@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Premium Logistics</title>
+    <title>Sollene Group | Logistics Management</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -13,51 +13,58 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background: #fdfaf6; 
             color: #1a1a1a; 
-            padding-bottom: 60px;
+            padding: 40px 20px;
         }
 
-        /* BANNER COM CONTRASTE MELHORADO */
-        .top-banner {
-            width: 100%;
-            height: 320px; /* Aumentei a altura */
-            /* A mágica acontece aqui: uma película escura (0.3) sobre a foto */
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(253, 250, 246, 1)), 
-                        url('image.png') no-repeat center center;
+        /* HEADER COM LOGO AO LADO DO NOME */
+        .header-brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px; /* Espaço entre a imagem e o nome */
+            margin-bottom: 60px;
+            max-width: 1100px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .logo-box {
+            width: 200px; /* Tamanho médio e nítido */
+            height: 130px;
+            background: url('image.png') no-repeat center center;
             background-size: cover;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #e5e7eb;
+            border-radius: 12px;
+            border: 2px solid #d4a373; /* Moldura dourada */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            flex-shrink: 0;
         }
 
-        .hero { text-align: center; margin-bottom: 40px; padding: 0 20px; }
-        
-        .hero h1 { 
-            font-size: 60px; 
+        .brand-text { text-align: left; }
+        .brand-text h1 { 
+            font-size: 54px; 
             font-weight: 800; 
             color: #0f172a; 
             letter-spacing: -2px;
-            /* Sombra suave para o título não sumir */
-            text-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+            line-height: 1;
         }
-
-        .hero p { 
-            color: #b39359; /* Dourado para destacar a divisão */
-            font-size: 12px; 
+        .brand-text p { 
+            color: #b39359; 
+            font-size: 13px; 
             text-transform: uppercase; 
             letter-spacing: 3px; 
-            font-weight: 800; 
-            margin-top: 10px; 
+            font-weight: 800;
+            margin-top: 5px;
         }
 
+        /* LAYOUT PRINCIPAL */
         .container { 
             display: flex; 
             gap: 40px; 
             max-width: 1300px; 
             margin: 0 auto; 
-            padding: 0 20px;
             align-items: flex-start; 
         }
 
-        /* CARD DE REGISTRO */
         .sidebar { width: 350px; flex-shrink: 0; }
 
         .form-card { 
@@ -68,77 +75,64 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
         }
 
-        .form-card h3 { 
-            color: #0f172a; 
-            font-size: 11px; 
-            text-transform: uppercase; 
-            margin-bottom: 25px; 
-            letter-spacing: 1.5px; 
-            border-left: 4px solid #b39359; 
-            padding-left: 10px;
-        }
+        .form-card h3 { color: #0f172a; font-size: 11px; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1px; }
 
         .field { margin-bottom: 20px; }
         label { display: block; font-size: 10px; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; font-weight: 800; }
 
         input, select { 
-            width: 100%; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; color: #1e293b; font-size: 15px; transition: 0.3s;
+            width: 100%; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; color: #1e293b; font-size: 15px; 
         }
-
-        input:focus { border-color: #b39359; outline: none; background: #fff; box-shadow: 0 0 0 4px rgba(179, 147, 89, 0.1); }
-
-        .qty-row { display: flex; gap: 10px; }
-        .qty-row input { flex: 2; }
-        .qty-row select { flex: 1.5; }
 
         #regBtn { 
-            width: 100%; padding: 18px; background: #0f172a; color: #fff; border: none; border-radius: 14px; font-weight: 800; cursor: pointer; margin-top: 10px; transition: 0.3s; text-transform: uppercase; font-size: 12px; letter-spacing: 1px;
+            width: 100%; padding: 18px; background: #0f172a; color: #fff; border: none; border-radius: 14px; font-weight: 800; cursor: pointer; transition: 0.3s; text-transform: uppercase; font-size: 12px;
         }
 
-        #regBtn:hover { background: #b39359; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(179, 147, 89, 0.3); }
+        #regBtn:hover { background: #b39359; transform: translateY(-3px); }
 
         /* TABELA */
         .table-area { flex: 1; min-width: 0; }
-        .table-area h2 { font-size: 24px; margin-bottom: 25px; color: #0f172a; font-weight: 800; letter-spacing: -0.5px; }
+        .table-area h2 { font-size: 24px; margin-bottom: 25px; color: #0f172a; font-weight: 800; }
 
         .data-container { 
             background: #ffffff; border-radius: 24px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
         }
 
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 20px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; letter-spacing: 1px; font-weight: 800; }
-        td { padding: 22px 20px; border-bottom: 1px solid #f8fafc; font-size: 15px; color: #334155; }
+        th { text-align: left; padding: 20px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; font-weight: 800; }
+        td { padding: 22px 20px; border-bottom: 1px solid #f8fafc; font-size: 15px; }
 
-        .price-text { color: #b39359; font-weight: 800; }
-        .del-btn { color: #ef4444; cursor: pointer; font-weight: 800; border: none; background: none; font-size: 11px; text-transform: uppercase; }
-
-        @media(max-width: 1000px) { .container { flex-direction: column; } .sidebar { width: 100%; } .top-banner { height: 200px; } }
+        @media(max-width: 900px) {
+            .header-brand { flex-direction: column; text-align: center; }
+            .brand-text { text-align: center; }
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; }
+        }
     </style>
 </head>
 <body>
 
-    <div class="top-banner"></div>
-
-    <header class="hero">
-        <h1>Sollene Group</h1>
-        <p>Supply Chain & Logistics Division</p>
+    <!-- HEADER COM IMAGEM AO LADO DO NOME -->
+    <header class="header-brand">
+        <div class="logo-box"></div>
+        <div class="brand-text">
+            <h1>Sollene Group</h1>
+            <p>Supply Chain & Logistics Division</p>
+        </div>
     </header>
 
     <div class="container">
         <aside class="sidebar">
             <div class="form-card">
                 <h3>Shipment Registration</h3>
-                
                 <div class="field">
                     <label>Commodity Name</label>
-                    <input type="text" id="pName" placeholder="e.g. Premium Rum">
+                    <input type="text" id="pName" placeholder="e.g. Premium Coffee">
                 </div>
-
                 <div class="field">
                     <label>Destination Port</label>
-                    <input type="text" id="pDest" placeholder="e.g. Hamburg">
+                    <input type="text" id="pDest" placeholder="e.g. Rotterdam">
                 </div>
-
                 <div class="field">
                     <label>Currency</label>
                     <select id="pCurr">
@@ -147,24 +141,14 @@
                         <option value="BRL">BRL (R$)</option>
                     </select>
                 </div>
-
                 <div class="field">
                     <label>Unit Price</label>
                     <input type="number" id="pPrice" placeholder="0.00">
                 </div>
-
                 <div class="field">
-                    <label>Volume & Unit</label>
-                    <div class="qty-row">
-                        <input type="number" id="pQty" placeholder="Val">
-                        <select id="pUnit">
-                            <option value="Units">Units</option>
-                            <option value="KG">KG</option>
-                            <option value="Tons">Tons</option>
-                        </select>
-                    </div>
+                    <label>Quantity</label>
+                    <input type="number" id="pQty" placeholder="Value">
                 </div>
-
                 <button id="regBtn">Register Cargo</button>
             </div>
         </aside>
@@ -198,10 +182,9 @@
             const curr = document.getElementById('pCurr').value;
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
-            const unit = document.getElementById('pUnit').value;
 
             if (!name || !price || !qty) {
-                alert("Please fill all required fields.");
+                alert("Please fill all fields.");
                 return;
             }
 
@@ -209,11 +192,11 @@
 
             const row = inventoryList.insertRow();
             row.innerHTML = `
-                <td style="font-weight: 700; color: #0f172a;">${name}</td>
-                <td style="color: #64748b;">${dest || 'Global'}</td>
-                <td class="price-text">${symbol} ${parseFloat(price).toFixed(2)}</td>
-                <td><strong>${qty} ${unit}</strong></td>
-                <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
+                <td style="font-weight: 700;">${name}</td>
+                <td style="color: #64748b;">${dest}</td>
+                <td style="color: #b39359; font-weight: 800;">${symbol} ${parseFloat(price).toFixed(2)}</td>
+                <td><strong>${qty}</strong> units</td>
+                <td><button onclick="this.parentElement.parentElement.remove()" style="color:red; border:none; background:none; cursor:pointer; font-weight:bold;">DEL</button></td>
             `;
 
             document.getElementById('pName').value = "";
@@ -224,5 +207,4 @@
     </script>
 </body>
 </html>
-
 
