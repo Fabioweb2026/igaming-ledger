@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Global Logistics</title>
+    <title>Sollene Group | Premium Logistics</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -16,25 +16,24 @@
             padding: 20px;
         }
 
-        /* HEADER PROFISSIONAL COM LINK EXTERNO PARA GARANTIR A IMAGEM */
+        /* HEADER COM A IMAGEM CORRIGIDA PARA imagem.jpg */
         .header-container {
             display: flex;
             max-width: 1200px;
             height: 220px;
             background: #ffffff;
             margin: 20px auto 40px;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
             box-shadow: 0 15px 35px rgba(0,0,0,0.05);
             border: 1px solid #e2e8f0;
         }
 
         .header-visual {
-            width: 45%;
+            width: 35%;
             height: 100%;
-            /* IMAGEM DE LOGÍSTICA PREMIUM - LINK DIRETO */
-            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), 
-                        url('https://unsplash.com') no-repeat center center;
+            /* AJUSTADO PARA O SEU NOVO NOME DE ARQUIVO */
+            background: url('imagem.jpg') no-repeat center 20%; 
             background-size: cover;
             border-right: 4px solid #d4a373;
         }
@@ -45,11 +44,10 @@
             flex-direction: column;
             justify-content: center;
             padding-left: 50px;
-            background: linear-gradient(to right, #ffffff, #fdfaf6);
         }
 
         .header-content h1 { 
-            font-size: 48px; 
+            font-size: 52px; 
             font-weight: 800; 
             color: #0f172a; 
             letter-spacing: -2px;
@@ -59,14 +57,14 @@
 
         .header-content p { 
             color: #b39359; 
-            font-size: 12px; 
+            font-size: 13px; 
             text-transform: uppercase; 
             letter-spacing: 4px; 
             font-weight: 800;
             margin-top: 10px;
         }
 
-        /* DASHBOARD */
+        /* DASHBOARD GRID */
         .main-grid {
             display: grid;
             grid-template-columns: 340px 1fr;
@@ -94,8 +92,6 @@
             outline: none;
         }
 
-        input:focus { border-color: #d4a373; }
-
         #regBtn {
             width: 100%;
             padding: 16px;
@@ -107,12 +103,10 @@
             cursor: pointer;
             transition: 0.3s;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         #regBtn:hover { background: #d4a373; transform: translateY(-2px); }
 
-        /* TABELA */
         .table-container {
             background: #ffffff;
             border-radius: 24px;
@@ -123,12 +117,10 @@
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 20px; color: #94a3b8; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid #f1f5f9; }
         td { padding: 20px; border-bottom: 1px solid #f8fafc; font-size: 15px; }
-        
-        .price-val { color: #b39359; font-weight: 800; }
 
         @media(max-width: 900px) {
             .header-container { flex-direction: column; height: auto; }
-            .header-visual { width: 100%; height: 180px; border-right: none; border-bottom: 4px solid #d4a373; }
+            .header-visual { width: 100%; height: 200px; border-right: none; border-bottom: 4px solid #d4a373; }
             .main-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -145,7 +137,7 @@
 
     <div class="main-grid">
         <aside class="card">
-            <h3 style="font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-bottom: 20px; letter-spacing: 1px;">Shipment Registration</h3>
+            <h3 style="font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-bottom: 20px;">Register Shipment</h3>
             <input type="text" id="pName" placeholder="Product Name">
             <input type="text" id="pDest" placeholder="Destination Port">
             <select id="pCurr">
@@ -155,7 +147,7 @@
             </select>
             <input type="number" id="pPrice" placeholder="Unit Price">
             <input type="number" id="pQty" placeholder="Quantity">
-            <button id="regBtn">Register Cargo</button>
+            <button id="regBtn">Register Product</button>
         </aside>
 
         <main>
@@ -184,22 +176,20 @@
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
 
-            if(!name || !price || !qty) return alert("Please fill all fields!");
+            if(!name || !price || !qty) return alert("Preencha todos os campos!");
 
             let s = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
             const row = document.getElementById('list').insertRow();
             row.innerHTML = `
-                <td style="font-weight:700; color: #0f172a;">${name}</td>
+                <td style="font-weight:700;">${name}</td>
                 <td style="color:#64748b">${dest}</td>
-                <td class="price-val">${s} ${parseFloat(price).toFixed(2)}</td>
+                <td style="color:#b39359; font-weight:800">${s} ${parseFloat(price).toFixed(2)}</td>
                 <td><strong>${qty}</strong> units</td>
             `;
-            // Limpar campos
             document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
 </body>
 </html>
-
 
 
