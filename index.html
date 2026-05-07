@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #fdfaf6; /* Creme de fundo */
+            background: #fdfaf6; 
             color: #1a1a1a; 
             padding-bottom: 60px;
             display: flex;
@@ -23,7 +24,7 @@
         .hero-banner {
             width: 100%;
             max-width: 1200px;
-            height: 320px;
+            height: 300px;
             background-color: #f7f4ed;
             background-image: url('image.jpg');
             background-repeat: no-repeat;
@@ -48,7 +49,7 @@
             padding: 0 20px;
         }
 
-        /* CARD DE REGISTRO GRAFITE */
+        /* CARD DE REGISTRO */
         .sidebar-card {
             background: #1f2937;
             padding: 40px 30px;
@@ -62,16 +63,7 @@
         .sidebar-card h3 { font-size: 11px; text-transform: uppercase; color: #b39359; margin-bottom: 30px; letter-spacing: 2px; font-weight: 800; text-align: center; }
 
         input, select {
-            width: 100%;
-            padding: 16px;
-            margin-bottom: 20px;
-            border: 1px solid #374151;
-            border-radius: 14px;
-            background: #111827;
-            font-size: 14px;
-            color: #ffffff;
-            outline: none;
-            transition: 0.3s ease;
+            width: 100%; padding: 16px; margin-bottom: 20px; border: 1px solid #374151; border-radius: 14px; background: #111827; font-size: 14px; color: #ffffff; outline: none;
         }
 
         input:focus { border-color: #b39359; box-shadow: 0 0 0 4px rgba(179, 147, 89, 0.15); }
@@ -80,62 +72,51 @@
         .qty-group input, .qty-group select { margin-bottom: 0; }
 
         #regBtn {
-            width: 100%;
-            padding: 20px;
-            background: #b39359;
-            color: #111827;
-            border: none;
-            border-radius: 16px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.4s;
-            text-transform: uppercase;
-            font-size: 13px;
+            width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; border-radius: 16px; font-weight: 800; cursor: pointer; transition: 0.4s; text-transform: uppercase; font-size: 13px;
         }
 
-        #regBtn:hover { background: #ffffff; transform: translateY(-3px); }
-
-        /* ESPAÇO DO INVENTÁRIO (CINZA PREENCHIDO) */
+        /* ÁREA DA TABELA COM PADRÃO TÉCNICO (MAPA) */
         .inventory-area {
-            background: #f1f5f9; /* AQUI O CINZA QUE VOCÊ PEDIU */
+            background-color: #f1f5f9;
+            /* PADRÃO DE PONTOS (GRID DE LOGÍSTICA) */
+            background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+            background-size: 24px 24px; 
+            
             border-radius: 30px;
             border: 1px solid #e2e8f0;
-            min-height: 500px; /* Garante que o espaço cinza apareça mesmo vazio */
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.02);
+            min-height: 550px;
             overflow: hidden;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.02);
         }
 
         table { width: 100%; border-collapse: collapse; }
         
         th { 
-            text-align: left; 
-            padding: 24px 20px; 
-            background: #1f2937; /* Cabeçalho Graphite */
-            color: #b39359; 
-            font-size: 10px; 
-            text-transform: uppercase; 
-            letter-spacing: 2px; 
-            font-weight: 800; 
+            text-align: left; padding: 24px 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; 
         }
 
         td { 
             padding: 24px 20px; 
-            border-bottom: 1px solid #e2e8f0; 
+            border-bottom: 1px solid rgba(226, 232, 240, 0.5); 
             font-size: 15px; 
             color: #334155; 
-            background: rgba(255, 255, 255, 0.5); /* Linhas levemente mais claras */
+            background: rgba(255, 255, 255, 0.6); /* Efeito de Vidro */
+            backdrop-filter: blur(5px);
+            transition: 0.3s;
         }
         
-        /* Efeito Zebra para facilitar a leitura */
-        tbody tr:nth-child(even) td { background-color: rgba(255, 255, 255, 0.2); }
+        /* HOVER PARA DAR VIDA ÀS LINHAS */
+        tbody tr:hover td { 
+            background: rgba(255, 255, 255, 0.9);
+            color: #1f2937;
+            transform: scale(1.01);
+            box-shadow: 0 4px 15px rgba(179, 147, 89, 0.1);
+        }
 
         .currency-style { color: #b39359; font-weight: 800; }
         .del-btn { color: #ef4444; cursor: pointer; border: none; background: none; font-weight: 800; font-size: 11px; text-transform: uppercase; }
 
-        @media(max-width: 900px) {
-            .main-grid { grid-template-columns: 1fr; }
-            .hero-banner { height: 220px; }
-        }
+        @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } .hero-banner { height: 220px; } }
     </style>
 </head>
 <body>
@@ -195,12 +176,12 @@
             const qty = document.getElementById('pQty').value;
             const unit = document.getElementById('pUnit').value;
 
-            if(!name || !price || !qty) return alert("Please fill all fields.");
+            if(!name || !price || !qty) return alert("All fields are required.");
 
             let s = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
             const row = document.getElementById('list').insertRow();
             row.innerHTML = `
-                <td style="font-weight:700; color: #1f2937;">${name}</td>
+                <td style="font-weight:700;">${name}</td>
                 <td style="color:#64748b">${dest || 'Global'}</td>
                 <td class="currency-style">${s} ${parseFloat(price).toFixed(2)}</td>
                 <td><strong>${qty}</strong> <small style="color:#b39359">${unit}</small></td>
@@ -211,5 +192,4 @@
     </script>
 </body>
 </html>
-
 
