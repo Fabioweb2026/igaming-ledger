@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Premium Logistics</title>
+    <title>Sollene Group | Premium Logistics Terminal</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -11,77 +11,56 @@
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #fdfaf6; 
+            background: #fdfaf6; /* Creme de luxo */
             color: #1a1a1a; 
             padding: 20px;
-        }
-
-        /* HEADER COM A IMAGEM CORRIGIDA PARA imagem.jpg */
-        .header-container {
-            display: flex;
-            max-width: 1200px;
-            height: 220px;
-            background: #ffffff;
-            margin: 20px auto 40px;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-            border: 1px solid #e2e8f0;
-        }
-
-        .header-visual {
-            width: 35%;
-            height: 100%;
-            /* AJUSTADO PARA O SEU NOVO NOME DE ARQUIVO */
-            /* Procure por .header-visual e mude para este nome: */
-            background: url('imagem.jpeg') no-repeat center 20%;
- 
-            background-size: cover;
-            border-right: 4px solid #d4a373;
-        }
-
-        .header-content {
-            flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            padding-left: 50px;
+            align-items: center;
         }
 
-        .header-content h1 { 
-            font-size: 52px; 
-            font-weight: 800; 
-            color: #0f172a; 
-            letter-spacing: -2px;
-            line-height: 1;
-            text-transform: uppercase;
+        /* BANNER COM ESTILO (Redimensionado e com Sombra) */
+        .hero-banner {
+            width: 100%;
+            max-width: 1200px;
+            height: 350px; /* Altura ideal para ver os produtos da foto */
+            background: url('image.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 24px;
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08); /* Sombra que dá profundidade */
+            position: relative;
         }
 
-        .header-content p { 
-            color: #b39359; 
-            font-size: 13px; 
-            text-transform: uppercase; 
-            letter-spacing: 4px; 
-            font-weight: 800;
-            margin-top: 10px;
+        /* Overlay sutil para o banner não ficar "seco" */
+        .hero-banner::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(253, 250, 246, 0) 60%, rgba(253, 250, 246, 0.2));
+            border-radius: 24px;
         }
 
-        /* DASHBOARD GRID */
         .main-grid {
             display: grid;
             grid-template-columns: 340px 1fr;
             gap: 30px;
+            width: 100%;
             max-width: 1200px;
-            margin: 0 auto;
         }
 
+        /* CARD DE REGISTRO */
         .card {
             background: #ffffff;
             padding: 30px;
             border-radius: 24px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            height: fit-content;
         }
+
+        .card h3 { font-size: 11px; text-transform: uppercase; color: #b39359; margin-bottom: 20px; letter-spacing: 2px; font-weight: 800; }
 
         input, select {
             width: 100%;
@@ -107,40 +86,39 @@
             text-transform: uppercase;
         }
 
-        #regBtn:hover { background: #d4a373; transform: translateY(-2px); }
+        #regBtn:hover { background: #b39359; transform: translateY(-2px); }
 
-        .table-container {
+        /* TABELA DE INVENTÁRIO */
+        .inventory-area {
             background: #ffffff;
             border-radius: 24px;
             border: 1px solid #e2e8f0;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
 
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 20px; color: #94a3b8; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid #f1f5f9; }
+        th { text-align: left; padding: 20px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #f1f5f9; }
         td { padding: 20px; border-bottom: 1px solid #f8fafc; font-size: 15px; }
+        
+        .currency { color: #b39359; font-weight: 800; }
 
         @media(max-width: 900px) {
-            .header-container { flex-direction: column; height: auto; }
-            .header-visual { width: 100%; height: 200px; border-right: none; border-bottom: 4px solid #d4a373; }
             .main-grid { grid-template-columns: 1fr; }
+            .hero-banner { height: 200px; }
         }
     </style>
 </head>
 <body>
 
-    <header class="header-container">
-        <div class="header-visual"></div>
-        <div class="header-content">
-            <h1>Sollene Group</h1>
-            <p>Supply Chain & Logistics Division</p>
-        </div>
-    </header>
+    <!-- O BANNER ESTILIZADO -->
+    <div class="hero-banner"></div>
 
     <div class="main-grid">
+        <!-- FORMULÁRIO NA ESQUERDA -->
         <aside class="card">
-            <h3 style="font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-bottom: 20px;">Register Shipment</h3>
-            <input type="text" id="pName" placeholder="Product Name">
+            <h3>Shipment Entry</h3>
+            <input type="text" id="pName" placeholder="Product (e.g. Arabica)">
             <input type="text" id="pDest" placeholder="Destination Port">
             <select id="pCurr">
                 <option value="USD">USD ($)</option>
@@ -149,22 +127,24 @@
             </select>
             <input type="number" id="pPrice" placeholder="Unit Price">
             <input type="number" id="pQty" placeholder="Quantity">
-            <button id="regBtn">Register Product</button>
+            <button id="regBtn">Register Cargo</button>
         </aside>
 
+        <!-- INVENTÁRIO NA DIREITA -->
         <main>
-            <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 25px; color: #0f172a;">Active Cargo Inventory</h2>
-            <div class="table-container">
+            <div class="inventory-area">
                 <table>
                     <thead>
                         <tr>
                             <th>Product</th>
                             <th>Destination</th>
                             <th>Value</th>
-                            <th>Quantity</th>
+                            <th>Volume</th>
                         </tr>
                     </thead>
-                    <tbody id="list"></tbody>
+                    <tbody id="list">
+                        <!-- Dados dinâmicos aqui -->
+                    </tbody>
                 </table>
             </div>
         </main>
@@ -178,14 +158,14 @@
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
 
-            if(!name || !price || !qty) return alert("Preencha todos os campos!");
+            if(!name || !price || !qty) return alert("Please fill all fields.");
 
             let s = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
             const row = document.getElementById('list').insertRow();
             row.innerHTML = `
-                <td style="font-weight:700;">${name}</td>
-                <td style="color:#64748b">${dest}</td>
-                <td style="color:#b39359; font-weight:800">${s} ${parseFloat(price).toFixed(2)}</td>
+                <td style="font-weight:700; color: #0f172a;">${name}</td>
+                <td style="color:#64748b">${dest || 'Global'}</td>
+                <td class="currency">${s} ${parseFloat(price).toFixed(2)}</td>
                 <td><strong>${qty}</strong> units</td>
             `;
             document.querySelectorAll('input').forEach(i => i.value = "");
@@ -193,5 +173,4 @@
     </script>
 </body>
 </html>
-
 
