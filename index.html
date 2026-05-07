@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,49 +16,50 @@
             padding-bottom: 60px;
         }
 
-        /* HEADER AJUSTADO: MAIS BAIXO E LIMPO */
-        .split-header {
+        /* HEADER: IMAGEM À ESQUERDA ENCONTRANDO O NOME */
+        .header-container {
             display: flex;
             align-items: center;
             width: 100%;
-            height: 180px; /* Altura reduzida para não cobrir a página */
+            height: 160px; /* Altura elegante e compacta */
             background: #ffffff;
             margin-bottom: 40px;
             border-bottom: 2px solid #d4a373;
-            overflow: hidden;
         }
 
-        .header-image {
-            width: 40%; /* Largura equilibrada */
+        .brand-visual {
+            width: 400px; /* Largura fixa para a imagem */
             height: 100%;
             background: url('image.png') no-repeat left center;
-            background-size: contain; /* Garante que a imagem apareça inteira sem cortes */
+            background-size: contain; /* Mantém a imagem inteira e nítida */
+            flex-shrink: 0;
+        }
+
+        .brand-name {
             padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        .header-text {
-            padding-left: 30px;
-            flex: 1;
-        }
-
-        .header-text h1 { 
-            font-size: 52px; /* Tamanho ajustado para harmonia */
+        .brand-name h1 { 
+            font-size: 56px; 
             font-weight: 800; 
             color: #0f172a; 
             letter-spacing: -2px;
             line-height: 1;
         }
 
-        .header-text p { 
+        .brand-name p { 
             color: #b39359; 
             font-size: 11px; 
             text-transform: uppercase; 
             letter-spacing: 3px; 
             font-weight: 800;
-            margin-top: 8px;
+            margin-top: 5px;
         }
 
-        /* CONTEÚDO */
+        /* CONTEÚDO PRINCIPAL */
         .container { 
             display: flex; 
             gap: 40px; 
@@ -107,19 +107,19 @@
         td { padding: 18px 15px; border-bottom: 1px solid #f8fafc; font-size: 14px; }
 
         @media(max-width: 1000px) {
-            .split-header { flex-direction: column; height: auto; padding: 20px 0; }
-            .header-image { width: 100%; height: 120px; }
-            .header-text { padding: 20px; text-align: center; }
+            .header-container { flex-direction: column; height: auto; padding: 20px; }
+            .brand-visual { width: 100%; height: 120px; }
+            .brand-name { padding: 20px 0; text-align: center; }
             .container { flex-direction: column; }
-            .sidebar { width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <header class="split-header">
-        <div class="header-image"></div>
-        <div class="header-text">
+    <header class="header-container">
+        <!-- A imagem agora "nasce" na esquerda e termina no nome -->
+        <div class="brand-visual"></div>
+        <div class="brand-name">
             <h1>Sollene Group</h1>
             <p>Supply Chain & Logistics Division</p>
         </div>
@@ -151,7 +151,7 @@
                 </div>
                 <div class="field">
                     <label>Quantity</label>
-                    <input type="number" id="pQty" placeholder="Tons">
+                    <input type="number" id="pQty" placeholder="Value">
                 </div>
                 <button id="regBtn">Register Cargo</button>
             </div>
@@ -187,7 +187,7 @@
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
 
-            if (!name || !price || !qty) return alert("Please fill all fields.");
+            if (!name || !price || !qty) return alert("Fill all fields.");
 
             let symbol = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
 
@@ -205,3 +205,4 @@
     </script>
 </body>
 </html>
+
