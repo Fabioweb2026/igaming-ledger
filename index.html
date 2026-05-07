@@ -13,61 +13,63 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background: #fdfaf6; 
             color: #1a1a1a; 
-            padding-bottom: 60px;
+            padding: 40px 20px; /* Adicionado espaço no topo e laterais */
         }
 
-        /* HEADER DIVIDIDO: IMAGEM LIMPA À ESQUERDA ENCONTRANDO O NOME */
+        /* HEADER DIVIDIDO COM IMAGEM E NOME */
         .split-header {
             display: flex;
             align-items: center;
             width: 100%;
-            height: 220px;
+            max-width: 1350px;
+            height: 240px; /* Altura imponente */
             background: #ffffff;
-            margin-bottom: 40px;
-            border-bottom: 3px solid #d4a373;
+            margin: 0 auto 50px; /* Centraliza o header e dá espaço embaixo */
+            border: 1px solid #e2e8f0;
+            border-bottom: 4px solid #d4a373; /* Linha dourada na base */
             overflow: hidden;
+            border-radius: 4px;
         }
 
-        .header-visual {
-            width: 50%; /* Ocupa metade da tela à esquerda */
+        .header-image {
+            width: 45%; /* Metade esquerda para a imagem */
             height: 100%;
-            /* Vamos usar uma imagem de logística limpa que combina com o creme/dourado */
-            background: linear-gradient(rgba(212, 163, 115, 0.2), rgba(212, 163, 115, 0.2)),
+            /* IMAGEM PROFISSIONAL DE LOGÍSTICA */
+            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), 
                         url('https://unsplash.com') no-repeat center center;
             background-size: cover;
-            border-right: 5px solid #d4a373;
+            border-right: 4px solid #d4a373; /* Linha dourada divisória */
         }
 
-        .header-brand {
-            flex: 1;
+        .header-text {
             padding-left: 50px;
+            flex: 1;
         }
 
-        .header-brand h1 { 
-            font-size: 62px; 
+        .header-text h1 { 
+            font-size: 60px; 
             font-weight: 800; 
             color: #0f172a; 
-            letter-spacing: -3px;
+            letter-spacing: -2px;
             line-height: 0.9;
             text-transform: uppercase;
         }
 
-        .header-brand p { 
+        .header-text p { 
             color: #b39359; 
             font-size: 13px; 
             text-transform: uppercase; 
             letter-spacing: 4px; 
             font-weight: 800;
-            margin-top: 10px;
+            margin-top: 12px;
         }
 
-        /* CONTEÚDO */
+        /* CONTEÚDO DO DASHBOARD */
         .container { 
             display: flex; 
             gap: 40px; 
             max-width: 1350px; 
             margin: 0 auto; 
-            padding: 0 20px;
             align-items: flex-start; 
         }
 
@@ -76,7 +78,7 @@
         .form-card { 
             background: #ffffff; 
             padding: 35px; 
-            border-radius: 24px; 
+            border-radius: 20px; 
             border: 1px solid #e2e8f0;
             box-shadow: 0 10px 25px rgba(0,0,0,0.03);
         }
@@ -84,29 +86,37 @@
         .form-card h3 { color: #0f172a; font-size: 11px; text-transform: uppercase; margin-bottom: 25px; border-left: 4px solid #b39359; padding-left: 12px;}
 
         input, select { 
-            width: 100%; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 15px;
+            width: 100%; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 15px; font-size: 14px;
         }
 
         #regBtn { 
-            width: 100%; padding: 18px; background: #0f172a; color: #fff; border: none; border-radius: 14px; font-weight: 800; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+            width: 100%; padding: 18px; background: #0f172a; color: #fff; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s; text-transform: uppercase;
         }
 
         #regBtn:hover { background: #b39359; transform: translateY(-3px); }
 
-        /* TABELA */
+        /* TABELA DE INVENTÁRIO */
         .table-area { flex: 1; min-width: 0; }
-        .data-container { background: #ffffff; border-radius: 24px; border: 1px solid #e2e8f0; overflow: hidden; }
+        .data-container { background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.02); }
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 20px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; }
+        th { text-align: left; padding: 20px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #f1f5f9; }
         td { padding: 20px; border-bottom: 1px solid #f8fafc; font-size: 15px; }
+
+        @media(max-width: 1000px) {
+            .split-header { flex-direction: column; height: auto; }
+            .header-image { width: 100%; height: 200px; border-right: none; border-bottom: 4px solid #d4a373; }
+            .header-text { padding: 30px; text-align: center; }
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; }
+        }
     </style>
 </head>
 <body>
 
+    <!-- HEADER CORRIGIDO COM IMAGEM E ESPAÇAMENTO -->
     <header class="split-header">
-        <!-- A imagem nasce na esquerda e vai até o meio, onde encontra o nome -->
-        <div class="header-visual"></div>
-        <div class="header-brand">
+        <div class="header-image"></div>
+        <div class="header-text">
             <h1>Sollene<br>Group</h1>
             <p>Supply Chain & Logistics Division</p>
         </div>
@@ -123,14 +133,14 @@
                     <option value="EUR">EUR (€)</option>
                     <option value="BRL">BRL (R$)</option>
                 </select>
-                <input type="number" id="pPrice" placeholder="Price">
+                <input type="number" id="pPrice" placeholder="Unit Price">
                 <input type="number" id="pQty" placeholder="Quantity">
                 <button id="regBtn">Register Cargo</button>
             </div>
         </aside>
 
         <main class="table-area">
-            <h2 style="margin-bottom: 20px;">Active Inventory</h2>
+            <h2 style="margin-bottom: 25px; color: #0f172a;">Active Cargo Inventory</h2>
             <div class="data-container">
                 <table>
                     <thead>
@@ -155,19 +165,22 @@
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
 
-            if (!name || !price || !qty) return alert("Fill all fields.");
+            if (!name || !price || !qty) return alert("Please fill all required fields.");
 
             let symbol = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
 
             const row = document.getElementById('inventoryList').insertRow();
             row.innerHTML = `
                 <td style="font-weight: 700;">${name}</td>
-                <td style="color: #64748b;">${dest}</td>
+                <td style="color: #64748b;">${dest || 'Global'}</td>
                 <td style="color: #b39359; font-weight: 800;">${symbol} ${parseFloat(price).toFixed(2)}</td>
                 <td><strong>${qty}</strong> units</td>
             `;
+
+            document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
 </body>
 </html>
+
 
