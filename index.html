@@ -1,148 +1,197 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Solutions | Global Inventory</title>
+    <title>Apex Solutions | Corporate Inventory</title>
     <style>
-        /* Importando uma fonte mais moderna */
         @import url('https://googleapis.com');
 
         *{ margin:0; padding:0; box-sizing:border-box; }
 
         body { 
-            font-family: 'Inter', sans-serif; 
-            padding: 40px; 
-            background: #f8fafc; /* Cinza muito claro de fundo */
-            color: #1e293b; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            padding: 50px 20px; 
+            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Fundo com degradê suave */
+            color: #102a43; 
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centraliza tudo horizontalmente */
         }
 
-        /* Nome da Empresa */
-        .company-header {
-            margin-bottom: 40px;
-            border-left: 5px solid #2563eb;
-            padding-left: 20px;
+        /* HEADER DA EMPRESA CENTRALIZADO */
+        .company-branding {
+            text-align: center;
+            margin-bottom: 50px;
         }
 
-        .company-header h1 { font-size: 28px; font-weight: 800; color: #0f172a; }
-        .company-header p { color: #64748b; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
-        
-        /* Formulário de Registro */
+        .logo-icon {
+            font-size: 50px;
+            background: #2563eb;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            margin: 0 auto 15px;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+            color: white;
+        }
+
+        .company-branding h1 { 
+            font-size: 36px; 
+            font-weight: 800; 
+            color: #102a43;
+            letter-spacing: -1px;
+            margin-bottom: 5px;
+        }
+
+        .company-info {
+            color: #627d98;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* FORMULÁRIO ESTILIZADO */
+        .main-container {
+            width: 100%;
+            max-width: 1100px;
+        }
+
         #registration-form { 
             background: white; 
-            padding: 30px; 
-            border-radius: 16px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            padding: 35px; 
+            border-radius: 24px; 
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             margin-bottom: 40px;
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
-            align-items: center;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(255,255,255,0.8);
         }
 
         input { 
-            padding: 14px; 
-            border: 1px solid #cbd5e1; 
-            border-radius: 8px; 
+            padding: 15px; 
+            border: 2px solid #f0f4f8; 
+            border-radius: 12px; 
             flex: 1;
-            min-width: 180px;
-            font-size: 14px;
-            outline: none;
+            min-width: 200px;
+            font-size: 15px;
+            background: #f8fafc;
             transition: 0.3s;
         }
 
-        input:focus { border-color: #2563eb; box-shadow: 0 0 0 3px rgba(37, 99, 236, 0.1); }
+        input:focus { 
+            border-color: #2563eb; 
+            background: white;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
 
         #saveBtn { 
-            padding: 14px 30px; 
+            padding: 15px 35px; 
             background: #2563eb; 
             color: white; 
             border: none; 
-            border-radius: 8px; 
+            border-radius: 12px; 
             cursor: pointer; 
             font-weight: 700;
             transition: 0.3s;
-            box-shadow: 0 4px 12px rgba(37, 99, 236, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        #saveBtn:hover { background: #1d4ed8; transform: translateY(-2px); }
+        #saveBtn:hover { 
+            background: #1d4ed8; 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+        }
 
-        /* Tabela de Inventário */
-        h2 { font-size: 20px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        
-        .table-container {
-            background: white; 
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
-            border: 1px solid #e2e8f0;
+        /* TABELA */
+        .inventory-section {
+            background: white;
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
+        .inventory-section h2 {
+            margin-bottom: 25px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         table { width: 100%; border-collapse: collapse; }
 
         th { 
-            background: #f1f5f9; 
-            padding: 18px; 
-            color: #475569; 
             text-align: left; 
-            font-size: 11px; 
+            padding: 15px; 
+            color: #486581; 
+            font-size: 12px; 
             text-transform: uppercase; 
-            letter-spacing: 1.5px;
-            font-weight: 700;
+            border-bottom: 2px solid #f0f4f8;
         }
 
-        td { padding: 18px; border-bottom: 1px solid #f1f5f9; font-size: 14px; }
-        
-        /* Botão de Deletar */
+        td { padding: 20px 15px; border-bottom: 1px solid #f0f4f8; font-size: 15px; }
+
         .del-btn {
-            background: #fee2e2;
-            color: #dc2626;
+            background: #ffebf0;
+            color: #d64545;
             border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 8px;
+            font-weight: 700;
             cursor: pointer;
-            font-size: 12px;
             transition: 0.2s;
         }
 
-        .del-btn:hover { background: #dc2626; color: white; }
+        .del-btn:hover { background: #d64545; color: white; }
 
     </style>
 </head>
 <body>
 
-    <div class="company-header">
-        <p>Supply Chain Division</p>
-        <h1>Apex Solutions | Inventory Management</h1>
+    <div class="company-branding">
+        <div class="logo-icon">▲</div> <!-- Símbolo da Empresa -->
+        <h1>Apex Solutions</h1>
+        <div class="company-info">
+            <p>123 Corporate Blvd, Suite 500 — Silicon Valley, CA</p>
+            <p>support@apexsolutions.com | +1 (555) 0123-4567</p>
+        </div>
     </div>
 
-    <!-- Registration Section -->
-    <div id="registration-form">
-        <input type="text" id="productName" placeholder="Product Name">
-        <input type="text" id="supplier" placeholder="Supplier">
-        <input type="number" id="price" placeholder="Price (USD)">
-        <input type="number" id="stock" placeholder="Stock Qty">
-        <button id="saveBtn">SAVE PRODUCT</button>
-    </div>
+    <div class="main-container">
+        <!-- Form Section -->
+        <div id="registration-form">
+            <input type="text" id="productName" placeholder="Product Name">
+            <input type="text" id="supplier" placeholder="Supplier">
+            <input type="number" id="price" placeholder="Price (USD)">
+            <input type="number" id="stock" placeholder="Stock Qty">
+            <button id="saveBtn">Save Product</button>
+        </div>
 
-    <h2>Current Inventory Status</h2>
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Supplier</th>
-                    <th>Price</th>
-                    <th>Stock Qty</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody id="tableBody">
-                <!-- Data will appear here -->
-            </tbody>
-        </table>
+        <!-- Table Section -->
+        <div class="inventory-section">
+            <h2>📦 Current Inventory Status</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Supplier</th>
+                        <th>Price</th>
+                        <th>Stock Qty</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- Data entries -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
@@ -155,29 +204,26 @@
             const price = document.getElementById('price').value;
             const stock = document.getElementById('stock').value;
 
-            if (productName === "" || price === "" || stock === "") {
-                alert("Please fill in all required fields!");
+            if (!productName || !price || !stock) {
+                alert("Please fill in the required fields.");
                 return;
             }
 
             const newRow = tableBody.insertRow();
             newRow.innerHTML = `
-                <td style="font-weight: 600;">${productName}</td>
-                <td>${supplier}</td>
-                <td>$ ${parseFloat(price).toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
-                <td>${stock} Units</td>
+                <td style="font-weight: 600; color: #243b53;">${productName}</td>
+                <td>${supplier || 'N/A'}</td>
+                <td style="color: #2563eb; font-weight: 600;">$${parseFloat(price).toFixed(2)}</td>
+                <td><span style="background: #e1f5fe; padding: 4px 10px; border-radius: 20px; font-size: 13px;">${stock} units</span></td>
                 <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
             `;
 
-            // Clear inputs
-            document.querySelectorAll('input').forEach(input => input.value = "");
+            document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
 
 </body>
 </html>
-
-    </script>
 
 
      
