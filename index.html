@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Premium Logistics</title>
+    <title>Sollene Group | Global Logistics</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -13,135 +13,154 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background: #fdfaf6; 
             color: #1a1a1a; 
-            padding: 40px 20px; /* Adicionado espaço no topo e laterais */
+            padding: 20px;
         }
 
-        /* HEADER DIVIDIDO COM IMAGEM E NOME */
-        .split-header {
+        /* HEADER PROFISSIONAL COM LINK EXTERNO PARA GARANTIR A IMAGEM */
+        .header-container {
             display: flex;
-            align-items: center;
-            width: 100%;
-            max-width: 1350px;
-            height: 240px; /* Altura imponente */
+            max-width: 1200px;
+            height: 220px;
             background: #ffffff;
-            margin: 0 auto 50px; /* Centraliza o header e dá espaço embaixo */
-            border: 1px solid #e2e8f0;
-            border-bottom: 4px solid #d4a373; /* Linha dourada na base */
+            margin: 20px auto 40px;
+            border-radius: 20px;
             overflow: hidden;
-            border-radius: 4px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border: 1px solid #e2e8f0;
         }
 
-        .header-image {
-            width: 45%; /* Metade esquerda para a imagem */
+        .header-visual {
+            width: 45%;
             height: 100%;
-            /* IMAGEM PROFISSIONAL DE LOGÍSTICA */
+            /* IMAGEM DE LOGÍSTICA PREMIUM - LINK DIRETO */
             background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), 
                         url('https://unsplash.com') no-repeat center center;
             background-size: cover;
-            border-right: 4px solid #d4a373; /* Linha dourada divisória */
+            border-right: 4px solid #d4a373;
         }
 
-        .header-text {
-            padding-left: 50px;
+        .header-content {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding-left: 50px;
+            background: linear-gradient(to right, #ffffff, #fdfaf6);
         }
 
-        .header-text h1 { 
-            font-size: 60px; 
+        .header-content h1 { 
+            font-size: 48px; 
             font-weight: 800; 
             color: #0f172a; 
             letter-spacing: -2px;
-            line-height: 0.9;
+            line-height: 1;
             text-transform: uppercase;
         }
 
-        .header-text p { 
+        .header-content p { 
             color: #b39359; 
-            font-size: 13px; 
+            font-size: 12px; 
             text-transform: uppercase; 
             letter-spacing: 4px; 
             font-weight: 800;
-            margin-top: 12px;
+            margin-top: 10px;
         }
 
-        /* CONTEÚDO DO DASHBOARD */
-        .container { 
-            display: flex; 
-            gap: 40px; 
-            max-width: 1350px; 
-            margin: 0 auto; 
-            align-items: flex-start; 
+        /* DASHBOARD */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .sidebar { width: 350px; flex-shrink: 0; }
-
-        .form-card { 
-            background: #ffffff; 
-            padding: 35px; 
-            border-radius: 20px; 
+        .card {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 24px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
         }
 
-        .form-card h3 { color: #0f172a; font-size: 11px; text-transform: uppercase; margin-bottom: 25px; border-left: 4px solid #b39359; padding-left: 12px;}
-
-        input, select { 
-            width: 100%; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 15px; font-size: 14px;
+        input, select {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background: #f8fafc;
+            font-size: 14px;
+            outline: none;
         }
 
-        #regBtn { 
-            width: 100%; padding: 18px; background: #0f172a; color: #fff; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; transition: 0.3s; text-transform: uppercase;
+        input:focus { border-color: #d4a373; }
+
+        #regBtn {
+            width: 100%;
+            padding: 16px;
+            background: #0f172a;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        #regBtn:hover { background: #b39359; transform: translateY(-3px); }
+        #regBtn:hover { background: #d4a373; transform: translateY(-2px); }
 
-        /* TABELA DE INVENTÁRIO */
-        .table-area { flex: 1; min-width: 0; }
-        .data-container { background: #ffffff; border-radius: 20px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.02); }
+        /* TABELA */
+        .table-container {
+            background: #ffffff;
+            border-radius: 24px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 20px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #f1f5f9; }
+        th { text-align: left; padding: 20px; color: #94a3b8; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid #f1f5f9; }
         td { padding: 20px; border-bottom: 1px solid #f8fafc; font-size: 15px; }
+        
+        .price-val { color: #b39359; font-weight: 800; }
 
-        @media(max-width: 1000px) {
-            .split-header { flex-direction: column; height: auto; }
-            .header-image { width: 100%; height: 200px; border-right: none; border-bottom: 4px solid #d4a373; }
-            .header-text { padding: 30px; text-align: center; }
-            .container { flex-direction: column; }
-            .sidebar { width: 100%; }
+        @media(max-width: 900px) {
+            .header-container { flex-direction: column; height: auto; }
+            .header-visual { width: 100%; height: 180px; border-right: none; border-bottom: 4px solid #d4a373; }
+            .main-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER CORRIGIDO COM IMAGEM E ESPAÇAMENTO -->
-    <header class="split-header">
-        <div class="header-image"></div>
-        <div class="header-text">
-            <h1>Sollene<br>Group</h1>
+    <header class="header-container">
+        <div class="header-visual"></div>
+        <div class="header-content">
+            <h1>Sollene Group</h1>
             <p>Supply Chain & Logistics Division</p>
         </div>
     </header>
 
-    <div class="container">
-        <aside class="sidebar">
-            <div class="form-card">
-                <h3>Shipment Registration</h3>
-                <input type="text" id="pName" placeholder="Product Name">
-                <input type="text" id="pDest" placeholder="Destination Port">
-                <select id="pCurr">
-                    <option value="USD">USD ($)</option>
-                    <option value="EUR">EUR (€)</option>
-                    <option value="BRL">BRL (R$)</option>
-                </select>
-                <input type="number" id="pPrice" placeholder="Unit Price">
-                <input type="number" id="pQty" placeholder="Quantity">
-                <button id="regBtn">Register Cargo</button>
-            </div>
+    <div class="main-grid">
+        <aside class="card">
+            <h3 style="font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-bottom: 20px; letter-spacing: 1px;">Shipment Registration</h3>
+            <input type="text" id="pName" placeholder="Product Name">
+            <input type="text" id="pDest" placeholder="Destination Port">
+            <select id="pCurr">
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="BRL">BRL (R$)</option>
+            </select>
+            <input type="number" id="pPrice" placeholder="Unit Price">
+            <input type="number" id="pQty" placeholder="Quantity">
+            <button id="regBtn">Register Cargo</button>
         </aside>
 
-        <main class="table-area">
-            <h2 style="margin-bottom: 25px; color: #0f172a;">Active Cargo Inventory</h2>
-            <div class="data-container">
+        <main>
+            <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 25px; color: #0f172a;">Active Cargo Inventory</h2>
+            <div class="table-container">
                 <table>
                     <thead>
                         <tr>
@@ -151,7 +170,7 @@
                             <th>Quantity</th>
                         </tr>
                     </thead>
-                    <tbody id="inventoryList"></tbody>
+                    <tbody id="list"></tbody>
                 </table>
             </div>
         </main>
@@ -165,22 +184,22 @@
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
 
-            if (!name || !price || !qty) return alert("Please fill all required fields.");
+            if(!name || !price || !qty) return alert("Please fill all fields!");
 
-            let symbol = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
-
-            const row = document.getElementById('inventoryList').insertRow();
+            let s = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
+            const row = document.getElementById('list').insertRow();
             row.innerHTML = `
-                <td style="font-weight: 700;">${name}</td>
-                <td style="color: #64748b;">${dest || 'Global'}</td>
-                <td style="color: #b39359; font-weight: 800;">${symbol} ${parseFloat(price).toFixed(2)}</td>
+                <td style="font-weight:700; color: #0f172a;">${name}</td>
+                <td style="color:#64748b">${dest}</td>
+                <td class="price-val">${s} ${parseFloat(price).toFixed(2)}</td>
                 <td><strong>${qty}</strong> units</td>
             `;
-
+            // Limpar campos
             document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
 </body>
 </html>
+
 
 
