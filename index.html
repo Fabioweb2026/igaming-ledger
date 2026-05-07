@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Terra Global | Import & Export Management</title>
     <style>
+        /* Importando a fonte corretamente */
         @import url('https://googleapis.com');
 
         *{ margin:0; padding:0; box-sizing:border-box; }
@@ -12,12 +13,15 @@
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             padding: 50px 20px; 
-            /* Fundo com cor de terra/areia e um degradê sofisticado */
-            background: linear-gradient(135deg, #e3d5ca 0%, #d5bdaf 100%);
+            /* AQUI ESTÁ A IMAGEM DE FUNDO */
+            background: linear-gradient(rgba(213, 189, 175, 0.8), rgba(213, 189, 175, 0.9)), 
+                        url('https://unsplash.com') no-repeat center center fixed;
+            background-size: cover;
             color: #2f2e2e; 
             display: flex;
             flex-direction: column;
             align-items: center;
+            min-height: 100vh;
         }
 
         /* HEADER ESTILO TRADING COMPANY */
@@ -28,7 +32,7 @@
 
         .logo-icon {
             font-size: 40px;
-            background: #1b4332; /* Verde Floresta Profundo */
+            background: #1b4332; /* Verde Floresta */
             width: 90px;
             height: 90px;
             display: flex;
@@ -37,7 +41,7 @@
             border-radius: 50%;
             margin: 0 auto 20px;
             box-shadow: 0 10px 25px rgba(27, 67, 50, 0.4);
-            color: #d4a373; /* Dourado/Bronze */
+            color: #d4a373; /* Dourado */
             border: 3px solid #d4a373;
         }
 
@@ -51,10 +55,14 @@
         }
 
         .company-info {
-            color: #582f0e; /* Tom de café */
+            color: #582f0e; 
             font-size: 14px;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: 0.5px;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
         }
 
         .main-container {
@@ -62,9 +70,10 @@
             max-width: 1150px;
         }
 
-        /* FORMULÁRIO COM CORES DE LUXO */
+        /* FORMULÁRIO */
         #registration-form { 
-            background: rgba(255, 255, 255, 0.95); 
+            background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(10px); /* Efeito de vidro */
             padding: 40px; 
             border-radius: 30px; 
             box-shadow: 0 30px 60px -12px rgba(88, 47, 14, 0.2);
@@ -86,11 +95,7 @@
             transition: 0.3s;
         }
 
-        input:focus { 
-            border-color: #d4a373; 
-            outline: none;
-            box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.2);
-        }
+        input:focus { border-color: #d4a373; outline: none; }
 
         #saveBtn { 
             padding: 16px 40px; 
@@ -101,69 +106,26 @@
             cursor: pointer; 
             font-weight: 800;
             transition: 0.4s;
-            letter-spacing: 1px;
         }
 
-        #saveBtn:hover { 
-            background: #2d6a4f; 
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(27, 67, 50, 0.3);
-        }
+        #saveBtn:hover { transform: translateY(-5px); background: #2d6a4f; }
 
-        /* TABELA DE INVENTÁRIO GLOBAL */
+        /* TABELA */
         .inventory-section {
-            background: #ffffff;
+            background: rgba(255, 255, 255, 0.95);
             padding: 40px;
             border-radius: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
         }
 
-        .inventory-section h2 {
-            margin-bottom: 30px;
-            font-size: 24px;
-            color: #1b4332;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .inventory-section h2 { margin-bottom: 30px; color: #1b4332; }
 
         table { width: 100%; border-collapse: collapse; }
-
-        th { 
-            text-align: left; 
-            padding: 20px; 
-            color: #a3a3a3; 
-            font-size: 12px; 
-            text-transform: uppercase; 
-            border-bottom: 2px solid #f8f9fa;
-        }
-
+        th { text-align: left; padding: 20px; color: #a3a3a3; font-size: 12px; text-transform: uppercase; border-bottom: 2px solid #f8f9fa; }
         td { padding: 22px 20px; border-bottom: 1px solid #f8f9fa; font-size: 16px; color: #333; }
 
-        /* Estilo para categorias (Alimentos, Bebidas, etc) */
-        .category-tag {
-            background: #fefae0;
-            color: #bc6c25;
-            padding: 5px 12px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
+        .category-tag { background: #fefae0; color: #bc6c25; padding: 5px 12px; border-radius: 10px; font-size: 12px; font-weight: 700; }
 
-        .del-btn {
-            background: #f8f9fa;
-            color: #9d0208;
-            border: 1px solid #ffccd5;
-            padding: 10px 18px;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .del-btn:hover { background: #9d0208; color: white; }
-
+        .del-btn { background: #f8f9fa; color: #9d0208; border: 1px solid #ffccd5; padding: 10px 18px; border-radius: 12px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -173,21 +135,18 @@
         <h1>Terra Global</h1>
         <div class="company-info">
             <p>AGRICULTURAL COMMODITIES | BRAZILIAN EXPORTS | GLOBAL TRADING</p>
-            <p>Port of Santos Office — Brazil | Rotterdam Hub — Netherlands</p>
         </div>
     </div>
 
     <div class="main-container">
-        <!-- Dashboard Form -->
         <div id="registration-form">
-            <input type="text" id="productName" placeholder="Product (e.g. Coffee, Tobacco, Wine)">
+            <input type="text" id="productName" placeholder="Product (e.g. Coffee, Tobacco)">
             <input type="text" id="origin" placeholder="Origin/Destination">
-            <input type="number" id="price" placeholder="Unit Price (USD)">
-            <input type="number" id="stock" placeholder="Tons/Quantity">
+            <input type="number" id="price" placeholder="Price (USD)">
+            <input type="number" id="stock" placeholder="Quantity">
             <button id="saveBtn">REGISTER SHIPMENT</button>
         </div>
 
-        <!-- Inventory List -->
         <div class="inventory-section">
             <h2>🚢 Global Shipment Tracking</h2>
             <table>
@@ -200,9 +159,7 @@
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody id="tableBody">
-                    <!-- Dynamic Rows -->
-                </tbody>
+                <tbody id="tableBody"></tbody>
             </table>
         </div>
     </div>
@@ -218,7 +175,7 @@
             const stock = document.getElementById('stock').value;
 
             if (!product || !price || !stock) {
-                alert("Please fill in the shipment details.");
+                alert("Please fill in the details.");
                 return;
             }
 
@@ -227,16 +184,17 @@
                 <td style="font-weight: 700; color: #1b4332;">${product}</td>
                 <td><span class="category-tag">${origin || 'Global'}</span></td>
                 <td style="font-weight: 700; color: #bc6c25;">$${parseFloat(price).toFixed(2)}</td>
-                <td><strong>${stock}</strong> <small>units</small></td>
+                <td><strong>${stock}</strong> units</td>
                 <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">CANCEL</button></td>
             `;
 
             document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
-
 </body>
 </html>
+
+
 
 
 
