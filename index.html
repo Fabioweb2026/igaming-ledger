@@ -11,7 +11,7 @@
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #fdfaf6; 
+            background: #fdfaf6; /* Cor de fundo elegante */
             color: #1a1a1a; 
             padding-bottom: 60px;
             display: flex;
@@ -19,112 +19,118 @@
             align-items: center;
         }
 
-        /* BANNER AJUSTADO PARA NÃO CORTAR */
+        /* BANNER COM COR LATERAL COMBINANDO */
         .hero-banner {
             width: 100%;
             max-width: 1200px;
-            height: 320px; /* Altura ideal para a proporção da sua imagem */
-            background-color: #ffffff; /* Fundo branco para emendar com a foto */
+            height: 350px;
+            background-color: #f7f4ed; /* COR QUE PREENCHE OS LADOS COM ELEGÂNCIA */
             background-image: url('image.jpg');
             background-repeat: no-repeat;
             background-position: center;
-            background-size: contain; /* GARANTE QUE A IMAGEM APAREÇA INTEIRA */
+            background-size: contain;
             border-radius: 24px;
             margin-top: 20px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+            border: 1px solid #e5e1da;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
         }
 
-        .company-header { 
-            text-align: center; 
-            margin: 40px 0; 
-        }
-        
-        .company-header h1 { 
-            font-size: 56px; 
-            font-weight: 800; 
-            color: #0f172a; 
-            letter-spacing: -2px; 
-            text-transform: uppercase;
-            line-height: 1;
-        }
-        
-        .company-header p { 
-            color: #b39359; 
-            font-size: 13px; 
-            text-transform: uppercase; 
-            letter-spacing: 4px; 
-            font-weight: 800; 
-            margin-top: 10px; 
-        }
+        .company-header { text-align: center; margin: 40px 0; }
+        .company-header h1 { font-size: 56px; font-weight: 800; color: #0f172a; letter-spacing: -2px; text-transform: uppercase; }
+        .company-header p { color: #b39359; font-size: 13px; text-transform: uppercase; letter-spacing: 4px; font-weight: 800; margin-top: 10px; }
 
         /* GRID LAYOUT */
         .main-grid {
             display: grid;
-            grid-template-columns: 340px 1fr;
+            grid-template-columns: 360px 1fr;
             gap: 30px;
             width: 100%;
             max-width: 1200px;
             padding: 0 20px;
         }
 
+        /* CARD DE ENTRADA MELHORADO */
         .card {
             background: #ffffff;
-            padding: 30px;
-            border-radius: 24px;
+            padding: 35px;
+            border-radius: 28px;
             border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.02);
             height: fit-content;
         }
 
-        .card h3 { font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-bottom: 25px; letter-spacing: 1.5px; }
+        .card h3 { font-size: 11px; text-transform: uppercase; color: #94a3b8; margin-bottom: 25px; letter-spacing: 2px; font-weight: 800; border-left: 3px solid #b39359; padding-left: 12px; }
 
+        /* INPUTS COM CORES ELEGANTES */
         input, select {
             width: 100%;
-            padding: 14px;
-            margin-bottom: 15px;
+            padding: 15px;
+            margin-bottom: 18px;
             border: 1px solid #e2e8f0;
-            border-radius: 12px;
-            background: #f8fafc;
+            border-radius: 14px;
+            background: #f8fafc; /* Cinza azulado bem leve */
             font-size: 14px;
+            color: #334155;
             outline: none;
+            transition: 0.3s ease;
         }
 
-        .qty-group { display: flex; gap: 10px; margin-bottom: 15px; }
+        /* Efeito de foco em Dourado */
+        input:focus, select:focus {
+            border-color: #b39359;
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(179, 147, 89, 0.1);
+        }
+
+        .qty-group { display: flex; gap: 10px; margin-bottom: 18px; }
         .qty-group input { flex: 1.5; margin-bottom: 0; }
         .qty-group select { flex: 1; margin-bottom: 0; }
 
+        /* BOTÃO PROFISSIONAL */
         #regBtn {
             width: 100%;
-            padding: 18px;
-            background: #0f172a;
-            color: white;
+            padding: 20px;
+            background: #1a202c; /* Navy Profundo */
+            color: #ffffff;
             border: none;
-            border-radius: 12px;
+            border-radius: 16px;
             font-weight: 800;
             cursor: pointer;
-            transition: 0.3s;
+            transition: 0.4s;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
         }
 
-        #regBtn:hover { background: #b39359; transform: translateY(-2px); }
+        #regBtn:hover { 
+            background: #b39359; /* Muda para dourado no hover */
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(179, 147, 89, 0.3);
+        }
 
+        /* TABELA ELEGANTE */
         .inventory-area {
             background: #ffffff;
-            border-radius: 24px;
+            border-radius: 28px;
             border: 1px solid #e2e8f0;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.02);
         }
 
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 20px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #f1f5f9; }
-        td { padding: 20px; border-bottom: 1px solid #f8fafc; font-size: 15px; color: #334155; }
+        th { text-align: left; padding: 22px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #f1f5f9; letter-spacing: 1px; font-weight: 800; }
+        td { padding: 22px; border-bottom: 1px solid #f8fafc; font-size: 15px; color: #334155; }
+        
+        /* Efeito zebra na tabela */
+        tbody tr:nth-child(even) { background-color: #fdfbf7; }
+
         .currency { color: #b39359; font-weight: 800; }
+        .del-btn { color: #ef4444; cursor: pointer; border: none; background: none; font-weight: 800; font-size: 11px; transition: 0.2s; }
+        .del-btn:hover { transform: scale(1.15); }
 
         @media(max-width: 900px) {
             .main-grid { grid-template-columns: 1fr; }
-            .hero-banner { height: 200px; }
+            .hero-banner { height: 220px; }
         }
     </style>
 </head>
@@ -134,7 +140,7 @@
 
     <header class="company-header">
         <h1>Sollene Group</h1>
-        <p>Premium Logistics & Global Trade</p>
+        <p>Supply Chain & Logistics Terminal</p>
     </header>
 
     <div class="main-grid">
@@ -185,16 +191,16 @@
             const qty = document.getElementById('pQty').value;
             const unit = document.getElementById('pUnit').value;
 
-            if(!name || !price || !qty) return alert("Please fill the cargo details.");
+            if(!name || !price || !qty) return alert("Required data missing.");
 
             let s = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
             const row = document.getElementById('list').insertRow();
             row.innerHTML = `
-                <td style="font-weight:700;">${name}</td>
+                <td style="font-weight:700; color: #0f172a;">${name}</td>
                 <td style="color:#64748b">${dest || 'Global'}</td>
                 <td class="currency">${s} ${parseFloat(price).toFixed(2)}</td>
                 <td><strong>${qty}</strong> <small>${unit}</small></td>
-                <td><button onclick="this.parentElement.parentElement.remove()" style="color:#ef4444; border:none; background:none; cursor:pointer; font-weight:bold;">DEL</button></td>
+                <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
             `;
             document.querySelectorAll('input').forEach(i => i.value = "");
         });
