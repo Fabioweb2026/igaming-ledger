@@ -1,157 +1,388 @@
+# Terra Global — Elegant International Logistics Webpage
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terra Global | Terminal de Carga</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Terra Global | International Cargo Terminal</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
-        @import url('https://googleapis.com');
 
-        *{ margin:0; padding:0; box-sizing:border-box; }
-
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            padding: 60px 20px; 
-            /* FUNDO AZUL MARINHO PROFISSIONAL */
-            background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
-            color: #ffffff; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            position: relative;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
 
-        /* IMAGEM NO CANTO COM DESTAQUE (GLOW) */
-        .corner-image {
-            position: absolute;
-            top: 25px;
-            right: 25px;
-            width: 160px;
-            height: 100px;
-            border-radius: 12px;
-            background: url('empresa.png') no-repeat center center;
-            background-size: cover;
-            border: 2px solid #d4a373; /* Borda Dourada */
-            /* Esse brilho faz a imagem não sumir no fundo escuro */
-            box-shadow: 0 0 20px rgba(212, 163, 115, 0.4); 
+        body{
+            font-family:'Plus Jakarta Sans', sans-serif;
+            min-height:100vh;
+            color:#f8fafc;
+            overflow-x:hidden;
+
+            /* LUXURY INTERNATIONAL BACKGROUND */
+            background:
+            radial-gradient(circle at top left, rgba(30,64,175,0.25), transparent 35%),
+            radial-gradient(circle at bottom right, rgba(212,163,115,0.18), transparent 30%),
+            linear-gradient(135deg, #020617 0%, #07111f 35%, #0f172a 100%);
+
+            padding:60px 20px;
+            position:relative;
         }
 
-        .company-branding { text-align: center; margin-bottom: 50px; }
-        
-        .company-branding h1 { 
-            font-size: 52px; 
-            font-weight: 800; 
-            color: #ffffff; 
-            text-transform: uppercase; 
-            letter-spacing: -1px;
-            text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        /* BACKGROUND GLOW EFFECTS */
+        body::before,
+        body::after{
+            content:"";
+            position:absolute;
+            width:350px;
+            height:350px;
+            border-radius:50%;
+            filter:blur(120px);
+            z-index:0;
         }
 
-        .company-info { 
-            color: #d4a373; 
-            font-size: 14px; 
-            font-weight: 700; 
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: 10px;
+        body::before{
+            background:rgba(59,130,246,0.15);
+            top:-120px;
+            left:-100px;
         }
 
-        .main-container { width: 100%; max-width: 1200px; }
-
-        /* FORMULÁRIO DE ALTO CONTRASTE */
-        #registration-form { 
-            background: rgba(30, 41, 59, 0.5); 
-            backdrop-filter: blur(15px);
-            padding: 40px; 
-            border-radius: 20px; 
-            margin-bottom: 30px;
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        body::after{
+            background:rgba(212,163,115,0.12);
+            bottom:-120px;
+            right:-80px;
         }
 
-        input, select { 
-            padding: 16px; 
-            border: 1px solid rgba(255, 255, 255, 0.2); 
-            border-radius: 12px; 
-            font-size: 15px;
-            background: #020617;
-            color: #ffffff; /* Letras Brancas */
-            outline: none;
-            transition: 0.3s;
+        .page-wrapper{
+            max-width:1300px;
+            margin:auto;
+            position:relative;
+            z-index:2;
         }
 
-        /* Destaque ao clicar no campo */
-        input:focus { border-color: #d4a373; box-shadow: 0 0 10px rgba(212, 163, 115, 0.3); }
-
-        input { flex: 2; min-width: 200px; }
-        select { flex: 1; min-width: 130px; cursor: pointer; }
-
-        #saveBtn { 
-            padding: 16px 40px; 
-            background: #10b981; /* Verde esmeralda vivo para o botão */
-            color: #020617; 
-            border: none; 
-            border-radius: 12px; 
-            cursor: pointer; 
-            font-weight: 800;
-            font-size: 16px;
-            transition: 0.3s;
+        /* HERO SECTION */
+        .hero{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:40px;
+            margin-bottom:50px;
+            flex-wrap:wrap;
         }
 
-        #saveBtn:hover { transform: translateY(-3px); background: #34d399; box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3); }
-
-        /* TABELA */
-        .inventory-section { 
-            background: rgba(15, 23, 42, 0.8); 
-            padding: 40px; 
-            border-radius: 20px; 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
+        .branding h1{
+            font-size:64px;
+            font-weight:800;
+            letter-spacing:-2px;
+            line-height:1;
+            background:linear-gradient(to right,#ffffff,#d4a373);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
         }
 
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 15px; color: #94a3b8; font-size: 12px; text-transform: uppercase; border-bottom: 2px solid rgba(255, 255, 255, 0.1); }
-        td { padding: 20px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-size: 16px; }
-
-        .price-col { font-weight: 700; color: #d4a373; }
-        .del-btn { color: #f87171; border: none; background: none; font-weight: 700; cursor: pointer; }
-
-        @media(max-width: 768px) {
-            .corner-image { position: static; width: 100%; margin-bottom: 20px; }
-            h1 { font-size: 32px; }
+        .branding p{
+            margin-top:16px;
+            color:#94a3b8;
+            font-size:17px;
+            max-width:600px;
+            line-height:1.7;
         }
+
+        .branding span{
+            display:inline-block;
+            margin-top:18px;
+            padding:10px 18px;
+            border:1px solid rgba(255,255,255,0.1);
+            border-radius:999px;
+            background:rgba(255,255,255,0.03);
+            color:#d4a373;
+            font-size:13px;
+            font-weight:700;
+            letter-spacing:2px;
+            text-transform:uppercase;
+        }
+
+        /* COMPANY IMAGE */
+        .company-image{
+            width:340px;
+            height:220px;
+            border-radius:24px;
+            overflow:hidden;
+            border:1px solid rgba(255,255,255,0.08);
+            box-shadow:
+            0 20px 50px rgba(0,0,0,0.5),
+            0 0 25px rgba(212,163,115,0.15);
+
+            background:url('empresa.png') center center/cover no-repeat;
+        }
+
+        /* GLASS CONTAINERS */
+        .glass-card{
+            background:rgba(15,23,42,0.55);
+            backdrop-filter:blur(18px);
+            border:1px solid rgba(255,255,255,0.08);
+            box-shadow:0 15px 40px rgba(0,0,0,0.35);
+            border-radius:28px;
+        }
+
+        /* FORM */
+        #registration-form{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+            gap:18px;
+            padding:35px;
+            margin-bottom:35px;
+        }
+
+        input,
+        select{
+            width:100%;
+            padding:16px 18px;
+            border-radius:16px;
+            border:1px solid rgba(255,255,255,0.08);
+            background:rgba(255,255,255,0.03);
+            color:#ffffff;
+            font-size:15px;
+            transition:0.35s ease;
+            outline:none;
+        }
+
+        input::placeholder{
+            color:#94a3b8;
+        }
+
+        select{
+            cursor:pointer;
+        }
+
+        input:focus,
+        select:focus{
+            border-color:#d4a373;
+            background:rgba(255,255,255,0.05);
+            box-shadow:0 0 0 4px rgba(212,163,115,0.12);
+            transform:translateY(-2px);
+        }
+
+        /* BUTTON */
+        #saveBtn{
+            border:none;
+            border-radius:18px;
+            background:linear-gradient(135deg,#d4a373,#f4d6a0);
+            color:#020617;
+            font-weight:800;
+            font-size:15px;
+            cursor:pointer;
+            transition:0.35s ease;
+            letter-spacing:1px;
+            min-height:56px;
+            box-shadow:0 10px 25px rgba(212,163,115,0.25);
+        }
+
+        #saveBtn:hover{
+            transform:translateY(-4px) scale(1.02);
+            box-shadow:0 18px 35px rgba(212,163,115,0.35);
+        }
+
+        #saveBtn:active{
+            transform:scale(0.98);
+        }
+
+        /* TABLE SECTION */
+        .inventory-section{
+            padding:35px;
+            overflow-x:auto;
+        }
+
+        .section-title{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:25px;
+            flex-wrap:wrap;
+            gap:15px;
+        }
+
+        .section-title h2{
+            font-size:28px;
+            font-weight:700;
+        }
+
+        .section-title span{
+            color:#94a3b8;
+            font-size:14px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        thead{
+            background:rgba(255,255,255,0.03);
+        }
+
+        th{
+            text-align:left;
+            padding:18px;
+            font-size:12px;
+            text-transform:uppercase;
+            color:#94a3b8;
+            letter-spacing:1px;
+            border-bottom:1px solid rgba(255,255,255,0.08);
+        }
+
+        td{
+            padding:22px 18px;
+            border-bottom:1px solid rgba(255,255,255,0.05);
+            font-size:15px;
+        }
+
+        tbody tr{
+            transition:0.3s ease;
+        }
+
+        tbody tr:hover{
+            background:rgba(255,255,255,0.03);
+        }
+
+        .product-name{
+            font-weight:700;
+            color:#ffffff;
+        }
+
+        .destination{
+            color:#94a3b8;
+        }
+
+        .price-col{
+            color:#d4a373;
+            font-weight:700;
+        }
+
+        .stock-col strong{
+            color:#38bdf8;
+        }
+
+        /* DELETE BUTTON */
+        .del-btn{
+            border:none;
+            padding:10px 18px;
+            border-radius:12px;
+            background:rgba(239,68,68,0.12);
+            color:#f87171;
+            font-weight:700;
+            cursor:pointer;
+            transition:0.3s ease;
+        }
+
+        .del-btn:hover{
+            background:#ef4444;
+            color:#ffffff;
+            transform:translateY(-2px);
+        }
+
+        /* FOOTER */
+        .footer{
+            margin-top:35px;
+            text-align:center;
+            color:#64748b;
+            font-size:14px;
+        }
+
+        /* MOBILE */
+        @media(max-width:768px){
+
+            body{
+                padding:35px 15px;
+            }
+
+            .branding h1{
+                font-size:42px;
+            }
+
+            .hero{
+                flex-direction:column;
+                align-items:flex-start;
+            }
+
+            .company-image{
+                width:100%;
+                height:220px;
+            }
+
+            #registration-form,
+            .inventory-section{
+                padding:22px;
+            }
+
+            table{
+                min-width:700px;
+            }
+        }
+
     </style>
 </head>
 <body>
 
-    <!-- IMAGEM COM BRILHO DOURADO -->
-    <div class="corner-image"></div>
+    <div class="page-wrapper">
 
-    <div class="company-branding">
-        <h1>Terra Global</h1>
-        <div class="company-info">Logistics & Multi-Currency Terminal</div>
-    </div>
+        <section class="hero">
 
-    <div class="main-container">
-        <div id="registration-form">
+            <div class="branding">
+                <h1>Terra Global</h1>
+
+                <span>International Trade & Logistics</span>
+
+                <p>
+                    Premium global import and export solutions connecting
+                    international markets through logistics excellence,
+                    high-value products, and strategic cargo operations.
+                </p>
+            </div>
+
+            <div class="company-image"></div>
+
+        </section>
+
+        <!-- FORM -->
+        <div id="registration-form" class="glass-card">
+
             <input type="text" id="productName" placeholder="Product Name">
+
             <input type="text" id="origin" placeholder="Destination Port">
-            
+
             <select id="currency">
                 <option value="USD">USD ($)</option>
                 <option value="EUR">EUR (€)</option>
-                <option value="BRL">R$ (BRL)</option>
+                <option value="BRL">BRL (R$)</option>
             </select>
 
             <input type="number" id="price" placeholder="Unit Price">
+
             <input type="number" id="stock" placeholder="Quantity">
-            <button id="saveBtn">REGISTER</button>
+
+            <button id="saveBtn">REGISTER PRODUCT</button>
+
         </div>
 
-        <div class="inventory-section">
+        <!-- TABLE -->
+        <div class="inventory-section glass-card">
+
+            <div class="section-title">
+                <h2>Cargo Inventory</h2>
+                <span>International Freight Monitoring System</span>
+            </div>
+
             <table>
+
                 <thead>
                     <tr>
                         <th>Product</th>
@@ -161,37 +392,67 @@
                         <th>Action</th>
                     </tr>
                 </thead>
+
                 <tbody id="tableBody"></tbody>
+
             </table>
+
         </div>
+
+        <div class="footer">
+            © 2026 Terra Global — Premium International Logistics
+        </div>
+
     </div>
 
     <script>
+
         const saveBtn = document.getElementById('saveBtn');
         const tableBody = document.getElementById('tableBody');
 
-        saveBtn.addEventListener('click', function() {
+        saveBtn.addEventListener('click', function(){
+
             const product = document.getElementById('productName').value;
             const origin = document.getElementById('origin').value;
             const currency = document.getElementById('currency').value;
             const price = document.getElementById('price').value;
             const stock = document.getElementById('stock').value;
 
-            if (!product || !price || !stock) return alert("Fill all fields");
+            if(!product || !origin || !price || !stock){
+                alert('Please fill all fields.');
+                return;
+            }
 
-            let symbol = currency === "BRL" ? "R$" : (currency === "USD" ? "$" : "€");
+            let symbol = currency === 'BRL'
+                ? 'R$'
+                : currency === 'USD'
+                ? '$'
+                : '€';
 
-            const newRow = tableBody.insertRow();
-            newRow.innerHTML = `
-                <td style="font-weight:700; color: #ffffff;">${product}</td>
-                <td style="color:#94a3b8">${origin}</td>
-                <td class="price-col">${symbol} ${parseFloat(price).toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
-                <td><strong>${stock}</strong> units</td>
-                <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
+            const row = tableBody.insertRow();
+
+            row.innerHTML = `
+                <td class="product-name">${product}</td>
+                <td class="destination">${origin}</td>
+                <td class="price-col">${symbol} ${parseFloat(price).toLocaleString('en-US', {
+                    minimumFractionDigits:2
+                })}</td>
+                <td class="stock-col"><strong>${stock}</strong> units</td>
+                <td>
+                    <button class="del-btn" onclick="this.closest('tr').remove()">
+                        DELETE
+                    </button>
+                </td>
             `;
 
-            document.querySelectorAll('input').forEach(i => i.value = "");
+            document.querySelectorAll('input').forEach(input => {
+                input.value = '';
+            });
+
         });
+
     </script>
+
 </body>
 </html>
+```
