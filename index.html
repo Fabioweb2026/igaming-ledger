@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +11,11 @@
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #0b0e14; /* Azul Marinho Luxo */
+            background: #0b0e14; /* Azul Marinho Profundo */
             color: #ffffff; 
             min-height: 100vh;
             padding: 40px 20px;
+            position: relative;
         }
 
         /* IMAGEM NO CANTO SUPERIOR DIREITO */
@@ -30,6 +30,7 @@
             background-size: cover;
             border: 1px solid rgba(212, 163, 115, 0.3);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 100; /* Garante que a logo fique visível */
         }
 
         /* CABEÇALHO CENTRALIZADO */
@@ -56,13 +57,13 @@
         .hero h1 { font-size: 64px; font-weight: 800; margin-bottom: 15px; letter-spacing: -2px; }
         .hero p { font-size: 18px; color: #94a3b8; line-height: 1.6; font-weight: 300; }
 
-        /* LAYOUT LADO A LADO */
+        /* LAYOUT LADO A LADO - CORREÇÃO DO CLIQUE */
         .dashboard {
             display: flex;
             gap: 40px;
             max-width: 1400px;
             margin: 0 auto;
-            align-items: flex-start;
+            align-items: flex-start; /* ESSENCIAL: impede a sidebar de cobrir a tabela */
         }
 
         /* BARRA LATERAL (REGISTRO) */
@@ -109,7 +110,10 @@
         #regBtn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 163, 115, 0.3); }
 
         /* ÁREA DA TABELA (INVENTÁRIO) */
-        .inventory-area { flex: 1; }
+        .inventory-area { 
+            flex: 1; 
+            min-width: 0; /* Previne que a tabela estoure o layout */
+        }
 
         .inv-header {
             display: flex;
@@ -125,7 +129,7 @@
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 20px;
-            overflow: hidden;
+            overflow-x: auto; /* Permite rolar a tabela em telas pequenas */
         }
 
         table { width: 100%; border-collapse: collapse; }
@@ -146,7 +150,7 @@
 </head>
 <body>
 
-    <!-- Imagem no Canto Superior -->
+    <!-- Logo no Canto -->
     <div class="header-image"></div>
 
     <header class="hero">
@@ -211,7 +215,7 @@
                         </tr>
                     </thead>
                     <tbody id="tableBody">
-                        <!-- Dados aqui -->
+                        <!-- Os dados aparecerão aqui -->
                     </tbody>
                 </table>
             </div>
@@ -222,7 +226,7 @@
 
     <script>
         const btn = document.getElementById('regBtn');
-        const body = document.getElementById('tableBody');
+        const tableBody = document.getElementById('tableBody');
 
         btn.addEventListener('click', () => {
             const n = document.getElementById('name').value;
@@ -231,22 +235,31 @@
             const p = document.getElementById('price').value;
             const q = document.getElementById('qty').value;
 
-            if(!n || !p || !q) return alert("Fill required fields");
+            // Validação simples
+            if(!n || !p || !q) {
+                alert("Please fill in the required fields (Product, Price, and Quantity).");
+                return;
+            }
 
             const s = c === "USD" ? "$" : (c === "EUR" ? "€" : "R$");
 
-            const row = body.insertRow();
+            // Cria a linha na tabela
+            const row = tableBody.insertRow();
             row.innerHTML = `
                 <td style="font-weight:600">${n}</td>
-                <td style="color:#94a3b8">${d || 'Global'}</td>
+                <td style="color:#94a3b8">${d || 'Global Hub'}</td>
                 <td class="price">${s} ${parseFloat(p).toFixed(2)}</td>
                 <td>${q} units</td>
                 <td><button class="del" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
             `;
 
-            // Limpa campos
-            document.querySelectorAll('input').forEach(i => i.value = "");
+            // Limpa os campos para o próximo registro
+            document.getElementById('name').value = "";
+            document.getElementById('dest').value = "";
+            document.getElementById('price').value = "";
+            document.getElementById('qty').value = "";
         });
     </script>
 </body>
 </html>
+
