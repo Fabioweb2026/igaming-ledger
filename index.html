@@ -19,11 +19,11 @@
             align-items: center;
         }
 
-        /* BANNER REDIMENSIONADO (MENOR E MAIS DISCRETO) */
+        /* BANNER */
         .hero-banner {
             width: 100%;
             max-width: 1200px;
-            height: 280px; /* Reduzido para ficar mais equilibrado */
+            height: 250px;
             background: url('image.jpg') no-repeat center center;
             background-size: cover;
             border-radius: 24px;
@@ -32,30 +32,11 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.05);
         }
 
-        /* NOME DA EMPRESA EM TEXTO */
-        .company-header {
-            text-align: center;
-            margin: 30px 0 40px;
-        }
+        .company-header { text-align: center; margin: 30px 0 40px; }
+        .company-header h1 { font-size: 48px; font-weight: 800; color: #0f172a; letter-spacing: -2px; text-transform: uppercase; }
+        .company-header p { color: #b39359; font-size: 12px; text-transform: uppercase; letter-spacing: 4px; font-weight: 800; margin-top: 5px; }
 
-        .company-header h1 {
-            font-size: 48px;
-            font-weight: 800;
-            color: #0f172a;
-            letter-spacing: -2px;
-            text-transform: uppercase;
-        }
-
-        .company-header p {
-            color: #b39359;
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-weight: 800;
-            margin-top: 5px;
-        }
-
-        /* LAYOUT PRINCIPAL */
+        /* GRID LAYOUT */
         .main-grid {
             display: grid;
             grid-template-columns: 340px 1fr;
@@ -65,6 +46,7 @@
             padding: 0 20px;
         }
 
+        /* CARD DE ENTRADA */
         .card {
             background: #ffffff;
             padding: 30px;
@@ -87,21 +69,32 @@
             outline: none;
         }
 
+        /* AJUSTE PARA QUANTIDADE E UNIDADE LADO A LADO */
+        .qty-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .qty-group input { flex: 1.5; margin-bottom: 0; }
+        .qty-group select { flex: 1; margin-bottom: 0; cursor: pointer; }
+
         #regBtn {
             width: 100%;
-            padding: 16px;
+            padding: 18px;
             background: #0f172a;
             color: white;
             border: none;
             border-radius: 12px;
-            font-weight: 700;
+            font-weight: 800;
             cursor: pointer;
             transition: 0.3s;
             text-transform: uppercase;
+            font-size: 13px;
         }
 
         #regBtn:hover { background: #b39359; transform: translateY(-2px); }
 
+        /* TABELA */
         .inventory-area {
             background: #ffffff;
             border-radius: 24px;
@@ -112,59 +105,66 @@
 
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 20px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #f1f5f9; }
-        td { padding: 20px; border-bottom: 1px solid #f8fafc; font-size: 15px; }
-        
+        td { padding: 20px; border-bottom: 1px solid #f8fafc; font-size: 15px; color: #334155; }
         .currency { color: #b39359; font-weight: 800; }
 
         @media(max-width: 900px) {
             .main-grid { grid-template-columns: 1fr; }
-            .hero-banner { height: 180px; margin-top: 10px; }
-            .company-header h1 { font-size: 32px; }
+            .hero-banner { height: 180px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Banner Superior -->
     <div class="hero-banner"></div>
 
-    <!-- Título da Empresa -->
     <header class="company-header">
         <h1>Sollene Group</h1>
         <p>Premium Logistics & Global Trade</p>
     </header>
 
     <div class="main-grid">
-        <!-- Formulário -->
         <aside class="card">
             <h3>Shipment Entry</h3>
+            
             <input type="text" id="pName" placeholder="Product Name">
-            <input type="text" id="pDest" placeholder="Destination">
+            <input type="text" id="pDest" placeholder="Destination Port">
+            
             <select id="pCurr">
                 <option value="USD">USD ($)</option>
                 <option value="EUR">EUR (€)</option>
                 <option value="BRL">BRL (R$)</option>
             </select>
+
             <input type="number" id="pPrice" placeholder="Unit Price">
-            <input type="number" id="pQty" placeholder="Quantity">
+            
+            <!-- QUANTIDADE COM SELETOR DE UNIDADE -->
+            <div class="qty-group">
+                <input type="number" id="pQty" placeholder="Qty">
+                <select id="pUnit">
+                    <option value="Units">Units</option>
+                    <option value="KG">KG</option>
+                    <option value="Tons">Tons</option>
+                    <option value="Packs">Packs</option>
+                </select>
+            </div>
+
             <button id="regBtn">Register Cargo</button>
         </aside>
 
-        <!-- Tabela -->
-        <main>
-            <div class="inventory-area">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Destination</th>
-                            <th>Value</th>
-                            <th>Volume</th>
-                        </tr>
-                    </thead>
-                    <tbody id="list"></tbody>
-                </table>
-            </div>
+        <main class="inventory-area">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Destination</th>
+                        <th>Value</th>
+                        <th>Volume</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="list"></tbody>
+            </table>
         </main>
     </div>
 
@@ -175,21 +175,30 @@
             const curr = document.getElementById('pCurr').value;
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
+            const unit = document.getElementById('pUnit').value;
 
             if(!name || !price || !qty) return alert("Please fill the cargo details.");
 
             let s = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
             const row = document.getElementById('list').insertRow();
+            
             row.innerHTML = `
-                <td style="font-weight:700; color: #0f172a;">${name}</td>
-                <td style="color:#64748b">${dest || 'Internal'}</td>
+                <td style="font-weight:700;">${name}</td>
+                <td style="color:#64748b">${dest || 'Global'}</td>
                 <td class="currency">${s} ${parseFloat(price).toFixed(2)}</td>
-                <td><strong>${qty}</strong> units</td>
+                <td><strong>${qty}</strong> <small>${unit}</small></td>
+                <td><button onclick="this.parentElement.parentElement.remove()" style="color:red; border:none; background:none; cursor:pointer; font-weight:bold;">DEL</button></td>
             `;
-            document.querySelectorAll('input').forEach(i => i.value = "");
+
+            // Limpar campos após registro
+            document.getElementById('pName').value = "";
+            document.getElementById('pDest').value = "";
+            document.getElementById('pPrice').value = "";
+            document.getElementById('pQty').value = "";
         });
     </script>
 </body>
 </html>
+
 
 
