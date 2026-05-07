@@ -11,90 +11,112 @@
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #fdfaf6; /* CREME CLARO */
+            background: #fdfaf6; 
             color: #1a1a1a; 
             padding-bottom: 60px;
         }
 
-        /* BANNER SUPERIOR COM A IMAGEM */
+        /* BANNER COM CONTRASTE MELHORADO */
         .top-banner {
             width: 100%;
-            height: 250px;
-            background: linear-gradient(rgba(253, 250, 246, 0.2), rgba(253, 250, 246, 1)), 
+            height: 320px; /* Aumentei a altura */
+            /* A mágica acontece aqui: uma película escura (0.3) sobre a foto */
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(253, 250, 246, 1)), 
                         url('image.png') no-repeat center center;
             background-size: cover;
             margin-bottom: 20px;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 2px solid #e5e7eb;
         }
 
         .hero { text-align: center; margin-bottom: 40px; padding: 0 20px; }
-        .hero h1 { font-size: 52px; font-weight: 800; color: #1a1a1a; letter-spacing: -2px; }
-        .hero p { color: #64748b; font-size: 13px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; margin-top: 5px; }
+        
+        .hero h1 { 
+            font-size: 60px; 
+            font-weight: 800; 
+            color: #0f172a; 
+            letter-spacing: -2px;
+            /* Sombra suave para o título não sumir */
+            text-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
+
+        .hero p { 
+            color: #b39359; /* Dourado para destacar a divisão */
+            font-size: 12px; 
+            text-transform: uppercase; 
+            letter-spacing: 3px; 
+            font-weight: 800; 
+            margin-top: 10px; 
+        }
 
         .container { 
             display: flex; 
-            gap: 30px; 
+            gap: 40px; 
             max-width: 1300px; 
             margin: 0 auto; 
             padding: 0 20px;
             align-items: flex-start; 
         }
 
-        /* BARRA LATERAL DE REGISTRO */
-        .sidebar { width: 340px; flex-shrink: 0; }
+        /* CARD DE REGISTRO */
+        .sidebar { width: 350px; flex-shrink: 0; }
 
         .form-card { 
             background: #ffffff; 
-            padding: 30px; 
-            border-radius: 20px; 
-            border: 1px solid #e5e7eb;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            padding: 35px; 
+            border-radius: 24px; 
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
         }
 
-        .form-card h3 { color: #b39359; font-size: 12px; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1px; border-bottom: 1px solid #f3f4f6; padding-bottom: 10px; }
+        .form-card h3 { 
+            color: #0f172a; 
+            font-size: 11px; 
+            text-transform: uppercase; 
+            margin-bottom: 25px; 
+            letter-spacing: 1.5px; 
+            border-left: 4px solid #b39359; 
+            padding-left: 10px;
+        }
 
-        .field { margin-bottom: 18px; }
-        label { display: block; font-size: 10px; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; font-weight: 700; }
+        .field { margin-bottom: 20px; }
+        label { display: block; font-size: 10px; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; font-weight: 800; }
 
         input, select { 
-            width: 100%; padding: 13px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; color: #1a1a1a; font-size: 14px; transition: 0.3s;
+            width: 100%; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; color: #1e293b; font-size: 15px; transition: 0.3s;
         }
 
-        input:focus { border-color: #b39359; outline: none; background: #fff; }
+        input:focus { border-color: #b39359; outline: none; background: #fff; box-shadow: 0 0 0 4px rgba(179, 147, 89, 0.1); }
 
-        .qty-row { display: flex; gap: 8px; }
+        .qty-row { display: flex; gap: 10px; }
         .qty-row input { flex: 2; }
-        .qty-row select { flex: 1.2; }
+        .qty-row select { flex: 1.5; }
 
         #regBtn { 
-            width: 100%; padding: 16px; background: #1a1a1a; color: #fff; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; margin-top: 10px; transition: 0.3s; text-transform: uppercase; font-size: 13px;
+            width: 100%; padding: 18px; background: #0f172a; color: #fff; border: none; border-radius: 14px; font-weight: 800; cursor: pointer; margin-top: 10px; transition: 0.3s; text-transform: uppercase; font-size: 12px; letter-spacing: 1px;
         }
 
-        #regBtn:hover { background: #b39359; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(179, 147, 89, 0.3); }
+        #regBtn:hover { background: #b39359; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(179, 147, 89, 0.3); }
 
         /* TABELA */
         .table-area { flex: 1; min-width: 0; }
-        .table-area h2 { font-size: 22px; margin-bottom: 20px; color: #1a1a1a; font-weight: 700; }
+        .table-area h2 { font-size: 24px; margin-bottom: 25px; color: #0f172a; font-weight: 800; letter-spacing: -0.5px; }
 
         .data-container { 
-            background: #ffffff; border-radius: 20px; border: 1px solid #e5e7eb; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            background: #ffffff; border-radius: 24px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
         }
 
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 18px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 1px solid #f3f4f6; letter-spacing: 1px; font-weight: 700; }
-        td { padding: 18px; border-bottom: 1px solid #f9fafb; font-size: 14px; color: #334155; }
+        th { text-align: left; padding: 20px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; letter-spacing: 1px; font-weight: 800; }
+        td { padding: 22px 20px; border-bottom: 1px solid #f8fafc; font-size: 15px; color: #334155; }
 
-        .price-text { color: #b39359; font-weight: 700; }
-        .del-btn { color: #ef4444; cursor: pointer; font-weight: 700; border: none; background: none; font-size: 11px; }
+        .price-text { color: #b39359; font-weight: 800; }
+        .del-btn { color: #ef4444; cursor: pointer; font-weight: 800; border: none; background: none; font-size: 11px; text-transform: uppercase; }
 
-        footer { text-align: center; margin-top: 60px; color: #94a3b8; font-size: 11px; letter-spacing: 1px; }
-
-        @media(max-width: 1000px) { .container { flex-direction: column; } .sidebar { width: 100%; } .top-banner { height: 180px; } }
+        @media(max-width: 1000px) { .container { flex-direction: column; } .sidebar { width: 100%; } .top-banner { height: 200px; } }
     </style>
 </head>
 <body>
 
-    <!-- BANNER SUBIDO PARA O TOPO -->
     <div class="top-banner"></div>
 
     <header class="hero">
@@ -103,19 +125,18 @@
     </header>
 
     <div class="container">
-        <!-- BARRA LATERAL LIMPA -->
         <aside class="sidebar">
             <div class="form-card">
                 <h3>Shipment Registration</h3>
                 
                 <div class="field">
                     <label>Commodity Name</label>
-                    <input type="text" id="pName" placeholder="e.g. Arabica Coffee">
+                    <input type="text" id="pName" placeholder="e.g. Premium Rum">
                 </div>
 
                 <div class="field">
                     <label>Destination Port</label>
-                    <input type="text" id="pDest" placeholder="e.g. Rotterdam">
+                    <input type="text" id="pDest" placeholder="e.g. Hamburg">
                 </div>
 
                 <div class="field">
@@ -148,7 +169,6 @@
             </div>
         </aside>
 
-        <!-- TABELA DE INVENTÁRIO -->
         <main class="table-area">
             <h2>Active Cargo Inventory</h2>
             <div class="data-container">
@@ -167,8 +187,6 @@
             </div>
         </main>
     </div>
-
-    <footer>© 2026 SOLLENE GROUP — PREMIUM INTERNATIONAL LOGISTICS</footer>
 
     <script>
         const regBtn = document.getElementById('regBtn');
@@ -191,7 +209,7 @@
 
             const row = inventoryList.insertRow();
             row.innerHTML = `
-                <td style="font-weight: 600;">${name}</td>
+                <td style="font-weight: 700; color: #0f172a;">${name}</td>
                 <td style="color: #64748b;">${dest || 'Global'}</td>
                 <td class="price-text">${symbol} ${parseFloat(price).toFixed(2)}</td>
                 <td><strong>${qty} ${unit}</strong></td>
@@ -206,4 +224,5 @@
     </script>
 </body>
 </html>
+
 
