@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Elegant International Logistics</title>
+    <title>Sollene Group | Premium Logistics</title>
     <style>
         @import url('https://googleapis.com');
 
@@ -12,31 +12,30 @@
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #0b0e14;
+            background: #0b0e14; /* Azul Marinho Luxo */
             color: #ffffff; 
             min-height: 100vh;
             padding: 40px 20px;
-            position: relative;
         }
 
-        /* IMAGEM NO CANTO (Garante que não cubra o resto) */
-        .corner-logo {
+        /* IMAGEM NO CANTO SUPERIOR DIREITO */
+        .header-image {
             position: absolute;
             top: 20px;
             right: 20px;
-            width: 150px;
+            width: 160px;
             height: 100px;
             border-radius: 12px;
-            background: url('empresa.png') no-repeat center center;
+            background: url('image.png') no-repeat center center;
             background-size: cover;
             border: 1px solid rgba(212, 163, 115, 0.3);
-            z-index: 10; /* Fica acima mas não bloqueia cliques */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        /* TEXTOS CENTRAIS */
-        .hero-section {
+        /* CABEÇALHO CENTRALIZADO */
+        .hero {
             text-align: center;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto 60px;
         }
 
@@ -49,161 +48,158 @@
             font-weight: 700;
             font-size: 11px;
             letter-spacing: 2px;
-            display: inline-block;
-            margin-bottom: 20px;
             border: 1px solid rgba(212, 163, 115, 0.2);
+            margin-bottom: 20px;
+            display: inline-block;
         }
 
-        .hero-section h1 { font-size: 64px; font-weight: 800; margin-bottom: 10px; }
-        .hero-section p { font-size: 18px; color: #94a3b8; line-height: 1.6; font-weight: 300; }
+        .hero h1 { font-size: 64px; font-weight: 800; margin-bottom: 15px; letter-spacing: -2px; }
+        .hero p { font-size: 18px; color: #94a3b8; line-height: 1.6; font-weight: 300; }
 
-        /* LAYOUT PRINCIPAL - CORRIGIDO */
-        .main-layout {
+        /* LAYOUT LADO A LADO */
+        .dashboard {
             display: flex;
-            gap: 30px;
-            max-width: 1300px;
+            gap: 40px;
+            max-width: 1400px;
             margin: 0 auto;
-            align-items: flex-start; /* Evita que a sidebar estique e cubra a tabela */
+            align-items: flex-start;
         }
 
         /* BARRA LATERAL (REGISTRO) */
         .sidebar {
-            width: 320px;
+            width: 340px;
             flex-shrink: 0;
-            position: sticky;
-            top: 40px;
-        }
-
-        .register-card {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 25px;
-            border-radius: 20px;
+            padding: 30px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
         }
 
-        .register-card h3 { font-size: 14px; margin-bottom: 20px; color: #d4a373; text-transform: uppercase; letter-spacing: 1px; }
+        .sidebar h3 { color: #d4a373; font-size: 14px; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1px; }
 
-        .input-group { margin-bottom: 15px; }
-        label { display: block; font-size: 10px; color: #64748b; margin-bottom: 5px; text-transform: uppercase; }
+        .field { margin-bottom: 18px; }
+        label { display: block; font-size: 10px; color: #64748b; margin-bottom: 6px; text-transform: uppercase; font-weight: 700; }
 
         input, select {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             background: #161b22;
             border: 1px solid #30363d;
-            border-radius: 8px;
+            border-radius: 10px;
             color: white;
             font-size: 14px;
         }
 
         input:focus { border-color: #d4a373; outline: none; }
 
-        #registerBtn {
+        #regBtn {
             width: 100%;
-            padding: 15px;
+            padding: 16px;
             background: #d4a373;
             color: #0b0e14;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: 800;
             cursor: pointer;
-            margin-top: 10px;
             transition: 0.3s;
+            text-transform: uppercase;
         }
 
-        #registerBtn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        #regBtn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 163, 115, 0.3); }
 
-        /* ÁREA CENTRAL (INVENTÁRIO) */
-        .content-area {
-            flex: 1;
-            min-width: 0; /* Impede que a tabela quebre o layout */
-        }
+        /* ÁREA DA TABELA (INVENTÁRIO) */
+        .inventory-area { flex: 1; }
 
-        .inventory-header {
+        .inv-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-end;
             margin-bottom: 25px;
         }
 
-        .inventory-header h2 { font-size: 26px; font-weight: 700; }
+        .inv-header h2 { font-size: 28px; font-weight: 700; }
+        .inv-header span { color: #475569; font-size: 12px; }
 
-        .table-container {
+        .table-box {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
             border-radius: 20px;
-            overflow-x: auto;
+            overflow: hidden;
         }
 
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 18px 15px; color: #64748b; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        td { padding: 20px 15px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 15px; }
+        th { text-align: left; padding: 18px; color: #64748b; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        td { padding: 20px 18px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 15px; }
 
-        .price-text { color: #d4a373; font-weight: 700; }
-        .del-btn { color: #ef4444; cursor: pointer; background: rgba(239, 68, 68, 0.1); border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; font-size: 11px; }
-        .del-btn:hover { background: #ef4444; color: white; }
+        .price { color: #d4a373; font-weight: 700; }
+        .del { color: #ef4444; cursor: pointer; background: rgba(239, 68, 68, 0.1); border: none; padding: 6px 12px; border-radius: 8px; font-weight: 700; font-size: 10px; }
+        .del:hover { background: #ef4444; color: white; }
 
-        footer { text-align: center; margin-top: 60px; color: #475569; font-size: 12px; }
+        footer { text-align: center; margin-top: 80px; color: #334155; font-size: 12px; }
 
         @media(max-width: 1100px) {
-            .main-layout { flex-direction: column; }
-            .sidebar { width: 100%; position: static; }
+            .dashboard { flex-direction: column; }
+            .sidebar { width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Logo no Canto -->
-    <div class="corner-logo"></div>
+    <!-- Imagem no Canto Superior -->
+    <div class="header-image"></div>
 
-    <header class="hero-section">
+    <header class="hero">
         <div class="badge">International Trade & Logistics</div>
         <h1>Sollene Group</h1>
         <p>Premium global import and export solutions connecting international markets through logistics excellence, high-value products, and strategic cargo operations.</p>
     </header>
 
-    <div class="main-layout">
-        <!-- Sidebar de Registro -->
+    <div class="dashboard">
+        <!-- Lado Esquerdo: Registro -->
         <aside class="sidebar">
-            <div class="register-card">
-                <h3>Register Shipment</h3>
-                <div class="input-group">
-                    <label>Product Name</label>
-                    <input type="text" id="pName" placeholder="e.g. Premium Tobacco">
-                </div>
-                <div class="input-group">
-                    <label>Destination Port</label>
-                    <input type="text" id="pDest" placeholder="e.g. Rotterdam">
-                </div>
-                <div class="input-group">
-                    <label>Currency</label>
-                    <select id="pCurr">
-                        <option value="USD">USD ($)</option>
-                        <option value="EUR">EUR (€)</option>
-                        <option value="BRL">BRL (R$)</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label>Unit Price</label>
-                    <input type="number" id="pPrice" placeholder="0.00">
-                </div>
-                <div class="input-group">
-                    <label>Quantity (Tons)</label>
-                    <input type="number" id="pQty" placeholder="0">
-                </div>
-                <button id="registerBtn">REGISTER PRODUCT</button>
+            <h3>Register Shipment</h3>
+            
+            <div class="field">
+                <label>Product Name</label>
+                <input type="text" id="name" placeholder="e.g. Arabica Coffee">
             </div>
+            
+            <div class="field">
+                <label>Destination Port</label>
+                <input type="text" id="dest" placeholder="e.g. Santos, BR">
+            </div>
+
+            <div class="field">
+                <label>Currency</label>
+                <select id="curr">
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="BRL">BRL (R$)</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Price</label>
+                <input type="number" id="price" placeholder="0.00">
+            </div>
+
+            <div class="field">
+                <label>Quantity</label>
+                <input type="number" id="qty" placeholder="0">
+            </div>
+
+            <button id="regBtn">Register Product</button>
         </aside>
 
-        <!-- Área da Tabela -->
-        <main class="content-area">
-            <div class="inventory-header">
+        <!-- Lado Direito: Tabela -->
+        <main class="inventory-area">
+            <div class="inv-header">
                 <h2>Cargo Inventory</h2>
-                <span style="color: #64748b; font-size: 11px; letter-spacing: 1px;">International Freight Monitoring System</span>
+                <span>International Freight Monitoring System</span>
             </div>
 
-            <div class="table-container">
+            <div class="table-box">
                 <table>
                     <thead>
                         <tr>
@@ -214,46 +210,41 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="inventoryBody">
-                        <!-- As linhas aparecerão aqui -->
+                    <tbody id="tableBody">
+                        <!-- Dados aqui -->
                     </tbody>
                 </table>
             </div>
         </main>
     </div>
 
-    <footer>
-        © 2026 Sollene Group — Premium International Logistics
-    </footer>
+    <footer>© 2026 Sollene Group — Premium International Logistics</footer>
 
     <script>
-        const registerBtn = document.getElementById('registerBtn');
-        const inventoryBody = document.getElementById('inventoryBody');
+        const btn = document.getElementById('regBtn');
+        const body = document.getElementById('tableBody');
 
-        registerBtn.addEventListener('click', function() {
-            const name = document.getElementById('pName').value;
-            const dest = document.getElementById('pDest').value;
-            const curr = document.getElementById('pCurr').value;
-            const price = document.getElementById('pPrice').value;
-            const qty = document.getElementById('pQty').value;
+        btn.addEventListener('click', () => {
+            const n = document.getElementById('name').value;
+            const d = document.getElementById('dest').value;
+            const c = document.getElementById('curr').value;
+            const p = document.getElementById('price').value;
+            const q = document.getElementById('qty').value;
 
-            if(!name || !price || !qty) {
-                alert("Please fill all required fields.");
-                return;
-            }
+            if(!n || !p || !q) return alert("Fill required fields");
 
-            const symbol = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
+            const s = c === "USD" ? "$" : (c === "EUR" ? "€" : "R$");
 
-            const row = inventoryBody.insertRow();
+            const row = body.insertRow();
             row.innerHTML = `
-                <td style="font-weight: 600;">${name}</td>
-                <td style="color: #94a3b8;">${dest || 'Global'}</td>
-                <td class="price-text">${symbol} ${parseFloat(price).toFixed(2)}</td>
-                <td>${qty} units</td>
-                <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
+                <td style="font-weight:600">${n}</td>
+                <td style="color:#94a3b8">${d || 'Global'}</td>
+                <td class="price">${s} ${parseFloat(p).toFixed(2)}</td>
+                <td>${q} units</td>
+                <td><button class="del" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
             `;
 
-            // Limpa os campos
+            // Limpa campos
             document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
