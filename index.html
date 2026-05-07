@@ -3,93 +3,151 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Cargo Management</title>
+    <title>Sollene Group | Premium Logistics</title>
     <style>
         @import url('https://googleapis.com');
-        *{ margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0e14; color: #ffffff; padding: 40px 20px; }
-        .hero { text-align: center; margin-bottom: 50px; }
-        .hero h1 { font-size: 50px; font-weight: 800; margin-bottom: 10px; }
-        .container { display: flex; gap: 30px; max-width: 1300px; margin: 0 auto; align-items: flex-start; }
-        .form-side { width: 320px; background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); }
-        .form-side h3 { color: #d4a373; font-size: 14px; text-transform: uppercase; margin-bottom: 20px; }
-        .input-box { margin-bottom: 15px; }
-        label { display: block; font-size: 10px; color: #64748b; margin-bottom: 5px; text-transform: uppercase; }
-        input, select { width: 100%; padding: 12px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; color: white; outline: none; }
         
-        /* Ajuste para quantidade e unidade ficarem lado a lado */
-        .qty-container { display: flex; gap: 10px; }
-        .qty-container input { flex: 2; }
-        .qty-container select { flex: 1.5; }
+        *{ margin:0; padding:0; box-sizing:border-box; }
 
-        #addBtn { width: 100%; padding: 15px; background: #d4a373; color: #0b0e14; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; margin-top: 10px; transition: 0.3s; }
-        #addBtn:hover { background: #e5b38a; transform: translateY(-2px); }
-        .table-side { flex: 1; }
-        .data-box { background: rgba(255, 255, 255, 0.02); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.05); overflow: hidden; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: #fdfaf6; /* CREME CLARO SOFISTICADO */
+            color: #1a1a1a; 
+            padding: 40px 20px; 
+        }
+
+        .hero { text-align: center; margin-bottom: 60px; }
+        .hero h1 { font-size: 52px; font-weight: 800; color: #1a1a1a; letter-spacing: -2px; }
+        .hero p { color: #64748b; font-size: 14px; text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+
+        .container { display: flex; gap: 40px; max-width: 1400px; margin: 0 auto; align-items: flex-start; }
+
+        /* BARRA LATERAL COM A IMAGEM */
+        .sidebar { width: 340px; }
+
+        .brand-image {
+            width: 100%;
+            height: 180px;
+            background: url('image.png') no-repeat center center;
+            background-size: cover;
+            border-radius: 20px 20px 0 0;
+            border: 1px solid #e5e7eb;
+            border-bottom: none;
+        }
+
+        .form-card { 
+            background: #ffffff; 
+            padding: 30px; 
+            border-radius: 0 0 20px 20px; 
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .form-card h3 { color: #b39359; font-size: 13px; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1px; }
+
+        .field { margin-bottom: 18px; }
+        label { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 6px; text-transform: uppercase; font-weight: 700; }
+
+        input, select { 
+            width: 100%; padding: 14px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; color: #1a1a1a; font-size: 14px; transition: 0.3s;
+        }
+
+        input:focus { border-color: #b39359; outline: none; background: #fff; }
+
+        .qty-row { display: flex; gap: 10px; }
+        .qty-row input { flex: 2; }
+        .qty-row select { flex: 1.5; }
+
+        #regBtn { 
+            width: 100%; padding: 16px; background: #1a1a1a; color: #fff; border: none; border-radius: 12px; font-weight: 800; cursor: pointer; margin-top: 10px; transition: 0.3s;
+        }
+
+        #regBtn:hover { background: #b39359; transform: translateY(-2px); }
+
+        /* TABELA GRAFITE */
+        .table-area { flex: 1; }
+        .table-area h2 { font-size: 24px; margin-bottom: 25px; color: #1a1a1a; }
+
+        .data-container { 
+            background: #ffffff; border-radius: 20px; border: 1px solid #e5e7eb; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 15px; color: #64748b; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        td { padding: 18px 15px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 14px; }
-        .price-color { color: #d4a373; font-weight: 700; }
-        .del-action { color: #ef4444; cursor: pointer; font-weight: 700; border: none; background: none; }
+        th { text-align: left; padding: 20px; color: #94a3b8; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid #f3f4f6; letter-spacing: 1px; }
+        td { padding: 20px; border-bottom: 1px solid #f9fafb; font-size: 15px; color: #334155; }
+
+        .price-text { color: #b39359; font-weight: 700; }
+        .del-btn { color: #ef4444; cursor: pointer; font-weight: 700; border: none; background: none; transition: 0.2s; }
+        .del-btn:hover { transform: scale(1.1); }
+
+        @media(max-width: 1000px) { .container { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
 <body>
 
     <header class="hero">
+        <p>Supply Chain & Logistics Division</p>
         <h1>Sollene Group</h1>
-        <p>Premium Logistics & Global Shipment Monitoring System</p>
     </header>
 
     <div class="container">
-        <aside class="form-side">
-            <h3>Register New Cargo</h3>
-            <div class="input-box">
-                <label>Product Name</label>
-                <input type="text" id="itemName" placeholder="e.g. Arabica Coffee">
-            </div>
-            <div class="input-box">
-                <label>Destination</label>
-                <input type="text" id="itemDest" placeholder="e.g. Rotterdam Port">
-            </div>
-            <div class="input-box">
-                <label>Currency</label>
-                <select id="itemCurr">
-                    <option value="USD">USD ($)</option>
-                    <option value="EUR">EUR (€)</option>
-                    <option value="BRL">BRL (R$)</option>
-                </select>
-            </div>
-            <div class="input-box">
-                <label>Price</label>
-                <input type="number" id="itemPrice" placeholder="0.00">
-            </div>
-            
-            <!-- CAMPO DE QUANTIDADE + UNIDADE -->
-            <div class="input-box">
-                <label>Quantity & Unit</label>
-                <div class="qty-container">
-                    <input type="number" id="itemQty" placeholder="Value">
-                    <select id="itemUnit">
-                        <option value="units">Units</option>
-                        <option value="KG">KG</option>
-                        <option value="Tons">Tons</option>
-                        <option value="Packs">Packs</option>
+        <!-- BARRA LATERAL COM IMAGEM -->
+        <aside class="sidebar">
+            <div class="brand-image"></div>
+            <div class="form-card">
+                <h3>Shipment Registration</h3>
+                
+                <div class="field">
+                    <label>Commodity Name</label>
+                    <input type="text" id="pName" placeholder="e.g. Brazilian Coffee">
+                </div>
+
+                <div class="field">
+                    <label>Destination</label>
+                    <input type="text" id="pDest" placeholder="e.g. Rotterdam Port">
+                </div>
+
+                <div class="field">
+                    <label>Currency</label>
+                    <select id="pCurr">
+                        <option value="USD">USD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                        <option value="BRL">BRL (R$)</option>
                     </select>
                 </div>
-            </div>
 
-            <button id="addBtn">REGISTER PRODUCT</button>
+                <div class="field">
+                    <label>Unit Price</label>
+                    <input type="number" id="pPrice" placeholder="0.00">
+                </div>
+
+                <div class="field">
+                    <label>Volume & Unit</label>
+                    <div class="qty-row">
+                        <input type="number" id="pQty" placeholder="Value">
+                        <select id="pUnit">
+                            <option value="Units">Units</option>
+                            <option value="KG">KG</option>
+                            <option value="Tons">Tons</option>
+                            <option value="Packs">Packs</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="regBtn">REGISTER CARGO</button>
+            </div>
         </aside>
 
-        <main class="table-side">
-            <h2>Cargo Inventory</h2>
-            <div class="data-box">
+        <!-- ÁREA DA TABELA -->
+        <main class="table-area">
+            <h2>Active Cargo Inventory</h2>
+            <div class="data-container">
                 <table>
                     <thead>
                         <tr>
                             <th>Product</th>
                             <th>Destination</th>
-                            <th>Price</th>
+                            <th>Value</th>
                             <th>Quantity</th>
                             <th>Action</th>
                         </tr>
@@ -101,19 +159,19 @@
     </div>
 
     <script>
-        const addBtn = document.getElementById('addBtn');
+        const regBtn = document.getElementById('regBtn');
         const inventoryList = document.getElementById('inventoryList');
 
-        addBtn.addEventListener('click', function() {
-            const name = document.getElementById('itemName').value;
-            const dest = document.getElementById('itemDest').value;
-            const curr = document.getElementById('itemCurr').value;
-            const price = document.getElementById('itemPrice').value;
-            const qty = document.getElementById('itemQty').value;
-            const unit = document.getElementById('itemUnit').value;
+        regBtn.addEventListener('click', function() {
+            const name = document.getElementById('pName').value;
+            const dest = document.getElementById('pDest').value;
+            const curr = document.getElementById('pCurr').value;
+            const price = document.getElementById('pPrice').value;
+            const qty = document.getElementById('pQty').value;
+            const unit = document.getElementById('pUnit').value;
 
             if (!name || !price || !qty) {
-                alert("Please fill all required fields!");
+                alert("Please fill all required fields.");
                 return;
             }
 
@@ -122,17 +180,17 @@
             const row = inventoryList.insertRow();
             row.innerHTML = `
                 <td style="font-weight: 600;">${name}</td>
-                <td style="color: #94a3b8;">${dest || 'Global'}</td>
-                <td class="price-color">${symbol} ${parseFloat(price).toFixed(2)}</td>
+                <td style="color: #64748b;">${dest || 'Internal'}</td>
+                <td class="price-text">${symbol} ${parseFloat(price).toFixed(2)}</td>
                 <td><strong>${qty} ${unit}</strong></td>
-                <td><button class="del-action" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
+                <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
             `;
 
             // Limpa os campos
-            document.getElementById('itemName').value = "";
-            document.getElementById('itemDest').value = "";
-            document.getElementById('itemPrice').value = "";
-            document.getElementById('itemQty').value = "";
+            document.getElementById('pName').value = "";
+            document.getElementById('pDest').value = "";
+            document.getElementById('pPrice').value = "";
+            document.getElementById('pQty').value = "";
         });
     </script>
 </body>
