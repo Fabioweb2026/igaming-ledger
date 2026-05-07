@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terra Global | Multi-Currency Inventory</title>
+    <title>Terra Global | Dark Premium Inventory</title>
     <style>
         @import url('https://googleapis.com');
 
@@ -13,87 +12,123 @@
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             padding: 60px 20px; 
-            background: #f8fafc; 
-            color: #1e293b; 
+            background: #020617; /* Fundo Black/Dark Profissional */
+            color: #f8fafc; 
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
+            position: relative;
         }
 
+        /* IMAGEM NO CANTO (Glow/Brilho para destacar no fundo preto) */
         .corner-image {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 150px;
-            height: 100px;
+            top: 30px;
+            right: 30px;
+            width: 140px;
+            height: 90px;
             border-radius: 12px;
-            background: url('background-terra.jpg') no-repeat center center;
+            background: url('empresa.png') no-repeat center center;
             background-size: cover;
-            border: 2px solid #d4a373;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid rgba(212, 163, 115, 0.3);
+            box-shadow: 0 0 20px rgba(212, 163, 115, 0.15);
         }
 
         .company-branding { text-align: center; margin-bottom: 50px; }
-        .company-branding h1 { font-size: 42px; font-weight: 800; color: #1b4332; text-transform: uppercase; }
-        .company-info { color: #475569; font-size: 13px; font-weight: 600; background: #e2e8f0; padding: 6px 20px; border-radius: 50px; display: inline-block; }
+        
+        .company-branding h1 { 
+            font-size: 48px; 
+            font-weight: 800; 
+            color: #ffffff; 
+            text-transform: uppercase; 
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #94a3b8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .company-info { 
+            color: #d4a373; /* Dourado */
+            font-size: 13px; 
+            font-weight: 700; 
+            background: rgba(212, 163, 115, 0.1); 
+            padding: 8px 25px; 
+            border-radius: 8px; 
+            display: inline-block;
+            border: 1px solid rgba(212, 163, 115, 0.2);
+            letter-spacing: 1px;
+        }
 
         .main-container { width: 100%; max-width: 1200px; }
 
-        /* FORMULÁRIO COM SELETOR DE MOEDA */
+        /* FORMULÁRIO DARK GLASS */
         #registration-form { 
-            background: white; 
+            background: rgba(15, 23, 42, 0.6); 
+            backdrop-filter: blur(12px);
             padding: 40px; 
-            border-radius: 24px; 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border-radius: 20px; 
             margin-bottom: 30px;
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-            border: 1px solid #e2e8f0;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         input, select { 
             padding: 15px; 
-            border: 1px solid #cbd5e1; 
-            border-radius: 12px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 10px; 
             font-size: 14px;
-            background: #f8fafc;
+            background: rgba(2, 6, 23, 0.5);
+            color: white;
+            outline: none;
         }
 
+        input:focus, select:focus { border-color: #d4a373; }
+
         input { flex: 2; min-width: 180px; }
-        select { flex: 1; min-width: 100px; cursor: pointer; font-weight: 600; }
+        select { flex: 1; min-width: 120px; cursor: pointer; }
 
         #saveBtn { 
-            padding: 15px 30px; 
-            background: #1b4332; 
+            padding: 15px 35px; 
+            background: #1b4332; /* Verde Esmeralda Escuro */
             color: white; 
             border: none; 
-            border-radius: 12px; 
+            border-radius: 10px; 
             cursor: pointer; 
             font-weight: 800;
             transition: 0.3s;
+            box-shadow: 0 0 20px rgba(27, 67, 50, 0.3);
         }
 
-        #saveBtn:hover { transform: translateY(-3px); background: #2d6a4f; }
+        #saveBtn:hover { transform: translateY(-3px); background: #2d6a4f; box-shadow: 0 0 30px rgba(45, 106, 79, 0.4); }
 
-        /* TABELA */
-        .inventory-section { background: white; padding: 35px; border-radius: 24px; border: 1px solid #e2e8f0; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        /* TABELA DARK */
+        .inventory-section { 
+            background: rgba(15, 23, 42, 0.4); 
+            padding: 35px; 
+            border-radius: 20px; 
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+        }
+
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 15px; color: #64748b; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid #f1f5f9; }
-        td { padding: 18px 15px; border-bottom: 1px solid #f1f5f9; font-size: 15px; }
+        th { text-align: left; padding: 15px; color: #64748b; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        td { padding: 20px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-size: 15px; }
 
-        .price-col { font-weight: 700; color: #1b4332; }
-        .del-btn { color: #ef4444; border: none; background: none; font-weight: 700; cursor: pointer; }
+        .price-col { font-weight: 700; color: #d4a373; }
+        .del-btn { color: #ef4444; border: none; background: none; font-weight: 700; cursor: pointer; transition: 0.2s; }
+        .del-btn:hover { color: #f87171; transform: scale(1.1); }
     </style>
 </head>
 <body>
 
+    <!-- AQUI A IMAGEM -->
     <div class="corner-image"></div>
 
     <div class="company-branding">
         <h1>Terra Global</h1>
-        <div class="company-info">Global Logistics & Multi-Currency Management</div>
+        <div class="company-info">LOGISTICS & MULTI-CURRENCY TERMINAL</div>
     </div>
 
     <div class="main-container">
@@ -101,14 +136,13 @@
             <input type="text" id="productName" placeholder="Product Name">
             <input type="text" id="origin" placeholder="Destination">
             
-            <!-- SELETOR DE MOEDA -->
             <select id="currency">
-                <option value="BRL">BRL (R$)</option>
                 <option value="USD">USD ($)</option>
                 <option value="EUR">EUR (€)</option>
+                <option value="BRL">BRL (R$)</option>
             </select>
 
-            <input type="number" id="price" placeholder="Price">
+            <input type="number" id="price" placeholder="Unit Price">
             <input type="number" id="stock" placeholder="Qty">
             <button id="saveBtn">REGISTER</button>
         </div>
@@ -120,7 +154,7 @@
                         <th>Product</th>
                         <th>Destination</th>
                         <th>Price</th>
-                        <th>Qty</th>
+                        <th>Quantity</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -140,28 +174,20 @@
             const price = document.getElementById('price').value;
             const stock = document.getElementById('stock').value;
 
-            if (!product || !price || !stock) return alert("Please fill all fields");
+            if (!product || !price || !stock) return alert("Fill all fields");
 
-            // Definir o símbolo da moeda com base na escolha
-            let symbol = "";
-            if (currency === "BRL") symbol = "R$";
-            else if (currency === "USD") symbol = "$";
-            else if (currency === "EUR") symbol = "€";
+            let symbol = currency === "BRL" ? "R$" : (currency === "USD" ? "$" : "€");
 
             const newRow = tableBody.insertRow();
             newRow.innerHTML = `
-                <td style="font-weight:700">${product}</td>
-                <td style="color:#64748b">${origin}</td>
-                <td class="price-col">${symbol} ${parseFloat(price).toFixed(2)}</td>
-                <td><strong>${stock}</strong> units</td>
+                <td style="font-weight:700; color: #f1f5f9;">${product}</td>
+                <td style="color:#94a3b8">${origin}</td>
+                <td class="price-col">${symbol} ${parseFloat(price).toLocaleString('en-US', {minimumFractionDigits: 2})}</td>
+                <td><strong style="color:#f1f5f9">${stock}</strong> units</td>
                 <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
             `;
 
-            // Limpar campos
-            document.getElementById('productName').value = "";
-            document.getElementById('origin').value = "";
-            document.getElementById('price').value = "";
-            document.getElementById('stock').value = "";
+            document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
 </body>
