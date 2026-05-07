@@ -1,4 +1,4 @@
-# Terra Global — Elegant International Logistics Webpage
+ Terra Global — Elegant International Logistics 
 
 ```html
 <!DOCTYPE html>
@@ -121,7 +121,7 @@
             0 20px 50px rgba(0,0,0,0.5),
             0 0 25px rgba(212,163,115,0.15);
 
-            background:url('empresa.png') center center/cover no-repeat;
+            background:url('image.png') center center/cover no-repeat;
         }
 
         /* GLASS CONTAINERS */
@@ -369,12 +369,12 @@
 
             <input type="number" id="stock" placeholder="Quantity">
 
-            <button id="saveBtn">REGISTER PRODUCT</button>
+            <button type="button" id="saveBtn">REGISTER PRODUCT</button>
 
         </div>
 
         <!-- TABLE -->
-        <div class="inventory-section glass-card">
+        <div class="inventory-section glass-card" id="inventorySection">
 
             <div class="section-title">
                 <h2>Cargo Inventory</h2>
@@ -411,6 +411,9 @@
         const tableBody = document.getElementById('tableBody');
 
         saveBtn.addEventListener('click', function(){
+
+            const inventorySection = document.getElementById('inventorySection');
+            inventorySection.scrollIntoView({ behavior:'smooth' });
 
             const product = document.getElementById('productName').value;
             const origin = document.getElementById('origin').value;
@@ -449,6 +452,8 @@
                 input.value = '';
             });
 
+            document.getElementById('currency').selectedIndex = 0;
+
         });
 
     </script>
@@ -456,3 +461,4 @@
 </body>
 </html>
 ```
+
