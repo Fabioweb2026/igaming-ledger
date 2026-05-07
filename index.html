@@ -19,11 +19,10 @@
             align-items: center;
         }
 
-        /* BANNER PREMIUM */
         .hero-banner {
             width: 100%;
             max-width: 1200px;
-            height: 350px;
+            height: 320px;
             background-color: #f7f4ed;
             background-image: url('image.jpg');
             background-repeat: no-repeat;
@@ -39,7 +38,6 @@
         .company-header h1 { font-size: 56px; font-weight: 800; color: #1f2937; letter-spacing: -2px; text-transform: uppercase; }
         .company-header p { color: #b39359; font-size: 13px; text-transform: uppercase; letter-spacing: 4px; font-weight: 800; margin-top: 10px; }
 
-        /* GRID LAYOUT */
         .main-grid {
             display: grid;
             grid-template-columns: 360px 1fr;
@@ -49,54 +47,41 @@
             padding: 0 20px;
         }
 
-        /* CARD DE REGISTRO EM GRAFITE */
+        /* CARD DE REGISTRO (GRAFITE) */
         .sidebar-card {
-            background: #1f2937; /* GRAFITE PROFUNDO */
+            background: #1f2937;
             padding: 40px 30px;
             border-radius: 30px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
             height: fit-content;
             color: #ffffff;
-            border-top: 4px solid #b39359; /* Detalhe em ouro */
+            border-top: 4px solid #b39359;
         }
 
-        .sidebar-card h3 { 
-            font-size: 11px; 
-            text-transform: uppercase; 
-            color: #b39359; 
-            margin-bottom: 30px; 
-            letter-spacing: 2px; 
-            font-weight: 800; 
-            text-align: center;
-        }
+        .sidebar-card h3 { font-size: 11px; text-transform: uppercase; color: #b39359; margin-bottom: 30px; letter-spacing: 2px; font-weight: 800; text-align: center; }
 
-        /* INPUTS NO CARD ESCURO */
-        .sidebar-card input, .sidebar-card select {
+        input, select {
             width: 100%;
             padding: 16px;
             margin-bottom: 20px;
             border: 1px solid #374151;
             border-radius: 14px;
-            background: #111827; /* Fundo mais escuro para o input */
+            background: #111827;
             font-size: 14px;
             color: #ffffff;
             outline: none;
             transition: 0.3s ease;
         }
 
-        .sidebar-card input:focus {
-            border-color: #b39359;
-            box-shadow: 0 0 0 4px rgba(179, 147, 89, 0.15);
-        }
+        input:focus { border-color: #b39359; box-shadow: 0 0 0 4px rgba(179, 147, 89, 0.15); }
 
         .qty-group { display: flex; gap: 10px; margin-bottom: 20px; }
         .qty-group input, .qty-group select { margin-bottom: 0; }
 
-        /* BOTÃO REGISTER */
         #regBtn {
             width: 100%;
             padding: 20px;
-            background: #b39359; /* DOURADO */
+            background: #b39359;
             color: #111827;
             border: none;
             border-radius: 16px;
@@ -104,19 +89,14 @@
             cursor: pointer;
             transition: 0.4s;
             text-transform: uppercase;
-            letter-spacing: 1px;
             font-size: 13px;
         }
 
-        #regBtn:hover { 
-            background: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
+        #regBtn:hover { background: #ffffff; transform: translateY(-3px); }
 
-        /* TABELA COM CABEÇALHO GRAFITE */
+        /* ÁREA DA TABELA (AJUSTADA PARA CINZA CLARO) */
         .inventory-area {
-            background: #ffffff;
+            background: #f8fafc; /* CINZA CLARO PROFISSIONAL */
             border-radius: 30px;
             border: 1px solid #e2e8f0;
             overflow: hidden;
@@ -125,11 +105,10 @@
 
         table { width: 100%; border-collapse: collapse; }
         
-        /* Cabeçalho da tabela em Grafite */
         th { 
             text-align: left; 
             padding: 24px 20px; 
-            background: #1f2937;
+            background: #1f2937; /* Cabeçalho Grafite */
             color: #b39359; 
             font-size: 10px; 
             text-transform: uppercase; 
@@ -137,13 +116,19 @@
             font-weight: 800; 
         }
 
-        td { padding: 24px 20px; border-bottom: 1px solid #f1f5f9; font-size: 15px; color: #374151; }
+        td { 
+            padding: 24px 20px; 
+            border-bottom: 1px solid #e2e8f0; 
+            font-size: 15px; 
+            color: #334155; 
+            background: transparent; /* Permite ver o cinza do fundo */
+        }
         
-        /* Zebra effect */
-        tbody tr:nth-child(even) { background-color: #fcfaf7; }
+        /* Efeito de listras (Zebra) com cinza um pouco mais escuro */
+        tbody tr:nth-child(even) { background-color: #f1f5f9; }
 
         .currency-style { color: #b39359; font-weight: 800; }
-        .del-btn { color: #ef4444; cursor: pointer; border: none; background: none; font-weight: 800; font-size: 11px; }
+        .del-btn { color: #ef4444; cursor: pointer; border: none; background: none; font-weight: 800; font-size: 11px; text-transform: uppercase; }
 
         @media(max-width: 900px) {
             .main-grid { grid-template-columns: 1fr; }
@@ -161,7 +146,6 @@
     </header>
 
     <div class="main-grid">
-        <!-- ÁREA LATERAL GRAFITE -->
         <aside class="sidebar-card">
             <h3>Shipment Entry</h3>
             <input type="text" id="pName" placeholder="Product Name">
@@ -184,7 +168,6 @@
             <button id="regBtn">Register Cargo</button>
         </aside>
 
-        <!-- ÁREA DA TABELA -->
         <main class="inventory-area">
             <table>
                 <thead>
@@ -210,13 +193,13 @@
             const qty = document.getElementById('pQty').value;
             const unit = document.getElementById('pUnit').value;
 
-            if(!name || !price || !qty) return alert("Fill all fields before registering.");
+            if(!name || !price || !qty) return alert("Fill all fields.");
 
             let s = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
             const row = document.getElementById('list').insertRow();
             row.innerHTML = `
-                <td style="font-weight:700;">${name}</td>
-                <td style="color:#6b7280">${dest || 'Global'}</td>
+                <td style="font-weight:700; color: #1f2937;">${name}</td>
+                <td style="color:#64748b">${dest || 'Global'}</td>
                 <td class="currency-style">${s} ${parseFloat(price).toFixed(2)}</td>
                 <td><strong>${qty}</strong> <small style="color:#b39359">${unit}</small></td>
                 <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
@@ -226,5 +209,4 @@
     </script>
 </body>
 </html>
-
 
