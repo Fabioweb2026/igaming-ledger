@@ -6,110 +6,34 @@
     <title>Sollene Group | Cargo Management</title>
     <style>
         @import url('https://googleapis.com');
-
         *{ margin:0; padding:0; box-sizing:border-box; }
-
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #0b0e14; /* Fundo Marinho Profissional */
-            color: #ffffff; 
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-
-        /* IMAGEM NO CANTO */
-        .header-logo {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            width: 150px;
-            height: 90px;
-            border-radius: 12px;
-            background: url('image.png') no-repeat center center;
-            background-size: cover;
-            border: 1px solid rgba(212, 163, 115, 0.3);
-        }
-
-        /* TEXTO TOPO */
-        .hero {
-            text-align: center;
-            margin-bottom: 50px;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0e14; color: #ffffff; padding: 40px 20px; }
+        .hero { text-align: center; margin-bottom: 50px; }
         .hero h1 { font-size: 50px; font-weight: 800; margin-bottom: 10px; }
-        .hero p { color: #94a3b8; font-size: 16px; max-width: 700px; margin: 0 auto; }
-
-        /* DASHBOARD */
-        .container {
-            display: flex;
-            gap: 30px;
-            max-width: 1300px;
-            margin: 0 auto;
-            align-items: flex-start;
-        }
-
-        /* ÁREA DE REGISTRO (ESQUERDA) */
-        .form-side {
-            width: 320px;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 25px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
+        .container { display: flex; gap: 30px; max-width: 1300px; margin: 0 auto; align-items: flex-start; }
+        .form-side { width: 320px; background: rgba(255, 255, 255, 0.03); padding: 25px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); }
         .form-side h3 { color: #d4a373; font-size: 14px; text-transform: uppercase; margin-bottom: 20px; }
-
         .input-box { margin-bottom: 15px; }
         label { display: block; font-size: 10px; color: #64748b; margin-bottom: 5px; text-transform: uppercase; }
+        input, select { width: 100%; padding: 12px; background: #161b22; border: 1px solid #30363d; border-radius: 8px; color: white; outline: none; }
+        
+        /* Ajuste para quantidade e unidade ficarem lado a lado */
+        .qty-container { display: flex; gap: 10px; }
+        .qty-container input { flex: 2; }
+        .qty-container select { flex: 1.5; }
 
-        input, select {
-            width: 100%;
-            padding: 12px;
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 8px;
-            color: white;
-            outline: none;
-        }
-
-        #addBtn {
-            width: 100%;
-            padding: 15px;
-            background: #d4a373;
-            color: #0b0e14;
-            border: none;
-            border-radius: 8px;
-            font-weight: 800;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
+        #addBtn { width: 100%; padding: 15px; background: #d4a373; color: #0b0e14; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; margin-top: 10px; transition: 0.3s; }
         #addBtn:hover { background: #e5b38a; transform: translateY(-2px); }
-
-        /* TABELA (DIREITA) */
         .table-side { flex: 1; }
-
-        .table-side h2 { font-size: 24px; margin-bottom: 20px; }
-
-        .data-box {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            overflow: hidden;
-        }
-
+        .data-box { background: rgba(255, 255, 255, 0.02); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.05); overflow: hidden; }
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 15px; color: #64748b; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.1); }
         td { padding: 18px 15px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 14px; }
-
         .price-color { color: #d4a373; font-weight: 700; }
         .del-action { color: #ef4444; cursor: pointer; font-weight: 700; border: none; background: none; }
-
-        @media(max-width: 1000px) { .container { flex-direction: column; } .form-side { width: 100%; } }
     </style>
 </head>
 <body>
-
-    <div class="header-logo"></div>
 
     <header class="hero">
         <h1>Sollene Group</h1>
@@ -117,7 +41,6 @@
     </header>
 
     <div class="container">
-        <!-- ÁREA PARA INSERIR -->
         <aside class="form-side">
             <h3>Register New Cargo</h3>
             <div class="input-box">
@@ -140,14 +63,24 @@
                 <label>Price</label>
                 <input type="number" id="itemPrice" placeholder="0.00">
             </div>
+            
+            <!-- CAMPO DE QUANTIDADE + UNIDADE -->
             <div class="input-box">
-                <label>Quantity</label>
-                <input type="number" id="itemQty" placeholder="0">
+                <label>Quantity & Unit</label>
+                <div class="qty-container">
+                    <input type="number" id="itemQty" placeholder="Value">
+                    <select id="itemUnit">
+                        <option value="units">Units</option>
+                        <option value="KG">KG</option>
+                        <option value="Tons">Tons</option>
+                        <option value="Packs">Packs</option>
+                    </select>
+                </div>
             </div>
+
             <button id="addBtn">REGISTER PRODUCT</button>
         </aside>
 
-        <!-- ÁREA DA TABELA -->
         <main class="table-side">
             <h2>Cargo Inventory</h2>
             <div class="data-box">
@@ -161,9 +94,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody id="inventoryList">
-                        <!-- O JavaScript vai colocar os produtos aqui -->
-                    </tbody>
+                    <tbody id="inventoryList"></tbody>
                 </table>
             </div>
         </main>
@@ -174,33 +105,30 @@
         const inventoryList = document.getElementById('inventoryList');
 
         addBtn.addEventListener('click', function() {
-            // Pegar valores dos campos
             const name = document.getElementById('itemName').value;
             const dest = document.getElementById('itemDest').value;
             const curr = document.getElementById('itemCurr').value;
             const price = document.getElementById('itemPrice').value;
             const qty = document.getElementById('itemQty').value;
+            const unit = document.getElementById('itemUnit').value;
 
-            // Validação simples
             if (!name || !price || !qty) {
-                alert("Please fill all fields!");
+                alert("Please fill all required fields!");
                 return;
             }
 
-            // Definir símbolo da moeda
             let symbol = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
 
-            // Criar a linha da tabela
             const row = inventoryList.insertRow();
             row.innerHTML = `
                 <td style="font-weight: 600;">${name}</td>
                 <td style="color: #94a3b8;">${dest || 'Global'}</td>
                 <td class="price-color">${symbol} ${parseFloat(price).toFixed(2)}</td>
-                <td>${qty} units</td>
+                <td><strong>${qty} ${unit}</strong></td>
                 <td><button class="del-action" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
             `;
 
-            // Limpar os campos para o próximo teste
+            // Limpa os campos
             document.getElementById('itemName').value = "";
             document.getElementById('itemDest').value = "";
             document.getElementById('itemPrice').value = "";
