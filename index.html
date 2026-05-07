@@ -87,5 +87,45 @@
 
 </body>
 </html>
+    <script>
+        // 1. Selecionar o botão e a tabela
+        const saveBtn = document.getElementById('saveBtn');
+        const tableBody = document.getElementById('tableBody');
+
+        // 2. Criar a função que roda quando clicamos no botão
+        saveBtn.addEventListener('click', function() {
+            
+            // Pegar os valores dos campos
+            const productName = document.getElementById('productName').value;
+            const supplier = document.getElementById('supplier').value;
+            const price = document.getElementById('price').value;
+            const stock = document.getElementById('stock').value;
+
+            // Validação simples: não deixar salvar se o nome estiver vazio
+            if (productName === "") {
+                alert("Please enter a product name!");
+                return;
+            }
+
+            // 3. Criar uma nova linha (tr) na tabela
+            const newRow = tableBody.insertRow();
+
+            // 4. Inserir as células (td) com os dados
+            newRow.innerHTML = `
+                <td>${productName}</td>
+                <td>${supplier}</td>
+                <td>$ ${price}</td>
+                <td>${stock}</td>
+                <td><button onclick="this.parentElement.parentElement.remove()" style="background:red; padding:5px 10px; font-size:10px;">Delete</button></td>
+            `;
+
+            // 5. Limpar os campos após salvar
+            document.getElementById('productName').value = "";
+            document.getElementById('supplier').value = "";
+            document.getElementById('price').value = "";
+            document.getElementById('stock').value = "";
+        });
+    </script>
+
 
      
