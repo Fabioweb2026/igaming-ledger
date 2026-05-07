@@ -16,20 +16,28 @@
             color: #ffffff; 
             min-height: 100vh;
             padding: 40px 20px;
+            position: relative;
         }
 
-        /* TEXTOS CENTRAIS DO TOPO */
+        /* IMAGEM NO CANTO (Garante que não cubra o resto) */
+        .corner-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 150px;
+            height: 100px;
+            border-radius: 12px;
+            background: url('empresa.png') no-repeat center center;
+            background-size: cover;
+            border: 1px solid rgba(212, 163, 115, 0.3);
+            z-index: 10; /* Fica acima mas não bloqueia cliques */
+        }
+
+        /* TEXTOS CENTRAIS */
         .hero-section {
             text-align: center;
             max-width: 800px;
-            margin: 0 auto 50px;
-        }
-
-        .hero-section h1 {
-            font-size: 64px;
-            font-weight: 800;
-            letter-spacing: -2px;
-            margin-bottom: 10px;
+            margin: 0 auto 60px;
         }
 
         .badge {
@@ -39,52 +47,45 @@
             border-radius: 50px;
             text-transform: uppercase;
             font-weight: 700;
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 2px;
             display: inline-block;
             margin-bottom: 20px;
             border: 1px solid rgba(212, 163, 115, 0.2);
         }
 
-        .hero-section p {
-            font-size: 18px;
-            color: #94a3b8;
-            line-height: 1.6;
-            font-weight: 300;
-        }
+        .hero-section h1 { font-size: 64px; font-weight: 800; margin-bottom: 10px; }
+        .hero-section p { font-size: 18px; color: #94a3b8; line-height: 1.6; font-weight: 300; }
 
-        /* LAYOUT PRINCIPAL */
+        /* LAYOUT PRINCIPAL - CORRIGIDO */
         .main-layout {
             display: flex;
             gap: 30px;
-            max-width: 1400px;
+            max-width: 1300px;
             margin: 0 auto;
+            align-items: flex-start; /* Evita que a sidebar estique e cubra a tabela */
         }
 
-        /* BARRA LATERAL DE REGISTRO */
+        /* BARRA LATERAL (REGISTRO) */
         .sidebar {
             width: 320px;
             flex-shrink: 0;
+            position: sticky;
+            top: 40px;
         }
 
         .register-card {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             padding: 25px;
             border-radius: 20px;
             backdrop-filter: blur(10px);
         }
 
-        .register-card h3 {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: #d4a373;
-            text-transform: uppercase;
-        }
+        .register-card h3 { font-size: 14px; margin-bottom: 20px; color: #d4a373; text-transform: uppercase; letter-spacing: 1px; }
 
         .input-group { margin-bottom: 15px; }
-
-        label { display: block; font-size: 11px; color: #64748b; margin-bottom: 5px; text-transform: uppercase; }
+        label { display: block; font-size: 10px; color: #64748b; margin-bottom: 5px; text-transform: uppercase; }
 
         input, select {
             width: 100%;
@@ -93,10 +94,10 @@
             border: 1px solid #30363d;
             border-radius: 8px;
             color: white;
-            outline: none;
+            font-size: 14px;
         }
 
-        input:focus { border-color: #d4a373; }
+        input:focus { border-color: #d4a373; outline: none; }
 
         #registerBtn {
             width: 100%;
@@ -104,59 +105,57 @@
             background: #d4a373;
             color: #0b0e14;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 800;
             cursor: pointer;
             margin-top: 10px;
             transition: 0.3s;
         }
 
-        #registerBtn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(212, 163, 115, 0.2); }
+        #registerBtn:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
-        /* ÁREA DO INVENTÁRIO */
-        .content-area { flex: 1; }
+        /* ÁREA CENTRAL (INVENTÁRIO) */
+        .content-area {
+            flex: 1;
+            min-width: 0; /* Impede que a tabela quebre o layout */
+        }
 
         .inventory-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
-        .inventory-header h2 { font-size: 24px; }
+        .inventory-header h2 { font-size: 26px; font-weight: 700; }
 
         .table-container {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 15px;
-            overflow: hidden;
+            border-radius: 20px;
+            overflow-x: auto;
         }
 
         table { width: 100%; border-collapse: collapse; }
-        
-        th { 
-            background: rgba(255, 255, 255, 0.03);
-            text-align: left; 
-            padding: 15px; 
-            font-size: 11px; 
-            color: #64748b; 
-            text-transform: uppercase;
-        }
-
-        td { padding: 20px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.03); font-size: 14px; }
+        th { text-align: left; padding: 18px 15px; color: #64748b; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        td { padding: 20px 15px; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 15px; }
 
         .price-text { color: #d4a373; font-weight: 700; }
-        .del-btn { color: #ef4444; cursor: pointer; background: none; border: none; font-weight: 700; }
+        .del-btn { color: #ef4444; cursor: pointer; background: rgba(239, 68, 68, 0.1); border: none; padding: 6px 12px; border-radius: 6px; font-weight: 700; font-size: 11px; }
+        .del-btn:hover { background: #ef4444; color: white; }
 
-        footer { text-align: center; margin-top: 50px; color: #475569; font-size: 12px; }
+        footer { text-align: center; margin-top: 60px; color: #475569; font-size: 12px; }
 
-        @media(max-width: 1000px) {
+        @media(max-width: 1100px) {
             .main-layout { flex-direction: column; }
-            .sidebar { width: 100%; }
+            .sidebar { width: 100%; position: static; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Logo no Canto -->
+    <div class="corner-logo"></div>
 
     <header class="hero-section">
         <div class="badge">International Trade & Logistics</div>
@@ -165,16 +164,17 @@
     </header>
 
     <div class="main-layout">
+        <!-- Sidebar de Registro -->
         <aside class="sidebar">
             <div class="register-card">
                 <h3>Register Shipment</h3>
                 <div class="input-group">
                     <label>Product Name</label>
-                    <input type="text" id="pName" placeholder="e.g. Arabica Coffee">
+                    <input type="text" id="pName" placeholder="e.g. Premium Tobacco">
                 </div>
                 <div class="input-group">
                     <label>Destination Port</label>
-                    <input type="text" id="pDest" placeholder="e.g. Hamburg">
+                    <input type="text" id="pDest" placeholder="e.g. Rotterdam">
                 </div>
                 <div class="input-group">
                     <label>Currency</label>
@@ -196,10 +196,11 @@
             </div>
         </aside>
 
+        <!-- Área da Tabela -->
         <main class="content-area">
             <div class="inventory-header">
                 <h2>Cargo Inventory</h2>
-                <span style="color: #64748b; font-size: 12px;">International Freight Monitoring System</span>
+                <span style="color: #64748b; font-size: 11px; letter-spacing: 1px;">International Freight Monitoring System</span>
             </div>
 
             <div class="table-container">
@@ -214,6 +215,7 @@
                         </tr>
                     </thead>
                     <tbody id="inventoryBody">
+                        <!-- As linhas aparecerão aqui -->
                     </tbody>
                 </table>
             </div>
@@ -225,33 +227,35 @@
     </footer>
 
     <script>
-        const btn = document.getElementById('registerBtn');
-        const table = document.getElementById('inventoryBody');
+        const registerBtn = document.getElementById('registerBtn');
+        const inventoryBody = document.getElementById('inventoryBody');
 
-        btn.addEventListener('click', () => {
+        registerBtn.addEventListener('click', function() {
             const name = document.getElementById('pName').value;
             const dest = document.getElementById('pDest').value;
             const curr = document.getElementById('pCurr').value;
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
 
-            if(!name || !price || !qty) return alert("Please fill all required fields");
+            if(!name || !price || !qty) {
+                alert("Please fill all required fields.");
+                return;
+            }
 
             const symbol = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
 
-            const row = table.insertRow();
+            const row = inventoryBody.insertRow();
             row.innerHTML = `
                 <td style="font-weight: 600;">${name}</td>
-                <td style="color: #94a3b8;">${dest}</td>
+                <td style="color: #94a3b8;">${dest || 'Global'}</td>
                 <td class="price-text">${symbol} ${parseFloat(price).toFixed(2)}</td>
                 <td>${qty} units</td>
                 <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
             `;
 
-            // Limpa os campos após o registro
+            // Limpa os campos
             document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
 </body>
 </html>
-
