@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex Solutions | Corporate Inventory</title>
+    <title>Terra Global | Import & Export Management</title>
     <style>
         @import url('https://googleapis.com');
 
@@ -13,182 +12,196 @@
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             padding: 50px 20px; 
-            background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Fundo com degradê suave */
-            color: #102a43; 
+            /* Fundo com cor de terra/areia e um degradê sofisticado */
+            background: linear-gradient(135deg, #e3d5ca 0%, #d5bdaf 100%);
+            color: #2f2e2e; 
             display: flex;
             flex-direction: column;
-            align-items: center; /* Centraliza tudo horizontalmente */
+            align-items: center;
         }
 
-        /* HEADER DA EMPRESA CENTRALIZADO */
+        /* HEADER ESTILO TRADING COMPANY */
         .company-branding {
             text-align: center;
             margin-bottom: 50px;
         }
 
         .logo-icon {
-            font-size: 50px;
-            background: #2563eb;
-            width: 80px;
-            height: 80px;
+            font-size: 40px;
+            background: #1b4332; /* Verde Floresta Profundo */
+            width: 90px;
+            height: 90px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 20px;
-            margin: 0 auto 15px;
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
-            color: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 25px rgba(27, 67, 50, 0.4);
+            color: #d4a373; /* Dourado/Bronze */
+            border: 3px solid #d4a373;
         }
 
         .company-branding h1 { 
-            font-size: 36px; 
+            font-size: 42px; 
             font-weight: 800; 
-            color: #102a43;
-            letter-spacing: -1px;
+            color: #1b4332;
+            letter-spacing: -1.5px;
             margin-bottom: 5px;
+            text-transform: uppercase;
         }
 
         .company-info {
-            color: #627d98;
+            color: #582f0e; /* Tom de café */
             font-size: 14px;
-            line-height: 1.6;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        /* FORMULÁRIO ESTILIZADO */
         .main-container {
             width: 100%;
-            max-width: 1100px;
+            max-width: 1150px;
         }
 
+        /* FORMULÁRIO COM CORES DE LUXO */
         #registration-form { 
-            background: white; 
-            padding: 35px; 
-            border-radius: 24px; 
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 40px; 
+            border-radius: 30px; 
+            box-shadow: 0 30px 60px -12px rgba(88, 47, 14, 0.2);
             margin-bottom: 40px;
             display: flex;
             gap: 15px;
             flex-wrap: wrap;
-            border: 1px solid rgba(255,255,255,0.8);
+            border: 2px solid #ffffff;
         }
 
         input { 
-            padding: 15px; 
-            border: 2px solid #f0f4f8; 
-            border-radius: 12px; 
+            padding: 16px; 
+            border: 2px solid #edede9; 
+            border-radius: 15px; 
             flex: 1;
-            min-width: 200px;
+            min-width: 220px;
             font-size: 15px;
-            background: #f8fafc;
+            background: #fdfdfb;
             transition: 0.3s;
         }
 
         input:focus { 
-            border-color: #2563eb; 
-            background: white;
+            border-color: #d4a373; 
             outline: none;
-            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.2);
         }
 
         #saveBtn { 
-            padding: 15px 35px; 
-            background: #2563eb; 
-            color: white; 
+            padding: 16px 40px; 
+            background: #1b4332; 
+            color: #fefae0; 
             border: none; 
-            border-radius: 12px; 
+            border-radius: 15px; 
             cursor: pointer; 
-            font-weight: 700;
-            transition: 0.3s;
-            text-transform: uppercase;
+            font-weight: 800;
+            transition: 0.4s;
             letter-spacing: 1px;
         }
 
         #saveBtn:hover { 
-            background: #1d4ed8; 
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+            background: #2d6a4f; 
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(27, 67, 50, 0.3);
         }
 
-        /* TABELA */
+        /* TABELA DE INVENTÁRIO GLOBAL */
         .inventory-section {
-            background: white;
-            padding: 30px;
-            border-radius: 24px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
         }
 
         .inventory-section h2 {
-            margin-bottom: 25px;
-            font-size: 22px;
+            margin-bottom: 30px;
+            font-size: 24px;
+            color: #1b4332;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
         table { width: 100%; border-collapse: collapse; }
 
         th { 
             text-align: left; 
-            padding: 15px; 
-            color: #486581; 
+            padding: 20px; 
+            color: #a3a3a3; 
             font-size: 12px; 
             text-transform: uppercase; 
-            border-bottom: 2px solid #f0f4f8;
+            border-bottom: 2px solid #f8f9fa;
         }
 
-        td { padding: 20px 15px; border-bottom: 1px solid #f0f4f8; font-size: 15px; }
+        td { padding: 22px 20px; border-bottom: 1px solid #f8f9fa; font-size: 16px; color: #333; }
+
+        /* Estilo para categorias (Alimentos, Bebidas, etc) */
+        .category-tag {
+            background: #fefae0;
+            color: #bc6c25;
+            padding: 5px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
 
         .del-btn {
-            background: #ffebf0;
-            color: #d64545;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 8px;
+            background: #f8f9fa;
+            color: #9d0208;
+            border: 1px solid #ffccd5;
+            padding: 10px 18px;
+            border-radius: 12px;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.2s;
+            transition: 0.3s;
         }
 
-        .del-btn:hover { background: #d64545; color: white; }
+        .del-btn:hover { background: #9d0208; color: white; }
 
     </style>
 </head>
 <body>
 
     <div class="company-branding">
-        <div class="logo-icon">▲</div> <!-- Símbolo da Empresa -->
-        <h1>Apex Solutions</h1>
+        <div class="logo-icon">🌍</div>
+        <h1>Terra Global</h1>
         <div class="company-info">
-            <p>123 Corporate Blvd, Suite 500 — Silicon Valley, CA</p>
-            <p>support@apexsolutions.com | +1 (555) 0123-4567</p>
+            <p>AGRICULTURAL COMMODITIES | BRAZILIAN EXPORTS | GLOBAL TRADING</p>
+            <p>Port of Santos Office — Brazil | Rotterdam Hub — Netherlands</p>
         </div>
     </div>
 
     <div class="main-container">
-        <!-- Form Section -->
+        <!-- Dashboard Form -->
         <div id="registration-form">
-            <input type="text" id="productName" placeholder="Product Name">
-            <input type="text" id="supplier" placeholder="Supplier">
-            <input type="number" id="price" placeholder="Price (USD)">
-            <input type="number" id="stock" placeholder="Stock Qty">
-            <button id="saveBtn">Save Product</button>
+            <input type="text" id="productName" placeholder="Product (e.g. Coffee, Tobacco, Wine)">
+            <input type="text" id="origin" placeholder="Origin/Destination">
+            <input type="number" id="price" placeholder="Unit Price (USD)">
+            <input type="number" id="stock" placeholder="Tons/Quantity">
+            <button id="saveBtn">REGISTER SHIPMENT</button>
         </div>
 
-        <!-- Table Section -->
+        <!-- Inventory List -->
         <div class="inventory-section">
-            <h2>📦 Current Inventory Status</h2>
+            <h2>🚢 Global Shipment Tracking</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Product</th>
-                        <th>Supplier</th>
-                        <th>Price</th>
-                        <th>Stock Qty</th>
+                        <th>Commodity</th>
+                        <th>Origin/Dest</th>
+                        <th>Price/Unit</th>
+                        <th>Quantity</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <!-- Data entries -->
+                    <!-- Dynamic Rows -->
                 </tbody>
             </table>
         </div>
@@ -199,23 +212,23 @@
         const tableBody = document.getElementById('tableBody');
 
         saveBtn.addEventListener('click', function() {
-            const productName = document.getElementById('productName').value;
-            const supplier = document.getElementById('supplier').value;
+            const product = document.getElementById('productName').value;
+            const origin = document.getElementById('origin').value;
             const price = document.getElementById('price').value;
             const stock = document.getElementById('stock').value;
 
-            if (!productName || !price || !stock) {
-                alert("Please fill in the required fields.");
+            if (!product || !price || !stock) {
+                alert("Please fill in the shipment details.");
                 return;
             }
 
             const newRow = tableBody.insertRow();
             newRow.innerHTML = `
-                <td style="font-weight: 600; color: #243b53;">${productName}</td>
-                <td>${supplier || 'N/A'}</td>
-                <td style="color: #2563eb; font-weight: 600;">$${parseFloat(price).toFixed(2)}</td>
-                <td><span style="background: #e1f5fe; padding: 4px 10px; border-radius: 20px; font-size: 13px;">${stock} units</span></td>
-                <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">DELETE</button></td>
+                <td style="font-weight: 700; color: #1b4332;">${product}</td>
+                <td><span class="category-tag">${origin || 'Global'}</span></td>
+                <td style="font-weight: 700; color: #bc6c25;">$${parseFloat(price).toFixed(2)}</td>
+                <td><strong>${stock}</strong> <small>units</small></td>
+                <td><button class="del-btn" onclick="this.parentElement.parentElement.remove()">CANCEL</button></td>
             `;
 
             document.querySelectorAll('input').forEach(i => i.value = "");
@@ -224,6 +237,8 @@
 
 </body>
 </html>
+
+
 
 
      
