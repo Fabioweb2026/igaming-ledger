@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Logistics Management</title>
+    <title>Sollene Group | Premium Logistics</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -13,59 +13,62 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background: #fdfaf6; 
             color: #1a1a1a; 
-            padding: 40px 20px;
+            padding-bottom: 60px;
         }
 
-        /* HEADER COM LOGO AO LADO DO NOME */
-        .header-brand {
+        /* HEADER DIVIDIDO: IMAGEM À ESQUERDA ATÉ O NOME */
+        .split-header {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 30px; /* Espaço entre a imagem e o nome */
-            margin-bottom: 60px;
-            max-width: 1100px;
-            margin-left: auto;
-            margin-right: auto;
+            width: 100%;
+            height: 280px; /* Altura imponente */
+            background: #ffffff;
+            margin-bottom: 50px;
+            border-bottom: 2px solid #d4a373;
+            overflow: hidden;
         }
 
-        .logo-box {
-            width: 200px; /* Tamanho médio e nítido */
-            height: 130px;
+        .header-image {
+            width: 45%; /* Ocupa quase metade da tela à esquerda */
+            height: 100%;
             background: url('image.png') no-repeat center center;
             background-size: cover;
-            border-radius: 12px;
-            border: 2px solid #d4a373; /* Moldura dourada */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            flex-shrink: 0;
+            border-right: 4px solid #d4a373; /* Divisória elegante */
         }
 
-        .brand-text { text-align: left; }
-        .brand-text h1 { 
-            font-size: 54px; 
+        .header-text {
+            padding-left: 50px;
+            flex: 1;
+        }
+
+        .header-text h1 { 
+            font-size: 68px; 
             font-weight: 800; 
             color: #0f172a; 
-            letter-spacing: -2px;
-            line-height: 1;
-        }
-        .brand-text p { 
-            color: #b39359; 
-            font-size: 13px; 
-            text-transform: uppercase; 
-            letter-spacing: 3px; 
-            font-weight: 800;
-            margin-top: 5px;
+            letter-spacing: -3px;
+            line-height: 0.9;
         }
 
-        /* LAYOUT PRINCIPAL */
+        .header-text p { 
+            color: #b39359; 
+            font-size: 14px; 
+            text-transform: uppercase; 
+            letter-spacing: 4px; 
+            font-weight: 800;
+            margin-top: 10px;
+        }
+
+        /* CONTEÚDO PRINCIPAL */
         .container { 
             display: flex; 
             gap: 40px; 
-            max-width: 1300px; 
+            max-width: 1350px; 
             margin: 0 auto; 
+            padding: 0 20px;
             align-items: flex-start; 
         }
 
-        .sidebar { width: 350px; flex-shrink: 0; }
+        .sidebar { width: 360px; flex-shrink: 0; }
 
         .form-card { 
             background: #ffffff; 
@@ -75,13 +78,13 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
         }
 
-        .form-card h3 { color: #0f172a; font-size: 11px; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1px; }
+        .form-card h3 { color: #0f172a; font-size: 11px; text-transform: uppercase; margin-bottom: 25px; letter-spacing: 1px; border-left: 4px solid #b39359; padding-left: 12px;}
 
         .field { margin-bottom: 20px; }
         label { display: block; font-size: 10px; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; font-weight: 800; }
 
         input, select { 
-            width: 100%; padding: 14px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; color: #1e293b; font-size: 15px; 
+            width: 100%; padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; color: #1e293b; font-size: 15px; 
         }
 
         #regBtn { 
@@ -102,9 +105,10 @@
         th { text-align: left; padding: 20px; color: #94a3b8; font-size: 10px; text-transform: uppercase; border-bottom: 2px solid #f1f5f9; font-weight: 800; }
         td { padding: 22px 20px; border-bottom: 1px solid #f8fafc; font-size: 15px; }
 
-        @media(max-width: 900px) {
-            .header-brand { flex-direction: column; text-align: center; }
-            .brand-text { text-align: center; }
+        @media(max-width: 1000px) {
+            .split-header { flex-direction: column; height: auto; }
+            .header-image { width: 100%; height: 200px; border-right: none; border-bottom: 4px solid #d4a373; }
+            .header-text { padding: 30px; text-align: center; }
             .container { flex-direction: column; }
             .sidebar { width: 100%; }
         }
@@ -112,10 +116,10 @@
 </head>
 <body>
 
-    <!-- HEADER COM IMAGEM AO LADO DO NOME -->
-    <header class="header-brand">
-        <div class="logo-box"></div>
-        <div class="brand-text">
+    <!-- NOVO HEADER DIVIDIDO -->
+    <header class="split-header">
+        <div class="header-image"></div>
+        <div class="header-text">
             <h1>Sollene Group</h1>
             <p>Supply Chain & Logistics Division</p>
         </div>
@@ -127,7 +131,7 @@
                 <h3>Shipment Registration</h3>
                 <div class="field">
                     <label>Commodity Name</label>
-                    <input type="text" id="pName" placeholder="e.g. Premium Coffee">
+                    <input type="text" id="pName" placeholder="e.g. Premium Tobacco">
                 </div>
                 <div class="field">
                     <label>Destination Port</label>
@@ -183,10 +187,7 @@
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
 
-            if (!name || !price || !qty) {
-                alert("Please fill all fields.");
-                return;
-            }
+            if (!name || !price || !qty) return alert("Fill all fields.");
 
             let symbol = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
 
@@ -199,12 +200,8 @@
                 <td><button onclick="this.parentElement.parentElement.remove()" style="color:red; border:none; background:none; cursor:pointer; font-weight:bold;">DEL</button></td>
             `;
 
-            document.getElementById('pName').value = "";
-            document.getElementById('pDest').value = "";
-            document.getElementById('pPrice').value = "";
-            document.getElementById('pQty').value = "";
+            document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
 </body>
 </html>
-
