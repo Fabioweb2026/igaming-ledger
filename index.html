@@ -137,11 +137,18 @@
             </select>
 
             <select id="pType">
-                <option value="ENTRADA">ENTRADA</option>
-                <option value="SAÍDA">SAÍDA</option>
-            </select>
+              <select id="pUnit">
+    <option value="">Selecione a Unidade</option>
+    <option value="Kg">Kg</option>
+    <option value="Toneladas">Toneladas</option>
+    <option value="Pacotes">Pacotes</option>
+</select>
 
-            <button id="regBtn">Registrar</button>
+<select id="pType">
+    <option value="ENTRADA">ENTRADA</option>
+    <option value="SAÍDA">SAÍDA</option>
+</select>
+                <button id="regBtn">Registrar</button>  
         </aside>
 
         <main class="inventory-area">
@@ -163,36 +170,100 @@
     </div>
 
     <script>
-        let saldos = JSON.parse(localStorage.getItem('solleneSaldos')) || {};
-        const inventoryList = document.getElementById('list');
 
-        function salvarDados() {
-            localStorage.setItem('solleneTableHTML', JSON.stringify(inventoryList.innerHTML));
-            localStorage.setItem('solleneSaldos', JSON.stringify(saldos));
-        }
+let saldos = JSON.parse(localStorage.getItem('solleneSaldos')) || {};
 
-        window.onload = () => {
-            const salvo = localStorage.getItem('solleneTableHTML');
-           if(t === "ENTRADA") {
-    saldos[n] += q;
+const inventoryList = document.getElementById('list');
+
+function salvarDados() {
+    localStorage.setItem(
+        'solleneTableHTML',
+        JSON.stringify(inventoryList.innerHTML)
+    );
+
+    localStorage.setItem(
+        'solleneSaldos',
+        JSON.stringify(saldos)
+    );
 }
 
-if(t === "SAÍDA") {
+window.onload = () => {
 
-    if(q > saldos[n]) {
-        return alert("Estoque insuficiente.");
+    const salvo = localStorage.getItem('solleneTableHTML');
+    if(salvo) {
+        inventoryList.innerHTML = JSON.parse(salvo);
     }
 
-    saldos[n] -= q;
-}
+};
+document.getElementById('regBtn').addEventListener('click', function() {
 
-        document.getElementById('regBtn').addEventListener('click', function() {
-            const n = document.getElementById('pName').value.trim();
-            const d = document.getElementById('pDest').value;
-            const v = document.getElementById('pPrice').value;
-            const q = parseInt(document.getElementById('pQty').value) || 0;
-            const u = document.getElementById('pUnit').value;
-            const t = document.getElementById('pType').value;
+    const n = document.getElementById('pName').value.trim();
+
+    const d = document.getElementById('pDest').value;
+
+    const v = document.getElementById('pPrice').value;
+
+    const q = parseInt(document.getElementById('pQty').value) || 0;
+
+    const u = document.getElementById('pUnit').value;
+
+    const t = document.getElementById('pType').value;
+
+    if(!n || !q) {
+        return alert("Preencha o produto e a quantidade.");
+    }
+
+    if(!saldos[n]) {
+        saldos[n] = 0;
+    }
+
+    // ENTRADA
+    if(t === "ENTRADA") {
+        saldos[n] += q;
+    }
+
+    // SAÍDA
+    if(t === "SAÍDA") {
+
+        if(q > saldos[n]) {
+            return alert("Estoque insuficiente.");
+        }
+
+        saldos[n] -= q;
+    }
+
+    const row = inventoryList.insertRow(0);
+
+    const cor = t === "ENTRADA"
+        ? "#27ae60"
+        : "#e74c3c";
+
+    row.innerHTML = `
+        <td>${n}</td>
+        <td>${d}</td>
+        <td style="color:${cor};font-weight:800">${t}</td>
+        <td style="color:#b39359;font-weight:800">
+            $ ${parseFloat(v).toFixed(2)}
+        </td>
+        <td>${q}</td>
+        <td>${u}</td>
+        <td style="font-weight:800">
+            ${saldos[n]} ${u}
+        </td>
+    `;
+    salvarDados();
+
+    // LIMPAR CAMPOS
+    document.getElementById('pName').value = "";
+    document.getElementById('pDest').value = "";
+    document.getElementById('pPrice').value = "";
+    document.getElementById('pQty').value = "";
+    document.getElementById('pUnit').value = "";
+    document.getElementById('pType').value = "ENTRADA";
+
+});
+
+</script>
             if(!n || !q) return alert("Preencha o produto e a quantidade.");
 
 if(!saldos[n]) {
