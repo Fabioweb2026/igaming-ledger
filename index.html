@@ -30,13 +30,12 @@
             border-radius: 50px; 
         }
 
-        /* BANNER CORRIGIDO PARA O REPOSITÓRIO ESTOQUE.HTML */
+        /* BANNER CORRIGIDO: Agora puxando a imagem que está na mesma pasta */
         .hero-banner { 
             width: 95%; 
             max-width: 1200px; 
             height: 400px; 
-            /* O link abaixo é o caminho exato da sua imagem no GitHub Pages */
-            background-image: url('https://github.io'); 
+            background-image: url('image.jpg'); 
             background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat; 
@@ -74,6 +73,7 @@
             background: #111827; 
             color: #fff; 
             border: 1px solid #374151; 
+            outline: none;
         }
 
         #regBtn { 
@@ -85,25 +85,29 @@
             border-radius: 16px; 
             font-weight: 800; 
             cursor: pointer; 
+            text-transform: uppercase;
         }
 
         .inventory-area { 
             background-color: #f2ede4; 
             border-radius: 30px; 
-            min-height: 400px; 
+            min-height: 450px; 
             width: 100%; 
             overflow: hidden; 
+            border: 1px solid #e5e1da;
         }
 
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; }
-        td { padding: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; }
+        td { padding: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 15px; }
     </style>
 </head>
 <body>
 
+    <!-- Link para voltar ao seu portfólio principal -->
     <a href="https://github.io" class="back-link">← Voltar ao Portfólio</a>
     
+    <!-- O Banner da Imagem -->
     <div class="hero-banner"></div>
 
     <header class="company-header">
@@ -133,18 +137,39 @@
 
     <script>
         const inventoryList = document.getElementById('list');
+
+        function saveData() {
+            const rows = [];
+            document.querySelectorAll('#list tr').forEach(row => {
+                rows.push(row.innerHTML);
+            });
+            localStorage.setItem('solleneData', JSON.stringify(rows));
+        }
+
+        function loadData() {
+            const saved = localStorage.getItem('solleneData');
+            if (saved) {
+                JSON.parse(saved).forEach(rowData => {
+                    const row = inventoryList.insertRow();
+                    row.innerHTML = rowData;
+                });
+            }
+        }
+
+        window.onload = loadData;
+
         document.getElementById('regBtn').addEventListener('click', function() {
             const n = document.getElementById('pName').value;
             const d = document.getElementById('pDest').value;
             const p = document.getElementById('pPrice').value;
             const q = document.getElementById('pQty').value;
-            if(!n || !p || !q) return alert("Preencha os campos.");
+            if(!n || !p || !q) return alert("Preencha todos os campos.");
             const row = inventoryList.insertRow();
             row.innerHTML = `<td>${n}</td><td>${d}</td><td style="color:#b39359; font-weight:800">$ ${parseFloat(p).toFixed(2)}</td><td>${q} un</td>`;
+            saveData();
             document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
 </body>
 </html>
-
 
