@@ -193,11 +193,20 @@
 
             <!-- NOVO CAMPO -->
             <select id="pUnit">
-                <option value="">Selecione a Unidade</option>
-                <option value="Kg">Kg</option>
-                <option value="Toneladas">Toneladas</option>
-                <option value="Pacotes">Pacotes</option>
-            </select>
+              <!-- Unidade -->
+<select id="pUnit">
+    <option value="">Selecione a Unidade</option>
+    <option value="Kg">Kg</option>
+    <option value="Toneladas">Toneladas</option>
+    <option value="Pacotes">Pacotes</option>
+</select>
+
+<!-- Tipo de movimentação -->
+<select id="pType">
+    <option value="">Tipo de Movimentação</option>
+    <option value="entrada">Entrada</option>
+    <option value="saida">Saída</option>
+</select>
 
             <button id="regBtn">Registrar</button>
 
@@ -209,15 +218,18 @@
 
                 <thead>
                     <tr>
-                        <th>Produto</th>
-                        <th>Destino</th>
-                        <th>Valor</th>
-                        <th>Volume</th>
-                        <th>Unidade</th>
-                    </tr>
-                </thead>
-
-                <tbody id="list"></tbody>
+                        <thead>
+    <tr>
+        <th>Produto</th>
+        <th>Destino</th>
+        <th>Tipo</th>
+        <th>Valor</th>
+        <th>Quantidade</th>
+        <th>Unidade</th>
+        <th>Saldo</th>
+    </tr>
+</thead>
+                        <tbody id="list"></tbody>
 
             </table>
 
@@ -226,42 +238,87 @@
     </div>
 
     <script>
+<script>
 
-        const inventoryList = document.getElementById('list');
+    const inventoryList = document.getElementById('list');
 
-        document.getElementById('regBtn').addEventListener('click', function() {
+    let estoque = {};
 
-            const n = document.getElementById('pName').value;
-            const d = document.getElementById('pDest').value;
-            const p = document.getElementById('pPrice').value;
-            const q = document.getElementById('pQty').value;
-            const u = document.getElementById('pUnit').value;
+    document.getElementById('regBtn').addEventListener('click', function() {
 
-            if(!n || !d || !p || !q || !u) {
-                return alert("Preencha todos os campos.");
+        const n = document.getElementById('pName').value;
+        const d = document.getElementById('pDest').value;
+        const p = document.getElementById('pPrice').value;
+        const q = parseFloat(document.getElementById('pQty').value);
+        const u = document.getElementById('pUnit').value;
+        const t = document.getElementById('pType').value;
+
+        if(!n || !d || !p || !q || !u || !t) {
+            return alert("Preencha todos os campos.");
+        }
+
+        if(!estoque[n]) {
+            estoque[n] = 0;
+        }
+
+        // ENTRADA
+        if(t === "entrada") {
+            estoque[n] += q;
+        }
+
+        // SAÍDA
+        if(t === "saida") {
+
+            if(q > estoque[n]) {
+                return alert("Estoque insuficiente.");
             }
 
-            const row = inventoryList.insertRow();
+            estoque[n] -= q;
+        }
 
-            row.innerHTML = `
-                <td>${n}</td>
-                <td>${d}</td>
-                <td style="color:#b39359; font-weight:800">
-                    $ ${parseFloat(p).toFixed(2)}
-                </td>
-                <td>${q}</td>
-                <td>${u}</td>
-            `;
+        const saldoAtual = estoque[n];
 
-            document.getElementById('pName').value = "";
-            document.getElementById('pDest').value = "";
-            document.getElementById('pPrice').value = "";
-            document.getElementById('pQty').value = "";
-            document.getElementById('pUnit').value = "";
+        const row = inventoryList.insertRow();
 
-        });
+        row.innerHTML = `
+            <td>${n}</td>
 
-    </script>
+            <td>${d}</td>
 
+            <td style="
+                font-weight:800;
+                color:${t === 'entrada' ? '#16a34a' : '#dc2626'}
+            ">
+                ${t.toUpperCase()}
+            </td>
+
+            <td style="
+                color:#b39359;
+                font-weight:800
+            ">
+                $ ${parseFloat(p).toFixed(2)}
+            </td>
+
+            <td>${q}</td>
+
+            <td>${u}</td>
+
+            <td style="font-weight:800">
+                ${saldoAtual} ${u}
+            </td>
+        `;
+
+        // LIMPAR CAMPOS
+        document.getElementById('pName').value = "";
+        document.getElementById('pDest').value = "";
+        document.getElementById('pPrice').value = "";
+        document.getElementById('pQty').value = "";
+        document.getElementById('pUnit').value = "";
+        document.getElementById('pType').value = "";
+
+    });
+
+</script>
+        
 </body>
 </html>
