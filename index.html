@@ -173,8 +173,18 @@
 
         window.onload = () => {
             const salvo = localStorage.getItem('solleneTableHTML');
-            if (salvo) inventoryList.innerHTML = JSON.parse(salvo);
-        };
+           if(t === "ENTRADA") {
+    saldos[n] += q;
+}
+
+if(t === "SAÍDA") {
+
+    if(q > saldos[n]) {
+        return alert("Estoque insuficiente.");
+    }
+
+    saldos[n] -= q;
+}
 
         document.getElementById('regBtn').addEventListener('click', function() {
             const n = document.getElementById('pName').value.trim();
