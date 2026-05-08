@@ -8,25 +8,12 @@
         @import url('https://googleapis.com');
         *{ margin:0; padding:0; box-sizing:border-box; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fdfaf6; color: #1a1a1a; padding-bottom: 60px; display: flex; flex-direction: column; align-items: center; }
-        
-        .back-link { align-self: flex-start; margin: 20px 0 0 40px; text-decoration: none; color: #b39359; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 2px; background: rgba(31,41,55,0.05); padding: 8px 15px; border-radius: 50px; }
-
-        /* BANNER COM IMAGEM DAS GARRAFAS */
+        .back-link { align-self: flex-start; margin: 20px 0 0 40px; text-decoration: none; color: #b39359; font-weight: 800; font-size: 11px; text-transform: uppercase; background: rgba(31,41,55,0.05); padding: 8px 15px; border-radius: 50px; }
         .hero-banner {
-            width: 100%;
-            max-width: 1200px;
-            height: 320px;
-            background-color: #f7f4ed;
+            width: 100%; max-width: 1200px; height: 320px; background-color: #f7f4ed;
             background-image: url('https://githubusercontent.com');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain; 
-            border-radius: 28px;
-            margin-top: 10px;
-            border: 1px solid #e5e1da;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+            background-repeat: no-repeat; background-position: center; background-size: contain; border-radius: 28px; margin-top: 10px; border: 1px solid #e5e1da; box-shadow: 0 20px 40px rgba(0,0,0,0.04);
         }
-
         .company-header { text-align: center; margin: 40px 0; }
         .company-header h1 { font-size: 56px; font-weight: 800; color: #1f2937; text-transform: uppercase; }
         .main-grid { display: grid; grid-template-columns: 360px 1fr; gap: 30px; width: 100%; max-width: 1200px; padding: 0 20px; }
@@ -79,7 +66,7 @@
             const n = document.getElementById('pName').value;
             const p = document.getElementById('pPrice').value;
             const q = document.getElementById('pQty').value;
-            if(!n || !p || !q) return alert("Fill fields.");
+            if(!n || !p || !q) return alert("Preencha os campos.");
             const row = inventoryList.insertRow();
             row.innerHTML = `<td>${n}</td><td>${document.getElementById('pDest').value}</td><td style="color:#b39359; font-weight:800">$ ${parseFloat(p).toFixed(2)}</td><td>${q} units</td>`;
             saveData();
@@ -88,3 +75,4 @@
     </script>
 </body>
 </html>
+
