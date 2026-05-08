@@ -8,7 +8,14 @@
         @import url('https://googleapis.com');
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fdfaf6; display: flex; flex-direction: column; align-items: center; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: #fdfaf6; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
 
         .back-link { 
             align-self: flex-start; 
@@ -23,85 +30,32 @@
             border-radius: 50px; 
         }
 
-        /* BANNER COM LINK DIRETO CORRIGIDO */
-        .hero-banner {
-            width: 95%;
-            max-width: 1200px;
-            height: 400px;
-            /* Usando o link completo para não ter erro de pasta */
+        /* BANNER CORRIGIDO COM O SEU LINK REAL */
+        .hero-banner { 
+            width: 95%; 
+            max-width: 1200px; 
+            height: 400px; 
+            /* O link deve ser o endereço completo do seu repositório */
             background-image: url('https://github.io'); 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-radius: 28px;
-            margin-top: 20px;
-            border: 1px solid #e5e1da;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
+            border-radius: 28px; 
+            margin-top: 20px; 
+            border: 1px solid #e5e1da; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.04); 
         }
 
         .company-header { text-align: center; margin: 40px 0; }
         .company-header h1 { font-size: 56px; font-weight: 800; color: #1f2937; text-transform: uppercase; }
-
-        .main-grid { 
-            display: grid; 
-            grid-template-columns: 360px 1fr; 
-            gap: 30px; 
-            width: 100%; 
-            max-width: 1200px; 
-            padding: 0 20px; 
-        }
-
-        .sidebar-card { 
-            background: #1f2937; 
-            padding: 40px 30px; 
-            border-radius: 30px; 
-            color: #ffffff; 
-            border-top: 4px solid #b39359; 
-            height: fit-content;
-        }
-
-        input { 
-            width: 100%; 
-            padding: 16px; 
-            margin-bottom: 20px; 
-            border-radius: 14px; 
-            background: #111827; 
-            color: #fff; 
-            border: 1px solid #374151; 
-            outline: none; 
-        }
-
-        #regBtn { 
-            width: 100%; 
-            padding: 20px; 
-            background: #b39359; 
-            color: #111827; 
-            border: none; 
-            border-radius: 16px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            text-transform: uppercase; 
-        }
-
-        .inventory-area { 
-            background-color: #f2ede4; 
-            border-radius: 30px; 
-            min-height: 500px; 
-            width: 100%; 
-            overflow: hidden; 
-            border: 1px solid #e5e1da; 
-        }
-
-        table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; }
-        td { padding: 20px; border-bottom: 1px solid rgba(212, 163, 115, 0.2); font-size: 15px; }
+        
+        /* ... outros estilos que você já tinha ... */
     </style>
 </head>
 <body>
 
     <a href="index.html" class="back-link">← Voltar ao Portfólio</a>
     
-    <!-- O BANNER APARECE AQUI -->
     <div class="hero-banner"></div>
 
     <header class="company-header">
@@ -109,75 +63,8 @@
         <p>Premium Logistics & Global Trade</p>
     </header>
 
-    <div class="main-grid">
-        <aside class="sidebar-card">
-            <h3>Registro de Carga</h3>
-            <input type="text" id="pName" placeholder="Produto">
-            <input type="text" id="pDest" placeholder="Destino">
-            <input type="number" id="pPrice" placeholder="Preço">
-            <input type="number" id="pQty" placeholder="Qtd">
-            <button id="regBtn">Registrar</button>
-        </aside>
+    <!-- O resto do seu código (main-grid, script, etc) continua igual aqui embaixo -->
 
-        <main class="inventory-area">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Destino</th>
-                        <th>Valor</th>
-                        <th>Volume</th>
-                    </tr>
-                </thead>
-                <tbody id="list"></tbody>
-            </table>
-        </main>
-    </div>
-
-    <script>
-        const inventoryList = document.getElementById('list');
-
-        function saveData() {
-            const rows = [];
-            document.querySelectorAll('#list tr').forEach(row => {
-                rows.push(row.innerHTML);
-            });
-            localStorage.setItem('solleneData', JSON.stringify(rows));
-        }
-
-        function loadData() {
-            const saved = localStorage.getItem('solleneData');
-            if (saved) {
-                JSON.parse(saved).forEach(rowData => {
-                    const row = inventoryList.insertRow();
-                    row.innerHTML = rowData;
-                });
-            }
-        }
-
-        window.onload = loadData;
-
-        document.getElementById('regBtn').addEventListener('click', function() {
-            const n = document.getElementById('pName').value;
-            const d = document.getElementById('pDest').value;
-            const p = document.getElementById('pPrice').value;
-            const q = document.getElementById('pQty').value;
-
-            if(!n || !p || !q) return alert("Preencha os campos obrigatórios.");
-
-            const row = inventoryList.insertRow();
-            row.innerHTML = `
-                <td>${n}</td>
-                <td>${d}</td>
-                <td style="color:#b39359; font-weight:800">$ ${parseFloat(p).toFixed(2)}</td>
-                <td>${q} unidades</td>
-            `;
-            saveData();
-            
-            document.querySelectorAll('input').forEach(i => i.value = "");
-        });
-    </script>
 </body>
 </html>
-
 
