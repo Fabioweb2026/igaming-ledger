@@ -7,106 +7,36 @@
     <style>
         @import url('https://googleapis.com');
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #fdfaf6; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            padding-bottom: 60px;
-        }
+        *{ margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fdfaf6; display: flex; flex-direction: column; align-items: center; padding-bottom: 60px; }
 
-        .back-link { 
-            align-self: flex-start; 
-            margin: 20px 0 0 40px; 
-            text-decoration: none; 
-            color: #b39359; 
-            font-weight: 800; 
-            font-size: 11px; 
-            text-transform: uppercase; 
-            background: rgba(31,41,55,0.05); 
-            padding: 8px 15px; 
-            border-radius: 50px; 
-        }
+        .back-link { align-self: flex-start; margin: 20px 0 0 40px; text-decoration: none; color: #b39359; font-weight: 800; font-size: 11px; text-transform: uppercase; background: rgba(31,41,55,0.05); padding: 8px 15px; border-radius: 50px; }
 
         .hero-banner { 
-            width: 95%; 
-            max-width: 1200px; 
-            height: 400px; 
+            width: 95%; max-width: 1200px; height: 400px; 
             background-image: url('https://github.io'); 
-            background-size: cover; 
-            background-position: center; 
-            background-repeat: no-repeat; 
-            border-radius: 28px; 
-            margin-top: 20px; 
-            border: 1px solid #e5e1da; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04); 
+            background-size: cover; background-position: center; border-radius: 28px; margin-top: 20px; 
+            border: 1px solid #e5e1da; box-shadow: 0 20px 40px rgba(0,0,0,0.04); 
         }
 
         .company-header { text-align: center; margin: 40px 0; }
         .company-header h1 { font-size: 56px; font-weight: 800; color: #1f2937; text-transform: uppercase; }
 
-        .main-grid { 
-            display: grid; 
-            grid-template-columns: 360px 1fr; 
-            gap: 30px; 
-            width: 100%; 
-            max-width: 1200px; 
-            padding: 0 20px; 
-        }
+        .main-grid { display: grid; grid-template-columns: 360px 1fr; gap: 30px; width: 100%; max-width: 1200px; padding: 0 20px; }
+        .sidebar-card { background: #1f2937; padding: 40px 30px; border-radius: 30px; color: #ffffff; border-top: 4px solid #b39359; height: fit-content; }
+        
+        input, select { width: 100%; padding: 16px; margin-bottom: 15px; border: 1px solid #374151; border-radius: 14px; background: #111827; color: #ffffff; outline: none; }
+        #regBtn { width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; border-radius: 16px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
 
-        .sidebar-card { 
-            background: #1f2937; 
-            padding: 40px 30px; 
-            border-radius: 30px; 
-            color: #ffffff; 
-            border-top: 4px solid #b39359; 
-            height: fit-content;
-        }
-
-        input { 
-            width: 100%; 
-            padding: 16px; 
-            margin-bottom: 20px; 
-            border-radius: 14px; 
-            background: #111827; 
-            color: #fff; 
-            border: 1px solid #374151; 
-            outline: none;
-        }
-
-        #regBtn { 
-            width: 100%; 
-            padding: 20px; 
-            background: #b39359; 
-            color: #111827; 
-            border: none; 
-            border-radius: 16px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            text-transform: uppercase;
-        }
-
-        .inventory-area { 
-            background-color: #f2ede4; 
-            border-radius: 30px; 
-            min-height: 500px; 
-            width: 100%; 
-            overflow: hidden; 
-            border: 1px solid #e5e1da;
-        }
-
+        .inventory-area { background-color: #f2ede4; border-radius: 30px; min-height: 550px; overflow: hidden; border: 1px solid #e5e1da; }
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; }
-        td { padding: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 15px; }
+        th { text-align: left; padding: 24px 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; }
+        td { padding: 24px 20px; border-bottom: 1px solid rgba(212, 163, 115, 0.2); font-size: 15px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); }
     </style>
 </head>
 <body>
 
     <a href="index.html" class="back-link">← Voltar ao Portfólio</a>
-    
     <div class="hero-banner"></div>
 
     <header class="company-header">
@@ -118,8 +48,21 @@
         <aside class="sidebar-card">
             <h3>Registro de Carga</h3>
             <input type="text" id="pName" placeholder="Produto">
-            <input type="number" id="pIn" placeholder="Qtd Entrada">
-            <input type="number" id="pOut" placeholder="Qtd Saída">
+            <input type="text" id="pDest" placeholder="Destino">
+            <input type="number" id="pPrice" placeholder="Preço">
+            <input type="number" id="pQty" placeholder="Quantidade">
+            
+            <select id="pUnit">
+                <option value="Pacotes">Pacotes</option>
+                <option value="Unidades">Unidades</option>
+                <option value="Caixas">Caixas</option>
+            </select>
+
+            <select id="pType">
+                <option value="ENTRADA">ENTRADA</option>
+                <option value="SAÍDA">SAÍDA</option>
+            </select>
+
             <button id="regBtn">Registrar</button>
         </aside>
 
@@ -127,10 +70,13 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Produto</th>
-                        <th>Entrada</th>
-                        <th>Saída</th>
-                        <th>Saldo Atual</th>
+                        <th>PRODUTO</th>
+                        <th>DESTINO</th>
+                        <th>TIPO</th>
+                        <th>VALOR</th>
+                        <th>QUANTIDADE</th>
+                        <th>UNIDADE</th>
+                        <th>SALDO</th>
                     </tr>
                 </thead>
                 <tbody id="list"></tbody>
@@ -139,55 +85,54 @@
     </div>
 
     <script>
-        // Objeto para controle de saldo acumulado
-        let controleEstoque = JSON.parse(localStorage.getItem('solleneData')) || {};
+        let saldos = JSON.parse(localStorage.getItem('solleneSaldos')) || {};
         const inventoryList = document.getElementById('list');
 
-        // Função para atualizar a tabela visualmente
-        function atualizarTabela() {
-            inventoryList.innerHTML = "";
-            for (let produto in controleEstoque) {
-                const row = inventoryList.insertRow();
-                row.innerHTML = `
-                    <td>${produto}</td>
-                    <td style="color: #27ae60;">+ ${controleEstoque[produto].totalEntrada}</td>
-                    <td style="color: #e74c3c;">- ${controleEstoque[produto].totalSaida}</td>
-                    <td style="font-weight: 800; color: #b39359;">${controleEstoque[produto].totalEntrada - controleEstoque[produto].totalSaida} un</td>
-                `;
-            }
+        function saveData(html) {
+            localStorage.setItem('solleneTable', JSON.stringify(html));
+            localStorage.setItem('solleneSaldos', JSON.stringify(saldos));
         }
 
-        // Carrega dados ao abrir a página
-        window.onload = atualizarTabela;
+        window.onload = () => {
+            const savedTable = localStorage.getItem('solleneTable');
+            if (savedTable) inventoryList.innerHTML = JSON.parse(savedTable);
+        };
 
         document.getElementById('regBtn').addEventListener('click', function() {
-            const nome = document.getElementById('pName').value.trim();
-            const entrada = parseInt(document.getElementById('pIn').value) || 0;
-            const saida = parseInt(document.getElementById('pOut').value) || 0;
+            const nome = document.getElementById('pName').value;
+            const dest = document.getElementById('pDest').value;
+            const preco = document.getElementById('pPrice').value;
+            const qtd = parseInt(document.getElementById('pQty').value) || 0;
+            const unidade = document.getElementById('pUnit').value;
+            const tipo = document.getElementById('pType').value;
 
-            if(!nome) return alert("Digite o nome do produto.");
+            if(!nome || !qtd) return alert("Preencha o produto e a quantidade.");
 
-            // Se o produto não existe, cria o registro dele
-            if (!controleEstoque[nome]) {
-                controleEstoque[nome] = { totalEntrada: 0, totalSaida: 0 };
+            if(!saldos[nome]) saldos[nome] = 0;
+
+            if(tipo === "ENTRADA") {
+                saldos[nome] += qtd;
+            } else {
+                saldos[nome] -= qtd;
             }
 
-            // Soma aos valores existentes
-            controleEstoque[nome].totalEntrada += entrada;
-            controleEstoque[nome].totalSaida += saida;
+            const row = inventoryList.insertRow();
+            const corTipo = tipo === "ENTRADA" ? "#27ae60" : "#e74c3c";
+            
+            row.innerHTML = `
+                <td>${nome}</td>
+                <td>${dest}</td>
+                <td style="color: ${corTipo}; font-weight:800">${tipo}</td>
+                <td style="color: #b39359;">$ ${parseFloat(preco).toFixed(2)}</td>
+                <td>${qtd}</td>
+                <td>${unidade}</td>
+                <td style="font-weight: 800;">${saldos[nome]} ${unidade}</td>
+            `;
 
-            // Salva no LocalStorage
-            localStorage.setItem('solleneData', JSON.stringify(controleEstoque));
-
-            // Atualiza a tela
-            atualizarTabela();
-
-            // Limpa campos
-            document.getElementById('pName').value = "";
-            document.getElementById('pIn').value = "";
-            document.getElementById('pOut').value = "";
-            document.getElementById('pName').focus();
+            saveData(inventoryList.innerHTML);
+            document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
 </body>
 </html>
+
