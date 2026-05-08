@@ -16,8 +16,21 @@
             background-image: url('image.jpg');
             background-repeat: no-repeat; background-position: center; background-size: contain; border-radius: 28px; margin-top: 10px; border: 1px solid #e5e1da; box-shadow: 0 20px 40px rgba(0,0,0,0.04);
         }
+        .hero-banner {
+    width: 100%;
+    max-width: 1200px;
+    height: 320px;
+    background-color: #f7f4ed;
+    /* Correção aqui: fechando o parêntese e aspas */
+    background-image: url('image.jpg'); 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover; /* Isso faz a imagem preencher todo o banner */
+    margin: 0 auto; /* Centraliza o banner na página */
+}
 
-        .company-header { text-align: center; margin: 40px 0; }
+
+       .company-header { text-align: center; margin: 40px 0; }
         .company-header h1 { font-size: 56px; font-weight: 800; color: #1f2937; text-transform: uppercase; }
         
         .main-grid { display: grid; grid-template-columns: 360px 1fr; gap: 30px; width: 100%; max-width: 1200px; padding: 0 20px; }
