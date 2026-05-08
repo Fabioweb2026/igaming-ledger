@@ -30,12 +30,12 @@
             border-radius: 50px; 
         }
 
-        /* BANNER CORRIGIDO COM O SEU LINK REAL */
+        /* BANNER CORRIGIDO PARA O REPOSITÓRIO ESTOQUE.HTML */
         .hero-banner { 
             width: 95%; 
             max-width: 1200px; 
             height: 400px; 
-            /* O link deve ser o endereço completo do seu repositório */
+            /* O link abaixo é o caminho exato da sua imagem no GitHub Pages */
             background-image: url('https://github.io'); 
             background-size: cover; 
             background-position: center; 
@@ -48,13 +48,61 @@
 
         .company-header { text-align: center; margin: 40px 0; }
         .company-header h1 { font-size: 56px; font-weight: 800; color: #1f2937; text-transform: uppercase; }
-        
-        /* ... outros estilos que você já tinha ... */
+
+        .main-grid { 
+            display: grid; 
+            grid-template-columns: 360px 1fr; 
+            gap: 30px; 
+            width: 100%; 
+            max-width: 1200px; 
+            padding: 0 20px; 
+        }
+
+        .sidebar-card { 
+            background: #1f2937; 
+            padding: 40px 30px; 
+            border-radius: 30px; 
+            color: #ffffff; 
+            border-top: 4px solid #b39359; 
+        }
+
+        input { 
+            width: 100%; 
+            padding: 16px; 
+            margin-bottom: 20px; 
+            border-radius: 14px; 
+            background: #111827; 
+            color: #fff; 
+            border: 1px solid #374151; 
+        }
+
+        #regBtn { 
+            width: 100%; 
+            padding: 20px; 
+            background: #b39359; 
+            color: #111827; 
+            border: none; 
+            border-radius: 16px; 
+            font-weight: 800; 
+            cursor: pointer; 
+        }
+
+        .inventory-area { 
+            background-color: #f2ede4; 
+            border-radius: 30px; 
+            min-height: 400px; 
+            width: 100%; 
+            overflow: hidden; 
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; }
+        td { padding: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-link">← Voltar ao Portfólio</a>
+    <a href="https://github.io" class="back-link">← Voltar ao Portfólio</a>
     
     <div class="hero-banner"></div>
 
@@ -63,8 +111,40 @@
         <p>Premium Logistics & Global Trade</p>
     </header>
 
-    <!-- O resto do seu código (main-grid, script, etc) continua igual aqui embaixo -->
+    <div class="main-grid">
+        <aside class="sidebar-card">
+            <h3>Registro de Carga</h3>
+            <input type="text" id="pName" placeholder="Produto">
+            <input type="text" id="pDest" placeholder="Destino">
+            <input type="number" id="pPrice" placeholder="Preço">
+            <input type="number" id="pQty" placeholder="Qtd">
+            <button id="regBtn">Registrar</button>
+        </aside>
 
+        <main class="inventory-area">
+            <table>
+                <thead>
+                    <tr><th>Produto</th><th>Destino</th><th>Valor</th><th>Volume</th></tr>
+                </thead>
+                <tbody id="list"></tbody>
+            </table>
+        </main>
+    </div>
+
+    <script>
+        const inventoryList = document.getElementById('list');
+        document.getElementById('regBtn').addEventListener('click', function() {
+            const n = document.getElementById('pName').value;
+            const d = document.getElementById('pDest').value;
+            const p = document.getElementById('pPrice').value;
+            const q = document.getElementById('pQty').value;
+            if(!n || !p || !q) return alert("Preencha os campos.");
+            const row = inventoryList.insertRow();
+            row.innerHTML = `<td>${n}</td><td>${d}</td><td style="color:#b39359; font-weight:800">$ ${parseFloat(p).toFixed(2)}</td><td>${q} un</td>`;
+            document.querySelectorAll('input').forEach(i => i.value = "");
+        });
+    </script>
 </body>
 </html>
+
 
