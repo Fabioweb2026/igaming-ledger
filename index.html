@@ -6,289 +6,88 @@
     <title>Sollene Group | Terminal</title>
     <style>
         @import url('https://googleapis.com');
+        *{ margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fdfaf6; display: flex; flex-direction: column; align-items: center; padding-bottom: 60px; }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #fdfaf6; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            padding-bottom: 60px; 
+        .back-link { align-self: flex-start; margin: 20px 0 0 40px; text-decoration: none; color: #b39359; font-weight: 800; font-size: 11px; text-transform: uppercase; background: rgba(31,41,55,0.05); padding: 8px 15px; border-radius: 50px; }
+
+        .hero-banner { 
+            width: 95%; max-width: 1200px; height: 450px; 
+            background-image: url('image.jpg'); 
+            background-size: cover; background-position: center; border-radius: 28px; margin-top: 20px; 
+            border: 1px solid #e5e1da; box-shadow: 0 25px 50px rgba(0,0,0,0.06); 
         }
-
-        .back-link { 
-            align-self: flex-start; 
-            margin: 20px 0 0 40px; 
-            text-decoration: none; 
-            color: #b39359; 
-            font-weight: 800; 
-            font-size: 11px; 
-            text-transform: uppercase; 
-            background: rgba(31,41,55,0.05); 
-            padding: 8px 15px; 
-            border-radius: 50px; 
-        }
-
-        /* BANNER - USANDO LINK ABSOLUTO PARA NÃO FALHAR */
-       .hero-banner { 
-    width: 95%; 
-    max-width: 1200px; 
-    height: 480px; 
-    background-image: url('./image.jpg'); 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat;
-    border-radius: 28px; 
-    margin-top: 20px; 
-    border: 1px solid #e5e1da; 
-    box-shadow: 0 25px 50px rgba(0,0,0,0.06); 
-}
 
         .company-header { text-align: center; margin: 40px 0; }
         .company-header h1 { font-size: 56px; font-weight: 800; color: #1f2937; text-transform: uppercase; }
 
-        /* GRID E FORMULÁRIO */
-        .main-grid { 
-            display: grid; 
-            grid-template-columns: 360px 1fr; 
-            gap: 30px; 
-            width: 100%; 
-            max-width: 1200px; 
-            padding: 0 20px; 
-        }
-
-        .sidebar-card { 
-            background: #1f2937; 
-            padding: 40px 30px; 
-            border-radius: 30px; 
-            color: #ffffff; 
-            border-top: 4px solid #b39359; 
-            height: fit-content; 
-        }
-
-        .sidebar-card h3 { margin-bottom: 25px; font-size: 22px; }
+        .main-grid { display: grid; grid-template-columns: 360px 1fr; gap: 30px; width: 100%; max-width: 1200px; padding: 0 20px; }
+        .sidebar-card { background: #1f2937; padding: 40px 30px; border-radius: 30px; color: #ffffff; border-top: 4px solid #b39359; height: fit-content; }
         
-        input, select { 
-            width: 100%; 
-            padding: 16px; 
-            margin-bottom: 15px; 
-            border: 1px solid #374151; 
-            border-radius: 14px; 
-            background: #111827; 
-            color: #ffffff; 
-            outline: none; 
-        }
+        input, select { width: 100%; padding: 16px; margin-bottom: 15px; border: 1px solid #374151; border-radius: 14px; background: #111827; color: #ffffff; outline: none; }
+        #regBtn { width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; border-radius: 16px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
 
-        #regBtn { 
-            width: 100%; 
-            padding: 20px; 
-            background: #b39359; 
-            color: #111827; 
-            border: none; 
-            border-radius: 16px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            text-transform: uppercase; 
-        }
-
-        /* TABELA DE 7 COLUNAS */
-        .inventory-area { 
-            background-color: #f2ede4; 
-            border-radius: 30px; 
-            min-height: 550px; 
-            overflow: hidden; 
-            border: 1px solid #e5e1da; 
-        }
-
+        .inventory-area { background-color: #f2ede4; border-radius: 30px; min-height: 550px; overflow: hidden; border: 1px solid #e5e1da; }
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 24px 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; }
         td { padding: 24px 20px; border-bottom: 1px solid rgba(212, 163, 115, 0.15); font-size: 14px; background: rgba(255, 255, 255, 0.3); }
-
     </style>
 </head>
 <body>
-
     <a href="index.html" class="back-link">← Voltar ao Portfólio</a>
-    
     <div class="hero-banner"></div>
-
     <header class="company-header">
         <h1>Sollene Group</h1>
         <p>Premium Logistics & Global Trade</p>
     </header>
-
     <div class="main-grid">
         <aside class="sidebar-card">
             <h3>Registro de Carga</h3>
             <input type="text" id="pName" placeholder="Produto">
             <input type="text" id="pDest" placeholder="Destino">
             <input type="number" id="pPrice" placeholder="Valor">
-            <input type="number" id="pQty" placeholder="Quantidade">
-            
-            <select id="pUnit">
-<select id="pUnit">
-    <option value="">Selecione a Unidade</option>
-    <option value="Kg">Kg</option>
-    <option value="Toneladas">Toneladas</option>
-    <option value="Pacotes">Pacotes</option>
-</select>
-
-<select id="pType">
-    <option value="ENTRADA">ENTRADA</option>
-    <option value="SAÍDA">SAÍDA</option>
-</select>
-
-<button id="regBtn">Registrar</button>
-                <button id="regBtn">Registrar</button>  
+            <input type="number" id="pIn" placeholder="Qtd Entrada">
+            <input type="number" id="pOut" placeholder="Qtd Saída">
+            <select id="pUnit"><option value="Unidades">Unidades</option><option value="Caixas">Caixas</option></select>
+            <button id="regBtn">Registrar</button>
         </aside>
         <main class="inventory-area">
             <table>
                 <thead>
-                    <tr>
-                        <th>PRODUTO</th>
-                        <th>DESTINO</th>
-                        <th>TIPO</th>
-                        <th>VALOR</th>
-                        <th>QUANTIDADE</th>
-                        <th>UNIDADE</th>
-                        <th>SALDO</th>
-                    </tr>
+                    <tr><th>PRODUTO</th><th>DESTINO</th><th>VALOR</th><th>ENTRADA</th><th>SAÍDA</th><th>UNIDADE</th><th>ESTOQUE ATUAL</th></tr>
                 </thead>
                 <tbody id="list"></tbody>
             </table>
         </main>
     </div>
-
     <script>
+        let saldos = JSON.parse(localStorage.getItem('solleneData')) || {};
+        const inventoryList = document.getElementById('list');
 
-let saldos = JSON.parse(localStorage.getItem('solleneSaldos')) || {};
-
-const inventoryList = document.getElementById('list');
-
-function salvarDados() {
-    localStorage.setItem(
-        'solleneTableHTML',
-        JSON.stringify(inventoryList.innerHTML)
-    );
-
-    localStorage.setItem(
-        'solleneSaldos',
-        JSON.stringify(saldos)
-    );
-}
-
-window.onload = () => {
-
-    const salvo = localStorage.getItem('solleneTableHTML');
-    if(salvo) {
-        inventoryList.innerHTML = JSON.parse(salvo);
-    }
-
-};
-document.getElementById('regBtn').addEventListener('click', function() {
-
-    const n = document.getElementById('pName').value.trim();
-
-    const d = document.getElementById('pDest').value;
-
-    const v = document.getElementById('pPrice').value;
-
-    const q = parseInt(document.getElementById('pQty').value) || 0;
-
-    const u = document.getElementById('pUnit').value;
-
-    const t = document.getElementById('pType').value;
-
-    if(!n || !q) {
-        return alert("Preencha o produto e a quantidade.");
-    }
-
-    if(!saldos[n]) {
-        saldos[n] = 0;
-    }
-
-    // ENTRADA
-    if(t === "ENTRADA") {
-        saldos[n] += q;
-    }
-
-    // SAÍDA
-    if(t === "SAÍDA") {
-
-        if(q > saldos[n]) {
-            return alert("Estoque insuficiente.");
+        function atualizar() {
+            inventoryList.innerHTML = "";
+            for (let p in saldos) {
+                const row = inventoryList.insertRow();
+                row.innerHTML = `<td>${p}</td><td>${saldos[p].d}</td><td style="color:#b39359">$ ${saldos[p].v}</td><td style="color:#27ae60">+ ${saldos[p].e}</td><td style="color:#e74c3c">- ${saldos[p].s}</td><td>${saldos[p].u}</td><td style="font-weight:800">${saldos[p].e - saldos[p].s} un</td>`;
+            }
+            localStorage.setItem('solleneData', JSON.stringify(saldos));
         }
 
-        saldos[n] -= q;
-    }
+        window.onload = atualizar;
 
-    const row = inventoryList.insertRow(0);
+        document.getElementById('regBtn').addEventListener('click', function() {
+            const n = document.getElementById('pName').value.trim();
+            const d = document.getElementById('pDest').value;
+            const v = document.getElementById('pPrice').value;
+            const e = parseInt(document.getElementById('pIn').value) || 0;
+            const s = parseInt(document.getElementById('pOut').value) || 0;
+            const u = document.getElementById('pUnit').value;
 
-    const cor = t === "ENTRADA"
-        ? "#27ae60"
-        : "#e74c3c";
-
-    row.innerHTML = `
-        <td>${n}</td>
-        <td>${d}</td>
-        <td style="color:${cor};font-weight:800">${t}</td>
-        <td style="color:#b39359;font-weight:800">
-            $ ${parseFloat(v).toFixed(2)}
-        </td>
-        <td>${q}</td>
-        <td>${u}</td>
-        <td style="font-weight:800">
-            ${saldos[n]} ${u}
-        </td>
-    `;
-    salvarDados();
-
-    // LIMPAR CAMPOS
-    document.getElementById('pName').value = "";
-    document.getElementById('pDest').value = "";
-    document.getElementById('pPrice').value = "";
-    document.getElementById('pQty').value = "";
-    document.getElementById('pUnit').value = "";
-    document.getElementById('pType').value = "ENTRADA";
-
-});
-
-</script>
-            if(!n || !q) return alert("Preencha o produto e a quantidade.");
-
-if(!saldos[n]) {
-    saldos[n] = 0;
-}
-
-if(t === "ENTRADA") {
-    saldos[n] += q;
-}
-
-if(t === "SAÍDA") {
-
-    if(q > saldos[n]) {
-        return alert("Estoque insuficiente.");
-    }
-
-    saldos[n] -= q;
-}
-   row.innerHTML = `
-                <td>${n}</td>
-                <td>${d}</td>
-                <td style="color: ${cor}; font-weight:800">${t}</td>
-                <td style="color: #b39359; font-weight:800">$ ${parseFloat(v).toFixed(2)}</td>
-                <td>${q}</td>
-                <td>${u}</td>
-                <td style="font-weight: 800;">${saldos[n]} ${u}</td>
-            `;
-            
-
-            salvarDados();
-            document.getElementById('pName').value = "";
-            document.getElementById('pPrice').value = "";
-            document.getElementById('pQty').value = "";
+            if(!n) return alert("Preencha o nome.");
+            if(!saldos[n]) saldos[n] = {d, v, e:0, s:0, u};
+            saldos[n].e += e; saldos[n].s += s;
+            atualizar();
+            document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
 </body>
