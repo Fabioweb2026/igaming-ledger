@@ -8,55 +8,32 @@
            id="pName"
            placeholder="Product Name">
 
+    <input type="number"
+           id="pQuantity"
+           placeholder="Quantity">
+
     <select id="pUnit">
 
-        <option value="">
-            Unit
-        </option>
-
-        <option value="Caixa">
-            Caixa
-        </option>
-
-        <option value="Kg">
-            Kg
-        </option>
-
-        <option value="Toneladas">
-            Toneladas
-        </option>
-
-        <option value="Pacotes">
-            Pacotes
-        </option>
+        <option value="">Unit</option>
+        <option value="Caixa">Caixa</option>
+        <option value="Kg">Kg</option>
+        <option value="Toneladas">Toneladas</option>
+        <option value="Pacotes">Pacotes</option>
 
     </select>
 
     <select id="pType">
 
-        <option value="ENTRADA">
-            Entry
-        </option>
-
-        <option value="SAÍDA">
-            Exit
-        </option>
+        <option value="ENTRADA">Entry</option>
+        <option value="SAÍDA">Exit</option>
 
     </select>
 
     <select id="currency">
 
-        <option value="€">
-            EUR
-        </option>
-
-        <option value="$">
-            USD
-        </option>
-
-        <option value="R$">
-            BRL
-        </option>
+        <option value="€">EUR</option>
+        <option value="$">USD</option>
+        <option value="R$">BRL</option>
 
     </select>
 
@@ -68,11 +45,12 @@
 
 <div class="buttons">
 
-    <button class="add-btn"
-            onclick="addProduct()">
-
+    <button class="add-btn" onclick="addProduct()">
         ADD PRODUCT
+    </button>
 
+    <button class="save-btn" onclick="saveProducts()">
+        SAVE
     </button>
 
 </div>
