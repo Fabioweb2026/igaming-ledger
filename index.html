@@ -23,7 +23,7 @@
         .container{
             max-width:1200px;
             margin:auto;
-            background:white;
+            background:#fff;
             padding:25px;
             border-radius:15px;
             box-shadow:0 0 10px rgba(0,0,0,0.1);
@@ -168,6 +168,8 @@
 
         </div>
 
+        <!-- BOTÕES -->
+
         <div class="buttons">
 
             <button class="add-btn" onclick="addProduct()">
@@ -180,9 +182,12 @@
 
         </div>
 
+        <!-- TABELA -->
+
         <table>
 
             <thead>
+
                 <tr>
                     <th>Produto</th>
                     <th>Quantidade</th>
@@ -192,6 +197,7 @@
                     <th>Tipo</th>
                     <th>Ação</th>
                 </tr>
+
             </thead>
 
             <tbody id="productTable">
@@ -199,6 +205,8 @@
             </tbody>
 
         </table>
+
+        <!-- TOTAL -->
 
         <div class="total-box" id="totalValue">
             Valor Total: R$ 0.00
@@ -210,23 +218,41 @@
 
         function addProduct(){
 
-            const name = document.getElementById("pName").value;
-            const quantity = document.getElementById("pQuantity").value;
-            const unit = document.getElementById("pUnit").value;
-            const price = document.getElementById("pPrice").value;
-            const currency = document.getElementById("currency").value;
-            const type = document.getElementById("pType").value;
+            const name =
+                document.getElementById("pName").value;
 
-            if(name === "" || quantity === "" || unit === "" || price === ""){
+            const quantity =
+                document.getElementById("pQuantity").value;
+
+            const unit =
+                document.getElementById("pUnit").value;
+
+            const price =
+                document.getElementById("pPrice").value;
+
+            const currency =
+                document.getElementById("currency").value;
+
+            const type =
+                document.getElementById("pType").value;
+
+            if(
+                name === "" ||
+                quantity === "" ||
+                unit === "" ||
+                price === ""
+            ){
 
                 alert("Preencha todos os campos!");
                 return;
 
             }
 
-            const table = document.getElementById("productTable");
+            const table =
+                document.getElementById("productTable");
 
-            const row = table.insertRow();
+            const row =
+                table.insertRow();
 
             if(type === "ENTRADA"){
                 row.classList.add("entrada");
@@ -242,7 +268,8 @@
                 <td>${currency}</td>
                 <td>${type}</td>
                 <td>
-                    <button class="delete-btn" onclick="deleteRow(this)">
+                    <button class="delete-btn"
+                    onclick="deleteRow(this)">
                         Excluir
                     </button>
                 </td>
@@ -254,25 +281,36 @@
 
         }
 
+        /* EXCLUIR */
+
         function deleteRow(button){
 
             button.parentElement.parentElement.remove();
 
             updateTotal();
 
+            saveProducts();
+
         }
+
+        /* TOTAL */
 
         function updateTotal(){
 
-            const rows = document.querySelectorAll("#productTable tr");
+            const rows =
+                document.querySelectorAll("#productTable tr");
 
             let total = 0;
+
             let currentCurrency = "R$";
 
             rows.forEach(row => {
 
-                const price = parseFloat(row.cells[3].innerText);
-                const currency = row.cells[4].innerText;
+                const price =
+                    parseFloat(row.cells[3].innerText);
+
+                const currency =
+                    row.cells[4].innerText;
 
                 total += price;
 
@@ -285,6 +323,8 @@
 
         }
 
+        /* LIMPAR CAMPOS */
+
         function clearFields(){
 
             document.getElementById("pName").value = "";
@@ -294,7 +334,7 @@
 
         }
 
-        /* SALVAR PRODUTOS */
+        /* SALVAR */
 
         function saveProducts(){
 
@@ -306,11 +346,9 @@
                 tableData
             );
 
-            alert("Produtos salvos com sucesso!");
-
         }
 
-        /* CARREGAR PRODUTOS */
+        /* CARREGAR */
 
         window.onload = function(){
 
