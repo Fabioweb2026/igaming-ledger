@@ -43,6 +43,7 @@
             margin-top: 20px; 
             border: 1px solid #e5e1da; 
             box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            background-color: #eee;
         }
 
         .company-header { text-align: center; margin: 40px 0; }
@@ -105,7 +106,7 @@
 </head>
 <body>
 
-    <a href="index.html" class="back-link">← Voltar ao Portfólio</a>
+    <a href="https://github.io" class="back-link">← Voltar ao Portfólio</a>
     <div class="hero-banner"></div>
 
     <header class="company-header">
@@ -118,7 +119,6 @@
             <h3>Registro de Carga</h3>
             <input type="text" id="pName" placeholder="Produto">
             
-            <!-- Novos campos de Moeda e Valor -->
             <select id="pCurrency">
                 <option value="R$">Real (BRL)</option>
                 <option value="$">Dólar (USD)</option>
@@ -133,6 +133,7 @@
                 <option value="KG">KG</option>
                 <option value="Toneladas">Toneladas</option>
                 <option value="Pacotes">Pacotes</option>
+                <option value="Caixas">Caixas</option> <!-- OPÇÃO ADICIONADA -->
             </select>
 
             <button id="regBtn">Registrar</button>
@@ -155,7 +156,7 @@
     </div>
 
     <script>
-        let controleEstoque = JSON.parse(localStorage.getItem('sollene_v4')) || {};
+        let controleEstoque = JSON.parse(localStorage.getItem('sollene_final_v6')) || {};
         const inventoryList = document.getElementById('list');
 
         function atualizarTabela() {
@@ -180,25 +181,28 @@
         document.getElementById('regBtn').addEventListener('click', function() {
             const nome = document.getElementById('pName').value.trim();
             const moeda = document.getElementById('pCurrency').value;
-            const valor = parseFloat(document.getElementById('pPrice').value).toFixed(2);
+            const valorRaw = document.getElementById('pPrice').value;
             const entrada = parseInt(document.getElementById('pIn').value) || 0;
             const saida = parseInt(document.getElementById('pOut').value) || 0;
             const unidade = document.getElementById('pUnit').value;
 
-            if(!nome || isNaN(valor)) {
-                return alert("Por favor, preencha o nome do produto e o valor.");
+            if(!nome || !valorRaw || (entrada === 0 && saida === 0)) {
+                return alert("Por favor, preencha o nome, o valor e uma quantidade.");
             }
 
+            const valorFormatado = parseFloat(valorRaw).toFixed(2);
+
             if (!controleEstoque[nome]) {
-                controleEstoque[nome] = { e: 0, s: 0, u: unidade, m: moeda, v: valor };
+                controleEstoque[nome] = { e: 0, s: 0, u: unidade, m: moeda, v: valorFormatado };
             }
 
             controleEstoque[nome].e += entrada;
             controleEstoque[nome].s += saida;
             controleEstoque[nome].m = moeda;
-            controleEstoque[nome].v = valor;
+            controleEstoque[nome].v = valorFormatado;
+            controleEstoque[nome].u = unidade;
 
-            localStorage.setItem('sollene_v4', JSON.stringify(controleEstoque));
+            localStorage.setItem('sollene_final_v6', JSON.stringify(controleEstoque));
             atualizarTabela();
 
             document.getElementById('pName').value = "";
@@ -209,4 +213,5 @@
     </script>
 </body>
 </html>
+
 
