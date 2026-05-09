@@ -83,9 +83,9 @@ body{
 /* TITLE */
 
 .hero-content h1{
-    font-size:32px;
+    font-size:34px;
     letter-spacing:4px;
-    margin-bottom:3px;
+    margin-bottom:5px;
     text-shadow:0 4px 10px rgba(0,0,0,0.5);
 }
 
@@ -95,37 +95,6 @@ body{
     opacity:0.80;
     font-size:11px;
     letter-spacing:2px;
-}
-
-/* ================= DASHBOARD ================= */
-
-.hero-stats{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    margin-top:14px;
-    flex-wrap:wrap;
-}
-
-/* STAT BOX */
-
-.stat-box{
-    background:rgba(0,0,0,0.38);
-    border:1px solid rgba(212,175,55,0.25);
-    padding:8px 12px;
-    border-radius:10px;
-    min-width:90px;
-    backdrop-filter:blur(5px);
-}
-
-.stat-box h3{
-    color:#d4af37;
-    font-size:16px;
-}
-
-.stat-box span{
-    font-size:10px;
-    opacity:0.8;
 }
 
 /* ================= CONTAINER ================= */
@@ -155,6 +124,7 @@ body{
 .card h3{
     margin-bottom:12px;
     letter-spacing:1px;
+    color:#d4af37;
 }
 
 .card input,
@@ -181,6 +151,7 @@ body{
 
 .card button:hover{
     opacity:0.9;
+    transform:translateY(-1px);
 }
 
 /* ================= TABLE ================= */
@@ -208,6 +179,7 @@ th,td{
 th{
     background:black;
     color:white;
+    letter-spacing:1px;
 }
 
 /* ================= MESSAGE ================= */
@@ -248,6 +220,7 @@ footer{
     padding:18px;
     margin-top:20px;
     font-size:12px;
+    letter-spacing:1px;
 }
 
 /* ================= RESPONSIVE ================= */
@@ -265,6 +238,10 @@ footer{
 
 .hero{
     height:300px;
+}
+
+.hero-content h1{
+    font-size:28px;
 }
 
 }
@@ -289,27 +266,6 @@ footer{
 <h1>SOLLENE GROUP</h1>
 
 <p>Stock Management Dashboard</p>
-
-<!-- DASHBOARD -->
-
-<div class="hero-stats">
-
-<div class="stat-box">
-<h3 id="totalProducts">0</h3>
-<span>Products</span>
-</div>
-
-<div class="stat-box">
-<h3 id="totalStock">0</h3>
-<span>Stock</span>
-</div>
-
-<div class="stat-box">
-<h3 id="totalValue">R$ 0</h3>
-<span>Total Value</span>
-</div>
-
-</div>
 
 </div>
 
@@ -483,40 +439,11 @@ priceBRL
 
 });
 
-updateDashboard();
-
 updateTable();
 
 clearFields();
 
 showMessage("Product added successfully");
-
-}
-
-/* ================= DASHBOARD ================= */
-
-function updateDashboard(){
-
-let totalProducts = products.length;
-
-let totalStock = 0;
-
-let totalValue = 0;
-
-products.forEach(p => {
-
-totalStock += p.stock;
-
-totalValue += p.stock * p.priceBRL;
-
-});
-
-document.getElementById("totalProducts").innerText = totalProducts;
-
-document.getElementById("totalStock").innerText = totalStock;
-
-document.getElementById("totalValue").innerText =
-"R$ " + totalValue.toFixed(2);
 
 }
 
