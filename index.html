@@ -16,7 +16,7 @@
         }
 
         body{
-            background:#f4f4f4;
+            background:#f5f5f5;
             padding:30px;
         }
 
@@ -53,8 +53,8 @@
         .buttons{
             display:flex;
             gap:10px;
-            flex-wrap:wrap;
             margin-bottom:20px;
+            flex-wrap:wrap;
         }
 
         button{
@@ -62,8 +62,8 @@
             padding:12px 20px;
             border-radius:8px;
             cursor:pointer;
-            color:white;
             font-weight:bold;
+            color:white;
             transition:0.3s;
         }
 
@@ -80,7 +80,7 @@
         }
 
         .save-btn:hover{
-            background:#1f7e34;
+            background:#1f7a34;
         }
 
         .delete-btn{
@@ -90,7 +90,7 @@
         }
 
         .delete-btn:hover{
-            background:#a71d2a;
+            background:#b52a37;
         }
 
         table{
@@ -135,238 +135,302 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <h1>Sistema de Controle de Estoque</h1>
+    <h1>Sistema de Controle de Estoque</h1>
 
-        <div class="form-grid">
+    <div class="form-grid">
 
-            <input type="text" id="pName" placeholder="Nome do Produto">
+        <input type="text"
+               id="pName"
+               placeholder="Nome do Produto">
 
-            <input type="number" id="pQuantity" placeholder="Quantidade">
+        <input type="number"
+               id="pQuantity"
+               placeholder="Quantidade">
 
-            <select id="pUnit">
-                <option value="">Selecione Unidade</option>
-                <option value="Kg">Kg</option>
-                <option value="Toneladas">Toneladas</option>
-                <option value="Pacotes">Pacotes</option>
-                <option value="Caixas">Caixas</option>
-            </select>
+        <select id="pUnit">
 
-            <input type="number" id="pPrice" placeholder="Valor">
+            <option value="">
+                Selecione Unidade
+            </option>
 
-            <select id="currency">
-                <option value="R$">Real (R$)</option>
-                <option value="$">Dólar ($)</option>
-                <option value="€">Euro (€)</option>
-            </select>
+            <option value="Kg">
+                Kg
+            </option>
 
-            <select id="pType">
-                <option value="ENTRADA">ENTRADA</option>
-                <option value="SAÍDA">SAÍDA</option>
-            </select>
+            <option value="Toneladas">
+                Toneladas
+            </option>
 
-        </div>
+            <option value="Pacotes">
+                Pacotes
+            </option>
 
-        <!-- BOTÕES -->
+            <option value="Caixas">
+                Caixas
+            </option>
 
-        <div class="buttons">
+        </select>
 
-            <button class="add-btn" onclick="addProduct()">
-                Adicionar Produto
-            </button>
+        <input type="number"
+               id="pPrice"
+               placeholder="Valor">
 
-            <button class="save-btn" onclick="saveProducts()">
-                Salvar Produtos
-            </button>
+        <select id="currency">
 
-        </div>
+            <option value="R$">
+                Real (R$)
+            </option>
 
-        <!-- TABELA -->
+            <option value="$">
+                Dólar ($)
+            </option>
 
-        <table>
+            <option value="€">
+                Euro (€)
+            </option>
 
-            <thead>
+        </select>
 
-                <tr>
-                    <th>Produto</th>
-                    <th>Quantidade</th>
-                    <th>Unidade</th>
-                    <th>Valor</th>
-                    <th>Moeda</th>
-                    <th>Tipo</th>
-                    <th>Ação</th>
-                </tr>
+        <select id="pType">
 
-            </thead>
+            <option value="ENTRADA">
+                ENTRADA
+            </option>
 
-            <tbody id="productTable">
+            <option value="SAÍDA">
+                SAÍDA
+            </option>
 
-            </tbody>
-
-        </table>
-
-        <!-- TOTAL -->
-
-        <div class="total-box" id="totalValue">
-            Valor Total: R$ 0.00
-        </div>
+        </select>
 
     </div>
 
-    <script>
+    <!-- BOTÕES -->
 
-        function addProduct(){
+    <div class="buttons">
 
-            const name =
-                document.getElementById("pName").value;
+        <button class="add-btn"
+                onclick="addProduct()">
 
-            const quantity =
-                document.getElementById("pQuantity").value;
+            Adicionar Produto
 
-            const unit =
-                document.getElementById("pUnit").value;
+        </button>
+
+        <!-- NOVO BOTÃO SALVAR -->
+
+        <button class="save-btn"
+                onclick="saveProducts()">
+
+            Salvar Produtos
+
+        </button>
+
+    </div>
+
+    <!-- TABELA -->
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Unidade</th>
+                <th>Valor</th>
+                <th>Moeda</th>
+                <th>Tipo</th>
+                <th>Ação</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id="productTable">
+
+        </tbody>
+
+    </table>
+
+    <!-- TOTAL -->
+
+    <div class="total-box"
+         id="totalValue">
+
+        Valor Total: R$ 0.00
+
+    </div>
+
+</div>
+
+<script>
+
+    /* ADICIONAR PRODUTO */
+
+    function addProduct(){
+
+        const name =
+            document.getElementById("pName").value;
+
+        const quantity =
+            document.getElementById("pQuantity").value;
+
+        const unit =
+            document.getElementById("pUnit").value;
+
+        const price =
+            document.getElementById("pPrice").value;
+
+        const currency =
+            document.getElementById("currency").value;
+
+        const type =
+            document.getElementById("pType").value;
+
+        if(
+            name === "" ||
+            quantity === "" ||
+            unit === "" ||
+            price === ""
+        ){
+
+            alert("Preencha todos os campos!");
+
+            return;
+
+        }
+
+        const table =
+            document.getElementById("productTable");
+
+        const row =
+            table.insertRow();
+
+        if(type === "ENTRADA"){
+
+            row.classList.add("entrada");
+
+        }else{
+
+            row.classList.add("saida");
+
+        }
+
+        row.innerHTML = `
+            <td>${name}</td>
+            <td>${quantity}</td>
+            <td>${unit}</td>
+            <td>${parseFloat(price).toFixed(2)}</td>
+            <td>${currency}</td>
+            <td>${type}</td>
+            <td>
+                <button class="delete-btn"
+                        onclick="deleteRow(this)">
+                    Excluir
+                </button>
+            </td>
+        `;
+
+        updateTotal();
+
+        clearFields();
+
+    }
+
+    /* EXCLUIR */
+
+    function deleteRow(button){
+
+        button.parentElement.parentElement.remove();
+
+        updateTotal();
+
+        saveProducts();
+
+    }
+
+    /* ATUALIZAR TOTAL */
+
+    function updateTotal(){
+
+        const rows =
+            document.querySelectorAll("#productTable tr");
+
+        let total = 0;
+
+        let currentCurrency = "R$";
+
+        rows.forEach(row => {
 
             const price =
-                document.getElementById("pPrice").value;
+                parseFloat(row.cells[3].innerText);
 
             const currency =
-                document.getElementById("currency").value;
+                row.cells[4].innerText;
 
-            const type =
-                document.getElementById("pType").value;
+            total += price;
 
-            if(
-                name === "" ||
-                quantity === "" ||
-                unit === "" ||
-                price === ""
-            ){
+            currentCurrency = currency;
 
-                alert("Preencha todos os campos!");
-                return;
+        });
 
-            }
+        document.getElementById("totalValue").innerHTML =
+            `Valor Total: ${currentCurrency} ${total.toFixed(2)}`;
 
-            const table =
-                document.getElementById("productTable");
+    }
 
-            const row =
-                table.insertRow();
+    /* LIMPAR CAMPOS */
 
-            if(type === "ENTRADA"){
-                row.classList.add("entrada");
-            }else{
-                row.classList.add("saida");
-            }
+    function clearFields(){
 
-            row.innerHTML = `
-                <td>${name}</td>
-                <td>${quantity}</td>
-                <td>${unit}</td>
-                <td>${parseFloat(price).toFixed(2)}</td>
-                <td>${currency}</td>
-                <td>${type}</td>
-                <td>
-                    <button class="delete-btn"
-                    onclick="deleteRow(this)">
-                        Excluir
-                    </button>
-                </td>
-            `;
+        document.getElementById("pName").value = "";
+
+        document.getElementById("pQuantity").value = "";
+
+        document.getElementById("pUnit").value = "";
+
+        document.getElementById("pPrice").value = "";
+
+    }
+
+    /* SALVAR PRODUTOS */
+
+    function saveProducts(){
+
+        const tableData =
+            document.getElementById("productTable").innerHTML;
+
+        localStorage.setItem(
+            "estoqueProdutos",
+            tableData
+        );
+
+        alert("Produtos salvos com sucesso!");
+
+    }
+
+    /* CARREGAR PRODUTOS */
+
+    window.onload = function(){
+
+        const savedProducts =
+            localStorage.getItem("estoqueProdutos");
+
+        if(savedProducts){
+
+            document.getElementById("productTable").innerHTML =
+                savedProducts;
 
             updateTotal();
 
-            clearFields();
-
         }
 
-        /* EXCLUIR */
+    }
 
-        function deleteRow(button){
-
-            button.parentElement.parentElement.remove();
-
-            updateTotal();
-
-            saveProducts();
-
-        }
-
-        /* TOTAL */
-
-        function updateTotal(){
-
-            const rows =
-                document.querySelectorAll("#productTable tr");
-
-            let total = 0;
-
-            let currentCurrency = "R$";
-
-            rows.forEach(row => {
-
-                const price =
-                    parseFloat(row.cells[3].innerText);
-
-                const currency =
-                    row.cells[4].innerText;
-
-                total += price;
-
-                currentCurrency = currency;
-
-            });
-
-            document.getElementById("totalValue").innerHTML =
-                `Valor Total: ${currentCurrency} ${total.toFixed(2)}`;
-
-        }
-
-        /* LIMPAR CAMPOS */
-
-        function clearFields(){
-
-            document.getElementById("pName").value = "";
-            document.getElementById("pQuantity").value = "";
-            document.getElementById("pUnit").value = "";
-            document.getElementById("pPrice").value = "";
-
-        }
-
-        /* SALVAR */
-
-        function saveProducts(){
-
-            const tableData =
-                document.getElementById("productTable").innerHTML;
-
-            localStorage.setItem(
-                "estoqueProdutos",
-                tableData
-            );
-
-        }
-
-        /* CARREGAR */
-
-        window.onload = function(){
-
-            const savedProducts =
-                localStorage.getItem("estoqueProdutos");
-
-            if(savedProducts){
-
-                document.getElementById("productTable").innerHTML =
-                    savedProducts;
-
-                updateTotal();
-
-            }
-
-        }
-
-    </script>
+</script>
 
 </body>
 
