@@ -14,15 +14,15 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: #0b1220;
-    color: #ffffff;
+    background: #f4f6fb; /* mais leve e profissional */
+    color: #111827;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 40px;
 }
 
-/* HERO IMAGE */
+/* IMAGEM */
 .hero-banner {
     width: 95%;
     max-width: 1200px;
@@ -32,13 +32,13 @@ body {
     background-position: center;
     border-radius: 20px;
     margin-top: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* TITLE */
+/* TÍTULO */
 h1 {
     margin-top: 20px;
-    color: #ffffff;
+    color: #111827;
 }
 
 /* GRID */
@@ -51,12 +51,19 @@ h1 {
     margin-top: 20px;
 }
 
-/* REGISTRO (BLACK PANEL) */
+/* 🟢 PAINEL REGISTRO (AJUSTADO) */
 .sidebar {
-    background: #0f172a;
+    background: #1f2937; /* cinza profissional */
     padding: 20px;
-    border-radius: 15px;
-    border: 1px solid #1f2937;
+    border-radius: 16px;
+    border: none;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* TÍTULO DO PAINEL */
+.sidebar h3 {
+    color: #f5c542; /* dourado leve */
+    margin-bottom: 15px;
 }
 
 /* INPUTS */
@@ -75,7 +82,7 @@ input::placeholder {
     color: #9ca3af;
 }
 
-/* BUTTON */
+/* BOTÃO */
 button {
     width: 100%;
     padding: 12px;
@@ -92,17 +99,17 @@ button:hover {
     background: #d4af37;
 }
 
-/* TABLE AREA */
+/* TABELA */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: #111827;
+    background: white;
     border-radius: 10px;
     overflow: hidden;
 }
 
 th {
-    background: #0f172a;
+    background: #1f2937;
     color: #b39359;
     padding: 12px;
     font-size: 12px;
@@ -111,8 +118,7 @@ th {
 
 td {
     padding: 12px;
-    border-bottom: 1px solid #1f2937;
-    color: #e5e7eb;
+    border-bottom: 1px solid #eee;
 }
 </style>
 
@@ -120,7 +126,6 @@ td {
 
 <body>
 
-<!-- HERO IMAGE -->
 <div class="hero-banner"></div>
 
 <h1>Sollene Group - Sistema de Estoque</h1>
