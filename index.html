@@ -12,19 +12,17 @@
     font-family: Arial;
 }
 
-/* FUNDO */
 body {
     background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
 }
 
 /* ================= HERO ================= */
 .hero {
-    position: relative;
     width: 100%;
     height: 320px;
+    position: relative;
     overflow: hidden;
     border-bottom: 4px solid black;
-    background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
 }
 
 .hero img {
@@ -38,8 +36,6 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    top: 0;
-    left: 0;
     background: rgba(0,0,0,0.2);
 }
 
@@ -52,31 +48,20 @@ body {
     text-align: center;
 }
 
-.hero-text h1 {
-    font-size: 40px;
-    letter-spacing: 4px;
-}
-
-.hero-text p {
-    font-size: 14px;
-}
-
 /* CONTACT */
 .contact {
     text-align: center;
     padding: 10px;
     font-size: 12px;
     background: rgba(255,255,255,0.5);
-    color: #3d2f14;
 }
 
-/* ================= LAYOUT ================= */
+/* LAYOUT */
 .container {
     display: flex;
-    height: 75vh;
 }
 
-/* ================= FORM ================= */
+/* FORM */
 .form-box {
     width: 28%;
     padding: 15px;
@@ -90,23 +75,16 @@ body {
     color: white;
 }
 
-.card h2 {
-    text-align: center;
-    color: #d4af37;
-    margin-bottom: 10px;
-}
-
 .card input, .card select {
     width: 100%;
     padding: 8px;
     margin: 5px 0;
     background: #111;
-    border: 1px solid #333;
     color: white;
+    border: 1px solid #333;
     border-radius: 5px;
 }
 
-/* STOCK BOX */
 .group-box {
     border: 1px solid #d4af37;
     padding: 10px;
@@ -116,35 +94,28 @@ body {
 
 .group-box h3 {
     text-align: center;
-    font-size: 12px;
     color: #d4af37;
 }
 
-/* BUTTON */
-.card button {
+button {
     width: 100%;
     padding: 10px;
-    margin-top: 10px;
     background: #d4af37;
     border: none;
-    color: black;
-    font-weight: bold;
     cursor: pointer;
-    border-radius: 6px;
+    font-weight: bold;
 }
 
-/* ================= TABLE ================= */
+/* TABLE */
 .table-box {
     width: 72%;
     padding: 15px;
-    overflow-y: auto;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     background: white;
-    border: 2px solid black;
 }
 
 th, td {
@@ -164,100 +135,112 @@ th {
 
 <!-- HERO -->
 <div class="hero">
-    <img src="sollene-group.jpg" alt="Sollene Group">
+    <img src="sollene-group.jpg">
     <div class="hero-overlay"></div>
-
     <div class="hero-text">
         <h1>SOLLENE GROUP</h1>
-        <p>Corporate Stock Management System</p>
+        <p>ERP Stock System</p>
     </div>
 </div>
 
-<!-- CONTACT -->
 <div class="contact">
-    📞 +55 11 99999-8888 | 📍 Av. Paulista, 1500 - São Paulo | ✉ contact@sollenegroup.com
+📞 +55 11 99999-8888 | 📍 São Paulo | ✉ contact@sollene.com
 </div>
 
 <div class="container">
 
 <!-- FORM -->
 <div class="form-box">
-    <div class="card">
-        <h2>REGISTER PRODUCT</h2>
+<div class="card">
 
-        <input type="text" id="name" placeholder="Product Name">
-        <input type="text" id="rg" placeholder="RG Code">
+<h2>REGISTER PRODUCT</h2>
 
-        <!-- STOCK UNITS (SEM DUPLICAÇÃO) -->
-        <div class="group-box">
-            <h3>STOCK UNITS</h3>
+<input type="text" id="name" placeholder="Product Name">
+<input type="text" id="rg" placeholder="RG Code">
 
-            <select id="unitType">
-                <option value="Kg">Kg</option>
-                <option value="Toneladas">Toneladas</option>
-                <option value="Caixas">Caixas</option>
-                <option value="Pacotes">Pacotes</option>
-            </select>
+<div class="group-box">
+<h3>STOCK UNITS</h3>
 
-            <input type="number" id="entry" placeholder="Entry Quantity">
-            <input type="number" id="exit" placeholder="Exit Quantity">
-        </div>
+<select id="unitType">
+<option value="Kg">Kg</option>
+<option value="Toneladas">Ton</option>
+<option value="Caixas">Caixas</option>
+<option value="Pacotes">Pacotes</option>
+</select>
 
-        <input type="number" id="price" placeholder="Price">
+<input type="number" id="entry" placeholder="Entry">
+<input type="number" id="exit" placeholder="Exit">
+</div>
 
-        <button onclick="addProduct()">ADD PRODUCT</button>
-    </div>
+<input type="number" id="price" placeholder="Price (BRL)">
+
+<button onclick="addProduct()">ADD PRODUCT</button>
+
+</div>
 </div>
 
 <!-- TABLE -->
 <div class="table-box">
-    <h2>STOCK CONTROL</h2>
+<h2>STOCK CONTROL</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Product</th>
-                <th>RG</th>
-                <th>Entry</th>
-                <th>Exit</th>
-                <th>Price</th>
-                <th>Stock</th>
-            </tr>
-        </thead>
-        <tbody id="tableBody"></tbody>
-    </table>
+<table>
+<thead>
+<tr>
+<th>Product</th>
+<th>RG</th>
+<th>Entry</th>
+<th>Exit</th>
+<th>BRL</th>
+<th>USD</th>
+<th>EUR</th>
+<th>Stock</th>
+</tr>
+</thead>
+
+<tbody id="tableBody"></tbody>
+</table>
 </div>
 
 </div>
 
 <script>
+
+// TAXAS FIXAS (pode depois puxar API)
+const USD_RATE = 5.15;
+const EUR_RATE = 5.78;
+
 function addProduct() {
-    let name = document.getElementById("name").value;
-    let rg = document.getElementById("rg").value;
-    let unitType = document.getElementById("unitType").value;
 
-    let entry = Number(document.getElementById("entry").value);
-    let exit = Number(document.getElementById("exit").value);
-    let price = Number(document.getElementById("price").value);
+let name = document.getElementById("name").value;
+let rg = document.getElementById("rg").value;
+let unit = document.getElementById("unitType").value;
 
-    let stock = entry - exit;
+let entry = Number(document.getElementById("entry").value);
+let exit = Number(document.getElementById("exit").value);
 
-    if (!name || isNaN(entry) || isNaN(exit)) {
-        alert("Please fill required fields");
-        return;
-    }
+let priceBRL = Number(document.getElementById("price").value);
 
-    document.getElementById("tableBody").innerHTML += `
-        <tr>
-            <td>${name}</td>
-            <td>${rg}</td>
-            <td>${entry} ${unitType}</td>
-            <td>${exit} ${unitType}</td>
-            <td>R$ ${price.toFixed(2)}</td>
-            <td>${stock} ${unitType}</td>
-        </tr>
-    `;
+let stock = entry - exit;
+
+// conversões
+let priceUSD = (priceBRL / USD_RATE).toFixed(2);
+let priceEUR = (priceBRL / EUR_RATE).toFixed(2);
+
+document.getElementById("tableBody").innerHTML += `
+<tr>
+<td>${name}</td>
+<td>${rg}</td>
+<td>${entry} ${unit}</td>
+<td>${exit} ${unit}</td>
+<td>R$ ${priceBRL.toFixed(2)}</td>
+<td>$ ${priceUSD}</td>
+<td>€ ${priceEUR}</td>
+<td>${stock} ${unit}</td>
+</tr>
+`;
+
 }
+
 </script>
 
 </body>
