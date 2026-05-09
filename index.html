@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sollene Group ERP System</title>
+<title>Sollene Group ERP</title>
 
 <style>
 * {
@@ -102,8 +102,8 @@ button {
     padding: 10px;
     background: #d4af37;
     border: none;
-    cursor: pointer;
     font-weight: bold;
+    cursor: pointer;
 }
 
 /* TABLE */
@@ -139,7 +139,7 @@ th {
     <div class="hero-overlay"></div>
     <div class="hero-text">
         <h1>SOLLENE GROUP</h1>
-        <p>ERP Stock System</p>
+        <p>ERP Stock Management System</p>
     </div>
 </div>
 
@@ -172,7 +172,14 @@ th {
 <input type="number" id="exit" placeholder="Exit">
 </div>
 
-<input type="number" id="price" placeholder="Price (BRL)">
+<!-- 🔥 MOEDA AGORA NO CADASTRO -->
+<select id="currency">
+<option value="BRL">Real (BRL)</option>
+<option value="USD">Dollar (USD)</option>
+<option value="EUR">Euro (EUR)</option>
+</select>
+
+<input type="number" id="price" placeholder="Product Price">
 
 <button onclick="addProduct()">ADD PRODUCT</button>
 
@@ -190,9 +197,10 @@ th {
 <th>RG</th>
 <th>Entry</th>
 <th>Exit</th>
-<th>BRL</th>
-<th>USD</th>
-<th>EUR</th>
+<th>Currency</th>
+<th>Price BRL</th>
+<th>Price USD</th>
+<th>Price EUR</th>
 <th>Stock</th>
 </tr>
 </thead>
@@ -205,7 +213,6 @@ th {
 
 <script>
 
-// TAXAS FIXAS (pode depois puxar API)
 const USD_RATE = 5.15;
 const EUR_RATE = 5.78;
 
@@ -213,16 +220,29 @@ function addProduct() {
 
 let name = document.getElementById("name").value;
 let rg = document.getElementById("rg").value;
+
 let unit = document.getElementById("unitType").value;
+let currency = document.getElementById("currency").value;
 
 let entry = Number(document.getElementById("entry").value);
 let exit = Number(document.getElementById("exit").value);
 
-let priceBRL = Number(document.getElementById("price").value);
+let price = Number(document.getElementById("price").value);
 
 let stock = entry - exit;
 
-// conversões
+// 🔥 CONVERSÃO BASE BRL
+let priceBRL;
+
+if (currency === "USD") {
+    priceBRL = price * USD_RATE;
+} else if (currency === "EUR") {
+    priceBRL = price * EUR_RATE;
+} else {
+    priceBRL = price;
+}
+
+// conversões finais
 let priceUSD = (priceBRL / USD_RATE).toFixed(2);
 let priceEUR = (priceBRL / EUR_RATE).toFixed(2);
 
@@ -232,6 +252,7 @@ document.getElementById("tableBody").innerHTML += `
 <td>${rg}</td>
 <td>${entry} ${unit}</td>
 <td>${exit} ${unit}</td>
+<td>${currency}</td>
 <td>R$ ${priceBRL.toFixed(2)}</td>
 <td>$ ${priceUSD}</td>
 <td>€ ${priceEUR}</td>
