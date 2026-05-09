@@ -1,500 +1,78 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Sistema de Estoque</title>
-
-    <style>
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, Helvetica, sans-serif;
-        }
-
-        body{
-            background:#f5f5f5;
-            padding:30px;
-        }
-
-        /* LOGO SUPERIOR */
-
-        .top-logo{
-            width:100%;
-            display:flex;
-            justify-content:center;
-            margin-bottom:25px;
-        }
-
-        .top-logo img{
-            width:220px;
-            max-width:90%;
-            object-fit:contain;
-        }
-
-        /* CONTAINER */
-
-        .container{
-            max-width:1200px;
-            margin:auto;
-            background:#fff;
-            padding:25px;
-            border-radius:15px;
-            box-shadow:0 0 10px rgba(0,0,0,0.1);
-        }
-
-        /* CARD TÍTULO */
-
-        .title-card{
-            background:#111;
-            color:white;
-            padding:15px 20px;
-            border-radius:12px;
-            margin-bottom:20px;
-            width:320px;
-            box-shadow:0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        .title-card h1{
-            margin:0;
-            color:white;
-            font-size:22px;
-            text-align:left;
-            letter-spacing:0.5px;
-        }
-
-        /* FORMULÁRIO */
-
-        .form-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-            gap:15px;
-            margin-bottom:20px;
-        }
-
-        input,
-        select{
-            padding:12px;
-            border:1px solid #ccc;
-            border-radius:8px;
-            font-size:15px;
-        }
-
-        /* BOTÕES */
-
-        .buttons{
-            display:flex;
-            gap:10px;
-            margin-bottom:20px;
-            flex-wrap:wrap;
-        }
-
-        button{
-            border:none;
-            padding:12px 20px;
-            border-radius:8px;
-            cursor:pointer;
-            font-weight:bold;
-            color:white;
-            transition:0.3s;
-        }
+<div class="title-card">
+    <h1>REGISTER PRODUCT</h1>
+</div>
 
-        .add-btn{
-            background:#007bff;
-        }
+<div class="form-grid">
 
-        .add-btn:hover{
-            background:#0056b3;
-        }
+    <input type="text"
+           id="pName"
+           placeholder="Product Name">
 
-        .save-btn{
-            background:#28a745;
-        }
+    <select id="pUnit">
 
-        .save-btn:hover{
-            background:#1f7a34;
-        }
+        <option value="">
+            Unit
+        </option>
 
-        .delete-btn{
-            background:#dc3545;
-            padding:8px 12px;
-            border-radius:5px;
-        }
+        <option value="Caixa">
+            Caixa
+        </option>
 
-        .delete-btn:hover{
-            background:#b52a37;
-        }
+        <option value="Kg">
+            Kg
+        </option>
 
-        /* TABELA */
+        <option value="Toneladas">
+            Toneladas
+        </option>
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-        }
+        <option value="Pacotes">
+            Pacotes
+        </option>
 
-        table th{
-            background:#333;
-            color:white;
-            padding:12px;
-        }
+    </select>
 
-        table td{
-            border:1px solid #ccc;
-            padding:10px;
-            text-align:center;
-        }
+    <select id="pType">
 
-        .entrada{
-            background:#d4edda;
-        }
+        <option value="ENTRADA">
+            Entry
+        </option>
 
-        .saida{
-            background:#f8d7da;
-        }
+        <option value="SAÍDA">
+            Exit
+        </option>
 
-        /* TOTAL */
+    </select>
 
-        .total-box{
-            margin-top:20px;
-            background:#222;
-            color:white;
-            padding:20px;
-            border-radius:10px;
-            text-align:center;
-            font-size:20px;
-            font-weight:bold;
-        }
+    <select id="currency">
 
-        /* RESPONSIVO */
+        <option value="€">
+            EUR
+        </option>
 
-        @media(max-width:768px){
+        <option value="$">
+            USD
+        </option>
 
-            body{
-                padding:15px;
-            }
+        <option value="R$">
+            BRL
+        </option>
 
-            .title-card{
-                width:100%;
-                min-width:auto;
-            }
+    </select>
 
-            .title-card h1{
-                font-size:18px;
-            }
+    <input type="number"
+           id="pPrice"
+           placeholder="Price">
 
-            table{
-                display:block;
-                overflow-x:auto;
-            }
+</div>
 
-        }
+<div class="buttons">
 
-    </style>
+    <button class="add-btn"
+            onclick="addProduct()">
 
-</head>
+        ADD PRODUCT
 
-<body>
+    </button>
 
-    <!-- LOGO -->
-
-    <div class="top-logo">
-        <img src="sollene-group.jpg" alt="Sollene Group">
-    </div>
-
-    <!-- CONTAINER -->
-
-    <div class="container">
-
-        <!-- CARD TÍTULO -->
-
-        <div class="title-card">
-            <h1>Sistema de Controle de Estoque</h1>
-        </div>
-
-        <!-- FORMULÁRIO -->
-
-        <div class="form-grid">
-
-            <input type="text"
-                   id="pName"
-                   placeholder="Nome do Produto">
-
-            <input type="number"
-                   id="pQuantity"
-                   placeholder="Quantidade">
-
-            <select id="pUnit">
-
-                <option value="">
-                    Selecione Unidade
-                </option>
-
-                <option value="Kg">
-                    Kg
-                </option>
-
-                <option value="Toneladas">
-                    Toneladas
-                </option>
-
-                <option value="Pacotes">
-                    Pacotes
-                </option>
-
-                <option value="Caixas">
-                    Caixas
-                </option>
-
-            </select>
-
-            <input type="number"
-                   id="pPrice"
-                   placeholder="Valor">
-
-            <select id="currency">
-
-                <option value="R$">
-                    Real (R$)
-                </option>
-
-                <option value="$">
-                    Dólar ($)
-                </option>
-
-                <option value="€">
-                    Euro (€)
-                </option>
-
-            </select>
-
-            <select id="pType">
-
-                <option value="ENTRADA">
-                    ENTRADA
-                </option>
-
-                <option value="SAÍDA">
-                    SAÍDA
-                </option>
-
-            </select>
-
-        </div>
-
-        <!-- BOTÕES -->
-
-        <div class="buttons">
-
-            <button class="add-btn"
-                    onclick="addProduct()">
-
-                Adicionar Produto
-
-            </button>
-
-            <button class="save-btn"
-                    onclick="saveProducts()">
-
-                Salvar Produtos
-
-            </button>
-
-        </div>
-
-        <!-- TABELA -->
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Produto</th>
-                    <th>Quantidade</th>
-                    <th>Unidade</th>
-                    <th>Valor</th>
-                    <th>Moeda</th>
-                    <th>Tipo</th>
-                    <th>Ação</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="productTable">
-
-            </tbody>
-
-        </table>
-
-        <!-- TOTAL -->
-
-        <div class="total-box"
-             id="totalValue">
-
-            Valor Total: R$ 0.00
-
-        </div>
-
-    </div>
-
-    <script>
-
-        function addProduct(){
-
-            const name =
-                document.getElementById("pName").value;
-
-            const quantity =
-                document.getElementById("pQuantity").value;
-
-            const unit =
-                document.getElementById("pUnit").value;
-
-            const price =
-                document.getElementById("pPrice").value;
-
-            const currency =
-                document.getElementById("currency").value;
-
-            const type =
-                document.getElementById("pType").value;
-
-            if(
-                name === "" ||
-                quantity === "" ||
-                unit === "" ||
-                price === ""
-            ){
-
-                alert("Preencha todos os campos!");
-
-                return;
-
-            }
-
-            const table =
-                document.getElementById("productTable");
-
-            const row =
-                table.insertRow();
-
-            if(type === "ENTRADA"){
-
-                row.classList.add("entrada");
-
-            }else{
-
-                row.classList.add("saida");
-
-            }
-
-            row.innerHTML = `
-                <td>${name}</td>
-                <td>${quantity}</td>
-                <td>${unit}</td>
-                <td>${parseFloat(price).toFixed(2)}</td>
-                <td>${currency}</td>
-                <td>${type}</td>
-                <td>
-                    <button class="delete-btn"
-                            onclick="deleteRow(this)">
-                        Excluir
-                    </button>
-                </td>
-            `;
-
-            updateTotal();
-
-            clearFields();
-
-        }
-
-        function deleteRow(button){
-
-            button.parentElement.parentElement.remove();
-
-            updateTotal();
-
-            saveProducts();
-
-        }
-
-        function updateTotal(){
-
-            const rows =
-                document.querySelectorAll("#productTable tr");
-
-            let total = 0;
-
-            let currentCurrency = "R$";
-
-            rows.forEach(row => {
-
-                const price =
-                    parseFloat(row.cells[3].innerText);
-
-                const currency =
-                    row.cells[4].innerText;
-
-                total += price;
-
-                currentCurrency = currency;
-
-            });
-
-            document.getElementById("totalValue").innerHTML =
-                `Valor Total: ${currentCurrency} ${total.toFixed(2)}`;
-
-        }
-
-        function clearFields(){
-
-            document.getElementById("pName").value = "";
-            document.getElementById("pQuantity").value = "";
-            document.getElementById("pUnit").value = "";
-            document.getElementById("pPrice").value = "";
-
-        }
-
-        function saveProducts(){
-
-            const tableData =
-                document.getElementById("productTable").innerHTML;
-
-            localStorage.setItem(
-                "estoqueProdutos",
-                tableData
-            );
-
-            alert("Produtos salvos com sucesso!");
-
-        }
-
-        window.onload = function(){
-
-            const savedProducts =
-                localStorage.getItem("estoqueProdutos");
-
-            if(savedProducts){
-
-                document.getElementById("productTable").innerHTML =
-                    savedProducts;
-
-                updateTotal();
-
-            }
-
-        }
-
-    </script>
-
-</body>
-
-</html>
-  
-
+</div>
