@@ -1,56 +1,223 @@
-<div class="title-card">
-    <h1>REGISTER PRODUCT</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stock Control</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f3ead7;
+}
+
+/* HEADER */
+
+.header{
+    width:100%;
+}
+
+.header img{
+    width:100%;
+    display:block;
+}
+
+/* LAYOUT PRINCIPAL */
+
+.main{
+    display:flex;
+    gap:20px;
+    padding:20px;
+}
+
+/* LEFT PANEL */
+
+.sidebar{
+    width:320px;
+}
+
+/* CARD STYLE */
+
+.card{
+    background:#111;
+    color:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.card h1{
+    font-size:20px;
+    margin-bottom:15px;
+}
+
+/* INPUTS */
+
+input, select{
+    width:100%;
+    padding:10px;
+    margin-bottom:10px;
+    border:none;
+    border-radius:8px;
+}
+
+/* BUTTON */
+
+button{
+    width:100%;
+    padding:12px;
+    border:none;
+    background:#d4af37;
+    font-weight:bold;
+    cursor:pointer;
+    border-radius:8px;
+}
+
+button:hover{
+    background:#b8922c;
+}
+
+/* RIGHT SIDE */
+
+.content{
+    flex:1;
+}
+
+/* TITLE */
+
+.title{
+    font-size:28px;
+    font-weight:bold;
+    margin-bottom:15px;
+}
+
+/* TABLE */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+th{
+    background:#000;
+    color:white;
+    padding:12px;
+}
+
+td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <img src="sollene-group.jpg" alt="Banner">
 </div>
 
-<div class="form-grid">
+<!-- MAIN LAYOUT -->
+<div class="main">
 
-    <input type="text"
-           id="pName"
-           placeholder="Product Name">
+    <!-- LEFT FORM -->
+    <div class="sidebar">
 
-    <input type="number"
-           id="pQuantity"
-           placeholder="Quantity">
+        <div class="card">
 
-    <select id="pUnit">
+            <h1>REGISTER PRODUCT</h1>
 
-        <option value="">Unit</option>
-        <option value="Caixa">Caixa</option>
-        <option value="Kg">Kg</option>
-        <option value="Toneladas">Toneladas</option>
-        <option value="Pacotes">Pacotes</option>
+            <input type="text" placeholder="Product Name">
 
-    </select>
+            <select>
+                <option>Unit</option>
+                <option>Caixa</option>
+                <option>Kg</option>
+                <option>Toneladas</option>
+                <option>Pacotes</option>
+            </select>
 
-    <select id="pType">
+            <input type="number" placeholder="Entry">
+            <input type="number" placeholder="Exit">
 
-        <option value="ENTRADA">Entry</option>
-        <option value="SAÍDA">Exit</option>
+            <select>
+                <option>EUR</option>
+                <option>USD</option>
+                <option>BRL</option>
+            </select>
 
-    </select>
+            <input type="number" placeholder="Price">
 
-    <select id="currency">
+            <button>ADD PRODUCT</button>
 
-        <option value="€">EUR</option>
-        <option value="$">USD</option>
-        <option value="R$">BRL</option>
+        </div>
 
-    </select>
+    </div>
 
-    <input type="number"
-           id="pPrice"
-           placeholder="Price">
+    <!-- RIGHT TABLE -->
+    <div class="content">
+
+        <div class="title">STOCK CONTROL</div>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Unit</th>
+                    <th>Entry</th>
+                    <th>Exit</th>
+                    <th>Currency</th>
+                    <th>Price</th>
+                    <th>Total Value</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td>coffee</td>
+                    <td>Caixa</td>
+                    <td>123</td>
+                    <td>65</td>
+                    <td>USD</td>
+                    <td>$ 6.78</td>
+                    <td>$ 393.24</td>
+                </tr>
+
+                <tr>
+                    <td>almond</td>
+                    <td>Caixa</td>
+                    <td>120</td>
+                    <td>34</td>
+                    <td>EUR</td>
+                    <td>€ 6.65</td>
+                    <td>€ 571.90</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
 
 </div>
 
-<div class="buttons">
-
-    <button class="add-btn" onclick="addProduct()">
-        ADD PRODUCT
-    </button>
-
-    <button class="save-btn" onclick="saveProducts()">
-        SAVE
-    </button>
-
-</div>
+</body>
+</html>
