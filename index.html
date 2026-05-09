@@ -30,6 +30,9 @@ body{
     height:340px;
     overflow:hidden;
     border-bottom:4px solid black;
+
+    /* FUNDO CLARO */
+    background:#f5ecd7;
 }
 
 /* HERO IMAGE */
@@ -37,9 +40,14 @@ body{
 .hero img{
     width:100%;
     height:100%;
-    object-fit:cover;
-    object-position:center 30%;
-    filter:brightness(0.65);
+
+    object-fit:contain;
+
+    object-position:center;
+
+    background:#f5ecd7;
+
+    filter:brightness(1);
 }
 
 /* OVERLAY */
@@ -49,9 +57,9 @@ body{
     inset:0;
 
     background:linear-gradient(
-        135deg,
-        rgba(0,0,0,0.35),
-        rgba(0,0,0,0.75)
+        180deg,
+        rgba(255,255,255,0.10),
+        rgba(0,0,0,0.15)
     );
 }
 
@@ -78,24 +86,18 @@ body{
     border-radius:20px;
     margin-bottom:10px;
     letter-spacing:2px;
-    background:rgba(212,175,55,0.10);
+    background:rgba(0,0,0,0.45);
+    backdrop-filter:blur(4px);
 }
 
-/* HERO TITLE */
-
-.hero-content h1{
-    font-size:44px;
-    letter-spacing:5px;
-    margin-bottom:6px;
-    text-shadow:0 6px 25px rgba(0,0,0,0.8);
-}
-
-/* HERO SUBTITLE */
+/* SUBTITLE */
 
 .hero-content p{
     font-size:13px;
-    opacity:0.85;
+    opacity:0.95;
     letter-spacing:3px;
+    color:white;
+    text-shadow:0 4px 10px rgba(0,0,0,0.6);
 }
 
 /* ================= CONTAINER ================= */
@@ -244,11 +246,11 @@ footer{
 }
 
 .hero{
-    height:280px;
+    height:260px;
 }
 
-.hero-content h1{
-    font-size:30px;
+.hero-content p{
+    font-size:11px;
 }
 
 }
@@ -269,8 +271,6 @@ footer{
 <div class="hero-content">
 
 <div class="badge">ENTERPRISE SYSTEM</div>
-
-<h1>SOLLENE GROUP</h1>
 
 <p>Stock Management Dashboard</p>
 
