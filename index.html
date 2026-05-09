@@ -1,223 +1,152 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sollene Group | Inventory</title>
+    <style>
+        @import url('https://googleapis.com');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #f2ede4; display: flex; flex-direction: column; align-items: center; }
 
-<title>Stock Control</title>
+        /* Banner */
+        .hero-banner { 
+            width: 100%; height: 400px; 
+            background: url('sollene-group.jpg') no-repeat center; 
+            background-size: cover; border-bottom: 2px solid #b39359; 
+        }
 
-<style>
+        .main-container { display: flex; gap: 40px; padding: 40px; max-width: 1400px; width: 100%; justify-content: center; }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
+        /* Formulário lateral */
+        .register-card { 
+            background: #111; padding: 30px; border-radius: 20px; width: 350px; 
+            border: 2px solid #b39359; box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
+        }
+        .register-card h2 { color: #f1c40f; text-transform: uppercase; font-size: 22px; margin-bottom: 25px; }
+        
+        input, select { 
+            width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 10px; 
+            background: #fff; border: 1px solid #ddd; outline: none; font-weight: 600; 
+        }
 
-body{
-    background:#f3ead7;
-}
+        #addBtn { 
+            width: 100%; padding: 20px; background: #f1c40f; color: #000; 
+            border: none; border-radius: 15px; font-weight: 800; cursor: pointer; 
+            text-transform: uppercase; transition: 0.3s;
+        }
+        #addBtn:hover { transform: scale(1.02); background: #d4ac0d; }
 
-/* HEADER */
-
-.header{
-    width:100%;
-}
-
-.header img{
-    width:100%;
-    display:block;
-}
-
-/* LAYOUT PRINCIPAL */
-
-.main{
-    display:flex;
-    gap:20px;
-    padding:20px;
-}
-
-/* LEFT PANEL */
-
-.sidebar{
-    width:320px;
-}
-
-/* CARD STYLE */
-
-.card{
-    background:#111;
-    color:white;
-    padding:20px;
-    border-radius:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.2);
-}
-
-.card h1{
-    font-size:20px;
-    margin-bottom:15px;
-}
-
-/* INPUTS */
-
-input, select{
-    width:100%;
-    padding:10px;
-    margin-bottom:10px;
-    border:none;
-    border-radius:8px;
-}
-
-/* BUTTON */
-
-button{
-    width:100%;
-    padding:12px;
-    border:none;
-    background:#d4af37;
-    font-weight:bold;
-    cursor:pointer;
-    border-radius:8px;
-}
-
-button:hover{
-    background:#b8922c;
-}
-
-/* RIGHT SIDE */
-
-.content{
-    flex:1;
-}
-
-/* TITLE */
-
-.title{
-    font-size:28px;
-    font-weight:bold;
-    margin-bottom:15px;
-}
-
-/* TABLE */
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-th{
-    background:#000;
-    color:white;
-    padding:12px;
-}
-
-td{
-    padding:12px;
-    text-align:center;
-    border-bottom:1px solid #ddd;
-}
-
-</style>
-
+        /* Tabela */
+        .table-area { flex: 1; background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #000; color: #fff; padding: 20px; text-transform: uppercase; font-size: 13px; text-align: center; }
+        td { padding: 18px; text-align: center; border-bottom: 1px solid #eee; font-size: 15px; color: #333; }
+        tr:nth-child(even) { background: #fafafa; }
+    </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
-<div class="header">
-    <img src="sollene-group.jpg" alt="Banner">
-</div>
+    <div class="hero-banner"></div>
 
-<!-- MAIN LAYOUT -->
-<div class="main">
-
-    <!-- LEFT FORM -->
-    <div class="sidebar">
-
-        <div class="card">
-
-            <h1>REGISTER PRODUCT</h1>
-
-            <input type="text" placeholder="Product Name">
-
-            <select>
-                <option>Unit</option>
-                <option>Caixa</option>
-                <option>Kg</option>
-                <option>Toneladas</option>
-                <option>Pacotes</option>
+    <div class="main-container">
+        <!-- LADO ESQUERDO: REGISTRO -->
+        <aside class="register-card">
+            <h2>Register Product</h2>
+            <input type="text" id="pName" placeholder="Product Name">
+            <select id="pUnit">
+                <option value="Caixa">Caixa</option>
+                <option value="Unidade">Unidade</option>
+                <option value="KG">KG</option>
             </select>
-
-            <input type="number" placeholder="Entry">
-            <input type="number" placeholder="Exit">
-
-            <select>
-                <option>EUR</option>
-                <option>USD</option>
-                <option>BRL</option>
+            <input type="number" id="pEntry" placeholder="Entry">
+            <input type="number" id="pExit" placeholder="Exit">
+            <select id="pCurrency">
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="BRL">BRL (R$)</option>
             </select>
+            <input type="number" id="pPrice" placeholder="Price">
+            
+            <button id="addBtn">Add Product</button>
+        </aside>
 
-            <input type="number" placeholder="Price">
-
-            <button>ADD PRODUCT</button>
-
-        </div>
-
+        <!-- LADO DIREITO: TABELA -->
+        <main class="table-area">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Unit</th>
+                        <th>Entry</th>
+                        <th>Exit</th>
+                        <th>Stock</th>
+                        <th>Currency</th>
+                        <th>Price</th>
+                        <th>Total Value</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryList"></tbody>
+            </table>
+        </main>
     </div>
 
-    <!-- RIGHT TABLE -->
-    <div class="content">
+    <script>
+        // Função para carregar os dados salvos e atualizar a tabela
+        let inventory = JSON.parse(localStorage.getItem('sollene_db')) || [];
 
-        <div class="title">STOCK CONTROL</div>
+        function renderTable() {
+            const list = document.getElementById('inventoryList');
+            list.innerHTML = "";
 
-        <table>
+            inventory.forEach((item, index) => {
+                const stock = item.entry - item.exit;
+                const totalValue = (stock * item.price).toFixed(2);
+                const symbol = item.currency === 'USD' ? '$' : (item.currency === 'EUR' ? '€' : 'R$');
 
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Unit</th>
-                    <th>Entry</th>
-                    <th>Exit</th>
-                    <th>Currency</th>
-                    <th>Price</th>
-                    <th>Total Value</th>
-                </tr>
-            </thead>
+                const row = list.insertRow();
+                row.innerHTML = `
+                    <td>${item.name}</td>
+                    <td>${item.unit}</td>
+                    <td style="color: green;">${item.entry}</td>
+                    <td style="color: red;">${item.exit}</td>
+                    <td style="font-weight: 800;">${stock}</td>
+                    <td>${item.currency}</td>
+                    <td>${symbol} ${item.price}</td>
+                    <td style="font-weight: 800;">${symbol} ${totalValue}</td>
+                `;
+            });
+        }
 
-            <tbody>
+        // Adicionar novo produto e SALVAR automaticamente
+        document.getElementById('addBtn').addEventListener('click', function() {
+            const name = document.getElementById('pName').value;
+            const unit = document.getElementById('pUnit').value;
+            const entry = parseInt(document.getElementById('pEntry').value) || 0;
+            const exit = parseInt(document.getElementById('pExit').value) || 0;
+            const currency = document.getElementById('pCurrency').value;
+            const price = parseFloat(document.getElementById('pPrice').value) || 0;
 
-                <tr>
-                    <td>coffee</td>
-                    <td>Caixa</td>
-                    <td>123</td>
-                    <td>65</td>
-                    <td>USD</td>
-                    <td>$ 6.78</td>
-                    <td>$ 393.24</td>
-                </tr>
+            if(!name || price <= 0) return alert("Please fill in the product name and price.");
 
-                <tr>
-                    <td>almond</td>
-                    <td>Caixa</td>
-                    <td>120</td>
-                    <td>34</td>
-                    <td>EUR</td>
-                    <td>€ 6.65</td>
-                    <td>€ 571.90</td>
-                </tr>
+            const newProduct = { name, unit, entry, exit, currency, price };
+            
+            inventory.push(newProduct);
+            localStorage.setItem('sollene_db', JSON.stringify(inventory)); // SALVA NO NAVEGADOR
+            
+            renderTable();
 
-            </tbody>
+            // Limpar campos após adicionar
+            document.getElementById('pName').value = "";
+            document.getElementById('pEntry').value = "";
+            document.getElementById('pExit').value = "";
+            document.getElementById('pPrice').value = "";
+        });
 
-        </table>
-
-    </div>
-
-</div>
-
+        // Carregar a tabela ao abrir a página
+        window.onload = renderTable;
+    </script>
 </body>
 </html>
+
