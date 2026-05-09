@@ -43,6 +43,8 @@ body {
     width: 100%;
     padding: 10px;
     margin: 8px 0;
+    border: none;
+    outline: none;
 }
 
 .login-box button {
@@ -52,6 +54,7 @@ body {
     background: #d4af37;
     border: none;
     cursor: pointer;
+    font-weight: bold;
 }
 
 /* ================= HERO ================= */
@@ -104,7 +107,6 @@ body {
 .hero-content h1 {
     font-size: 44px;
     letter-spacing: 5px;
-    text-transform: uppercase;
 }
 
 .hero-content p {
@@ -155,6 +157,8 @@ input, select {
     width: 100%;
     padding: 8px;
     margin: 5px 0;
+    border: none;
+    outline: none;
 }
 
 button {
@@ -163,6 +167,7 @@ button {
     background: #d4af37;
     border: none;
     cursor: pointer;
+    font-weight: bold;
 }
 
 /* ================= TABLE ================= */
@@ -197,13 +202,19 @@ th {
 <div class="login-screen" id="loginScreen">
 
 <div class="login-box">
-    <h3>LOGIN SYSTEM</h3>
+
+    <h3>ERP LOGIN</h3>
 
     <input type="text" id="user" placeholder="User">
     <input type="password" id="pass" placeholder="Password">
 
     <button onclick="login()">LOGIN</button>
     <button onclick="registerUser()">REGISTER</button>
+
+    <p style="font-size:11px; margin-top:8px; opacity:0.6;">
+        admin / 1234
+    </p>
+
 </div>
 
 </div>
@@ -295,9 +306,15 @@ th {
 
 let products = [];
 
-/* TAXAS */
 const USD = 5.15;
 const EUR = 5.78;
+
+/* ================= SESSÃO ================= */
+window.onload = function() {
+    if(localStorage.getItem("logged") === "true"){
+        document.getElementById("loginScreen").style.display = "none";
+    }
+};
 
 /* ================= LOGIN ================= */
 function registerUser() {
@@ -320,16 +337,18 @@ function login() {
 let user = document.getElementById("user").value;
 let pass = document.getElementById("pass").value;
 
-/* ADMIN FIXO */
+/* ADMIN */
 if(user === "admin" && pass === "1234"){
+    localStorage.setItem("logged", "true");
     document.getElementById("loginScreen").style.display = "none";
     return;
 }
 
-/* USUÁRIO CADASTRADO */
+/* USERS */
 let saved = localStorage.getItem("user_" + user);
 
 if(saved && saved === pass){
+    localStorage.setItem("logged", "true");
     document.getElementById("loginScreen").style.display = "none";
 } else {
     alert("Invalid login");
@@ -337,7 +356,7 @@ if(saved && saved === pass){
 
 }
 
-/* ================= PRODUTOS ================= */
+/* ================= PRODUCTS ================= */
 function addProduct() {
 
 let name = document.getElementById("name").value;
@@ -348,7 +367,6 @@ let currency = document.getElementById("currency").value;
 
 let stock = entry - exit;
 
-/* CONVERSÃO */
 let priceBRL;
 
 if(currency === "USD") priceBRL = price * USD;
