@@ -1,246 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sollene Group | Estoque</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f6fb;
-    color: #111827;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 40px;
-}
-
-/* HERO */
-.hero-banner {
-    width: 95%;
-    max-width: 1200px;
-    height: 300px;
-    background-image: url('sollene-group.jpg');
-    background-size: cover;
-    background-position: center;
-    border-radius: 20px;
-    margin-top: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-}
-
-/* TITLE */
-h1 {
-    margin-top: 20px;
-}
-
-/* GRID */
-.main-grid {
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 20px;
-    width: 95%;
-    max-width: 1200px;
-    margin-top: 20px;
-}
-
-/* PANEL */
-.sidebar {
-    background: #1f2937;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-}
-
-.sidebar h3 {
-    color: #f5c542;
-    margin-bottom: 15px;
-}
-
-/* INPUTS */
-input, select {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    border: 1px solid #334155;
-    background: #111827;
-    color: #fff;
-    outline: none;
-}
-
-input::placeholder {
-    color: #9ca3af;
-}
-
-/* BUTTON */
-button {
-    width: 100%;
-    padding: 12px;
-    background: #b39359;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 8px;
-    color: #111827;
-}
-
-button:hover {
-    background: #d4af37;
-}
-
-/* TABLE */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-th {
-    background: #1f2937;
-    color: #b39359;
-    padding: 12px;
-    font-size: 12px;
-    text-transform: uppercase;
-}
-
-td {
-    padding: 12px;
-    border-bottom: 1px solid #eee;
-}
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sollene Group | Terminal</title>
+    <style>
+        @import url('https://googleapis.com');
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fdfaf6; padding-bottom: 60px; text-align: center; }
+        .hero-banner { width: 95%; max-width: 1200px; height: 400px; background: #eee url('sollene-group.jpg') no-repeat center; background-size: cover; border-radius: 28px; margin: 20px auto; border: 1px solid #e5e1da; }
+        .sidebar { width: 360px; background: #1f2937; padding: 30px; border-radius: 30px; color: #fff; margin: 20px; }
+        input, select { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: none; background: #111827; color: #fff; }
+        #regBtn { width: 100%; padding: 15px; background: #b39359; color: #000; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; }
+        table { width: 95%; max-width: 1200px; margin: 20px auto; border-collapse: collapse; background: #f2ede4; border-radius: 20px; overflow: hidden; }
+        th { background: #1f2937; color: #b39359; padding: 15px; font-size: 12px; }
+        td { padding: 15px; border-bottom: 1px solid #ddd; font-size: 14px; color: #333; }
+    </style>
 </head>
-
 <body>
-
-<div class="hero-banner"></div>
-
-<h1>Sollene Group - Sistema de Estoque</h1>
-
-<div class="main-grid">
-
-<!-- REGISTRO -->
-<div class="sidebar">
-
-<h3>Registro de Produto</h3>
-
-<input type="text" id="nome" placeholder="Nome do Produto">
-
-<!-- MOEDA -->
-<select id="moeda">
-    <option value="R$">Real (BRL)</option>
-    <option value="$">Dólar (USD)</option>
-    <option value="€">Euro (EUR)</option>
-</select>
-
-<input type="number" id="valor" placeholder="Valor Unitário">
-
-<input type="number" id="entrada" placeholder="Entrada">
-<input type="number" id="saida" placeholder="Saída">
-
-<select id="unidade">
-    <option value="Unidades">Unidades</option>
-    <option value="KG">KG</option>
-    <option value="Toneladas">Toneladas</option>
-    <option value="Pacotes">Pacotes</option>
-    <option value="Caixas">Caixas</option>
-</select>
-
-<button onclick="adicionar()">Registrar</button>
-
-</div>
-
-<!-- TABELA -->
-<div>
-<table>
-<thead>
-<tr>
-<th>Produto</th>
-<th>Valor</th>
-<th>Entrada</th>
-<th>Saída</th>
-<th>Saldo</th>
-<th>Unidade</th>
-</tr>
-</thead>
-
-<tbody id="tabela"></tbody>
-</table>
-</div>
-
-</div>
-
-<script>
-let estoque = JSON.parse(localStorage.getItem("sollene_estoque")) || {};
-
-function adicionar() {
-
-    let nome = document.getElementById("nome").value;
-    let moeda = document.getElementById("moeda").value;
-    let valor = document.getElementById("valor").value;
-    let entrada = parseFloat(document.getElementById("entrada").value) || 0;
-    let saida = parseFloat(document.getElementById("saida").value) || 0;
-    let unidade = document.getElementById("unidade").value;
-
-    if(!nome || !valor) {
-        alert("Preencha nome e valor!");
-        return;
-    }
-
-    if(!estoque[nome]) {
-        estoque[nome] = {
-            moeda: moeda,
-            valor: valor,
-            entrada: 0,
-            saida: 0,
-            unidade: unidade
+    <a href="index.html" style="display:inline-block; margin-top:20px; color:#b39359; text-decoration:none; font-weight:800;">← VOLTAR</a>
+    <div class="hero-banner"></div>
+    <h1>Sollene Group</h1>
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
+        <div class="sidebar">
+            <h3>Registro de Carga</h3>
+            <input type="text" id="pName" placeholder="Produto">
+            <select id="pCurrency"><option value="R$">Real (BRL)</option><option value="$">Dólar (USD)</option></select>
+            <input type="number" id="pPrice" placeholder="Valor">
+            <input type="number" id="pIn" placeholder="Entrada"><input type="number" id="pOut" placeholder="Saída">
+            <select id="pUnit"><option value="Unidades">Unidades</option><option value="KG">KG</option><option value="Toneladas">Toneladas</option><option value="Caixas">Caixas</option></select>
+            <button id="regBtn">Registrar</button>
+        </div>
+        <table id="invTable">
+            <thead><tr><th>Produto</th><th>Valor</th><th>Entrada</th><th>Saída</th><th>Saldo</th></tr></thead>
+            <tbody id="list"></tbody>
+        </table>
+    </div>
+    <script>
+        let data = JSON.parse(localStorage.getItem('sollene_final')) || {};
+        function update() {
+            const list = document.getElementById('list'); list.innerHTML = "";
+            for (let p in data) {
+                let row = list.insertRow();
+                row.innerHTML = `<td>${p}</td><td>${data[p].m} ${data[p].v}</td><td style="color:green">+ ${data[p].e}</td><td style="color:red">- ${data[p].s}</td><td style="font-weight:800">${data[p].e - data[p].s} ${data[p].u}</td>`;
+            }
+            localStorage.setItem('sollene_final', JSON.stringify(data));
+        }
+        document.getElementById('regBtn').onclick = () => {
+            let n = document.getElementById('pName').value;
+            let v = document.getElementById('pPrice').value;
+            let e = parseInt(document.getElementById('pIn').value) || 0;
+            let s = parseInt(document.getElementById('pOut').value) || 0;
+            if(!n) return alert("Nome!");
+            if(!data[n]) data[n] = {e:0, s:0, m:document.getElementById('pCurrency').value, v, u:document.getElementById('pUnit').value};
+            data[n].e += e; data[n].s += s; update();
         };
-    }
-
-    estoque[nome].entrada += entrada;
-    estoque[nome].saida += saida;
-    estoque[nome].moeda = moeda;
-    estoque[nome].valor = valor;
-    estoque[nome].unidade = unidade;
-
-    localStorage.setItem("sollene_estoque", JSON.stringify(estoque));
-
-    render();
-}
-
-function render() {
-    let tabela = document.getElementById("tabela");
-    tabela.innerHTML = "";
-
-    for(let item in estoque) {
-
-        let p = estoque[item];
-        let saldo = p.entrada - p.saida;
-
-        tabela.innerHTML += `
-        <tr>
-            <td>${item}</td>
-            <td>${p.moeda} ${p.valor}</td>
-            <td style="color:#22c55e;">${p.entrada}</td>
-            <td style="color:#ef4444;">${p.saida}</td>
-            <td style="font-weight:bold;">${saldo}</td>
-            <td>${p.unidade}</td>
-        </tr>
-        `;
-    }
-}
-
-render();
-</script>
-
+        window.onload = update;
+    </script>
 </body>
 </html>
+
