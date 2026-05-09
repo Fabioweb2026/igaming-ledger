@@ -40,10 +40,8 @@ body{
     width:100%;
     height:100%;
 
-    /* OCUPA TODO O ESPAÇO */
     object-fit:cover;
 
-    /* CENTRALIZA */
     object-position:center center;
 
     display:block;
@@ -62,7 +60,7 @@ body{
     );
 }
 
-/* ENDEREÇO */
+/* ADDRESS */
 
 .company-address{
 
@@ -285,6 +283,20 @@ Sollene Group Enterprise • 45 Marina Business Avenue • Valletta • Malta
 
 <input type="text" id="name" placeholder="Product Name">
 
+<!-- UNIT SELECT -->
+
+<select id="unit">
+
+<option value="Kg">Kg</option>
+
+<option value="Toneladas">Toneladas</option>
+
+<option value="Pacotes">Pacotes</option>
+
+<option value="Caixa">Caixa</option>
+
+</select>
+
 <input type="number" id="entry" placeholder="Entry">
 
 <input type="number" id="exit" placeholder="Exit">
@@ -322,6 +334,8 @@ ADD PRODUCT
 <tr>
 
 <th>Product</th>
+
+<th>Unit</th>
 
 <th>Entry</th>
 
@@ -402,6 +416,8 @@ function addProduct(){
 
 let name = document.getElementById("name").value;
 
+let unit = document.getElementById("unit").value;
+
 let entry = Number(document.getElementById("entry").value);
 
 let exit = Number(document.getElementById("exit").value);
@@ -418,7 +434,11 @@ return;
 
 }
 
+/* STOCK */
+
 let stock = entry - exit;
+
+/* CONVERSION */
 
 let priceBRL;
 
@@ -438,15 +458,20 @@ priceBRL = price;
 
 }
 
+/* SAVE */
+
 products.push({
 
 name,
+unit,
 entry,
 exit,
 stock,
 priceBRL
 
 });
+
+/* UPDATE */
 
 updateTable();
 
@@ -475,6 +500,8 @@ html += `
 <tr>
 
 <td>${p.name}</td>
+
+<td>${p.unit}</td>
 
 <td>${p.entry}</td>
 
