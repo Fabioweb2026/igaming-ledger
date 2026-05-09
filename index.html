@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sollene Group ERP</title>
+<title>Sollene Group ERP System</title>
 
 <style>
 * {
@@ -12,56 +12,87 @@
     font-family: Arial;
 }
 
+/* ================= BODY ================= */
 body {
     background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
 }
 
-/* ================= HERO ================= */
+/* ================= HERO PROFISSIONAL ================= */
 .hero {
-    width: 100%;
-    height: 320px;
     position: relative;
+    width: 100%;
+    height: 300px;
     overflow: hidden;
     border-bottom: 4px solid black;
 }
 
+/* IMAGEM PRINCIPAL */
 .hero img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 35%;
+    object-position: center 30%;
+    filter: brightness(0.75);
 }
 
+/* OVERLAY (ESCURECIMENTO PROFISSIONAL) */
 .hero-overlay {
     position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.2);
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.55)
+    );
 }
 
+/* TEXTO CENTRAL ÚNICO */
 .hero-text {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: white;
     text-align: center;
+    color: white;
+    padding: 10px;
 }
 
-/* CONTACT */
+/* TÍTULO */
+.hero-text h1 {
+    font-size: 44px;
+    letter-spacing: 5px;
+    font-weight: bold;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.6);
+}
+
+/* SUBTÍTULO */
+.hero-text p {
+    font-size: 14px;
+    letter-spacing: 2px;
+    opacity: 0.9;
+    margin-top: 5px;
+}
+
+/* ================= CONTACT ================= */
 .contact {
     text-align: center;
     padding: 10px;
     font-size: 12px;
     background: rgba(255,255,255,0.5);
+    color: #3d2f14;
+    border-bottom: 1px solid #cbb98d;
 }
 
-/* LAYOUT */
+/* ================= LAYOUT ================= */
 .container {
     display: flex;
+    height: 75vh;
 }
 
-/* FORM */
+/* ================= FORM ================= */
 .form-box {
     width: 28%;
     padding: 15px;
@@ -75,16 +106,23 @@ body {
     color: white;
 }
 
+.card h2 {
+    text-align: center;
+    color: #d4af37;
+    margin-bottom: 10px;
+}
+
 .card input, .card select {
     width: 100%;
     padding: 8px;
     margin: 5px 0;
     background: #111;
-    color: white;
     border: 1px solid #333;
+    color: white;
     border-radius: 5px;
 }
 
+/* STOCK BOX */
 .group-box {
     border: 1px solid #d4af37;
     padding: 10px;
@@ -97,19 +135,22 @@ body {
     color: #d4af37;
 }
 
-button {
+/* BUTTON */
+.card button {
     width: 100%;
     padding: 10px;
+    margin-top: 10px;
     background: #d4af37;
     border: none;
     font-weight: bold;
     cursor: pointer;
 }
 
-/* TABLE */
+/* ================= TABLE ================= */
 .table-box {
     width: 72%;
     padding: 15px;
+    overflow-y: auto;
 }
 
 table {
@@ -135,18 +176,21 @@ th {
 
 <!-- HERO -->
 <div class="hero">
-    <img src="sollene-group.jpg">
+    <img src="sollene-group.jpg" alt="Sollene Group">
     <div class="hero-overlay"></div>
+
     <div class="hero-text">
         <h1>SOLLENE GROUP</h1>
-        <p>ERP Stock Management System</p>
+        <p>Enterprise Stock Management System</p>
     </div>
 </div>
 
+<!-- CONTACT -->
 <div class="contact">
-📞 +55 11 99999-8888 | 📍 São Paulo | ✉ contact@sollene.com
+📞 +55 11 99999-8888 | 📍 Av. Paulista, 1500 - São Paulo | ✉ contact@sollene.com
 </div>
 
+<!-- LAYOUT -->
 <div class="container">
 
 <!-- FORM -->
@@ -163,23 +207,16 @@ th {
 
 <select id="unitType">
 <option value="Kg">Kg</option>
-<option value="Toneladas">Ton</option>
-<option value="Caixas">Caixas</option>
-<option value="Pacotes">Pacotes</option>
+<option value="Ton">Ton</option>
+<option value="Boxes">Boxes</option>
+<option value="Packages">Packages</option>
 </select>
 
 <input type="number" id="entry" placeholder="Entry">
 <input type="number" id="exit" placeholder="Exit">
 </div>
 
-<!-- 🔥 MOEDA AGORA NO CADASTRO -->
-<select id="currency">
-<option value="BRL">Real (BRL)</option>
-<option value="USD">Dollar (USD)</option>
-<option value="EUR">Euro (EUR)</option>
-</select>
-
-<input type="number" id="price" placeholder="Product Price">
+<input type="number" id="price" placeholder="Price">
 
 <button onclick="addProduct()">ADD PRODUCT</button>
 
@@ -197,14 +234,9 @@ th {
 <th>RG</th>
 <th>Entry</th>
 <th>Exit</th>
-<th>Currency</th>
-<th>Price BRL</th>
-<th>Price USD</th>
-<th>Price EUR</th>
 <th>Stock</th>
 </tr>
 </thead>
-
 <tbody id="tableBody"></tbody>
 </table>
 </div>
@@ -212,39 +244,16 @@ th {
 </div>
 
 <script>
-
-const USD_RATE = 5.15;
-const EUR_RATE = 5.78;
-
 function addProduct() {
 
 let name = document.getElementById("name").value;
 let rg = document.getElementById("rg").value;
-
 let unit = document.getElementById("unitType").value;
-let currency = document.getElementById("currency").value;
 
 let entry = Number(document.getElementById("entry").value);
 let exit = Number(document.getElementById("exit").value);
 
-let price = Number(document.getElementById("price").value);
-
 let stock = entry - exit;
-
-// 🔥 CONVERSÃO BASE BRL
-let priceBRL;
-
-if (currency === "USD") {
-    priceBRL = price * USD_RATE;
-} else if (currency === "EUR") {
-    priceBRL = price * EUR_RATE;
-} else {
-    priceBRL = price;
-}
-
-// conversões finais
-let priceUSD = (priceBRL / USD_RATE).toFixed(2);
-let priceEUR = (priceBRL / EUR_RATE).toFixed(2);
 
 document.getElementById("tableBody").innerHTML += `
 <tr>
@@ -252,16 +261,11 @@ document.getElementById("tableBody").innerHTML += `
 <td>${rg}</td>
 <td>${entry} ${unit}</td>
 <td>${exit} ${unit}</td>
-<td>${currency}</td>
-<td>R$ ${priceBRL.toFixed(2)}</td>
-<td>$ ${priceUSD}</td>
-<td>€ ${priceEUR}</td>
 <td>${stock} ${unit}</td>
 </tr>
 `;
 
 }
-
 </script>
 
 </body>
