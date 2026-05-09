@@ -47,10 +47,25 @@
             box-shadow:0 0 10px rgba(0,0,0,0.1);
         }
 
-        h1{
-            text-align:center;
+        /* CARD TÍTULO */
+
+        .title-card{
+            background:#111;
+            color:white;
+            padding:20px;
+            border-radius:15px;
             margin-bottom:25px;
-            color:#333;
+            width:fit-content;
+            min-width:350px;
+            box-shadow:0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .title-card h1{
+            margin:0;
+            color:white;
+            font-size:28px;
+            text-align:left;
+            letter-spacing:1px;
         }
 
         /* FORMULÁRIO */
@@ -171,7 +186,11 @@
 
     <div class="container">
 
-        <h1>Sistema de Controle de Estoque</h1>
+        <!-- CARD TÍTULO -->
+
+        <div class="title-card">
+            <h1>Sistema de Controle de Estoque</h1>
+        </div>
 
         <!-- FORMULÁRIO -->
 
@@ -302,8 +321,6 @@
 
     <script>
 
-        /* ADICIONAR PRODUTO */
-
         function addProduct(){
 
             const name =
@@ -374,8 +391,6 @@
 
         }
 
-        /* EXCLUIR */
-
         function deleteRow(button){
 
             button.parentElement.parentElement.remove();
@@ -385,8 +400,6 @@
             saveProducts();
 
         }
-
-        /* TOTAL */
 
         function updateTotal(){
 
@@ -416,8 +429,6 @@
 
         }
 
-        /* LIMPAR CAMPOS */
-
         function clearFields(){
 
             document.getElementById("pName").value = "";
@@ -429,8 +440,6 @@
             document.getElementById("pPrice").value = "";
 
         }
-
-        /* SALVAR */
 
         function saveProducts(){
 
@@ -445,8 +454,6 @@
             alert("Produtos salvos com sucesso!");
 
         }
-
-        /* CARREGAR */
 
         window.onload = function(){
 
@@ -469,4 +476,5 @@
 </body>
 
 </html>
+  
 
