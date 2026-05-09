@@ -31,18 +31,16 @@
             border-radius: 50px; 
         }
 
+        /* BANNER CORRIGIDO - COM LINK OFICIAL */
         .hero-banner { 
             width: 95%; 
             max-width: 1200px; 
             height: 400px; 
-            background-image: url('https://github.io'); 
+            background: #eee url('https://github.io') no-repeat center; 
             background-size: cover; 
-            background-position: center; 
-            background-repeat: no-repeat; 
             border-radius: 28px; 
             margin-top: 20px; 
             border: 1px solid #e5e1da; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04); 
         }
 
         .company-header { text-align: center; margin: 40px 0; }
@@ -66,8 +64,6 @@
             height: fit-content;
         }
 
-        .sidebar-card h3 { margin-bottom: 25px; font-size: 22px; }
-
         input, select { 
             width: 100%; 
             padding: 16px; 
@@ -77,7 +73,6 @@
             color: #fff; 
             border: 1px solid #374151; 
             outline: none;
-            font-size: 14px;
         }
 
         #regBtn { 
@@ -120,7 +115,6 @@
         <aside class="sidebar-card">
             <h3>Registro de Carga</h3>
             <input type="text" id="pName" placeholder="Produto">
-            <input type="text" id="pDest" placeholder="Destino">
             <input type="number" id="pIn" placeholder="Qtd Entrada">
             <input type="number" id="pOut" placeholder="Qtd Saída">
             
@@ -129,7 +123,6 @@
                 <option value="KG">KG</option>
                 <option value="Toneladas">Toneladas</option>
                 <option value="Pacotes">Pacotes</option>
-                <option value="Caixas">Caixas</option>
             </select>
 
             <button id="regBtn">Registrar</button>
@@ -140,7 +133,6 @@
                 <thead>
                     <tr>
                         <th>Produto</th>
-                        <th>Destino</th>
                         <th>Entrada</th>
                         <th>Saída</th>
                         <th>Saldo Atual</th>
@@ -159,17 +151,14 @@
             inventoryList.innerHTML = "";
             for (let produto in controleEstoque) {
                 const item = controleEstoque[produto];
-                const entrada = item.totalEntrada || 0;
-                const saida = item.totalSaida || 0;
-                const saldo = entrada - saida;
+                const saldo = (item.e || 0) - (item.s || 0);
 
                 const row = inventoryList.insertRow();
                 row.innerHTML = `
                     <td>${produto}</td>
-                    <td>${item.destino || "---"}</td>
-                    <td style="color: #27ae60;">+ ${entrada}</td>
-                    <td style="color: #e74c3c;">- ${saida}</td>
-                    <td style="font-weight: 800; color: #b39359;">${saldo} ${item.unidade || "un"}</td>
+                    <td style="color: #27ae60;">+ ${item.e || 0}</td>
+                    <td style="color: #e74c3c;">- ${item.s || 0}</td>
+                    <td style="font-weight: 800; color: #b39359;">${saldo} ${item.u || "un"}</td>
                 `;
             }
         }
@@ -178,36 +167,30 @@
 
         document.getElementById('regBtn').addEventListener('click', function() {
             const nome = document.getElementById('pName').value.trim();
-            const destino = document.getElementById('pDest').value.trim();
             const entrada = parseInt(document.getElementById('pIn').value) || 0;
             const saida = parseInt(document.getElementById('pOut').value) || 0;
             const unidade = document.getElementById('pUnit').value;
 
-            // TRAVA DE SEGURANÇA
+            // BLOQUEIO DE LINHAS VAZIAS
             if(!nome || (entrada === 0 && saida === 0)) {
-                return alert("Por favor, preencha o nome do produto e pelo menos uma quantidade.");
+                return alert("Preencha o nome e uma quantidade.");
             }
 
             if (!controleEstoque[nome]) {
-                controleEstoque[nome] = { totalEntrada: 0, totalSaida: 0, unidade: unidade, destino: destino };
+                controleEstoque[nome] = { e: 0, s: 0, u: unidade };
             }
 
-            controleEstoque[nome].totalEntrada += entrada;
-            controleEstoque[nome].totalSaida += saida;
-            controleEstoque[nome].unidade = unidade;
-            controleEstoque[nome].destino = destino;
+            controleEstoque[nome].e += entrada;
+            controleEstoque[nome].s += saida;
+            controleEstoque[nome].u = unidade;
 
             localStorage.setItem('solleneData', JSON.stringify(controleEstoque));
             atualizarTabela();
 
-            // LIMPEZA DE CAMPOS
             document.getElementById('pName').value = "";
-            document.getElementById('pDest').value = "";
             document.getElementById('pIn').value = "";
             document.getElementById('pOut').value = "";
-            document.getElementById('pName').focus();
         });
     </script>
 </body>
 </html>
-
