@@ -6,96 +6,28 @@
     <title>Sollene Group | Terminal</title>
     <style>
         @import url('https://googleapis.com');
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #fdfaf6; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            padding-bottom: 60px;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fdfaf6; display: flex; flex-direction: column; align-items: center; padding-bottom: 60px; }
 
-        .back-link { 
-            align-self: flex-start; 
-            margin: 20px 0 0 40px; 
-            text-decoration: none; 
-            color: #b39359; 
-            font-weight: 800; 
-            font-size: 11px; 
-            text-transform: uppercase; 
-            background: rgba(31,41,55,0.05); 
-            padding: 8px 15px; 
-            border-radius: 50px; 
-        }
+        .back-link { align-self: flex-start; margin: 20px 0 0 40px; text-decoration: none; color: #b39359; font-weight: 800; font-size: 11px; text-transform: uppercase; background: rgba(31,41,55,0.05); padding: 8px 15px; border-radius: 50px; }
 
         /* BANNER CORRIGIDO - COM LINK OFICIAL */
         .hero-banner { 
-            width: 95%; 
-            max-width: 1200px; 
-            height: 400px; 
+            width: 95%; max-width: 1200px; height: 400px; 
             background: #eee url('https://github.io') no-repeat center; 
-            background-size: cover; 
-            border-radius: 28px; 
-            margin-top: 20px; 
-            border: 1px solid #e5e1da; 
+            background-size: cover; border-radius: 28px; margin-top: 20px; border: 1px solid #e5e1da; 
         }
 
         .company-header { text-align: center; margin: 40px 0; }
         .company-header h1 { font-size: 56px; font-weight: 800; color: #1f2937; text-transform: uppercase; }
 
-        .main-grid { 
-            display: grid; 
-            grid-template-columns: 360px 1fr; 
-            gap: 30px; 
-            width: 100%; 
-            max-width: 1200px; 
-            padding: 0 20px; 
-        }
+        .main-grid { display: grid; grid-template-columns: 360px 1fr; gap: 30px; width: 100%; max-width: 1200px; padding: 0 20px; }
+        .sidebar-card { background: #1f2937; padding: 40px 30px; border-radius: 30px; color: #ffffff; border-top: 4px solid #b39359; height: fit-content; }
+        
+        input, select { width: 100%; padding: 16px; margin-bottom: 15px; border-radius: 14px; background: #111827; color: #fff; border: 1px solid #374151; outline: none; }
+        #regBtn { width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; border-radius: 16px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
 
-        .sidebar-card { 
-            background: #1f2937; 
-            padding: 40px 30px; 
-            border-radius: 30px; 
-            color: #ffffff; 
-            border-top: 4px solid #b39359; 
-            height: fit-content;
-        }
-
-        input, select { 
-            width: 100%; 
-            padding: 16px; 
-            margin-bottom: 15px; 
-            border-radius: 14px; 
-            background: #111827; 
-            color: #fff; 
-            border: 1px solid #374151; 
-            outline: none;
-        }
-
-        #regBtn { 
-            width: 100%; 
-            padding: 20px; 
-            background: #b39359; 
-            color: #111827; 
-            border: none; 
-            border-radius: 16px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            text-transform: uppercase;
-        }
-
-        .inventory-area { 
-            background-color: #f2ede4; 
-            border-radius: 30px; 
-            min-height: 500px; 
-            width: 100%; 
-            overflow: hidden; 
-            border: 1px solid #e5e1da;
-        }
-
+        .inventory-area { background-color: #f2ede4; border-radius: 30px; min-height: 500px; width: 100%; overflow: hidden; border: 1px solid #e5e1da; }
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; }
         td { padding: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); font-size: 14px; }
@@ -117,26 +49,19 @@
             <input type="text" id="pName" placeholder="Produto">
             <input type="number" id="pIn" placeholder="Qtd Entrada">
             <input type="number" id="pOut" placeholder="Qtd Saída">
-            
             <select id="pUnit">
                 <option value="Unidades">Unidades</option>
                 <option value="KG">KG</option>
                 <option value="Toneladas">Toneladas</option>
                 <option value="Pacotes">Pacotes</option>
             </select>
-
             <button id="regBtn">Registrar</button>
         </aside>
 
         <main class="inventory-area">
             <table>
                 <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Entrada</th>
-                        <th>Saída</th>
-                        <th>Saldo Atual</th>
-                    </tr>
+                    <tr><th>Produto</th><th>Entrada</th><th>Saída</th><th>Saldo Atual</th></tr>
                 </thead>
                 <tbody id="list"></tbody>
             </table>
@@ -144,7 +69,8 @@
     </div>
 
     <script>
-        let controleEstoque = JSON.parse(localStorage.getItem('solleneData')) || {};
+        // Carrega dados ou inicia vazio
+        let controleEstoque = JSON.parse(localStorage.getItem('solleneFinal')) || {};
         const inventoryList = document.getElementById('list');
 
         function atualizarTabela() {
@@ -156,9 +82,9 @@
                 const row = inventoryList.insertRow();
                 row.innerHTML = `
                     <td>${produto}</td>
-                    <td style="color: #27ae60;">+ ${item.e || 0}</td>
-                    <td style="color: #e74c3c;">- ${item.s || 0}</td>
-                    <td style="font-weight: 800; color: #b39359;">${saldo} ${item.u || "un"}</td>
+                    <td style="color:#27ae60">+ ${item.e}</td>
+                    <td style="color:#e74c3c">- ${item.s}</td>
+                    <td style="font-weight:800;color:#b39359">${saldo} ${item.u}</td>
                 `;
             }
         }
@@ -171,26 +97,28 @@
             const saida = parseInt(document.getElementById('pOut').value) || 0;
             const unidade = document.getElementById('pUnit').value;
 
-            // BLOQUEIO DE LINHAS VAZIAS
+            // TRAVA: Só registra se tiver nome e alguma quantidade
             if(!nome || (entrada === 0 && saida === 0)) {
-                return alert("Preencha o nome e uma quantidade.");
+                return alert("Erro: Preencha o nome e uma quantidade válida!");
             }
 
-            if (!controleEstoque[nome]) {
-                controleEstoque[nome] = { e: 0, s: 0, u: unidade };
+            if (!controleEstoque[nome]) { 
+                controleEstoque[nome] = { e: 0, s: 0, u: unidade }; 
             }
-
+            
             controleEstoque[nome].e += entrada;
             controleEstoque[nome].s += saida;
             controleEstoque[nome].u = unidade;
 
-            localStorage.setItem('solleneData', JSON.stringify(controleEstoque));
+            localStorage.setItem('solleneFinal', JSON.stringify(controleEstoque));
             atualizarTabela();
 
-            document.getElementById('pName').value = "";
-            document.getElementById('pIn').value = "";
+            // Limpa campos
+            document.getElementById('pName').value = ""; 
+            document.getElementById('pIn').value = ""; 
             document.getElementById('pOut').value = "";
         });
     </script>
 </body>
 </html>
+
