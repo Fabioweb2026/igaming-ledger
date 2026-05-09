@@ -30,7 +30,7 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: center bottom; /* 🔥 AJUSTE FEITO AQUI */
 }
 
 .hero-overlay {
@@ -104,7 +104,7 @@ header {
     border-radius: 5px;
 }
 
-/* GROUP BOX */
+/* GROUP */
 .group-box {
     border: 1px solid #d4af37;
     padding: 10px;
@@ -176,7 +176,6 @@ th {
     Av. Paulista, 1500 - São Paulo, SP - Brazil | ERP System
 </header>
 
-<!-- CONTAINER -->
 <div class="container">
 
 <!-- FORM -->
@@ -187,7 +186,6 @@ th {
         <input type="text" id="name" placeholder="Product Name">
         <input type="text" id="rg" placeholder="RG Code">
 
-        <!-- GROUP -->
         <div class="group-box">
             <h3>STOCK UNITS</h3>
 
@@ -228,7 +226,6 @@ th {
 
 </div>
 
-<!-- JAVASCRIPT -->
 <script>
 function addProduct() {
     let name = document.getElementById("name").value;
@@ -263,16 +260,6 @@ function addProduct() {
             <td>${stock}</td>
         </tr>
     `;
-
-    // limpar campos
-    document.getElementById("name").value = "";
-    document.getElementById("rg").value = "";
-    document.getElementById("entry").value = "";
-    document.getElementById("exit").value = "";
-    document.getElementById("tons").value = "";
-    document.getElementById("boxes").value = "";
-    document.getElementById("packages").value = "";
-    document.getElementById("price").value = "";
 }
 </script>
 
