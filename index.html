@@ -1,16 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sollene Group ERP</title>
+
+<style>
+
+/* ================= BASE ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+body {
+    background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
+}
+
+/* ================= HERO DASHBOARD ================= */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 360px;
+    overflow: hidden;
+    border-bottom: 4px solid black;
+}
+
+/* IMAGEM */
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: brightness(0.65) contrast(1.1);
+}
+
+/* OVERLAY */
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.75)
+    );
+}
+
+/* CONTEÚDO */
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 90%;
+}
+
+/* BADGE */
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    border: 1px solid #d4af37;
+    color: #d4af37;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+/* TITULO */
+.hero-content h1 {
+    font-size: 44px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+/* SUB */
+.hero-content p {
+    font-size: 13px;
+    opacity: 0.85;
+    margin-top: 5px;
+}
+
+/* DASHBOARD CARDS */
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 18px;
+    flex-wrap: wrap;
+}
+
+.stat-box {
+    background: rgba(0,0,0,0.45);
+    border: 1px solid rgba(212,175,55,0.4);
+    padding: 10px 16px;
+    border-radius: 10px;
+    min-width: 120px;
+}
+
+.stat-box h3 {
+    color: #d4af37;
+    font-size: 18px;
+}
+
+.stat-box span {
+    font-size: 11px;
+    opacity: 0.8;
+}
+
+/* ================= FORM ================= */
+.container {
+    display: flex;
+    padding: 15px;
+}
+
+.form-box {
+    width: 30%;
+}
+
+.card {
+    background: rgba(0,0,0,0.92);
+    border: 2px solid #d4af37;
+    border-radius: 12px;
+    padding: 15px;
+    color: white;
+}
+
+.card input, .card select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    background: #111;
+    color: white;
+    border: 1px solid #333;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #d4af37;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+/* ================= TABLE ================= */
+.table-box {
+    width: 70%;
+    padding-left: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background: black;
+    color: white;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ================= HERO ================= -->
 <div class="hero">
 
-    <img src="sollene-group.jpg" alt="Sollene Group">
+    <img src="sollene-group.jpg">
     <div class="hero-overlay"></div>
 
     <div class="hero-content">
 
-        <div class="badge">ENTERPRISE DASHBOARD</div>
+        <div class="badge">ENTERPRISE SYSTEM</div>
 
         <h1>SOLLENE GROUP</h1>
-        <p>Stock • Finance • Operations Overview</p>
+        <p>Stock Management Dashboard</p>
 
-        <!-- DASHBOARD CARDS -->
         <div class="hero-stats">
 
             <div class="stat-box">
@@ -20,15 +199,121 @@
 
             <div class="stat-box">
                 <h3 id="totalStock">0</h3>
-                <span>Total Stock</span>
+                <span>Stock</span>
             </div>
 
             <div class="stat-box">
                 <h3 id="totalValue">R$ 0</h3>
-                <span>Estimated Value</span>
+                <span>Total Value</span>
             </div>
 
         </div>
 
     </div>
 </div>
+
+<!-- ================= BODY ================= -->
+<div class="container">
+
+<!-- FORM -->
+<div class="form-box">
+<div class="card">
+
+<h2>REGISTER PRODUCT</h2>
+
+<input type="text" id="name" placeholder="Product Name">
+<input type="number" id="entry" placeholder="Entry">
+<input type="number" id="exit" placeholder="Exit">
+<input type="number" id="price" placeholder="Price">
+
+<button onclick="addProduct()">ADD PRODUCT</button>
+
+</div>
+</div>
+
+<!-- TABLE -->
+<div class="table-box">
+<h2>STOCK TABLE</h2>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Entry</th>
+<th>Exit</th>
+<th>Stock</th>
+</tr>
+</thead>
+
+<tbody id="tableBody"></tbody>
+</table>
+
+</div>
+
+</div>
+
+<!-- ================= JS ================= -->
+<script>
+
+let products = [];
+
+function addProduct() {
+
+let name = document.getElementById("name").value;
+let entry = Number(document.getElementById("entry").value);
+let exit = Number(document.getElementById("exit").value);
+let price = Number(document.getElementById("price").value);
+
+let stock = entry - exit;
+
+products.push({
+    name,
+    stock,
+    price
+});
+
+updateDashboard();
+updateTable();
+
+}
+
+function updateDashboard() {
+
+let totalProducts = products.length;
+let totalStock = 0;
+let totalValue = 0;
+
+products.forEach(p => {
+    totalStock += p.stock;
+    totalValue += p.stock * p.price;
+});
+
+document.getElementById("totalProducts").innerText = totalProducts;
+document.getElementById("totalStock").innerText = totalStock;
+document.getElementById("totalValue").innerText = "R$ " + totalValue.toFixed(2);
+
+}
+
+function updateTable() {
+
+let html = "";
+
+products.forEach(p => {
+html += `
+<tr>
+<td>${p.name}</td>
+<td>${p.stock}</td>
+<td>${p.stock}</td>
+<td>${p.stock}</td>
+</tr>
+`;
+});
+
+document.getElementById("tableBody").innerHTML = html;
+
+}
+
+</script>
+
+</body>
+</html>
