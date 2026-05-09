@@ -9,184 +9,197 @@
 <style>
 
 /* ================= BASE ================= */
+
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
 }
 
 body{
-    background:linear-gradient(135deg,#f7f1e1,#e9dcc2);
+background:linear-gradient(135deg,#f7f1e1,#e9dcc2);
 }
 
 /* ================= HERO ================= */
+
 .hero{
-    position:relative;
-    width:100%;
-    height:380px;
-    overflow:hidden;
-    border-bottom:4px solid black;
+position:relative;
+height:360px;
+overflow:hidden;
+border-bottom:4px solid black;
 }
 
 .hero img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center 30%;
-    filter:brightness(0.6);
+width:100%;
+height:100%;
+object-fit:cover;
+object-position:center 30%;
+filter:brightness(0.6);
 }
 
 .hero-overlay{
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        135deg,
-        rgba(0,0,0,0.35),
-        rgba(0,0,0,0.75)
-    );
+position:absolute;
+inset:0;
+background:linear-gradient(
+135deg,
+rgba(0,0,0,0.35),
+rgba(0,0,0,0.75)
+);
 }
 
 .hero-content{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    text-align:center;
-    color:white;
-    width:90%;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+color:white;
+width:90%;
 }
 
 .badge{
-    display:inline-block;
-    padding:6px 12px;
-    border:1px solid #d4af37;
-    color:#d4af37;
-    border-radius:20px;
-    font-size:11px;
-    margin-bottom:10px;
+display:inline-block;
+padding:6px 12px;
+border:1px solid #d4af37;
+color:#d4af37;
+border-radius:20px;
+font-size:11px;
+margin-bottom:10px;
 }
 
 .hero-content h1{
-    font-size:46px;
-    letter-spacing:5px;
+font-size:46px;
+letter-spacing:5px;
 }
 
 .hero-content p{
-    opacity:0.8;
-    margin-top:5px;
+opacity:0.85;
+margin-top:5px;
 }
 
-/* ================= LOGIN BOX ================= */
+/* ================= LOGIN ================= */
+
 .login-box{
-    margin:20px auto 0;
-    width:320px;
-    background:rgba(0,0,0,0.75);
-    border:1px solid rgba(212,175,55,0.5);
-    padding:20px;
-    border-radius:12px;
-    backdrop-filter:blur(8px);
+margin:20px auto 0;
+width:320px;
+background:rgba(0,0,0,0.75);
+border:1px solid rgba(212,175,55,0.5);
+padding:20px;
+border-radius:12px;
+backdrop-filter:blur(8px);
 }
 
 .login-box h3{
-    margin-bottom:10px;
-    color:#d4af37;
+color:#d4af37;
+margin-bottom:10px;
 }
 
 .login-box input{
-    width:100%;
-    padding:10px;
-    margin:6px 0;
-    border:none;
-    border-radius:5px;
+width:100%;
+padding:10px;
+margin:5px 0;
+border:none;
+border-radius:5px;
 }
 
 .login-box button{
-    width:100%;
-    padding:10px;
-    margin-top:8px;
-    border:none;
-    cursor:pointer;
-    background:#d4af37;
-    font-weight:bold;
+width:100%;
+padding:10px;
+margin-top:5px;
+background:#d4af37;
+border:none;
+cursor:pointer;
+font-weight:bold;
 }
 
 /* ================= DASHBOARD ================= */
+
 .hero-stats{
-    display:none;
-    justify-content:center;
-    gap:15px;
-    margin-top:20px;
-    flex-wrap:wrap;
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:20px;
+flex-wrap:wrap;
 }
 
 .stat-box{
-    background:rgba(0,0,0,0.45);
-    border:1px solid rgba(212,175,55,0.4);
-    padding:12px 16px;
-    border-radius:10px;
-    min-width:120px;
+background:rgba(0,0,0,0.45);
+border:1px solid rgba(212,175,55,0.4);
+padding:12px 16px;
+border-radius:10px;
+min-width:120px;
 }
 
 .stat-box h3{
-    color:#d4af37;
+color:#d4af37;
 }
 
-/* ================= SYSTEM ================= */
+/* ================= CONTAINER ================= */
+
 .container{
-    display:none;
-    padding:15px;
+display:flex;
+padding:15px;
+gap:15px;
 }
+
+/* ================= FORM ================= */
 
 .form-box{
-    width:30%;
+width:30%;
 }
 
 .card{
-    background:rgba(0,0,0,0.92);
-    border:2px solid #d4af37;
-    border-radius:12px;
-    padding:15px;
-    color:white;
+background:rgba(0,0,0,0.92);
+border:2px solid #d4af37;
+border-radius:12px;
+padding:15px;
+color:white;
+}
+
+.card h3{
+margin-bottom:10px;
 }
 
 .card input,
 .card select{
-    width:100%;
-    padding:10px;
-    margin:6px 0;
+width:100%;
+padding:10px;
+margin:6px 0;
+border:none;
+border-radius:5px;
 }
 
 .card button{
-    width:100%;
-    padding:10px;
-    background:#d4af37;
-    border:none;
-    cursor:pointer;
-    font-weight:bold;
+width:100%;
+padding:10px;
+background:#d4af37;
+border:none;
+cursor:pointer;
+font-weight:bold;
 }
 
 /* ================= TABLE ================= */
+
 .table-box{
-    width:70%;
-    padding-left:15px;
+width:70%;
 }
 
 table{
-    width:100%;
-    border-collapse:collapse;
-    background:white;
+width:100%;
+border-collapse:collapse;
+background:white;
 }
 
 th,td{
-    border:1px solid black;
-    padding:8px;
-    text-align:center;
+border:1px solid black;
+padding:10px;
+text-align:center;
 }
 
 th{
-    background:black;
-    color:white;
+background:black;
+color:white;
 }
 
 </style>
@@ -195,6 +208,7 @@ th{
 <body>
 
 <!-- ================= HERO ================= -->
+
 <div class="hero">
 
 <img src="sollene-group.jpg" alt="Sollene Group">
@@ -209,25 +223,9 @@ th{
 
 <p>Stock Management Dashboard</p>
 
-<!-- LOGIN -->
-<div class="login-box" id="loginBox">
-
-<h3>ERP LOGIN</h3>
-
-<input type="text" id="user" placeholder="User">
-<input type="password" id="pass" placeholder="Password">
-
-<button onclick="login()">LOGIN</button>
-<button onclick="registerUser()">REGISTER</button>
-
-<p style="margin-top:10px;font-size:11px;opacity:0.7;">
-Default: admin / 1234
-</p>
-
-</div>
-
 <!-- DASHBOARD -->
-<div class="hero-stats" id="dashboard">
+
+<div class="hero-stats">
 
 <div class="stat-box">
 <h3 id="totalProducts">0</h3>
@@ -246,11 +244,34 @@ Default: admin / 1234
 
 </div>
 
+<!-- LOGIN -->
+
+<div class="login-box">
+
+<h3>ERP LOGIN</h3>
+
+<input type="text" id="user" placeholder="User">
+
+<input type="password" id="pass" placeholder="Password">
+
+<button onclick="login()">LOGIN</button>
+
+<button onclick="registerUser()">REGISTER</button>
+
+<p style="font-size:11px;margin-top:8px;opacity:0.7;">
+admin / 1234
+</p>
+
+</div>
+
 </div>
 </div>
 
 <!-- ================= SYSTEM ================= -->
-<div class="container" id="system">
+
+<div class="container">
+
+<!-- FORM -->
 
 <div class="form-box">
 
@@ -261,6 +282,7 @@ Default: admin / 1234
 <input type="text" id="name" placeholder="Product Name">
 
 <input type="number" id="entry" placeholder="Entry">
+
 <input type="number" id="exit" placeholder="Exit">
 
 <select id="currency">
@@ -271,23 +293,32 @@ Default: admin / 1234
 
 <input type="number" id="price" placeholder="Price">
 
-<button onclick="addProduct()">ADD PRODUCT</button>
+<button id="addBtn" onclick="addProduct()" disabled>
+LOGIN TO ADD
+</button>
 
 </div>
+
 </div>
+
+<!-- TABLE -->
 
 <div class="table-box">
 
 <table>
 
 <thead>
+
 <tr>
-<th>Name</th>
+<th>Product</th>
+<th>Entry</th>
+<th>Exit</th>
 <th>Stock</th>
 <th>BRL</th>
 <th>USD</th>
 <th>EUR</th>
 </tr>
+
 </thead>
 
 <tbody id="tableBody"></tbody>
@@ -301,40 +332,22 @@ Default: admin / 1234
 <script>
 
 /* ================= PRODUCTS ================= */
+
 let products = [];
 
 const USD = 5.15;
 const EUR = 5.78;
 
-/* ================= SESSION ================= */
-window.onload = function(){
+/* ================= LOGIN ================= */
 
-if(localStorage.getItem("erpLogged") === "true"){
-    openSystem();
-}
-
-}
-
-/* ================= OPEN SYSTEM ================= */
-function openSystem(){
-
-document.getElementById("loginBox").style.display = "none";
-
-document.getElementById("dashboard").style.display = "flex";
-
-document.getElementById("system").style.display = "flex";
-
-}
-
-/* ================= REGISTER ================= */
 function registerUser(){
 
 let user = document.getElementById("user").value;
 let pass = document.getElementById("pass").value;
 
 if(!user || !pass){
-    alert("Fill all fields");
-    return;
+alert("Fill all fields");
+return;
 }
 
 localStorage.setItem("erp_user_" + user, pass);
@@ -343,31 +356,24 @@ alert("User created successfully");
 
 }
 
-/* ================= LOGIN ================= */
 function login(){
 
 let user = document.getElementById("user").value;
 let pass = document.getElementById("pass").value;
 
-/* ADMIN */
 if(user === "admin" && pass === "1234"){
 
-localStorage.setItem("erpLogged","true");
-
-openSystem();
+unlockSystem();
 
 return;
 
 }
 
-/* USERS */
 let saved = localStorage.getItem("erp_user_" + user);
 
 if(saved && saved === pass){
 
-localStorage.setItem("erpLogged","true");
-
-openSystem();
+unlockSystem();
 
 }else{
 
@@ -377,7 +383,16 @@ alert("Invalid login");
 
 }
 
+function unlockSystem(){
+
+document.getElementById("addBtn").disabled = false;
+
+document.getElementById("addBtn").innerText = "ADD PRODUCT";
+
+}
+
 /* ================= ADD PRODUCT ================= */
+
 function addProduct(){
 
 let name = document.getElementById("name").value;
@@ -395,27 +410,31 @@ let stock = entry - exit;
 let priceBRL;
 
 if(currency === "USD"){
-    priceBRL = price * USD;
+priceBRL = price * USD;
 }
 else if(currency === "EUR"){
-    priceBRL = price * EUR;
+priceBRL = price * EUR;
 }
 else{
-    priceBRL = price;
+priceBRL = price;
 }
 
 products.push({
-    name,
-    stock,
-    priceBRL
+name,
+entry,
+exit,
+stock,
+priceBRL
 });
 
 updateDashboard();
+
 updateTable();
 
 }
 
 /* ================= DASHBOARD ================= */
+
 function updateDashboard(){
 
 let totalProducts = products.length;
@@ -424,7 +443,7 @@ let totalStock = 0;
 
 let totalValue = 0;
 
-products.forEach(p => {
+products.forEach(p=>{
 
 totalStock += p.stock;
 
@@ -442,11 +461,12 @@ document.getElementById("totalValue").innerText =
 }
 
 /* ================= TABLE ================= */
+
 function updateTable(){
 
 let html = "";
 
-products.forEach(p => {
+products.forEach(p=>{
 
 let usd = (p.priceBRL / USD).toFixed(2);
 
@@ -454,11 +474,21 @@ let eur = (p.priceBRL / EUR).toFixed(2);
 
 html += `
 <tr>
+
 <td>${p.name}</td>
+
+<td>${p.entry}</td>
+
+<td>${p.exit}</td>
+
 <td>${p.stock}</td>
+
 <td>R$ ${p.priceBRL.toFixed(2)}</td>
+
 <td>$ ${usd}</td>
+
 <td>€ ${eur}</td>
+
 </tr>
 `;
 
