@@ -22,7 +22,7 @@ body {
 .login-screen {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.92);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,6 +48,7 @@ body {
 .login-box button {
     width: 100%;
     padding: 10px;
+    margin-top: 5px;
     background: #d4af37;
     border: none;
     cursor: pointer;
@@ -57,7 +58,7 @@ body {
 .hero {
     position: relative;
     width: 100%;
-    height: 340px;
+    height: 360px;
     overflow: hidden;
     border-bottom: 4px solid black;
 }
@@ -103,6 +104,7 @@ body {
 .hero-content h1 {
     font-size: 44px;
     letter-spacing: 5px;
+    text-transform: uppercase;
 }
 
 .hero-content p {
@@ -193,12 +195,17 @@ th {
 
 <!-- ================= LOGIN ================= -->
 <div class="login-screen" id="loginScreen">
-    <div class="login-box">
-        <h3>ADMIN LOGIN</h3>
-        <input type="text" id="user" placeholder="User">
-        <input type="password" id="pass" placeholder="Password">
-        <button onclick="login()">ENTER</button>
-    </div>
+
+<div class="login-box">
+    <h3>LOGIN SYSTEM</h3>
+
+    <input type="text" id="user" placeholder="User">
+    <input type="password" id="pass" placeholder="Password">
+
+    <button onclick="login()">LOGIN</button>
+    <button onclick="registerUser()">REGISTER</button>
+</div>
+
 </div>
 
 <!-- ================= HERO ================= -->
@@ -288,13 +295,41 @@ th {
 
 let products = [];
 
-/* LOGIN SIMPLES */
+/* TAXAS */
+const USD = 5.15;
+const EUR = 5.78;
+
+/* ================= LOGIN ================= */
+function registerUser() {
+
+let user = document.getElementById("user").value;
+let pass = document.getElementById("pass").value;
+
+if(!user || !pass){
+    alert("Fill all fields");
+    return;
+}
+
+localStorage.setItem("user_" + user, pass);
+alert("User created!");
+
+}
+
 function login() {
 
 let user = document.getElementById("user").value;
 let pass = document.getElementById("pass").value;
 
+/* ADMIN FIXO */
 if(user === "admin" && pass === "1234"){
+    document.getElementById("loginScreen").style.display = "none";
+    return;
+}
+
+/* USUÁRIO CADASTRADO */
+let saved = localStorage.getItem("user_" + user);
+
+if(saved && saved === pass){
     document.getElementById("loginScreen").style.display = "none";
 } else {
     alert("Invalid login");
@@ -302,10 +337,7 @@ if(user === "admin" && pass === "1234"){
 
 }
 
-/* TAXAS */
-const USD = 5.15;
-const EUR = 5.78;
-
+/* ================= PRODUTOS ================= */
 function addProduct() {
 
 let name = document.getElementById("name").value;
@@ -316,6 +348,7 @@ let currency = document.getElementById("currency").value;
 
 let stock = entry - exit;
 
+/* CONVERSÃO */
 let priceBRL;
 
 if(currency === "USD") priceBRL = price * USD;
@@ -329,6 +362,7 @@ updateTable();
 
 }
 
+/* ================= DASHBOARD ================= */
 function updateDashboard() {
 
 let totalProducts = products.length;
@@ -346,6 +380,7 @@ document.getElementById("totalValue").innerText = "R$ " + totalValue.toFixed(2);
 
 }
 
+/* ================= TABLE ================= */
 function updateTable() {
 
 let html = "";
