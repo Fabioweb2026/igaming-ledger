@@ -97,72 +97,6 @@ body{
     letter-spacing:2px;
 }
 
-/* ================= LOGIN ================= */
-
-.login-box{
-    position:absolute;
-    top:15px;
-    right:20px;
-
-    width:210px;
-
-    background:rgba(0,0,0,0.58);
-
-    border:1px solid rgba(212,175,55,0.28);
-
-    padding:10px;
-
-    border-radius:12px;
-
-    backdrop-filter:blur(10px);
-
-    box-shadow:
-    0 6px 20px rgba(0,0,0,0.25);
-
-    z-index:10;
-}
-
-.login-box h3{
-    font-size:13px;
-    margin-bottom:6px;
-    color:#d4af37;
-    letter-spacing:1px;
-}
-
-.login-box input{
-    width:100%;
-    padding:7px 9px;
-    margin:4px 0;
-    border:none;
-    border-radius:5px;
-    font-size:11px;
-    background:#f5f5f5;
-}
-
-.login-box button{
-    width:100%;
-    padding:7px;
-    margin-top:4px;
-    background:#d4af37;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    font-size:11px;
-    font-weight:bold;
-    transition:0.3s;
-}
-
-.login-box button:hover{
-    opacity:0.9;
-    transform:translateY(-1px);
-}
-
-.login-box p{
-    font-size:9px;
-    opacity:0.6;
-    margin-top:5px;
-}
-
 /* ================= DASHBOARD ================= */
 
 .hero-stats{
@@ -242,6 +176,11 @@ body{
     cursor:pointer;
     font-weight:bold;
     margin-top:5px;
+    transition:0.3s;
+}
+
+.card button:hover{
+    opacity:0.9;
 }
 
 /* ================= TABLE ================= */
@@ -269,17 +208,6 @@ th,td{
 th{
     background:black;
     color:white;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-    background:black;
-    color:white;
-    text-align:center;
-    padding:18px;
-    margin-top:20px;
-    font-size:12px;
 }
 
 /* ================= MESSAGE ================= */
@@ -311,6 +239,17 @@ footer{
     transition:0.3s;
 }
 
+/* ================= FOOTER ================= */
+
+footer{
+    background:black;
+    color:white;
+    text-align:center;
+    padding:18px;
+    margin-top:20px;
+    font-size:12px;
+}
+
 /* ================= RESPONSIVE ================= */
 
 @media(max-width:900px){
@@ -324,15 +263,8 @@ footer{
     width:100%;
 }
 
-.login-box{
-    position:relative;
-    top:auto;
-    right:auto;
-    margin:10px auto;
-}
-
 .hero{
-    height:320px;
+    height:300px;
 }
 
 }
@@ -349,26 +281,6 @@ footer{
 <img src="sollene-group.jpg" alt="Sollene Group">
 
 <div class="hero-overlay"></div>
-
-<!-- LOGIN -->
-
-<div class="login-box">
-
-<h3>ERP LOGIN</h3>
-
-<input type="text" id="user" placeholder="User">
-
-<input type="password" id="pass" placeholder="Password">
-
-<button onclick="login()">LOGIN</button>
-
-<button onclick="registerUser()">REGISTER</button>
-
-<p>Create employee access</p>
-
-</div>
-
-<!-- HERO CONTENT -->
 
 <div class="hero-content">
 
@@ -429,8 +341,8 @@ footer{
 
 <input type="number" id="price" placeholder="Price">
 
-<button id="addBtn" onclick="addProduct()" disabled>
-LOGIN TO ADD
+<button onclick="addProduct()">
+ADD PRODUCT
 </button>
 
 </div>
@@ -444,15 +356,27 @@ LOGIN TO ADD
 <table>
 
 <thead>
+
 <tr>
+
 <th>Product</th>
+
 <th>Entry</th>
+
 <th>Exit</th>
+
 <th>Stock</th>
+
 <th>BRL</th>
+
 <th>USD</th>
+
 <th>EUR</th>
+
+<th>Total Value</th>
+
 </tr>
+
 </thead>
 
 <tbody id="tableBody"></tbody>
@@ -508,63 +432,6 @@ setTimeout(()=>{
 
 }
 
-/* ================= REGISTER ================= */
-
-function registerUser(){
-
-let user = document.getElementById("user").value.trim();
-
-let pass = document.getElementById("pass").value.trim();
-
-if(user === "" || pass === ""){
-
-showMessage("Fill all fields");
-
-return;
-}
-
-/* save employee */
-
-localStorage.setItem("erp_user_" + user, pass);
-
-showMessage("Employee registered successfully");
-
-}
-
-/* ================= LOGIN ================= */
-
-function login(){
-
-let user = document.getElementById("user").value.trim();
-
-let pass = document.getElementById("pass").value.trim();
-
-let saved = localStorage.getItem("erp_user_" + user);
-
-if(saved && saved === pass){
-
-unlockSystem();
-
-showMessage("Login successful");
-
-}else{
-
-showMessage("Invalid login");
-
-}
-
-}
-
-/* ================= UNLOCK ================= */
-
-function unlockSystem(){
-
-document.getElementById("addBtn").disabled = false;
-
-document.getElementById("addBtn").innerText = "ADD PRODUCT";
-
-}
-
 /* ================= ADD PRODUCT ================= */
 
 function addProduct(){
@@ -578,6 +445,14 @@ let exit = Number(document.getElementById("exit").value);
 let price = Number(document.getElementById("price").value);
 
 let currency = document.getElementById("currency").value;
+
+if(name === ""){
+
+showMessage("Enter product name");
+
+return;
+
+}
 
 let stock = entry - exit;
 
@@ -657,6 +532,8 @@ let usd = (p.priceBRL / USD).toFixed(2);
 
 let eur = (p.priceBRL / EUR).toFixed(2);
 
+let total = (p.stock * p.priceBRL).toFixed(2);
+
 html += `
 <tr>
 
@@ -673,6 +550,8 @@ html += `
 <td>$ ${usd}</td>
 
 <td>€ ${eur}</td>
+
+<td>R$ ${total}</td>
 
 </tr>
 `;
