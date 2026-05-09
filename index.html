@@ -31,12 +31,11 @@
             border-radius: 50px; 
         }
 
-        /* Banner Superior */
         .hero-banner { 
             width: 95%; 
             max-width: 1200px; 
             height: 400px; 
-            background-image: url('image.jpg'); 
+            background-image: url('https://github.io'); 
             background-size: cover; 
             background-position: center; 
             background-repeat: no-repeat; 
@@ -49,7 +48,6 @@
         .company-header { text-align: center; margin: 40px 0; }
         .company-header h1 { font-size: 56px; font-weight: 800; color: #1f2937; text-transform: uppercase; }
 
-        /* Grid Principal */
         .main-grid { 
             display: grid; 
             grid-template-columns: 360px 1fr; 
@@ -59,7 +57,6 @@
             padding: 0 20px; 
         }
 
-        /* Lateral de Registro */
         .sidebar-card { 
             background: #1f2937; 
             padding: 40px 30px; 
@@ -83,8 +80,6 @@
             font-size: 14px;
         }
 
-        select option { background: #1f2937; }
-
         #regBtn { 
             width: 100%; 
             padding: 20px; 
@@ -95,12 +90,8 @@
             font-weight: 800; 
             cursor: pointer; 
             text-transform: uppercase;
-            transition: 0.3s;
         }
 
-        #regBtn:hover { background: #d4a373; }
-
-        /* Área da Tabela */
         .inventory-area { 
             background-color: #f2ede4; 
             border-radius: 30px; 
@@ -118,7 +109,6 @@
 <body>
 
     <a href="index.html" class="back-link">← Voltar ao Portfólio</a>
-    
     <div class="hero-banner"></div>
 
     <header class="company-header">
@@ -131,11 +121,9 @@
             <h3>Registro de Carga</h3>
             <input type="text" id="pName" placeholder="Produto">
             <input type="text" id="pDest" placeholder="Destino">
-            <input type="number" id="pPrice" placeholder="Valor">
             <input type="number" id="pIn" placeholder="Qtd Entrada">
             <input type="number" id="pOut" placeholder="Qtd Saída">
             
-            <!-- Menu de Unidades com as novas opções -->
             <select id="pUnit">
                 <option value="Unidades">Unidades</option>
                 <option value="KG">KG</option>
@@ -164,30 +152,27 @@
     </div>
 
     <script>
-        // Sistema de controle acumulativo e persistência
         let controleEstoque = JSON.parse(localStorage.getItem('solleneData')) || {};
         const inventoryList = document.getElementById('list');
+
         function atualizarTabela() {
-    inventoryList.innerHTML = "";
-    for (let produto in controleEstoque) {
-        const item = controleEstoque[produto];
-        
-        // Proteção: Se o valor não existir, vira 0 ou vazio em vez de "undefined"
-        const entrada = item.totalEntrada || 0;
-        const saida = item.totalSaida || 0;
-        const destino = item.destino || "---";
-        const unidade = item.unidade || "un";
-        const saldo = entrada - saida;
-        const row = inventoryList.insertRow();
-        row.innerHTML = `
-            <td>${produto}</td>
-            <td>${destino}</td>
-            <td style="color: #27ae60;">+ ${entrada}</td>
-            <td style="color: #e74c3c;">- ${saida}</td>
-            <td style="font-weight: 800; color: #b39359;">${saldo} ${unidade}</td>
-        `;
-    }
-}
+            inventoryList.innerHTML = "";
+            for (let produto in controleEstoque) {
+                const item = controleEstoque[produto];
+                const entrada = item.totalEntrada || 0;
+                const saida = item.totalSaida || 0;
+                const saldo = entrada - saida;
+
+                const row = inventoryList.insertRow();
+                row.innerHTML = `
+                    <td>${produto}</td>
+                    <td>${item.destino || "---"}</td>
+                    <td style="color: #27ae60;">+ ${entrada}</td>
+                    <td style="color: #e74c3c;">- ${saida}</td>
+                    <td style="font-weight: 800; color: #b39359;">${saldo} ${item.unidade || "un"}</td>
+                `;
+            }
+        }
 
         window.onload = atualizarTabela;
 
@@ -198,23 +183,28 @@
             const saida = parseInt(document.getElementById('pOut').value) || 0;
             const unidade = document.getElementById('pUnit').value;
 
-            if(!nome) return alert("Por favor, digite o nome do produto.");
+            // TRAVA DE SEGURANÇA
+            if(!nome || (entrada === 0 && saida === 0)) {
+                return alert("Por favor, preencha o nome do produto e pelo menos uma quantidade.");
+            }
 
-            // Inicializa ou atualiza o produto no controle
             if (!controleEstoque[nome]) {
                 controleEstoque[nome] = { totalEntrada: 0, totalSaida: 0, unidade: unidade, destino: destino };
             }
 
             controleEstoque[nome].totalEntrada += entrada;
             controleEstoque[nome].totalSaida += saida;
-            controleEstoque[nome].unidade = unidade; // Atualiza a unidade caso mude
-            controleEstoque[nome].destino = destino; // Atualiza o destino caso mude
+            controleEstoque[nome].unidade = unidade;
+            controleEstoque[nome].destino = destino;
 
             localStorage.setItem('solleneData', JSON.stringify(controleEstoque));
             atualizarTabela();
 
-            // Limpa os campos
-            document.querySelectorAll('input').forEach(i => i.value = "");
+            // LIMPEZA DE CAMPOS
+            document.getElementById('pName').value = "";
+            document.getElementById('pDest').value = "";
+            document.getElementById('pIn').value = "";
+            document.getElementById('pOut').value = "";
             document.getElementById('pName').focus();
         });
     </script>
