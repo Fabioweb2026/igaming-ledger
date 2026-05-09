@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NeoStock Enterprise</title>
+<title>Sollene Group | Stock System</title>
 
 <style>
 * {
@@ -12,27 +12,28 @@
     font-family: Arial;
 }
 
+/* FUNDO CREME / DOURADO LEVE */
 body {
-    background: #0a0a0a;
-    color: white;
+    background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
+    color: #1a1a1a;
 }
 
-/* HEADER EMPRESA */
+/* HEADER */
 header {
     text-align: center;
     padding: 20px;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid #d6c7a6;
 }
 
 header h1 {
     font-size: 28px;
-    color: #00ffcc;
+    color: #8a6d2f;
     letter-spacing: 2px;
 }
 
 header p {
     font-size: 12px;
-    color: #aaa;
+    color: #5c4a24;
 }
 
 /* LAYOUT */
@@ -44,42 +45,42 @@ header p {
 /* FORMULÁRIO */
 .form-box {
     width: 25%;
-    background: #111;
+    background: #ffffffb3;
     padding: 20px;
-    border-right: 1px solid #222;
+    border-right: 1px solid #d6c7a6;
 }
 
 .form-box h2 {
     margin-bottom: 15px;
-    color: #00ffcc;
+    color: #8a6d2f;
 }
 
 .form-box input {
     width: 100%;
     padding: 10px;
     margin: 8px 0;
-    background: #000;
-    border: 1px solid #333;
-    color: white;
+    border: 1px solid #cbb98d;
+    background: #fff;
 }
 
 .form-box button {
     width: 100%;
     padding: 10px;
-    background: #00ffcc;
+    background: #8a6d2f;
     border: none;
+    color: white;
     cursor: pointer;
     font-weight: bold;
 }
 
-/* CENTRO IMAGEM */
+/* CENTRO */
 .center {
     width: 30%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-right: 1px solid #222;
+    border-right: 1px solid #d6c7a6;
 }
 
 .center img {
@@ -87,18 +88,19 @@ header p {
     height: 220px;
     object-fit: cover;
     border-radius: 50%;
-    border: 3px solid #00ffcc;
+    border: 4px solid #8a6d2f;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 .center h2 {
     margin-top: 15px;
-    color: #00ffcc;
+    color: #8a6d2f;
     letter-spacing: 2px;
 }
 
 .center p {
     font-size: 12px;
-    color: #aaa;
+    color: #5c4a24;
     text-align: center;
     margin-top: 10px;
     padding: 0 20px;
@@ -114,17 +116,18 @@ header p {
 table {
     width: 100%;
     border-collapse: collapse;
+    background: white;
 }
 
 th, td {
     padding: 10px;
-    border: 1px solid #222;
+    border: 1px solid #e0d2b0;
     text-align: center;
 }
 
 th {
-    background: #00ffcc;
-    color: #000;
+    background: #8a6d2f;
+    color: white;
 }
 </style>
 </head>
@@ -132,37 +135,37 @@ th {
 <body>
 
 <header>
-    <h1>NEOSTOCK ENTERPRISE</h1>
-    <p>Rua das Tecnologias, 1024 - São Paulo, SP - Brazil</p>
+    <h1>SOLLENE GROUP</h1>
+    <p>Av. Paulista, 1500 - São Paulo, SP - Brazil</p>
 </header>
 
 <div class="container">
 
 <!-- FORM -->
 <div class="form-box">
-    <h2>Register</h2>
+    <h2>Register Product</h2>
 
     <input type="text" id="name" placeholder="Product Name">
     <input type="number" id="entry" placeholder="Entry">
     <input type="number" id="exit" placeholder="Exit">
     <input type="number" id="price" placeholder="Price">
 
-    <button onclick="addProduct()">ADD PRODUCT</button>
+    <button onclick="addProduct()">ADD</button>
 </div>
 
 <!-- CENTRO EMPRESA -->
 <div class="center">
-    <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a" alt="Company">
-    <h2>NEOSTOCK</h2>
+    <img src="sollene-group.jpg" alt="Sollene Group">
+    <h2>SOLLENE GROUP</h2>
     <p>
-        Enterprise Stock Management System<br>
-        Secure • Fast • Intelligent Inventory Control
+        Corporate Stock & Management System<br>
+        Premium Business Intelligence Platform
     </p>
 </div>
 
 <!-- TABELA -->
 <div class="table-box">
-    <h2>Stock Register</h2>
+    <h2>Stock Control</h2>
 
     <table>
         <thead>
@@ -189,14 +192,12 @@ function addProduct() {
 
     let stock = entry - exit;
 
-    let table = document.getElementById("tableBody");
-
-    table.innerHTML += `
+    document.getElementById("tableBody").innerHTML += `
         <tr>
             <td>${name}</td>
             <td>${entry}</td>
             <td>${exit}</td>
-            <td>$${price.toFixed(2)}</td>
+            <td>R$ ${price.toFixed(2)}</td>
             <td>${stock}</td>
         </tr>
     `;
