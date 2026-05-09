@@ -1,512 +1,340 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sollene Group ERP</title>
+<title>Sistema de Estoque</title>
 
 <style>
-
-/* ================= BASE ================= */
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
-    background:linear-gradient(135deg,#f7f1e1,#e9dcc2);
-    color:#222;
+    background:#f4f4f4;
+    padding:30px;
 }
-
-/* ================= HERO ================= */
-
-.hero{
-    position:relative;
-    width:100%;
-    height:320px;
-    overflow:hidden;
-    border-bottom:4px solid black;
-    background:#f5ecd7;
-}
-
-.hero img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    object-position:center center;
-    display:block;
-}
-
-.hero-overlay{
-    position:absolute;
-    inset:0;
-
-    background:linear-gradient(
-        180deg,
-        rgba(255,255,255,0.03),
-        rgba(0,0,0,0.08)
-    );
-}
-
-/* ADDRESS */
-
-.company-address{
-
-    position:absolute;
-
-    bottom:15px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    background:rgba(0,0,0,0.65);
-
-    color:#f5f5f5;
-
-    padding:8px 18px;
-
-    border-radius:30px;
-
-    font-size:11px;
-
-    letter-spacing:1px;
-
-    backdrop-filter:blur(5px);
-
-    border:1px solid rgba(255,255,255,0.15);
-
-    z-index:10;
-}
-
-/* ================= CONTAINER ================= */
 
 .container{
-    display:flex;
-    gap:20px;
-    padding:20px;
-    align-items:flex-start;
-}
-
-/* ================= FORM ================= */
-
-.form-box{
-    width:30%;
-}
-
-/* CARD */
-
-.card{
-    background:rgba(0,0,0,0.92);
-    border:2px solid #d4af37;
+    max-width:1200px;
+    margin:auto;
+    background:#fff;
+    padding:25px;
     border-radius:15px;
-    padding:20px;
-    color:white;
-    box-shadow:0 10px 30px rgba(0,0,0,0.20);
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
 }
 
-.card h3{
-    margin-bottom:15px;
-    letter-spacing:1px;
-    color:#d4af37;
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    color:#333;
 }
 
-/* INPUTS */
-
-.card input,
-.card select{
-    width:100%;
-    padding:11px;
-    margin:7px 0;
-    border:none;
-    border-radius:6px;
-    outline:none;
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-bottom:20px;
 }
 
-/* BUTTON */
-
-.card button{
-    width:100%;
+input,
+select{
     padding:12px;
-    margin-top:8px;
-    background:#d4af37;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+}
+
+.buttons{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+button{
+    padding:12px 20px;
     border:none;
-    border-radius:6px;
+    border-radius:8px;
     cursor:pointer;
     font-weight:bold;
+    color:#fff;
     transition:0.3s;
 }
 
-.card button:hover{
-    opacity:0.9;
-    transform:translateY(-2px);
+.add-btn{
+    background:#007bff;
 }
 
-/* ================= TABLE ================= */
+.add-btn:hover{
+    background:#0056b3;
+}
 
-.table-box{
-    width:70%;
+.save-btn{
+    background:#28a745;
+}
+
+.save-btn:hover{
+    background:#1f7e34;
+}
+
+.clear-btn{
+    background:#dc3545;
+}
+
+.clear-btn:hover{
+    background:#a71d2a;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    background:white;
-    border-radius:12px;
-    overflow:hidden;
-    box-shadow:0 5px 20px rgba(0,0,0,0.15);
-}
-
-th,td{
-    border:1px solid #ddd;
-    padding:12px;
-    text-align:center;
-    font-size:14px;
-}
-
-th{
-    background:black;
-    color:white;
-    letter-spacing:1px;
-}
-
-/* ================= MESSAGE ================= */
-
-.system-message{
-
-    position:fixed;
-
-    top:20px;
-
-    right:20px;
-
-    background:black;
-
-    color:#d4af37;
-
-    border:1px solid #d4af37;
-
-    padding:12px 18px;
-
-    border-radius:10px;
-
-    z-index:9999;
-
-    font-size:12px;
-
-    box-shadow:0 8px 20px rgba(0,0,0,0.25);
-
-    transition:0.3s;
-}
-
-/* ================= FOOTER ================= */
-
-footer{
-    background:black;
-    color:white;
-    text-align:center;
-    padding:20px;
     margin-top:20px;
-    font-size:12px;
-    letter-spacing:1px;
 }
 
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:900px){
-
-.container{
-    flex-direction:column;
+table th{
+    background:#333;
+    color:#fff;
+    padding:12px;
 }
 
-.form-box,
-.table-box{
-    width:100%;
-}
-
-.hero{
-    height:220px;
-}
-
-.company-address{
-    width:90%;
+table td{
+    border:1px solid #ccc;
+    padding:10px;
     text-align:center;
-    font-size:10px;
 }
 
+.entrada{
+    background:#d4edda;
+}
+
+.saida{
+    background:#f8d7da;
+}
+
+.total-box{
+    margin-top:25px;
+    padding:20px;
+    background:#222;
+    color:#fff;
+    border-radius:10px;
+    font-size:20px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.delete-btn{
+    background:#dc3545;
+    padding:8px 12px;
+    border-radius:5px;
+}
+
+.delete-btn:hover{
+    background:#b02a37;
 }
 
 </style>
 </head>
-
 <body>
-
-<!-- ================= HERO ================= -->
-
-<div class="hero">
-
-<img src="sollene-group.jpg" alt="Sollene Group">
-
-<div class="hero-overlay"></div>
-
-<div class="company-address">
-
-Sollene Group Enterprise • 45 Marina Business Avenue • Valletta • Malta
-
-</div>
-
-</div>
-
-<!-- ================= SYSTEM ================= -->
 
 <div class="container">
 
-<!-- FORM -->
+    <h1>Sistema de Controle de Estoque</h1>
 
-<div class="form-box">
+    <div class="form-grid">
 
-<div class="card">
+        <input type="text" id="pName" placeholder="Nome do Produto">
 
-<h3>REGISTER PRODUCT</h3>
+        <input type="number" id="pQuantity" placeholder="Quantidade">
 
-<input type="text" id="name" placeholder="Product Name">
+        <select id="pUnit">
+            <option value="">Selecione Unidade</option>
+            <option value="Kg">Kg</option>
+            <option value="Toneladas">Toneladas</option>
+            <option value="Pacotes">Pacotes</option>
+            <option value="Caixas">Caixas</option>
+        </select>
 
-<select id="unit">
+        <input type="number" id="pPrice" placeholder="Valor">
 
-<option value="Kg">Kg</option>
+        <select id="currency">
+            <option value="R$">Real (R$)</option>
+            <option value="$">Dólar ($)</option>
+            <option value="€">Euro (€)</option>
+        </select>
 
-<option value="Toneladas">Toneladas</option>
+        <select id="pType">
+            <option value="ENTRADA">ENTRADA</option>
+            <option value="SAÍDA">SAÍDA</option>
+        </select>
 
-<option value="Pacotes">Pacotes</option>
+    </div>
 
-<option value="Caixa">Caixa</option>
+    <div class="buttons">
+        <button class="add-btn" onclick="addProduct()">
+            Adicionar Produto
+        </button>
 
-</select>
+        <button class="save-btn" onclick="saveProducts()">
+            Salvar Produtos
+        </button>
 
-<input type="number" id="entry" placeholder="Entry">
+        <button class="clear-btn" onclick="clearProducts()">
+            Limpar Tudo
+        </button>
+    </div>
 
-<input type="number" id="exit" placeholder="Exit">
+    <table>
 
-<select id="currency">
+        <thead>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Unidade</th>
+                <th>Valor</th>
+                <th>Moeda</th>
+                <th>Tipo</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
 
-<option value="BRL">BRL</option>
+        <tbody id="productTable">
 
-<option value="USD">USD</option>
+        </tbody>
 
-<option value="EUR">EUR</option>
+    </table>
 
-</select>
-
-<input type="number" id="price" placeholder="Price">
-
-<button onclick="addProduct()">
-
-ADD PRODUCT
-
-</button>
-
-</div>
-
-</div>
-
-<!-- ================= TABLE ================= -->
-
-<div class="table-box">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Product</th>
-
-<th>Unit</th>
-
-<th>Entry</th>
-
-<th>Exit</th>
-
-<th>Stock</th>
-
-<th>Currency</th>
-
-<th>Price</th>
-
-<th>Total Value</th>
-
-</tr>
-
-</thead>
-
-<tbody id="tableBody"></tbody>
-
-</table>
+    <div class="total-box" id="totalValue">
+        Valor Total: R$ 0.00
+    </div>
 
 </div>
-
-</div>
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-Sollene Group Enterprise • contact@sollene-group.com • Malta Business Center
-
-</footer>
 
 <script>
 
-/* ================= PRODUCTS ================= */
-
-let products = [];
-
-/* ================= MESSAGE ================= */
-
-function showMessage(text){
-
-const old = document.querySelector(".system-message");
-
-if(old){
-    old.remove();
-}
-
-const msg = document.createElement("div");
-
-msg.className = "system-message";
-
-msg.innerText = text;
-
-document.body.appendChild(msg);
-
-setTimeout(()=>{
-
-    msg.style.opacity = "0";
-
-    setTimeout(()=>{
-        msg.remove();
-    },300);
-
-},2500);
-
-}
-
-/* ================= ADD PRODUCT ================= */
-
 function addProduct(){
 
-let name = document.getElementById("name").value;
+    const name = document.getElementById("pName").value;
+    const quantity = document.getElementById("pQuantity").value;
+    const unit = document.getElementById("pUnit").value;
+    const price = document.getElementById("pPrice").value;
+    const currency = document.getElementById("currency").value;
+    const type = document.getElementById("pType").value;
 
-let unit = document.getElementById("unit").value;
+    if(name === "" || quantity === "" || unit === "" || price === ""){
+        alert("Preencha todos os campos!");
+        return;
+    }
 
-let entry = Number(document.getElementById("entry").value);
+    const table = document.getElementById("productTable");
 
-let exit = Number(document.getElementById("exit").value);
+    const row = table.insertRow();
 
-let price = Number(document.getElementById("price").value);
+    if(type === "ENTRADA"){
+        row.classList.add("entrada");
+    }else{
+        row.classList.add("saida");
+    }
 
-let currency = document.getElementById("currency").value;
+    row.innerHTML = `
+        <td>${name}</td>
+        <td>${quantity}</td>
+        <td>${unit}</td>
+        <td>${parseFloat(price).toFixed(2)}</td>
+        <td>${currency}</td>
+        <td>${type}</td>
+        <td>
+            <button class="delete-btn" onclick="deleteRow(this)">
+                Excluir
+            </button>
+        </td>
+    `;
 
-if(name === ""){
+    updateTotal();
 
-showMessage("Enter product name");
+    clearFields();
+}
 
-return;
+function deleteRow(button){
+
+    button.parentElement.parentElement.remove();
+
+    updateTotal();
 
 }
 
-/* STOCK */
+function updateTotal(){
 
-let stock = entry - exit;
+    const rows = document.querySelectorAll("#productTable tr");
 
-/* SAVE */
+    let total = 0;
+    let currentCurrency = "R$";
 
-products.push({
+    rows.forEach(row => {
 
-name,
-unit,
-entry,
-exit,
-stock,
-price,
-currency
+        const price = parseFloat(row.cells[3].innerText);
+        const currency = row.cells[4].innerText;
 
-});
+        total += price;
 
-/* UPDATE */
+        currentCurrency = currency;
 
-updateTable();
+    });
 
-clearFields();
-
-showMessage("Product added successfully");
+    document.getElementById("totalValue").innerHTML =
+        `Valor Total: ${currentCurrency} ${total.toFixed(2)}`;
 
 }
-
-/* ================= TABLE ================= */
-
-function updateTable(){
-
-let html = "";
-
-products.forEach(p => {
-
-let symbol = "R$";
-
-if(p.currency === "USD"){
-    symbol = "$";
-}
-else if(p.currency === "EUR"){
-    symbol = "€";
-}
-
-let total = (p.stock * p.price).toFixed(2);
-
-html += `
-
-<tr>
-
-<td>${p.name}</td>
-
-<td>${p.unit}</td>
-
-<td>${p.entry}</td>
-
-<td>${p.exit}</td>
-
-<td>${p.stock}</td>
-
-<td>${p.currency}</td>
-
-<td>${symbol} ${p.price.toFixed(2)}</td>
-
-<td>${symbol} ${total}</td>
-
-</tr>
-
-`;
-
-});
-
-document.getElementById("tableBody").innerHTML = html;
-
-}
-
-/* ================= CLEAR ================= */
 
 function clearFields(){
 
-document.getElementById("name").value = "";
+    document.getElementById("pName").value = "";
+    document.getElementById("pQuantity").value = "";
+    document.getElementById("pUnit").value = "";
+    document.getElementById("pPrice").value = "";
 
-document.getElementById("entry").value = "";
+}
 
-document.getElementById("exit").value = "";
+function saveProducts(){
 
-document.getElementById("price").value = "";
+    const tableData = document.getElementById("productTable").innerHTML;
+
+    localStorage.setItem("estoqueProdutos", tableData);
+
+    alert("Produtos salvos com sucesso!");
+
+}
+
+function clearProducts(){
+
+    if(confirm("Deseja apagar todos os produtos?")){
+
+        localStorage.removeItem("estoqueProdutos");
+
+        document.getElementById("productTable").innerHTML = "";
+
+        updateTotal();
+
+    }
+
+}
+
+window.onload = function(){
+
+    const savedProducts = localStorage.getItem("estoqueProdutos");
+
+    if(savedProducts){
+
+        document.getElementById("productTable").innerHTML = savedProducts;
+
+        updateTotal();
+
+    }
 
 }
 
