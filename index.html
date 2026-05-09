@@ -13,32 +13,32 @@
 }
 
 body {
-    font-family: Arial;
-    background: #fdfaf6;
+    font-family: Arial, sans-serif;
+    background: #0b1220;
+    color: #ffffff;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-bottom: 40px;
 }
 
-/* HERO COM IMAGEM */
+/* HERO IMAGE */
 .hero-banner {
     width: 95%;
     max-width: 1200px;
-    height: 320px;
+    height: 300px;
     background-image: url('sollene-group.jpg');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
     border-radius: 20px;
     margin-top: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.5);
 }
 
-/* TITULO */
+/* TITLE */
 h1 {
     margin-top: 20px;
-    color: #1f2937;
+    color: #ffffff;
 }
 
 /* GRID */
@@ -51,24 +51,31 @@ h1 {
     margin-top: 20px;
 }
 
-/* FORM */
+/* REGISTRO (BLACK PANEL) */
 .sidebar {
-    background: #1f2937;
+    background: #0f172a;
     padding: 20px;
     border-radius: 15px;
-    color: white;
+    border: 1px solid #1f2937;
 }
 
+/* INPUTS */
 input, select {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     margin-bottom: 10px;
     border-radius: 8px;
-    border: none;
+    border: 1px solid #334155;
+    background: #111827;
+    color: #fff;
     outline: none;
 }
 
-/* BOTÃO */
+input::placeholder {
+    color: #9ca3af;
+}
+
+/* BUTTON */
 button {
     width: 100%;
     padding: 12px;
@@ -77,19 +84,25 @@ button {
     font-weight: bold;
     cursor: pointer;
     border-radius: 8px;
+    color: #111827;
+    transition: 0.3s;
 }
 
-/* TABELA */
+button:hover {
+    background: #d4af37;
+}
+
+/* TABLE AREA */
 table {
     width: 100%;
     border-collapse: collapse;
-    background: white;
+    background: #111827;
     border-radius: 10px;
     overflow: hidden;
 }
 
 th {
-    background: #1f2937;
+    background: #0f172a;
     color: #b39359;
     padding: 12px;
     font-size: 12px;
@@ -98,7 +111,8 @@ th {
 
 td {
     padding: 12px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid #1f2937;
+    color: #e5e7eb;
 }
 </style>
 
@@ -106,14 +120,14 @@ td {
 
 <body>
 
-<!-- IMAGEM PRINCIPAL -->
+<!-- HERO IMAGE -->
 <div class="hero-banner"></div>
 
 <h1>Sollene Group - Sistema de Estoque</h1>
 
 <div class="main-grid">
 
-<!-- FORMULÁRIO -->
+<!-- REGISTRO -->
 <div class="sidebar">
 
 <h3>Registro de Produto</h3>
@@ -148,6 +162,7 @@ td {
 <th>Unidade</th>
 </tr>
 </thead>
+
 <tbody id="tabela"></tbody>
 </table>
 </div>
@@ -202,9 +217,9 @@ function render() {
         <tr>
             <td>${item}</td>
             <td>${p.valor}</td>
-            <td>${p.entrada}</td>
-            <td>${p.saida}</td>
-            <td>${saldo}</td>
+            <td style="color:#22c55e;">${p.entrada}</td>
+            <td style="color:#ef4444;">${p.saida}</td>
+            <td style="font-weight:bold;">${saldo}</td>
             <td>${p.unidade}</td>
         </tr>
         `;
