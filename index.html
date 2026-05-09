@@ -18,16 +18,50 @@ body {
     background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
 }
 
-/* ================= HERO DASHBOARD ================= */
+/* ================= LOGIN ================= */
+.login-screen {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.login-box {
+    background: black;
+    padding: 20px;
+    border: 2px solid #d4af37;
+    border-radius: 10px;
+    width: 280px;
+    text-align: center;
+    color: white;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 10px;
+    background: #d4af37;
+    border: none;
+    cursor: pointer;
+}
+
+/* ================= HERO ================= */
 .hero {
     position: relative;
     width: 100%;
-    height: 360px;
+    height: 340px;
     overflow: hidden;
     border-bottom: 4px solid black;
 }
 
-/* IMAGEM */
 .hero img {
     width: 100%;
     height: 100%;
@@ -36,7 +70,6 @@ body {
     filter: brightness(0.65) contrast(1.1);
 }
 
-/* OVERLAY */
 .hero-overlay {
     position: absolute;
     inset: 0;
@@ -47,7 +80,6 @@ body {
     );
 }
 
-/* CONTEÚDO */
 .hero-content {
     position: absolute;
     top: 50%;
@@ -58,38 +90,32 @@ body {
     width: 90%;
 }
 
-/* BADGE */
 .badge {
     display: inline-block;
     padding: 6px 12px;
     font-size: 11px;
-    letter-spacing: 2px;
     border: 1px solid #d4af37;
     color: #d4af37;
     border-radius: 20px;
     margin-bottom: 10px;
 }
 
-/* TITULO */
 .hero-content h1 {
     font-size: 44px;
     letter-spacing: 5px;
-    text-transform: uppercase;
 }
 
-/* SUB */
 .hero-content p {
     font-size: 13px;
     opacity: 0.85;
-    margin-top: 5px;
 }
 
-/* DASHBOARD CARDS */
+/* ================= DASHBOARD ================= */
 .hero-stats {
     display: flex;
     justify-content: center;
     gap: 15px;
-    margin-top: 18px;
+    margin-top: 15px;
     flex-wrap: wrap;
 }
 
@@ -103,15 +129,9 @@ body {
 
 .stat-box h3 {
     color: #d4af37;
-    font-size: 18px;
 }
 
-.stat-box span {
-    font-size: 11px;
-    opacity: 0.8;
-}
-
-/* ================= FORM ================= */
+/* ================= LAYOUT ================= */
 .container {
     display: flex;
     padding: 15px;
@@ -129,14 +149,10 @@ body {
     color: white;
 }
 
-.card input, .card select {
+input, select {
     width: 100%;
     padding: 8px;
     margin: 5px 0;
-    background: #111;
-    color: white;
-    border: 1px solid #333;
-    border-radius: 5px;
 }
 
 button {
@@ -144,9 +160,7 @@ button {
     padding: 10px;
     background: #d4af37;
     border: none;
-    font-weight: bold;
     cursor: pointer;
-    margin-top: 10px;
 }
 
 /* ================= TABLE ================= */
@@ -177,75 +191,92 @@ th {
 
 <body>
 
-<!-- ================= HERO ================= -->
-<div class="hero">
-
-    <img src="sollene-group.jpg">
-    <div class="hero-overlay"></div>
-
-    <div class="hero-content">
-
-        <div class="badge">ENTERPRISE SYSTEM</div>
-
-        <h1>SOLLENE GROUP</h1>
-        <p>Stock Management Dashboard</p>
-
-        <div class="hero-stats">
-
-            <div class="stat-box">
-                <h3 id="totalProducts">0</h3>
-                <span>Products</span>
-            </div>
-
-            <div class="stat-box">
-                <h3 id="totalStock">0</h3>
-                <span>Stock</span>
-            </div>
-
-            <div class="stat-box">
-                <h3 id="totalValue">R$ 0</h3>
-                <span>Total Value</span>
-            </div>
-
-        </div>
-
+<!-- ================= LOGIN ================= -->
+<div class="login-screen" id="loginScreen">
+    <div class="login-box">
+        <h3>ADMIN LOGIN</h3>
+        <input type="text" id="user" placeholder="User">
+        <input type="password" id="pass" placeholder="Password">
+        <button onclick="login()">ENTER</button>
     </div>
 </div>
 
-<!-- ================= BODY ================= -->
+<!-- ================= HERO ================= -->
+<div class="hero">
+
+<img src="sollene-group.jpg">
+<div class="hero-overlay"></div>
+
+<div class="hero-content">
+
+    <div class="badge">ENTERPRISE SYSTEM</div>
+
+    <h1>SOLLENE GROUP</h1>
+    <p>Stock Management Dashboard</p>
+
+    <div class="hero-stats">
+
+        <div class="stat-box">
+            <h3 id="totalProducts">0</h3>
+            <span>Products</span>
+        </div>
+
+        <div class="stat-box">
+            <h3 id="totalStock">0</h3>
+            <span>Stock</span>
+        </div>
+
+        <div class="stat-box">
+            <h3 id="totalValue">R$ 0</h3>
+            <span>Total Value</span>
+        </div>
+
+    </div>
+
+</div>
+</div>
+
+<!-- ================= SYSTEM ================= -->
 <div class="container">
 
-<!-- FORM -->
 <div class="form-box">
 <div class="card">
 
-<h2>REGISTER PRODUCT</h2>
+<h3>REGISTER PRODUCT</h3>
 
-<input type="text" id="name" placeholder="Product Name">
+<input type="text" id="name" placeholder="Product">
+
 <input type="number" id="entry" placeholder="Entry">
 <input type="number" id="exit" placeholder="Exit">
+
+<select id="currency">
+    <option value="BRL">BRL</option>
+    <option value="USD">USD</option>
+    <option value="EUR">EUR</option>
+</select>
+
 <input type="number" id="price" placeholder="Price">
 
-<button onclick="addProduct()">ADD PRODUCT</button>
+<button onclick="addProduct()">ADD</button>
 
 </div>
 </div>
 
-<!-- TABLE -->
 <div class="table-box">
-<h2>STOCK TABLE</h2>
 
 <table>
 <thead>
 <tr>
 <th>Name</th>
-<th>Entry</th>
-<th>Exit</th>
 <th>Stock</th>
+<th>BRL</th>
+<th>USD</th>
+<th>EUR</th>
 </tr>
 </thead>
 
 <tbody id="tableBody"></tbody>
+
 </table>
 
 </div>
@@ -257,20 +288,41 @@ th {
 
 let products = [];
 
+/* LOGIN SIMPLES */
+function login() {
+
+let user = document.getElementById("user").value;
+let pass = document.getElementById("pass").value;
+
+if(user === "admin" && pass === "1234"){
+    document.getElementById("loginScreen").style.display = "none";
+} else {
+    alert("Invalid login");
+}
+
+}
+
+/* TAXAS */
+const USD = 5.15;
+const EUR = 5.78;
+
 function addProduct() {
 
 let name = document.getElementById("name").value;
 let entry = Number(document.getElementById("entry").value);
 let exit = Number(document.getElementById("exit").value);
 let price = Number(document.getElementById("price").value);
+let currency = document.getElementById("currency").value;
 
 let stock = entry - exit;
 
-products.push({
-    name,
-    stock,
-    price
-});
+let priceBRL;
+
+if(currency === "USD") priceBRL = price * USD;
+else if(currency === "EUR") priceBRL = price * EUR;
+else priceBRL = price;
+
+products.push({ name, stock, priceBRL });
 
 updateDashboard();
 updateTable();
@@ -285,7 +337,7 @@ let totalValue = 0;
 
 products.forEach(p => {
     totalStock += p.stock;
-    totalValue += p.stock * p.price;
+    totalValue += p.stock * p.priceBRL;
 });
 
 document.getElementById("totalProducts").innerText = totalProducts;
@@ -299,14 +351,20 @@ function updateTable() {
 let html = "";
 
 products.forEach(p => {
+
+let usd = (p.priceBRL / USD).toFixed(2);
+let eur = (p.priceBRL / EUR).toFixed(2);
+
 html += `
 <tr>
 <td>${p.name}</td>
 <td>${p.stock}</td>
-<td>${p.stock}</td>
-<td>${p.stock}</td>
+<td>R$ ${p.priceBRL.toFixed(2)}</td>
+<td>$ ${usd}</td>
+<td>€ ${eur}</td>
 </tr>
 `;
+
 });
 
 document.getElementById("tableBody").innerHTML = html;
