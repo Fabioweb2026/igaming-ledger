@@ -1,272 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Sollene Group ERP System</title>
-
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial;
-}
-
-/* ================= BODY ================= */
-body {
-    background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
-}
-
-/* ================= HERO PROFISSIONAL ================= */
-.hero {
-    position: relative;
-    width: 100%;
-    height: 300px;
-    overflow: hidden;
-    border-bottom: 4px solid black;
-}
-
-/* IMAGEM PRINCIPAL */
-.hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-    filter: brightness(0.75);
-}
-
-/* OVERLAY (ESCURECIMENTO PROFISSIONAL) */
-.hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.35),
-        rgba(0,0,0,0.55)
-    );
-}
-
-/* TEXTO CENTRAL ÚNICO */
-.hero-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    padding: 10px;
-}
-
-/* TÍTULO */
-.hero-text h1 {
-    font-size: 44px;
-    letter-spacing: 5px;
-    font-weight: bold;
-    text-shadow: 0 4px 10px rgba(0,0,0,0.6);
-}
-
-/* SUBTÍTULO */
-.hero-text p {
-    font-size: 14px;
-    letter-spacing: 2px;
-    opacity: 0.9;
-    margin-top: 5px;
-}
-
-/* ================= CONTACT ================= */
-.contact {
-    text-align: center;
-    padding: 10px;
-    font-size: 12px;
-    background: rgba(255,255,255,0.5);
-    color: #3d2f14;
-    border-bottom: 1px solid #cbb98d;
-}
-
-/* ================= LAYOUT ================= */
-.container {
-    display: flex;
-    height: 75vh;
-}
-
-/* ================= FORM ================= */
-.form-box {
-    width: 28%;
-    padding: 15px;
-}
-
-.card {
-    background: rgba(0,0,0,0.92);
-    border: 2px solid #d4af37;
-    border-radius: 12px;
-    padding: 15px;
-    color: white;
-}
-
-.card h2 {
-    text-align: center;
-    color: #d4af37;
-    margin-bottom: 10px;
-}
-
-.card input, .card select {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    background: #111;
-    border: 1px solid #333;
-    color: white;
-    border-radius: 5px;
-}
-
-/* STOCK BOX */
-.group-box {
-    border: 1px solid #d4af37;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 8px;
-}
-
-.group-box h3 {
-    text-align: center;
-    color: #d4af37;
-}
-
-/* BUTTON */
-.card button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    background: #d4af37;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-/* ================= TABLE ================= */
-.table-box {
-    width: 72%;
-    padding: 15px;
-    overflow-y: auto;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
-}
-
-th, td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: center;
-}
-
-th {
-    background: black;
-    color: white;
-}
-</style>
-</head>
-
-<body>
-
-<!-- HERO -->
 <div class="hero">
+
     <img src="sollene-group.jpg" alt="Sollene Group">
     <div class="hero-overlay"></div>
 
-    <div class="hero-text">
+    <div class="hero-content">
+
+        <div class="badge">ENTERPRISE DASHBOARD</div>
+
         <h1>SOLLENE GROUP</h1>
-        <p>Enterprise Stock Management System</p>
+        <p>Stock • Finance • Operations Overview</p>
+
+        <!-- DASHBOARD CARDS -->
+        <div class="hero-stats">
+
+            <div class="stat-box">
+                <h3 id="totalProducts">0</h3>
+                <span>Products</span>
+            </div>
+
+            <div class="stat-box">
+                <h3 id="totalStock">0</h3>
+                <span>Total Stock</span>
+            </div>
+
+            <div class="stat-box">
+                <h3 id="totalValue">R$ 0</h3>
+                <span>Estimated Value</span>
+            </div>
+
+        </div>
+
     </div>
 </div>
-
-<!-- CONTACT -->
-<div class="contact">
-📞 +55 11 99999-8888 | 📍 Av. Paulista, 1500 - São Paulo | ✉ contact@sollene.com
-</div>
-
-<!-- LAYOUT -->
-<div class="container">
-
-<!-- FORM -->
-<div class="form-box">
-<div class="card">
-
-<h2>REGISTER PRODUCT</h2>
-
-<input type="text" id="name" placeholder="Product Name">
-<input type="text" id="rg" placeholder="RG Code">
-
-<div class="group-box">
-<h3>STOCK UNITS</h3>
-
-<select id="unitType">
-<option value="Kg">Kg</option>
-<option value="Ton">Ton</option>
-<option value="Boxes">Boxes</option>
-<option value="Packages">Packages</option>
-</select>
-
-<input type="number" id="entry" placeholder="Entry">
-<input type="number" id="exit" placeholder="Exit">
-</div>
-
-<input type="number" id="price" placeholder="Price">
-
-<button onclick="addProduct()">ADD PRODUCT</button>
-
-</div>
-</div>
-
-<!-- TABLE -->
-<div class="table-box">
-<h2>STOCK CONTROL</h2>
-
-<table>
-<thead>
-<tr>
-<th>Product</th>
-<th>RG</th>
-<th>Entry</th>
-<th>Exit</th>
-<th>Stock</th>
-</tr>
-</thead>
-<tbody id="tableBody"></tbody>
-</table>
-</div>
-
-</div>
-
-<script>
-function addProduct() {
-
-let name = document.getElementById("name").value;
-let rg = document.getElementById("rg").value;
-let unit = document.getElementById("unitType").value;
-
-let entry = Number(document.getElementById("entry").value);
-let exit = Number(document.getElementById("exit").value);
-
-let stock = entry - exit;
-
-document.getElementById("tableBody").innerHTML += `
-<tr>
-<td>${name}</td>
-<td>${rg}</td>
-<td>${entry} ${unit}</td>
-<td>${exit} ${unit}</td>
-<td>${stock} ${unit}</td>
-</tr>
-`;
-
-}
-</script>
-
-</body>
-</html>
