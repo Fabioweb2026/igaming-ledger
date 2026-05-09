@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Inventory Terminal</title>
+    <title>Sollene Group | Global Inventory</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -19,14 +19,31 @@
             padding-bottom: 50px;
         }
 
-        /* AJUSTE DA IMAGEM LOGO (Para não comer palavras) */
+        /* BANNER SUPERIOR AJUSTADO */
         .hero-banner { 
             width: 100%; 
-            height: 450px; 
+            height: 480px; 
             background: #000 url('sollene-group.jpg') no-repeat center center; 
-            background-size: contain; /* Ajusta a imagem para caber inteira sem cortar */
+            background-size: cover; /* Ocupa todo o espaço e se ajusta automaticamente */
             border-bottom: 4px solid #b39359;
-            margin-bottom: 30px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        /* BARRA DE CONTATOS FICTÍCIOS NO BANNER */
+        .contact-bar {
+            background: rgba(0, 0, 0, 0.7);
+            color: #b39359;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            backdrop-filter: blur(5px);
         }
 
         .main-container { 
@@ -35,9 +52,10 @@
             gap: 30px; 
             width: 95%; 
             max-width: 1400px; 
+            margin-top: 30px;
         }
 
-        /* Barra Lateral de Registro */
+        /* Painel de Registro */
         .sidebar { 
             background: #111; 
             padding: 35px 25px; 
@@ -52,7 +70,6 @@
             font-size: 20px; 
             text-transform: uppercase; 
             margin-bottom: 25px; 
-            letter-spacing: 1px;
         }
 
         input, select { 
@@ -67,34 +84,15 @@
         }
 
         .btn-add { 
-            width: 100%; 
-            padding: 18px; 
-            background: #b39359; 
-            color: #111; 
-            border: none; 
-            border-radius: 12px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            transition: 0.3s;
+            width: 100%; padding: 18px; background: #b39359; color: #111; 
+            border: none; border-radius: 12px; font-weight: 800; cursor: pointer; 
+            text-transform: uppercase; margin-bottom: 10px;
         }
 
-        /* BOTÃO SALVAR */
         .btn-save { 
-            width: 100%; 
-            padding: 15px; 
-            background: #27ae60; 
-            color: #fff; 
-            border: none; 
-            border-radius: 12px; 
-            font-weight: 800; 
-            cursor: pointer; 
+            width: 100%; padding: 15px; background: #27ae60; color: #fff; 
+            border: none; border-radius: 12px; font-weight: 800; cursor: pointer; 
             text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
         }
 
         /* Área da Tabela */
@@ -107,20 +105,21 @@
         }
 
         table { width: 100%; border-collapse: collapse; }
-        th { background: #111; color: #b39359; padding: 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+        th { background: #111; color: #b39359; padding: 20px; font-size: 11px; text-transform: uppercase; }
         td { padding: 18px; text-align: center; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
         tr:nth-child(even) { background: #fafafa; }
-        .stock-val { font-weight: 800; color: #111; }
-        .total-val { font-weight: 800; color: #b39359; }
     </style>
 </head>
 <body>
 
-    <!-- Banner Ajustado -->
-    <div class="hero-banner"></div>
+    <!-- Banner Ocupando o Espaço Superior -->
+    <div class="hero-banner">
+        <div class="contact-bar">
+            Sollene Group Enterprise • Marina Business Avenue, Valletta • Malta • +356 2134 5678 • info@sollene-group.mt
+        </div>
+    </div>
 
     <div class="main-container">
-        <!-- Registro -->
         <aside class="sidebar">
             <h2>Register Product</h2>
             <input type="text" id="pName" placeholder="Product Name">
@@ -144,7 +143,6 @@
             <button class="btn-save" onclick="saveData()">💾 Save Inventory</button>
         </aside>
 
-        <!-- Tabela -->
         <main class="table-area">
             <table>
                 <thead>
@@ -165,14 +163,13 @@
     </div>
 
     <script>
-        // Carrega dados salvos do navegador
-        let inventory = JSON.parse(localStorage.getItem('sollene_storage')) || [];
+        let inventory = JSON.parse(localStorage.getItem('sollene_db_v3')) || [];
 
         function renderTable() {
             const body = document.getElementById('inventoryBody');
             body.innerHTML = "";
 
-            inventory.forEach((item, index) => {
+            inventory.forEach((item) => {
                 const stock = item.entry - item.exit;
                 const total = (stock * item.price).toFixed(2);
                 const symbol = item.currency === 'USD' ? '$' : (item.currency === 'EUR' ? '€' : 'R$');
@@ -183,10 +180,10 @@
                     <td>${item.unit}</td>
                     <td style="color: #27ae60; font-weight: 800;">+ ${item.entry}</td>
                     <td style="color: #e74c3c; font-weight: 800;">- ${item.exit}</td>
-                    <td class="stock-val">${stock}</td>
+                    <td style="font-weight: 800;">${stock}</td>
                     <td>${item.currency}</td>
                     <td>${symbol} ${item.price}</td>
-                    <td class="total-val">${symbol} ${total}</td>
+                    <td style="font-weight: 800; color: #b39359;">${symbol} ${total}</td>
                 `;
             });
         }
@@ -199,27 +196,26 @@
             const currency = document.getElementById('pCurrency').value;
             const price = parseFloat(document.getElementById('pPrice').value) || 0;
 
-            if(!name || price <= 0) return alert("Por favor, insira o nome e o preço.");
+            if(!name || price <= 0) return alert("Por favor, preencha os campos corretamente.");
 
             inventory.push({ name, unit, entry, exit, currency, price });
-            saveData(); // Salva automaticamente
+            saveData(false); 
             renderTable();
 
-            // Limpa os campos
             document.getElementById('pName').value = "";
             document.getElementById('pEntry').value = "";
             document.getElementById('pExit').value = "";
             document.getElementById('pPrice').value = "";
         }
 
-        function saveData() {
-            localStorage.setItem('sollene_storage', JSON.stringify(inventory));
-            alert("Inventory Saved Successfully!");
+        function saveData(showAlert = true) {
+            localStorage.setItem('sollene_db_v3', JSON.stringify(inventory));
+            if(showAlert) alert("Inventory Saved Successfully!");
         }
 
-        // Inicia a tabela ao abrir
         window.onload = renderTable;
     </script>
 </body>
 </html>
+
 
