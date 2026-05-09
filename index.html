@@ -1,62 +1,129 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Terminal</title>
-    <style>
-        @import url('https://googleapis.com');
-        * { margin:0; padding:0; box-sizing:border-box; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #fdfaf6; padding-bottom: 60px; text-align: center; }
-        .hero-banner { width: 95%; max-width: 1200px; height: 400px; background: #eee url('sollene-group.jpg') no-repeat center; background-size: cover; border-radius: 28px; margin: 20px auto; border: 1px solid #e5e1da; }
-        .sidebar { width: 360px; background: #1f2937; padding: 30px; border-radius: 30px; color: #fff; margin: 20px; }
-        input, select { width: 100%; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: none; background: #111827; color: #fff; }
-        #regBtn { width: 100%; padding: 15px; background: #b39359; color: #000; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; }
-        table { width: 95%; max-width: 1200px; margin: 20px auto; border-collapse: collapse; background: #f2ede4; border-radius: 20px; overflow: hidden; }
-        th { background: #1f2937; color: #b39359; padding: 15px; font-size: 12px; }
-        td { padding: 15px; border-bottom: 1px solid #ddd; font-size: 14px; color: #333; }
-    </style>
+<meta charset="UTF-8">
+<title>Stock System</title>
+
+<style>
+body {
+    font-family: Arial;
+    margin: 0;
+    display: flex;
+    background: #f4f4f4;
+}
+
+/* LADO FORMULÁRIO */
+.form-box {
+    width: 30%;
+    padding: 20px;
+    background: #1e1e2f;
+    color: white;
+    height: 100vh;
+}
+
+.form-box input {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+}
+
+.form-box button {
+    width: 100%;
+    padding: 10px;
+    background: #00c896;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+/* TABELA */
+.table-box {
+    width: 70%;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+th {
+    background: #333;
+    color: white;
+}
+</style>
 </head>
+
 <body>
-    <a href="index.html" style="display:inline-block; margin-top:20px; color:#b39359; text-decoration:none; font-weight:800;">← VOLTAR</a>
-    <div class="hero-banner"></div>
-    <h1>Sollene Group</h1>
-    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-        <div class="sidebar">
-            <h3>Registro de Carga</h3>
-            <input type="text" id="pName" placeholder="Produto">
-            <select id="pCurrency"><option value="R$">Real (BRL)</option><option value="$">Dólar (USD)</option></select>
-            <input type="number" id="pPrice" placeholder="Valor">
-            <input type="number" id="pIn" placeholder="Entrada"><input type="number" id="pOut" placeholder="Saída">
-            <select id="pUnit"><option value="Unidades">Unidades</option><option value="KG">KG</option><option value="Toneladas">Toneladas</option><option value="Caixas">Caixas</option></select>
-            <button id="regBtn">Registrar</button>
-        </div>
-        <table id="invTable">
-            <thead><tr><th>Produto</th><th>Valor</th><th>Entrada</th><th>Saída</th><th>Saldo</th></tr></thead>
-            <tbody id="list"></tbody>
-        </table>
-    </div>
-    <script>
-        let data = JSON.parse(localStorage.getItem('sollene_final')) || {};
-        function update() {
-            const list = document.getElementById('list'); list.innerHTML = "";
-            for (let p in data) {
-                let row = list.insertRow();
-                row.innerHTML = `<td>${p}</td><td>${data[p].m} ${data[p].v}</td><td style="color:green">+ ${data[p].e}</td><td style="color:red">- ${data[p].s}</td><td style="font-weight:800">${data[p].e - data[p].s} ${data[p].u}</td>`;
-            }
-            localStorage.setItem('sollene_final', JSON.stringify(data));
-        }
-        document.getElementById('regBtn').onclick = () => {
-            let n = document.getElementById('pName').value;
-            let v = document.getElementById('pPrice').value;
-            let e = parseInt(document.getElementById('pIn').value) || 0;
-            let s = parseInt(document.getElementById('pOut').value) || 0;
-            if(!n) return alert("Nome!");
-            if(!data[n]) data[n] = {e:0, s:0, m:document.getElementById('pCurrency').value, v, u:document.getElementById('pUnit').value};
-            data[n].e += e; data[n].s += s; update();
-        };
-        window.onload = update;
-    </script>
+
+<!-- FORMULÁRIO LATERAL -->
+<div class="form-box">
+    <h2>Register Product</h2>
+
+    <input type="text" id="name" placeholder="Product Name">
+    <input type="number" id="entry" placeholder="Entry">
+    <input type="number" id="exit" placeholder="Exit">
+    <input type="number" id="price" placeholder="Price">
+
+    <button onclick="addProduct()">Add Product</button>
+</div>
+
+<!-- TABELA -->
+<div class="table-box">
+    <h2>Stock Table</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Entry</th>
+                <th>Exit</th>
+                <th>Price</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
+
+<script>
+function addProduct() {
+    let name = document.getElementById("name").value;
+    let entry = Number(document.getElementById("entry").value);
+    let exit = Number(document.getElementById("exit").value);
+    let price = Number(document.getElementById("price").value);
+
+    let stock = entry - exit;
+
+    let table = document.getElementById("tableBody");
+
+    let row = `
+        <tr>
+            <td>${name}</td>
+            <td>${entry}</td>
+            <td>${exit}</td>
+            <td>$${price.toFixed(2)}</td>
+            <td>${stock}</td>
+        </tr>
+    `;
+
+    table.innerHTML += row;
+
+    // limpar inputs
+    document.getElementById("name").value = "";
+    document.getElementById("entry").value = "";
+    document.getElementById("exit").value = "";
+    document.getElementById("price").value = "";
+}
+</script>
+
 </body>
 </html>
-
