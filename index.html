@@ -6,44 +6,89 @@
 <title>Sollene Group | Estoque</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: Arial;
     background: #fdfaf6;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 40px;
 }
 
+/* HEADER */
 .hero-banner {
-    width:95%;
-    max-width:1200px;
-    height:450px;
-    background:url('sollene-group.jpg') center/cover no-repeat;
-    border-radius:20px;
+    width: 95%;
+    max-width: 1200px;
+    height: 300px;
+    background: #222;
+    border-radius: 20px;
+    margin-top: 20px;
 }
 
+/* GRID */
 .main-grid {
-    display:grid;
-    grid-template-columns: 300px 1fr;
-    gap:20px;
-    width:100%;
-    max-width:1200px;
-    margin-top:20px;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 20px;
+    width: 95%;
+    max-width: 1200px;
+    margin-top: 20px;
 }
 
-.sidebar-card {
-    background:#1f2937;
-    color:white;
-    padding:20px;
-    border-radius:15px;
+/* FORM */
+.sidebar {
+    background: #1f2937;
+    padding: 20px;
+    border-radius: 15px;
+    color: white;
 }
 
-.inventory-area {
-    background:#fff;
-    border-radius:15px;
-    padding:10px;
+input, select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+}
+
+/* BOTÃO */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #b39359;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+/* TABELA */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+th {
+    background: #1f2937;
+    color: #b39359;
+    padding: 12px;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
 }
 </style>
 
@@ -53,24 +98,113 @@ body {
 
 <div class="hero-banner"></div>
 
-<h1>Sollene Group</h1>
+<h1>Sollene Group - Estoque</h1>
 
 <div class="main-grid">
 
-<aside class="sidebar-card">
-<h3>Registro</h3>
-<input placeholder="Produto">
-<input placeholder="Valor">
-<button>Registrar</button>
-</aside>
+<!-- FORM -->
+<div class="sidebar">
 
-<main class="inventory-area">
-<table>
-<tr><th>Produto</th><th>Valor</th></tr>
-</table>
-</main>
+<h3>Registro de Produto</h3>
+
+<input type="text" id="nome" placeholder="Nome do Produto">
+
+<input type="number" id="valor" placeholder="Valor Unitário">
+
+<input type="number" id="entrada" placeholder="Entrada">
+
+<input type="number" id="saida" placeholder="Saída">
+
+<select id="unidade">
+    <option value="Unidades">Unidades</option>
+    <option value="KG">KG</option>
+    <option value="Toneladas">Toneladas</option>
+    <option value="Pacotes">Pacotes</option>
+    <option value="Caixas">Caixas</option>
+</select>
+
+<button onclick="adicionar()">Registrar</button>
 
 </div>
+
+<!-- TABELA -->
+<div>
+<table>
+<thead>
+<tr>
+<th>Produto</th>
+<th>Valor</th>
+<th>Entrada</th>
+<th>Saída</th>
+<th>Saldo</th>
+<th>Unidade</th>
+</tr>
+</thead>
+<tbody id="tabela"></tbody>
+</table>
+</div>
+
+</div>
+
+<script>
+let estoque = JSON.parse(localStorage.getItem("sollene_estoque")) || {};
+
+function adicionar() {
+
+    let nome = document.getElementById("nome").value;
+    let valor = document.getElementById("valor").value;
+    let entrada = parseFloat(document.getElementById("entrada").value) || 0;
+    let saida = parseFloat(document.getElementById("saida").value) || 0;
+    let unidade = document.getElementById("unidade").value;
+
+    if(!nome || !valor) {
+        alert("Preencha nome e valor!");
+        return;
+    }
+
+    if(!estoque[nome]) {
+        estoque[nome] = {
+            valor: valor,
+            entrada: 0,
+            saida: 0,
+            unidade: unidade
+        };
+    }
+
+    estoque[nome].entrada += entrada;
+    estoque[nome].saida += saida;
+    estoque[nome].valor = valor;
+    estoque[nome].unidade = unidade;
+
+    localStorage.setItem("sollene_estoque", JSON.stringify(estoque));
+
+    render();
+}
+
+function render() {
+    let tabela = document.getElementById("tabela");
+    tabela.innerHTML = "";
+
+    for(let item in estoque) {
+
+        let p = estoque[item];
+        let saldo = p.entrada - p.saida;
+
+        tabela.innerHTML += `
+        <tr>
+            <td>${item}</td>
+            <td>${p.valor}</td>
+            <td>${p.entrada}</td>
+            <td>${p.saida}</td>
+            <td>${saldo}</td>
+            <td>${p.unidade}</td>
+        </tr>
+        `;
+    }
+}
+
+render();
+</script>
 
 </body>
 </html>
