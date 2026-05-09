@@ -167,22 +167,27 @@
         // Sistema de controle acumulativo e persistência
         let controleEstoque = JSON.parse(localStorage.getItem('solleneData')) || {};
         const inventoryList = document.getElementById('list');
-
         function atualizarTabela() {
-            inventoryList.innerHTML = "";
-            for (let produto in controleEstoque) {
-                const item = controleEstoque[produto];
-                const saldo = item.totalEntrada - item.totalSaida;
-                const row = inventoryList.insertRow();
-                row.innerHTML = `
-                    <td>${produto}</td>
-                    <td>${item.destino}</td>
-                    <td style="color: #27ae60;">+ ${item.totalEntrada}</td>
-                    <td style="color: #e74c3c;">- ${item.totalSaida}</td>
-                    <td style="font-weight: 800; color: #b39359;">${saldo} ${item.unidade}</td>
-                `;
-            }
-        }
+    inventoryList.innerHTML = "";
+    for (let produto in controleEstoque) {
+        const item = controleEstoque[produto];
+        
+        // Proteção: Se o valor não existir, vira 0 ou vazio em vez de "undefined"
+        const entrada = item.totalEntrada || 0;
+        const saida = item.totalSaida || 0;
+        const destino = item.destino || "---";
+        const unidade = item.unidade || "un";
+        const saldo = entrada - saida;
+        const row = inventoryList.insertRow();
+        row.innerHTML = `
+            <td>${produto}</td>
+            <td>${destino}</td>
+            <td style="color: #27ae60;">+ ${entrada}</td>
+            <td style="color: #e74c3c;">- ${saida}</td>
+            <td style="font-weight: 800; color: #b39359;">${saldo} ${unidade}</td>
+        `;
+    }
+}
 
         window.onload = atualizarTabela;
 
