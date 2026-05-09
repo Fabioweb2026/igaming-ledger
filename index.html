@@ -31,12 +31,10 @@
             border-radius: 50px; 
         }
 
-        /* BANNER CORRIGIDO COM O NOME EXATO DO ARQUIVO */
         .hero-banner { 
             width: 95%; 
             max-width: 1200px; 
             height: 450px; 
-            /* Mudamos para sollene-group.jpg que está no seu repositório */
             background-image: url('sollene-group.jpg'); 
             background-size: cover; 
             background-position: center; 
@@ -71,7 +69,7 @@
         input, select { 
             width: 100%; 
             padding: 16px; 
-            margin-bottom: 15px; 
+            margin-bottom: 12px; 
             border-radius: 14px; 
             background: #111827; 
             color: #fff; 
@@ -119,6 +117,14 @@
         <aside class="sidebar-card">
             <h3>Registro de Carga</h3>
             <input type="text" id="pName" placeholder="Produto">
+            
+            <!-- Novos campos de Moeda e Valor -->
+            <select id="pCurrency">
+                <option value="R$">Real (BRL)</option>
+                <option value="$">Dólar (USD)</option>
+            </select>
+            <input type="number" id="pPrice" placeholder="Valor Unitário">
+
             <input type="number" id="pIn" placeholder="Qtd Entrada">
             <input type="number" id="pOut" placeholder="Qtd Saída">
             
@@ -137,6 +143,7 @@
                 <thead>
                     <tr>
                         <th>Produto</th>
+                        <th>Valor</th>
                         <th>Entrada</th>
                         <th>Saída</th>
                         <th>Saldo Atual</th>
@@ -148,8 +155,7 @@
     </div>
 
     <script>
-        // Sistema de Persistência Atualizado
-        let controleEstoque = JSON.parse(localStorage.getItem('sollene_final_v3')) || {};
+        let controleEstoque = JSON.parse(localStorage.getItem('sollene_v4')) || {};
         const inventoryList = document.getElementById('list');
 
         function atualizarTabela() {
@@ -161,9 +167,10 @@
                 const row = inventoryList.insertRow();
                 row.innerHTML = `
                     <td>${produto}</td>
+                    <td style="color: #b39359; font-weight: 800;">${item.m} ${item.v}</td>
                     <td style="color: #27ae60;">+ ${item.e}</td>
                     <td style="color: #e74c3c;">- ${item.s}</td>
-                    <td style="font-weight: 800; color: #b39359;">${saldo} ${item.u}</td>
+                    <td style="font-weight: 800;">${saldo} ${item.u}</td>
                 `;
             }
         }
@@ -172,32 +179,34 @@
 
         document.getElementById('regBtn').addEventListener('click', function() {
             const nome = document.getElementById('pName').value.trim();
+            const moeda = document.getElementById('pCurrency').value;
+            const valor = parseFloat(document.getElementById('pPrice').value).toFixed(2);
             const entrada = parseInt(document.getElementById('pIn').value) || 0;
             const saida = parseInt(document.getElementById('pOut').value) || 0;
             const unidade = document.getElementById('pUnit').value;
 
-            // TRAVA DE SEGURANÇA: Impede registros vazios ou apenas com zeros
-            if(!nome || (entrada === 0 && saida === 0)) {
-                return alert("Por favor, preencha o nome do produto e pelo menos uma quantidade.");
+            if(!nome || isNaN(valor)) {
+                return alert("Por favor, preencha o nome do produto e o valor.");
             }
 
             if (!controleEstoque[nome]) {
-                controleEstoque[nome] = { e: 0, s: 0, u: unidade };
+                controleEstoque[nome] = { e: 0, s: 0, u: unidade, m: moeda, v: valor };
             }
 
             controleEstoque[nome].e += entrada;
             controleEstoque[nome].s += saida;
-            controleEstoque[nome].u = unidade;
+            controleEstoque[nome].m = moeda;
+            controleEstoque[nome].v = valor;
 
-            localStorage.setItem('sollene_final_v3', JSON.stringify(controleEstoque));
+            localStorage.setItem('sollene_v4', JSON.stringify(controleEstoque));
             atualizarTabela();
 
-            // Limpar campos
             document.getElementById('pName').value = "";
+            document.getElementById('pPrice').value = "";
             document.getElementById('pIn').value = "";
             document.getElementById('pOut').value = "";
-            document.getElementById('pName').focus();
         });
     </script>
 </body>
 </html>
+
