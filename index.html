@@ -11,11 +11,17 @@
 
         .back-link { align-self: flex-start; margin: 20px 0 0 40px; text-decoration: none; color: #b39359; font-weight: 800; font-size: 11px; text-transform: uppercase; background: rgba(31,41,55,0.05); padding: 8px 15px; border-radius: 50px; }
 
-        /* BANNER CORRIGIDO - COM LINK OFICIAL */
+        /* BANNER CORRIGIDO COM O LINK OFICIAL */
         .hero-banner { 
-            width: 95%; max-width: 1200px; height: 400px; 
+            width: 95%; 
+            max-width: 1200px; 
+            height: 450px; 
             background: #eee url('https://github.io') no-repeat center; 
-            background-size: cover; border-radius: 28px; margin-top: 20px; border: 1px solid #e5e1da; 
+            background-size: cover; 
+            border-radius: 28px; 
+            margin-top: 20px; 
+            border: 1px solid #e5e1da; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
         }
 
         .company-header { text-align: center; margin: 40px 0; }
@@ -69,8 +75,8 @@
     </div>
 
     <script>
-        // Carrega dados ou inicia vazio
-        let controleEstoque = JSON.parse(localStorage.getItem('solleneFinal')) || {};
+        // Limpa erros antigos e inicia sistema novo
+        let controleEstoque = JSON.parse(localStorage.getItem('sollene_final_v2')) || {};
         const inventoryList = document.getElementById('list');
 
         function atualizarTabela() {
@@ -78,14 +84,8 @@
             for (let produto in controleEstoque) {
                 const item = controleEstoque[produto];
                 const saldo = (item.e || 0) - (item.s || 0);
-
                 const row = inventoryList.insertRow();
-                row.innerHTML = `
-                    <td>${produto}</td>
-                    <td style="color:#27ae60">+ ${item.e}</td>
-                    <td style="color:#e74c3c">- ${item.s}</td>
-                    <td style="font-weight:800;color:#b39359">${saldo} ${item.u}</td>
-                `;
+                row.innerHTML = `<td>${produto}</td><td style="color:#27ae60">+ ${item.e}</td><td style="color:#e74c3c">- ${item.s}</td><td style="font-weight:800;color:#b39359">${saldo} ${item.u}</td>`;
             }
         }
 
@@ -97,23 +97,19 @@
             const saida = parseInt(document.getElementById('pOut').value) || 0;
             const unidade = document.getElementById('pUnit').value;
 
-            // TRAVA: Só registra se tiver nome e alguma quantidade
+            // TRAVA DE SEGURANÇA: Impede registros vazios
             if(!nome || (entrada === 0 && saida === 0)) {
-                return alert("Erro: Preencha o nome e uma quantidade válida!");
+                return alert("Erro: Digite o nome do produto e uma quantidade válida.");
             }
 
-            if (!controleEstoque[nome]) { 
-                controleEstoque[nome] = { e: 0, s: 0, u: unidade }; 
-            }
-            
+            if (!controleEstoque[nome]) { controleEstoque[nome] = { e: 0, s: 0, u: unidade }; }
             controleEstoque[nome].e += entrada;
             controleEstoque[nome].s += saida;
             controleEstoque[nome].u = unidade;
 
-            localStorage.setItem('solleneFinal', JSON.stringify(controleEstoque));
+            localStorage.setItem('sollene_final_v2', JSON.stringify(controleEstoque));
             atualizarTabela();
 
-            // Limpa campos
             document.getElementById('pName').value = ""; 
             document.getElementById('pIn').value = ""; 
             document.getElementById('pOut').value = "";
@@ -121,4 +117,5 @@
     </script>
 </body>
 </html>
+
 
