@@ -1,3 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sollene Group ERP System</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial;
+}
+
+/* FUNDO PREMIUM */
+body {
+    background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
+}
+
+/* ===== HERO (IMAGEM TOPO) ===== */
+.hero {
+    width: 100%;
+    height: 300px;
+    position: relative;
+    background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
+    border-bottom: 4px solid black;
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.hero-text {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #8a6d2f;
+}
+
+.hero-text h1 {
+    font-size: 34px;
+    letter-spacing: 3px;
+}
+
+.hero-text p {
+    font-size: 13px;
+    color: #5c4a24;
+}
+
+/* ===== HEADER ===== */
+header {
+    text-align: center;
+    padding: 10px;
+    color: #5c4a24;
+    font-size: 12px;
+}
+
+/* ===== LAYOUT ===== */
+.container {
+    display: flex;
+    height: 75vh;
+}
+
+/* ===== FORM CARD ===== */
+.form-box {
+    width: 28%;
+    padding: 15px;
+}
+
+.card {
+    background: rgba(0,0,0,0.9);
+    border: 2px solid #d4af37;
+    border-radius: 12px;
+    padding: 15px;
+    color: white;
+}
+
+.card h2 {
+    text-align: center;
+    color: #d4af37;
+    margin-bottom: 10px;
+}
+
+.card input {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    background: #111;
+    border: 1px solid #333;
+    color: white;
+    border-radius: 5px;
+}
+
+/* GROUP BOX */
+.group-box {
+    border: 1px solid #d4af37;
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.group-box h3 {
+    font-size: 12px;
+    color: #d4af37;
+    text-align: center;
+}
+
+.card button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background: #d4af37;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+/* ===== TABELA ===== */
+.table-box {
+    width: 72%;
+    padding: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border: 2px solid black;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background: black;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO IMAGE -->
+<div class="hero">
+    <img src="sollene-group.jpg" alt="Sollene Group">
+    <div class="hero-text">
+        <h1>SOLLENE GROUP</h1>
+        <p>Corporate Stock Management System</p>
+    </div>
+</div>
+
+<header>
+    Av. Paulista, 1500 - São Paulo, SP - Brazil | ERP System
+</header>
+
+<div class="container">
+
+<!-- FORM -->
 <div class="form-box">
     <div class="card">
         <h2>REGISTER PRODUCT</h2>
@@ -5,13 +172,10 @@
         <input type="text" id="name" placeholder="Product Name">
         <input type="text" id="rg" placeholder="RG Code">
 
-        <!-- CAIXA ÚNICA AGRUPADA -->
         <div class="group-box">
-            <h3>Stock Units</h3>
-
+            <h3>STOCK UNITS</h3>
             <input type="number" id="entry" placeholder="Kg Entry">
             <input type="number" id="exit" placeholder="Kg Exit">
-
             <input type="number" id="tons" placeholder="Toneladas">
             <input type="number" id="boxes" placeholder="Caixas">
             <input type="number" id="packages" placeholder="Pacotes">
@@ -22,30 +186,32 @@
         <button onclick="addProduct()">ADD PRODUCT</button>
     </div>
 </div>
-.group-box {
-    margin-top: 10px;
-    padding: 10px;
-    border: 1px solid #d4af37;
-    border-radius: 8px;
-    background: rgba(0,0,0,0.4);
-}
 
-.group-box h3 {
-    color: #d4af37;
-    font-size: 12px;
-    margin-bottom: 8px;
-    text-align: center;
-}
+<!-- TABLE -->
+<div class="table-box">
+    <h2>STOCK CONTROL</h2>
 
-.group-box input {
-    width: 100%;
-    margin: 5px 0;
-    padding: 8px;
-    background: #111;
-    color: white;
-    border: 1px solid #333;
-    border-radius: 5px;
-}
+    <table>
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>RG</th>
+                <th>Entry Kg</th>
+                <th>Exit Kg</th>
+                <th>Tons</th>
+                <th>Boxes</th>
+                <th>Packages</th>
+                <th>Price</th>
+                <th>Stock</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+    </table>
+</div>
+
+</div>
+
+<script>
 function addProduct() {
     let name = document.getElementById("name").value;
     let rg = document.getElementById("rg").value;
@@ -59,12 +225,10 @@ function addProduct() {
 
     let price = Number(document.getElementById("price").value);
 
-    // cálculo de estoque
     let stock = entry - exit;
 
-    // validação simples (evita linha vazia)
     if (!name || isNaN(entry) || isNaN(exit)) {
-        alert("Please fill Product Name, Entry and Exit");
+        alert("Fill required fields");
         return;
     }
 
@@ -72,8 +236,8 @@ function addProduct() {
         <tr>
             <td>${name}</td>
             <td>${rg}</td>
-            <td>${entry} kg</td>
-            <td>${exit} kg</td>
+            <td>${entry}</td>
+            <td>${exit}</td>
             <td>${tons}</td>
             <td>${boxes}</td>
             <td>${packages}</td>
@@ -82,7 +246,7 @@ function addProduct() {
         </tr>
     `;
 
-    // limpar campos
+    // limpar
     document.getElementById("name").value = "";
     document.getElementById("rg").value = "";
     document.getElementById("entry").value = "";
@@ -92,3 +256,7 @@ function addProduct() {
     document.getElementById("packages").value = "";
     document.getElementById("price").value = "";
 }
+</script>
+
+</body>
+</html>
