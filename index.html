@@ -17,30 +17,30 @@ body {
     background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
 }
 
-/* ================= HERO AJUSTADO ================= */
+/* ================= HERO ================= */
 .hero {
     position: relative;
     width: 100%;
-    height: 320px; /* altura maior e equilibrada */
+    height: 320px;
     overflow: hidden;
     border-bottom: 4px solid black;
     background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
 }
 
-/* 🔥 ajuste profissional de banner */
 .hero img {
     width: 100%;
     height: 100%;
-    object-fit: cover;          /* ocupa toda área */
-    object-position: center 35%; /* 🔥 move imagem para não cortar o logo */
+    object-fit: cover;
+    object-position: center 35%; /* ajuste para não cortar logo */
 }
+
 .hero-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0,0,0,0.15);
+    background: rgba(0,0,0,0.2);
 }
 
 .hero-text {
@@ -49,34 +49,25 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: #8a6d2f;
+    color: white;
 }
 
 .hero-text h1 {
-    font-size: 34px;
-    letter-spacing: 3px;
+    font-size: 40px;
+    letter-spacing: 4px;
 }
 
 .hero-text p {
-    font-size: 13px;
-    color: #5c4a24;
+    font-size: 14px;
 }
 
-/* ================= HEADER + CONTACT ================= */
-header {
-    text-align: center;
-    padding: 10px;
-    font-size: 12px;
-    color: #5c4a24;
-}
-
-/* CONTACT BOX */
+/* ================= CONTACT ================= */
 .contact {
     text-align: center;
     padding: 10px;
     font-size: 12px;
     color: #3d2f14;
-    background: rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.5);
     border-bottom: 1px solid #cbb98d;
 }
 
@@ -93,7 +84,7 @@ header {
 }
 
 .card {
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.92);
     border: 2px solid #d4af37;
     border-radius: 12px;
     padding: 15px;
@@ -128,6 +119,17 @@ header {
     font-size: 12px;
     color: #d4af37;
     text-align: center;
+}
+
+/* SELECT UNITS */
+.group-box select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    background: #111;
+    color: white;
+    border: 1px solid #d4af37;
+    border-radius: 5px;
 }
 
 /* BUTTON */
@@ -185,12 +187,8 @@ th {
 
 <!-- CONTACT -->
 <div class="contact">
-    📞 +55 11 99999-8888 | 📍 Av. Paulista, 1500 - São Paulo, SP - Brazil | ✉ contact@sollenegroup.com
+    📞 +55 11 99999-8888 | 📍 Av. Paulista, 1500 - São Paulo, SP | ✉ contact@sollenegroup.com
 </div>
-
-<header>
-    ERP Stock Management System
-</header>
 
 <div class="container">
 
@@ -205,13 +203,21 @@ th {
         <div class="group-box">
             <h3>STOCK UNITS</h3>
 
-            <input type="number" id="entry" placeholder="Kg Entry">
-            <input type="number" id="exit" placeholder="Kg Exit">
-            <input type="number" id="tons" placeholder="Toneladas">
-            <input type="number" id="boxes" placeholder="Caixas">
-            <input type="number" id="packages" placeholder="Pacotes">
+            <!-- SELECT UNIDADE -->
+            <select id="unitType">
+                <option value="Kg">Kg</option>
+                <option value="Toneladas">Toneladas</option>
+                <option value="Caixas">Caixas</option>
+                <option value="Pacotes">Pacotes</option>
+            </select>
+
+            <input type="number" id="entry" placeholder="Entry Quantity">
+            <input type="number" id="exit" placeholder="Exit Quantity">
         </div>
 
+        <input type="number" id="tons" placeholder="Toneladas">
+        <input type="number" id="boxes" placeholder="Caixas">
+        <input type="number" id="packages" placeholder="Pacotes">
         <input type="number" id="price" placeholder="Price">
 
         <button onclick="addProduct()">ADD PRODUCT</button>
@@ -227,8 +233,8 @@ th {
             <tr>
                 <th>Product</th>
                 <th>RG</th>
-                <th>Kg Entry</th>
-                <th>Kg Exit</th>
+                <th>Entry</th>
+                <th>Exit</th>
                 <th>Tons</th>
                 <th>Boxes</th>
                 <th>Packages</th>
@@ -247,6 +253,8 @@ function addProduct() {
     let name = document.getElementById("name").value;
     let rg = document.getElementById("rg").value;
 
+    let unitType = document.getElementById("unitType").value;
+
     let entry = Number(document.getElementById("entry").value);
     let exit = Number(document.getElementById("exit").value);
 
@@ -258,17 +266,22 @@ function addProduct() {
 
     let stock = entry - exit;
 
+    if (!name || isNaN(entry) || isNaN(exit)) {
+        alert("Please fill required fields");
+        return;
+    }
+
     document.getElementById("tableBody").innerHTML += `
         <tr>
             <td>${name}</td>
             <td>${rg}</td>
-            <td>${entry}</td>
-            <td>${exit}</td>
+            <td>${entry} ${unitType}</td>
+            <td>${exit} ${unitType}</td>
             <td>${tons}</td>
             <td>${boxes}</td>
             <td>${packages}</td>
             <td>R$ ${price.toFixed(2)}</td>
-            <td>${stock}</td>
+            <td>${stock} ${unitType}</td>
         </tr>
     `;
 }
