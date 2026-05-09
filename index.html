@@ -26,9 +26,10 @@ body{
 
 .hero{
     position:relative;
-    height:240px;
+    width:100%;
+    height:340px;
     overflow:hidden;
-    border-bottom:2px solid black;
+    border-bottom:4px solid black;
 }
 
 /* HERO IMAGE */
@@ -37,8 +38,8 @@ body{
     width:100%;
     height:100%;
     object-fit:cover;
-    object-position:center 38%;
-    filter:brightness(0.50) contrast(1.05);
+    object-position:center 30%;
+    filter:brightness(0.65);
 }
 
 /* OVERLAY */
@@ -49,8 +50,8 @@ body{
 
     background:linear-gradient(
         135deg,
-        rgba(0,0,0,0.30),
-        rgba(0,0,0,0.72)
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.75)
     );
 }
 
@@ -70,38 +71,38 @@ body{
 
 .badge{
     display:inline-block;
-    padding:5px 10px;
+    padding:6px 12px;
+    font-size:11px;
     border:1px solid #d4af37;
     color:#d4af37;
     border-radius:20px;
-    font-size:10px;
+    margin-bottom:10px;
     letter-spacing:2px;
-    margin-bottom:8px;
-    background:rgba(212,175,55,0.08);
+    background:rgba(212,175,55,0.10);
 }
 
-/* TITLE */
+/* HERO TITLE */
 
 .hero-content h1{
-    font-size:34px;
-    letter-spacing:4px;
-    margin-bottom:5px;
-    text-shadow:0 4px 10px rgba(0,0,0,0.5);
+    font-size:44px;
+    letter-spacing:5px;
+    margin-bottom:6px;
+    text-shadow:0 6px 25px rgba(0,0,0,0.8);
 }
 
-/* SUBTITLE */
+/* HERO SUBTITLE */
 
 .hero-content p{
-    opacity:0.80;
-    font-size:11px;
-    letter-spacing:2px;
+    font-size:13px;
+    opacity:0.85;
+    letter-spacing:3px;
 }
 
 /* ================= CONTAINER ================= */
 
 .container{
     display:flex;
-    gap:15px;
+    gap:20px;
     padding:20px;
     align-items:flex-start;
 }
@@ -112,46 +113,52 @@ body{
     width:30%;
 }
 
+/* CARD */
+
 .card{
     background:rgba(0,0,0,0.92);
     border:2px solid #d4af37;
-    border-radius:14px;
-    padding:18px;
+    border-radius:15px;
+    padding:20px;
     color:white;
-    box-shadow:0 10px 25px rgba(0,0,0,0.20);
+    box-shadow:0 10px 30px rgba(0,0,0,0.20);
 }
 
 .card h3{
-    margin-bottom:12px;
+    margin-bottom:15px;
     letter-spacing:1px;
     color:#d4af37;
 }
 
+/* INPUTS */
+
 .card input,
 .card select{
     width:100%;
-    padding:10px;
-    margin:6px 0;
+    padding:11px;
+    margin:7px 0;
     border:none;
     border-radius:6px;
     outline:none;
 }
 
+/* BUTTON */
+
 .card button{
     width:100%;
-    padding:11px;
+    padding:12px;
+    margin-top:8px;
     background:#d4af37;
     border:none;
     border-radius:6px;
     cursor:pointer;
     font-weight:bold;
-    margin-top:5px;
     transition:0.3s;
 }
 
 .card button:hover{
     opacity:0.9;
-    transform:translateY(-1px);
+    transform:translateY(-2px);
 }
 
 /* ================= TABLE ================= */
@@ -171,7 +178,7 @@ table{
 
 th,td{
     border:1px solid #ddd;
-    padding:10px;
+    padding:12px;
     text-align:center;
     font-size:14px;
 }
@@ -217,7 +224,7 @@ footer{
     background:black;
     color:white;
     text-align:center;
-    padding:18px;
+    padding:20px;
     margin-top:20px;
     font-size:12px;
     letter-spacing:1px;
@@ -237,11 +244,11 @@ footer{
 }
 
 .hero{
-    height:300px;
+    height:280px;
 }
 
 .hero-content h1{
-    font-size:28px;
+    font-size:30px;
 }
 
 }
@@ -290,22 +297,28 @@ footer{
 <input type="number" id="exit" placeholder="Exit">
 
 <select id="currency">
+
 <option value="BRL">BRL</option>
+
 <option value="USD">USD</option>
+
 <option value="EUR">EUR</option>
+
 </select>
 
 <input type="number" id="price" placeholder="Price">
 
 <button onclick="addProduct()">
+
 ADD PRODUCT
+
 </button>
 
 </div>
 
 </div>
 
-<!-- TABLE -->
+<!-- ================= TABLE ================= -->
 
 <div class="table-box">
 
@@ -346,7 +359,9 @@ ADD PRODUCT
 <!-- ================= FOOTER ================= -->
 
 <footer>
+
 Sollene Group Enterprise • Malta Business Center • contact@sollene-group.com
+
 </footer>
 
 <script>
@@ -402,6 +417,8 @@ let price = Number(document.getElementById("price").value);
 
 let currency = document.getElementById("currency").value;
 
+/* VALIDATION */
+
 if(name === ""){
 
 showMessage("Enter product name");
@@ -410,7 +427,11 @@ return;
 
 }
 
+/* STOCK */
+
 let stock = entry - exit;
+
+/* CONVERSION */
 
 let priceBRL;
 
@@ -427,7 +448,10 @@ priceBRL = price * EUR;
 else{
 
 priceBRL = price;
+
 }
+
+/* SAVE */
 
 products.push({
 
@@ -438,6 +462,8 @@ stock,
 priceBRL
 
 });
+
+/* UPDATE */
 
 updateTable();
 
@@ -462,6 +488,7 @@ let eur = (p.priceBRL / EUR).toFixed(2);
 let total = (p.stock * p.priceBRL).toFixed(2);
 
 html += `
+
 <tr>
 
 <td>${p.name}</td>
@@ -481,6 +508,7 @@ html += `
 <td>R$ ${total}</td>
 
 </tr>
+
 `;
 
 });
