@@ -17,55 +17,64 @@ body {
     background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
 }
 
-/* ===== HERO (IMAGEM TOPO) ===== */
+/* ================= HERO ================= */
 .hero {
-    width: 100%;
-    height: 300px;
     position: relative;
-    background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
+    width: 100%;
+    height: 380px;
+    overflow: hidden;
     border-bottom: 4px solid black;
 }
 
 .hero img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.25);
 }
 
 .hero-text {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    color: #8a6d2f;
+    color: white;
 }
 
 .hero-text h1 {
-    font-size: 34px;
-    letter-spacing: 3px;
+    font-size: 42px;
+    letter-spacing: 4px;
 }
 
 .hero-text p {
-    font-size: 13px;
-    color: #5c4a24;
+    font-size: 14px;
 }
 
-/* ===== HEADER ===== */
+/* ================= HEADER ================= */
 header {
     text-align: center;
     padding: 10px;
-    color: #5c4a24;
     font-size: 12px;
+    color: #5c4a24;
 }
 
-/* ===== LAYOUT ===== */
+/* ================= LAYOUT ================= */
 .container {
     display: flex;
     height: 75vh;
 }
 
-/* ===== FORM CARD ===== */
+/* ================= FORM CARD ================= */
 .form-box {
     width: 28%;
     padding: 15px;
@@ -98,7 +107,7 @@ header {
 /* GROUP BOX */
 .group-box {
     border: 1px solid #d4af37;
-    padding: 8px;
+    padding: 10px;
     margin-top: 10px;
     border-radius: 8px;
 }
@@ -107,8 +116,10 @@ header {
     font-size: 12px;
     color: #d4af37;
     text-align: center;
+    margin-bottom: 5px;
 }
 
+/* BUTTON */
 .card button {
     width: 100%;
     padding: 10px;
@@ -121,10 +132,11 @@ header {
     border-radius: 6px;
 }
 
-/* ===== TABELA ===== */
+/* ================= TABLE ================= */
 .table-box {
     width: 72%;
     padding: 15px;
+    overflow-y: auto;
 }
 
 table {
@@ -149,9 +161,11 @@ th {
 
 <body>
 
-<!-- HERO IMAGE -->
+<!-- HERO -->
 <div class="hero">
     <img src="sollene-group.jpg" alt="Sollene Group">
+    <div class="hero-overlay"></div>
+
     <div class="hero-text">
         <h1>SOLLENE GROUP</h1>
         <p>Corporate Stock Management System</p>
@@ -162,6 +176,7 @@ th {
     Av. Paulista, 1500 - São Paulo, SP - Brazil | ERP System
 </header>
 
+<!-- CONTAINER -->
 <div class="container">
 
 <!-- FORM -->
@@ -172,8 +187,10 @@ th {
         <input type="text" id="name" placeholder="Product Name">
         <input type="text" id="rg" placeholder="RG Code">
 
+        <!-- GROUP -->
         <div class="group-box">
             <h3>STOCK UNITS</h3>
+
             <input type="number" id="entry" placeholder="Kg Entry">
             <input type="number" id="exit" placeholder="Kg Exit">
             <input type="number" id="tons" placeholder="Toneladas">
@@ -196,8 +213,8 @@ th {
             <tr>
                 <th>Product</th>
                 <th>RG</th>
-                <th>Entry Kg</th>
-                <th>Exit Kg</th>
+                <th>Kg Entry</th>
+                <th>Kg Exit</th>
                 <th>Tons</th>
                 <th>Boxes</th>
                 <th>Packages</th>
@@ -211,6 +228,7 @@ th {
 
 </div>
 
+<!-- JAVASCRIPT -->
 <script>
 function addProduct() {
     let name = document.getElementById("name").value;
@@ -228,7 +246,7 @@ function addProduct() {
     let stock = entry - exit;
 
     if (!name || isNaN(entry) || isNaN(exit)) {
-        alert("Fill required fields");
+        alert("Please fill required fields");
         return;
     }
 
@@ -246,7 +264,7 @@ function addProduct() {
         </tr>
     `;
 
-    // limpar
+    // limpar campos
     document.getElementById("name").value = "";
     document.getElementById("rg").value = "";
     document.getElementById("entry").value = "";
