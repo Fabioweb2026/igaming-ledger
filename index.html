@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Sollene Group | Stock System</title>
+<title>Sollene Group | ERP Stock</title>
 
 <style>
 * {
@@ -12,103 +12,76 @@
     font-family: Arial;
 }
 
-/* FUNDO CREME / DOURADO LEVE */
+/* FUNDO CREME PREMIUM */
 body {
     background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
-    color: #1a1a1a;
 }
 
-/* HEADER */
+/* IMAGEM TOPO FULL WIDTH */
+.top-banner img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-bottom: 5px solid black;
+}
+
+/* HEADER EMPRESA */
 header {
     text-align: center;
-    padding: 20px;
-    border-bottom: 1px solid #d6c7a6;
+    padding: 15px;
 }
 
 header h1 {
-    font-size: 28px;
     color: #8a6d2f;
     letter-spacing: 2px;
 }
 
 header p {
-    font-size: 12px;
     color: #5c4a24;
+    font-size: 12px;
 }
 
 /* LAYOUT */
 .container {
     display: flex;
-    height: 90vh;
+    height: 80vh;
 }
 
 /* FORMULÁRIO */
 .form-box {
     width: 25%;
-    background: #ffffffb3;
+    background: rgba(255,255,255,0.7);
     padding: 20px;
-    border-right: 1px solid #d6c7a6;
+    border-right: 3px solid black; /* BORDA PRETA ELEGANTE */
 }
 
 .form-box h2 {
-    margin-bottom: 15px;
     color: #8a6d2f;
+    margin-bottom: 10px;
 }
 
 .form-box input {
     width: 100%;
     padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #cbb98d;
-    background: #fff;
+    margin: 6px 0;
+    border: 1px solid black;
+    background: white;
 }
 
+/* BOTÃO */
 .form-box button {
     width: 100%;
     padding: 10px;
-    background: #8a6d2f;
-    border: none;
+    background: black;
     color: white;
+    border: none;
     cursor: pointer;
-    font-weight: bold;
-}
-
-/* CENTRO */
-.center {
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border-right: 1px solid #d6c7a6;
-}
-
-.center img {
-    width: 220px;
-    height: 220px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 4px solid #8a6d2f;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.center h2 {
-    margin-top: 15px;
-    color: #8a6d2f;
-    letter-spacing: 2px;
-}
-
-.center p {
-    font-size: 12px;
-    color: #5c4a24;
-    text-align: center;
     margin-top: 10px;
-    padding: 0 20px;
 }
 
 /* TABELA */
 .table-box {
-    width: 45%;
+    width: 75%;
     padding: 20px;
     overflow-y: auto;
 }
@@ -117,22 +90,28 @@ table {
     width: 100%;
     border-collapse: collapse;
     background: white;
+    border: 2px solid black;
 }
 
 th, td {
     padding: 10px;
-    border: 1px solid #e0d2b0;
+    border: 1px solid black;
     text-align: center;
 }
 
 th {
-    background: #8a6d2f;
+    background: black;
     color: white;
 }
 </style>
 </head>
 
 <body>
+
+<!-- IMAGEM TOPO -->
+<div class="top-banner">
+    <img src="sollene-group.jpg" alt="Sollene Group">
+</div>
 
 <header>
     <h1>SOLLENE GROUP</h1>
@@ -141,26 +120,24 @@ th {
 
 <div class="container">
 
-<!-- FORM -->
+<!-- FORMULÁRIO -->
 <div class="form-box">
     <h2>Register Product</h2>
 
     <input type="text" id="name" placeholder="Product Name">
+
+    <input type="text" id="rg" placeholder="RG Code">
+
     <input type="number" id="entry" placeholder="Entry">
     <input type="number" id="exit" placeholder="Exit">
+
+    <input type="number" id="tons" placeholder="Toneladas">
+    <input type="number" id="boxes" placeholder="Caixas">
+    <input type="number" id="packages" placeholder="Pacotes">
+
     <input type="number" id="price" placeholder="Price">
 
-    <button onclick="addProduct()">ADD</button>
-</div>
-
-<!-- CENTRO EMPRESA -->
-<div class="center">
-    <img src="sollene-group.jpg" alt="Sollene Group">
-    <h2>SOLLENE GROUP</h2>
-    <p>
-        Corporate Stock & Management System<br>
-        Premium Business Intelligence Platform
-    </p>
+    <button onclick="addProduct()">ADD PRODUCT</button>
 </div>
 
 <!-- TABELA -->
@@ -171,8 +148,12 @@ th {
         <thead>
             <tr>
                 <th>Product</th>
+                <th>RG</th>
                 <th>Entry</th>
                 <th>Exit</th>
+                <th>Tons</th>
+                <th>Boxes</th>
+                <th>Packages</th>
                 <th>Price</th>
                 <th>Stock</th>
             </tr>
@@ -186,8 +167,12 @@ th {
 <script>
 function addProduct() {
     let name = document.getElementById("name").value;
+    let rg = document.getElementById("rg").value;
     let entry = Number(document.getElementById("entry").value);
     let exit = Number(document.getElementById("exit").value);
+    let tons = document.getElementById("tons").value;
+    let boxes = document.getElementById("boxes").value;
+    let packages = document.getElementById("packages").value;
     let price = Number(document.getElementById("price").value);
 
     let stock = entry - exit;
@@ -195,8 +180,12 @@ function addProduct() {
     document.getElementById("tableBody").innerHTML += `
         <tr>
             <td>${name}</td>
+            <td>${rg}</td>
             <td>${entry}</td>
             <td>${exit}</td>
+            <td>${tons}</td>
+            <td>${boxes}</td>
+            <td>${packages}</td>
             <td>R$ ${price.toFixed(2)}</td>
             <td>${stock}</td>
         </tr>
