@@ -2,195 +2,191 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sollene Group ERP</title>
 
 <style>
 
 /* ================= BASE ================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
 }
 
-body {
-    background: linear-gradient(135deg, #f7f1e1, #e9dcc2);
-}
-
-/* ================= LOGIN ================= */
-.login-screen {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.92);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-}
-
-.login-box {
-    background: black;
-    padding: 20px;
-    border: 2px solid #d4af37;
-    border-radius: 10px;
-    width: 280px;
-    text-align: center;
-    color: white;
-}
-
-.login-box input {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: none;
-    outline: none;
-}
-
-.login-box button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    background: #d4af37;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
+body{
+    background:linear-gradient(135deg,#f7f1e1,#e9dcc2);
 }
 
 /* ================= HERO ================= */
-.hero {
-    position: relative;
-    width: 100%;
-    height: 360px;
-    overflow: hidden;
-    border-bottom: 4px solid black;
+.hero{
+    position:relative;
+    width:100%;
+    height:380px;
+    overflow:hidden;
+    border-bottom:4px solid black;
 }
 
-.hero img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 30%;
-    filter: brightness(0.65) contrast(1.1);
+.hero img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center 30%;
+    filter:brightness(0.6);
 }
 
-.hero-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
         135deg,
         rgba(0,0,0,0.35),
         rgba(0,0,0,0.75)
     );
 }
 
-.hero-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-    width: 90%;
+.hero-content{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+    color:white;
+    width:90%;
 }
 
-.badge {
-    display: inline-block;
-    padding: 6px 12px;
-    font-size: 11px;
-    border: 1px solid #d4af37;
-    color: #d4af37;
-    border-radius: 20px;
-    margin-bottom: 10px;
+.badge{
+    display:inline-block;
+    padding:6px 12px;
+    border:1px solid #d4af37;
+    color:#d4af37;
+    border-radius:20px;
+    font-size:11px;
+    margin-bottom:10px;
 }
 
-.hero-content h1 {
-    font-size: 44px;
-    letter-spacing: 5px;
+.hero-content h1{
+    font-size:46px;
+    letter-spacing:5px;
 }
 
-.hero-content p {
-    font-size: 13px;
-    opacity: 0.85;
+.hero-content p{
+    opacity:0.8;
+    margin-top:5px;
+}
+
+/* ================= LOGIN BOX ================= */
+.login-box{
+    margin:20px auto 0;
+    width:320px;
+    background:rgba(0,0,0,0.75);
+    border:1px solid rgba(212,175,55,0.5);
+    padding:20px;
+    border-radius:12px;
+    backdrop-filter:blur(8px);
+}
+
+.login-box h3{
+    margin-bottom:10px;
+    color:#d4af37;
+}
+
+.login-box input{
+    width:100%;
+    padding:10px;
+    margin:6px 0;
+    border:none;
+    border-radius:5px;
+}
+
+.login-box button{
+    width:100%;
+    padding:10px;
+    margin-top:8px;
+    border:none;
+    cursor:pointer;
+    background:#d4af37;
+    font-weight:bold;
 }
 
 /* ================= DASHBOARD ================= */
-.hero-stats {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
-    flex-wrap: wrap;
+.hero-stats{
+    display:none;
+    justify-content:center;
+    gap:15px;
+    margin-top:20px;
+    flex-wrap:wrap;
 }
 
-.stat-box {
-    background: rgba(0,0,0,0.45);
-    border: 1px solid rgba(212,175,55,0.4);
-    padding: 10px 16px;
-    border-radius: 10px;
-    min-width: 120px;
+.stat-box{
+    background:rgba(0,0,0,0.45);
+    border:1px solid rgba(212,175,55,0.4);
+    padding:12px 16px;
+    border-radius:10px;
+    min-width:120px;
 }
 
-.stat-box h3 {
-    color: #d4af37;
+.stat-box h3{
+    color:#d4af37;
 }
 
-/* ================= LAYOUT ================= */
-.container {
-    display: flex;
-    padding: 15px;
+/* ================= SYSTEM ================= */
+.container{
+    display:none;
+    padding:15px;
 }
 
-.form-box {
-    width: 30%;
+.form-box{
+    width:30%;
 }
 
-.card {
-    background: rgba(0,0,0,0.92);
-    border: 2px solid #d4af37;
-    border-radius: 12px;
-    padding: 15px;
-    color: white;
+.card{
+    background:rgba(0,0,0,0.92);
+    border:2px solid #d4af37;
+    border-radius:12px;
+    padding:15px;
+    color:white;
 }
 
-input, select {
-    width: 100%;
-    padding: 8px;
-    margin: 5px 0;
-    border: none;
-    outline: none;
+.card input,
+.card select{
+    width:100%;
+    padding:10px;
+    margin:6px 0;
 }
 
-button {
-    width: 100%;
-    padding: 10px;
-    background: #d4af37;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
+.card button{
+    width:100%;
+    padding:10px;
+    background:#d4af37;
+    border:none;
+    cursor:pointer;
+    font-weight:bold;
 }
 
 /* ================= TABLE ================= */
-.table-box {
-    width: 70%;
-    padding-left: 15px;
+.table-box{
+    width:70%;
+    padding-left:15px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: white;
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
 }
 
-th, td {
-    border: 1px solid black;
-    padding: 8px;
-    text-align: center;
+th,td{
+    border:1px solid black;
+    padding:8px;
+    text-align:center;
 }
 
-th {
-    background: black;
-    color: white;
+th{
+    background:black;
+    color:white;
 }
 
 </style>
@@ -198,84 +194,84 @@ th {
 
 <body>
 
-<!-- ================= LOGIN ================= -->
-<div class="login-screen" id="loginScreen">
-
-<div class="login-box">
-
-    <h3>ERP LOGIN</h3>
-
-    <input type="text" id="user" placeholder="User">
-    <input type="password" id="pass" placeholder="Password">
-
-    <button onclick="login()">LOGIN</button>
-    <button onclick="registerUser()">REGISTER</button>
-
-    <p style="font-size:11px; margin-top:8px; opacity:0.6;">
-        admin / 1234
-    </p>
-
-</div>
-
-</div>
-
 <!-- ================= HERO ================= -->
 <div class="hero">
 
-<img src="sollene-group.jpg">
+<img src="sollene-group.jpg" alt="Sollene Group">
+
 <div class="hero-overlay"></div>
 
 <div class="hero-content">
 
-    <div class="badge">ENTERPRISE SYSTEM</div>
+<div class="badge">ENTERPRISE SYSTEM</div>
 
-    <h1>SOLLENE GROUP</h1>
-    <p>Stock Management Dashboard</p>
+<h1>SOLLENE GROUP</h1>
 
-    <div class="hero-stats">
+<p>Stock Management Dashboard</p>
 
-        <div class="stat-box">
-            <h3 id="totalProducts">0</h3>
-            <span>Products</span>
-        </div>
+<!-- LOGIN -->
+<div class="login-box" id="loginBox">
 
-        <div class="stat-box">
-            <h3 id="totalStock">0</h3>
-            <span>Stock</span>
-        </div>
+<h3>ERP LOGIN</h3>
 
-        <div class="stat-box">
-            <h3 id="totalValue">R$ 0</h3>
-            <span>Total Value</span>
-        </div>
+<input type="text" id="user" placeholder="User">
+<input type="password" id="pass" placeholder="Password">
 
-    </div>
+<button onclick="login()">LOGIN</button>
+<button onclick="registerUser()">REGISTER</button>
+
+<p style="margin-top:10px;font-size:11px;opacity:0.7;">
+Default: admin / 1234
+</p>
+
+</div>
+
+<!-- DASHBOARD -->
+<div class="hero-stats" id="dashboard">
+
+<div class="stat-box">
+<h3 id="totalProducts">0</h3>
+<span>Products</span>
+</div>
+
+<div class="stat-box">
+<h3 id="totalStock">0</h3>
+<span>Stock</span>
+</div>
+
+<div class="stat-box">
+<h3 id="totalValue">R$ 0</h3>
+<span>Total Value</span>
+</div>
+
+</div>
 
 </div>
 </div>
 
 <!-- ================= SYSTEM ================= -->
-<div class="container">
+<div class="container" id="system">
 
 <div class="form-box">
+
 <div class="card">
 
 <h3>REGISTER PRODUCT</h3>
 
-<input type="text" id="name" placeholder="Product">
+<input type="text" id="name" placeholder="Product Name">
 
 <input type="number" id="entry" placeholder="Entry">
 <input type="number" id="exit" placeholder="Exit">
 
 <select id="currency">
-    <option value="BRL">BRL</option>
-    <option value="USD">USD</option>
-    <option value="EUR">EUR</option>
+<option value="BRL">BRL</option>
+<option value="USD">USD</option>
+<option value="EUR">EUR</option>
 </select>
 
 <input type="number" id="price" placeholder="Price">
 
-<button onclick="addProduct()">ADD</button>
+<button onclick="addProduct()">ADD PRODUCT</button>
 
 </div>
 </div>
@@ -283,6 +279,7 @@ th {
 <div class="table-box">
 
 <table>
+
 <thead>
 <tr>
 <th>Name</th>
@@ -301,23 +298,36 @@ th {
 
 </div>
 
-<!-- ================= JS ================= -->
 <script>
 
+/* ================= PRODUCTS ================= */
 let products = [];
 
 const USD = 5.15;
 const EUR = 5.78;
 
-/* ================= SESSÃO ================= */
-window.onload = function() {
-    if(localStorage.getItem("logged") === "true"){
-        document.getElementById("loginScreen").style.display = "none";
-    }
-};
+/* ================= SESSION ================= */
+window.onload = function(){
 
-/* ================= LOGIN ================= */
-function registerUser() {
+if(localStorage.getItem("erpLogged") === "true"){
+    openSystem();
+}
+
+}
+
+/* ================= OPEN SYSTEM ================= */
+function openSystem(){
+
+document.getElementById("loginBox").style.display = "none";
+
+document.getElementById("dashboard").style.display = "flex";
+
+document.getElementById("system").style.display = "flex";
+
+}
+
+/* ================= REGISTER ================= */
+function registerUser(){
 
 let user = document.getElementById("user").value;
 let pass = document.getElementById("pass").value;
@@ -327,53 +337,78 @@ if(!user || !pass){
     return;
 }
 
-localStorage.setItem("user_" + user, pass);
-alert("User created!");
+localStorage.setItem("erp_user_" + user, pass);
+
+alert("User created successfully");
 
 }
 
-function login() {
+/* ================= LOGIN ================= */
+function login(){
 
 let user = document.getElementById("user").value;
 let pass = document.getElementById("pass").value;
 
 /* ADMIN */
 if(user === "admin" && pass === "1234"){
-    localStorage.setItem("logged", "true");
-    document.getElementById("loginScreen").style.display = "none";
-    return;
+
+localStorage.setItem("erpLogged","true");
+
+openSystem();
+
+return;
+
 }
 
 /* USERS */
-let saved = localStorage.getItem("user_" + user);
+let saved = localStorage.getItem("erp_user_" + user);
 
 if(saved && saved === pass){
-    localStorage.setItem("logged", "true");
-    document.getElementById("loginScreen").style.display = "none";
-} else {
-    alert("Invalid login");
-}
+
+localStorage.setItem("erpLogged","true");
+
+openSystem();
+
+}else{
+
+alert("Invalid login");
 
 }
 
-/* ================= PRODUCTS ================= */
-function addProduct() {
+}
+
+/* ================= ADD PRODUCT ================= */
+function addProduct(){
 
 let name = document.getElementById("name").value;
+
 let entry = Number(document.getElementById("entry").value);
+
 let exit = Number(document.getElementById("exit").value);
+
 let price = Number(document.getElementById("price").value);
+
 let currency = document.getElementById("currency").value;
 
 let stock = entry - exit;
 
 let priceBRL;
 
-if(currency === "USD") priceBRL = price * USD;
-else if(currency === "EUR") priceBRL = price * EUR;
-else priceBRL = price;
+if(currency === "USD"){
+    priceBRL = price * USD;
+}
+else if(currency === "EUR"){
+    priceBRL = price * EUR;
+}
+else{
+    priceBRL = price;
+}
 
-products.push({ name, stock, priceBRL });
+products.push({
+    name,
+    stock,
+    priceBRL
+});
 
 updateDashboard();
 updateTable();
@@ -381,31 +416,40 @@ updateTable();
 }
 
 /* ================= DASHBOARD ================= */
-function updateDashboard() {
+function updateDashboard(){
 
 let totalProducts = products.length;
+
 let totalStock = 0;
+
 let totalValue = 0;
 
 products.forEach(p => {
-    totalStock += p.stock;
-    totalValue += p.stock * p.priceBRL;
+
+totalStock += p.stock;
+
+totalValue += p.stock * p.priceBRL;
+
 });
 
 document.getElementById("totalProducts").innerText = totalProducts;
+
 document.getElementById("totalStock").innerText = totalStock;
-document.getElementById("totalValue").innerText = "R$ " + totalValue.toFixed(2);
+
+document.getElementById("totalValue").innerText =
+"R$ " + totalValue.toFixed(2);
 
 }
 
 /* ================= TABLE ================= */
-function updateTable() {
+function updateTable(){
 
 let html = "";
 
 products.forEach(p => {
 
 let usd = (p.priceBRL / USD).toFixed(2);
+
 let eur = (p.priceBRL / EUR).toFixed(2);
 
 html += `
