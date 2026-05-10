@@ -7,11 +7,12 @@
     <link href="https://googleapis.com" rel="stylesheet">
     
     <style>
+        /* RESET & BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0;
+            background-color: #fdfcf0; /* Cor creme que combina com o banner */
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
@@ -25,27 +26,29 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* BANNER CENTRALIZADO */
+        /* 1. BANNER AJUSTADO (SEM COMER LETRAS) */
         .banner-header {
             width: 100%;
             display: flex;
             justify-content: center;
-            padding: 30px 20px 10px;
+            padding: 40px 20px 20px; /* Mais espaço no topo para harmonia */
         }
 
         .banner-header img {
-            width: 55%;
-            max-width: 750px;
+            width: 70%; /* Ocupa 70% para ser imponente mas não gigante */
+            max-width: 900px;
             height: auto;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(179, 147, 89, 0.2);
-            border: 4px solid white;
+            box-shadow: 0 15px 35px rgba(179, 147, 89, 0.2);
+            border: 5px solid white;
+            display: block;
         }
 
+        /* 2. BOTÃO VOLTAR */
         .nav-top {
             width: 100%;
             max-width: 1200px;
-            padding: 10px 20px 20px;
+            padding: 10px 20px 30px;
             text-align: left;
         }
 
@@ -63,13 +66,13 @@
 
         .btn-back:hover { background: #b39359; color: white; }
 
-        /* SISTEMA DE ESTOQUE */
+        /* 3. SISTEMA DE ESTOQUE */
         .main-content {
             display: flex;
             width: 100%;
             max-width: 1200px;
             gap: 25px;
-            padding: 0 20px 60px;
+            padding: 0 20px 80px;
             flex: 1;
         }
 
@@ -77,7 +80,7 @@
             width: 320px;
             background-color: #1a1a1a;
             color: #b39359;
-            padding: 25px;
+            padding: 30px 20px;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             height: fit-content;
@@ -86,15 +89,16 @@
         .sidebar h2 { 
             font-family: 'Playfair Display', serif;
             font-size: 18px; 
-            margin-bottom: 20px; 
+            margin-bottom: 25px; 
             text-align: center;
+            letter-spacing: 1px;
         }
 
         input, select {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
-            border-radius: 8px;
+            border-radius: 10px;
             border: 1px solid #333;
             font-size: 14px;
         }
@@ -106,10 +110,12 @@
             color: #000;
             border: none;
             font-weight: 800;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             text-transform: uppercase;
         }
+
+        .btn-add:hover { background: #d4af37; transform: scale(1.02); }
 
         .btn-save {
             width: 100%;
@@ -118,11 +124,11 @@
             background-color: #27ae60;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 700;
-            cursor: pointer;
         }
 
+        /* TABELA */
         .table-container {
             flex: 1;
             background: white;
@@ -133,7 +139,7 @@
         }
 
         table { width: 100%; border-collapse: collapse; }
-        thead { background-color: #000; color: #b39359; }
+        thead { background-color: #1a1a1a; color: #b39359; }
         th { padding: 18px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
         td { padding: 18px; text-align: center; font-size: 14px; border-bottom: 1px solid #f2f2f2; }
         
@@ -141,14 +147,13 @@
         .exit { color: #e74c3c; font-weight: bold; }
         .total-val { color: #b39359; font-weight: bold; }
 
-        /* RODAPÉ */
+        /* RODAPÉ CORPORATIVO */
         footer {
             width: 100%;
             padding: 60px 20px;
             background-color: #1a1a1a;
             text-align: center;
             border-top: 3px solid #b39359;
-            margin-top: 40px;
         }
 
         .footer-address {
@@ -164,36 +169,38 @@
             font-size: 10px;
             margin-top: 20px;
             letter-spacing: 1px;
-            text-transform: uppercase;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
             .main-content { flex-direction: column; }
             .sidebar { width: 100%; }
-            .banner-header img { width: 90%; }
+            .banner-header img { width: 95%; }
         }
     </style>
 </head>
 <body>
 
+    <!-- BANNER CENTRALIZADO -->
     <header class="banner-header">
-        <img src="sollene-group.jpg" alt="Sollene Group Premium">
+        <img src="sollene-group.jpg" alt="Sollene Group Premium Trade">
     </header>
 
+    <!-- NAVEGAÇÃO -->
     <nav class="nav-top">
         <a href="index.html" class="btn-back">← Back to Portfolio</a>
     </nav>
 
+    <!-- SISTEMA DE ESTOQUE -->
     <main class="main-content">
         <section class="sidebar">
-            <h2>Register Product</h2>
+            <h2>Product Entry</h2>
             <input type="text" placeholder="Product Name">
             <select>
-                <option>Case</option>
-                <option>Unit</option>
+                <option>Case (Caixa)</option>
+                <option>Unit (Unidade)</option>
             </select>
-            <input type="number" placeholder="Entry">
-            <input type="number" placeholder="Exit">
+            <input type="number" placeholder="Entry Qty">
+            <input type="number" placeholder="Exit Qty">
             <select>
                 <option>USD ($)</option>
                 <option>EUR (€)</option>
@@ -219,7 +226,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Premium Coffee</td>
+                        <td>Sollene Premium Coffee</td>
                         <td>Case</td>
                         <td class="entry">+ 100</td>
                         <td class="exit">- 23</td>
@@ -229,7 +236,7 @@
                         <td class="total-val">$ 513.59</td>
                     </tr>
                     <tr>
-                        <td>Sollene Wine</td>
+                        <td>Grand Reserve Wine</td>
                         <td>Case</td>
                         <td class="entry">+ 300</td>
                         <td class="exit">- 123</td>
@@ -243,6 +250,7 @@
         </section>
     </main>
 
+    <!-- RODAPÉ CORPORATIVO -->
     <footer>
         <div class="footer-address">
             <p>SOLLENE GROUP ENTERPRISE • MARINA BUSINESS AVENUE, VALLETTA, MALTA</p>
@@ -253,5 +261,3 @@
 
 </body>
 </html>
-
-
