@@ -1,271 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Inventory System</title>
-    <link href="https://googleapis.com" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Management System</title>
+
     <style>
-        /* RESET & BASE STYLE */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0;
-            color: #1a1a1a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            opacity: 0;
-            animation: fadeInPage 1.5s ease-out forwards;
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
         }
 
-        @keyframes fadeInPage {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        body{
+            background:#0f172a;
+            padding:30px;
+            color:white;
         }
 
-        /* 1. BANNER FULL WIDTH COM LOGO VISÍVEL */
-        .banner-header {
-            width: 100%;
-            height: 9.5cm;
-            margin-top: 0.5cm; /* Espaço solicitado do topo */
-            overflow: hidden;
-            display: flex;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        .container{
+            max-width:1400px;
+            margin:auto;
         }
 
-        .banner-header img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; 
-            object-position: left top; /* Garante que o nome Sollene Group apareça */
-            display: block;
+        h1{
+            text-align:center;
+            margin-bottom:25px;
+            color:#38bdf8;
+            font-size:38px;
         }
 
-        /* 2. BOTÃO VOLTAR */
-        .nav-top {
-            width: 100%;
-            max-width: 1200px;
-            padding: 30px 20px 20px;
-            text-align: left;
+        .form-box{
+            background:#1e293b;
+            padding:20px;
+            border-radius:14px;
+            margin-bottom:25px;
+            box-shadow:0 0 10px rgba(0,0,0,0.3);
         }
 
-        .btn-back {
-            text-decoration: none;
-            color: #b39359;
-            border: 1px solid #b39359;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: 0.3s;
+        .form-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+            gap:12px;
         }
 
-        .btn-back:hover {
-            background: #b39359;
-            color: white;
+        input, select{
+            padding:12px;
+            border:none;
+            border-radius:8px;
+            font-size:15px;
+            outline:none;
+            background:#334155;
+            color:white;
         }
 
-        /* 3. CONTEÚDO DO SISTEMA */
-        .main-content {
-            display: flex;
-            width: 100%;
-            max-width: 1200px;
-            gap: 25px;
-            padding: 0 20px 60px;
-            flex: 1;
+        input::placeholder{
+            color:#cbd5e1;
         }
 
-        .sidebar {
-            width: 320px;
-            background-color: #1a1a1a;
-            color: #b39359;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            height: fit-content;
+        .buttons{
+            display:flex;
+            gap:10px;
+            margin-top:18px;
+            flex-wrap:wrap;
         }
 
-        .sidebar h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            margin-bottom: 20px;
-            text-align: center;
+        button{
+            padding:12px 18px;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            font-weight:bold;
+            transition:0.3s;
+            color:white;
         }
 
-        input, select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            font-size: 14px;
+        .add-btn{
+            background:#16a34a;
         }
 
-        .btn-add {
-            width: 100%;
-            padding: 14px;
-            background-color: #b39359;
-            color: #000;
-            border: none;
-            font-weight: 800;
-            border-radius: 8px;
-            cursor: pointer;
-            text-transform: uppercase;
+        .update-btn{
+            background:#f59e0b;
         }
 
-        .btn-save {
-            width: 100%;
-            margin-top: 10px;
-            padding: 12px;
-            background-color: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-weight: 700;
-            cursor: pointer;
+        .delete-btn{
+            background:#dc2626;
         }
 
-        .table-container {
-            flex: 1;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid rgba(179, 147, 89, 0.2);
+        button:hover{
+            transform:scale(1.03);
+            opacity:0.9;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:#1e293b;
+            overflow:hidden;
+            border-radius:12px;
         }
 
-        thead {
-            background-color: #000;
-            color: #b39359;
+        th{
+            background:#0284c7;
+            padding:14px;
+            font-size:14px;
         }
 
-        th {
-            padding: 18px;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        td{
+            padding:12px;
+            text-align:center;
+            border-bottom:1px solid #334155;
+            font-size:14px;
         }
 
-        td {
-            padding: 18px;
-            text-align: center;
-            font-size: 14px;
-            border-bottom: 1px solid #f2f2f2;
+        tr:hover{
+            background:#334155;
         }
 
-        .entry { color: #27ae60; font-weight: bold; }
-        .exit { color: #e74c3c; font-weight: bold; }
-        .total-val { color: #b39359; font-weight: bold; }
-
-        /* 4. RODAPÉ */
-        footer {
-            width: 100%;
-            padding: 60px 20px;
-            background-color: #1a1a1a;
-            text-align: center;
-            border-top: 3px solid #b39359;
+        .action-btn{
+            padding:7px 12px;
+            margin:2px;
+            border-radius:6px;
+            font-size:13px;
         }
 
-        .footer-address {
-            color: #b39359;
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            line-height: 1.8;
+        .edit{
+            background:#f59e0b;
         }
 
-        .copyright {
-            color: #555;
-            font-size: 10px;
-            margin-top: 20px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+        .remove{
+            background:#dc2626;
         }
 
-        @media (max-width: 900px) {
-            .main-content { flex-direction: column; }
-            .sidebar { width: 100%; }
-            .banner-header { height: auto; min-height: 180px; }
+        .summary{
+            margin-top:25px;
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+            gap:15px;
+        }
+
+        .card{
+            background:#1e293b;
+            padding:20px;
+            border-radius:12px;
+            text-align:center;
+        }
+
+        .card h2{
+            color:#38bdf8;
+            margin-bottom:10px;
+            font-size:18px;
+        }
+
+        .card p{
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        @media(max-width:768px){
+            body{
+                padding:15px;
+            }
+
+            table{
+                font-size:12px;
+            }
+
+            th,td{
+                padding:8px;
+            }
         }
     </style>
 </head>
+
 <body>
 
-    <header class="banner-header">
-        <img src="sollene-group.jpg" alt="Sollene Group Dashboard">
-    </header>
+<div class="container">
 
-    <nav class="nav-top">
-        <a href="index.html" class="btn-back">← BACK TO PORTFOLIO</a>
-    </nav>
+    <h1>STOCK MANAGEMENT SYSTEM</h1>
 
-    <main class="main-content">
-        <section class="sidebar">
-            <h2>Register Product</h2>
-            <input type="text" placeholder="Product Name">
-            <select>
-                <option>Box (Caixa)</option>
-                <option>Unit (Unidade)</option>
+    <div class="form-box">
+
+        <div class="form-grid">
+
+            <input type="text" id="productName" placeholder="Product Name">
+
+            <select id="unit">
+                <option value="Kg">Kg</option>
+                <option value="Ton">Ton</option>
+                <option value="Package">Package</option>
+                <option value="Box">Box</option>
             </select>
-            <input type="number" placeholder="Entry">
-            <input type="number" placeholder="Exit">
-            <select>
-                <option>USD ($)</option>
-                <option>EUR (€)</option>
+
+            <input type="number" id="entry" placeholder="Entry">
+
+            <input type="number" id="exit" placeholder="Exit">
+
+            <input type="number" id="price" placeholder="Buy Price">
+
+            <select id="currency">
+                <option value="EUR">EUR</option>
+                <option value="USD">USD</option>
+                <option value="BRL">BRL</option>
             </select>
-            <input type="number" placeholder="Unit Price">
-            <button class="btn-add">Add Product</button>
-            <button class="btn-save">💾 Save Inventory</button>
-        </section>
 
-        <section class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>PRODUCT</th>
-                        <th>UNIT</th>
-                        <th>ENTRY</th>
-                        <th>EXIT</th>
-                        <th>STOCK</th>
-                        <th>CURRENCY</th>
-                        <th>PRICE</th>
-                        <th>REVENUE</th>
-                        <th>CASH</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Coffee</td>
-                        <td>Box</td>
-                        <td class="entry">123</td>
-                        <td class="exit">56</td>
-                        <td>67</td>
-                        <td>USD</td>
-                        <td>$ 6.78</td>
-                        <td>$ 379.68</td>
-                        <td class="total-val">$ -454.26</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-    </main>
+            <input type="number" id="sellPrice" placeholder="Sell Price">
 
-    <footer>
-        <div class="footer-address">
-            <p>SOLLENE GROUP ENTERPRISE • MARINA BUSINESS AVENUE, VALLETTA, MALTA</p>
-            <p>TEL: +356 2134 5678 • EMAIL: CONTACT@SOLLENE-GROUP.MT</p>
         </div>
-        <p class="copyright">© 2026 SOLLENE GROUP ENTERPRISE | PRESTIGE IN TECHNOLOGY & TRADE</p>
-    </footer>
+
+        <div class="buttons">
+            <button class="add-btn" onclick="addProduct()">ADD PRODUCT</button>
+            <button class="update-btn" onclick="updateProduct()">UPDATE PRODUCT</button>
+            <button class="delete-btn" onclick="deleteSelected()">DELETE PRODUCT</button>
+        </div>
+
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Select</th>
+                <th>Product</th>
+                <th>Unit</th>
+                <th>Entry</th>
+                <th>Exit</th>
+                <th>Stock</th>
+                <th>Buy Price</th>
+                <th>Currency</th>
+                <th>Sell Price</th>
+                <th>Profit</th>
+                <th>Total Value</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody id="tableBody"></tbody>
+
+    </table>
+
+    <div class="summary">
+
+        <div class="card">
+            <h2>Total Products</h2>
+            <p id="totalProducts">0</p>
+        </div>
+
+        <div class="card">
+            <h2>Total Stock</h2>
+            <p id="totalStock">0</p>
+        </div>
+
+        <div class="card">
+            <h2>Total Inventory Value</h2>
+            <p id="totalValue">0</p>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+    let products = [];
+    let editIndex = -1;
+
+    function addProduct(){
+
+        const productName = document.getElementById("productName").value;
+        const unit = document.getElementById("unit").value;
+        const entry = Number(document.getElementById("entry").value);
+        const exit = Number(document.getElementById("exit").value);
+        const price = Number(document.getElementById("price").value);
+        const currency = document.getElementById("currency").value;
+        const sellPrice = Number(document.getElementById("sellPrice").value);
+
+        const stock = entry - exit;
+        const profit = (sellPrice - price) * stock;
+        const totalValue = stock * price;
+
+        if(productName === ""){
+            alert("Enter product name");
+            return;
+        }
+
+        products.push({
+            productName,
+            unit,
+            entry,
+            exit,
+            stock,
+            price,
+            currency,
+            sellPrice,
+            profit,
+            totalValue
+        });
+
+        renderTable();
+        clearInputs();
+    }
+
+    function renderTable(){
+
+        const tableBody = document.getElementById("tableBody");
+        tableBody.innerHTML = "";
+
+        let totalStock = 0;
+        let totalValue = 0;
+
+        products.forEach((product,index)=>{
+
+            totalStock += product.stock;
+            totalValue += product.totalValue;
+
+            tableBody.innerHTML += `
+                <tr>
+
+                    <td>
+                        <input type="checkbox" class="select-product" data-index="${index}">
+                    </td>
+
+                    <td>${product.productName}</td>
+                    <td>${product.unit}</td>
+                    <td>${product.entry}</td>
+                    <td>${product.exit}</td>
+                    <td>${product.stock}</td>
+                    <td>${product.price.toFixed(2)}</td>
+                    <td>${product.currency}</td>
+                    <td>${product.sellPrice.toFixed(2)}</td>
+                    <td>${product.currency} ${product.profit.toFixed(2)}</td>
+                    <td>${product.currency} ${product.totalValue.toFixed(2)}</td>
+
+                    <td>
+                        <button class="action-btn edit" onclick="editProduct(${index})">
+                            Edit
+                        </button>
+
+                        <button class="action-btn remove" onclick="removeProduct(${index})">
+                            Delete
+                        </button>
+                    </td>
+
+                </tr>
+            `;
+        });
+
+        document.getElementById("totalProducts").innerText = products.length;
+        document.getElementById("totalStock").innerText = totalStock;
+        document.getElementById("totalValue").innerText = totalValue.toFixed(2);
+    }
+
+    function clearInputs(){
+
+        document.getElementById("productName").value = "";
+        document.getElementById("entry").value = "";
+        document.getElementById("exit").value = "";
+        document.getElementById("price").value = "";
+        document.getElementById("sellPrice").value = "";
+    }
+
+    function removeProduct(index){
+
+        products.splice(index,1);
+        renderTable();
+    }
+
+    function editProduct(index){
+
+        const product = products[index];
+
+        document.getElementById("productName").value = product.productName;
+        document.getElementById("unit").value = product.unit;
+        document.getElementById("entry").value = product.entry;
+        document.getElementById("exit").value = product.exit;
+        document.getElementById("price").value = product.price;
+        document.getElementById("currency").value = product.currency;
+        document.getElementById("sellPrice").value = product.sellPrice;
+
+        editIndex = index;
+    }
+
+    function updateProduct(){
+
+        if(editIndex === -1){
+            alert("Select a product to edit");
+            return;
+        }
+
+        const productName = document.getElementById("productName").value;
+        const unit = document.getElementById("unit").value;
+        const entry = Number(document.getElementById("entry").value);
+        const exit = Number(document.getElementById("exit").value);
+        const price = Number(document.getElementById("price").value);
+        const currency = document.getElementById("currency").value;
+        const sellPrice = Number(document.getElementById("sellPrice").value);
+
+        const stock = entry - exit;
+        const profit = (sellPrice - price) * stock;
+        const totalValue = stock * price;
+
+        products[editIndex] = {
+            productName,
+            unit,
+            entry,
+            exit,
+            stock,
+            price,
+            currency,
+            sellPrice,
+            profit,
+            totalValue
+        };
+
+        renderTable();
+        clearInputs();
+
+        editIndex = -1;
+    }
+
+    function deleteSelected(){
+
+        const checkboxes = document.querySelectorAll(".select-product");
+
+        const selectedIndexes = [];
+
+        checkboxes.forEach((checkbox)=>{
+
+            if(checkbox.checked){
+                selectedIndexes.push(Number(checkbox.dataset.index));
+            }
+        });
+
+        products = products.filter((_,index)=> !selectedIndexes.includes(index));
+
+        renderTable();
+    }
+
+</script>
 
 </body>
 </html>
-
