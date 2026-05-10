@@ -19,7 +19,7 @@
             padding-bottom: 50px;
         }
 
-        /* BANNER SUPERIOR COM CONTATOS */
+        /* BANNER SUPERIOR */
         .hero-banner { 
             width: 100%; 
             height: 480px; 
@@ -46,12 +46,7 @@
             line-height: 1.6;
         }
 
-        /* Links de contato clicáveis */
-        .contact-bar a {
-            color: #b39359;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+        .contact-bar a { color: #b39359; text-decoration: none; transition: 0.3s; }
         .contact-bar a:hover { color: #fff; }
 
         .main-container { 
@@ -63,7 +58,7 @@
             margin-top: 30px;
         }
 
-        /* Painel de Registro */
+        /* PAINEL DE REGISTRO */
         .sidebar { 
             background: #111; 
             padding: 35px 25px; 
@@ -76,14 +71,8 @@
         .sidebar h2 { color: #b39359; font-size: 20px; text-transform: uppercase; margin-bottom: 25px; }
 
         input, select { 
-            width: 100%; 
-            padding: 15px; 
-            margin-bottom: 12px; 
-            border-radius: 12px; 
-            border: 1px solid #333; 
-            background: #fff; 
-            font-weight: 600;
-            outline: none;
+            width: 100%; padding: 15px; margin-bottom: 12px; border-radius: 12px; 
+            background: #fff; color: #333; border: 1px solid #333; outline: none; font-weight: 600;
         }
 
         .btn-add { 
@@ -92,13 +81,16 @@
             text-transform: uppercase; margin-bottom: 10px;
         }
 
+        /* BOTÃO DE SALVAR CORRIGIDO */
         .btn-save { 
             width: 100%; padding: 15px; background: #27ae60; color: #fff; 
-            border: none; border-radius: 12px; font-weight: 800; cursor: pointer; 
-            text-transform: uppercase;
+            border: 2px solid #fff; border-radius: 12px; font-weight: 800; cursor: pointer; 
+            text-transform: uppercase; display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: 0.3s;
         }
+        .btn-save:hover { background: #1e8449; transform: scale(1.02); }
 
-        /* Área da Tabela */
+        /* ÁREA DA TABELA */
         .table-area { 
             background: #fff; 
             border-radius: 24px; 
@@ -143,7 +135,9 @@
             <input type="number" id="pPrice" placeholder="Price (Preço Unit.)">
             
             <button class="btn-add" onclick="addProduct()">Add Product</button>
-            <button class="btn-save" onclick="saveData()">💾 Save Inventory</button>
+            
+            <!-- CHAMANDO A FUNÇÃO DE SALVAMENTO CORRETAMENTE -->
+            <button class="btn-save" onclick="saveData()">💾 SAVE INVENTORY</button>
         </aside>
 
         <main class="table-area">
@@ -166,7 +160,8 @@
     </div>
 
     <script>
-        let inventory = JSON.parse(localStorage.getItem('sollene_db_final')) || [];
+        // Carrega dados existentes
+        let inventory = JSON.parse(localStorage.getItem('sollene_final_v5')) || [];
 
         function renderTable() {
             const body = document.getElementById('inventoryBody');
@@ -199,27 +194,26 @@
             const currency = document.getElementById('pCurrency').value;
             const price = parseFloat(document.getElementById('pPrice').value) || 0;
 
-            if(!name || price <= 0) return alert("Preencha o nome e o preço.");
+            if(!name || isNaN(price)) return alert("Please enter Product Name and Price.");
 
             inventory.push({ name, unit, entry, exit, currency, price });
-            saveData(false); 
             renderTable();
 
+            // Limpa formulário
             document.getElementById('pName').value = "";
             document.getElementById('pEntry').value = "";
             document.getElementById('pExit').value = "";
             document.getElementById('pPrice').value = "";
         }
 
-        function saveData(showAlert = true) {
-            localStorage.setItem('sollene_db_final', JSON.stringify(inventory));
-            if(showAlert) alert("Inventory Saved Successfully!");
+        // FUNÇÃO DE SALVAR NO NAVEGADOR
+        function saveData() {
+            localStorage.setItem('sollene_final_v5', JSON.stringify(inventory));
+            alert("Inventory Saved Successfully!");
         }
 
         window.onload = renderTable;
     </script>
 </body>
 </html>
-
-
 
