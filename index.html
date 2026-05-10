@@ -41,11 +41,11 @@ h1{
     align-items:flex-start;
 }
 
-/* LEFT FORM */
+/* FORM BOX */
 
 .form-box{
-    width:290px;
-    min-width:290px;
+    width:300px;
+    min-width:300px;
     background:#1e293b;
     padding:16px;
     border-radius:12px;
@@ -53,7 +53,7 @@ h1{
     top:15px;
 }
 
-/* FORM GRID */
+/* FORM */
 
 .form-grid{
     display:flex;
@@ -134,7 +134,7 @@ button:hover{
 
 table{
     width:100%;
-    min-width:1150px;
+    min-width:1250px;
     border-collapse:collapse;
     background:#1e293b;
 }
@@ -265,6 +265,9 @@ tr:hover{
 <option value="EUR">Euro (EUR)</option>
 </select>
 
+<label>Sold Price</label>
+<input type="number" id="sellPrice" placeholder="Sold Price">
+
 <label>Sold In</label>
 <select id="sellCurrency">
 <option value="BRL">Real (BRL)</option>
@@ -311,7 +314,9 @@ DELETE PRODUCT
 <th>Stock</th>
 <th>Buy Price</th>
 <th>Purchased In</th>
+<th>Sold Price</th>
 <th>Sold In</th>
+<th>Profit</th>
 <th>Total Value</th>
 <th>Actions</th>
 </tr>
@@ -323,8 +328,6 @@ DELETE PRODUCT
 </table>
 
 </div>
-
-<!-- SUMMARY -->
 
 <div class="summary">
 
@@ -364,6 +367,7 @@ const entry = Number(document.getElementById("entry").value);
 const exit = Number(document.getElementById("exit").value);
 const price = Number(document.getElementById("price").value);
 const currency = document.getElementById("currency").value;
+const sellPrice = Number(document.getElementById("sellPrice").value);
 const sellCurrency = document.getElementById("sellCurrency").value;
 
 if(productName === ""){
@@ -372,6 +376,7 @@ return;
 }
 
 const stock = entry - exit;
+const profit = (sellPrice - price) * stock;
 const totalValue = stock * price;
 
 products.push({
@@ -382,7 +387,9 @@ exit,
 stock,
 price,
 currency,
+sellPrice,
 sellCurrency,
+profit,
 totalValue
 });
 
@@ -422,7 +429,11 @@ tableBody.innerHTML += `
 
 <td>${product.currency}</td>
 
+<td>${product.sellCurrency} ${product.sellPrice.toFixed(2)}</td>
+
 <td>${product.sellCurrency}</td>
+
+<td>${product.sellCurrency} ${product.profit.toFixed(2)}</td>
 
 <td>${product.currency} ${product.totalValue.toFixed(2)}</td>
 
@@ -458,6 +469,7 @@ document.getElementById("productName").value = "";
 document.getElementById("entry").value = "";
 document.getElementById("exit").value = "";
 document.getElementById("price").value = "";
+document.getElementById("sellPrice").value = "";
 
 }
 
@@ -478,6 +490,7 @@ document.getElementById("entry").value = product.entry;
 document.getElementById("exit").value = product.exit;
 document.getElementById("price").value = product.price;
 document.getElementById("currency").value = product.currency;
+document.getElementById("sellPrice").value = product.sellPrice;
 document.getElementById("sellCurrency").value = product.sellCurrency;
 
 editIndex = index;
@@ -497,9 +510,11 @@ const entry = Number(document.getElementById("entry").value);
 const exit = Number(document.getElementById("exit").value);
 const price = Number(document.getElementById("price").value);
 const currency = document.getElementById("currency").value;
+const sellPrice = Number(document.getElementById("sellPrice").value);
 const sellCurrency = document.getElementById("sellCurrency").value;
 
 const stock = entry - exit;
+const profit = (sellPrice - price) * stock;
 const totalValue = stock * price;
 
 products[editIndex] = {
@@ -510,7 +525,9 @@ exit,
 stock,
 price,
 currency,
+sellPrice,
 sellCurrency,
+profit,
 totalValue
 };
 
