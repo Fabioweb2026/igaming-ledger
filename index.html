@@ -19,12 +19,12 @@
             padding-bottom: 50px;
         }
 
-        /* BANNER SUPERIOR AJUSTADO */
+        /* BANNER SUPERIOR COM CONTATOS */
         .hero-banner { 
             width: 100%; 
             height: 480px; 
             background: #000 url('sollene-group.jpg') no-repeat center center; 
-            background-size: cover; /* Ocupa todo o espaço e se ajusta automaticamente */
+            background-size: cover;
             border-bottom: 4px solid #b39359;
             position: relative;
             display: flex;
@@ -32,19 +32,27 @@
             justify-content: center;
         }
 
-        /* BARRA DE CONTATOS FICTÍCIOS NO BANNER */
         .contact-bar {
             background: rgba(0, 0, 0, 0.7);
             color: #b39359;
             width: 100%;
             padding: 15px;
             text-align: center;
-            font-size: 13px;
+            font-size: 11px;
             font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             backdrop-filter: blur(5px);
+            line-height: 1.6;
         }
+
+        /* Links de contato clicáveis */
+        .contact-bar a {
+            color: #b39359;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .contact-bar a:hover { color: #fff; }
 
         .main-container { 
             display: grid; 
@@ -65,12 +73,7 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
         }
 
-        .sidebar h2 { 
-            color: #b39359; 
-            font-size: 20px; 
-            text-transform: uppercase; 
-            margin-bottom: 25px; 
-        }
+        .sidebar h2 { color: #b39359; font-size: 20px; text-transform: uppercase; margin-bottom: 25px; }
 
         input, select { 
             width: 100%; 
@@ -112,10 +115,10 @@
 </head>
 <body>
 
-    <!-- Banner Ocupando o Espaço Superior -->
     <div class="hero-banner">
         <div class="contact-bar">
-            Sollene Group Enterprise • Marina Business Avenue, Valletta • Malta • +356 2134 5678 • info@sollene-group.mt
+            Sollene Group Enterprise • Marina Business Avenue, Valletta, Malta<br>
+            <a href="tel:+35621345678">Tel: +356 2134 5678</a> • <a href="mailto:contact@sollene-group.mt">Email: contact@sollene-group.mt</a>
         </div>
     </div>
 
@@ -163,7 +166,7 @@
     </div>
 
     <script>
-        let inventory = JSON.parse(localStorage.getItem('sollene_db_v3')) || [];
+        let inventory = JSON.parse(localStorage.getItem('sollene_db_final')) || [];
 
         function renderTable() {
             const body = document.getElementById('inventoryBody');
@@ -196,7 +199,7 @@
             const currency = document.getElementById('pCurrency').value;
             const price = parseFloat(document.getElementById('pPrice').value) || 0;
 
-            if(!name || price <= 0) return alert("Por favor, preencha os campos corretamente.");
+            if(!name || price <= 0) return alert("Preencha o nome e o preço.");
 
             inventory.push({ name, unit, entry, exit, currency, price });
             saveData(false); 
@@ -209,7 +212,7 @@
         }
 
         function saveData(showAlert = true) {
-            localStorage.setItem('sollene_db_v3', JSON.stringify(inventory));
+            localStorage.setItem('sollene_db_final', JSON.stringify(inventory));
             if(showAlert) alert("Inventory Saved Successfully!");
         }
 
@@ -217,5 +220,6 @@
     </script>
 </body>
 </html>
+
 
 
