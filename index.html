@@ -7,41 +7,47 @@
     <link href="https://googleapis.com" rel="stylesheet">
     
     <style>
-        /* RESET & BASE */
+        /* RESET & BASE STYLE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0;
+            background-color: #fdfcf0; /* Cor creme para harmonizar com o fundo da imagem */
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
             align-items: center;
             opacity: 0;
             animation: fadeInPage 1.5s ease-out forwards;
+            overflow-x: hidden;
         }
 
-        @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-        /* 1. BANNER FULL WIDTH (AJUSTADO PARA NÃO CORTAR PALAVRAS) */
+        /* 1. BANNER FULL WIDTH (MODELO SOLENNE) */
         .banner-header {
             width: 100%;
             background-color: #fdfcf0;
-            border-bottom: 4px solid #b39359;
-            line-height: 0; /* Remove espaços fantasmas abaixo da imagem */
+            line-height: 0;
+            border-bottom: 5px solid #b39359; /* Linha dourada de acabamento */
         }
 
         .banner-header img {
             width: 100%;
-            height: auto; /* Mantém a proporção real para não "comer" letras */
+            height: auto;
             display: block;
+            /* Garante que o topo (letras) e a base (contatos) da imagem apareçam */
+            object-fit: contain; 
         }
 
-        /* 2. NAVEGAÇÃO / BOTÃO VOLTAR */
+        /* 2. NAVEGAÇÃO */
         .nav-top {
             width: 100%;
-            max-width: 1200px;
-            padding: 25px 20px;
+            max-width: 1250px;
+            padding: 30px 20px 10px;
             text-align: left;
         }
 
@@ -49,7 +55,7 @@
             text-decoration: none;
             color: #b39359;
             border: 1px solid #b39359;
-            padding: 8px 25px;
+            padding: 10px 25px;
             border-radius: 50px;
             font-size: 11px;
             font-weight: 700;
@@ -58,82 +64,123 @@
             background: white;
         }
 
-        .btn-back:hover { background: #b39359; color: white; }
+        .btn-back:hover { 
+            background: #b39359; 
+            color: white;
+            box-shadow: 0 5px 15px rgba(179, 147, 89, 0.3);
+        }
 
-        /* 3. SISTEMA DE ESTOQUE */
+        /* 3. SISTEMA DE GESTÃO (LAYOUT HARMONIZADO) */
         .main-content {
             display: flex;
             width: 100%;
-            max-width: 1200px;
-            gap: 25px;
-            padding: 0 20px 80px;
+            max-width: 1250px;
+            gap: 30px;
+            padding: 20px 20px 80px;
             flex: 1;
         }
 
+        /* Sidebar de Registro */
         .sidebar {
-            width: 320px;
+            width: 340px;
             background-color: #1a1a1a;
             color: #b39359;
-            padding: 30px 20px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            padding: 35px 25px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
             height: fit-content;
         }
 
-        .sidebar h2 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 25px; text-align: center; }
+        .sidebar h2 { 
+            font-family: 'Playfair Display', serif;
+            font-size: 22px; 
+            margin-bottom: 30px; 
+            text-align: center;
+            letter-spacing: 1px;
+        }
 
         input, select {
-            width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px;
-            border: 1px solid #333; font-size: 14px;
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            background: #fff;
+            font-size: 14px;
+            outline: none;
         }
 
         .btn-add {
-            width: 100%; padding: 14px; background-color: #b39359; color: #000;
-            border: none; font-weight: 800; border-radius: 10px; cursor: pointer;
+            width: 100%;
+            padding: 16px;
+            background-color: #b39359;
+            color: #000;
+            border: none;
+            font-weight: 800;
+            border-radius: 12px;
+            cursor: pointer;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
         }
 
-        /* TABELA */
+        .btn-add:hover { 
+            background: #d4af37; 
+            transform: scale(1.02);
+        }
+
+        /* Tabela de Produtos */
         .table-container {
             flex: 1;
             background: white;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 15px 35px rgba(179, 147, 89, 0.1);
             border: 1px solid rgba(179, 147, 89, 0.2);
         }
 
         table { width: 100%; border-collapse: collapse; }
         thead { background-color: #1a1a1a; color: #b39359; }
-        th { padding: 18px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
-        td { padding: 18px; text-align: center; font-size: 14px; border-bottom: 1px solid #f2f2f2; }
+        th { 
+            padding: 20px; 
+            font-size: 12px; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
+            text-align: center;
+        }
+        td { 
+            padding: 20px; 
+            text-align: center; 
+            font-size: 15px; 
+            border-bottom: 1px solid #f2f2f2;
+            color: #444;
+        }
         
-        .total-val { color: #b39359; font-weight: bold; }
+        .entry { color: #27ae60; font-weight: 700; }
+        .exit { color: #e74c3c; font-weight: 700; }
+        .total-val { color: #b39359; font-weight: 800; }
 
-        /* RODAPÉ CORPORATIVO */
+        /* 4. FOOTER COMPLEMENTAR */
         footer {
             width: 100%;
-            padding: 60px 20px;
+            padding: 40px 20px;
             background-color: #1a1a1a;
             text-align: center;
-            border-top: 3px solid #b39359;
+            color: #555;
+            font-size: 11px;
+            letter-spacing: 2px;
         }
 
-        .footer-address {
-            color: #b39359; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.8;
-        }
-
-        .copyright { color: #555; font-size: 10px; margin-top: 20px; letter-spacing: 1px; }
-
-        @media (max-width: 1000px) {
-            .main-content { flex-direction: column; }
-            .sidebar { width: 100%; }
+        /* RESPONSIVIDADE */
+        @media (max-width: 1024px) {
+            .main-content { flex-direction: column; align-items: center; }
+            .sidebar { width: 100%; max-width: 500px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BANNER QUE PREENCHE A LARGURA SEM CORTAR AS LETRAS -->
+    <!-- BANNER CONFORME O MODELO ENVIADO -->
     <header class="banner-header">
         <img src="sollene-group.jpg" alt="Sollene Group Global Trade">
     </header>
@@ -143,15 +190,16 @@
     </nav>
 
     <main class="main-content">
+        <!-- REGISTRATION SIDEBAR -->
         <section class="sidebar">
-            <h2>Product Entry</h2>
+            <h2>Register Product</h2>
             <input type="text" placeholder="Product Name">
             <select>
                 <option>Case (Caixa)</option>
                 <option>Unit (Unidade)</option>
             </select>
-            <input type="number" placeholder="Entry Qty">
-            <input type="number" placeholder="Exit Qty">
+            <input type="number" placeholder="Entry (Entrada)">
+            <input type="number" placeholder="Exit (Saída)">
             <select>
                 <option>USD ($)</option>
                 <option>EUR (€)</option>
@@ -160,6 +208,7 @@
             <button class="btn-add">Add to Inventory</button>
         </section>
 
+        <!-- INVENTORY TABLE -->
         <section class="table-container">
             <table>
                 <thead>
@@ -176,14 +225,24 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Sollene Premium Coffee</td>
+                        <td>Sollene Reserve Coffee</td>
                         <td>Case</td>
-                        <td>+ 100</td>
-                        <td>- 23</td>
-                        <td>77</td>
+                        <td class="entry">+ 120</td>
+                        <td class="exit">- 45</td>
+                        <td>75</td>
                         <td>USD</td>
-                        <td>$ 6.67</td>
-                        <td class="total-val">$ 513.59</td>
+                        <td>$ 8.50</td>
+                        <td class="total-val">$ 637.50</td>
+                    </tr>
+                    <tr>
+                        <td>Premium Red Wine</td>
+                        <td>Case</td>
+                        <td class="entry">+ 200</td>
+                        <td class="exit">- 80</td>
+                        <td>120</td>
+                        <td>EUR</td>
+                        <td>€ 12.00</td>
+                        <td class="total-val">€ 1,440.00</td>
                     </tr>
                 </tbody>
             </table>
@@ -191,14 +250,11 @@
     </main>
 
     <footer>
-        <div class="footer-address">
-            <p>SOLLENE GROUP ENTERPRISE • MARINA BUSINESS AVENUE, VALLETTA, MALTA</p>
-            <p>TEL: +356 2134 5678 • EMAIL: CONTACT@SOLLENE-GROUP.MT</p>
-        </div>
-        <p class="copyright">© 2026 SOLLENE GROUP ENTERPRISE | PRESTIGE IN TECHNOLOGY & TRADE</p>
+        © 2026 SOLLENE GROUP ENTERPRISE | PRESTIGE IN TECHNOLOGY & TRADE
     </footer>
 
 </body>
 </html>
+
 
 
