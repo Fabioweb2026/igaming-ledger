@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sollene Group | Multi Currency Inventory</title>
+<title>Sollene Group | Inventory USD System</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -55,10 +54,10 @@ html, body {
 }
 
 /* CAMPOS */
-input, select {
+input {
     width: 100%;
-    height: 42px;
-    margin-bottom: 10px;
+    height: 45px;
+    margin-bottom: 12px;
     border-radius: 10px;
     border: none;
     padding: 0 10px;
@@ -118,24 +117,9 @@ th, td {
 <div class="sidebar">
     <h2>Register Product</h2>
 
-    <input id="name" placeholder="Product">
-
-    <select id="buyCurrency">
-        <option value="EUR">Buy EUR</option>
-        <option value="USD">Buy USD</option>
-        <option value="BRL">Buy BRL</option>
-    </select>
-
-    <input id="cost" type="number" placeholder="Cost (buy)">
-
-    <select id="sellCurrency">
-        <option value="EUR">Sell EUR</option>
-        <option value="USD">Sell USD</option>
-        <option value="BRL">Sell BRL</option>
-    </select>
-
-    <input id="sell" type="number" placeholder="Sell value">
-
+    <input id="name" placeholder="Product Name">
+    <input id="cost" type="number" placeholder="Cost (USD)">
+    <input id="sell" type="number" placeholder="Sell Price (USD)">
     <input id="qty" type="number" placeholder="Quantity">
 
     <button onclick="add()">Add Product</button>
@@ -147,11 +131,11 @@ th, td {
 <thead>
 <tr>
 <th>Product</th>
-<th>Buy</th>
+<th>Cost</th>
 <th>Sell</th>
 <th>Qty</th>
-<th>Cost USD</th>
-<th>Revenue USD</th>
+<th>Cost Total</th>
+<th>Revenue</th>
 <th>Cash</th>
 </tr>
 </thead>
@@ -165,45 +149,27 @@ th, td {
 
 <script>
 
-/* taxa fixa (pode depois vir API real) */
-const rates = {
-EUR: 1.08,
-USD: 1,
-BRL: 0.20
-};
-
 let inventory = [];
-
-function convert(value, currency){
-return value * rates[currency];
-}
 
 function add(){
 
-let name=document.getElementById('name').value;
+let name = document.getElementById('name').value;
+let cost = +document.getElementById('cost').value;
+let sell = +document.getElementById('sell').value;
+let qty = +document.getElementById('qty').value;
 
-let buyCur=document.getElementById('buyCurrency').value;
-let cost=+document.getElementById('cost').value;
-
-let sellCur=document.getElementById('sellCurrency').value;
-let sell=+document.getElementById('sell').value;
-
-let qty=+document.getElementById('qty').value;
-
-/* CONVERSÃO */
-let costUSD = convert(cost, buyCur) * qty;
-let revenueUSD = convert(sell, sellCur) * qty;
-
-/* LUCRO */
-let cash = revenueUSD - costUSD;
+/* cálculos simples */
+let costTotal = cost * qty;
+let revenue = sell * qty;
+let cash = revenue - costTotal;
 
 inventory.push({
 name,
-buyCur,
-sellCur,
+cost,
+sell,
 qty,
-costUSD,
-revenueUSD,
+costTotal,
+revenue,
 cash
 });
 
@@ -217,19 +183,16 @@ let table=document.getElementById('table');
 table.innerHTML="";
 
 inventory.forEach(i=>{
-
 table.innerHTML+=`
 <tr>
 <td>${i.name}</td>
-<td>${i.buyCur}</td>
-<td>${i.sellCur}</td>
+<td>${i.cost}</td>
+<td>${i.sell}</td>
 <td>${i.qty}</td>
-<td>${i.costUSD.toFixed(2)}</td>
-<td>${i.revenueUSD.toFixed(2)}</td>
+<td>${i.costTotal.toFixed(2)}</td>
+<td>${i.revenue.toFixed(2)}</td>
 <td class="cash">${i.cash.toFixed(2)}</td>
-</tr>
-`;
-
+</tr>`;
 });
 
 }
@@ -238,3 +201,4 @@ table.innerHTML+=`
 
 </body>
 </html>
+
