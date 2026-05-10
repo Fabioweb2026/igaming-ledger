@@ -5,11 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sollene Group | Inventory System</title>
 
-    <!-- FONTES -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
-        /* RESET GLOBAL */
+        /* RESET */
         html, body {
             margin: 0;
             padding: 0;
@@ -25,21 +24,23 @@
         }
 
         /* =========================
-           BANNER FULL WIDTH
+           BANNER AJUSTADO (30cm visual x 10cm)
         ========================= */
         .banner-header {
-            width: 100vw;        /* pega tela inteira */
-            height: 80vh;        /* altura elegante */
-            margin: 0;
-            padding: 0;
+            width: 100%;
+            height: 180px;       /* ~10cm visual */
+            margin-bottom: 10px; /* ~1cm espaço abaixo */
             overflow: hidden;
-            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fdfcf0;
         }
 
         .banner-header img {
             width: 100%;
             height: 100%;
-            object-fit: cover;   /* cobre tudo sem distorcer */
+            object-fit: cover;
             object-position: center;
             display: block;
         }
@@ -49,7 +50,7 @@
             width: 100%;
             max-width: 1250px;
             margin: auto;
-            padding: 25px 20px;
+            padding: 20px;
         }
 
         .btn-back {
@@ -75,7 +76,7 @@
             max-width: 1250px;
             margin: auto;
             gap: 30px;
-            padding: 40px 20px;
+            padding: 30px 20px;
         }
 
         /* SIDEBAR */
@@ -160,7 +161,7 @@
             }
 
             .banner-header {
-                height: 60vh;
+                height: 140px;
             }
         }
     </style>
@@ -168,7 +169,7 @@
 
 <body>
 
-<!-- BANNER FULL WIDTH -->
+<!-- BANNER -->
 <header class="banner-header">
     <img src="sollene-group.jpg" alt="Sollene Group Banner">
 </header>
@@ -178,7 +179,7 @@
     <a href="index.html" class="btn-back">← Back</a>
 </nav>
 
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <main class="main-content">
 
     <!-- SIDEBAR -->
@@ -244,7 +245,7 @@
     © 2026 SOLLENE GROUP | INVENTORY SYSTEM
 </footer>
 
-<!-- JAVASCRIPT -->
+<!-- JS -->
 <script>
 function addProduct() {
     let name = document.getElementById("productName").value;
