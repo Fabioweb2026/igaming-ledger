@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sollene Group | Inventory System</title>
+<title>Sollene Group | Multi Currency Inventory</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -53,46 +54,26 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* FORM */
-.form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-
+/* CAMPOS */
 input, select {
     width: 100%;
     height: 42px;
+    margin-bottom: 10px;
     border-radius: 10px;
     border: none;
     padding: 0 10px;
     box-sizing: border-box;
 }
 
-/* FULL WIDTH */
-.full {
-    grid-column: 1 / -1;
-}
-
-/* BOTÕES */
+/* BOTÃO */
 button {
     width: 100%;
     height: 45px;
     border-radius: 10px;
     border: none;
+    background: #b39359;
     font-weight: bold;
     cursor: pointer;
-}
-
-.add {
-    background: #b39359;
-    grid-column: 1 / -1;
-}
-
-.save {
-    background: #27ae60;
-    color: white;
-    grid-column: 1 / -1;
 }
 
 /* TABLE */
@@ -118,22 +99,9 @@ th, td {
     border-bottom: 1px solid #eee;
 }
 
-.entry { color: green; font-weight: bold; }
-.exit { color: red; font-weight: bold; }
-.cash { color: #27ae60; font-weight: bold; }
-
-footer {
-    text-align: center;
-    padding: 25px;
-    background: #1a1a1a;
-    color: #777;
-    margin-top: 40px;
-}
-
-@media (max-width: 900px) {
-    .main-content {
-        grid-template-columns: 1fr;
-    }
+.cash {
+    color: #27ae60;
+    font-weight: bold;
 }
 
 </style>
@@ -150,84 +118,99 @@ footer {
 <div class="sidebar">
     <h2>Register Product</h2>
 
-    <div class="form-grid">
+    <input id="name" placeholder="Product">
 
-        <input id="name" class="full" placeholder="Product Name">
+    <select id="buyCurrency">
+        <option value="EUR">Buy EUR</option>
+        <option value="USD">Buy USD</option>
+        <option value="BRL">Buy BRL</option>
+    </select>
 
-        <select id="unit">
-            <option>Kg</option>
-            <option>Ton</option>
-            <option>Box</option>
-        </select>
+    <input id="cost" type="number" placeholder="Cost (buy)">
 
-        <select id="currency">
-            <option>USD</option>
-            <option>EUR</option>
-            <option>BRL</option>
-        </select>
+    <select id="sellCurrency">
+        <option value="EUR">Sell EUR</option>
+        <option value="USD">Sell USD</option>
+        <option value="BRL">Sell BRL</option>
+    </select>
 
-        <input id="entry" type="number" placeholder="Entry">
-        <input id="exit" type="number" placeholder="Exit">
+    <input id="sell" type="number" placeholder="Sell value">
 
-        <input id="price" class="full" type="number" placeholder="Price per unit">
+    <input id="qty" type="number" placeholder="Quantity">
 
-        <button class="add" onclick="add()">Add Product</button>
-        <button class="save" onclick="save()">Save Inventory</button>
-
-    </div>
+    <button onclick="add()">Add Product</button>
 </div>
 
 <div class="table-container">
 <table>
+
 <thead>
 <tr>
 <th>Product</th>
-<th>Unit</th>
-<th>Entry</th>
-<th>Exit</th>
-<th>Stock</th>
-<th>Currency</th>
-<th>Price</th>
-<th>Revenue</th>
+<th>Buy</th>
+<th>Sell</th>
+<th>Qty</th>
+<th>Cost USD</th>
+<th>Revenue USD</th>
 <th>Cash</th>
 </tr>
 </thead>
 
 <tbody id="table"></tbody>
+
 </table>
 </div>
 
 </div>
 
-<footer>© 2026 SOLLENE GROUP</footer>
-
 <script>
 
-/* 🔥 CARREGA AUTOMATICAMENTE */
-let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
-
-render();
-
-/* ADD + AUTO SAVE */
-function add(){
-
-let item = {
-name: document.getElementById('name').value,
-unit: document.getElementById('unit').value,
-entry: +document.getElementById('entry').value,
-exit: +document.getElementById('exit').value,
-currency: document.getElementById('currency').value,
-price: +document.getElementById('price').value
+/* taxa fixa (pode depois vir API real) */
+const rates = {
+EUR: 1.08,
+USD: 1,
+BRL: 0.20
 };
 
-inventory.push(item);
+let inventory = [];
 
-autoSave();   // 🔥 SALVA AUTOMATICAMENTE
+function convert(value, currency){
+return value * rates[currency];
+}
+
+function add(){
+
+let name=document.getElementById('name').value;
+
+let buyCur=document.getElementById('buyCurrency').value;
+let cost=+document.getElementById('cost').value;
+
+let sellCur=document.getElementById('sellCurrency').value;
+let sell=+document.getElementById('sell').value;
+
+let qty=+document.getElementById('qty').value;
+
+/* CONVERSÃO */
+let costUSD = convert(cost, buyCur) * qty;
+let revenueUSD = convert(sell, sellCur) * qty;
+
+/* LUCRO */
+let cash = revenueUSD - costUSD;
+
+inventory.push({
+name,
+buyCur,
+sellCur,
+qty,
+costUSD,
+revenueUSD,
+cash
+});
+
 render();
 
 }
 
-/* RENDER */
 function render(){
 
 let table=document.getElementById('table');
@@ -235,35 +218,20 @@ table.innerHTML="";
 
 inventory.forEach(i=>{
 
-let stock=i.entry-i.exit;
-let revenue=i.exit*i.price;
-let cash=revenue-(i.entry*i.price);
-
 table.innerHTML+=`
 <tr>
 <td>${i.name}</td>
-<td>${i.unit}</td>
-<td class="entry">${i.entry}</td>
-<td class="exit">${i.exit}</td>
-<td>${stock}</td>
-<td>${i.currency}</td>
-<td>${i.price}</td>
-<td>${revenue.toFixed(2)}</td>
-<td class="cash">${cash.toFixed(2)}</td>
-</tr>`;
+<td>${i.buyCur}</td>
+<td>${i.sellCur}</td>
+<td>${i.qty}</td>
+<td>${i.costUSD.toFixed(2)}</td>
+<td>${i.revenueUSD.toFixed(2)}</td>
+<td class="cash">${i.cash.toFixed(2)}</td>
+</tr>
+`;
+
 });
 
-}
-
-/* 🔥 SALVAMENTO REAL */
-function save(){
-localStorage.setItem("inventory", JSON.stringify(inventory));
-alert("Inventory saved successfully!");
-}
-
-/* AUTO SAVE (IMPORTANTE) */
-function autoSave(){
-localStorage.setItem("inventory", JSON.stringify(inventory));
 }
 
 </script>
