@@ -25,27 +25,23 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 1. BANNER MODELO FINAL: FULL WIDTH SEM ESPAÇOS LATERAIS */
+        /* 1. BANNER AJUSTADO PARA MOSTRAR O NOME (TOP LEFT) */
         .banner-header {
             width: 100%;
             height: 9.5cm;
-            margin-top: 0.5cm;
+            margin-top: 0.5cm; /* Distância de 0.5cm do navegador */
             overflow: hidden;
             display: flex;
-            justify-content: center;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
 
         .banner-header img {
-            width: 100%;       /* Ocupa toda a largura da esquerda para a direita */
-            height: 100%;      /* Preenche toda a altura de 9.5cm */
-            
-            /* O 'cover' faz a imagem preencher o espaço total sem distorcer, 
-               ajustando-se como no modelo que você enviou */
+            width: 100%;
+            height: 100%;
+            /* 'cover' preenche todo o espaço de ponta a ponta */
             object-fit: cover; 
-            
-            /* Centraliza a imagem para que os produtos e o logo fiquem equilibrados */
-            object-position: center; 
+            /* ESTE É O AJUSTE: foca no topo e na esquerda para o nome não sumir */
+            object-position: left top; 
             display: block;
         }
 
@@ -199,15 +195,15 @@
         @media (max-width: 900px) {
             .main-content { flex-direction: column; }
             .sidebar { width: 100%; }
-            .banner-header { height: auto; min-height: 200px; }
+            .banner-header { height: auto; min-height: 180px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BANNER MODELO FINAL (ESTILO MODELO ENVIADO) -->
+    <!-- HEADER: FOCO NO NOME SOLLENE GROUP -->
     <header class="banner-header">
-        <img src="sollene-group.jpg" alt="Sollene Group Premium Dashboard">
+        <img src="sollene-group.jpg" alt="Sollene Group Dashboard">
     </header>
 
     <nav class="nav-top">
@@ -273,6 +269,4 @@
 
 </body>
 </html>
-
-
 
