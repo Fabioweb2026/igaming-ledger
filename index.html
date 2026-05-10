@@ -23,10 +23,10 @@
 
         @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
 
-        /* 1. BANNER PANORÂMICO (LADO A LADO COM ALTURA REDUZIDA) */
+        /* 1. BANNER PANORÂMICO AJUSTADO (FOCO NO TOPO) */
         .banner-header {
             width: 100%;
-            height: 350px; /* ALTURA AJUSTADA: Diminui o espaço de cima para baixo */
+            height: 320px; /* Altura ideal para manter o texto legível */
             overflow: hidden;
             background-color: #fdfcf0;
             border-bottom: 4px solid #b39359;
@@ -35,8 +35,9 @@
         .banner-header img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* MANTÉM A PROPORÇÃO: Corta as bordas mas não achata a imagem */
-            object-position: center; /* Foca no centro da imagem */
+            object-fit: cover;
+            /* AJUSTE CHAVE: Garante que o topo da imagem (letras) apareça primeiro */
+            object-position: top center; 
             display: block;
         }
 
@@ -44,7 +45,7 @@
         .nav-top {
             width: 100%;
             max-width: 1200px;
-            padding: 20px;
+            padding: 25px 20px;
             text-align: left;
         }
 
@@ -139,7 +140,7 @@
 </head>
 <body>
 
-    <!-- BANNER PANORÂMICO -->
+    <!-- BANNER PANORÂMICO COM FOCO NAS LETRAS -->
     <header class="banner-header">
         <img src="sollene-group.jpg" alt="Sollene Group Global Trade">
     </header>
@@ -216,4 +217,5 @@
 
 </body>
 </html>
+
 
