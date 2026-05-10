@@ -5,49 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sollene Group | Inventory System</title>
     <link href="https://googleapis.com" rel="stylesheet">
-    
     <style>
         /* RESET & BASE STYLE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0; /* Cor creme para harmonizar com o fundo da imagem */
+            background-color: #fdfcf0;
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
             align-items: center;
             opacity: 0;
             animation: fadeInPage 1.5s ease-out forwards;
-            overflow-x: hidden;
         }
 
         @keyframes fadeInPage {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 1. BANNER FULL WIDTH (MODELO SOLENNE) */
+        /* 1. BANNER AJUSTADO: 30cm x 9.5cm, FULL WIDTH E 0.5cm DO TOPO */
         .banner-header {
             width: 100%;
-            background-color: #fdfcf0;
-            line-height: 0;
-            border-bottom: 5px solid #b39359; /* Linha dourada de acabamento */
+            display: flex;
+            justify-content: center;
+            /* Espaço de 0.5cm abaixo do "navegador" (topo da página) */
+            margin-top: 0.5cm; 
+            padding: 0; 
         }
 
         .banner-header img {
+            /* Ocupa todo o espaço da esquerda para a direita */
             width: 100%;
-            height: auto;
-            display: block;
-            /* Garante que o topo (letras) e a base (contatos) da imagem apareçam */
-            object-fit: contain; 
+            /* Limita a largura máxima a 30cm como solicitado */
+            max-width: 30cm; 
+            /* Altura fixa de 9.5cm */
+            height: 9.5cm;
+            /* Garante que a imagem preencha o espaço sem esticar */
+            object-fit: cover;
+            object-position: center;
+            border-radius: 0; /* Removido arredondamento para ocupar as bordas */
+            box-shadow: 0 10px 30px rgba(179, 147, 89, 0.2);
         }
 
-        /* 2. NAVEGAÇÃO */
+        /* 2. BOTÃO VOLTAR */
         .nav-top {
             width: 100%;
-            max-width: 1250px;
-            padding: 30px 20px 10px;
+            max-width: 1200px;
+            padding: 20px;
             text-align: left;
         }
 
@@ -55,148 +61,168 @@
             text-decoration: none;
             color: #b39359;
             border: 1px solid #b39359;
-            padding: 10px 25px;
+            padding: 8px 20px;
             border-radius: 50px;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             transition: 0.3s;
-            background: white;
         }
 
-        .btn-back:hover { 
-            background: #b39359; 
+        .btn-back:hover {
+            background: #b39359;
             color: white;
-            box-shadow: 0 5px 15px rgba(179, 147, 89, 0.3);
         }
 
-        /* 3. SISTEMA DE GESTÃO (LAYOUT HARMONIZADO) */
+        /* 3. CONTEÚDO DO SISTEMA */
         .main-content {
             display: flex;
             width: 100%;
-            max-width: 1250px;
-            gap: 30px;
-            padding: 20px 20px 80px;
+            max-width: 1200px;
+            gap: 25px;
+            padding: 0 20px 60px;
             flex: 1;
         }
 
-        /* Sidebar de Registro */
         .sidebar {
-            width: 340px;
+            width: 320px;
             background-color: #1a1a1a;
             color: #b39359;
-            padding: 35px 25px;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             height: fit-content;
         }
 
-        .sidebar h2 { 
+        .sidebar h2 {
             font-family: 'Playfair Display', serif;
-            font-size: 22px; 
-            margin-bottom: 30px; 
+            font-size: 18px;
+            margin-bottom: 20px;
             text-align: center;
-            letter-spacing: 1px;
         }
 
         input, select {
             width: 100%;
-            padding: 14px;
-            margin-bottom: 18px;
-            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
             border: 1px solid #333;
-            background: #fff;
             font-size: 14px;
-            outline: none;
         }
 
         .btn-add {
             width: 100%;
-            padding: 16px;
+            padding: 14px;
             background-color: #b39359;
             color: #000;
             border: none;
             font-weight: 800;
-            border-radius: 12px;
+            border-radius: 8px;
             cursor: pointer;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
         }
 
-        .btn-add:hover { 
-            background: #d4af37; 
-            transform: scale(1.02);
+        .btn-save {
+            width: 100%;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
         }
 
-        /* Tabela de Produtos */
         .table-container {
             flex: 1;
             background: white;
-            border-radius: 24px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 35px rgba(179, 147, 89, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border: 1px solid rgba(179, 147, 89, 0.2);
         }
 
-        table { width: 100%; border-collapse: collapse; }
-        thead { background-color: #1a1a1a; color: #b39359; }
-        th { 
-            padding: 20px; 
-            font-size: 12px; 
-            text-transform: uppercase; 
-            letter-spacing: 1.5px;
-            text-align: center;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-        td { 
-            padding: 20px; 
-            text-align: center; 
-            font-size: 15px; 
-            border-bottom: 1px solid #f2f2f2;
-            color: #444;
-        }
-        
-        .entry { color: #27ae60; font-weight: 700; }
-        .exit { color: #e74c3c; font-weight: 700; }
-        .total-val { color: #b39359; font-weight: 800; }
 
-        /* 4. FOOTER COMPLEMENTAR */
+        thead {
+            background-color: #000;
+            color: #b39359;
+        }
+
+        th {
+            padding: 18px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        td {
+            padding: 18px;
+            text-align: center;
+            font-size: 14px;
+            border-bottom: 1px solid #f2f2f2;
+        }
+
+        .entry { color: #27ae60; font-weight: bold; }
+        .exit { color: #e74c3c; font-weight: bold; }
+        .total-val { color: #b39359; font-weight: bold; }
+
+        /* 4. RODAPÉ */
         footer {
             width: 100%;
-            padding: 40px 20px;
+            padding: 60px 20px;
             background-color: #1a1a1a;
             text-align: center;
-            color: #555;
-            font-size: 11px;
-            letter-spacing: 2px;
+            border-top: 3px solid #b39359;
         }
 
-        /* RESPONSIVIDADE */
-        @media (max-width: 1024px) {
-            .main-content { flex-direction: column; align-items: center; }
-            .sidebar { width: 100%; max-width: 500px; }
+        .footer-address {
+            color: #b39359;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1.8;
+        }
+
+        .copyright {
+            color: #555;
+            font-size: 10px;
+            margin-top: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 900px) {
+            .main-content { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .banner-header img { height: auto; min-height: 150px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BANNER CONFORME O MODELO ENVIADO -->
+    <!-- BANNER COM OS NOVOS AJUSTES -->
     <header class="banner-header">
-        <img src="sollene-group.jpg" alt="Sollene Group Global Trade">
+        <img src="sollene-group.jpg" alt="Sollene Group Premium Banner">
     </header>
 
+    <!-- NAVIGATION -->
     <nav class="nav-top">
-        <a href="index.html" class="btn-back">← Back to Portfolio</a>
+        <a href="index.html" class="btn-back">← BACK TO PORTFOLIO</a>
     </nav>
 
+    <!-- MAIN SYSTEM -->
     <main class="main-content">
-        <!-- REGISTRATION SIDEBAR -->
         <section class="sidebar">
             <h2>Register Product</h2>
             <input type="text" placeholder="Product Name">
             <select>
-                <option>Case (Caixa)</option>
-                <option>Unit (Unidade)</option>
+                <option>Caixa (Case)</option>
+                <option>Unidade (Unit)</option>
             </select>
             <input type="number" placeholder="Entry (Entrada)">
             <input type="number" placeholder="Exit (Saída)">
@@ -205,10 +231,10 @@
                 <option>EUR (€)</option>
             </select>
             <input type="number" placeholder="Unit Price">
-            <button class="btn-add">Add to Inventory</button>
+            <button class="btn-add">Add Product</button>
+            <button class="btn-save">💾 Save Inventory</button>
         </section>
 
-        <!-- INVENTORY TABLE -->
         <section class="table-container">
             <table>
                 <thead>
@@ -225,24 +251,24 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Sollene Reserve Coffee</td>
+                        <td>Premium Coffee</td>
                         <td>Case</td>
-                        <td class="entry">+ 120</td>
-                        <td class="exit">- 45</td>
-                        <td>75</td>
+                        <td class="entry">+ 100</td>
+                        <td class="exit">- 23</td>
+                        <td>77</td>
                         <td>USD</td>
-                        <td>$ 8.50</td>
-                        <td class="total-val">$ 637.50</td>
+                        <td>$ 6.67</td>
+                        <td class="total-val">$ 513.59</td>
                     </tr>
                     <tr>
-                        <td>Premium Red Wine</td>
+                        <td>Sollene Wine</td>
                         <td>Case</td>
-                        <td class="entry">+ 200</td>
-                        <td class="exit">- 80</td>
-                        <td>120</td>
+                        <td class="entry">+ 300</td>
+                        <td class="exit">- 123</td>
+                        <td>177</td>
                         <td>EUR</td>
-                        <td>€ 12.00</td>
-                        <td class="total-val">€ 1,440.00</td>
+                        <td>€ 4.58</td>
+                        <td class="total-val">€ 810.66</td>
                     </tr>
                 </tbody>
             </table>
@@ -250,8 +276,13 @@
     </main>
 
     <footer>
-        © 2026 SOLLENE GROUP ENTERPRISE | PRESTIGE IN TECHNOLOGY & TRADE
+        <div class="footer-address">
+            <p>SOLLENE GROUP ENTERPRISE • MARINA BUSINESS AVENUE, VALLETTA, MALTA</p>
+            <p>TEL: +356 2134 5678 • EMAIL: CONTACT@SOLLENE-GROUP.MT</p>
+        </div>
+        <p class="copyright">© 2026 SOLLENE GROUP ENTERPRISE | PRESTIGE IN TECHNOLOGY & TRADE</p>
     </footer>
 
 </body>
 </html>
+
