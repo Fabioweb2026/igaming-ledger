@@ -21,30 +21,30 @@
             animation: fadeInPage 1.5s ease-out forwards;
         }
 
-        @keyframes fadeInPage {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
 
-        /* 1. BANNER FULL WIDTH (DE LADO A LADO) */
+        /* 1. BANNER PANORÂMICO (LADO A LADO COM ALTURA REDUZIDA) */
         .banner-header {
             width: 100%;
+            height: 350px; /* ALTURA AJUSTADA: Diminui o espaço de cima para baixo */
             overflow: hidden;
             background-color: #fdfcf0;
+            border-bottom: 4px solid #b39359;
         }
 
         .banner-header img {
-            width: 100%; /* OCUPA 100% DA LARGURA */
-            height: auto;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* MANTÉM A PROPORÇÃO: Corta as bordas mas não achata a imagem */
+            object-position: center; /* Foca no centro da imagem */
             display: block;
-            border-bottom: 4px solid #b39359; /* Linha dourada para separar do sistema */
         }
 
         /* 2. NAVEGAÇÃO / BOTÃO VOLTAR */
         .nav-top {
             width: 100%;
             max-width: 1200px;
-            padding: 25px 20px;
+            padding: 20px;
             text-align: left;
         }
 
@@ -96,8 +96,6 @@
             text-transform: uppercase;
         }
 
-        .btn-add:hover { background: #d4af37; transform: translateY(-2px); }
-
         /* TABELA */
         .table-container {
             flex: 1;
@@ -135,14 +133,15 @@
         @media (max-width: 1000px) {
             .main-content { flex-direction: column; }
             .sidebar { width: 100%; }
+            .banner-header { height: 250px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BANNER DE LADO A LADO -->
+    <!-- BANNER PANORÂMICO -->
     <header class="banner-header">
-        <img src="sollene-group.jpg" alt="Sollene Group Worldwide Trade">
+        <img src="sollene-group.jpg" alt="Sollene Group Global Trade">
     </header>
 
     <nav class="nav-top">
@@ -164,7 +163,7 @@
                 <option>EUR (€)</option>
             </select>
             <input type="number" placeholder="Unit Price">
-            <button class="btn-add">Add to Stock</button>
+            <button class="btn-add">Add to Inventory</button>
         </section>
 
         <section class="table-container">
