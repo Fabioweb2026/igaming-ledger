@@ -23,21 +23,17 @@
 
         @keyframes fadeInPage { from { opacity: 0; } to { opacity: 1; } }
 
-        /* 1. BANNER PANORÂMICO AJUSTADO (FOCO NO TOPO) */
+        /* 1. BANNER FULL WIDTH (AJUSTADO PARA NÃO CORTAR PALAVRAS) */
         .banner-header {
             width: 100%;
-            height: 320px; /* Altura ideal para manter o texto legível */
-            overflow: hidden;
             background-color: #fdfcf0;
             border-bottom: 4px solid #b39359;
+            line-height: 0; /* Remove espaços fantasmas abaixo da imagem */
         }
 
         .banner-header img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* AJUSTE CHAVE: Garante que o topo da imagem (letras) apareça primeiro */
-            object-position: top center; 
+            height: auto; /* Mantém a proporção real para não "comer" letras */
             display: block;
         }
 
@@ -112,8 +108,6 @@
         th { padding: 18px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
         td { padding: 18px; text-align: center; font-size: 14px; border-bottom: 1px solid #f2f2f2; }
         
-        .entry { color: #27ae60; font-weight: bold; }
-        .exit { color: #e74c3c; font-weight: bold; }
         .total-val { color: #b39359; font-weight: bold; }
 
         /* RODAPÉ CORPORATIVO */
@@ -134,13 +128,12 @@
         @media (max-width: 1000px) {
             .main-content { flex-direction: column; }
             .sidebar { width: 100%; }
-            .banner-header { height: 250px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BANNER PANORÂMICO COM FOCO NAS LETRAS -->
+    <!-- BANNER QUE PREENCHE A LARGURA SEM CORTAR AS LETRAS -->
     <header class="banner-header">
         <img src="sollene-group.jpg" alt="Sollene Group Global Trade">
     </header>
@@ -185,22 +178,12 @@
                     <tr>
                         <td>Sollene Premium Coffee</td>
                         <td>Case</td>
-                        <td class="entry">+ 100</td>
-                        <td class="exit">- 23</td>
+                        <td>+ 100</td>
+                        <td>- 23</td>
                         <td>77</td>
                         <td>USD</td>
                         <td>$ 6.67</td>
                         <td class="total-val">$ 513.59</td>
-                    </tr>
-                    <tr>
-                        <td>Grand Reserve Wine</td>
-                        <td>Case</td>
-                        <td class="entry">+ 300</td>
-                        <td class="exit">- 123</td>
-                        <td>177</td>
-                        <td>EUR</td>
-                        <td>€ 4.58</td>
-                        <td class="total-val">€ 810.66</td>
                     </tr>
                 </tbody>
             </table>
