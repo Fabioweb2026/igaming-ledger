@@ -78,10 +78,11 @@
         .btn-add { 
             width: 100%; padding: 18px; background: #b39359; color: #111; 
             border: none; border-radius: 12px; font-weight: 800; cursor: pointer; 
-            text-transform: uppercase; margin-bottom: 10px;
+            text-transform: uppercase; margin-bottom: 15px; transition: 0.3s;
         }
+        .btn-add:hover { background: #d4ac0d; }
 
-        /* BOTÃO DE SALVAR CORRIGIDO */
+        /* BOTÃO DE SALVAR - AJUSTADO */
         .btn-save { 
             width: 100%; padding: 15px; background: #27ae60; color: #fff; 
             border: 2px solid #fff; border-radius: 12px; font-weight: 800; cursor: pointer; 
@@ -90,13 +91,10 @@
         }
         .btn-save:hover { background: #1e8449; transform: scale(1.02); }
 
-        /* ÁREA DA TABELA */
+        /* TABELA */
         .table-area { 
-            background: #fff; 
-            border-radius: 24px; 
-            overflow: hidden; 
-            border: 1px solid #e5e1da;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            background: #fff; border-radius: 24px; overflow: hidden; 
+            border: 1px solid #e5e1da; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
         table { width: 100%; border-collapse: collapse; }
@@ -134,10 +132,11 @@
             </select>
             <input type="number" id="pPrice" placeholder="Price (Preço Unit.)">
             
-            <button class="btn-add" onclick="addProduct()">Add Product</button>
+            <!-- Botão Adicionar -->
+            <button class="btn-add" id="btnActionAdd">Add Product</button>
             
-            <!-- CHAMANDO A FUNÇÃO DE SALVAMENTO CORRETAMENTE -->
-            <button class="btn-save" onclick="saveData()">💾 SAVE INVENTORY</button>
+            <!-- Botão Salvar -->
+            <button class="btn-save" id="btnActionSave">💾 SAVE INVENTORY</button>
         </aside>
 
         <main class="table-area">
@@ -160,16 +159,17 @@
     </div>
 
     <script>
-        // Carrega dados existentes
-        let inventory = JSON.parse(localStorage.getItem('sollene_final_v5')) || [];
+        // Banco de dados interno do navegador
+        let inventory = JSON.parse(localStorage.getItem('sollene_final_v10')) || [];
 
+        // Função para desenhar a tabela na tela
         function renderTable() {
             const body = document.getElementById('inventoryBody');
             body.innerHTML = "";
 
             inventory.forEach((item) => {
-                const stock = item.entry - item.exit;
-                const total = (stock * item.price).toFixed(2);
+                const stock = (item.entry || 0) - (item.exit || 0);
+                const total = (stock * (item.price || 0)).toFixed(2);
                 const symbol = item.currency === 'USD' ? '$' : (item.currency === 'EUR' ? '€' : 'R$');
 
                 const row = body.insertRow();
@@ -186,32 +186,47 @@
             });
         }
 
-        function addProduct() {
-            const name = document.getElementById('pName').value;
+        // Função Principal de Salvamento
+        function saveData(silent = false) {
+            localStorage.setItem('sollene_final_v10', JSON.stringify(inventory));
+            if (!silent) {
+                alert("✅ Inventory Saved Successfully!");
+            }
+        }
+
+        // Ação do Botão Adicionar
+        document.getElementById('btnActionAdd').onclick = function() {
+            const name = document.getElementById('pName').value.trim();
             const unit = document.getElementById('pUnit').value;
             const entry = parseInt(document.getElementById('pEntry').value) || 0;
             const exit = parseInt(document.getElementById('pExit').value) || 0;
             const currency = document.getElementById('pCurrency').value;
             const price = parseFloat(document.getElementById('pPrice').value) || 0;
 
-            if(!name || isNaN(price)) return alert("Please enter Product Name and Price.");
+            if(!name || isNaN(price)) {
+                alert("Please enter a valid Product Name and Price.");
+                return;
+            }
 
             inventory.push({ name, unit, entry, exit, currency, price });
+            
+            // Salva automaticamente ao adicionar
+            saveData(true); 
             renderTable();
 
-            // Limpa formulário
+            // Limpa os campos
             document.getElementById('pName').value = "";
             document.getElementById('pEntry').value = "";
             document.getElementById('pExit').value = "";
             document.getElementById('pPrice').value = "";
-        }
+        };
 
-        // FUNÇÃO DE SALVAR NO NAVEGADOR
-        function saveData() {
-            localStorage.setItem('sollene_final_v5', JSON.stringify(inventory));
-            alert("Inventory Saved Successfully!");
-        }
+        // Ação do Botão Salvar Manual
+        document.getElementById('btnActionSave').onclick = function() {
+            saveData();
+        };
 
+        // Carregar dados ao iniciar a página
         window.onload = renderTable;
     </script>
 </body>
