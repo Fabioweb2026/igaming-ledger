@@ -1,726 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sollene Group | Inventory System</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        /* RESET & BASE STYLE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fdfcf0;
+            color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: fadeInPage 1.5s ease-out forwards;
+        }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-<title>Sollene Group | Professional Inventory System</title>
+        /* 1. BANNER FULL WIDTH COM LOGO VISÍVEL */
+        .banner-header {
+            width: 100%;
+            height: 9.5cm;
+            margin-top: 0.5cm; /* Espaço solicitado do topo */
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+        .banner-header img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: left top; /* Garante que o nome Sollene Group apareça */
+            display: block;
+        }
 
-<style>
+        /* 2. BOTÃO VOLTAR */
+        .nav-top {
+            width: 100%;
+            max-width: 1200px;
+            padding: 30px 20px 20px;
+            text-align: left;
+        }
 
-/* =========================
-   RESET
-========================= */
+        .btn-back {
+            text-decoration: none;
+            color: #b39359;
+            border: 1px solid #b39359;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+        .btn-back:hover {
+            background: #b39359;
+            color: white;
+        }
 
-body{
-    font-family:'Plus Jakarta Sans',sans-serif;
-    background:#f6f4ea;
-    overflow-x:hidden;
-}
+        /* 3. CONTEÚDO DO SISTEMA */
+        .main-content {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            gap: 25px;
+            padding: 0 20px 60px;
+            flex: 1;
+        }
 
-/* =========================
-   BANNER
-========================= */
+        .sidebar {
+            width: 320px;
+            background-color: #1a1a1a;
+            color: #b39359;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            height: fit-content;
+        }
 
-.banner-header{
-    width:100%;
-    height:130px;
-    margin-top:15px;
-    overflow:hidden;
-    border-bottom:3px solid #b39359;
-}
+        .sidebar h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-.banner-header img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            font-size: 14px;
+        }
 
-/* =========================
-   MAIN
-========================= */
+        .btn-add {
+            width: 100%;
+            padding: 14px;
+            background-color: #b39359;
+            color: #000;
+            border: none;
+            font-weight: 800;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
 
-.main-content{
-    max-width:1450px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:330px 1fr;
-    gap:18px;
-    padding:20px;
-}
+        .btn-save {
+            width: 100%;
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+        }
 
-/* =========================
-   SIDEBAR
-========================= */
+        .table-container {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(179, 147, 89, 0.2);
+        }
 
-.sidebar{
-    background:#1a1a1a;
-    padding:20px;
-    border-radius:16px;
-    color:#b39359;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-.sidebar h2{
-    margin-bottom:18px;
-    font-size:22px;
-}
+        thead {
+            background-color: #000;
+            color: #b39359;
+        }
 
-/* =========================
-   FORM GRID
-========================= */
+        th {
+            padding: 18px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
-.form-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
+        td {
+            padding: 18px;
+            text-align: center;
+            font-size: 14px;
+            border-bottom: 1px solid #f2f2f2;
+        }
 
-/* =========================
-   INPUTS
-========================= */
+        .entry { color: #27ae60; font-weight: bold; }
+        .exit { color: #e74c3c; font-weight: bold; }
+        .total-val { color: #b39359; font-weight: bold; }
 
-.form-grid input,
-.form-grid select{
-    width:100%;
-    height:42px;
-    border:none;
-    border-radius:8px;
-    padding:0 10px;
-    outline:none;
-    font-size:13px;
-    font-family:'Plus Jakarta Sans',sans-serif;
-}
+        /* 4. RODAPÉ */
+        footer {
+            width: 100%;
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+            border-top: 3px solid #b39359;
+        }
 
-.full{
-    grid-column:1 / -1;
-}
+        .footer-address {
+            color: #b39359;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1.8;
+        }
 
-/* =========================
-   LABELS
-========================= */
+        .copyright {
+            color: #555;
+            font-size: 10px;
+            margin-top: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
 
-label{
-    display:block;
-    margin-bottom:5px;
-    font-size:12px;
-    color:#fff;
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-button{
-    width:100%;
-    height:42px;
-    border:none;
-    border-radius:8px;
-    font-weight:700;
-    cursor:pointer;
-    transition:0.3s;
-    font-size:13px;
-}
-
-button:hover{
-    transform:scale(1.02);
-}
-
-.add-btn{
-    background:#b39359;
-    color:#000;
-}
-
-.save-btn{
-    background:#27ae60;
-    color:#fff;
-}
-
-/* =========================
-   TABLE CONTAINER
-========================= */
-
-.table-container{
-    background:#fff;
-    border-radius:16px;
-    overflow:auto;
-    box-shadow:0 8px 20px rgba(0,0,0,0.08);
-}
-
-/* =========================
-   TABLE
-========================= */
-
-table{
-    width:100%;
-    border-collapse:collapse;
-    min-width:1200px;
-}
-
-thead{
-    background:#1a1a1a;
-    color:#b39359;
-}
-
-th,
-td{
-    padding:8px;
-    text-align:center;
-    border-bottom:1px solid #eee;
-    font-size:11px;
-    white-space:nowrap;
-}
-
-th{
-    font-size:10px;
-    letter-spacing:0.5px;
-}
-
-.entry{
-    color:#27ae60;
-    font-weight:bold;
-}
-
-.exit{
-    color:#e74c3c;
-    font-weight:bold;
-}
-
-.stock{
-    color:#b39359;
-    font-weight:bold;
-}
-
-.profit{
-    color:#2980b9;
-    font-weight:bold;
-}
-
-.cash{
-    color:#27ae60;
-    font-weight:bold;
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    margin-top:25px;
-    background:#1a1a1a;
-    color:#777;
-    text-align:center;
-    padding:20px;
-    font-size:11px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:900px){
-
-.main-content{
-    grid-template-columns:1fr;
-}
-
-.form-grid{
-    grid-template-columns:1fr;
-}
-
-}
-
-</style>
-
+        @media (max-width: 900px) {
+            .main-content { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .banner-header { height: auto; min-height: 180px; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- =========================
-     BANNER
-========================= -->
+    <header class="banner-header">
+        <img src="sollene-group.jpg" alt="Sollene Group Dashboard">
+    </header>
 
-<header class="banner-header">
+    <nav class="nav-top">
+        <a href="index.html" class="btn-back">← BACK TO PORTFOLIO</a>
+    </nav>
 
-    <img src="sollene-group.jpg" alt="Sollene Group">
+    <main class="main-content">
+        <section class="sidebar">
+            <h2>Register Product</h2>
+            <input type="text" placeholder="Product Name">
+            <select>
+                <option>Box (Caixa)</option>
+                <option>Unit (Unidade)</option>
+            </select>
+            <input type="number" placeholder="Entry">
+            <input type="number" placeholder="Exit">
+            <select>
+                <option>USD ($)</option>
+                <option>EUR (€)</option>
+            </select>
+            <input type="number" placeholder="Unit Price">
+            <button class="btn-add">Add Product</button>
+            <button class="btn-save">💾 Save Inventory</button>
+        </section>
 
-</header>
+        <section class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>PRODUCT</th>
+                        <th>UNIT</th>
+                        <th>ENTRY</th>
+                        <th>EXIT</th>
+                        <th>STOCK</th>
+                        <th>CURRENCY</th>
+                        <th>PRICE</th>
+                        <th>REVENUE</th>
+                        <th>CASH</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Coffee</td>
+                        <td>Box</td>
+                        <td class="entry">123</td>
+                        <td class="exit">56</td>
+                        <td>67</td>
+                        <td>USD</td>
+                        <td>$ 6.78</td>
+                        <td>$ 379.68</td>
+                        <td class="total-val">$ -454.26</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
 
-<!-- =========================
-     MAIN
-========================= -->
-
-<div class="main-content">
-
-    <!-- SIDEBAR -->
-
-    <div class="sidebar">
-
-        <h2>Register Product</h2>
-
-        <div class="form-grid">
-
-            <!-- PRODUCT -->
-
-            <div class="full">
-
-                <label>Product Name</label>
-
-                <input
-                    type="text"
-                    id="product"
-                    placeholder="Coffee"
-                >
-
-            </div>
-
-            <!-- UNIT -->
-
-            <div>
-
-                <label>Unit</label>
-
-                <select id="unit">
-                    <option value="Kg">Kg</option>
-                    <option value="Ton">Ton</option>
-                    <option value="Box">Box</option>
-                </select>
-
-            </div>
-
-            <!-- ENTRY -->
-
-            <div>
-
-                <label>Entry</label>
-
-                <input
-                    type="number"
-                    id="entry"
-                    value="0"
-                >
-
-            </div>
-
-            <!-- EXIT -->
-
-            <div>
-
-                <label>Exit</label>
-
-                <input
-                    type="number"
-                    id="exit"
-                    value="0"
-                >
-
-            </div>
-
-            <!-- BUY PRICE -->
-
-            <div>
-
-                <label>Buy Price</label>
-
-                <input
-                    type="number"
-                    id="buyPrice"
-                    placeholder="6.50"
-                >
-
-            </div>
-
-            <!-- BUY CURRENCY -->
-
-            <div>
-
-                <label>Buy Currency</label>
-
-                <select id="buyCurrency">
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="BRL">BRL</option>
-                </select>
-
-            </div>
-
-            <!-- SELL PRICE -->
-
-            <div>
-
-                <label>Sell Price</label>
-
-                <input
-                    type="number"
-                    id="sellPrice"
-                    placeholder="9.00"
-                >
-
-            </div>
-
-            <!-- SELL CURRENCY -->
-
-            <div>
-
-                <label>Sell Currency</label>
-
-                <select id="sellCurrency">
-                    <option value="USD">USD</option>
-                    <option value="EUR">EUR</option>
-                    <option value="BRL">BRL</option>
-                </select>
-
-            </div>
-
-            <!-- ADD BUTTON -->
-
-            <button
-                type="button"
-                class="add-btn full"
-                id="addButton"
-            >
-                Add Product
-            </button>
-
-            <!-- SAVE BUTTON -->
-
-            <button
-                type="button"
-                class="save-btn full"
-                id="saveButton"
-            >
-                Save Inventory
-            </button>
-
+    <footer>
+        <div class="footer-address">
+            <p>SOLLENE GROUP ENTERPRISE • MARINA BUSINESS AVENUE, VALLETTA, MALTA</p>
+            <p>TEL: +356 2134 5678 • EMAIL: CONTACT@SOLLENE-GROUP.MT</p>
         </div>
-
-    </div>
-
-    <!-- TABLE -->
-
-    <div class="table-container">
-
-        <table>
-
-            <thead>
-
-                <tr>
-
-                    <th>Product</th>
-                    <th>Unit</th>
-                    <th>Entry</th>
-                    <th>Exit</th>
-                    <th>Stock</th>
-                    <th>Buy Price</th>
-                    <th>Buy Currency</th>
-                    <th>Sell Price</th>
-                    <th>Sell Currency</th>
-                    <th>Profit</th>
-                    <th>Cash</th>
-                    <th>Stock Value</th>
-                    <th>Total Value</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="table-body"></tbody>
-
-        </table>
-
-    </div>
-
-</div>
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-© 2026 SOLLENE GROUP | PROFESSIONAL INVENTORY SYSTEM
-
-</footer>
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
-<script>
-
-/* =========================
-   INVENTORY
-========================= */
-
-let inventory = JSON.parse(
-localStorage.getItem("inventory")
-) || [];
-
-/* =========================
-   TABLE
-========================= */
-
-const tableBody =
-document.getElementById("table-body");
-
-/* =========================
-   RENDER TABLE
-========================= */
-
-function renderTable(){
-
-    tableBody.innerHTML = "";
-
-    inventory.forEach(function(item){
-
-        tableBody.innerHTML += `
-
-        <tr>
-
-            <td>${item.product}</td>
-
-            <td>${item.unit}</td>
-
-            <td class="entry">
-            +${item.entry}
-            </td>
-
-            <td class="exit">
-            -${item.exit}
-            </td>
-
-            <td class="stock">
-            ${item.stock}
-            </td>
-
-            <td>
-            ${item.buyPrice}
-            </td>
-
-            <td>
-            ${item.buyCurrency}
-            </td>
-
-            <td>
-            ${item.sellPrice}
-            </td>
-
-            <td>
-            ${item.sellCurrency}
-            </td>
-
-            <td class="profit">
-            ${item.profit}
-            </td>
-
-            <td class="cash">
-            ${item.cash}
-            ${item.sellCurrency}
-            </td>
-
-            <td class="stock">
-            ${item.remaining}
-            ${item.buyCurrency}
-            </td>
-
-            <td class="cash">
-            ${item.totalValue || "0.00"}
-            ${item.sellCurrency}
-            </td>
-
-        </tr>
-
-        `;
-
-    });
-
-}
-
-/* =========================
-   ADD PRODUCT
-========================= */
-
-document
-.getElementById("addButton")
-.addEventListener("click", function(){
-
-    const product =
-    document.getElementById("product")
-    .value
-    .trim();
-
-    const unit =
-    document.getElementById("unit")
-    .value;
-
-    const entry =
-    parseFloat(
-        document.getElementById("entry").value
-    ) || 0;
-
-    const exit =
-    parseFloat(
-        document.getElementById("exit").value
-    ) || 0;
-
-    let buyPrice =
-    parseFloat(
-        document.getElementById("buyPrice").value
-    ) || 1;
-
-    let sellPrice =
-    parseFloat(
-        document.getElementById("sellPrice").value
-    ) || 1;
-
-    const buyCurrency =
-    document.getElementById("buyCurrency")
-    .value;
-
-    const sellCurrency =
-    document.getElementById("sellCurrency")
-    .value;
-
-    /* VALIDATION */
-
-    if(product === ""){
-
-        alert("Enter product name");
-        return;
-
-    }
-
-    if(exit > entry){
-
-        alert(
-        "Exit cannot be greater than Entry"
-        );
-
-        return;
-
-    }
-
-    /* CALCULATIONS */
-
-    const stock =
-    entry - exit;
-
-    const profit =
-    (
-        (sellPrice - buyPrice) * exit
-    ).toFixed(2);
-
-    const cash =
-    (
-        sellPrice * exit
-    ).toFixed(2);
-
-    const remaining =
-    (
-        stock * buyPrice
-    ).toFixed(2);
-
-    const totalValue =
-    Number(
-        stock * sellPrice
-    ).toFixed(2);
-
-    /* OBJECT */
-
-    const item = {
-
-        product: product,
-
-        unit: unit,
-
-        entry: entry,
-
-        exit: exit,
-
-        stock: stock,
-
-        buyPrice: buyPrice.toFixed(2),
-
-        buyCurrency: buyCurrency,
-
-        sellPrice: sellPrice.toFixed(2),
-
-        sellCurrency: sellCurrency,
-
-        profit: profit,
-
-        cash: cash,
-
-        remaining: remaining,
-
-        totalValue: totalValue
-
-    };
-
-    /* PUSH */
-
-    inventory.push(item);
-
-    /* SAVE */
-
-    localStorage.setItem(
-        "inventory",
-        JSON.stringify(inventory)
-    );
-
-    /* RENDER */
-
-    renderTable();
-
-    /* CLEAR */
-
-    document.getElementById("product").value = "";
-
-    document.getElementById("entry").value = "0";
-
-    document.getElementById("exit").value = "0";
-
-    document.getElementById("buyPrice").value = "";
-
-    document.getElementById("sellPrice").value = "";
-
-});
-
-/* =========================
-   SAVE
-========================= */
-
-document
-.getElementById("saveButton")
-.addEventListener("click", function(){
-
-    localStorage.setItem(
-        "inventory",
-        JSON.stringify(inventory)
-    );
-
-    alert(
-    "Inventory saved successfully!"
-    );
-
-});
-
-/* =========================
-   INITIAL
-========================= */
-
-renderTable();
-
-</script>
+        <p class="copyright">© 2026 SOLLENE GROUP ENTERPRISE | PRESTIGE IN TECHNOLOGY & TRADE</p>
+    </footer>
 
 </body>
 </html>
+
