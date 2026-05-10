@@ -1,483 +1,485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Stock Management System</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stock Management System</title>
 
-    <style>
+<style>
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-            font-family:Arial, Helvetica, sans-serif;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
 
-        body{
-            background:#0f172a;
-            color:white;
-            padding:30px;
-        }
+body{
+    background:#0f172a;
+    color:white;
+    padding:20px;
+}
 
-        .container{
-            max-width:1450px;
-            margin:auto;
-        }
+.container{
+    width:100%;
+    max-width:1400px;
+    margin:auto;
+}
 
-        h1{
-            text-align:center;
-            margin-bottom:25px;
-            color:#38bdf8;
-            font-size:38px;
-        }
+h1{
+    text-align:center;
+    margin-bottom:25px;
+    color:#38bdf8;
+    font-size:34px;
+}
 
-        /* FORM */
+/* FORM */
 
-        .form-box{
-            background:#1e293b;
-            border-radius:14px;
-            padding:20px;
-            margin-bottom:25px;
-        }
+.form-box{
+    background:#1e293b;
+    padding:20px;
+    border-radius:14px;
+    margin-bottom:25px;
+}
 
-        /* LEFT ALIGN */
-        .form-grid{
-            display:flex;
-            flex-wrap:wrap;
-            justify-content:flex-start;
-            gap:12px;
-        }
+.form-grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:flex-start;
+}
 
-        /* SMALLER BOXES */
+.form-grid input,
+.form-grid select{
+    width:150px;
+    padding:10px;
+    border:none;
+    border-radius:8px;
+    background:#334155;
+    color:white;
+    outline:none;
+    font-size:14px;
+}
 
-        .form-grid input,
-        .form-grid select{
-            width:170px;
-            padding:11px;
-            border:none;
-            border-radius:8px;
-            outline:none;
-            background:#334155;
-            color:white;
-            font-size:14px;
-        }
+input::placeholder{
+    color:#cbd5e1;
+}
 
-        input::placeholder{
-            color:#cbd5e1;
-        }
+.buttons{
+    margin-top:18px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
 
-        .buttons{
-            display:flex;
-            gap:10px;
-            margin-top:18px;
-            justify-content:flex-start;
-            flex-wrap:wrap;
-        }
+button{
+    border:none;
+    border-radius:8px;
+    padding:10px 18px;
+    color:white;
+    cursor:pointer;
+    font-weight:bold;
+    transition:0.3s;
+}
 
-        button{
-            padding:11px 18px;
-            border:none;
-            border-radius:8px;
-            cursor:pointer;
-            font-weight:bold;
-            color:white;
-            transition:0.3s;
-        }
+button:hover{
+    transform:scale(1.03);
+}
 
-        button:hover{
-            transform:scale(1.03);
-        }
+.add-btn{
+    background:#16a34a;
+}
 
-        .add-btn{
-            background:#16a34a;
-        }
+.update-btn{
+    background:#f59e0b;
+}
 
-        .update-btn{
-            background:#f59e0b;
-        }
+.delete-btn{
+    background:#dc2626;
+}
 
-        .delete-btn{
-            background:#dc2626;
-        }
+/* TABLE */
 
-        /* TABLE */
+.table-container{
+    width:100%;
+    overflow-x:auto;
+    border-radius:12px;
+}
 
-        table{
-            width:100%;
-            border-collapse:collapse;
-            overflow:hidden;
-            border-radius:12px;
-            background:#1e293b;
-        }
+table{
+    width:100%;
+    min-width:1200px;
+    border-collapse:collapse;
+    background:#1e293b;
+}
 
-        th{
-            background:#0284c7;
-            padding:14px;
-            font-size:14px;
-        }
+th{
+    background:#0284c7;
+    padding:14px;
+    font-size:14px;
+}
 
-        td{
-            padding:12px;
-            border-bottom:1px solid #334155;
-            text-align:center;
-            font-size:14px;
-        }
+td{
+    padding:12px;
+    border-bottom:1px solid #334155;
+    text-align:center;
+    font-size:14px;
+}
 
-        tr:hover{
-            background:#334155;
-        }
+tr:hover{
+    background:#334155;
+}
 
-        .action-btn{
-            padding:7px 12px;
-            border:none;
-            border-radius:6px;
-            color:white;
-            cursor:pointer;
-            margin:2px;
-        }
+.action-btn{
+    border:none;
+    border-radius:6px;
+    padding:6px 10px;
+    color:white;
+    cursor:pointer;
+    margin:2px;
+}
 
-        .edit{
-            background:#f59e0b;
-        }
+.edit{
+    background:#f59e0b;
+}
 
-        .remove{
-            background:#dc2626;
-        }
+.remove{
+    background:#dc2626;
+}
 
-        /* SUMMARY */
+/* SUMMARY */
 
-        .summary{
-            margin-top:25px;
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-            gap:15px;
-        }
+.summary{
+    margin-top:25px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
 
-        .card{
-            background:#1e293b;
-            padding:20px;
-            border-radius:12px;
-            text-align:center;
-        }
+.card{
+    background:#1e293b;
+    border-radius:12px;
+    padding:20px;
+    text-align:center;
+}
 
-        .card h2{
-            color:#38bdf8;
-            margin-bottom:10px;
-            font-size:18px;
-        }
+.card h2{
+    color:#38bdf8;
+    margin-bottom:10px;
+    font-size:18px;
+}
 
-        .card p{
-            font-size:24px;
-            font-weight:bold;
-        }
+.card p{
+    font-size:24px;
+    font-weight:bold;
+}
 
-        @media(max-width:768px){
+/* MOBILE */
 
-            body{
-                padding:15px;
-            }
+@media(max-width:768px){
 
-            .form-grid input,
-            .form-grid select{
-                width:100%;
-            }
+    .form-grid input,
+    .form-grid select{
+        width:100%;
+    }
 
-            table{
-                font-size:12px;
-            }
+    h1{
+        font-size:26px;
+    }
 
-            th,td{
-                padding:8px;
-            }
+}
 
-        }
-
-    </style>
+</style>
 </head>
 
 <body>
 
 <div class="container">
 
-    <h1>STOCK MANAGEMENT SYSTEM</h1>
+<h1>STOCK MANAGEMENT SYSTEM</h1>
 
-    <div class="form-box">
+<div class="form-box">
 
-        <div class="form-grid">
+<div class="form-grid">
 
-            <input type="text" id="productName" placeholder="Product Name">
+<input type="text" id="productName" placeholder="Product Name">
 
-            <select id="unit">
-                <option value="Kg">Kg</option>
-                <option value="Ton">Ton</option>
-                <option value="Package">Package</option>
-                <option value="Box">Box</option>
-            </select>
+<select id="unit">
+    <option value="Kg">Kg</option>
+    <option value="Ton">Ton</option>
+    <option value="Package">Package</option>
+    <option value="Box">Box</option>
+</select>
 
-            <input type="number" id="entry" placeholder="Entry">
+<input type="number" id="entry" placeholder="Entry">
 
-            <input type="number" id="exit" placeholder="Exit">
+<input type="number" id="exit" placeholder="Exit">
 
-            <input type="number" id="price" placeholder="Buy Price">
+<input type="number" id="price" placeholder="Buy Price">
 
-            <select id="currency">
-                <option value="EUR">EUR</option>
-                <option value="USD">USD</option>
-                <option value="BRL">BRL</option>
-            </select>
+<select id="currency">
+    <option value="EUR">EUR</option>
+    <option value="USD">USD</option>
+    <option value="BRL">BRL</option>
+</select>
 
-            <input type="number" id="sellPrice" placeholder="Sell Price">
+<input type="number" id="sellPrice" placeholder="Sell Price">
 
-        </div>
+</div>
 
-        <div class="buttons">
+<div class="buttons">
 
-            <button class="add-btn" onclick="addProduct()">
-                ADD PRODUCT
-            </button>
+<button class="add-btn" onclick="addProduct()">
+ADD PRODUCT
+</button>
 
-            <button class="update-btn" onclick="updateProduct()">
-                UPDATE PRODUCT
-            </button>
+<button class="update-btn" onclick="updateProduct()">
+UPDATE PRODUCT
+</button>
 
-            <button class="delete-btn" onclick="deleteSelected()">
-                DELETE PRODUCT
-            </button>
+<button class="delete-btn" onclick="deleteSelected()">
+DELETE PRODUCT
+</button>
 
-        </div>
+</div>
 
-    </div>
+</div>
 
-    <table>
+<div class="table-container">
 
-        <thead>
+<table>
 
-            <tr>
-                <th>Select</th>
-                <th>Product</th>
-                <th>Unit</th>
-                <th>Entry</th>
-                <th>Exit</th>
-                <th>Stock</th>
-                <th>Buy Price</th>
-                <th>Currency</th>
-                <th>Sell Price</th>
-                <th>Profit</th>
-                <th>Total Value</th>
-                <th>Actions</th>
-            </tr>
+<thead>
 
-        </thead>
+<tr>
+<th>Select</th>
+<th>Product</th>
+<th>Unit</th>
+<th>Entry</th>
+<th>Exit</th>
+<th>Stock</th>
+<th>Buy Price</th>
+<th>Currency</th>
+<th>Sell Price</th>
+<th>Profit</th>
+<th>Total Value</th>
+<th>Actions</th>
+</tr>
 
-        <tbody id="tableBody"></tbody>
+</thead>
 
-    </table>
+<tbody id="tableBody"></tbody>
 
-    <div class="summary">
+</table>
 
-        <div class="card">
-            <h2>Total Products</h2>
-            <p id="totalProducts">0</p>
-        </div>
+</div>
 
-        <div class="card">
-            <h2>Total Stock</h2>
-            <p id="totalStock">0</p>
-        </div>
+<div class="summary">
 
-        <div class="card">
-            <h2>Total Inventory Value</h2>
-            <p id="totalValue">0</p>
-        </div>
+<div class="card">
+<h2>Total Products</h2>
+<p id="totalProducts">0</p>
+</div>
 
-    </div>
+<div class="card">
+<h2>Total Stock</h2>
+<p id="totalStock">0</p>
+</div>
+
+<div class="card">
+<h2>Total Inventory Value</h2>
+<p id="totalValue">0</p>
+</div>
+
+</div>
 
 </div>
 
 <script>
 
-    let products = [];
-    let editIndex = -1;
+let products = [];
+let editIndex = -1;
 
-    function addProduct(){
+function addProduct(){
 
-        const productName = document.getElementById("productName").value;
-        const unit = document.getElementById("unit").value;
-        const entry = Number(document.getElementById("entry").value);
-        const exit = Number(document.getElementById("exit").value);
-        const price = Number(document.getElementById("price").value);
-        const currency = document.getElementById("currency").value;
-        const sellPrice = Number(document.getElementById("sellPrice").value);
+    const productName = document.getElementById("productName").value;
+    const unit = document.getElementById("unit").value;
+    const entry = Number(document.getElementById("entry").value);
+    const exit = Number(document.getElementById("exit").value);
+    const price = Number(document.getElementById("price").value);
+    const currency = document.getElementById("currency").value;
+    const sellPrice = Number(document.getElementById("sellPrice").value);
 
-        const stock = entry - exit;
-        const profit = (sellPrice - price) * stock;
-        const totalValue = stock * price;
+    if(productName === ""){
+        alert("Enter product name");
+        return;
+    }
 
-        if(productName === ""){
-            alert("Enter product name");
-            return;
+    const stock = entry - exit;
+    const profit = (sellPrice - price) * stock;
+    const totalValue = stock * price;
+
+    products.push({
+        productName,
+        unit,
+        entry,
+        exit,
+        stock,
+        price,
+        currency,
+        sellPrice,
+        profit,
+        totalValue
+    });
+
+    renderTable();
+    clearInputs();
+}
+
+function renderTable(){
+
+    const tableBody = document.getElementById("tableBody");
+    tableBody.innerHTML = "";
+
+    let totalStock = 0;
+    let totalValue = 0;
+
+    products.forEach((product,index)=>{
+
+        totalStock += product.stock;
+        totalValue += product.totalValue;
+
+        tableBody.innerHTML += `
+
+        <tr>
+
+        <td>
+        <input type="checkbox" class="select-product" data-index="${index}">
+        </td>
+
+        <td>${product.productName}</td>
+        <td>${product.unit}</td>
+        <td>${product.entry}</td>
+        <td>${product.exit}</td>
+        <td>${product.stock}</td>
+        <td>${product.currency} ${product.price.toFixed(2)}</td>
+        <td>${product.currency}</td>
+        <td>${product.currency} ${product.sellPrice.toFixed(2)}</td>
+        <td>${product.currency} ${product.profit.toFixed(2)}</td>
+        <td>${product.currency} ${product.totalValue.toFixed(2)}</td>
+
+        <td>
+
+        <button class="action-btn edit"
+        onclick="editProduct(${index})">
+        Edit
+        </button>
+
+        <button class="action-btn remove"
+        onclick="removeProduct(${index})">
+        Delete
+        </button>
+
+        </td>
+
+        </tr>
+
+        `;
+    });
+
+    document.getElementById("totalProducts").innerText = products.length;
+    document.getElementById("totalStock").innerText = totalStock;
+    document.getElementById("totalValue").innerText = totalValue.toFixed(2);
+}
+
+function clearInputs(){
+
+    document.getElementById("productName").value = "";
+    document.getElementById("entry").value = "";
+    document.getElementById("exit").value = "";
+    document.getElementById("price").value = "";
+    document.getElementById("sellPrice").value = "";
+}
+
+function removeProduct(index){
+
+    products.splice(index,1);
+    renderTable();
+}
+
+function editProduct(index){
+
+    const product = products[index];
+
+    document.getElementById("productName").value = product.productName;
+    document.getElementById("unit").value = product.unit;
+    document.getElementById("entry").value = product.entry;
+    document.getElementById("exit").value = product.exit;
+    document.getElementById("price").value = product.price;
+    document.getElementById("currency").value = product.currency;
+    document.getElementById("sellPrice").value = product.sellPrice;
+
+    editIndex = index;
+}
+
+function updateProduct(){
+
+    if(editIndex === -1){
+        alert("Select a product to edit");
+        return;
+    }
+
+    const productName = document.getElementById("productName").value;
+    const unit = document.getElementById("unit").value;
+    const entry = Number(document.getElementById("entry").value);
+    const exit = Number(document.getElementById("exit").value);
+    const price = Number(document.getElementById("price").value);
+    const currency = document.getElementById("currency").value;
+    const sellPrice = Number(document.getElementById("sellPrice").value);
+
+    const stock = entry - exit;
+    const profit = (sellPrice - price) * stock;
+    const totalValue = stock * price;
+
+    products[editIndex] = {
+        productName,
+        unit,
+        entry,
+        exit,
+        stock,
+        price,
+        currency,
+        sellPrice,
+        profit,
+        totalValue
+    };
+
+    renderTable();
+    clearInputs();
+
+    editIndex = -1;
+}
+
+function deleteSelected(){
+
+    const checkboxes = document.querySelectorAll(".select-product");
+
+    const selectedIndexes = [];
+
+    checkboxes.forEach((checkbox)=>{
+
+        if(checkbox.checked){
+            selectedIndexes.push(Number(checkbox.dataset.index));
         }
 
-        products.push({
-            productName,
-            unit,
-            entry,
-            exit,
-            stock,
-            price,
-            currency,
-            sellPrice,
-            profit,
-            totalValue
-        });
+    });
 
-        renderTable();
-        clearInputs();
-    }
+    products = products.filter((_,index)=>
+        !selectedIndexes.includes(index)
+    );
 
-    function renderTable(){
-
-        const tableBody = document.getElementById("tableBody");
-        tableBody.innerHTML = "";
-
-        let totalStock = 0;
-        let totalValue = 0;
-
-        products.forEach((product,index)=>{
-
-            totalStock += product.stock;
-            totalValue += product.totalValue;
-
-            tableBody.innerHTML += `
-                <tr>
-
-                    <td>
-                        <input type="checkbox" class="select-product" data-index="${index}">
-                    </td>
-
-                    <td>${product.productName}</td>
-                    <td>${product.unit}</td>
-                    <td>${product.entry}</td>
-                    <td>${product.exit}</td>
-                    <td>${product.stock}</td>
-                    <td>${product.price.toFixed(2)}</td>
-                    <td>${product.currency}</td>
-                    <td>${product.sellPrice.toFixed(2)}</td>
-                    <td>${product.currency} ${product.profit.toFixed(2)}</td>
-                    <td>${product.currency} ${product.totalValue.toFixed(2)}</td>
-
-                    <td>
-
-                        <button class="action-btn edit"
-                        onclick="editProduct(${index})">
-                        Edit
-                        </button>
-
-                        <button class="action-btn remove"
-                        onclick="removeProduct(${index})">
-                        Delete
-                        </button>
-
-                    </td>
-
-                </tr>
-            `;
-        });
-
-        document.getElementById("totalProducts").innerText = products.length;
-        document.getElementById("totalStock").innerText = totalStock;
-        document.getElementById("totalValue").innerText = totalValue.toFixed(2);
-    }
-
-    function clearInputs(){
-
-        document.getElementById("productName").value = "";
-        document.getElementById("entry").value = "";
-        document.getElementById("exit").value = "";
-        document.getElementById("price").value = "";
-        document.getElementById("sellPrice").value = "";
-    }
-
-    function removeProduct(index){
-
-        products.splice(index,1);
-        renderTable();
-    }
-
-    function editProduct(index){
-
-        const product = products[index];
-
-        document.getElementById("productName").value = product.productName;
-        document.getElementById("unit").value = product.unit;
-        document.getElementById("entry").value = product.entry;
-        document.getElementById("exit").value = product.exit;
-        document.getElementById("price").value = product.price;
-        document.getElementById("currency").value = product.currency;
-        document.getElementById("sellPrice").value = product.sellPrice;
-
-        editIndex = index;
-    }
-
-    function updateProduct(){
-
-        if(editIndex === -1){
-            alert("Select a product to edit");
-            return;
-        }
-
-        const productName = document.getElementById("productName").value;
-        const unit = document.getElementById("unit").value;
-        const entry = Number(document.getElementById("entry").value);
-        const exit = Number(document.getElementById("exit").value);
-        const price = Number(document.getElementById("price").value);
-        const currency = document.getElementById("currency").value;
-        const sellPrice = Number(document.getElementById("sellPrice").value);
-
-        const stock = entry - exit;
-        const profit = (sellPrice - price) * stock;
-        const totalValue = stock * price;
-
-        products[editIndex] = {
-            productName,
-            unit,
-            entry,
-            exit,
-            stock,
-            price,
-            currency,
-            sellPrice,
-            profit,
-            totalValue
-        };
-
-        renderTable();
-        clearInputs();
-
-        editIndex = -1;
-    }
-
-    function deleteSelected(){
-
-        const checkboxes = document.querySelectorAll(".select-product");
-
-        const selectedIndexes = [];
-
-        checkboxes.forEach((checkbox)=>{
-
-            if(checkbox.checked){
-                selectedIndexes.push(Number(checkbox.dataset.index));
-            }
-
-        });
-
-        products = products.filter((_,index)=>
-            !selectedIndexes.includes(index)
-        );
-
-        renderTable();
-    }
+    renderTable();
+}
 
 </script>
 
