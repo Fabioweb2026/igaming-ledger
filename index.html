@@ -11,7 +11,7 @@
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0; /* Creme suave harmonizado */
+            background-color: #fdfcf0;
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
@@ -25,24 +25,27 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 1. BANNER AJUSTADO: EXIBIÇÃO COMPLETA DO LOGO */
+        /* 1. BANNER FULL WIDTH (PONTA A PONTA) */
         .banner-header {
-            width: 100%;
+            width: 100%; /* Garante que o container ocupe 100% da tela */
             display: flex;
             justify-content: center;
             margin-top: 0.5cm; /* Espaço de 0.5cm abaixo do topo */
             padding: 0; 
+            overflow: hidden;
         }
 
         .banner-header img {
-            width: 100%;
-            max-width: 30cm; 
-            height: 9.5cm;
-            /* 'contain' garante que o logo Sollene Group apareça por inteiro sem cortes */
-            object-fit: contain; 
-            /* Prioriza a exibição do lado esquerdo onde está o nome */
-            object-position: left center; 
-            background-color: white; /* Fundo branco caso a imagem não preencha os 30cm totais */
+            width: 100vw; /* Ocupa 100% da largura visual da janela */
+            height: 9.5cm; /* Mantém a altura solicitada */
+            
+            /* 'cover' é necessário aqui para que a imagem preencha as laterais 
+               sem deixar espaços vazios (fundo branco) */
+            object-fit: cover; 
+            
+            /* Ajustado para focar no lado esquerdo (Logo) e topo */
+            object-position: left top; 
+            
             box-shadow: 0 10px 30px rgba(179, 147, 89, 0.2);
         }
 
@@ -196,15 +199,15 @@
         @media (max-width: 900px) {
             .main-content { flex-direction: column; }
             .sidebar { width: 100%; }
-            .banner-header img { height: auto; min-height: 150px; }
+            .banner-header img { height: auto; min-height: 200px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BANNER COM AJUSTES DE VISIBILIDADE -->
+    <!-- BANNER QUE OCUPA TODA A LARGURA DA TELA -->
     <header class="banner-header">
-        <img src="sollene-group.jpg" alt="Sollene Group Premium Portfolio">
+        <img src="sollene-group.jpg" alt="Sollene Group Full Banner">
     </header>
 
     <!-- NAVIGATION -->
