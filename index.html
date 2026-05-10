@@ -1,3 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sollene Group | Inventory System</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:#f6f4ea;
+    overflow-x:hidden;
+}
+
+/* =========================
+   BANNER
+========================= */
+
+.banner-header{
+    width:100%;
+    height:140px;
+    margin-top:20px;
+    overflow:hidden;
+    border-bottom:3px solid #b39359;
+}
+
+.banner-header img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main-content{
+    max-width:1250px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:25px;
+    padding:25px;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    background:#1a1a1a;
+    padding:25px;
+    border-radius:18px;
+    color:#b39359;
+}
+
+.sidebar h2{
+    margin-bottom:20px;
+    font-size:22px;
+}
+
+/* =========================
+   FORM GRID
+========================= */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.form-grid input,
+.form-grid select{
+    width:100%;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    padding:0 12px;
+    outline:none;
+    font-size:14px;
+    font-family:'Plus Jakarta Sans',sans-serif;
+}
+
+/* FULL */
+
+.full{
+    grid-column:1 / -1;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+button{
+    width:100%;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.02);
+}
+
+.add-btn{
+    background:#b39359;
+    color:#000;
+}
+
+.save-btn{
+    background:#27ae60;
+    color:#fff;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-container{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#1a1a1a;
+    color:#b39359;
+}
+
+th,
+td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+    font-size:14px;
+}
+
+.entry{
+    color:#27ae60;
+    font-weight:bold;
+}
+
+.exit{
+    color:#e74c3c;
+    font-weight:bold;
+}
+
+.cash{
+    color:#b39359;
+    font-weight:bold;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:40px;
+    background:#1a1a1a;
+    color:#777;
+    text-align:center;
+    padding:25px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+
+.main-content{
+    grid-template-columns:1fr;
+}
+
+.form-grid{
+    grid-template-columns:1fr;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- =========================
+     BANNER
+========================= -->
+
+<header class="banner-header">
+    <img src="sollene-group.jpg" alt="Sollene Group">
+</header>
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<div class="main-content">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+        <h2>Register Product</h2>
+
+        <div class="form-grid">
+
+            <!-- PRODUCT -->
+
+            <input
+                type="text"
+                id="product"
+                class="full"
+                placeholder="Product Name"
+            >
+
+            <!-- UNIT -->
+
+            <select id="unit">
+                <option value="Kg">Kg</option>
+                <option value="Ton">Ton</option>
+                <option value="Box">Box</option>
+            </select>
+
+            <!-- CURRENCY -->
+
+            <select id="currency">
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="BRL">BRL</option>
+            </select>
+
+            <!-- ENTRY -->
+
+            <input
+                type="number"
+                id="entry"
+                placeholder="Entry"
+                value="0"
+            >
+
+            <!-- EXIT -->
+
+            <input
+                type="number"
+                id="exit"
+                placeholder="Exit"
+                value="0"
+            >
+
+            <!-- PRICE -->
+
+            <input
+                type="number"
+                id="price"
+                class="full"
+                placeholder="Price"
+                value="0"
+            >
+
+            <!-- BUTTON ADD -->
+
+            <button
+                type="button"
+                class="add-btn full"
+                id="addButton"
+            >
+                Add Product
+            </button>
+
+            <!-- BUTTON SAVE -->
+
+            <button
+                type="button"
+                class="save-btn full"
+                id="saveButton"
+            >
+                Save Inventory
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Unit</th>
+                    <th>Currency</th>
+                    <th>Entry</th>
+                    <th>Exit</th>
+                    <th>Stock</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Cash</th>
+                </tr>
+            </thead>
+
+            <tbody id="table-body"></tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+© 2026 SOLLENE GROUP | INVENTORY SYSTEM
+</footer>
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
 
 /* ===================================
@@ -166,3 +520,6 @@ document
 renderTable();
 
 </script>
+
+</body>
+</html>
