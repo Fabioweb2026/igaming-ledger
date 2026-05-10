@@ -11,7 +11,7 @@
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0;
+            background-color: #fdfcf0; /* Creme suave harmonizado */
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
@@ -25,27 +25,24 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 1. BANNER AJUSTADO: 30cm x 9.5cm, FULL WIDTH E 0.5cm DO TOPO */
+        /* 1. BANNER AJUSTADO: EXIBIÇÃO COMPLETA DO LOGO */
         .banner-header {
             width: 100%;
             display: flex;
             justify-content: center;
-            /* Espaço de 0.5cm abaixo do "navegador" (topo da página) */
-            margin-top: 0.5cm; 
+            margin-top: 0.5cm; /* Espaço de 0.5cm abaixo do topo */
             padding: 0; 
         }
 
         .banner-header img {
-            /* Ocupa todo o espaço da esquerda para a direita */
             width: 100%;
-            /* Limita a largura máxima a 30cm como solicitado */
             max-width: 30cm; 
-            /* Altura fixa de 9.5cm */
             height: 9.5cm;
-            /* Garante que a imagem preencha o espaço sem esticar */
-            object-fit: cover;
-            object-position: center;
-            border-radius: 0; /* Removido arredondamento para ocupar as bordas */
+            /* 'contain' garante que o logo Sollene Group apareça por inteiro sem cortes */
+            object-fit: contain; 
+            /* Prioriza a exibição do lado esquerdo onde está o nome */
+            object-position: left center; 
+            background-color: white; /* Fundo branco caso a imagem não preencha os 30cm totais */
             box-shadow: 0 10px 30px rgba(179, 147, 89, 0.2);
         }
 
@@ -205,9 +202,9 @@
 </head>
 <body>
 
-    <!-- BANNER COM OS NOVOS AJUSTES -->
+    <!-- BANNER COM AJUSTES DE VISIBILIDADE -->
     <header class="banner-header">
-        <img src="sollene-group.jpg" alt="Sollene Group Premium Banner">
+        <img src="sollene-group.jpg" alt="Sollene Group Premium Portfolio">
     </header>
 
     <!-- NAVIGATION -->
@@ -285,4 +282,5 @@
 
 </body>
 </html>
+
 
