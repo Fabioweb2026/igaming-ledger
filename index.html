@@ -19,16 +19,16 @@ html, body {
 }
 
 /* =======================
-   BANNER PREMIUM
+   BANNER
 ======================= */
 .banner-header {
     width: 100%;
-    height: 140px;        /* proporção elegante */
-    margin-top: 20px;     /* 2cm abaixo do navegador */
-    overflow: hidden;
+    height: 140px;
+    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     background: #fff;
     border-bottom: 3px solid #b39359;
 }
@@ -56,23 +56,20 @@ html, body {
     background: white;
 }
 
-.btn-back:hover {
-    background: #b39359;
-    color: white;
-}
-
-/* LAYOUT PRINCIPAL */
+/* =======================
+   LAYOUT PRINCIPAL (FIX)
+======================= */
 .main-content {
     max-width: 1200px;
     margin: auto;
-    display: flex;
+    display: grid;
+    grid-template-columns: 320px 1fr; /* 🔥 ALINHAMENTO PERFEITO */
     gap: 25px;
     padding: 25px;
 }
 
 /* SIDEBAR */
 .sidebar {
-    width: 320px;
     background: #1a1a1a;
     color: #b39359;
     padding: 25px;
@@ -84,14 +81,12 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* INPUTS */
 input, select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 8px;
     border: none;
-    outline: none;
 }
 
 /* BOTÃO */
@@ -101,13 +96,12 @@ button {
     background: #b39359;
     border: none;
     font-weight: bold;
-    cursor: pointer;
     border-radius: 10px;
+    cursor: pointer;
 }
 
-/* TABELA */
+/* TABLE */
 .table-container {
-    flex: 1;
     background: white;
     border-radius: 18px;
     overflow: hidden;
@@ -146,11 +140,7 @@ footer {
 /* RESPONSIVO */
 @media (max-width: 900px) {
     .main-content {
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
+        grid-template-columns: 1fr; /* empilha correto */
     }
 
     .banner-header {
@@ -173,7 +163,7 @@ footer {
     <a href="index.html" class="btn-back">← Back</a>
 </nav>
 
-<!-- CONTENT -->
+<!-- MAIN -->
 <div class="main-content">
 
 <!-- SIDEBAR -->
@@ -197,7 +187,7 @@ footer {
 
     <input id="price" type="number" placeholder="Price">
 
-    <button onclick="add()">Add</button>
+    <button onclick="add()">Add Product</button>
 </div>
 
 <!-- TABLE -->
@@ -266,4 +256,3 @@ document.getElementById('table').innerHTML+=`
 
 </body>
 </html>
-
