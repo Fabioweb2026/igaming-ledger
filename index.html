@@ -17,7 +17,9 @@ html, body {
     overflow-x: hidden;
 }
 
-/* BANNER */
+/* =======================
+   BANNER
+======================= */
 .banner-header {
     width: 100%;
     height: 140px;
@@ -32,7 +34,9 @@ html, body {
     object-fit: cover;
 }
 
-/* LAYOUT */
+/* =======================
+   LAYOUT
+======================= */
 .main-content {
     max-width: 1200px;
     margin: auto;
@@ -54,7 +58,7 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* CAMPOS IGUAIS */
+/* CAMPOS PADRONIZADOS */
 .sidebar input,
 .sidebar select {
     width: 100%;
@@ -65,24 +69,15 @@ html, body {
     padding: 0 10px;
 }
 
-/* BOTÕES */
+/* BOTÃO */
 button {
     width: 100%;
     height: 46px;
-    margin-bottom: 10px;
     border-radius: 10px;
     border: none;
+    background: #b39359;
     font-weight: bold;
     cursor: pointer;
-}
-
-.add-btn {
-    background: #b39359;
-}
-
-.save-btn {
-    background: #27ae60;
-    color: white;
 }
 
 /* TABLE */
@@ -90,6 +85,7 @@ button {
     background: white;
     border-radius: 18px;
     overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 table {
@@ -112,6 +108,12 @@ th, td {
 .exit { color: red; font-weight: bold; }
 .total { color: #b39359; font-weight: bold; }
 
+/* CASH COLUMN */
+.cash {
+    color: #27ae60;
+    font-weight: bold;
+}
+
 /* FOOTER */
 footer {
     text-align: center;
@@ -121,6 +123,7 @@ footer {
     margin-top: 40px;
 }
 
+/* RESPONSIVO */
 @media (max-width: 900px) {
     .main-content {
         grid-template-columns: 1fr;
@@ -160,15 +163,15 @@ footer {
         <option>BRL</option>
     </select>
 
-    <input id="price" type="number" placeholder="Price">
+    <input id="price" type="number" placeholder="Price per unit">
 
-    <button class="add-btn" onclick="add()">Add Product</button>
-    <button class="save-btn" onclick="save()">Save Inventory</button>
+    <button onclick="add()">Add Product</button>
 </div>
 
 <!-- TABLE -->
 <div class="table-container">
 <table>
+
 <thead>
 <tr>
 <th>Product</th>
@@ -178,7 +181,8 @@ footer {
 <th>Stock</th>
 <th>Currency</th>
 <th>Price</th>
-<th>Total</th>
+<th>Total Revenue</th>
+<th>Cash (Profit)</th>
 </tr>
 </thead>
 
@@ -190,60 +194,46 @@ footer {
 </div>
 
 <footer>
-© 2026 SOLLENE GROUP
+© 2026 SOLLENE GROUP | INVENTORY SYSTEM
 </footer>
 
 <script>
 
-let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
-
-/* CARREGAR AO ABRIR */
-window.onload = function () {
-    render();
-}
-
-/* ADICIONAR PRODUTO */
 function add(){
-    let item = {
-        name: document.getElementById('name').value,
-        unit: document.getElementById('unit').value,
-        entry: +document.getElementById('entry').value,
-        exit: +document.getElementById('exit').value,
-        currency: document.getElementById('currency').value,
-        price: +document.getElementById('price').value
-    };
 
-    inventory.push(item);
-    render();
-}
+let name=document.getElementById('name').value;
+let unit=document.getElementById('unit').value;
+let entry=+document.getElementById('entry').value;
+let exit=+document.getElementById('exit').value;
+let currency=document.getElementById('currency').value;
+let price=+document.getElementById('price').value;
 
-/* SALVAR NO NAVEGADOR */
-function save(){
-    localStorage.setItem("inventory", JSON.stringify(inventory));
-    alert("Inventory saved successfully!");
-}
+/* ESTOQUE */
+let stock = entry - exit;
 
-/* RENDERIZAR TABELA */
-function render(){
-    let table = document.getElementById('table');
-    table.innerHTML = "";
+/* RECEITA (vendas reais) */
+let revenue = exit * price;
 
-    inventory.forEach(item => {
-        let stock = item.entry - item.exit;
-        let total = stock * item.price;
+/* CUSTO (entrada total) */
+let cost = entry * price;
 
-        table.innerHTML += `
-        <tr>
-            <td>${item.name}</td>
-            <td>${item.unit}</td>
-            <td class="entry">+${item.entry}</td>
-            <td class="exit">-${item.exit}</td>
-            <td>${stock}</td>
-            <td>${item.currency}</td>
-            <td>${item.price}</td>
-            <td class="total">${total}</td>
-        </tr>`;
-    });
+/* LUCRO / CAIXA */
+let cash = revenue - cost;
+
+document.getElementById('table').innerHTML += `
+<tr>
+<td>${name}</td>
+<td>${unit}</td>
+<td class="entry">+${entry}</td>
+<td class="exit">-${exit}</td>
+<td>${stock}</td>
+<td>${currency}</td>
+<td>${price}</td>
+<td>${revenue.toFixed(2)}</td>
+<td class="cash">${cash.toFixed(2)}</td>
+</tr>
+`;
+
 }
 
 </script>
