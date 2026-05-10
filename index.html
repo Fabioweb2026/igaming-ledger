@@ -4,54 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sollene Group | Inventory System</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
-
+    <link href="https://googleapis.com" rel="stylesheet">
+    
     <style>
-        /* RESET */
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            overflow-x: hidden;
+        /* RESET & BASE STYLE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0;
+            background-color: #fdfcf0; /* Cor creme para harmonizar com o fundo da imagem */
             color: #1a1a1a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: fadeInPage 1.5s ease-out forwards;
+            overflow-x: hidden;
         }
 
-        * {
-            box-sizing: border-box;
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* =========================
-           BANNER (10cm altura / 30cm largura visual)
-        ========================= */
+        /* 1. BANNER FULL WIDTH (MODELO SOLENNE) */
         .banner-header {
             width: 100%;
-            height: 120px;        /* ≈ 10cm visual */
-            margin-top: 20px;     /* ≈ 2cm abaixo do topo */
-            margin-bottom: 10px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fdfcf0;
+            background-color: #fdfcf0;
+            line-height: 0;
+            border-bottom: 5px solid #b39359; /* Linha dourada de acabamento */
         }
 
         .banner-header img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+            height: auto;
             display: block;
+            /* Garante que o topo (letras) e a base (contatos) da imagem apareçam */
+            object-fit: contain; 
         }
 
-        /* NAV */
+        /* 2. NAVEGAÇÃO */
         .nav-top {
             width: 100%;
             max-width: 1250px;
-            margin: auto;
-            padding: 20px;
+            padding: 30px 20px 10px;
+            text-align: left;
         }
 
         .btn-back {
@@ -60,221 +57,201 @@
             border: 1px solid #b39359;
             padding: 10px 25px;
             border-radius: 50px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            background: white;
+            text-transform: uppercase;
             transition: 0.3s;
+            background: white;
         }
 
-        .btn-back:hover {
-            background: #b39359;
+        .btn-back:hover { 
+            background: #b39359; 
             color: white;
+            box-shadow: 0 5px 15px rgba(179, 147, 89, 0.3);
         }
 
-        /* MAIN */
+        /* 3. SISTEMA DE GESTÃO (LAYOUT HARMONIZADO) */
         .main-content {
             display: flex;
+            width: 100%;
             max-width: 1250px;
-            margin: auto;
             gap: 30px;
-            padding: 30px 20px;
+            padding: 20px 20px 80px;
+            flex: 1;
         }
 
-        /* SIDEBAR */
+        /* Sidebar de Registro */
         .sidebar {
             width: 340px;
-            background: #1a1a1a;
+            background-color: #1a1a1a;
             color: #b39359;
-            padding: 30px;
-            border-radius: 20px;
+            padding: 35px 25px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            height: fit-content;
         }
 
-        .sidebar h2 {
-            margin-bottom: 20px;
+        .sidebar h2 { 
             font-family: 'Playfair Display', serif;
+            font-size: 22px; 
+            margin-bottom: 30px; 
+            text-align: center;
+            letter-spacing: 1px;
         }
 
         input, select {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 12px;
-            border-radius: 10px;
-            border: none;
+            padding: 14px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            background: #fff;
+            font-size: 14px;
             outline: none;
         }
 
         .btn-add {
             width: 100%;
-            padding: 14px;
-            background: #b39359;
+            padding: 16px;
+            background-color: #b39359;
+            color: #000;
             border: none;
-            font-weight: bold;
+            font-weight: 800;
+            border-radius: 12px;
             cursor: pointer;
-            border-radius: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
         }
 
-        /* TABLE */
+        .btn-add:hover { 
+            background: #d4af37; 
+            transform: scale(1.02);
+        }
+
+        /* Tabela de Produtos */
         .table-container {
             flex: 1;
             background: white;
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 35px rgba(179, 147, 89, 0.1);
+            border: 1px solid rgba(179, 147, 89, 0.2);
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        thead {
-            background: #1a1a1a;
-            color: #b39359;
-        }
-
-        th, td {
-            padding: 18px;
+        table { width: 100%; border-collapse: collapse; }
+        thead { background-color: #1a1a1a; color: #b39359; }
+        th { 
+            padding: 20px; 
+            font-size: 12px; 
+            text-transform: uppercase; 
+            letter-spacing: 1.5px;
             text-align: center;
-            border-bottom: 1px solid #eee;
         }
+        td { 
+            padding: 20px; 
+            text-align: center; 
+            font-size: 15px; 
+            border-bottom: 1px solid #f2f2f2;
+            color: #444;
+        }
+        
+        .entry { color: #27ae60; font-weight: 700; }
+        .exit { color: #e74c3c; font-weight: 700; }
+        .total-val { color: #b39359; font-weight: 800; }
 
-        .entry { color: green; font-weight: bold; }
-        .exit { color: red; font-weight: bold; }
-        .total { color: #b39359; font-weight: bold; }
-
-        /* FOOTER */
+        /* 4. FOOTER COMPLEMENTAR */
         footer {
+            width: 100%;
+            padding: 40px 20px;
+            background-color: #1a1a1a;
             text-align: center;
-            padding: 30px;
-            background: #1a1a1a;
-            color: #777;
-            margin-top: 40px;
+            color: #555;
+            font-size: 11px;
+            letter-spacing: 2px;
         }
 
-        /* RESPONSIVO */
-        @media (max-width: 900px) {
-            .main-content {
-                flex-direction: column;
-            }
-
-            .sidebar {
-                width: 100%;
-            }
-
-            .banner-header {
-                height: 100px;
-            }
+        /* RESPONSIVIDADE */
+        @media (max-width: 1024px) {
+            .main-content { flex-direction: column; align-items: center; }
+            .sidebar { width: 100%; max-width: 500px; }
         }
     </style>
 </head>
-
 <body>
 
-<!-- BANNER -->
-<header class="banner-header">
-    <img src="sollene-group.jpg" alt="Sollene Group Banner">
-</header>
+    <!-- BANNER CONFORME O MODELO ENVIADO -->
+    <header class="banner-header">
+        <img src="sollene-group.jpg" alt="Sollene Group Global Trade">
+    </header>
 
-<!-- NAV -->
-<nav class="nav-top">
-    <a href="index.html" class="btn-back">← Back</a>
-</nav>
+    <nav class="nav-top">
+        <a href="index.html" class="btn-back">← Back to Portfolio</a>
+    </nav>
 
-<!-- MAIN -->
-<main class="main-content">
+    <main class="main-content">
+        <!-- REGISTRATION SIDEBAR -->
+        <section class="sidebar">
+            <h2>Register Product</h2>
+            <input type="text" placeholder="Product Name">
+            <select>
+                <option>Case (Caixa)</option>
+                <option>Unit (Unidade)</option>
+            </select>
+            <input type="number" placeholder="Entry (Entrada)">
+            <input type="number" placeholder="Exit (Saída)">
+            <select>
+                <option>USD ($)</option>
+                <option>EUR (€)</option>
+            </select>
+            <input type="number" placeholder="Unit Price">
+            <button class="btn-add">Add to Inventory</button>
+        </section>
 
-    <!-- SIDEBAR -->
-    <section class="sidebar">
-        <h2>Register Product</h2>
+        <!-- INVENTORY TABLE -->
+        <section class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>PRODUCT</th>
+                        <th>UNIT</th>
+                        <th>ENTRY</th>
+                        <th>EXIT</th>
+                        <th>STOCK</th>
+                        <th>CURRENCY</th>
+                        <th>PRICE</th>
+                        <th>TOTAL VALUE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sollene Reserve Coffee</td>
+                        <td>Case</td>
+                        <td class="entry">+ 120</td>
+                        <td class="exit">- 45</td>
+                        <td>75</td>
+                        <td>USD</td>
+                        <td>$ 8.50</td>
+                        <td class="total-val">$ 637.50</td>
+                    </tr>
+                    <tr>
+                        <td>Premium Red Wine</td>
+                        <td>Case</td>
+                        <td class="entry">+ 200</td>
+                        <td class="exit">- 80</td>
+                        <td>120</td>
+                        <td>EUR</td>
+                        <td>€ 12.00</td>
+                        <td class="total-val">€ 1,440.00</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
 
-        <input type="text" id="productName" placeholder="Product Name">
-
-        <select id="unit">
-            <option value="Case">Case</option>
-            <option value="Unit">Unit</option>
-        </select>
-
-        <input type="number" id="entry" placeholder="Entry">
-        <input type="number" id="exit" placeholder="Exit">
-
-        <select id="currency">
-            <option value="USD">USD ($)</option>
-            <option value="EUR">EUR (€)</option>
-            <option value="BRL">BRL (R$)</option>
-        </select>
-
-        <input type="number" id="price" placeholder="Unit Price">
-
-        <button class="btn-add" onclick="addProduct()">Add Product</button>
-    </section>
-
-    <!-- TABLE -->
-    <section class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>PRODUCT</th>
-                    <th>UNIT</th>
-                    <th>ENTRY</th>
-                    <th>EXIT</th>
-                    <th>STOCK</th>
-                    <th>CURRENCY</th>
-                    <th>PRICE</th>
-                    <th>TOTAL VALUE</th>
-                </tr>
-            </thead>
-
-            <tbody id="inventoryTable">
-                <tr>
-                    <td>Example Product</td>
-                    <td>Case</td>
-                    <td class="entry">120</td>
-                    <td class="exit">45</td>
-                    <td>75</td>
-                    <td>USD</td>
-                    <td>$10</td>
-                    <td class="total">$750</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-</main>
-
-<!-- FOOTER -->
-<footer>
-    © 2026 SOLLENE GROUP | INVENTORY SYSTEM
-</footer>
-
-<!-- JS -->
-<script>
-function addProduct() {
-    let name = document.getElementById("productName").value;
-    let unit = document.getElementById("unit").value;
-    let entry = parseInt(document.getElementById("entry").value) || 0;
-    let exit = parseInt(document.getElementById("exit").value) || 0;
-    let currency = document.getElementById("currency").value;
-    let price = parseFloat(document.getElementById("price").value) || 0;
-
-    let stock = entry - exit;
-    let total = stock * price;
-
-    let table = document.getElementById("inventoryTable");
-
-    let row = table.insertRow();
-
-    row.innerHTML = `
-        <td>${name}</td>
-        <td>${unit}</td>
-        <td class="entry">+${entry}</td>
-        <td class="exit">-${exit}</td>
-        <td>${stock}</td>
-        <td>${currency}</td>
-        <td>${price}</td>
-        <td class="total">${total.toFixed(2)}</td>
-    `;
-}
-</script>
+    <footer>
+        © 2026 SOLLENE GROUP ENTERPRISE | PRESTIGE IN TECHNOLOGY & TRADE
+    </footer>
 
 </body>
 </html>
