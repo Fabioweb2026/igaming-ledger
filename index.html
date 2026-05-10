@@ -3,104 +3,194 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sollene Group | Inventory USD System</title>
+<title>Sollene Group | Inventory System</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    background: #f6f4ea;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-/* BANNER */
-.banner-header {
-    width: 100%;
-    height: 140px;
-    margin-top: 20px;
-    overflow: hidden;
-    border-bottom: 3px solid #b39359;
+body{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    background:#f6f4ea;
+    overflow-x:hidden;
 }
 
-.banner-header img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+/* =========================
+   BANNER
+========================= */
+
+.banner-header{
+    width:100%;
+    height:140px;
+    margin-top:20px;
+    overflow:hidden;
+    border-bottom:3px solid #b39359;
 }
 
-/* LAYOUT */
-.main-content {
-    max-width: 1200px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: 320px 1fr;
-    gap: 25px;
-    padding: 25px;
+.banner-header img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
-/* SIDEBAR */
-.sidebar {
-    background: #1a1a1a;
-    color: #b39359;
-    padding: 25px;
-    border-radius: 18px;
+/* =========================
+   LAYOUT
+========================= */
+
+.main-content{
+    max-width:1250px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:25px;
+    padding:25px;
 }
 
-.sidebar h2 {
-    margin-bottom: 20px;
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    background:#1a1a1a;
+    padding:25px;
+    border-radius:18px;
+    color:#b39359;
 }
 
-/* CAMPOS */
-input {
-    width: 100%;
-    height: 45px;
-    margin-bottom: 12px;
-    border-radius: 10px;
-    border: none;
-    padding: 0 10px;
-    box-sizing: border-box;
+.sidebar h2{
+    margin-bottom:20px;
+    font-size:22px;
 }
 
-/* BOTÃO */
-button {
-    width: 100%;
-    height: 45px;
-    border-radius: 10px;
-    border: none;
-    background: #b39359;
-    font-weight: bold;
-    cursor: pointer;
+/* GRID FORM */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
 }
 
-/* TABLE */
-.table-container {
-    background: white;
-    border-radius: 18px;
-    overflow: hidden;
+/* INPUTS */
+
+.form-grid input,
+.form-grid select{
+    width:100%;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    padding:0 12px;
+    font-size:14px;
+    outline:none;
+    font-family:'Plus Jakarta Sans',sans-serif;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
+/* CAMPOS GRANDES */
+
+.full{
+    grid-column:1 / -1;
 }
 
-thead {
-    background: #1a1a1a;
-    color: #b39359;
+/* BOTÕES */
+
+button{
+    width:100%;
+    height:45px;
+    border:none;
+    border-radius:10px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
 }
 
-th, td {
-    padding: 15px;
-    text-align: center;
-    border-bottom: 1px solid #eee;
+.add-btn{
+    background:#b39359;
+    color:#000;
 }
 
-.cash {
-    color: #27ae60;
-    font-weight: bold;
+.save-btn{
+    background:#27ae60;
+    color:#fff;
+}
+
+button:hover{
+    transform:scale(1.02);
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-container{
+    background:#fff;
+    border-radius:18px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#1a1a1a;
+    color:#b39359;
+}
+
+th,td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+    font-size:14px;
+}
+
+.entry{
+    color:#27ae60;
+    font-weight:700;
+}
+
+.exit{
+    color:#e74c3c;
+    font-weight:700;
+}
+
+.cash{
+    color:#b39359;
+    font-weight:700;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    margin-top:40px;
+    background:#1a1a1a;
+    color:#777;
+    text-align:center;
+    padding:25px;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media(max-width:900px){
+
+.main-content{
+    grid-template-columns:1fr;
+}
+
+.form-grid{
+    grid-template-columns:1fr;
+}
+
 }
 
 </style>
@@ -108,97 +198,236 @@ th, td {
 
 <body>
 
+<!-- BANNER -->
+
 <header class="banner-header">
-    <img src="sollene-group.jpg">
+    <img src="sollene-group.jpg" alt="">
 </header>
+
+<!-- MAIN -->
 
 <div class="main-content">
 
-<div class="sidebar">
-    <h2>Register Product</h2>
+    <!-- SIDEBAR -->
 
-    <input id="name" placeholder="Product Name">
-    <input id="cost" type="number" placeholder="Cost (USD)">
-    <input id="sell" type="number" placeholder="Sell Price (USD)">
-    <input id="qty" type="number" placeholder="Quantity">
+    <div class="sidebar">
 
-    <button onclick="add()">Add Product</button>
+        <h2>Register Product</h2>
+
+        <div class="form-grid">
+
+            <!-- PRODUTO -->
+
+            <input 
+                type="text"
+                id="product"
+                class="full"
+                placeholder="Product Name"
+            >
+
+            <!-- UNIDADE -->
+
+            <select id="unit">
+                <option>Kg</option>
+                <option>Ton</option>
+                <option>Box</option>
+            </select>
+
+            <!-- MOEDA -->
+
+            <select id="currency">
+                <option>USD</option>
+                <option>EUR</option>
+                <option>BRL</option>
+            </select>
+
+            <!-- ENTRADA -->
+
+            <input 
+                type="number"
+                id="entry"
+                placeholder="Entry"
+            >
+
+            <!-- SAÍDA -->
+
+            <input 
+                type="number"
+                id="exit"
+                placeholder="Exit"
+            >
+
+            <!-- PREÇO -->
+
+            <input 
+                type="number"
+                id="price"
+                class="full"
+                placeholder="Price"
+            >
+
+            <!-- BOTÕES -->
+
+            <button 
+                class="add-btn full"
+                onclick="addProduct()"
+            >
+                Add Product
+            </button>
+
+            <button 
+                class="save-btn full"
+                onclick="saveInventory()"
+            >
+                Save Inventory
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- TABLE -->
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Unit</th>
+                    <th>Currency</th>
+                    <th>Entry</th>
+                    <th>Exit</th>
+                    <th>Stock</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                    <th>Cash</th>
+                </tr>
+            </thead>
+
+            <tbody id="table-body"></tbody>
+
+        </table>
+
+    </div>
+
 </div>
 
-<div class="table-container">
-<table>
-
-<thead>
-<tr>
-<th>Product</th>
-<th>Cost</th>
-<th>Sell</th>
-<th>Qty</th>
-<th>Cost Total</th>
-<th>Revenue</th>
-<th>Cash</th>
-</tr>
-</thead>
-
-<tbody id="table"></tbody>
-
-</table>
-</div>
-
-</div>
+<footer>
+© 2026 SOLLENE GROUP | INVENTORY SYSTEM
+</footer>
 
 <script>
 
-let inventory = [];
+let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
 
-function add(){
+/* =========================
+   ADD PRODUCT
+========================= */
 
-let name = document.getElementById('name').value;
-let cost = +document.getElementById('cost').value;
-let sell = +document.getElementById('sell').value;
-let qty = +document.getElementById('qty').value;
+function addProduct(){
 
-/* cálculos simples */
-let costTotal = cost * qty;
-let revenue = sell * qty;
-let cash = revenue - costTotal;
+    let product = document.getElementById("product").value;
+    let unit = document.getElementById("unit").value;
+    let currency = document.getElementById("currency").value;
 
-inventory.push({
-name,
-cost,
-sell,
-qty,
-costTotal,
-revenue,
-cash
-});
+    let entry = Number(document.getElementById("entry").value);
+    let exit = Number(document.getElementById("exit").value);
 
-render();
+    let price = Number(document.getElementById("price").value);
+
+    let stock = entry - exit;
+
+    let total = stock * price;
+
+    let cash = exit * price;
+
+    let item = {
+        product,
+        unit,
+        currency,
+        entry,
+        exit,
+        stock,
+        price,
+        total,
+        cash
+    };
+
+    inventory.push(item);
+
+    renderTable();
+
+    autoSave();
+
+}
+
+/* =========================
+   RENDER TABLE
+========================= */
+
+function renderTable(){
+
+    let table = document.getElementById("table-body");
+
+    table.innerHTML = "";
+
+    inventory.forEach(item => {
+
+        table.innerHTML += `
+        
+        <tr>
+            <td>${item.product}</td>
+            <td>${item.unit}</td>
+            <td>${item.currency}</td>
+            <td class="entry">+${item.entry}</td>
+            <td class="exit">-${item.exit}</td>
+            <td>${item.stock}</td>
+            <td>${item.price.toFixed(2)}</td>
+            <td>${item.total.toFixed(2)}</td>
+            <td class="cash">${item.cash.toFixed(2)}</td>
+        </tr>
+
+        `;
+
+    });
 
 }
 
-function render(){
+/* =========================
+   SAVE
+========================= */
 
-let table=document.getElementById('table');
-table.innerHTML="";
+function saveInventory(){
 
-inventory.forEach(i=>{
-table.innerHTML+=`
-<tr>
-<td>${i.name}</td>
-<td>${i.cost}</td>
-<td>${i.sell}</td>
-<td>${i.qty}</td>
-<td>${i.costTotal.toFixed(2)}</td>
-<td>${i.revenue.toFixed(2)}</td>
-<td class="cash">${i.cash.toFixed(2)}</td>
-</tr>`;
-});
+    localStorage.setItem(
+        "inventory",
+        JSON.stringify(inventory)
+    );
+
+    alert("Inventory saved successfully!");
 
 }
+
+/* AUTO SAVE */
+
+function autoSave(){
+
+    localStorage.setItem(
+        "inventory",
+        JSON.stringify(inventory)
+    );
+
+}
+
+/* LOAD */
+
+renderTable();
 
 </script>
 
 </body>
 </html>
+
 
