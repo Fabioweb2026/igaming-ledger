@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -12,9 +11,7 @@
 
 <style>
 
-/* =========================
-   RESET
-========================= */
+/* RESET */
 
 *{
     margin:0;
@@ -28,9 +25,7 @@ body{
     overflow-x:hidden;
 }
 
-/* =========================
-   BANNER
-========================= */
+/* BANNER */
 
 .banner-header{
     width:100%;
@@ -46,9 +41,7 @@ body{
     object-fit:cover;
 }
 
-/* =========================
-   MAIN LAYOUT
-========================= */
+/* MAIN */
 
 .main-content{
     max-width:1250px;
@@ -59,9 +52,7 @@ body{
     padding:25px;
 }
 
-/* =========================
-   SIDEBAR
-========================= */
+/* SIDEBAR */
 
 .sidebar{
     background:#1a1a1a;
@@ -75,19 +66,13 @@ body{
     font-size:22px;
 }
 
-/* =========================
-   FORM GRID
-========================= */
+/* FORM */
 
 .form-grid{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:12px;
 }
-
-/* =========================
-   INPUTS
-========================= */
 
 .form-grid input,
 .form-grid select{
@@ -98,18 +83,15 @@ body{
     padding:0 12px;
     outline:none;
     font-size:14px;
-    font-family:'Plus Jakarta Sans',sans-serif;
 }
 
-/* FULL WIDTH */
+/* FULL */
 
 .full{
     grid-column:1 / -1;
 }
 
-/* =========================
-   BUTTONS
-========================= */
+/* BUTTONS */
 
 button{
     width:100%;
@@ -118,11 +100,6 @@ button{
     border-radius:10px;
     font-weight:700;
     cursor:pointer;
-    transition:0.3s;
-}
-
-button:hover{
-    transform:scale(1.02);
 }
 
 .add-btn{
@@ -135,15 +112,12 @@ button:hover{
     color:#fff;
 }
 
-/* =========================
-   TABLE
-========================= */
+/* TABLE */
 
 .table-container{
     background:#fff;
     border-radius:18px;
     overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
 table{
@@ -161,27 +135,24 @@ td{
     padding:15px;
     text-align:center;
     border-bottom:1px solid #eee;
-    font-size:14px;
 }
 
 .entry{
     color:#27ae60;
-    font-weight:700;
+    font-weight:bold;
 }
 
 .exit{
     color:#e74c3c;
-    font-weight:700;
+    font-weight:bold;
 }
 
 .cash{
     color:#b39359;
-    font-weight:700;
+    font-weight:bold;
 }
 
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer{
     margin-top:40px;
@@ -191,9 +162,7 @@ footer{
     padding:25px;
 }
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* RESPONSIVE */
 
 @media(max-width:900px){
 
@@ -213,17 +182,13 @@ footer{
 
 <body>
 
-<!-- =========================
-     BANNER
-========================= -->
+<!-- BANNER -->
 
 <header class="banner-header">
-    <img src="sollene-group.jpg" alt="Sollene Group">
+    <img src="sollene-group.jpg" alt="">
 </header>
 
-<!-- =========================
-     MAIN CONTENT
-========================= -->
+<!-- MAIN -->
 
 <div class="main-content">
 
@@ -235,8 +200,6 @@ footer{
 
         <div class="form-grid">
 
-            <!-- PRODUCT -->
-
             <input
                 type="text"
                 id="product"
@@ -244,15 +207,11 @@ footer{
                 placeholder="Product Name"
             >
 
-            <!-- UNIT -->
-
             <select id="unit">
                 <option>Kg</option>
                 <option>Ton</option>
                 <option>Box</option>
             </select>
-
-            <!-- CURRENCY -->
 
             <select id="currency">
                 <option>USD</option>
@@ -260,23 +219,17 @@ footer{
                 <option>BRL</option>
             </select>
 
-            <!-- ENTRY -->
-
             <input
                 type="number"
                 id="entry"
                 placeholder="Entry"
             >
 
-            <!-- EXIT -->
-
             <input
                 type="number"
                 id="exit"
                 placeholder="Exit"
             >
-
-            <!-- PRICE -->
 
             <input
                 type="number"
@@ -285,7 +238,7 @@ footer{
                 placeholder="Price"
             >
 
-            <!-- BUTTON ADD -->
+            <!-- ADD -->
 
             <button
                 type="button"
@@ -295,7 +248,7 @@ footer{
                 Add Product
             </button>
 
-            <!-- BUTTON SAVE -->
+            <!-- SAVE -->
 
             <button
                 type="button"
@@ -343,64 +296,36 @@ footer{
 © 2026 SOLLENE GROUP | INVENTORY SYSTEM
 </footer>
 
-<!-- =========================
-     JAVASCRIPT
-========================= -->
+<!-- JAVASCRIPT -->
 
 <script>
 
-document.addEventListener("DOMContentLoaded", () => {
-
-/* =========================
-   STORAGE
-========================= */
+/* STORAGE */
 
 let inventory =
 JSON.parse(localStorage.getItem("inventory")) || [];
 
-/* =========================
-   ADD PRODUCT
-========================= */
+/* ADD PRODUCT */
 
-window.addProduct = function(){
-
-    let productField =
-    document.getElementById("product");
-
-    let unitField =
-    document.getElementById("unit");
-
-    let currencyField =
-    document.getElementById("currency");
-
-    let entryField =
-    document.getElementById("entry");
-
-    let exitField =
-    document.getElementById("exit");
-
-    let priceField =
-    document.getElementById("price");
-
-    /* VALUES */
+function addProduct(){
 
     let product =
-    productField.value.trim();
+    document.getElementById("product").value.trim();
 
     let unit =
-    unitField.value;
+    document.getElementById("unit").value;
 
     let currency =
-    currencyField.value;
+    document.getElementById("currency").value;
 
     let entry =
-    Number(entryField.value) || 0;
+    Number(document.getElementById("entry").value) || 0;
 
     let exit =
-    Number(exitField.value) || 0;
+    Number(document.getElementById("exit").value) || 0;
 
     let price =
-    Number(priceField.value) || 0;
+    Number(document.getElementById("price").value) || 0;
 
     /* VALIDATION */
 
@@ -436,7 +361,7 @@ window.addProduct = function(){
         cash
     };
 
-    /* ADD */
+    /* PUSH */
 
     inventory.push(item);
 
@@ -447,22 +372,20 @@ window.addProduct = function(){
         JSON.stringify(inventory)
     );
 
-    /* RENDER */
+    /* UPDATE */
 
     renderTable();
 
-    /* CLEAR FORM */
+    /* CLEAR */
 
-    productField.value = "";
-    entryField.value = "";
-    exitField.value = "";
-    priceField.value = "";
+    document.getElementById("product").value = "";
+    document.getElementById("entry").value = "";
+    document.getElementById("exit").value = "";
+    document.getElementById("price").value = "";
 
 }
 
-/* =========================
-   TABLE
-========================= */
+/* RENDER TABLE */
 
 function renderTable(){
 
@@ -491,11 +414,9 @@ function renderTable(){
 
 }
 
-/* =========================
-   SAVE BUTTON
-========================= */
+/* SAVE BUTTON */
 
-window.saveInventory = function(){
+function saveInventory(){
 
     localStorage.setItem(
         "inventory",
@@ -506,17 +427,12 @@ window.saveInventory = function(){
 
 }
 
-/* =========================
-   LOAD TABLE
-========================= */
+/* INITIAL LOAD */
 
 renderTable();
-
-});
 
 </script>
 
 </body>
 </html>
-
 
