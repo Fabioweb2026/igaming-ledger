@@ -34,7 +34,7 @@ body{
 
 .banner-header{
     width:100%;
-    height:140px;
+    height:150px;
     margin-top:20px;
     overflow:hidden;
     border-bottom:3px solid #b39359;
@@ -51,10 +51,10 @@ body{
 ========================= */
 
 .main-content{
-    max-width:1500px;
+    max-width:1600px;
     margin:auto;
     display:grid;
-    grid-template-columns:360px 1fr;
+    grid-template-columns:380px 1fr;
     gap:25px;
     padding:25px;
 }
@@ -76,7 +76,7 @@ body{
 }
 
 /* =========================
-   FORM
+   FORM GRID
 ========================= */
 
 .form-grid{
@@ -84,6 +84,10 @@ body{
     grid-template-columns:1fr 1fr;
     gap:12px;
 }
+
+/* =========================
+   INPUTS
+========================= */
 
 .form-grid input,
 .form-grid select{
@@ -99,6 +103,17 @@ body{
 
 .full{
     grid-column:1 / -1;
+}
+
+/* =========================
+   LABELS
+========================= */
+
+label{
+    display:block;
+    margin-bottom:6px;
+    font-size:13px;
+    color:#fff;
 }
 
 /* =========================
@@ -143,7 +158,7 @@ button:hover{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:1600px;
+    min-width:1700px;
 }
 
 thead{
@@ -169,6 +184,11 @@ td{
     font-weight:bold;
 }
 
+.stock{
+    color:#b39359;
+    font-weight:bold;
+}
+
 .profit{
     color:#2980b9;
     font-weight:bold;
@@ -176,11 +196,6 @@ td{
 
 .cash{
     color:#27ae60;
-    font-weight:bold;
-}
-
-.stock{
-    color:#b39359;
     font-weight:bold;
 }
 
@@ -223,7 +238,9 @@ footer{
 ========================= -->
 
 <header class="banner-header">
+
     <img src="sollene-group.jpg" alt="Sollene Group">
+
 </header>
 
 <!-- =========================
@@ -232,7 +249,9 @@ footer{
 
 <div class="main-content">
 
-    <!-- SIDEBAR -->
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
 
     <div class="sidebar">
 
@@ -242,72 +261,163 @@ footer{
 
             <!-- PRODUCT -->
 
-            <input
-                type="text"
-                id="product"
-                class="full"
-                placeholder="Product Name"
-            >
+            <div class="full">
+
+                <label>
+                    Product Name
+                </label>
+
+                <input
+                    type="text"
+                    id="product"
+                    placeholder="Coffee"
+                >
+
+            </div>
 
             <!-- UNIT -->
 
-            <select id="unit">
-                <option value="Kg">Kg</option>
-                <option value="Ton">Ton</option>
-                <option value="Box">Box</option>
-            </select>
+            <div>
 
-            <!-- BUY CURRENCY -->
+                <label>
+                    Unit
+                </label>
 
-            <select id="buyCurrency">
-                <option value="USD">Buy USD</option>
-                <option value="EUR">Buy EUR</option>
-                <option value="BRL">Buy BRL</option>
-            </select>
+                <select id="unit">
 
-            <!-- SELL CURRENCY -->
+                    <option value="Kg">
+                        Kg
+                    </option>
 
-            <select id="sellCurrency">
-                <option value="USD">Sell USD</option>
-                <option value="EUR">Sell EUR</option>
-                <option value="BRL">Sell BRL</option>
-            </select>
+                    <option value="Ton">
+                        Ton
+                    </option>
+
+                    <option value="Box">
+                        Box
+                    </option>
+
+                </select>
+
+            </div>
 
             <!-- ENTRY -->
 
-            <input
-                type="number"
-                id="entry"
-                placeholder="Entry"
-                value="0"
-            >
+            <div>
+
+                <label>
+                    Entry
+                </label>
+
+                <input
+                    type="number"
+                    id="entry"
+                    value="0"
+                >
+
+            </div>
 
             <!-- EXIT -->
 
-            <input
-                type="number"
-                id="exit"
-                placeholder="Exit"
-                value="0"
-            >
+            <div>
+
+                <label>
+                    Exit
+                </label>
+
+                <input
+                    type="number"
+                    id="exit"
+                    value="0"
+                >
+
+            </div>
 
             <!-- BUY PRICE -->
 
-            <input
-                type="number"
-                id="buyPrice"
-                placeholder="Buy Price"
-            >
+            <div>
+
+                <label>
+                    Buy Price
+                </label>
+
+                <input
+                    type="number"
+                    id="buyPrice"
+                    placeholder="6.50"
+                >
+
+            </div>
+
+            <!-- BUY CURRENCY -->
+
+            <div>
+
+                <label>
+                    Buy Currency
+                </label>
+
+                <select id="buyCurrency">
+
+                    <option value="USD">
+                        USD
+                    </option>
+
+                    <option value="EUR">
+                        EUR
+                    </option>
+
+                    <option value="BRL">
+                        BRL
+                    </option>
+
+                </select>
+
+            </div>
 
             <!-- SELL PRICE -->
 
-            <input
-                type="number"
-                id="sellPrice"
-                placeholder="Sell Price"
-            >
+            <div>
 
-            <!-- ADD BUTTON -->
+                <label>
+                    Sell Price
+                </label>
+
+                <input
+                    type="number"
+                    id="sellPrice"
+                    placeholder="9.00"
+                >
+
+            </div>
+
+            <!-- SELL CURRENCY -->
+
+            <div>
+
+                <label>
+                    Sell Currency
+                </label>
+
+                <select id="sellCurrency">
+
+                    <option value="USD">
+                        USD
+                    </option>
+
+                    <option value="EUR">
+                        EUR
+                    </option>
+
+                    <option value="BRL">
+                        BRL
+                    </option>
+
+                </select>
+
+            </div>
+
+            <!-- BUTTON ADD -->
 
             <button
                 type="button"
@@ -317,7 +427,7 @@ footer{
                 Add Product
             </button>
 
-            <!-- SAVE BUTTON -->
+            <!-- BUTTON SAVE -->
 
             <button
                 type="button"
@@ -331,7 +441,9 @@ footer{
 
     </div>
 
-    <!-- TABLE -->
+    <!-- =========================
+         TABLE
+    ========================= -->
 
     <div class="table-container">
 
@@ -340,18 +452,31 @@ footer{
             <thead>
 
                 <tr>
+
                     <th>Product</th>
+
                     <th>Unit</th>
-                    <th>Buy Currency</th>
-                    <th>Sell Currency</th>
+
                     <th>Entry</th>
+
                     <th>Exit</th>
+
                     <th>Stock</th>
+
                     <th>Buy Price</th>
+
+                    <th>Buy Currency</th>
+
                     <th>Sell Price</th>
+
+                    <th>Sell Currency</th>
+
                     <th>Profit</th>
+
                     <th>Cash In Register</th>
+
                     <th>Remaining Stock Value</th>
+
                 </tr>
 
             </thead>
@@ -369,7 +494,9 @@ footer{
 ========================= -->
 
 <footer>
+
 © 2026 SOLLENE GROUP | PROFESSIONAL INVENTORY SYSTEM
+
 </footer>
 
 <!-- =========================
@@ -379,16 +506,12 @@ footer{
 <script>
 
 /* =========================
-   CLEAR STORAGE
-========================= */
-
-localStorage.removeItem("inventory");
-
-/* =========================
    INVENTORY
 ========================= */
 
-let inventory = [];
+let inventory = JSON.parse(
+localStorage.getItem("inventory")
+) || [];
 
 /* =========================
    TABLE
@@ -415,10 +538,6 @@ function renderTable(){
 
             <td>${item.unit}</td>
 
-            <td>${item.buyCurrency}</td>
-
-            <td>${item.sellCurrency}</td>
-
             <td class="entry">
             +${item.entry}
             </td>
@@ -436,7 +555,15 @@ function renderTable(){
             </td>
 
             <td>
+            ${item.buyCurrency}
+            </td>
+
+            <td>
             ${item.sellPrice}
+            </td>
+
+            <td>
+            ${item.sellCurrency}
             </td>
 
             <td class="profit">
@@ -476,14 +603,6 @@ document
     document.getElementById("unit")
     .value;
 
-    const buyCurrency =
-    document.getElementById("buyCurrency")
-    .value;
-
-    const sellCurrency =
-    document.getElementById("sellCurrency")
-    .value;
-
     const entry =
     parseFloat(
         document.getElementById("entry").value
@@ -504,12 +623,19 @@ document
         document.getElementById("sellPrice").value
     ) || 0;
 
+    const buyCurrency =
+    document.getElementById("buyCurrency")
+    .value;
+
+    const sellCurrency =
+    document.getElementById("sellCurrency")
+    .value;
+
     /* VALIDATION */
 
     if(product === ""){
 
         alert("Enter product name");
-
         return;
 
     }
@@ -527,7 +653,6 @@ document
     if(buyPrice <= 0 || sellPrice <= 0){
 
         alert("Enter valid prices");
-
         return;
 
     }
@@ -561,10 +686,6 @@ document
 
         unit: unit,
 
-        buyCurrency: buyCurrency,
-
-        sellCurrency: sellCurrency,
-
         entry: entry,
 
         exit: exit,
@@ -573,7 +694,11 @@ document
 
         buyPrice: buyPrice.toFixed(2),
 
+        buyCurrency: buyCurrency,
+
         sellPrice: sellPrice.toFixed(2),
+
+        sellCurrency: sellCurrency,
 
         profit: profit,
 
@@ -586,6 +711,13 @@ document
     /* PUSH */
 
     inventory.push(item);
+
+    /* SAVE */
+
+    localStorage.setItem(
+        "inventory",
+        JSON.stringify(inventory)
+    );
 
     /* RENDER */
 
@@ -606,7 +738,7 @@ document
 });
 
 /* =========================
-   SAVE
+   SAVE BUTTON
 ========================= */
 
 document
@@ -618,7 +750,9 @@ document
         JSON.stringify(inventory)
     );
 
-    alert("Inventory saved successfully!");
+    alert(
+    "Inventory saved successfully!"
+    );
 
 });
 
