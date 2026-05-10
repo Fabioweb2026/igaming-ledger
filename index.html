@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sollene Group | Advanced Inventory System</title>
+<title>Sollene Group | Professional Inventory System</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -51,7 +51,7 @@ body{
 ========================= */
 
 .main-content{
-    max-width:1400px;
+    max-width:1500px;
     margin:auto;
     display:grid;
     grid-template-columns:360px 1fr;
@@ -76,7 +76,7 @@ body{
 }
 
 /* =========================
-   FORM GRID
+   FORM
 ========================= */
 
 .form-grid{
@@ -84,10 +84,6 @@ body{
     grid-template-columns:1fr 1fr;
     gap:12px;
 }
-
-/* =========================
-   INPUTS
-========================= */
 
 .form-grid input,
 .form-grid select{
@@ -147,7 +143,7 @@ button:hover{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:1400px;
+    min-width:1600px;
 }
 
 thead{
@@ -183,7 +179,7 @@ td{
     font-weight:bold;
 }
 
-.stock-value{
+.stock{
     color:#b39359;
     font-weight:bold;
 }
@@ -261,12 +257,20 @@ footer{
                 <option value="Box">Box</option>
             </select>
 
-            <!-- CURRENCY -->
+            <!-- BUY CURRENCY -->
 
-            <select id="currency">
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-                <option value="BRL">BRL</option>
+            <select id="buyCurrency">
+                <option value="USD">Buy USD</option>
+                <option value="EUR">Buy EUR</option>
+                <option value="BRL">Buy BRL</option>
+            </select>
+
+            <!-- SELL CURRENCY -->
+
+            <select id="sellCurrency">
+                <option value="USD">Sell USD</option>
+                <option value="EUR">Sell EUR</option>
+                <option value="BRL">Sell BRL</option>
             </select>
 
             <!-- ENTRY -->
@@ -303,7 +307,7 @@ footer{
                 placeholder="Sell Price"
             >
 
-            <!-- BUTTON ADD -->
+            <!-- ADD BUTTON -->
 
             <button
                 type="button"
@@ -313,7 +317,7 @@ footer{
                 Add Product
             </button>
 
-            <!-- BUTTON SAVE -->
+            <!-- SAVE BUTTON -->
 
             <button
                 type="button"
@@ -338,14 +342,15 @@ footer{
                 <tr>
                     <th>Product</th>
                     <th>Unit</th>
-                    <th>Currency</th>
+                    <th>Buy Currency</th>
+                    <th>Sell Currency</th>
                     <th>Entry</th>
                     <th>Exit</th>
                     <th>Stock</th>
                     <th>Buy Price</th>
                     <th>Sell Price</th>
                     <th>Profit</th>
-                    <th>Cash in Register</th>
+                    <th>Cash In Register</th>
                     <th>Remaining Stock Value</th>
                 </tr>
 
@@ -364,7 +369,7 @@ footer{
 ========================= -->
 
 <footer>
-© 2026 SOLLENE GROUP | ADVANCED INVENTORY SYSTEM
+© 2026 SOLLENE GROUP | PROFESSIONAL INVENTORY SYSTEM
 </footer>
 
 <!-- =========================
@@ -373,20 +378,28 @@ footer{
 
 <script>
 
-/* CLEAR STORAGE */
+/* =========================
+   CLEAR STORAGE
+========================= */
 
 localStorage.removeItem("inventory");
 
-/* INVENTORY */
+/* =========================
+   INVENTORY
+========================= */
 
 let inventory = [];
 
-/* TABLE */
+/* =========================
+   TABLE
+========================= */
 
 const tableBody =
 document.getElementById("table-body");
 
-/* RENDER */
+/* =========================
+   RENDER TABLE
+========================= */
 
 function renderTable(){
 
@@ -402,7 +415,9 @@ function renderTable(){
 
             <td>${item.unit}</td>
 
-            <td>${item.currency}</td>
+            <td>${item.buyCurrency}</td>
+
+            <td>${item.sellCurrency}</td>
 
             <td class="entry">
             +${item.entry}
@@ -412,7 +427,7 @@ function renderTable(){
             -${item.exit}
             </td>
 
-            <td>
+            <td class="stock">
             ${item.stock}
             </td>
 
@@ -432,7 +447,7 @@ function renderTable(){
             ${item.cash}
             </td>
 
-            <td class="stock-value">
+            <td class="stock">
             ${item.remaining}
             </td>
 
@@ -444,7 +459,9 @@ function renderTable(){
 
 }
 
-/* ADD PRODUCT */
+/* =========================
+   ADD PRODUCT
+========================= */
 
 document
 .getElementById("addButton")
@@ -459,8 +476,12 @@ document
     document.getElementById("unit")
     .value;
 
-    const currency =
-    document.getElementById("currency")
+    const buyCurrency =
+    document.getElementById("buyCurrency")
+    .value;
+
+    const sellCurrency =
+    document.getElementById("sellCurrency")
     .value;
 
     const entry =
@@ -488,6 +509,17 @@ document
     if(product === ""){
 
         alert("Enter product name");
+
+        return;
+
+    }
+
+    if(exit > entry){
+
+        alert(
+        "Exit cannot be greater than Entry"
+        );
+
         return;
 
     }
@@ -495,6 +527,7 @@ document
     if(buyPrice <= 0 || sellPrice <= 0){
 
         alert("Enter valid prices");
+
         return;
 
     }
@@ -505,31 +538,47 @@ document
     entry - exit;
 
     const profit =
-    ((sellPrice - buyPrice) * exit)
-    .toFixed(2);
+    (
+        (sellPrice - buyPrice)
+        * exit
+    ).toFixed(2);
 
     const cash =
-    (sellPrice * exit)
-    .toFixed(2);
+    (
+        sellPrice * exit
+    ).toFixed(2);
 
     const remaining =
-    (stock * buyPrice)
-    .toFixed(2);
+    (
+        stock * buyPrice
+    ).toFixed(2);
 
     /* OBJECT */
 
     const item = {
 
         product: product,
+
         unit: unit,
-        currency: currency,
+
+        buyCurrency: buyCurrency,
+
+        sellCurrency: sellCurrency,
+
         entry: entry,
+
         exit: exit,
+
         stock: stock,
+
         buyPrice: buyPrice.toFixed(2),
+
         sellPrice: sellPrice.toFixed(2),
+
         profit: profit,
+
         cash: cash,
+
         remaining: remaining
 
     };
@@ -545,14 +594,20 @@ document
     /* CLEAR */
 
     document.getElementById("product").value = "";
+
     document.getElementById("entry").value = "0";
+
     document.getElementById("exit").value = "0";
+
     document.getElementById("buyPrice").value = "";
+
     document.getElementById("sellPrice").value = "";
 
 });
 
-/* SAVE */
+/* =========================
+   SAVE
+========================= */
 
 document
 .getElementById("saveButton")
@@ -567,7 +622,9 @@ document
 
 });
 
-/* INITIAL */
+/* =========================
+   INITIAL
+========================= */
 
 renderTable();
 
