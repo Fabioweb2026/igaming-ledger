@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sollene Group | Inventory System</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -21,9 +22,9 @@ body{
     overflow-x:hidden;
 }
 
-/* =========================
+/* ======================
    BANNER
-========================= */
+====================== */
 
 .banner-header{
     width:100%;
@@ -39,9 +40,9 @@ body{
     object-fit:cover;
 }
 
-/* =========================
+/* ======================
    LAYOUT
-========================= */
+====================== */
 
 .main-content{
     max-width:1250px;
@@ -52,9 +53,9 @@ body{
     padding:25px;
 }
 
-/* =========================
+/* ======================
    SIDEBAR
-========================= */
+====================== */
 
 .sidebar{
     background:#1a1a1a;
@@ -68,7 +69,7 @@ body{
     font-size:22px;
 }
 
-/* GRID FORM */
+/* FORM GRID */
 
 .form-grid{
     display:grid;
@@ -90,13 +91,13 @@ body{
     font-family:'Plus Jakarta Sans',sans-serif;
 }
 
-/* CAMPOS GRANDES */
+/* FULL WIDTH */
 
 .full{
     grid-column:1 / -1;
 }
 
-/* BOTÕES */
+/* BUTTONS */
 
 button{
     width:100%;
@@ -106,6 +107,10 @@ button{
     font-weight:700;
     cursor:pointer;
     transition:.3s;
+}
+
+button:hover{
+    transform:scale(1.02);
 }
 
 .add-btn{
@@ -118,13 +123,9 @@ button{
     color:#fff;
 }
 
-button:hover{
-    transform:scale(1.02);
-}
-
-/* =========================
+/* ======================
    TABLE
-========================= */
+====================== */
 
 .table-container{
     background:#fff;
@@ -165,9 +166,9 @@ th,td{
     font-weight:700;
 }
 
-/* =========================
+/* ======================
    FOOTER
-========================= */
+====================== */
 
 footer{
     margin-top:40px;
@@ -177,9 +178,9 @@ footer{
     padding:25px;
 }
 
-/* =========================
-   RESPONSIVO
-========================= */
+/* ======================
+   RESPONSIVE
+====================== */
 
 @media(max-width:900px){
 
@@ -216,7 +217,7 @@ footer{
 
         <div class="form-grid">
 
-            <!-- PRODUTO -->
+            <!-- PRODUCT -->
 
             <input 
                 type="text"
@@ -225,7 +226,7 @@ footer{
                 placeholder="Product Name"
             >
 
-            <!-- UNIDADE -->
+            <!-- UNIT -->
 
             <select id="unit">
                 <option>Kg</option>
@@ -233,7 +234,7 @@ footer{
                 <option>Box</option>
             </select>
 
-            <!-- MOEDA -->
+            <!-- CURRENCY -->
 
             <select id="currency">
                 <option>USD</option>
@@ -241,7 +242,7 @@ footer{
                 <option>BRL</option>
             </select>
 
-            <!-- ENTRADA -->
+            <!-- ENTRY -->
 
             <input 
                 type="number"
@@ -249,7 +250,7 @@ footer{
                 placeholder="Entry"
             >
 
-            <!-- SAÍDA -->
+            <!-- EXIT -->
 
             <input 
                 type="number"
@@ -257,7 +258,7 @@ footer{
                 placeholder="Exit"
             >
 
-            <!-- PREÇO -->
+            <!-- PRICE -->
 
             <input 
                 type="number"
@@ -266,9 +267,10 @@ footer{
                 placeholder="Price"
             >
 
-            <!-- BOTÕES -->
+            <!-- BUTTONS -->
 
             <button 
+                type="button"
                 class="add-btn full"
                 onclick="addProduct()"
             >
@@ -276,6 +278,7 @@ footer{
             </button>
 
             <button 
+                type="button"
                 class="save-btn full"
                 onclick="saveInventory()"
             >
@@ -320,28 +323,46 @@ footer{
 
 <script>
 
+/* ======================
+   INVENTORY STORAGE
+====================== */
+
 let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
 
-/* =========================
+/* ======================
    ADD PRODUCT
-========================= */
+====================== */
 
 function addProduct(){
 
     let product = document.getElementById("product").value;
+
     let unit = document.getElementById("unit").value;
+
     let currency = document.getElementById("currency").value;
 
     let entry = Number(document.getElementById("entry").value);
+
     let exit = Number(document.getElementById("exit").value);
 
     let price = Number(document.getElementById("price").value);
+
+    /* VALIDATION */
+
+    if(product === ""){
+        alert("Enter product name");
+        return;
+    }
+
+    /* CALCULATIONS */
 
     let stock = entry - exit;
 
     let total = stock * price;
 
     let cash = exit * price;
+
+    /* OBJECT */
 
     let item = {
         product,
@@ -355,17 +376,30 @@ function addProduct(){
         cash
     };
 
+    /* PUSH */
+
     inventory.push(item);
+
+    /* SAVE AUTOMATIC */
+
+    localStorage.setItem(
+        "inventory",
+        JSON.stringify(inventory)
+    );
+
+    /* UPDATE TABLE */
 
     renderTable();
 
-    autoSave();
+    /* CLEAR INPUTS */
+
+    clearForm();
 
 }
 
-/* =========================
+/* ======================
    RENDER TABLE
-========================= */
+====================== */
 
 function renderTable(){
 
@@ -376,7 +410,6 @@ function renderTable(){
     inventory.forEach(item => {
 
         table.innerHTML += `
-        
         <tr>
             <td>${item.product}</td>
             <td>${item.unit}</td>
@@ -388,16 +421,15 @@ function renderTable(){
             <td>${item.total.toFixed(2)}</td>
             <td class="cash">${item.cash.toFixed(2)}</td>
         </tr>
-
         `;
 
     });
 
 }
 
-/* =========================
-   SAVE
-========================= */
+/* ======================
+   SAVE BUTTON
+====================== */
 
 function saveInventory(){
 
@@ -410,18 +442,22 @@ function saveInventory(){
 
 }
 
-/* AUTO SAVE */
+/* ======================
+   CLEAR FORM
+====================== */
 
-function autoSave(){
+function clearForm(){
 
-    localStorage.setItem(
-        "inventory",
-        JSON.stringify(inventory)
-    );
+    document.getElementById("product").value = "";
+    document.getElementById("entry").value = "";
+    document.getElementById("exit").value = "";
+    document.getElementById("price").value = "";
 
 }
 
-/* LOAD */
+/* ======================
+   INITIAL LOAD
+====================== */
 
 renderTable();
 
