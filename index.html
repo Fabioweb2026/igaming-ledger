@@ -41,9 +41,7 @@ html, body {
     padding: 25px;
 }
 
-/* =========================
-   🔥 REGISTER PROFISSIONAL GRID
-========================= */
+/* SIDEBAR */
 .sidebar {
     background: #1a1a1a;
     color: #b39359;
@@ -55,32 +53,30 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* GRID INTERNO (CORREÇÃO PRINCIPAL) */
+/* FORM */
 .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 }
 
-/* CAMPOS IGUAIS */
-.sidebar input,
-.sidebar select {
+input, select {
     width: 100%;
     height: 42px;
-    padding: 0 10px;
     border-radius: 10px;
     border: none;
-    font-size: 14px;
+    padding: 0 10px;
     box-sizing: border-box;
 }
 
-/* OCUPA LINHA TODA */
+/* FULL WIDTH */
 .full {
     grid-column: 1 / -1;
 }
 
 /* BOTÕES */
-.btn {
+button {
+    width: 100%;
     height: 45px;
     border-radius: 10px;
     border: none;
@@ -134,13 +130,8 @@ footer {
     margin-top: 40px;
 }
 
-/* RESPONSIVO */
 @media (max-width: 900px) {
     .main-content {
-        grid-template-columns: 1fr;
-    }
-
-    .form-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -150,19 +141,15 @@ footer {
 
 <body>
 
-<!-- BANNER -->
 <header class="banner-header">
     <img src="sollene-group.jpg">
 </header>
 
-<!-- MAIN -->
 <div class="main-content">
 
-<!-- SIDEBAR -->
 <div class="sidebar">
     <h2>Register Product</h2>
 
-    <!-- GRID FORM -->
     <div class="form-grid">
 
         <input id="name" class="full" placeholder="Product Name">
@@ -184,16 +171,14 @@ footer {
 
         <input id="price" class="full" type="number" placeholder="Price per unit">
 
-        <button class="btn add" onclick="add()">Add Product</button>
-        <button class="btn save" onclick="save()">Save Inventory</button>
+        <button class="add" onclick="add()">Add Product</button>
+        <button class="save" onclick="save()">Save Inventory</button>
 
     </div>
 </div>
 
-<!-- TABLE -->
 <div class="table-container">
 <table>
-
 <thead>
 <tr>
 <th>Product</th>
@@ -209,73 +194,76 @@ footer {
 </thead>
 
 <tbody id="table"></tbody>
-
 </table>
 </div>
 
 </div>
 
-<footer>
-© 2026 SOLLENE GROUP
-</footer>
+<footer>© 2026 SOLLENE GROUP</footer>
 
 <script>
 
-let inventory = [];
+/* 🔥 CARREGA AUTOMATICAMENTE */
+let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
 
+render();
+
+/* ADD + AUTO SAVE */
 function add(){
 
-let name=document.getElementById('name').value;
-let unit=document.getElementById('unit').value;
-let entry=+document.getElementById('entry').value;
-let exit=+document.getElementById('exit').value;
-let currency=document.getElementById('currency').value;
-let price=+document.getElementById('price').value;
+let item = {
+name: document.getElementById('name').value,
+unit: document.getElementById('unit').value,
+entry: +document.getElementById('entry').value,
+exit: +document.getElementById('exit').value,
+currency: document.getElementById('currency').value,
+price: +document.getElementById('price').value
+};
 
-let stock = entry - exit;
-let revenue = exit * price;
-let cost = entry * price;
-let cash = revenue - cost;
+inventory.push(item);
 
-inventory.push({name,unit,entry,exit,stock,currency,price,revenue,cash});
-
+autoSave();   // 🔥 SALVA AUTOMATICAMENTE
 render();
 
 }
 
+/* RENDER */
 function render(){
 
 let table=document.getElementById('table');
 table.innerHTML="";
 
 inventory.forEach(i=>{
+
+let stock=i.entry-i.exit;
+let revenue=i.exit*i.price;
+let cash=revenue-(i.entry*i.price);
+
 table.innerHTML+=`
 <tr>
 <td>${i.name}</td>
 <td>${i.unit}</td>
 <td class="entry">${i.entry}</td>
 <td class="exit">${i.exit}</td>
-<td>${i.stock}</td>
+<td>${stock}</td>
 <td>${i.currency}</td>
 <td>${i.price}</td>
-<td>${i.revenue.toFixed(2)}</td>
-<td class="cash">${i.cash.toFixed(2)}</td>
+<td>${revenue.toFixed(2)}</td>
+<td class="cash">${cash.toFixed(2)}</td>
 </tr>`;
 });
 
 }
 
+/* 🔥 SALVAMENTO REAL */
 function save(){
 localStorage.setItem("inventory", JSON.stringify(inventory));
-alert("Saved successfully!");
+alert("Inventory saved successfully!");
 }
 
-window.onload = function(){
-let data = localStorage.getItem("inventory");
-if(data){
-inventory = JSON.parse(data);
-render();
-}
+/* AUTO SAVE (IMPORTANTE) */
+function autoSave(){
+localStorage.setItem("inventory", JSON.stringify(inventory));
 }
 
 </script>
