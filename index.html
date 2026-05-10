@@ -7,12 +7,11 @@
     <link href="https://googleapis.com" rel="stylesheet">
     
     <style>
-        /* RESET & BASE STYLE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0; /* Creme suave harmonizado */
+            background-color: #fdfcf0;
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
@@ -26,7 +25,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 1. BANNER CENTRALIZADO E REDUZIDO */
+        /* BANNER CENTRALIZADO */
         .banner-header {
             width: 100%;
             display: flex;
@@ -43,7 +42,6 @@
             border: 4px solid white;
         }
 
-        /* 2. BOTÃO VOLTAR */
         .nav-top {
             width: 100%;
             max-width: 1200px;
@@ -65,7 +63,7 @@
 
         .btn-back:hover { background: #b39359; color: white; }
 
-        /* 3. CONTEÚDO DO SISTEMA (SIDEBAR + TABELA) */
+        /* SISTEMA DE ESTOQUE */
         .main-content {
             display: flex;
             width: 100%;
@@ -143,13 +141,14 @@
         .exit { color: #e74c3c; font-weight: bold; }
         .total-val { color: #b39359; font-weight: bold; }
 
-        /* 4. RODAPÉ CORPORATIVO */
+        /* RODAPÉ */
         footer {
             width: 100%;
             padding: 60px 20px;
             background-color: #1a1a1a;
             text-align: center;
             border-top: 3px solid #b39359;
+            margin-top: 40px;
         }
 
         .footer-address {
@@ -177,27 +176,24 @@
 </head>
 <body>
 
-    <!-- BANNER -->
     <header class="banner-header">
         <img src="sollene-group.jpg" alt="Sollene Group Premium">
     </header>
 
-    <!-- NAVIGATION -->
     <nav class="nav-top">
-        <a href="index.html" class="btn-back">← BACK TO PORTFOLIO</a>
+        <a href="index.html" class="btn-back">← Back to Portfolio</a>
     </nav>
 
-    <!-- MAIN SYSTEM -->
     <main class="main-content">
         <section class="sidebar">
             <h2>Register Product</h2>
             <input type="text" placeholder="Product Name">
             <select>
-                <option>Caixa (Case)</option>
-                <option>Unidade (Unit)</option>
+                <option>Case</option>
+                <option>Unit</option>
             </select>
-            <input type="number" placeholder="Entry (Entrada)">
-            <input type="number" placeholder="Exit (Saída)">
+            <input type="number" placeholder="Entry">
+            <input type="number" placeholder="Exit">
             <select>
                 <option>USD ($)</option>
                 <option>EUR (€)</option>
@@ -247,7 +243,6 @@
         </section>
     </main>
 
-    <!-- FOOTER WITH FICTIONAL ADDRESS -->
     <footer>
         <div class="footer-address">
             <p>SOLLENE GROUP ENTERPRISE • MARINA BUSINESS AVENUE, VALLETTA, MALTA</p>
@@ -258,4 +253,5 @@
 
 </body>
 </html>
+
 
