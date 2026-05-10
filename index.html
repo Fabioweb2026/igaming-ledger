@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Sollene Group | Inventory System</title>
+<title>Sollene Group | Advanced Inventory System</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -51,10 +51,10 @@ body{
 ========================= */
 
 .main-content{
-    max-width:1250px;
+    max-width:1400px;
     margin:auto;
     display:grid;
-    grid-template-columns:340px 1fr;
+    grid-template-columns:360px 1fr;
     gap:25px;
     padding:25px;
 }
@@ -72,7 +72,7 @@ body{
 
 .sidebar h2{
     margin-bottom:20px;
-    font-size:22px;
+    font-size:24px;
 }
 
 /* =========================
@@ -92,7 +92,7 @@ body{
 .form-grid input,
 .form-grid select{
     width:100%;
-    height:45px;
+    height:48px;
     border:none;
     border-radius:10px;
     padding:0 12px;
@@ -100,8 +100,6 @@ body{
     font-size:14px;
     font-family:'Plus Jakarta Sans',sans-serif;
 }
-
-/* FULL */
 
 .full{
     grid-column:1 / -1;
@@ -113,7 +111,7 @@ body{
 
 button{
     width:100%;
-    height:45px;
+    height:48px;
     border:none;
     border-radius:10px;
     font-weight:700;
@@ -142,13 +140,14 @@ button:hover{
 .table-container{
     background:#fff;
     border-radius:18px;
-    overflow:hidden;
+    overflow:auto;
     box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
 table{
     width:100%;
     border-collapse:collapse;
+    min-width:1400px;
 }
 
 thead{
@@ -158,7 +157,7 @@ thead{
 
 th,
 td{
-    padding:15px;
+    padding:14px;
     text-align:center;
     border-bottom:1px solid #eee;
     font-size:14px;
@@ -174,7 +173,17 @@ td{
     font-weight:bold;
 }
 
+.profit{
+    color:#2980b9;
+    font-weight:bold;
+}
+
 .cash{
+    color:#27ae60;
+    font-weight:bold;
+}
+
+.stock-value{
     color:#b39359;
     font-weight:bold;
 }
@@ -278,14 +287,20 @@ footer{
                 value="0"
             >
 
-            <!-- PRICE -->
+            <!-- BUY PRICE -->
 
             <input
                 type="number"
-                id="price"
-                class="full"
-                placeholder="Price"
-                value="0"
+                id="buyPrice"
+                placeholder="Buy Price"
+            >
+
+            <!-- SELL PRICE -->
+
+            <input
+                type="number"
+                id="sellPrice"
+                placeholder="Sell Price"
             >
 
             <!-- BUTTON ADD -->
@@ -319,6 +334,7 @@ footer{
         <table>
 
             <thead>
+
                 <tr>
                     <th>Product</th>
                     <th>Unit</th>
@@ -326,10 +342,13 @@ footer{
                     <th>Entry</th>
                     <th>Exit</th>
                     <th>Stock</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                    <th>Cash</th>
+                    <th>Buy Price</th>
+                    <th>Sell Price</th>
+                    <th>Profit</th>
+                    <th>Cash in Register</th>
+                    <th>Remaining Stock Value</th>
                 </tr>
+
             </thead>
 
             <tbody id="table-body"></tbody>
@@ -345,7 +364,7 @@ footer{
 ========================= -->
 
 <footer>
-© 2026 SOLLENE GROUP | INVENTORY SYSTEM
+© 2026 SOLLENE GROUP | ADVANCED INVENTORY SYSTEM
 </footer>
 
 <!-- =========================
@@ -354,28 +373,20 @@ footer{
 
 <script>
 
-/* ===================================
-   CLEAR OLD STORAGE
-=================================== */
+/* CLEAR STORAGE */
 
 localStorage.removeItem("inventory");
 
-/* ===================================
-   NEW INVENTORY
-=================================== */
+/* INVENTORY */
 
 let inventory = [];
 
-/* ===================================
-   TABLE
-=================================== */
+/* TABLE */
 
 const tableBody =
 document.getElementById("table-body");
 
-/* ===================================
-   RENDER TABLE
-=================================== */
+/* RENDER */
 
 function renderTable(){
 
@@ -384,26 +395,56 @@ function renderTable(){
     inventory.forEach(function(item){
 
         tableBody.innerHTML += `
+
         <tr>
+
             <td>${item.product}</td>
+
             <td>${item.unit}</td>
+
             <td>${item.currency}</td>
-            <td class="entry">+${item.entry}</td>
-            <td class="exit">-${item.exit}</td>
-            <td>${item.stock}</td>
-            <td>${item.price}</td>
-            <td>${item.total}</td>
-            <td class="cash">${item.cash}</td>
+
+            <td class="entry">
+            +${item.entry}
+            </td>
+
+            <td class="exit">
+            -${item.exit}
+            </td>
+
+            <td>
+            ${item.stock}
+            </td>
+
+            <td>
+            ${item.buyPrice}
+            </td>
+
+            <td>
+            ${item.sellPrice}
+            </td>
+
+            <td class="profit">
+            ${item.profit}
+            </td>
+
+            <td class="cash">
+            ${item.cash}
+            </td>
+
+            <td class="stock-value">
+            ${item.remaining}
+            </td>
+
         </tr>
+
         `;
 
     });
 
 }
 
-/* ===================================
-   ADD PRODUCT
-=================================== */
+/* ADD PRODUCT */
 
 document
 .getElementById("addButton")
@@ -432,9 +473,14 @@ document
         document.getElementById("exit").value
     ) || 0;
 
-    const price =
+    const buyPrice =
     parseFloat(
-        document.getElementById("price").value
+        document.getElementById("buyPrice").value
+    ) || 0;
+
+    const sellPrice =
+    parseFloat(
+        document.getElementById("sellPrice").value
     ) || 0;
 
     /* VALIDATION */
@@ -442,26 +488,33 @@ document
     if(product === ""){
 
         alert("Enter product name");
-
         return;
+
     }
 
-    if(price <= 0){
+    if(buyPrice <= 0 || sellPrice <= 0){
 
-        alert("Enter valid price");
-
+        alert("Enter valid prices");
         return;
+
     }
 
     /* CALCULATIONS */
 
-    const stock = entry - exit;
+    const stock =
+    entry - exit;
 
-    const total =
-    (stock * price).toFixed(2);
+    const profit =
+    ((sellPrice - buyPrice) * exit)
+    .toFixed(2);
 
     const cash =
-    (exit * price).toFixed(2);
+    (sellPrice * exit)
+    .toFixed(2);
+
+    const remaining =
+    (stock * buyPrice)
+    .toFixed(2);
 
     /* OBJECT */
 
@@ -473,9 +526,11 @@ document
         entry: entry,
         exit: exit,
         stock: stock,
-        price: price.toFixed(2),
-        total: total,
-        cash: cash
+        buyPrice: buyPrice.toFixed(2),
+        sellPrice: sellPrice.toFixed(2),
+        profit: profit,
+        cash: cash,
+        remaining: remaining
 
     };
 
@@ -483,22 +538,21 @@ document
 
     inventory.push(item);
 
-    /* UPDATE TABLE */
+    /* RENDER */
 
     renderTable();
 
-    /* CLEAR FORM */
+    /* CLEAR */
 
     document.getElementById("product").value = "";
     document.getElementById("entry").value = "0";
     document.getElementById("exit").value = "0";
-    document.getElementById("price").value = "0";
+    document.getElementById("buyPrice").value = "";
+    document.getElementById("sellPrice").value = "";
 
 });
 
-/* ===================================
-   SAVE BUTTON
-=================================== */
+/* SAVE */
 
 document
 .getElementById("saveButton")
@@ -513,9 +567,7 @@ document
 
 });
 
-/* ===================================
-   INITIAL
-=================================== */
+/* INITIAL */
 
 renderTable();
 
