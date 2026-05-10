@@ -22,9 +22,9 @@ body{
     overflow-x:hidden;
 }
 
-/* ======================
+/* =========================
    BANNER
-====================== */
+========================= */
 
 .banner-header{
     width:100%;
@@ -40,9 +40,9 @@ body{
     object-fit:cover;
 }
 
-/* ======================
-   LAYOUT
-====================== */
+/* =========================
+   MAIN LAYOUT
+========================= */
 
 .main-content{
     max-width:1250px;
@@ -53,9 +53,9 @@ body{
     padding:25px;
 }
 
-/* ======================
+/* =========================
    SIDEBAR
-====================== */
+========================= */
 
 .sidebar{
     background:#1a1a1a;
@@ -86,8 +86,8 @@ body{
     border:none;
     border-radius:10px;
     padding:0 12px;
-    font-size:14px;
     outline:none;
+    font-size:14px;
     font-family:'Plus Jakarta Sans',sans-serif;
 }
 
@@ -106,7 +106,7 @@ button{
     border-radius:10px;
     font-weight:700;
     cursor:pointer;
-    transition:.3s;
+    transition:0.3s;
 }
 
 button:hover{
@@ -123,9 +123,9 @@ button:hover{
     color:#fff;
 }
 
-/* ======================
+/* =========================
    TABLE
-====================== */
+========================= */
 
 .table-container{
     background:#fff;
@@ -166,9 +166,9 @@ th,td{
     font-weight:700;
 }
 
-/* ======================
+/* =========================
    FOOTER
-====================== */
+========================= */
 
 footer{
     margin-top:40px;
@@ -178,9 +178,9 @@ footer{
     padding:25px;
 }
 
-/* ======================
+/* =========================
    RESPONSIVE
-====================== */
+========================= */
 
 @media(max-width:900px){
 
@@ -199,17 +199,23 @@ footer{
 
 <body>
 
-<!-- BANNER -->
+<!-- =========================
+     BANNER
+========================= -->
 
 <header class="banner-header">
-    <img src="sollene-group.jpg" alt="">
+    <img src="sollene-group.jpg" alt="Sollene Group">
 </header>
 
-<!-- MAIN -->
+<!-- =========================
+     MAIN
+========================= -->
 
 <div class="main-content">
 
-    <!-- SIDEBAR -->
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
 
     <div class="sidebar">
 
@@ -267,7 +273,7 @@ footer{
                 placeholder="Price"
             >
 
-            <!-- BUTTONS -->
+            <!-- BUTTON ADD -->
 
             <button 
                 type="button"
@@ -276,6 +282,8 @@ footer{
             >
                 Add Product
             </button>
+
+            <!-- BUTTON SAVE -->
 
             <button 
                 type="button"
@@ -289,7 +297,9 @@ footer{
 
     </div>
 
-    <!-- TABLE -->
+    <!-- =========================
+         TABLE
+    ========================= -->
 
     <div class="table-container">
 
@@ -317,54 +327,69 @@ footer{
 
 </div>
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
 © 2026 SOLLENE GROUP | INVENTORY SYSTEM
 </footer>
 
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
 <script>
 
-/* ======================
-   INVENTORY STORAGE
-====================== */
+/* =========================
+   STORAGE
+========================= */
 
 let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
 
-/* ======================
+/* =========================
    ADD PRODUCT
-====================== */
+========================= */
 
 function addProduct(){
 
-    let product = document.getElementById("product").value;
+    /* VALUES */
 
-    let unit = document.getElementById("unit").value;
+    const product = document.getElementById("product").value.trim();
 
-    let currency = document.getElementById("currency").value;
+    const unit = document.getElementById("unit").value;
 
-    let entry = Number(document.getElementById("entry").value);
+    const currency = document.getElementById("currency").value;
 
-    let exit = Number(document.getElementById("exit").value);
+    const entry = parseFloat(document.getElementById("entry").value) || 0;
 
-    let price = Number(document.getElementById("price").value);
+    const exit = parseFloat(document.getElementById("exit").value) || 0;
+
+    const price = parseFloat(document.getElementById("price").value) || 0;
 
     /* VALIDATION */
 
     if(product === ""){
-        alert("Enter product name");
+        alert("Please enter product name");
+        return;
+    }
+
+    if(price <= 0){
+        alert("Please enter valid price");
         return;
     }
 
     /* CALCULATIONS */
 
-    let stock = entry - exit;
+    const stock = entry - exit;
 
-    let total = stock * price;
+    const total = stock * price;
 
-    let cash = exit * price;
+    const cash = exit * price;
 
     /* OBJECT */
 
-    let item = {
+    const item = {
         product,
         unit,
         currency,
@@ -376,11 +401,11 @@ function addProduct(){
         cash
     };
 
-    /* PUSH */
+    /* ADD ARRAY */
 
     inventory.push(item);
 
-    /* SAVE AUTOMATIC */
+    /* SAVE AUTO */
 
     localStorage.setItem(
         "inventory",
@@ -391,19 +416,19 @@ function addProduct(){
 
     renderTable();
 
-    /* CLEAR INPUTS */
+    /* CLEAR FORM */
 
     clearForm();
 
 }
 
-/* ======================
+/* =========================
    RENDER TABLE
-====================== */
+========================= */
 
 function renderTable(){
 
-    let table = document.getElementById("table-body");
+    const table = document.getElementById("table-body");
 
     table.innerHTML = "";
 
@@ -427,9 +452,9 @@ function renderTable(){
 
 }
 
-/* ======================
-   SAVE BUTTON
-====================== */
+/* =========================
+   SAVE INVENTORY
+========================= */
 
 function saveInventory(){
 
@@ -442,9 +467,9 @@ function saveInventory(){
 
 }
 
-/* ======================
+/* =========================
    CLEAR FORM
-====================== */
+========================= */
 
 function clearForm(){
 
@@ -455,9 +480,9 @@ function clearForm(){
 
 }
 
-/* ======================
+/* =========================
    INITIAL LOAD
-====================== */
+========================= */
 
 renderTable();
 
