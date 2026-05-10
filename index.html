@@ -7,49 +7,73 @@
     <link href="https://googleapis.com" rel="stylesheet">
     
     <style>
+        /* RESET E ESTILO BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0; /* Creme suave para harmonizar com o banner */
+            background-color: #fdfcf0; /* Cor creme para harmonizar */
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* 1. BANNER HARMONIZADO */
-        .banner-container {
+        /* 1. BANNER REDUZIDO E CENTRALIZADO */
+        .banner-header {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 30px 20px;
+            background-color: #fdfcf0;
+        }
+
+        .banner-header img {
+            width: 55%; /* Tamanho reduzido para não ocupar tudo */
+            max-width: 750px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(179, 147, 89, 0.2);
+            border: 4px solid white;
+        }
+
+        /* 2. BOTÃO VOLTAR */
+        .nav-top {
             width: 100%;
             max-width: 1200px;
-            margin-bottom: 30px;
-            background-color: white;
-            box-shadow: 0 10px 30px rgba(179, 147, 89, 0.1);
-            border-bottom: 4px solid #b39359;
+            padding: 0 20px;
+            text-align: left;
         }
 
-        .banner-container img {
-            width: 100%;
-            display: block;
-            /* Se a imagem for malta10.jpg em vez de sollene-group.jpg, ajuste abaixo */
-            content: url('sollene-group.jpg'); 
+        .btn-back {
+            text-decoration: none;
+            color: #b39359;
+            border: 1px solid #b39359;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.3s;
         }
 
-        /* 2. CONTEÚDO PRINCIPAL (SISTEMA) */
+        .btn-back:hover { background: #b39359; color: white; }
+
+        /* 3. SISTEMA DE ESTOQUE (LAYOUT ORIGINAL) */
         .main-content {
             display: flex;
             width: 100%;
             max-width: 1200px;
             gap: 25px;
-            padding: 0 20px 60px;
+            padding: 20px 20px 60px;
         }
 
-        /* Lado esquerdo: Formulário Profissional */
+        /* Lado esquerdo: Registro */
         .sidebar {
             width: 320px;
             background-color: #1a1a1a;
             color: #b39359;
-            padding: 30px 20px;
+            padding: 25px;
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             height: fit-content;
@@ -57,20 +81,18 @@
 
         .sidebar h2 { 
             font-family: 'Playfair Display', serif;
-            font-size: 20px; 
-            margin-bottom: 25px; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
+            font-size: 18px; 
+            margin-bottom: 20px; 
             text-align: center;
+            letter-spacing: 1px;
         }
 
         input, select {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
-            border-radius: 10px;
+            border-radius: 8px;
             border: 1px solid #333;
-            background: #fff;
             font-size: 14px;
         }
 
@@ -81,13 +103,13 @@
             color: #000;
             border: none;
             font-weight: 800;
-            border-radius: 10px;
+            border-radius: 8px;
             cursor: pointer;
             text-transform: uppercase;
             transition: 0.3s;
         }
 
-        .btn-add:hover { background-color: #d4af37; transform: scale(1.02); }
+        .btn-add:hover { background: #d4af37; transform: translateY(-2px); }
 
         .btn-save {
             width: 100%;
@@ -96,56 +118,54 @@
             background-color: #27ae60;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 8px;
             font-weight: 700;
             cursor: pointer;
         }
 
-        /* Lado direito: Tabela de Luxo */
+        /* Lado direito: Tabela */
         .table-container {
             flex: 1;
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(179, 147, 89, 0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             border: 1px solid rgba(179, 147, 89, 0.2);
         }
 
         table { width: 100%; border-collapse: collapse; }
-
-        thead { background-color: #1a1a1a; color: #b39359; }
-
-        th { 
-            padding: 18px; 
-            text-transform: uppercase; 
-            font-size: 11px; 
-            letter-spacing: 1px; 
-        }
-
+        thead { background-color: #000; color: #b39359; }
+        th { padding: 18px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
         td { padding: 18px; text-align: center; font-size: 14px; border-bottom: 1px solid #f2f2f2; }
+        
+        .entry { color: #27ae60; font-weight: bold; }
+        .exit { color: #e74c3c; font-weight: bold; }
+        .total-val { color: #b39359; font-weight: bold; }
 
-        tr:last-child td { border-bottom: none; }
-
-        .entry { color: #27ae60; font-weight: 700; }
-        .exit { color: #e74c3c; font-weight: 700; }
-        .total-val { color: #b39359; font-weight: 800; }
-
+        /* Responsividade */
         @media (max-width: 900px) {
             .main-content { flex-direction: column; }
             .sidebar { width: 100%; }
+            .banner-header img { width: 90%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BANNER INTEGRADO -->
-    <div class="banner-container">
-        <img alt="Sollene Group Premium Banner">
-    </div>
+    <!-- 1. BANNER CENTRALIZADO E REDUZIDO -->
+    <header class="banner-header">
+        <img src="sollene-group.jpg" alt="Sollene Group Premium">
+    </header>
 
-    <!-- SISTEMA DE ESTOQUE HARMONIZADO -->
-    <div class="main-content">
-        <div class="sidebar">
+    <!-- 2. NAVEGAÇÃO -->
+    <nav class="nav-top">
+        <a href="index.html" class="btn-back">← Back to Portfolio</a>
+    </nav>
+
+    <!-- 3. SISTEMA DE ESTOQUE -->
+    <main class="main-content">
+        <!-- LADO ESQUERDO: REGISTRO -->
+        <section class="sidebar">
             <h2>Register Product</h2>
             <input type="text" placeholder="Product Name">
             <select>
@@ -159,11 +179,12 @@
                 <option>EUR (€)</option>
             </select>
             <input type="number" placeholder="Unit Price">
-            <button class="btn-add">Add to Inventory</button>
-            <button class="btn-save">💾 Save Changes</button>
-        </div>
+            <button class="btn-add">Add Product</button>
+            <button class="btn-save">💾 Save Inventory</button>
+        </section>
 
-        <div class="table-container">
+        <!-- LADO DIREITO: TABELA -->
+        <section class="table-container">
             <table>
                 <thead>
                     <tr>
@@ -179,7 +200,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Coffee Beans (S)</td>
+                        <td>Premium Coffee</td>
                         <td>Caixa</td>
                         <td class="entry">+ 100</td>
                         <td class="exit">- 23</td>
@@ -189,7 +210,7 @@
                         <td class="total-val">$ 513.59</td>
                     </tr>
                     <tr>
-                        <td>Premium Red Wine</td>
+                        <td>Sollene Wine</td>
                         <td>Caixa</td>
                         <td class="entry">+ 300</td>
                         <td class="exit">- 123</td>
@@ -200,10 +221,13 @@
                     </tr>
                 </tbody>
             </table>
-        </div>
-    </div>
+        </section>
+    </main>
+
+    <footer style="padding-bottom: 40px; color: #b39359; font-size: 10px; letter-spacing: 2px;">
+        © 2026 SOLLENE GROUP ENTERPRISE
+    </footer>
 
 </body>
 </html>
-
 
