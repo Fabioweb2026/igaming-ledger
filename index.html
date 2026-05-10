@@ -12,7 +12,7 @@
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0; /* Cor creme que combina com o banner */
+            background-color: #fdfcf0;
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
@@ -22,33 +22,29 @@
         }
 
         @keyframes fadeInPage {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
-        /* 1. BANNER AJUSTADO (SEM COMER LETRAS) */
+        /* 1. BANNER FULL WIDTH (DE LADO A LADO) */
         .banner-header {
             width: 100%;
-            display: flex;
-            justify-content: center;
-            padding: 40px 20px 20px; /* Mais espaço no topo para harmonia */
+            overflow: hidden;
+            background-color: #fdfcf0;
         }
 
         .banner-header img {
-            width: 70%; /* Ocupa 70% para ser imponente mas não gigante */
-            max-width: 900px;
+            width: 100%; /* OCUPA 100% DA LARGURA */
             height: auto;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(179, 147, 89, 0.2);
-            border: 5px solid white;
             display: block;
+            border-bottom: 4px solid #b39359; /* Linha dourada para separar do sistema */
         }
 
-        /* 2. BOTÃO VOLTAR */
+        /* 2. NAVEGAÇÃO / BOTÃO VOLTAR */
         .nav-top {
             width: 100%;
             max-width: 1200px;
-            padding: 10px 20px 30px;
+            padding: 25px 20px;
             text-align: left;
         }
 
@@ -56,12 +52,13 @@
             text-decoration: none;
             color: #b39359;
             border: 1px solid #b39359;
-            padding: 8px 20px;
+            padding: 8px 25px;
             border-radius: 50px;
             font-size: 11px;
             font-weight: 700;
             text-transform: uppercase;
             transition: 0.3s;
+            background: white;
         }
 
         .btn-back:hover { background: #b39359; color: white; }
@@ -82,51 +79,24 @@
             color: #b39359;
             padding: 30px 20px;
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             height: fit-content;
         }
 
-        .sidebar h2 { 
-            font-family: 'Playfair Display', serif;
-            font-size: 18px; 
-            margin-bottom: 25px; 
-            text-align: center;
-            letter-spacing: 1px;
-        }
+        .sidebar h2 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 25px; text-align: center; }
 
         input, select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            font-size: 14px;
+            width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px;
+            border: 1px solid #333; font-size: 14px;
         }
 
         .btn-add {
-            width: 100%;
-            padding: 14px;
-            background-color: #b39359;
-            color: #000;
-            border: none;
-            font-weight: 800;
-            border-radius: 10px;
-            cursor: pointer;
+            width: 100%; padding: 14px; background-color: #b39359; color: #000;
+            border: none; font-weight: 800; border-radius: 10px; cursor: pointer;
             text-transform: uppercase;
         }
 
-        .btn-add:hover { background: #d4af37; transform: scale(1.02); }
-
-        .btn-save {
-            width: 100%;
-            margin-top: 10px;
-            padding: 12px;
-            background-color: #27ae60;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-        }
+        .btn-add:hover { background: #d4af37; transform: translateY(-2px); }
 
         /* TABELA */
         .table-container {
@@ -157,40 +127,28 @@
         }
 
         .footer-address {
-            color: #b39359;
-            font-size: 11px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            line-height: 1.8;
+            color: #b39359; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; line-height: 1.8;
         }
 
-        .copyright {
-            color: #555;
-            font-size: 10px;
-            margin-top: 20px;
-            letter-spacing: 1px;
-        }
+        .copyright { color: #555; font-size: 10px; margin-top: 20px; letter-spacing: 1px; }
 
         @media (max-width: 1000px) {
             .main-content { flex-direction: column; }
             .sidebar { width: 100%; }
-            .banner-header img { width: 95%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BANNER CENTRALIZADO -->
+    <!-- BANNER DE LADO A LADO -->
     <header class="banner-header">
-        <img src="sollene-group.jpg" alt="Sollene Group Premium Trade">
+        <img src="sollene-group.jpg" alt="Sollene Group Worldwide Trade">
     </header>
 
-    <!-- NAVEGAÇÃO -->
     <nav class="nav-top">
         <a href="index.html" class="btn-back">← Back to Portfolio</a>
     </nav>
 
-    <!-- SISTEMA DE ESTOQUE -->
     <main class="main-content">
         <section class="sidebar">
             <h2>Product Entry</h2>
@@ -206,8 +164,7 @@
                 <option>EUR (€)</option>
             </select>
             <input type="number" placeholder="Unit Price">
-            <button class="btn-add">Add Product</button>
-            <button class="btn-save">💾 Save Inventory</button>
+            <button class="btn-add">Add to Stock</button>
         </section>
 
         <section class="table-container">
@@ -250,7 +207,6 @@
         </section>
     </main>
 
-    <!-- RODAPÉ CORPORATIVO -->
     <footer>
         <div class="footer-address">
             <p>SOLLENE GROUP ENTERPRISE • MARINA BUSINESS AVENUE, VALLETTA, MALTA</p>
@@ -261,3 +217,4 @@
 
 </body>
 </html>
+
