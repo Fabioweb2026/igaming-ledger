@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Stock Management System</title>
+<title>SMART STOCK LTD</title>
 
 <style>
 
@@ -15,10 +15,53 @@
 }
 
 body{
-    background:#0f172a;
+    background:linear-gradient(135deg,#0f172a,#111827,#1e293b);
     color:white;
     padding:10px;
 }
+
+/* TOPBAR */
+
+.topbar{
+    width:100%;
+    background:#111827;
+    border-bottom:2px solid #0284c7;
+    padding:12px 20px;
+    margin-bottom:18px;
+    border-radius:10px;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#0284c7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+    font-size:18px;
+    color:white;
+}
+
+.company-info h2{
+    font-size:16px;
+    color:#38bdf8;
+}
+
+.company-info p{
+    font-size:11px;
+    color:#cbd5e1;
+    margin-top:2px;
+}
+
+/* CONTAINER */
 
 .container{
     width:100%;
@@ -41,7 +84,7 @@ h1{
     align-items:flex-start;
 }
 
-/* LEFT FORM */
+/* FORM BOX */
 
 .form-box{
     width:210px;
@@ -51,6 +94,7 @@ h1{
     border-radius:12px;
     position:sticky;
     top:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.3);
 }
 
 /* FORM GRID */
@@ -130,6 +174,7 @@ button:hover{
     width:100%;
     overflow-x:auto;
     border-radius:10px;
+    box-shadow:0 0 10px rgba(0,0,0,0.3);
 }
 
 table{
@@ -192,6 +237,7 @@ tr:hover{
     border-radius:10px;
     padding:12px;
     text-align:center;
+    box-shadow:0 0 10px rgba(0,0,0,0.3);
 }
 
 .card h2{
@@ -229,6 +275,25 @@ table{
 </head>
 
 <body>
+
+<!-- HEADER -->
+
+<header class="topbar">
+
+<div class="logo-area">
+
+<div class="logo">
+SM
+</div>
+
+<div class="company-info">
+<h2>SMART STOCK LTD</h2>
+<p>Industrial Avenue 245 - London, UK</p>
+</div>
+
+</div>
+
+</header>
 
 <div class="container">
 
@@ -570,4 +635,3 @@ renderTable();
 
 </body>
 </html>
-
