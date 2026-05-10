@@ -41,7 +41,9 @@ html, body {
     padding: 25px;
 }
 
-/* SIDEBAR */
+/* =========================
+   🔥 REGISTER PROFISSIONAL GRID
+========================= */
 .sidebar {
     background: #1a1a1a;
     color: #b39359;
@@ -53,33 +55,48 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* CAMPOS PADRONIZADOS */
+/* GRID INTERNO (CORREÇÃO PRINCIPAL) */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+/* CAMPOS IGUAIS */
 .sidebar input,
 .sidebar select {
     width: 100%;
-    height: 45px;
-    margin-bottom: 12px;
-    padding: 0 12px;
+    height: 42px;
+    padding: 0 10px;
     border-radius: 10px;
     border: none;
-    outline: none;
     font-size: 14px;
+    box-sizing: border-box;
 }
 
-/* SELECT UNIDADES */
-.sidebar select {
-    background: white;
+/* OCUPA LINHA TODA */
+.full {
+    grid-column: 1 / -1;
 }
 
-/* BOTÃO */
-.sidebar button {
-    width: 100%;
+/* BOTÕES */
+.btn {
     height: 45px;
     border-radius: 10px;
     border: none;
-    background: #b39359;
     font-weight: bold;
     cursor: pointer;
+}
+
+.add {
+    background: #b39359;
+    grid-column: 1 / -1;
+}
+
+.save {
+    background: #27ae60;
+    color: white;
+    grid-column: 1 / -1;
 }
 
 /* TABLE */
@@ -117,8 +134,13 @@ footer {
     margin-top: 40px;
 }
 
+/* RESPONSIVO */
 @media (max-width: 900px) {
     .main-content {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -140,27 +162,32 @@ footer {
 <div class="sidebar">
     <h2>Register Product</h2>
 
-    <input id="name" placeholder="Product Name">
+    <!-- GRID FORM -->
+    <div class="form-grid">
 
-    <!-- 🔥 UNIDADES AJUSTADAS -->
-    <select id="unit">
-        <option value="kg">Kg (Kilogram)</option>
-        <option value="ton">Ton (Tonelada)</option>
-        <option value="box">Box (Caixa)</option>
-    </select>
+        <input id="name" class="full" placeholder="Product Name">
 
-    <input id="entry" type="number" placeholder="Entry Quantity">
-    <input id="exit" type="number" placeholder="Exit Quantity">
+        <select id="unit">
+            <option>Kg</option>
+            <option>Ton</option>
+            <option>Box</option>
+        </select>
 
-    <select id="currency">
-        <option>USD</option>
-        <option>EUR</option>
-        <option>BRL</option>
-    </select>
+        <select id="currency">
+            <option>USD</option>
+            <option>EUR</option>
+            <option>BRL</option>
+        </select>
 
-    <input id="price" type="number" placeholder="Price per unit">
+        <input id="entry" type="number" placeholder="Entry">
+        <input id="exit" type="number" placeholder="Exit">
 
-    <button onclick="add()">Add Product</button>
+        <input id="price" class="full" type="number" placeholder="Price per unit">
+
+        <button class="btn add" onclick="add()">Add Product</button>
+        <button class="btn save" onclick="save()">Save Inventory</button>
+
+    </div>
 </div>
 
 <!-- TABLE -->
@@ -194,6 +221,8 @@ footer {
 
 <script>
 
+let inventory = [];
+
 function add(){
 
 let name=document.getElementById('name').value;
@@ -203,32 +232,50 @@ let exit=+document.getElementById('exit').value;
 let currency=document.getElementById('currency').value;
 let price=+document.getElementById('price').value;
 
-/* estoque */
 let stock = entry - exit;
-
-/* receita */
 let revenue = exit * price;
-
-/* custo */
 let cost = entry * price;
-
-/* caixa */
 let cash = revenue - cost;
 
-document.getElementById('table').innerHTML += `
-<tr>
-<td>${name}</td>
-<td>${unit}</td>
-<td class="entry">${entry}</td>
-<td class="exit">${exit}</td>
-<td>${stock} ${unit}</td>
-<td>${currency}</td>
-<td>${price}</td>
-<td>${revenue.toFixed(2)}</td>
-<td class="cash">${cash.toFixed(2)}</td>
-</tr>
-`;
+inventory.push({name,unit,entry,exit,stock,currency,price,revenue,cash});
 
+render();
+
+}
+
+function render(){
+
+let table=document.getElementById('table');
+table.innerHTML="";
+
+inventory.forEach(i=>{
+table.innerHTML+=`
+<tr>
+<td>${i.name}</td>
+<td>${i.unit}</td>
+<td class="entry">${i.entry}</td>
+<td class="exit">${i.exit}</td>
+<td>${i.stock}</td>
+<td>${i.currency}</td>
+<td>${i.price}</td>
+<td>${i.revenue.toFixed(2)}</td>
+<td class="cash">${i.cash.toFixed(2)}</td>
+</tr>`;
+});
+
+}
+
+function save(){
+localStorage.setItem("inventory", JSON.stringify(inventory));
+alert("Saved successfully!");
+}
+
+window.onload = function(){
+let data = localStorage.getItem("inventory");
+if(data){
+inventory = JSON.parse(data);
+render();
+}
 }
 
 </script>
