@@ -7,12 +7,12 @@
     <link href="https://googleapis.com" rel="stylesheet">
     
     <style>
-        /* RESET & BASE */
+        /* RESET & BASE STYLE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0;
+            background-color: #fdfcf0; /* Creme suave harmonizado */
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
@@ -26,7 +26,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* BANNER SECTION */
+        /* 1. BANNER CENTRALIZADO E REDUZIDO */
         .banner-header {
             width: 100%;
             display: flex;
@@ -43,7 +43,7 @@
             border: 4px solid white;
         }
 
-        /* NAVIGATION */
+        /* 2. BOTÃO VOLTAR */
         .nav-top {
             width: 100%;
             max-width: 1200px;
@@ -65,7 +65,7 @@
 
         .btn-back:hover { background: #b39359; color: white; }
 
-        /* INVENTORY SYSTEM LAYOUT */
+        /* 3. CONTEÚDO DO SISTEMA (SIDEBAR + TABELA) */
         .main-content {
             display: flex;
             width: 100%;
@@ -143,7 +143,7 @@
         .exit { color: #e74c3c; font-weight: bold; }
         .total-val { color: #b39359; font-weight: bold; }
 
-        /* FOOTER & ADDRESS */
+        /* 4. RODAPÉ CORPORATIVO */
         footer {
             width: 100%;
             padding: 60px 20px;
@@ -177,14 +177,17 @@
 </head>
 <body>
 
+    <!-- BANNER -->
     <header class="banner-header">
         <img src="sollene-group.jpg" alt="Sollene Group Premium">
     </header>
 
+    <!-- NAVIGATION -->
     <nav class="nav-top">
-        <a href="index.html" class="btn-back">← Back to Portfolio</a>
+        <a href="index.html" class="btn-back">← BACK TO PORTFOLIO</a>
     </nav>
 
+    <!-- MAIN SYSTEM -->
     <main class="main-content">
         <section class="sidebar">
             <h2>Register Product</h2>
@@ -244,6 +247,7 @@
         </section>
     </main>
 
+    <!-- FOOTER WITH FICTIONAL ADDRESS -->
     <footer>
         <div class="footer-address">
             <p>SOLLENE GROUP ENTERPRISE • MARINA BUSINESS AVENUE, VALLETTA, MALTA</p>
@@ -254,5 +258,4 @@
 
 </body>
 </html>
-
 
