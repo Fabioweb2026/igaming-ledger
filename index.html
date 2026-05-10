@@ -7,28 +7,35 @@
     <link href="https://googleapis.com" rel="stylesheet">
     
     <style>
-        /* RESET E ESTILO BASE */
+        /* RESET & BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0; /* Cor creme harmonizada */
+            background-color: #fdfcf0;
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
             align-items: center;
+            opacity: 0;
+            animation: fadeInPage 1.5s ease-out forwards;
         }
 
-        /* 1. BANNER CENTRALIZADO E REDUZIDO */
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* BANNER SECTION */
         .banner-header {
             width: 100%;
             display: flex;
             justify-content: center;
-            padding: 30px 20px 20px;
+            padding: 30px 20px 10px;
         }
 
         .banner-header img {
-            width: 55%; /* Tamanho equilibrado */
+            width: 55%;
             max-width: 750px;
             height: auto;
             border-radius: 15px;
@@ -36,11 +43,11 @@
             border: 4px solid white;
         }
 
-        /* 2. BOTÃO VOLTAR */
+        /* NAVIGATION */
         .nav-top {
             width: 100%;
             max-width: 1200px;
-            padding: 0 20px 20px;
+            padding: 10px 20px 20px;
             text-align: left;
         }
 
@@ -58,7 +65,7 @@
 
         .btn-back:hover { background: #b39359; color: white; }
 
-        /* 3. SISTEMA DE ESTOQUE */
+        /* INVENTORY SYSTEM LAYOUT */
         .main-content {
             display: flex;
             width: 100%;
@@ -136,7 +143,7 @@
         .exit { color: #e74c3c; font-weight: bold; }
         .total-val { color: #b39359; font-weight: bold; }
 
-        /* 4. RODAPÉ COM ENDEREÇO HARMONIZADO */
+        /* FOOTER & ADDRESS */
         footer {
             width: 100%;
             padding: 60px 20px;
@@ -151,7 +158,6 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             line-height: 1.8;
-            font-weight: 400;
         }
 
         .copyright {
@@ -171,17 +177,14 @@
 </head>
 <body>
 
-    <!-- BANNER -->
     <header class="banner-header">
         <img src="sollene-group.jpg" alt="Sollene Group Premium">
     </header>
 
-    <!-- NAVEGAÇÃO -->
     <nav class="nav-top">
         <a href="index.html" class="btn-back">← Back to Portfolio</a>
     </nav>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
         <section class="sidebar">
             <h2>Register Product</h2>
@@ -218,7 +221,7 @@
                 <tbody>
                     <tr>
                         <td>Premium Coffee</td>
-                        <td>Caixa</td>
+                        <td>Case</td>
                         <td class="entry">+ 100</td>
                         <td class="exit">- 23</td>
                         <td>77</td>
@@ -228,7 +231,7 @@
                     </tr>
                     <tr>
                         <td>Sollene Wine</td>
-                        <td>Caixa</td>
+                        <td>Case</td>
                         <td class="entry">+ 300</td>
                         <td class="exit">- 123</td>
                         <td>177</td>
@@ -241,7 +244,6 @@
         </section>
     </main>
 
-    <!-- RODAPÉ AJUSTADO -->
     <footer>
         <div class="footer-address">
             <p>SOLLENE GROUP ENTERPRISE • MARINA BUSINESS AVENUE, VALLETTA, MALTA</p>
@@ -252,4 +254,5 @@
 
 </body>
 </html>
+
 
