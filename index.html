@@ -11,7 +11,7 @@
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0;
+            background-color: #fdfcf0; /* Cor creme original */
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
@@ -25,25 +25,35 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 1. BANNER AJUSTADO: LARGURA TOTAL + 9.5CM ALTURA + LOGO VISÍVEL */
+        /* 1. BANNER COM EFEITO GRADIENTE (FUSÃO) */
         .banner-header {
             width: 100%;
-            height: 9.5cm;             /* Altura exata solicitada */
-            margin-top: 0.5cm;         /* Distância do topo do navegador */
-            background-color: white;   /* Fundo branco para áreas não preenchidas */
+            height: 9.5cm;
+            margin-top: 0.5cm;
+            background-color: #fdfcf0; /* Mesma cor do fundo para fusão perfeita */
             display: flex;
-            justify-content: center;
+            justify-content: flex-start; /* Mantém a imagem à esquerda */
+            position: relative; /* Necessário para o efeito gradiente */
             overflow: hidden;
         }
 
         .banner-header img {
-            width: 100%;
             height: 100%;
-            /* 'contain' garante que a imagem e o logo apareçam inteiros sem cortes */
-            object-fit: contain; 
-            /* Alinha o conteúdo à esquerda para destacar o nome Sollene Group */
-            object-position: left center; 
+            width: auto; /* Mantém a proporção sem esticar */
+            object-fit: cover;
             display: block;
+        }
+
+        /* Camada de Gradiente sobre o lado direito da imagem */
+        .banner-header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%; /* Aumentamos para uma transição mais suave */
+            height: 100%;
+            /* Transição do transparente (centro) para o creme (direita) */
+            background: linear-gradient(to right, rgba(253, 252, 240, 0) 0%, #fdfcf0 85%);
         }
 
         /* 2. BOTÃO VOLTAR */
@@ -196,15 +206,16 @@
         @media (max-width: 900px) {
             .main-content { flex-direction: column; }
             .sidebar { width: 100%; }
-            .banner-header { height: auto; min-height: 150px; }
+            .banner-header { height: auto; min-height: 200px; }
+            .banner-header::after { display: none; } /* Remove gradiente no mobile para melhor leitura */
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER COM O BANNER AJUSTADO -->
+    <!-- BANNER COM EFEITO DE GRADIENTE NO LADO DIREITO -->
     <header class="banner-header">
-        <img src="sollene-group.jpg" alt="Sollene Group Portfolio">
+        <img src="sollene-group.jpg" alt="Sollene Group Premium Portfolio">
     </header>
 
     <!-- NAVEGAÇÃO -->
@@ -216,18 +227,18 @@
     <main class="main-content">
         <section class="sidebar">
             <h2>Register Product</h2>
-            <input type="text" placeholder="Product Name">
-            <select>
+            <input type="text" id="pName" placeholder="Product Name">
+            <select id="pUnit">
                 <option>Caixa (Case)</option>
                 <option>Unidade (Unit)</option>
             </select>
-            <input type="number" placeholder="Entry (Entrada)">
-            <input type="number" placeholder="Exit (Saída)">
-            <select>
+            <input type="number" id="pEntry" placeholder="Entry (Entrada)">
+            <input type="number" id="pExit" placeholder="Exit (Saída)">
+            <select id="pCurrency">
                 <option>USD ($)</option>
                 <option>EUR (€)</option>
             </select>
-            <input type="number" placeholder="Unit Price">
+            <input type="number" id="pPrice" placeholder="Unit Price">
             <button class="btn-add">Add Product</button>
             <button class="btn-save">💾 Save Inventory</button>
         </section>
@@ -246,7 +257,7 @@
                         <th>TOTAL VALUE</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="inventoryBody">
                     <tr>
                         <td>Premium Coffee</td>
                         <td>Case</td>
@@ -256,16 +267,6 @@
                         <td>USD</td>
                         <td>$ 6.67</td>
                         <td class="total-val">$ 513.59</td>
-                    </tr>
-                    <tr>
-                        <td>Sollene Wine</td>
-                        <td>Case</td>
-                        <td class="entry">+ 300</td>
-                        <td class="exit">- 123</td>
-                        <td>177</td>
-                        <td>EUR</td>
-                        <td>€ 4.58</td>
-                        <td class="total-val">€ 810.66</td>
                     </tr>
                 </tbody>
             </table>
@@ -282,4 +283,5 @@
 
 </body>
 </html>
+
 
