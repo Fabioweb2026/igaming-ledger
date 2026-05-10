@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,6 +11,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* =========================
+   RESET
+========================= */
 
 *{
     margin:0;
@@ -69,7 +75,9 @@ body{
     font-size:22px;
 }
 
-/* FORM GRID */
+/* =========================
+   FORM GRID
+========================= */
 
 .form-grid{
     display:grid;
@@ -77,7 +85,9 @@ body{
     gap:12px;
 }
 
-/* INPUTS */
+/* =========================
+   INPUTS
+========================= */
 
 .form-grid input,
 .form-grid select{
@@ -97,7 +107,9 @@ body{
     grid-column:1 / -1;
 }
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
 
 button{
     width:100%;
@@ -144,7 +156,8 @@ thead{
     color:#b39359;
 }
 
-th,td{
+th,
+td{
     padding:15px;
     text-align:center;
     border-bottom:1px solid #eee;
@@ -195,6 +208,7 @@ footer{
 }
 
 </style>
+
 </head>
 
 <body>
@@ -208,14 +222,12 @@ footer{
 </header>
 
 <!-- =========================
-     MAIN
+     MAIN CONTENT
 ========================= -->
 
 <div class="main-content">
 
-    <!-- =========================
-         SIDEBAR
-    ========================= -->
+    <!-- SIDEBAR -->
 
     <div class="sidebar">
 
@@ -225,7 +237,7 @@ footer{
 
             <!-- PRODUCT -->
 
-            <input 
+            <input
                 type="text"
                 id="product"
                 class="full"
@@ -250,7 +262,7 @@ footer{
 
             <!-- ENTRY -->
 
-            <input 
+            <input
                 type="number"
                 id="entry"
                 placeholder="Entry"
@@ -258,7 +270,7 @@ footer{
 
             <!-- EXIT -->
 
-            <input 
+            <input
                 type="number"
                 id="exit"
                 placeholder="Exit"
@@ -266,7 +278,7 @@ footer{
 
             <!-- PRICE -->
 
-            <input 
+            <input
                 type="number"
                 id="price"
                 class="full"
@@ -275,7 +287,7 @@ footer{
 
             <!-- BUTTON ADD -->
 
-            <button 
+            <button
                 type="button"
                 class="add-btn full"
                 onclick="addProduct()"
@@ -285,7 +297,7 @@ footer{
 
             <!-- BUTTON SAVE -->
 
-            <button 
+            <button
                 type="button"
                 class="save-btn full"
                 onclick="saveInventory()"
@@ -297,9 +309,7 @@ footer{
 
     </div>
 
-    <!-- =========================
-         TABLE
-    ========================= -->
+    <!-- TABLE -->
 
     <div class="table-container">
 
@@ -327,9 +337,7 @@ footer{
 
 </div>
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- FOOTER -->
 
 <footer>
 © 2026 SOLLENE GROUP | INVENTORY SYSTEM
@@ -341,55 +349,82 @@ footer{
 
 <script>
 
+document.addEventListener("DOMContentLoaded", () => {
+
 /* =========================
    STORAGE
 ========================= */
 
-let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
+let inventory =
+JSON.parse(localStorage.getItem("inventory")) || [];
 
 /* =========================
    ADD PRODUCT
 ========================= */
 
-function addProduct(){
+window.addProduct = function(){
+
+    let productField =
+    document.getElementById("product");
+
+    let unitField =
+    document.getElementById("unit");
+
+    let currencyField =
+    document.getElementById("currency");
+
+    let entryField =
+    document.getElementById("entry");
+
+    let exitField =
+    document.getElementById("exit");
+
+    let priceField =
+    document.getElementById("price");
 
     /* VALUES */
 
-    const product = document.getElementById("product").value.trim();
+    let product =
+    productField.value.trim();
 
-    const unit = document.getElementById("unit").value;
+    let unit =
+    unitField.value;
 
-    const currency = document.getElementById("currency").value;
+    let currency =
+    currencyField.value;
 
-    const entry = parseFloat(document.getElementById("entry").value) || 0;
+    let entry =
+    Number(entryField.value) || 0;
 
-    const exit = parseFloat(document.getElementById("exit").value) || 0;
+    let exit =
+    Number(exitField.value) || 0;
 
-    const price = parseFloat(document.getElementById("price").value) || 0;
+    let price =
+    Number(priceField.value) || 0;
 
     /* VALIDATION */
 
     if(product === ""){
-        alert("Please enter product name");
+        alert("Enter product name");
         return;
     }
 
     if(price <= 0){
-        alert("Please enter valid price");
+        alert("Enter valid price");
         return;
     }
 
     /* CALCULATIONS */
 
-    const stock = entry - exit;
+    let stock = entry - exit;
 
-    const total = stock * price;
+    let total = stock * price;
 
-    const cash = exit * price;
+    let cash = exit * price;
 
     /* OBJECT */
 
-    const item = {
+    let item = {
         product,
         unit,
         currency,
@@ -401,34 +436,38 @@ function addProduct(){
         cash
     };
 
-    /* ADD ARRAY */
+    /* ADD */
 
     inventory.push(item);
 
-    /* SAVE AUTO */
+    /* SAVE */
 
     localStorage.setItem(
         "inventory",
         JSON.stringify(inventory)
     );
 
-    /* UPDATE TABLE */
+    /* RENDER */
 
     renderTable();
 
     /* CLEAR FORM */
 
-    clearForm();
+    productField.value = "";
+    entryField.value = "";
+    exitField.value = "";
+    priceField.value = "";
 
 }
 
 /* =========================
-   RENDER TABLE
+   TABLE
 ========================= */
 
 function renderTable(){
 
-    const table = document.getElementById("table-body");
+    let table =
+    document.getElementById("table-body");
 
     table.innerHTML = "";
 
@@ -453,10 +492,10 @@ function renderTable(){
 }
 
 /* =========================
-   SAVE INVENTORY
+   SAVE BUTTON
 ========================= */
 
-function saveInventory(){
+window.saveInventory = function(){
 
     localStorage.setItem(
         "inventory",
@@ -468,23 +507,12 @@ function saveInventory(){
 }
 
 /* =========================
-   CLEAR FORM
-========================= */
-
-function clearForm(){
-
-    document.getElementById("product").value = "";
-    document.getElementById("entry").value = "";
-    document.getElementById("exit").value = "";
-    document.getElementById("price").value = "";
-
-}
-
-/* =========================
-   INITIAL LOAD
+   LOAD TABLE
 ========================= */
 
 renderTable();
+
+});
 
 </script>
 
