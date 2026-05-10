@@ -51,7 +51,7 @@ body{
 ========================= */
 
 .main-content{
-    max-width:1600px;
+    max-width:1700px;
     margin:auto;
     display:grid;
     grid-template-columns:380px 1fr;
@@ -158,7 +158,7 @@ button:hover{
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:1700px;
+    min-width:1800px;
 }
 
 thead{
@@ -249,9 +249,7 @@ footer{
 
 <div class="main-content">
 
-    <!-- =========================
-         SIDEBAR
-    ========================= -->
+    <!-- SIDEBAR -->
 
     <div class="sidebar">
 
@@ -263,9 +261,7 @@ footer{
 
             <div class="full">
 
-                <label>
-                    Product Name
-                </label>
+                <label>Product Name</label>
 
                 <input
                     type="text"
@@ -279,23 +275,13 @@ footer{
 
             <div>
 
-                <label>
-                    Unit
-                </label>
+                <label>Unit</label>
 
                 <select id="unit">
 
-                    <option value="Kg">
-                        Kg
-                    </option>
-
-                    <option value="Ton">
-                        Ton
-                    </option>
-
-                    <option value="Box">
-                        Box
-                    </option>
+                    <option value="Kg">Kg</option>
+                    <option value="Ton">Ton</option>
+                    <option value="Box">Box</option>
 
                 </select>
 
@@ -305,9 +291,7 @@ footer{
 
             <div>
 
-                <label>
-                    Entry
-                </label>
+                <label>Entry</label>
 
                 <input
                     type="number"
@@ -321,9 +305,7 @@ footer{
 
             <div>
 
-                <label>
-                    Exit
-                </label>
+                <label>Exit</label>
 
                 <input
                     type="number"
@@ -337,9 +319,7 @@ footer{
 
             <div>
 
-                <label>
-                    Buy Price
-                </label>
+                <label>Buy Price</label>
 
                 <input
                     type="number"
@@ -353,23 +333,13 @@ footer{
 
             <div>
 
-                <label>
-                    Buy Currency
-                </label>
+                <label>Buy Currency</label>
 
                 <select id="buyCurrency">
 
-                    <option value="USD">
-                        USD
-                    </option>
-
-                    <option value="EUR">
-                        EUR
-                    </option>
-
-                    <option value="BRL">
-                        BRL
-                    </option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="BRL">BRL</option>
 
                 </select>
 
@@ -379,9 +349,7 @@ footer{
 
             <div>
 
-                <label>
-                    Sell Price
-                </label>
+                <label>Sell Price</label>
 
                 <input
                     type="number"
@@ -395,29 +363,19 @@ footer{
 
             <div>
 
-                <label>
-                    Sell Currency
-                </label>
+                <label>Sell Currency</label>
 
                 <select id="sellCurrency">
 
-                    <option value="USD">
-                        USD
-                    </option>
-
-                    <option value="EUR">
-                        EUR
-                    </option>
-
-                    <option value="BRL">
-                        BRL
-                    </option>
+                    <option value="USD">USD</option>
+                    <option value="EUR">EUR</option>
+                    <option value="BRL">BRL</option>
 
                 </select>
 
             </div>
 
-            <!-- BUTTON ADD -->
+            <!-- ADD BUTTON -->
 
             <button
                 type="button"
@@ -427,7 +385,7 @@ footer{
                 Add Product
             </button>
 
-            <!-- BUTTON SAVE -->
+            <!-- SAVE BUTTON -->
 
             <button
                 type="button"
@@ -441,9 +399,7 @@ footer{
 
     </div>
 
-    <!-- =========================
-         TABLE
-    ========================= -->
+    <!-- TABLE -->
 
     <div class="table-container">
 
@@ -476,6 +432,8 @@ footer{
                     <th>Cash In Register</th>
 
                     <th>Remaining Stock Value</th>
+
+                    <th>Total Value</th>
 
                 </tr>
 
@@ -572,10 +530,17 @@ function renderTable(){
 
             <td class="cash">
             ${item.cash}
+            ${item.sellCurrency}
             </td>
 
             <td class="stock">
             ${item.remaining}
+            ${item.buyCurrency}
+            </td>
+
+            <td class="cash">
+            ${item.totalValue}
+            ${item.sellCurrency}
             </td>
 
         </tr>
@@ -613,15 +578,15 @@ document
         document.getElementById("exit").value
     ) || 0;
 
-    const buyPrice =
+    let buyPrice =
     parseFloat(
         document.getElementById("buyPrice").value
-    ) || 0;
+    ) || 1;
 
-    const sellPrice =
+    let sellPrice =
     parseFloat(
         document.getElementById("sellPrice").value
-    ) || 0;
+    ) || 1;
 
     const buyCurrency =
     document.getElementById("buyCurrency")
@@ -650,13 +615,6 @@ document
 
     }
 
-    if(buyPrice <= 0 || sellPrice <= 0){
-
-        alert("Enter valid prices");
-        return;
-
-    }
-
     /* CALCULATIONS */
 
     const stock =
@@ -676,6 +634,11 @@ document
     const remaining =
     (
         stock * buyPrice
+    ).toFixed(2);
+
+    const totalValue =
+    (
+        stock * sellPrice
     ).toFixed(2);
 
     /* OBJECT */
@@ -704,7 +667,9 @@ document
 
         cash: cash,
 
-        remaining: remaining
+        remaining: remaining,
+
+        totalValue: totalValue
 
     };
 
