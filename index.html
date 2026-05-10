@@ -5,41 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sollene Group | Inventory System</title>
 
-    <!-- FONTS -->
+    <!-- FONTES -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
 
     <style>
-        * {
+        /* RESET GLOBAL */
+        html, body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
+            width: 100%;
+            overflow-x: hidden;
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #fdfcf0;
             color: #1a1a1a;
         }
 
-        /* =======================
-           BANNER AJUSTADO
-        ======================== */
+        * {
+            box-sizing: border-box;
+        }
+
+        /* =========================
+           BANNER FULL WIDTH
+        ========================= */
         .banner-header {
-            width: 100%;
-            height: 85vh;
-            background: #fdfcf0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            width: 100vw;        /* pega tela inteira */
+            height: 80vh;        /* altura elegante */
+            margin: 0;
+            padding: 0;
             overflow: hidden;
-            border-bottom: 4px solid #b39359;
+            position: relative;
         }
 
         .banner-header img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* NÃO corta o texto da imagem */
+            object-fit: cover;   /* cobre tudo sem distorcer */
             object-position: center;
+            display: block;
         }
 
         /* NAV */
@@ -83,7 +85,6 @@
             color: #b39359;
             padding: 30px;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
         .sidebar h2 {
@@ -157,13 +158,17 @@
             .sidebar {
                 width: 100%;
             }
+
+            .banner-header {
+                height: 60vh;
+            }
         }
     </style>
 </head>
 
 <body>
 
-<!-- BANNER -->
+<!-- BANNER FULL WIDTH -->
 <header class="banner-header">
     <img src="sollene-group.jpg" alt="Sollene Group Banner">
 </header>
@@ -173,10 +178,10 @@
     <a href="index.html" class="btn-back">← Back</a>
 </nav>
 
-<!-- MAIN -->
+<!-- MAIN CONTENT -->
 <main class="main-content">
 
-    <!-- FORM -->
+    <!-- SIDEBAR -->
     <section class="sidebar">
         <h2>Register Product</h2>
 
@@ -191,14 +196,14 @@
         <input type="number" id="exit" placeholder="Exit">
 
         <select id="currency">
-            <option value="USD">$ USD</option>
-            <option value="EUR">€ EUR</option>
-            <option value="BRL">R$ BRL</option>
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="BRL">BRL (R$)</option>
         </select>
 
         <input type="number" id="price" placeholder="Unit Price">
 
-        <button class="btn-add" onclick="addProduct()">Add to Inventory</button>
+        <button class="btn-add" onclick="addProduct()">Add Product</button>
     </section>
 
     <!-- TABLE -->
@@ -234,6 +239,7 @@
 
 </main>
 
+<!-- FOOTER -->
 <footer>
     © 2026 SOLLENE GROUP | INVENTORY SYSTEM
 </footer>
@@ -270,4 +276,3 @@ function addProduct() {
 
 </body>
 </html>
-
