@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -118,6 +119,7 @@ button{
     background:#fff;
     border-radius:18px;
     overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
 table{
@@ -185,7 +187,7 @@ footer{
 <!-- BANNER -->
 
 <header class="banner-header">
-    <img src="sollene-group.jpg" alt="">
+    <img src="sollene-group.jpg" alt="Sollene Group">
 </header>
 
 <!-- MAIN -->
@@ -200,6 +202,8 @@ footer{
 
         <div class="form-grid">
 
+            <!-- PRODUCT -->
+
             <input
                 type="text"
                 id="product"
@@ -207,53 +211,66 @@ footer{
                 placeholder="Product Name"
             >
 
+            <!-- UNIT -->
+
             <select id="unit">
-                <option>Kg</option>
-                <option>Ton</option>
-                <option>Box</option>
+                <option value="Kg">Kg</option>
+                <option value="Ton">Ton</option>
+                <option value="Box">Box</option>
             </select>
 
+            <!-- CURRENCY -->
+
             <select id="currency">
-                <option>USD</option>
-                <option>EUR</option>
-                <option>BRL</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+                <option value="BRL">BRL</option>
             </select>
+
+            <!-- ENTRY -->
 
             <input
                 type="number"
                 id="entry"
                 placeholder="Entry"
+                value="0"
             >
+
+            <!-- EXIT -->
 
             <input
                 type="number"
                 id="exit"
                 placeholder="Exit"
+                value="0"
             >
+
+            <!-- PRICE -->
 
             <input
                 type="number"
                 id="price"
                 class="full"
                 placeholder="Price"
+                value="0"
             >
 
-            <!-- ADD -->
+            <!-- ADD BUTTON -->
 
             <button
                 type="button"
                 class="add-btn full"
-                onclick="addProduct()"
+                id="addButton"
             >
                 Add Product
             </button>
 
-            <!-- SAVE -->
+            <!-- SAVE BUTTON -->
 
             <button
                 type="button"
                 class="save-btn full"
-                onclick="saveInventory()"
+                id="saveButton"
             >
                 Save Inventory
             </button>
@@ -282,7 +299,9 @@ footer{
                 </tr>
             </thead>
 
-            <tbody id="table-body"></tbody>
+            <tbody id="table-body">
+
+            </tbody>
 
         </table>
 
@@ -302,63 +321,100 @@ footer{
 
 /* STORAGE */
 
-let inventory =
-JSON.parse(localStorage.getItem("inventory")) || [];
+let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
+
+/* TABLE */
+
+const tableBody = document.getElementById("table-body");
+
+/* RENDER TABLE */
+
+function renderTable(){
+
+    tableBody.innerHTML = "";
+
+    inventory.forEach(function(item){
+
+        const row = `
+        <tr>
+            <td>${item.product}</td>
+            <td>${item.unit}</td>
+            <td>${item.currency}</td>
+            <td class="entry">+${item.entry}</td>
+            <td class="exit">-${item.exit}</td>
+            <td>${item.stock}</td>
+            <td>${item.price}</td>
+            <td>${item.total}</td>
+            <td class="cash">${item.cash}</td>
+        </tr>
+        `;
+
+        tableBody.innerHTML += row;
+
+    });
+
+}
 
 /* ADD PRODUCT */
 
-function addProduct(){
+document.getElementById("addButton").addEventListener("click", function(){
 
-    let product =
+    const product =
     document.getElementById("product").value.trim();
 
-    let unit =
+    const unit =
     document.getElementById("unit").value;
 
-    let currency =
+    const currency =
     document.getElementById("currency").value;
 
-    let entry =
-    Number(document.getElementById("entry").value) || 0;
+    const entry =
+    parseFloat(document.getElementById("entry").value) || 0;
 
-    let exit =
-    Number(document.getElementById("exit").value) || 0;
+    const exit =
+    parseFloat(document.getElementById("exit").value) || 0;
 
-    let price =
-    Number(document.getElementById("price").value) || 0;
+    const price =
+    parseFloat(document.getElementById("price").value) || 0;
 
     /* VALIDATION */
 
     if(product === ""){
+
         alert("Enter product name");
+
         return;
     }
 
     if(price <= 0){
+
         alert("Enter valid price");
+
         return;
     }
 
     /* CALCULATIONS */
 
-    let stock = entry - exit;
+    const stock = entry - exit;
 
-    let total = stock * price;
+    const total = (stock * price).toFixed(2);
 
-    let cash = exit * price;
+    const cash = (exit * price).toFixed(2);
 
     /* OBJECT */
 
-    let item = {
-        product,
-        unit,
-        currency,
-        entry,
-        exit,
-        stock,
-        price,
-        total,
-        cash
+    const item = {
+
+        product: product,
+        unit: unit,
+        currency: currency,
+        entry: entry,
+        exit: exit,
+        stock: stock,
+        price: price.toFixed(2),
+        total: total,
+        cash: cash
+
     };
 
     /* PUSH */
@@ -372,51 +428,22 @@ function addProduct(){
         JSON.stringify(inventory)
     );
 
-    /* UPDATE */
+    /* RENDER */
 
     renderTable();
 
     /* CLEAR */
 
     document.getElementById("product").value = "";
-    document.getElementById("entry").value = "";
-    document.getElementById("exit").value = "";
-    document.getElementById("price").value = "";
+    document.getElementById("entry").value = "0";
+    document.getElementById("exit").value = "0";
+    document.getElementById("price").value = "0";
 
-}
-
-/* RENDER TABLE */
-
-function renderTable(){
-
-    let table =
-    document.getElementById("table-body");
-
-    table.innerHTML = "";
-
-    inventory.forEach(item => {
-
-        table.innerHTML += `
-        <tr>
-            <td>${item.product}</td>
-            <td>${item.unit}</td>
-            <td>${item.currency}</td>
-            <td class="entry">+${item.entry}</td>
-            <td class="exit">-${item.exit}</td>
-            <td>${item.stock}</td>
-            <td>${item.price.toFixed(2)}</td>
-            <td>${item.total.toFixed(2)}</td>
-            <td class="cash">${item.cash.toFixed(2)}</td>
-        </tr>
-        `;
-
-    });
-
-}
+});
 
 /* SAVE BUTTON */
 
-function saveInventory(){
+document.getElementById("saveButton").addEventListener("click", function(){
 
     localStorage.setItem(
         "inventory",
@@ -425,9 +452,9 @@ function saveInventory(){
 
     alert("Inventory saved successfully!");
 
-}
+});
 
-/* INITIAL LOAD */
+/* INITIAL */
 
 renderTable();
 
