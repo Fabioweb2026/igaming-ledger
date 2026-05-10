@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Stock Management System</title>
 
     <style>
+
         *{
             margin:0;
             padding:0;
@@ -15,12 +16,12 @@
 
         body{
             background:#0f172a;
-            padding:30px;
             color:white;
+            padding:30px;
         }
 
         .container{
-            max-width:1400px;
+            max-width:1450px;
             margin:auto;
         }
 
@@ -31,28 +32,35 @@
             font-size:38px;
         }
 
+        /* FORM */
+
         .form-box{
             background:#1e293b;
-            padding:20px;
             border-radius:14px;
+            padding:20px;
             margin-bottom:25px;
-            box-shadow:0 0 10px rgba(0,0,0,0.3);
         }
 
+        /* LEFT ALIGN */
         .form-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+            display:flex;
+            flex-wrap:wrap;
+            justify-content:flex-start;
             gap:12px;
         }
 
-        input, select{
-            padding:12px;
+        /* SMALLER BOXES */
+
+        .form-grid input,
+        .form-grid select{
+            width:170px;
+            padding:11px;
             border:none;
             border-radius:8px;
-            font-size:15px;
             outline:none;
             background:#334155;
             color:white;
+            font-size:14px;
         }
 
         input::placeholder{
@@ -63,17 +71,22 @@
             display:flex;
             gap:10px;
             margin-top:18px;
+            justify-content:flex-start;
             flex-wrap:wrap;
         }
 
         button{
-            padding:12px 18px;
+            padding:11px 18px;
             border:none;
             border-radius:8px;
             cursor:pointer;
             font-weight:bold;
-            transition:0.3s;
             color:white;
+            transition:0.3s;
+        }
+
+        button:hover{
+            transform:scale(1.03);
         }
 
         .add-btn{
@@ -88,17 +101,14 @@
             background:#dc2626;
         }
 
-        button:hover{
-            transform:scale(1.03);
-            opacity:0.9;
-        }
+        /* TABLE */
 
         table{
             width:100%;
             border-collapse:collapse;
-            background:#1e293b;
             overflow:hidden;
             border-radius:12px;
+            background:#1e293b;
         }
 
         th{
@@ -109,8 +119,8 @@
 
         td{
             padding:12px;
-            text-align:center;
             border-bottom:1px solid #334155;
+            text-align:center;
             font-size:14px;
         }
 
@@ -120,9 +130,11 @@
 
         .action-btn{
             padding:7px 12px;
-            margin:2px;
+            border:none;
             border-radius:6px;
-            font-size:13px;
+            color:white;
+            cursor:pointer;
+            margin:2px;
         }
 
         .edit{
@@ -132,6 +144,8 @@
         .remove{
             background:#dc2626;
         }
+
+        /* SUMMARY */
 
         .summary{
             margin-top:25px;
@@ -159,8 +173,14 @@
         }
 
         @media(max-width:768px){
+
             body{
                 padding:15px;
+            }
+
+            .form-grid input,
+            .form-grid select{
+                width:100%;
             }
 
             table{
@@ -170,7 +190,9 @@
             th,td{
                 padding:8px;
             }
+
         }
+
     </style>
 </head>
 
@@ -210,9 +232,19 @@
         </div>
 
         <div class="buttons">
-            <button class="add-btn" onclick="addProduct()">ADD PRODUCT</button>
-            <button class="update-btn" onclick="updateProduct()">UPDATE PRODUCT</button>
-            <button class="delete-btn" onclick="deleteSelected()">DELETE PRODUCT</button>
+
+            <button class="add-btn" onclick="addProduct()">
+                ADD PRODUCT
+            </button>
+
+            <button class="update-btn" onclick="updateProduct()">
+                UPDATE PRODUCT
+            </button>
+
+            <button class="delete-btn" onclick="deleteSelected()">
+                DELETE PRODUCT
+            </button>
+
         </div>
 
     </div>
@@ -220,6 +252,7 @@
     <table>
 
         <thead>
+
             <tr>
                 <th>Select</th>
                 <th>Product</th>
@@ -234,6 +267,7 @@
                 <th>Total Value</th>
                 <th>Actions</th>
             </tr>
+
         </thead>
 
         <tbody id="tableBody"></tbody>
@@ -334,13 +368,17 @@
                     <td>${product.currency} ${product.totalValue.toFixed(2)}</td>
 
                     <td>
-                        <button class="action-btn edit" onclick="editProduct(${index})">
-                            Edit
+
+                        <button class="action-btn edit"
+                        onclick="editProduct(${index})">
+                        Edit
                         </button>
 
-                        <button class="action-btn remove" onclick="removeProduct(${index})">
-                            Delete
+                        <button class="action-btn remove"
+                        onclick="removeProduct(${index})">
+                        Delete
                         </button>
+
                     </td>
 
                 </tr>
@@ -431,9 +469,12 @@
             if(checkbox.checked){
                 selectedIndexes.push(Number(checkbox.dataset.index));
             }
+
         });
 
-        products = products.filter((_,index)=> !selectedIndexes.includes(index));
+        products = products.filter((_,index)=>
+            !selectedIndexes.includes(index)
+        );
 
         renderTable();
     }
