@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,65 +18,65 @@
 body{
     background:#0f172a;
     color:white;
-    padding:15px;
+    padding:12px;
 }
 
 .container{
     width:100%;
-    max-width:1500px;
+    max-width:1450px;
     margin:auto;
 }
 
 h1{
     text-align:center;
-    margin-bottom:20px;
+    margin-bottom:18px;
     color:#38bdf8;
-    font-size:28px;
+    font-size:24px;
 }
 
 /* MAIN LAYOUT */
 
 .main-layout{
     display:flex;
-    gap:15px;
+    gap:12px;
     align-items:flex-start;
 }
 
-/* FORM BOX */
+/* LEFT FORM */
 
 .form-box{
-    width:300px;
-    min-width:300px;
+    width:240px;
+    min-width:240px;
     background:#1e293b;
-    padding:16px;
+    padding:14px;
     border-radius:12px;
     position:sticky;
-    top:15px;
+    top:12px;
 }
 
-/* FORM */
+/* FORM GRID */
 
 .form-grid{
     display:flex;
     flex-direction:column;
-    gap:10px;
+    gap:8px;
 }
 
 .form-grid label{
-    font-size:12px;
+    font-size:11px;
     color:#cbd5e1;
 }
 
 .form-grid input,
 .form-grid select{
     width:100%;
-    padding:10px;
+    padding:8px;
     border:none;
     border-radius:7px;
     background:#334155;
     color:white;
     outline:none;
-    font-size:13px;
+    font-size:12px;
 }
 
 input::placeholder{
@@ -85,21 +86,21 @@ input::placeholder{
 /* BUTTONS */
 
 .buttons{
-    margin-top:15px;
+    margin-top:12px;
     display:flex;
     flex-direction:column;
-    gap:8px;
+    gap:7px;
 }
 
 button{
     border:none;
     border-radius:7px;
-    padding:10px;
+    padding:8px;
     color:white;
     cursor:pointer;
     font-weight:bold;
     transition:0.3s;
-    font-size:13px;
+    font-size:12px;
 }
 
 button:hover{
@@ -129,28 +130,28 @@ button:hover{
 .table-container{
     width:100%;
     overflow-x:auto;
-    border-radius:12px;
+    border-radius:10px;
 }
 
 table{
     width:100%;
-    min-width:1250px;
+    min-width:980px;
     border-collapse:collapse;
     background:#1e293b;
 }
 
 th{
     background:#0284c7;
-    padding:10px 6px;
-    font-size:12px;
+    padding:8px 4px;
+    font-size:11px;
     white-space:nowrap;
 }
 
 td{
-    padding:10px 6px;
+    padding:8px 4px;
     border-bottom:1px solid #334155;
     text-align:center;
-    font-size:12px;
+    font-size:11px;
     white-space:nowrap;
 }
 
@@ -163,11 +164,11 @@ tr:hover{
 .action-btn{
     border:none;
     border-radius:5px;
-    padding:5px 8px;
+    padding:4px 7px;
     color:white;
     cursor:pointer;
-    margin:2px;
-    font-size:11px;
+    margin:1px;
+    font-size:10px;
 }
 
 .edit{
@@ -181,27 +182,27 @@ tr:hover{
 /* SUMMARY */
 
 .summary{
-    margin-top:20px;
+    margin-top:16px;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:12px;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:10px;
 }
 
 .card{
     background:#1e293b;
     border-radius:10px;
-    padding:18px;
+    padding:14px;
     text-align:center;
 }
 
 .card h2{
     color:#38bdf8;
-    margin-bottom:8px;
-    font-size:16px;
+    margin-bottom:6px;
+    font-size:14px;
 }
 
 .card p{
-    font-size:22px;
+    font-size:20px;
     font-weight:bold;
 }
 
@@ -217,6 +218,10 @@ tr:hover{
     width:100%;
     min-width:100%;
     position:relative;
+}
+
+table{
+    min-width:900px;
 }
 
 }
@@ -328,6 +333,8 @@ DELETE PRODUCT
 </table>
 
 </div>
+
+<!-- SUMMARY -->
 
 <div class="summary">
 
