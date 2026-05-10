@@ -25,19 +25,25 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* 1. BANNER CORRIGIDO: FULL WIDTH E PROPORCIONAL */
+        /* 1. BANNER AJUSTADO: LARGURA TOTAL + 9.5CM ALTURA + LOGO VISÍVEL */
         .banner-header {
             width: 100%;
-            margin-top: 0.5cm; /* Espaço abaixo do navegador */
-            padding: 0;
-            line-height: 0; /* Remove espaços fantasmas abaixo da imagem */
+            height: 9.5cm;             /* Altura exata solicitada */
+            margin-top: 0.5cm;         /* Distância do topo do navegador */
+            background-color: white;   /* Fundo branco para áreas não preenchidas */
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
         }
 
         .banner-header img {
-            width: 100%;       /* Ocupa da esquerda para a direita */
-            height: auto;      /* ALTURA AUTOMÁTICA: evita cortes e distorção */
+            width: 100%;
+            height: 100%;
+            /* 'contain' garante que a imagem e o logo apareçam inteiros sem cortes */
+            object-fit: contain; 
+            /* Alinha o conteúdo à esquerda para destacar o nome Sollene Group */
+            object-position: left center; 
             display: block;
-            box-shadow: 0 10px 30px rgba(179, 147, 89, 0.15);
         }
 
         /* 2. BOTÃO VOLTAR */
@@ -190,22 +196,23 @@
         @media (max-width: 900px) {
             .main-content { flex-direction: column; }
             .sidebar { width: 100%; }
+            .banner-header { height: auto; min-height: 150px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BANNER SEM CORTES E SEM DISTORÇÃO -->
+    <!-- HEADER COM O BANNER AJUSTADO -->
     <header class="banner-header">
-        <img src="sollene-group.jpg" alt="Sollene Group Premium Banner">
+        <img src="sollene-group.jpg" alt="Sollene Group Portfolio">
     </header>
 
-    <!-- NAVIGATION -->
+    <!-- NAVEGAÇÃO -->
     <nav class="nav-top">
         <a href="index.html" class="btn-back">← BACK TO PORTFOLIO</a>
     </nav>
 
-    <!-- MAIN SYSTEM -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
         <section class="sidebar">
             <h2>Register Product</h2>
@@ -275,5 +282,4 @@
 
 </body>
 </html>
-
 
