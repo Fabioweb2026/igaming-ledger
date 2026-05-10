@@ -1,88 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Premium Trade</title>
-    <link href="https://googleapis.com" rel="stylesheet">
-    
+    <title>Sollene Group | Inventory System</title>
     <style>
-        /* RESET TOTAL PARA O BANNER OCUPAR A TELA CORRETAMENTE */
+        /* RESET E ESTILO BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0; /* Cor creme igual ao fundo do banner */
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
         }
 
-        /* BOTÃO DE VOLTAR DISCRETO NO TOPO */
-        nav {
-            width: 100%;
-            padding: 20px;
-            text-align: left;
-            max-width: 1200px;
-        }
-
-        .btn-back {
-            text-decoration: none;
-            color: #b39359;
-            border: 1px solid #b39359;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
-        .btn-back:hover {
-            background: #b39359;
-            color: white;
-        }
-
-        /* CONTAINER DO BANNER */
+        /* 1. BANNER DO TOPO */
         .banner-container {
             width: 100%;
             max-width: 1200px;
-            padding: 0 20px 40px;
+            margin-bottom: 20px;
         }
 
-        .banner-img {
+        .banner-container img {
             width: 100%;
-            height: auto;
             display: block;
-            border-radius: 15px; /* Bordas arredondadas suaves */
-            box-shadow: 0 20px 50px rgba(179, 147, 89, 0.2); /* Sombra elegante */
+            border-bottom: 5px solid #b39359;
         }
 
-        footer {
-            margin-top: auto;
-            padding-bottom: 30px;
+        /* 2. LAYOUT DO SISTEMA (SIDEBAR + TABELA) */
+        .main-content {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        /* Lado esquerdo: Formulário */
+        .sidebar {
+            width: 300px;
+            background-color: #1a1a1a;
             color: #b39359;
-            font-size: 10px;
-            letter-spacing: 2px;
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .sidebar h2 { font-size: 18px; margin-bottom: 20px; text-transform: uppercase; }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 12px;
+            background-color: #b39359;
+            color: black;
+            border: none;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
             text-transform: uppercase;
         }
+
+        .btn-save {
+            width: 100%;
+            margin-top: 15px;
+            padding: 12px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* Lado direito: Tabela */
+        .table-container {
+            flex: 1;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        thead { background-color: #000; color: #b39359; }
+        th, td { padding: 15px; text-align: center; font-size: 14px; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+
+        .entry { color: #2ecc71; font-weight: bold; }
+        .exit { color: #e74c3c; font-weight: bold; }
+        .total-val { color: #b39359; font-weight: bold; }
+
     </style>
 </head>
 <body>
 
-    <nav>
-        <a href="index.html" class="btn-back">← BACK TO PORTFOLIO</a>
-    </nav>
+    <!-- O BANNER QUE VOCÊ QUERIA NO TOPO -->
+    <div class="banner-container">
+        <img src="sollene-group.jpg" alt="Sollene Group Banner">
+    </div>
 
-    <main class="banner-container">
-        <!-- O nome da imagem deve ser exatamente sollene-group.jpg no seu GitHub -->
-        <img src="sollene-group.jpg" alt="Sollene Group Global Trade" class="banner-img">
-    </main>
+    <!-- O SISTEMA QUE ESTAVA PERFEITO -->
+    <div class="main-content">
+        <div class="sidebar">
+            <h2>Register Product</h2>
+            <input type="text" placeholder="Product Name">
+            <select>
+                <option>Caixa</option>
+                <option>Unidade</option>
+            </select>
+            <input type="number" placeholder="Entry (Entrada)">
+            <input type="number" placeholder="Exit (Saída)">
+            <select>
+                <option>USD ($)</option>
+                <option>EUR (€)</option>
+            </select>
+            <input type="number" placeholder="Price (Preço Unit.)">
+            <button class="btn-add">Add Product</button>
+            <button class="btn-save">💾 Save Inventory</button>
+        </div>
 
-    <footer>
-        © 2026 SOLLENE GROUP ENTERPRISE
-    </footer>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>PRODUCT</th>
+                        <th>UNIT</th>
+                        <th>ENTRY</th>
+                        <th>EXIT</th>
+                        <th>STOCK</th>
+                        <th>CURRENCY</th>
+                        <th>PRICE</th>
+                        <th>TOTAL VALUE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>coffe</td>
+                        <td>Caixa</td>
+                        <td class="entry">+ 100</td>
+                        <td class="exit">- 23</td>
+                        <td>77</td>
+                        <td>USD</td>
+                        <td>$ 6.67</td>
+                        <td class="total-val">$ 513.59</td>
+                    </tr>
+                    <tr>
+                        <td>amendoim</td>
+                        <td>Caixa</td>
+                        <td class="entry">+ 300</td>
+                        <td class="exit">- 123</td>
+                        <td>177</td>
+                        <td>EUR</td>
+                        <td>€ 4.58</td>
+                        <td class="total-val">€ 810.66</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
 </body>
 </html>
