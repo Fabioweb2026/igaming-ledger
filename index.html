@@ -22,7 +22,7 @@ body{
 
 .container{
     width:100%;
-    max-width:1400px;
+    max-width:1500px;
     margin:auto;
 }
 
@@ -33,26 +33,38 @@ h1{
     font-size:34px;
 }
 
-/* FORM */
+/* MAIN LAYOUT */
+
+.main-layout{
+    display:flex;
+    gap:20px;
+    align-items:flex-start;
+}
+
+/* LEFT SIDE FORM */
 
 .form-box{
+    width:320px;
+    min-width:320px;
     background:#1e293b;
     padding:20px;
     border-radius:14px;
-    margin-bottom:25px;
+    position:sticky;
+    top:20px;
 }
+
+/* FORM */
 
 .form-grid{
     display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    justify-content:flex-start;
+    flex-direction:column;
+    gap:12px;
 }
 
 .form-grid input,
 .form-grid select{
-    width:150px;
-    padding:10px;
+    width:100%;
+    padding:11px;
     border:none;
     border-radius:8px;
     background:#334155;
@@ -65,17 +77,19 @@ input::placeholder{
     color:#cbd5e1;
 }
 
+/* BUTTONS */
+
 .buttons{
     margin-top:18px;
     display:flex;
-    flex-wrap:wrap;
+    flex-direction:column;
     gap:10px;
 }
 
 button{
     border:none;
     border-radius:8px;
-    padding:10px 18px;
+    padding:11px;
     color:white;
     cursor:pointer;
     font-weight:bold;
@@ -83,7 +97,7 @@ button{
 }
 
 button:hover{
-    transform:scale(1.03);
+    transform:scale(1.02);
 }
 
 .add-btn{
@@ -96,6 +110,12 @@ button:hover{
 
 .delete-btn{
     background:#dc2626;
+}
+
+/* RIGHT CONTENT */
+
+.content-area{
+    flex:1;
 }
 
 /* TABLE */
@@ -133,7 +153,7 @@ tr:hover{
 .action-btn{
     border:none;
     border-radius:6px;
-    padding:6px 10px;
+    padding:7px 10px;
     color:white;
     cursor:pointer;
     margin:2px;
@@ -176,15 +196,16 @@ tr:hover{
 
 /* MOBILE */
 
-@media(max-width:768px){
+@media(max-width:900px){
 
-    .form-grid input,
-    .form-grid select{
-        width:100%;
+    .main-layout{
+        flex-direction:column;
     }
 
-    h1{
-        font-size:26px;
+    .form-box{
+        width:100%;
+        min-width:100%;
+        position:relative;
     }
 
 }
@@ -198,6 +219,10 @@ tr:hover{
 
 <h1>STOCK MANAGEMENT SYSTEM</h1>
 
+<div class="main-layout">
+
+<!-- LEFT FORM -->
+
 <div class="form-box">
 
 <div class="form-grid">
@@ -205,10 +230,10 @@ tr:hover{
 <input type="text" id="productName" placeholder="Product Name">
 
 <select id="unit">
-    <option value="Kg">Kg</option>
-    <option value="Ton">Ton</option>
-    <option value="Package">Package</option>
-    <option value="Box">Box</option>
+<option value="Kg">Kg</option>
+<option value="Ton">Ton</option>
+<option value="Package">Package</option>
+<option value="Box">Box</option>
 </select>
 
 <input type="number" id="entry" placeholder="Entry">
@@ -218,9 +243,9 @@ tr:hover{
 <input type="number" id="price" placeholder="Buy Price">
 
 <select id="currency">
-    <option value="EUR">EUR</option>
-    <option value="USD">USD</option>
-    <option value="BRL">BRL</option>
+<option value="EUR">EUR</option>
+<option value="USD">USD</option>
+<option value="BRL">BRL</option>
 </select>
 
 <input type="number" id="sellPrice" placeholder="Sell Price">
@@ -244,6 +269,10 @@ DELETE PRODUCT
 </div>
 
 </div>
+
+<!-- RIGHT CONTENT -->
+
+<div class="content-area">
 
 <div class="table-container">
 
@@ -289,6 +318,10 @@ DELETE PRODUCT
 <div class="card">
 <h2>Total Inventory Value</h2>
 <p id="totalValue">0</p>
+</div>
+
+</div>
+
 </div>
 
 </div>
