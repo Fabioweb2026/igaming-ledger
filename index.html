@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,24 +12,23 @@
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0; /* Cor creme para harmonizar */
+            background-color: #fdfcf0; /* Cor creme harmonizada */
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* 1. BANNER REDUZIDO E CENTRALIZADO */
+        /* 1. BANNER CENTRALIZADO E REDUZIDO */
         .banner-header {
             width: 100%;
             display: flex;
             justify-content: center;
-            padding: 30px 20px;
-            background-color: #fdfcf0;
+            padding: 30px 20px 20px;
         }
 
         .banner-header img {
-            width: 55%; /* Tamanho reduzido para não ocupar tudo */
+            width: 55%; /* Tamanho equilibrado */
             max-width: 750px;
             height: auto;
             border-radius: 15px;
@@ -41,7 +40,7 @@
         .nav-top {
             width: 100%;
             max-width: 1200px;
-            padding: 0 20px;
+            padding: 0 20px 20px;
             text-align: left;
         }
 
@@ -59,16 +58,16 @@
 
         .btn-back:hover { background: #b39359; color: white; }
 
-        /* 3. SISTEMA DE ESTOQUE (LAYOUT ORIGINAL) */
+        /* 3. SISTEMA DE ESTOQUE */
         .main-content {
             display: flex;
             width: 100%;
             max-width: 1200px;
             gap: 25px;
-            padding: 20px 20px 60px;
+            padding: 0 20px 60px;
+            flex: 1;
         }
 
-        /* Lado esquerdo: Registro */
         .sidebar {
             width: 320px;
             background-color: #1a1a1a;
@@ -84,7 +83,6 @@
             font-size: 18px; 
             margin-bottom: 20px; 
             text-align: center;
-            letter-spacing: 1px;
         }
 
         input, select {
@@ -106,14 +104,11 @@
             border-radius: 8px;
             cursor: pointer;
             text-transform: uppercase;
-            transition: 0.3s;
         }
-
-        .btn-add:hover { background: #d4af37; transform: translateY(-2px); }
 
         .btn-save {
             width: 100%;
-            margin-top: 15px;
+            margin-top: 10px;
             padding: 12px;
             background-color: #27ae60;
             color: white;
@@ -123,7 +118,6 @@
             cursor: pointer;
         }
 
-        /* Lado direito: Tabela */
         .table-container {
             flex: 1;
             background: white;
@@ -135,14 +129,39 @@
 
         table { width: 100%; border-collapse: collapse; }
         thead { background-color: #000; color: #b39359; }
-        th { padding: 18px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+        th { padding: 18px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
         td { padding: 18px; text-align: center; font-size: 14px; border-bottom: 1px solid #f2f2f2; }
         
         .entry { color: #27ae60; font-weight: bold; }
         .exit { color: #e74c3c; font-weight: bold; }
         .total-val { color: #b39359; font-weight: bold; }
 
-        /* Responsividade */
+        /* 4. RODAPÉ COM ENDEREÇO HARMONIZADO */
+        footer {
+            width: 100%;
+            padding: 60px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+            border-top: 3px solid #b39359;
+        }
+
+        .footer-address {
+            color: #b39359;
+            font-size: 11px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .copyright {
+            color: #555;
+            font-size: 10px;
+            margin-top: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         @media (max-width: 900px) {
             .main-content { flex-direction: column; }
             .sidebar { width: 100%; }
@@ -152,19 +171,18 @@
 </head>
 <body>
 
-    <!-- 1. BANNER CENTRALIZADO E REDUZIDO -->
+    <!-- BANNER -->
     <header class="banner-header">
         <img src="sollene-group.jpg" alt="Sollene Group Premium">
     </header>
 
-    <!-- 2. NAVEGAÇÃO -->
+    <!-- NAVEGAÇÃO -->
     <nav class="nav-top">
         <a href="index.html" class="btn-back">← Back to Portfolio</a>
     </nav>
 
-    <!-- 3. SISTEMA DE ESTOQUE -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content">
-        <!-- LADO ESQUERDO: REGISTRO -->
         <section class="sidebar">
             <h2>Register Product</h2>
             <input type="text" placeholder="Product Name">
@@ -183,7 +201,6 @@
             <button class="btn-save">💾 Save Inventory</button>
         </section>
 
-        <!-- LADO DIREITO: TABELA -->
         <section class="table-container">
             <table>
                 <thead>
@@ -224,8 +241,13 @@
         </section>
     </main>
 
-    <footer style="padding-bottom: 40px; color: #b39359; font-size: 10px; letter-spacing: 2px;">
-        © 2026 SOLLENE GROUP ENTERPRISE
+    <!-- RODAPÉ AJUSTADO -->
+    <footer>
+        <div class="footer-address">
+            <p>SOLLENE GROUP ENTERPRISE • MARINA BUSINESS AVENUE, VALLETTA, MALTA</p>
+            <p>TEL: +356 2134 5678 • EMAIL: CONTACT@SOLLENE-GROUP.MT</p>
+        </div>
+        <p class="copyright">© 2026 SOLLENE GROUP ENTERPRISE | PRESTIGE IN TECHNOLOGY & TRADE</p>
     </footer>
 
 </body>
