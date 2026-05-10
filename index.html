@@ -23,9 +23,6 @@ html, body {
     height: 140px;
     margin-top: 20px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     border-bottom: 3px solid #b39359;
 }
 
@@ -57,29 +54,35 @@ html, body {
     margin-bottom: 20px;
 }
 
-/* 🔥 PADRONIZAÇÃO DOS CAMPOS (CORREÇÃO PRINCIPAL) */
+/* CAMPOS IGUAIS */
 .sidebar input,
 .sidebar select {
     width: 100%;
-    height: 44px;              /* MESMA ALTURA FIXA */
+    height: 44px;
     margin-bottom: 12px;
     border-radius: 10px;
     border: none;
-    padding: 0 12px;
-    font-size: 14px;
-    outline: none;
-    box-sizing: border-box;
+    padding: 0 10px;
 }
 
-/* BOTÃO PADRÃO */
-.sidebar button {
+/* BOTÕES */
+button {
     width: 100%;
     height: 46px;
+    margin-bottom: 10px;
     border-radius: 10px;
     border: none;
-    background: #b39359;
     font-weight: bold;
     cursor: pointer;
+}
+
+.add-btn {
+    background: #b39359;
+}
+
+.save-btn {
+    background: #27ae60;
+    color: white;
 }
 
 /* TABLE */
@@ -87,7 +90,6 @@ html, body {
     background: white;
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 table {
@@ -119,7 +121,6 @@ footer {
     margin-top: 40px;
 }
 
-/* RESPONSIVO */
 @media (max-width: 900px) {
     .main-content {
         grid-template-columns: 1fr;
@@ -161,7 +162,8 @@ footer {
 
     <input id="price" type="number" placeholder="Price">
 
-    <button onclick="add()">Add Product</button>
+    <button class="add-btn" onclick="add()">Add Product</button>
+    <button class="save-btn" onclick="save()">Save Inventory</button>
 </div>
 
 <!-- TABLE -->
@@ -180,18 +182,7 @@ footer {
 </tr>
 </thead>
 
-<tbody id="table">
-<tr>
-<td>Example</td>
-<td>Case</td>
-<td class="entry">120</td>
-<td class="exit">45</td>
-<td>75</td>
-<td>USD</td>
-<td>10</td>
-<td class="total">750</td>
-</tr>
-</tbody>
+<tbody id="table"></tbody>
 
 </table>
 </div>
@@ -203,29 +194,58 @@ footer {
 </footer>
 
 <script>
-function add(){
-let name=document.getElementById('name').value;
-let unit=document.getElementById('unit').value;
-let entry=+document.getElementById('entry').value;
-let exit=+document.getElementById('exit').value;
-let currency=document.getElementById('currency').value;
-let price=+document.getElementById('price').value;
 
-let stock=entry-exit;
-let total=stock*price;
+let inventory = JSON.parse(localStorage.getItem("inventory")) || [];
 
-document.getElementById('table').innerHTML+=`
-<tr>
-<td>${name}</td>
-<td>${unit}</td>
-<td class="entry">+${entry}</td>
-<td class="exit">-${exit}</td>
-<td>${stock}</td>
-<td>${currency}</td>
-<td>${price}</td>
-<td class="total">${total}</td>
-</tr>`;
+/* CARREGAR AO ABRIR */
+window.onload = function () {
+    render();
 }
+
+/* ADICIONAR PRODUTO */
+function add(){
+    let item = {
+        name: document.getElementById('name').value,
+        unit: document.getElementById('unit').value,
+        entry: +document.getElementById('entry').value,
+        exit: +document.getElementById('exit').value,
+        currency: document.getElementById('currency').value,
+        price: +document.getElementById('price').value
+    };
+
+    inventory.push(item);
+    render();
+}
+
+/* SALVAR NO NAVEGADOR */
+function save(){
+    localStorage.setItem("inventory", JSON.stringify(inventory));
+    alert("Inventory saved successfully!");
+}
+
+/* RENDERIZAR TABELA */
+function render(){
+    let table = document.getElementById('table');
+    table.innerHTML = "";
+
+    inventory.forEach(item => {
+        let stock = item.entry - item.exit;
+        let total = stock * item.price;
+
+        table.innerHTML += `
+        <tr>
+            <td>${item.name}</td>
+            <td>${item.unit}</td>
+            <td class="entry">+${item.entry}</td>
+            <td class="exit">-${item.exit}</td>
+            <td>${stock}</td>
+            <td>${item.currency}</td>
+            <td>${item.price}</td>
+            <td class="total">${total}</td>
+        </tr>`;
+    });
+}
+
 </script>
 
 </body>
