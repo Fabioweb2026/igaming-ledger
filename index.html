@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,40 +17,40 @@
 body{
     background:#0f172a;
     color:white;
-    padding:12px;
+    padding:10px;
 }
 
 .container{
     width:100%;
-    max-width:1450px;
+    max-width:1400px;
     margin:auto;
 }
 
 h1{
     text-align:center;
-    margin-bottom:18px;
+    margin-bottom:16px;
     color:#38bdf8;
-    font-size:24px;
+    font-size:22px;
 }
 
 /* MAIN LAYOUT */
 
 .main-layout{
     display:flex;
-    gap:12px;
+    gap:10px;
     align-items:flex-start;
 }
 
 /* LEFT FORM */
 
 .form-box{
-    width:240px;
-    min-width:240px;
+    width:210px;
+    min-width:210px;
     background:#1e293b;
-    padding:14px;
+    padding:12px;
     border-radius:12px;
     position:sticky;
-    top:12px;
+    top:10px;
 }
 
 /* FORM GRID */
@@ -59,24 +58,24 @@ h1{
 .form-grid{
     display:flex;
     flex-direction:column;
-    gap:8px;
+    gap:7px;
 }
 
 .form-grid label{
-    font-size:11px;
+    font-size:10px;
     color:#cbd5e1;
 }
 
 .form-grid input,
 .form-grid select{
     width:100%;
-    padding:8px;
+    padding:7px;
     border:none;
-    border-radius:7px;
+    border-radius:6px;
     background:#334155;
     color:white;
     outline:none;
-    font-size:12px;
+    font-size:11px;
 }
 
 input::placeholder{
@@ -86,21 +85,21 @@ input::placeholder{
 /* BUTTONS */
 
 .buttons{
-    margin-top:12px;
+    margin-top:10px;
     display:flex;
     flex-direction:column;
-    gap:7px;
+    gap:6px;
 }
 
 button{
     border:none;
-    border-radius:7px;
-    padding:8px;
+    border-radius:6px;
+    padding:7px;
     color:white;
     cursor:pointer;
     font-weight:bold;
     transition:0.3s;
-    font-size:12px;
+    font-size:11px;
 }
 
 button:hover{
@@ -135,23 +134,23 @@ button:hover{
 
 table{
     width:100%;
-    min-width:980px;
+    min-width:920px;
     border-collapse:collapse;
     background:#1e293b;
 }
 
 th{
     background:#0284c7;
-    padding:8px 4px;
-    font-size:11px;
+    padding:7px 4px;
+    font-size:10px;
     white-space:nowrap;
 }
 
 td{
-    padding:8px 4px;
+    padding:7px 4px;
     border-bottom:1px solid #334155;
     text-align:center;
-    font-size:11px;
+    font-size:10px;
     white-space:nowrap;
 }
 
@@ -163,12 +162,12 @@ tr:hover{
 
 .action-btn{
     border:none;
-    border-radius:5px;
-    padding:4px 7px;
+    border-radius:4px;
+    padding:3px 6px;
     color:white;
     cursor:pointer;
     margin:1px;
-    font-size:10px;
+    font-size:9px;
 }
 
 .edit{
@@ -182,27 +181,27 @@ tr:hover{
 /* SUMMARY */
 
 .summary{
-    margin-top:16px;
+    margin-top:14px;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:10px;
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:8px;
 }
 
 .card{
     background:#1e293b;
     border-radius:10px;
-    padding:14px;
+    padding:12px;
     text-align:center;
 }
 
 .card h2{
     color:#38bdf8;
-    margin-bottom:6px;
-    font-size:14px;
+    margin-bottom:5px;
+    font-size:12px;
 }
 
 .card p{
-    font-size:20px;
+    font-size:18px;
     font-weight:bold;
 }
 
@@ -221,7 +220,7 @@ tr:hover{
 }
 
 table{
-    min-width:900px;
+    min-width:850px;
 }
 
 }
@@ -255,19 +254,19 @@ table{
 </select>
 
 <label>Product Entry</label>
-<input type="number" id="entry" placeholder="Entry Quantity">
+<input type="number" id="entry" placeholder="Entry">
 
 <label>Product Exit</label>
-<input type="number" id="exit" placeholder="Exit Quantity">
+<input type="number" id="exit" placeholder="Exit">
 
 <label>Buy Price</label>
 <input type="number" id="price" placeholder="Buy Price">
 
 <label>Purchased In</label>
 <select id="currency">
-<option value="BRL">Real (BRL)</option>
-<option value="USD">Dollar (USD)</option>
-<option value="EUR">Euro (EUR)</option>
+<option value="BRL">BRL</option>
+<option value="USD">USD</option>
+<option value="EUR">EUR</option>
 </select>
 
 <label>Sold Price</label>
@@ -275,9 +274,9 @@ table{
 
 <label>Sold In</label>
 <select id="sellCurrency">
-<option value="BRL">Real (BRL)</option>
-<option value="USD">Dollar (USD)</option>
-<option value="EUR">Euro (EUR)</option>
+<option value="BRL">BRL</option>
+<option value="USD">USD</option>
+<option value="EUR">EUR</option>
 </select>
 
 </div>
@@ -317,12 +316,12 @@ DELETE PRODUCT
 <th>Entry</th>
 <th>Exit</th>
 <th>Stock</th>
-<th>Buy Price</th>
-<th>Purchased In</th>
-<th>Sold Price</th>
-<th>Sold In</th>
+<th>Buy</th>
+<th>Buy Curr.</th>
+<th>Sold</th>
+<th>Sold Curr.</th>
 <th>Profit</th>
-<th>Total Value</th>
+<th>Total</th>
 <th>Actions</th>
 </tr>
 
@@ -349,7 +348,7 @@ DELETE PRODUCT
 </div>
 
 <div class="card">
-<h2>Total Inventory Value</h2>
+<h2>Total Value</h2>
 <p id="totalValue">0</p>
 </div>
 
@@ -571,3 +570,4 @@ renderTable();
 
 </body>
 </html>
+
