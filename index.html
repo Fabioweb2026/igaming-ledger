@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Global Trade</title>
+    <title>Sollene Group | Premium Trade</title>
     <link href="https://googleapis.com" rel="stylesheet">
     
     <style>
@@ -12,7 +12,7 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0; /* Creme suave */
+            background-color: #fdfcf0; /* Cor creme que combina com o banner */
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
@@ -23,28 +23,41 @@
 
         @keyframes fadeIn { to { opacity: 1; } }
 
-        /* NAVEGAÇÃO */
-        nav { padding: 40px; width: 100%; text-align: center; }
+        /* NAVEGAÇÃO SUPERIOR */
+        nav { 
+            padding: 20px; 
+            width: 100%; 
+            text-align: left; /* Botão no canto para não atrapalhar o banner */
+            max-width: 1200px;
+        }
+        
         .btn-back {
-            text-decoration: none; color: #b39359; border: 1px solid #b39359;
-            padding: 10px 25px; border-radius: 50px; font-weight: 600;
-            transition: 0.3s; font-size: 12px;
+            text-decoration: none; 
+            color: #b39359; 
+            background: rgba(255,255,255,0.8);
+            border: 1px solid #b39359;
+            padding: 8px 20px; 
+            border-radius: 50px; 
+            font-weight: 600;
+            transition: 0.3s; 
+            font-size: 11px;
+            text-transform: uppercase;
         }
         .btn-back:hover { background: #b39359; color: white; }
 
-        /* BANNER PRINCIPAL */
+        /* BANNER PRINCIPAL - O FOCO DA PÁGINA */
         .main-container {
             width: 100%;
             max-width: 1200px;
             padding: 0 20px;
-            margin-bottom: 60px;
+            margin-top: 10px;
         }
 
         .banner-img {
             width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(179, 147, 89, 0.2);
-            border: 5px solid white;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(179, 147, 89, 0.2);
             display: block;
         }
 
@@ -52,7 +65,7 @@
         .info-section {
             max-width: 800px;
             text-align: center;
-            padding: 20px;
+            padding: 60px 20px;
         }
 
         .info-section h1 {
@@ -69,7 +82,7 @@
             margin-bottom: 40px;
         }
 
-        /* BOX DE CONTATO */
+        /* CARD DE CONTATO */
         .contact-card {
             background: white;
             padding: 40px;
@@ -78,30 +91,37 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        .contact-card h3 { color: #b39359; margin-bottom: 10px; }
+        .contact-card h3 { color: #b39359; margin-bottom: 10px; font-size: 24px; }
+        .contact-card p { font-weight: 600; color: #4a4a4a; margin: 5px 0; }
 
-        footer { padding: 80px 20px; font-size: 11px; color: #999; letter-spacing: 2px; }
+        footer { 
+            padding: 80px 20px; 
+            font-size: 11px; 
+            color: #999; 
+            letter-spacing: 2px; 
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <a href="index.html" class="btn-back">← BACK TO PORTFOLIO</a>
+        <a href="index.html" class="btn-back">← VOLTAR AO PORTFÓLIO</a>
     </nav>
 
     <main class="main-container">
-        <!-- O NOME DA IMAGEM ABAIXO FOI AJUSTADO PARA O QUE VOCÊ ENVIOU -->
-        <img src="sollene-group.jpg" alt="Sollene Group Banner" class="banner-img">
+        <!-- O nome da imagem agora está 100% correto -->
+        <img src="sollene-group.jpg" alt="Sollene Group Portfolio" class="banner-img">
     </main>
 
     <section class="info-section">
         <h1>Global Trade Excellence</h1>
-        <p>Connecting premium markets through trusted partnerships. Specializing in international import and export of high-end products.</p>
+        <p>Connecting premium international markets through trusted partnerships. Specialist in logistics and global trade of high-end products.</p>
 
         <div class="contact-card">
             <h3>Sollene Group Enterprise</h3>
-            <p>Marina Business Avenue, Valletta, Malta</p>
-            <p style="margin-top: 10px; font-weight: 600;">contact@sollene-group.mt</p>
+            <p>📍 Marina Business Avenue, Valletta, Malta</p>
+            <p>📧 contact@sollene-group.mt</p>
         </div>
     </section>
 
