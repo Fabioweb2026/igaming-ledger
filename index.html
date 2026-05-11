@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,177 +8,51 @@
     <style>
         /* RESET & BASE STYLE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0;
-            color: #1a1a1a;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fdfcf0; color: #1a1a1a; display: flex; flex-direction: column; align-items: center; }
 
         /* BANNER */
-        .banner-header {
-            width: 100%;
-            height: 9.5cm;
-            margin-top: 0.5cm;
-            background-color: #fdfcf0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-        }
-
-        .banner-header img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; 
-            object-position: center; 
-            display: block;
-        }
+        .banner-header { width: 100%; height: 9.5cm; margin-top: 0.5cm; background-color: #fdfcf0; overflow: hidden; display: flex; justify-content: center; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
+        .banner-header img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
 
         /* NAVEGAÇÃO */
-        .nav-top {
-            width: 100%;
-            max-width: 1200px;
-            padding: 30px 20px 20px;
-            text-align: left;
-        }
-
-        .btn-back {
-            text-decoration: none;
-            color: #b39359;
-            border: 1px solid #b39359;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            transition: 0.3s;
-        }
-
+        .nav-top { width: 100%; max-width: 1200px; padding: 30px 20px 20px; text-align: left; }
+        .btn-back { text-decoration: none; color: #b39359; border: 1px solid #b39359; padding: 8px 20px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
         .btn-back:hover { background: #b39359; color: white; }
 
         /* CONTEÚDO PRINCIPAL */
-        .main-content {
-            display: flex;
-            width: 100%;
-            max-width: 1300px;
-            gap: 25px;
-            padding: 0 20px 60px;
-            flex: 1;
-        }
+        .main-content { display: flex; width: 100%; max-width: 1300px; gap: 25px; padding: 0 20px 60px; flex: 1; }
 
-        /* SIDEBAR AJUSTADA COM BOTÃO DELETE GERAL */
-        .sidebar {
-            width: 320px;
-            background-color: #1a1a1a;
-            color: #b39359;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            height: fit-content;
-            border: 1px solid rgba(179, 147, 89, 0.3);
-        }
-
+        /* SIDEBAR */
+        .sidebar { width: 320px; background-color: #1a1a1a; color: #b39359; padding: 30px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); height: fit-content; border: 1px solid rgba(179, 147, 89, 0.3); }
         .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 25px; text-align: center; }
+        input, select { width: 100%; padding: 14px; margin-bottom: 18px; border-radius: 10px; border: 1px solid #333; background: #fff; color: #1a1a1a; font-size: 14px; }
 
-        input, select {
-            width: 100%;
-            padding: 14px;
-            margin-bottom: 18px;
-            border-radius: 10px;
-            border: 1px solid #333;
-            background: #fff;
-            color: #1a1a1a;
-            font-size: 14px;
-        }
-
-        .btn-add {
-            width: 100%;
-            padding: 16px;
-            background-color: #b39359;
-            color: #1a1a1a;
-            border: none;
-            font-weight: 800;
-            border-radius: 10px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: 0.3s;
-            margin-bottom: 10px;
-        }
-
+        .btn-add { width: 100%; padding: 16px; background-color: #b39359; color: #1a1a1a; border: none; font-weight: 800; border-radius: 10px; cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-bottom: 10px; }
         .btn-add:hover { background-color: #cbb07c; transform: translateY(-2px); }
 
-        .btn-clear {
-            width: 100%;
-            padding: 10px;
-            background-color: transparent;
-            color: #e74c3c;
-            border: 1px solid #e74c3c;
-            font-weight: 700;
-            border-radius: 10px;
-            cursor: pointer;
-            text-transform: uppercase;
-            font-size: 11px;
-            transition: 0.3s;
-        }
-
+        .btn-clear { width: 100%; padding: 10px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 10px; cursor: pointer; text-transform: uppercase; font-size: 11px; transition: 0.3s; }
         .btn-clear:hover { background-color: #e74c3c; color: #fff; }
 
-        /* TABELA COM BOTÃO DELETE POR LINHA */
-        .table-container {
-            flex: 1;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            border: 1px solid rgba(179, 147, 89, 0.2);
-        }
-
+        /* TABELA */
+        .table-container { flex: 1; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2); }
         table { width: 100%; border-collapse: collapse; }
         thead { background-color: #000; color: #b39359; }
         th, td { padding: 15px; text-align: center; font-size: 13px; border-bottom: 1px solid #f2f2f2; }
         
-        /* Estilo do Botão Delete na Tabela */
-        .btn-del-row {
-            background-color: #ffeded;
-            color: #e74c3c;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 10px;
-            transition: 0.3s;
-        }
-
+        .btn-del-row { background-color: #ffeded; color: #e74c3c; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 10px; transition: 0.3s; }
         .btn-del-row:hover { background-color: #e74c3c; color: #fff; }
 
         .total-val { color: #b39359; font-weight: bold; }
-
-        footer {
-            width: 100%;
-            padding: 40px 20px;
-            background-color: #1a1a1a;
-            text-align: center;
-            border-top: 3px solid #b39359;
-            margin-top: auto;
-        }
-
+        footer { width: 100%; padding: 40px 20px; background-color: #1a1a1a; text-align: center; border-top: 3px solid #b39359; margin-top: auto; }
         .footer-address { color: #b39359; font-size: 11px; text-transform: uppercase; }
 
-        @media (max-width: 1000px) {
-            .main-content { flex-direction: column; }
-            .sidebar { width: 100%; }
-        }
+        @media (max-width: 1000px) { .main-content { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
 <body>
 
     <header class="banner-header">
-        <img src="imagem.Sollene Group.png" alt="Sollene Group New Premium Logo">
+        <img src="imagem.Sollene Group.png" alt="Sollene Group Logo">
     </header>
 
     <nav class="nav-top">
@@ -189,15 +62,15 @@
     <main class="main-content">
         <section class="sidebar">
             <h2>Register Product</h2>
-            <input type="text" placeholder="Product Name">
-            <select><option>Box</option><option>Unit</option></select>
-            <input type="number" placeholder="Entry">
-            <input type="number" placeholder="Exit">
-            <select><option>USD ($)</option><option>EUR (€)</option></select>
-            <input type="number" placeholder="Unit Price">
+            <input type="text" id="pName" placeholder="Product Name">
+            <select id="pUnit"><option>Box</option><option>Unit</option></select>
+            <input type="number" id="pEntry" placeholder="Entry">
+            <input type="number" id="pExit" placeholder="Exit">
+            <select id="pCurrency"><option value="USD">USD ($)</option><option value="EUR">EUR (€)</option></select>
+            <input type="number" id="pPrice" placeholder="Unit Price">
             
-            <button class="btn-add">Add Product</button>
-            <button class="btn-clear">🗑️ Clear All</button>
+            <button class="btn-add" onclick="addProduct()">Add Product</button>
+            <button class="btn-clear" onclick="clearAll()">🗑️ Clear All</button>
         </section>
 
         <section class="table-container">
@@ -215,28 +88,73 @@
                         <th>ACTION</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td>Coffee</td>
-                        <td>Box</td>
-                        <td>123</td>
-                        <td>56</td>
-                        <td>67</td>
-                        <td>$ 6.78</td>
-                        <td>$ 379.68</td>
-                        <td class="total-val">$ -454.26</td>
-                        <td><button class="btn-del-row">Delete</button></td>
-                    </tr>
+                <tbody id="inventoryBody">
+                    <!-- Linhas serão adicionadas aqui -->
                 </tbody>
             </table>
         </section>
     </main>
 
     <footer>
-        <div class="footer-address">
-            <p>SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
-        </div>
+        <div class="footer-address"><p>SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p></div>
     </footer>
+
+    <script>
+        function addProduct() {
+            // Pegar valores dos campos
+            const name = document.getElementById('pName').value;
+            const unit = document.getElementById('pUnit').value;
+            const entry = Number(document.getElementById('pEntry').value);
+            const exit = Number(document.getElementById('pExit').value);
+            const currency = document.getElementById('pCurrency').value;
+            const price = Number(document.getElementById('pPrice').value);
+
+            if (!name || entry === 0 || price === 0) {
+                alert("Please fill in the product name, entry and price.");
+                return;
+            }
+
+            // Cálculos
+            const stock = entry - exit;
+            const revenue = exit * price;
+            const cash = revenue - (entry * price);
+            const symbol = currency === "USD" ? "$" : "€";
+
+            // Criar a linha na tabela
+            const table = document.getElementById('inventoryBody');
+            const row = table.insertRow();
+
+            row.innerHTML = `
+                <td>${name}</td>
+                <td>${unit}</td>
+                <td>${entry}</td>
+                <td>${exit}</td>
+                <td>${stock}</td>
+                <td>${symbol} ${price.toFixed(2)}</td>
+                <td>${symbol} ${revenue.toFixed(2)}</td>
+                <td class="total-val">${symbol} ${cash.toFixed(2)}</td>
+                <td><button class="btn-del-row" onclick="deleteRow(this)">Delete</button></td>
+            `;
+
+            // Limpar campos após adicionar
+            document.getElementById('pName').value = "";
+            document.getElementById('pEntry').value = "";
+            document.getElementById('pExit').value = "";
+            document.getElementById('pPrice').value = "";
+        }
+
+        function deleteRow(btn) {
+            const row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+
+        function clearAll() {
+            if (confirm("Are you sure you want to clear the entire inventory?")) {
+                document.getElementById('inventoryBody').innerHTML = "";
+            }
+        }
+    </script>
 
 </body>
 </html>
+
