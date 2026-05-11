@@ -18,33 +18,30 @@
             background: #fdfaf6;
             color: #1a1a1a;
             padding-bottom: 60px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
-        /* HEADER LOGO */
+        /* ===== LOGO BANNER FULL WIDTH ===== */
         .header-container {
             width: 100%;
-            max-width: 1200px;
-            padding: 40px 20px;
-            text-align: center;
+            height: 160px; /* altura do banner */
+            overflow: hidden;
         }
 
         .logo-main {
-            max-width: 320px;
-            height: auto;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* faz ocupar toda área sem distorcer */
             display: block;
-            margin: 0 auto;
         }
 
-        /* LAYOUT PRINCIPAL */
+        /* ===== LAYOUT ===== */
         .main-grid {
             display: grid;
             grid-template-columns: 360px 1fr;
             gap: 30px;
             width: 100%;
             max-width: 1200px;
+            margin: 40px auto;
             padding: 0 20px;
         }
 
@@ -74,7 +71,6 @@
             border: none;
             background: #111827;
             color: #fff;
-            outline: none;
         }
 
         #regBtn {
@@ -108,7 +104,6 @@
             color: #b39359;
             font-size: 11px;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
         td {
@@ -130,10 +125,13 @@
             font-weight: bold;
         }
 
-        /* RESPONSIVO */
         @media(max-width: 900px) {
             .main-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .header-container {
+                height: 120px;
             }
         }
     </style>
@@ -141,7 +139,7 @@
 
 <body>
 
-    <!-- LOGO DA EMPRESA -->
+    <!-- BANNER LOGO FULL WIDTH -->
     <header class="header-container">
         <img src="Sollene-Group.png" alt="Sollene Group Logo" class="logo-main">
     </header>
@@ -149,7 +147,6 @@
     <!-- CONTEÚDO -->
     <div class="main-grid">
 
-        <!-- FORMULÁRIO -->
         <aside class="sidebar-card">
             <h3>Shipment Entry</h3>
 
@@ -168,7 +165,6 @@
             <button id="regBtn">Process Trade</button>
         </aside>
 
-        <!-- TABELA -->
         <main class="inventory-area">
             <table>
                 <thead>
@@ -186,7 +182,6 @@
 
     </div>
 
-    <!-- SCRIPT -->
     <script>
         const inventoryList = document.getElementById('list');
 
