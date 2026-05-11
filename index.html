@@ -16,11 +16,25 @@
             display: flex; flex-direction: column; align-items: center;
         }
 
-        /* HEADER COM LOGO CORRIGIDO */
-        .logo-container { width: 100%; max-width: 1200px; padding: 40px 20px; text-align: center; }
-        .logo-img { max-width: 320px; height: auto; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05)); }
+        /* 1. HEADER COM LOGO AMPLO E PROTEGIDO */
+        .logo-container { 
+            width: 100%; 
+            max-width: 1200px; /* Alinhado com a largura do conteúdo abaixo */
+            padding: 40px 30px; /* O '30px' garante o espaço nas laterais do navegador */
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
 
-        /* GRID DO SISTEMA */
+        .logo-img { 
+            width: 100%; /* Faz o logo tentar ocupar o espaço disponível */
+            max-width: 1000px; /* Limite para não ficar exageradamente grande em telas gigantes */
+            height: auto; 
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05));
+            object-fit: contain; /* Garante que não corte as letras */
+        }
+
+        /* 2. GRID DO SISTEMA */
         .main-grid {
             display: grid; grid-template-columns: 360px 1fr; gap: 25px;
             width: 95%; max-width: 1200px; margin-bottom: 80px;
@@ -45,7 +59,7 @@
         }
         #regBtn:hover { background: #ffffff; transform: translateY(-2px); }
 
-        /* TABELA DE RESULTADOS */
+        /* 3. TABELA DE RESULTADOS */
         .inventory-area { background: #ffffff; border-radius: 24px; border: 1px solid #e5e1da; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 18px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; }
@@ -58,18 +72,21 @@
         .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 10px; }
         .btn-delete:hover { background: #991b1b; color: #ffffff; }
 
-        /* RODAPÉ GLOBAL */
+        /* 4. RODAPÉ GLOBAL */
         .footer-premium { background: #000000; color: #ffffff; padding: 60px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
         .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 10px; display: inline-block; transition: 0.3s; }
         .social-btn:hover { background: #b39359; color: #000000; }
 
-        @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+        @media(max-width: 900px) { 
+            .main-grid { grid-template-columns: 1fr; }
+            .logo-img { max-width: 90%; } /* Ajuste para celular */
+        }
     </style>
 </head>
 <body>
 
     <div class="logo-container">
-        <!-- O NOME DA IMAGEM ABAIXO DEVE SER IGUAL AO DO GITHUB -->
+        <!-- O logo agora ocupa mais espaço com segurança -->
         <img src="Sollene-Group.png" alt="Sollene Group Logo" class="logo-img">
     </div>
 
@@ -140,11 +157,11 @@
                     qty: row.cells[3].innerText
                 });
             });
-            localStorage.setItem('sollene_v3', JSON.stringify(items));
+            localStorage.setItem('sollene_final_v1', JSON.stringify(items));
         }
 
         function loadData() {
-            const saved = localStorage.getItem('sollene_v3');
+            const saved = localStorage.getItem('sollene_final_v1');
             if (saved) {
                 JSON.parse(saved).forEach(item => {
                     renderRow(item.type, item.name, item.value, item.qty);
