@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Global Trade Terminal</title>
+    <title>Sollene Group | Terminal</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -13,75 +13,111 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background: #fdfaf6; 
             color: #1a1a1a; 
-            display: flex; flex-direction: column; align-items: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* HEADER COM LOGO */
-        .logo-container { width: 100%; max-width: 1200px; padding: 40px 30px; text-align: center; }
-        .logo-img { width: 100%; max-width: 1000px; height: auto; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05)); object-fit: contain; }
+        /* LOGO AMPLO NO TOPO */
+        .logo-container { 
+            width: 100%; 
+            max-width: 1200px; 
+            padding: 40px 30px; 
+            text-align: center;
+        }
+        .logo-img { 
+            width: 100%; 
+            max-width: 1000px; 
+            height: auto; 
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05));
+            object-fit: contain;
+        }
 
-        /* GRID DO SISTEMA */
+        /* GRID PRINCIPAL */
         .main-grid {
-            display: grid; grid-template-columns: 360px 1fr; gap: 30px;
-            width: 95%; max-width: 1200px; margin-bottom: 80px;
-        }
-/* CARD LATERAL DARK (SHIPMENT ENTRY) - COMPACTO E REFINADO */
-.sidebar-card {
-    background: #1a222e; 
-    padding: 22px; /* DIMINUÍDO: de 35px para 22px para encurtar o card */
-    border-radius: 20px; 
-    color: #ffffff; 
-    border: 1px solid rgba(179, 147, 89, 0.3); 
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
-    height: fit-content;
-}
-
-/* DESTAQUE NOS TÍTULOS (Product Name, Operation Type, etc) */
-label { 
-    font-size: 9px; 
-    text-transform: uppercase; 
-    color: #b39359; /* COR DOURADA: Para dar o destaque que você pediu */
-    display: block; 
-    margin-bottom: 5px; 
-    font-weight: 800; 
-    letter-spacing: 2px; /* Espaçamento para parecer etiqueta de luxo */
-}
-
-/* AJUSTE DOS INPUTS PARA FICAREM MAIS BAIXOS */
-input, select {
-    width: 100%; 
-    padding: 10px; /* DIMINUÍDO: para o card não ficar tão alto */
-    margin-bottom: 12px; 
-    border: 1px solid #2d3748; 
-    border-radius: 8px; 
-    background: #0f172a; 
-    color: #ffffff; 
-    outline: none; 
-    font-size: 13px;
-}
-
-        
-            border-bottom: 1px solid rgba(179, 147, 89, 0.2); padding-bottom: 15px;
+            display: grid; 
+            grid-template-columns: 360px 1fr; 
+            gap: 30px;
+            width: 95%; 
+            max-width: 1200px; 
+            margin-bottom: 80px;
         }
 
-        label { font-size: 10px; text-transform: uppercase; color: #94a3b8; display: block; margin-bottom: 8px; font-weight: 700; letter-spacing: 1px; }
+        /* CARD EXECUTIVO (LADO ESQUERDO) */
+        .sidebar-card {
+            background: #111827; /* Dark Mode Moderno */
+            padding: 30px; 
+            border-radius: 24px;
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            height: fit-content;
+        }
+
+        .sidebar-card h3 { 
+            font-size: 20px; 
+            font-weight: 800;
+            color: #ffffff; 
+            margin-bottom: 25px; 
+            text-align: left;
+            letter-spacing: -0.5px;
+        }
+
+        label { 
+            font-size: 10px; 
+            text-transform: uppercase; 
+            color: #b39359; /* Dourado para destaque */
+            display: block; 
+            margin-bottom: 8px; 
+            font-weight: 700; 
+            letter-spacing: 1.5px;
+        }
 
         input, select {
-            width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #2d3748; 
-            border-radius: 12px; background: #0f172a; color: #ffffff; outline: none; font-size: 14px;
+            width: 100%; 
+            padding: 14px; 
+            margin-bottom: 18px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 12px; 
+            background: rgba(255, 255, 255, 0.03); 
+            color: #ffffff; 
+            outline: none; 
+            font-size: 14px;
+            transition: 0.3s ease;
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: #b39359;
         }
 
         .row-group { display: flex; gap: 10px; }
 
         #regBtn {
-            width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; 
-            border-radius: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; 
-            letter-spacing: 2px; transition: 0.4s; margin-top: 10px;
+            width: 100%;
+            padding: 18px;
+            background: #b39359;
+            color: #111827;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.4s;
         }
         #regBtn:hover { background: #ffffff; transform: translateY(-3px); }
 
-        /* ÁREA DA TABELA */
-        .inventory-area { background: #ffffff; border-radius: 24px; border: 1px solid #e5e1da; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        /* ÁREA DA TABELA (LADO DIREITO) */
+        .inventory-area { 
+            background: #ffffff; 
+            border-radius: 24px; 
+            border: 1px solid #e5e1da; 
+            overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02); 
+        }
+
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; }
         td { padding: 20px; border-bottom: 1px solid #f1f1f1; font-size: 14px; vertical-align: middle; }
@@ -90,15 +126,12 @@ input, select {
         .badge-in { background: #dcfce7; color: #166534; }
         .badge-out { background: #fee2e2; color: #991b1b; }
 
-        .price-buy { color: #64748b; font-size: 13px; }
-        .price-sale { color: #b39359; font-weight: 800; }
-
         .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 10px; transition: 0.3s;}
         .btn-delete:hover { background: #991b1b; color: #ffffff; }
 
-        /* RODAPÉ */
-        .footer-premium { background: #000000; color: #ffffff; padding: 60px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
-        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 10px; display: inline-block; transition: 0.3s; }
+        /* RODAPÉ BLACK */
+        .footer-premium { background: #000000; color: #ffffff; padding: 80px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
+        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 12px 30px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 10px; display: inline-block; transition: 0.3s; }
         .social-btn:hover { background: #b39359; color: #000000; }
 
         @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
@@ -115,7 +148,7 @@ input, select {
             <h3>Shipment Entry</h3>
             
             <label>Product Name</label>
-            <input type="text" id="pName" placeholder="Ex: Raw Coffee">
+            <input type="text" id="pName" placeholder="Ex: Premium Arabica">
             
             <label>Operation Type</label>
             <select id="pType">
@@ -174,7 +207,7 @@ input, select {
     </div>
 
     <footer class="footer-premium">
-        <div style="margin-bottom: 25px;">
+        <div style="margin-bottom: 30px;">
             <a href="https://linkedin.com" target="_blank" class="social-btn">LinkedIn</a>
             <a href="https://github.com" target="_blank" class="social-btn">GitHub</a>
             <a href="https://wa.me" target="_blank" class="social-btn">WhatsApp</a>
@@ -196,11 +229,11 @@ input, select {
                     volume: row.cells[4].innerText
                 });
             });
-            localStorage.setItem('sollene_final_db', JSON.stringify(items));
+            localStorage.setItem('sollene_final_v10', JSON.stringify(items));
         }
 
         function loadData() {
-            const saved = localStorage.getItem('sollene_final_db');
+            const saved = localStorage.getItem('sollene_final_v10');
             if (saved) {
                 JSON.parse(saved).forEach(item => {
                     renderRow(item.status, item.name, item.purchase, item.sale, item.volume);
@@ -214,8 +247,8 @@ input, select {
             row.innerHTML = `
                 <td><span class="badge ${badgeClass}">${status}</span></td>
                 <td><strong>${name}</strong></td>
-                <td class="price-buy">${purchase}</td>
-                <td class="price-sale">${sale}</td>
+                <td style="color:#64748b">${purchase}</td>
+                <td style="color:#b39359; font-weight:800">${sale}</td>
                 <td>${volume}</td>
                 <td><button class="btn-delete" onclick="this.closest('tr').remove(); saveData();">DELETE</button></td>
             `;
@@ -250,4 +283,3 @@ input, select {
     </script>
 </body>
 </html>
-
