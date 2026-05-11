@@ -7,19 +7,23 @@
     <title>Sollene Group | Terminal</title>
 
     <style>
-        *{ margin:0; padding:0; box-sizing:border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        body { 
+        body {
             font-family: Arial, sans-serif;
             background: #fdfaf6;
-            color: #1a1a1a; 
+            color: #1a1a1a;
             padding-bottom: 60px;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* HEADER */
+        /* HEADER LOGO */
         .header-container {
             width: 100%;
             max-width: 1200px;
@@ -28,12 +32,13 @@
         }
 
         .logo-main {
-            max-width: 300px;
+            max-width: 320px;
             height: auto;
             display: block;
             margin: 0 auto;
         }
 
+        /* LAYOUT PRINCIPAL */
         .main-grid {
             display: grid;
             grid-template-columns: 360px 1fr;
@@ -58,6 +63,7 @@
             color: #b39359;
             text-transform: uppercase;
             font-size: 12px;
+            letter-spacing: 2px;
         }
 
         input, select {
@@ -68,6 +74,7 @@
             border: none;
             background: #111827;
             color: #fff;
+            outline: none;
         }
 
         #regBtn {
@@ -78,17 +85,22 @@
             border-radius: 12px;
             font-weight: bold;
             cursor: pointer;
+            color: #111;
         }
 
-        /* TABLE AREA */
+        /* TABELA */
         .inventory-area {
             background: #f2ede4;
             border-radius: 25px;
             min-height: 500px;
             border: 1px solid #e5e1da;
+            overflow: hidden;
         }
 
-        table { width: 100%; border-collapse: collapse; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
         th {
             padding: 20px;
@@ -96,6 +108,7 @@
             color: #b39359;
             font-size: 11px;
             text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         td {
@@ -117,21 +130,26 @@
             font-weight: bold;
         }
 
-        @media(max-width: 900px){
-            .main-grid { grid-template-columns: 1fr; }
+        /* RESPONSIVO */
+        @media(max-width: 900px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <!-- LOGO NO TOPO (AQUI ESTÁ A IMAGEM INSERIDA) -->
+    <!-- LOGO DA EMPRESA -->
     <header class="header-container">
         <img src="Sollene-Group.png" alt="Sollene Group Logo" class="logo-main">
     </header>
 
+    <!-- CONTEÚDO -->
     <div class="main-grid">
 
+        <!-- FORMULÁRIO -->
         <aside class="sidebar-card">
             <h3>Shipment Entry</h3>
 
@@ -150,6 +168,7 @@
             <button id="regBtn">Process Trade</button>
         </aside>
 
+        <!-- TABELA -->
         <main class="inventory-area">
             <table>
                 <thead>
@@ -167,6 +186,7 @@
 
     </div>
 
+    <!-- SCRIPT -->
     <script>
         const inventoryList = document.getElementById('list');
 
@@ -190,22 +210,25 @@
 
         window.onload = loadData;
 
-        document.getElementById('regBtn').addEventListener('click', function() {
+        document.getElementById('regBtn').addEventListener('click', function () {
             const name = document.getElementById('pName').value;
             const dest = document.getElementById('pDest').value;
             const curr = document.getElementById('pCurr').value;
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
 
-            if(!name || !price || !qty) return alert("Please complete all fields.");
+            if (!name || !price || !qty) {
+                alert("Please complete all fields.");
+                return;
+            }
 
-            let s = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
+            let symbol = curr === "USD" ? "$" : curr === "EUR" ? "€" : "R$";
 
             const row = inventoryList.insertRow();
             row.innerHTML = `
                 <td><b>${name}</b></td>
                 <td>${dest || 'Global'}</td>
-                <td class="currency-style">${s} ${parseFloat(price).toFixed(2)}</td>
+                <td class="currency-style">${symbol} ${parseFloat(price).toFixed(2)}</td>
                 <td>${qty}</td>
                 <td><button class="del-btn" onclick="this.parentElement.parentElement.remove(); saveData()">DELETE</button></td>
             `;
@@ -217,14 +240,3 @@
 
 </body>
 </html>
-   
-    
-    
-   
-    
-
-
-  
-
-   
-
