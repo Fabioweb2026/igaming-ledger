@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Terminal</title>
+    <title>Sollene Group | Import & Export Terminal</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -13,113 +13,51 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background: #fdfaf6; 
             color: #1a1a1a; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        /* 1. HEADER COM LOGO AMPLO */
-        .logo-container { 
-            width: 100%; 
-            max-width: 1200px; 
-            padding: 40px 30px; 
-            text-align: center;
-        }
-        .logo-img { 
-            width: 100%; 
-            max-width: 1000px; 
-            height: auto; 
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05));
-            object-fit: contain;
-        }
+        /* HEADER COM LOGO */
+        .logo-container { width: 100%; max-width: 1200px; padding: 40px 30px; text-align: center; }
+        .logo-img { width: 100%; max-width: 1000px; height: auto; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05)); object-fit: contain; }
 
-        /* 2. GRID DO SISTEMA */
+        /* GRID DO SISTEMA */
         .main-grid {
-            display: grid; 
-            grid-template-columns: 360px 1fr; 
-            gap: 30px;
-            width: 95%; 
-            max-width: 1200px; 
-            margin-bottom: 80px;
+            display: grid; grid-template-columns: 360px 1fr; gap: 30px;
+            width: 95%; max-width: 1200px; margin-bottom: 80px;
         }
 
-        /* 3. CARD LATERAL DARK (IGUAL À SUA FOTO) */
+        /* CARD LATERAL DARK (SHIPMENT ENTRY) */
         .sidebar-card {
-            background: #1a222e; /* Grafite Dark */
-            padding: 35px;
-            border-radius: 24px;
-            color: #ffffff;
-            border: 1px solid rgba(179, 147, 89, 0.2);
+            background: #1a222e; padding: 35px; border-radius: 24px;
+            color: #ffffff; border: 1px solid rgba(179, 147, 89, 0.2);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             height: fit-content;
         }
 
         .sidebar-card h3 { 
-            font-size: 12px; 
-            text-transform: uppercase; 
-            color: #b39359; 
-            margin-bottom: 30px; 
-            letter-spacing: 3px; 
-            text-align: center;
-            border-bottom: 1px solid rgba(179, 147, 89, 0.2);
-            padding-bottom: 15px;
+            font-size: 12px; text-transform: uppercase; color: #b39359; 
+            margin-bottom: 30px; letter-spacing: 3px; text-align: center;
+            border-bottom: 1px solid rgba(179, 147, 89, 0.2); padding-bottom: 15px;
         }
 
-        label { 
-            font-size: 10px; 
-            text-transform: uppercase; 
-            color: #94a3b8; 
-            display: block; 
-            margin-bottom: 8px; 
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
+        label { font-size: 10px; text-transform: uppercase; color: #94a3b8; display: block; margin-bottom: 8px; font-weight: 700; letter-spacing: 1px; }
 
         input, select {
-            width: 100%; 
-            padding: 15px; 
-            margin-bottom: 20px; 
-            border: 1px solid #2d3748; 
-            border-radius: 12px; 
-            background: #0f172a; 
-            color: #ffffff; 
-            outline: none;
-            font-size: 14px;
-            transition: 0.3s;
+            width: 100%; padding: 15px; margin-bottom: 20px; border: 1px solid #2d3748; 
+            border-radius: 12px; background: #0f172a; color: #ffffff; outline: none; font-size: 14px;
         }
 
         input:focus { border-color: #b39359; }
 
         #regBtn {
-            width: 100%; 
-            padding: 20px; 
-            background: #b39359; 
-            color: #111827; 
-            border: none; 
-            border-radius: 12px; 
-            font-weight: 800; 
-            cursor: pointer; 
-            text-transform: uppercase; 
-            letter-spacing: 2px;
-            transition: 0.4s;
-            margin-top: 10px;
+            width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; 
+            border-radius: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; 
+            letter-spacing: 2px; transition: 0.4s; margin-top: 10px;
         }
+        #regBtn:hover { background: #ffffff; transform: translateY(-3px); }
 
-        #regBtn:hover {
-            background: #ffffff;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(179, 147, 89, 0.3);
-        }
-
-        /* 4. ÁREA DA TABELA */
-        .inventory-area { 
-            background: #ffffff; 
-            border-radius: 24px; 
-            border: 1px solid #e5e1da; 
-            overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02); 
-        }
-
+        /* ÁREA DA TABELA (INVENTORY) */
+        .inventory-area { background: #ffffff; border-radius: 24px; border: 1px solid #e5e1da; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; }
         td { padding: 20px; border-bottom: 1px solid #f1f1f1; font-size: 14px; vertical-align: middle; }
@@ -128,17 +66,16 @@
         .badge-in { background: #dcfce7; color: #166534; }
         .badge-out { background: #fee2e2; color: #991b1b; }
 
+        .price-buy { color: #166534; font-weight: 700; }
+        .price-sale { color: #b39359; font-weight: 800; }
+
         .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 10px; }
-        .btn-delete:hover { background: #991b1b; color: #ffffff; }
 
-        /* 5. RODAPÉ PREMIUM */
-        .footer-premium { background: #000000; color: #ffffff; padding: 80px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
-        .footer-premium h2 { font-size: 22px; color: #b39359; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 30px; }
-        .social-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
-        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 12px 30px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; transition: 0.3s; }
-        .social-btn:hover { background: #b39359; color: #000000; }
+        /* RODAPÉ */
+        .footer-premium { background: #000000; color: #ffffff; padding: 60px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
+        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 10px; display: inline-block; transition: 0.3s; }
 
-        @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } .logo-img { max-width: 90%; } }
+        @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -152,23 +89,19 @@
             <h3>Shipment Entry</h3>
             
             <label>Product Name</label>
-            <input type="text" id="pName" placeholder="Ex: Premium Arabica">
+            <input type="text" id="pName" placeholder="Ex: Premium Coffee">
             
             <label>Operation Type</label>
             <select id="pType">
-                <option value="In">Entry (In)</option>
-                <option value="Out">Exit (Out)</option>
+                <option value="In">Import (Entry)</option>
+                <option value="Out">Export (Exit)</option>
             </select>
 
-            <label>Currency & Price</label>
-            <div style="display: flex; gap: 10px;">
-                <select id="pCurr" style="flex: 1;">
-                    <option value="USD">USD ($)</option>
-                    <option value="EUR">EUR (€)</option>
-                    <option value="BRL">BRL (R$)</option>
-                </select>
-                <input type="number" id="pPrice" placeholder="0.00" style="flex: 2;">
-            </div>
+            <label>Purchase Price (BRL - R$)</label>
+            <input type="number" id="pCost" placeholder="0.00">
+
+            <label>Sale Price (EUR - €)</label>
+            <input type="number" id="pSale" placeholder="0.00">
 
             <label>Quantity</label>
             <input type="number" id="pQty" placeholder="Ex: 1000">
@@ -182,7 +115,8 @@
                     <tr>
                         <th>Status</th>
                         <th>Product</th>
-                        <th>Value</th>
+                        <th>Cost (BRL)</th>
+                        <th>Sale (EUR)</th>
                         <th>Qty</th>
                         <th>Action</th>
                     </tr>
@@ -193,13 +127,12 @@
     </div>
 
     <footer class="footer-premium">
-        <h2>Global Connection</h2>
-        <div class="social-links">
+        <div style="margin-bottom: 25px;">
             <a href="#" class="social-btn">LinkedIn</a>
             <a href="https://github.com" class="social-btn">GitHub</a>
             <a href="#" class="social-btn">WhatsApp</a>
         </div>
-        <p style="font-size: 10px; color: #b39359; letter-spacing: 2px; opacity: 0.7;">SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
+        <p style="font-size: 10px; color: #b39359; letter-spacing: 2px;">SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
     </footer>
 
     <script>
@@ -211,29 +144,31 @@
                 items.push({
                     status: row.cells[0].innerText,
                     name: row.cells[1].innerText,
-                    value: row.cells[2].innerText,
-                    qty: row.cells[3].innerText
+                    cost: row.cells[2].innerText,
+                    sale: row.cells[3].innerText,
+                    qty: row.cells[4].innerText
                 });
             });
-            localStorage.setItem('sollene_v_final', JSON.stringify(items));
+            localStorage.setItem('sollene_trade_v1', JSON.stringify(items));
         }
 
         function loadData() {
-            const saved = localStorage.getItem('sollene_v_final');
+            const saved = localStorage.getItem('sollene_trade_v1');
             if (saved) {
                 JSON.parse(saved).forEach(item => {
-                    renderRow(item.status, item.name, item.value, item.qty);
+                    renderRow(item.status, item.name, item.cost, item.sale, item.qty);
                 });
             }
         }
 
-        function renderRow(status, name, value, qty) {
+        function renderRow(status, name, cost, sale, qty) {
             const row = inventoryList.insertRow();
             const badgeClass = status === 'In' ? 'badge-in' : 'badge-out';
             row.innerHTML = `
                 <td><span class="badge ${badgeClass}">${status}</span></td>
                 <td><strong>${name}</strong></td>
-                <td style="color:#b39359; font-weight:800">${value}</td>
+                <td class="price-buy">${cost}</td>
+                <td class="price-sale">${sale}</td>
                 <td>${qty} units</td>
                 <td><button class="btn-delete" onclick="this.closest('tr').remove(); saveData();">DELETE</button></td>
             `;
@@ -244,22 +179,24 @@
         document.getElementById('regBtn').addEventListener('click', function() {
             const name = document.getElementById('pName').value;
             const type = document.getElementById('pType').value;
-            const curr = document.getElementById('pCurr').value;
-            const price = document.getElementById('pPrice').value;
+            const cost = document.getElementById('pCost').value;
+            const sale = document.getElementById('pSale').value;
             const qty = document.getElementById('pQty').value;
 
-            if(!name || !price || !qty) return alert("Fill all fields.");
+            if(!name || !cost || !sale || !qty) return alert("Please fill all fields.");
 
-            const symbol = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
-            const formattedValue = `${symbol} ${parseFloat(price).toFixed(2)}`;
+            const formattedCost = `R$ ${parseFloat(cost).toFixed(2)}`;
+            const formattedSale = `€ ${parseFloat(sale).toFixed(2)}`;
 
-            renderRow(type, name, formattedValue, qty);
+            renderRow(type, name, formattedCost, formattedSale, qty);
             saveData();
 
             document.getElementById('pName').value = "";
-            document.getElementById('pPrice').value = "";
+            document.getElementById('pCost').value = "";
+            document.getElementById('pSale').value = "";
             document.getElementById('pQty').value = "";
         });
     </script>
 </body>
 </html>
+
