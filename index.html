@@ -29,7 +29,7 @@
         /* CONTEÚDO PRINCIPAL */
         .main-content { display: flex; width: 100%; max-width: 1400px; gap: 20px; padding: 0 20px 40px; flex: 1; }
 
-        /* SIDEBAR PREMIUM */
+        /* SIDEBAR */
         .sidebar { width: 320px; background-color: #1a1a1a; color: #b39359; padding: 25px; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); height: fit-content; border: 1px solid rgba(179, 147, 89, 0.3); }
         .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 20px; text-align: center; font-size: 1.2rem; }
         label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: block; color: #888; }
@@ -45,7 +45,7 @@
         .btn-clear { width: 100%; padding: 8px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 9px; transition: 0.3s; }
         .btn-clear:hover { background-color: #e74c3c; color: white; }
 
-        /* TABELA DE ALTA PERFORMANCE */
+        /* TABELA */
         .table-container { flex: 1; background: white; border-radius: 15px; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2); }
         table { width: 100%; border-collapse: collapse; min-width: 950px; }
         thead { background-color: #000; color: #b39359; }
@@ -53,9 +53,10 @@
         
         /* CORES DE STATUS FINANCEIRO */
         .revenue-val { color: #27ae60 !important; font-weight: 800; } 
-        .profit-plus { color: #2ecc71 !important; font-weight: 800; } /* Verde vibrante para lucro */
-        .profit-minus { color: #e74c3c !important; font-weight: 800; } /* Vermelho para prejuízo */
-        .inv-val { color: #2980b9 !important; font-weight: bold; font-size: 10px; } /* Azul para capital em estoque */
+        .profit-plus { color: #2ecc71 !important; font-weight: 800; } 
+        .profit-minus { color: #e74c3c !important; font-weight: 800; } 
+        /* Cor Roxa/Azulada para o valor convertido de Malta */
+        .inv-val { color: #8e44ad !important; font-weight: bold; font-size: 11px; } 
 
         footer { width: 100%; padding: 30px 20px; background-color: #1a1a1a; text-align: center; border-top: 3px solid #b39359; margin-top: auto; }
         .footer-address { color: #b39359; font-size: 10px; text-transform: uppercase; }
@@ -92,7 +93,7 @@
                 <input type="number" id="pExit" placeholder="Out">
             </div>
 
-            <label>Buy Curr & Cost</label>
+            <label>Buy Curr & Cost (Brazil)</label>
             <div style="display: flex; gap: 8px;">
                 <select id="pBuyCurr" style="width: 45%;">
                     <option value="BRL">R$</option>
@@ -102,15 +103,18 @@
                 <input type="number" id="pBuyPrice" placeholder="Cost">
             </div>
 
-            <label>Sell Curr & Price</label>
+            <label>Sell Curr & Price (Malta)</label>
             <div style="display: flex; gap: 8px;">
                 <select id="pSellCurr" style="width: 45%;">
-                    <option value="USD">$</option>
                     <option value="EUR">€</option>
+                    <option value="USD">$</option>
                     <option value="BRL">R$</option>
                 </select>
                 <input type="number" id="pSellPrice" placeholder="Price">
             </div>
+
+            <label>Exchange Rate (1 Buy = ? Sell)</label>
+            <input type="number" id="pExchange" step="0.0001" placeholder="Ex: 0.16 (BRL to EUR)">
             
             <button class="btn-add" onclick="addProduct()">Process Trade</button>
             <button class="btn-save-manual" onclick="manualSave()">💾 Save Inventory</button>
@@ -128,7 +132,7 @@
                         <th>SELL PRICE</th>
                         <th>REVENUE</th>
                         <th>PROFIT (SALES)</th>
-                        <th>INV. VALUE</th>
+                        <th>INV. VALUE (SELL CURR)</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
@@ -146,7 +150,6 @@
             return "€";
         }
 
-        // Função de Salvamento (LocalStorage)
         function saveInventory() {
             const table = document.getElementById('inventoryBody');
             localStorage.setItem("solleneInventoryHTML", table.innerHTML);
@@ -154,7 +157,7 @@
 
         function manualSave() {
             saveInventory();
-            alert("Sollene Group: Inventory saved successfully!");
+            alert("Inventory saved successfully!");
         }
 
         function loadInventory() {
@@ -173,6 +176,7 @@
             const buyPrice = Number(document.getElementById('pBuyPrice').value) || 0;
             const sellCurr = document.getElementById('pSellCurr').value;
             const sellPrice = Number(document.getElementById('pSellPrice').value) || 0;
+            const exchange = Number(document.getElementById('pExchange').value) || 1;
 
             if (!name || buyPrice === 0) {
                 alert("Please fill in the product name and cost.");
@@ -181,8 +185,13 @@
 
             const stock = entry - exit;
             const revenue = exit * sellPrice; 
-            const profit = (sellPrice - buyPrice) * exit; // Lucro direto (simplificado)
-            const inventoryValue = stock * buyPrice;
+            
+            // Lógica Malta: Converte o custo unitário para a moeda de venda para calcular o lucro
+            const unitCostInSellCurr = buyPrice * exchange;
+            const profit = (sellPrice - unitCostInSellCurr) * exit;
+
+            // VALOR DE INVENTÁRIO: Quanto seu estoque atual vale na moeda de Malta
+            const inventoryValueInSellCurr = stock * sellPrice;
 
             const table = document.getElementById('inventoryBody');
             const row = table.insertRow();
@@ -200,13 +209,12 @@
                 <td class="${profit >= 0 ? 'profit-plus' : 'profit-minus'}">
                     ${sSell} ${profit.toFixed(2)}
                 </td>
-                <td class="inv-val">${sBuy} ${inventoryValue.toFixed(2)}</td>
+                <td class="inv-val">${sSell} ${inventoryValueInSellCurr.toFixed(2)}</td>
                 <td><button style="color:red; border:none; background:none; cursor:pointer;" onclick="deleteRow(this)">Delete</button></td>
             `;
             
             saveInventory();
             
-            // Limpa campos para novo registro
             document.getElementById('pName').value = "";
             document.getElementById('pEntry').value = "";
             document.getElementById('pExit').value = "";
@@ -228,4 +236,3 @@
     </script>
 </body>
 </html>
-
