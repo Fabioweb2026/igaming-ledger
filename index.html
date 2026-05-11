@@ -8,34 +8,22 @@
     <style>
         /* RESET & BASE STYLE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background-color: #fdfcf0; 
-            color: #1a1a1a; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-        }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fdfcf0; color: #1a1a1a; display: flex; flex-direction: column; align-items: center; }
         
-        /* BANNER */
         .banner-header { width: 100%; height: 9.5cm; margin-top: 0.5cm; background-color: #fdfcf0; overflow: hidden; display: flex; justify-content: center; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
         .banner-header img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
 
-        /* NAVEGAÇÃO */
         .nav-top { width: 100%; max-width: 1400px; padding: 15px 20px; text-align: left; }
         .btn-back { text-decoration: none; color: #b39359; border: 1px solid #b39359; padding: 6px 15px; border-radius: 50px; font-size: 10px; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
         .btn-back:hover { background: #b39359; color: white; }
 
-        /* CONTEÚDO PRINCIPAL */
         .main-content { display: flex; width: 100%; max-width: 1400px; gap: 20px; padding: 0 20px 40px; flex: 1; }
 
-        /* SIDEBAR */
         .sidebar { width: 320px; background-color: #1a1a1a; color: #b39359; padding: 25px; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); height: fit-content; border: 1px solid rgba(179, 147, 89, 0.3); }
         .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 20px; text-align: center; font-size: 1.2rem; }
         label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: block; color: #888; }
         input, select { width: 100%; padding: 10px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #333; background: #fff; color: #1a1a1a; font-size: 12px; }
 
-        /* BOTÕES */
         .btn-add { width: 100%; padding: 14px; background-color: #b39359; color: #1a1a1a; border: none; font-weight: 800; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 12px; transition: 0.3s; margin-bottom: 10px; }
         .btn-add:hover { background-color: #cbb07c; transform: translateY(-2px); }
 
@@ -45,17 +33,14 @@
         .btn-clear { width: 100%; padding: 8px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 9px; transition: 0.3s; }
         .btn-clear:hover { background-color: #e74c3c; color: white; }
 
-        /* TABELA */
         .table-container { flex: 1; background: white; border-radius: 15px; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2); }
         table { width: 100%; border-collapse: collapse; min-width: 950px; }
         thead { background-color: #000; color: #b39359; }
         th, td { padding: 12px; text-align: center; font-size: 11px; border-bottom: 1px solid #f2f2f2; }
         
-        /* CORES DE STATUS FINANCEIRO */
         .revenue-val { color: #27ae60 !important; font-weight: 800; } 
         .profit-plus { color: #2ecc71 !important; font-weight: 800; } 
         .profit-minus { color: #e74c3c !important; font-weight: 800; } 
-        /* Cor Roxa/Azulada para o valor convertido de Malta */
         .inv-val { color: #8e44ad !important; font-weight: bold; font-size: 11px; } 
 
         footer { width: 100%; padding: 30px 20px; background-color: #1a1a1a; text-align: center; border-top: 3px solid #b39359; margin-top: auto; }
@@ -114,7 +99,7 @@
             </div>
 
             <label>Exchange Rate (1 Buy = ? Sell)</label>
-            <input type="number" id="pExchange" step="0.0001" placeholder="Ex: 0.16 (BRL to EUR)">
+            <input type="number" id="pExchange" step="0.0001" placeholder="Ex: 0.16">
             
             <button class="btn-add" onclick="addProduct()">Process Trade</button>
             <button class="btn-save-manual" onclick="manualSave()">💾 Save Inventory</button>
@@ -186,11 +171,10 @@
             const stock = entry - exit;
             const revenue = exit * sellPrice; 
             
-            // Lógica Malta: Converte o custo unitário para a moeda de venda para calcular o lucro
             const unitCostInSellCurr = buyPrice * exchange;
             const profit = (sellPrice - unitCostInSellCurr) * exit;
 
-            // VALOR DE INVENTÁRIO: Quanto seu estoque atual vale na moeda de Malta
+            // VALOR DE INVENTÁRIO: Calculado usando o preço de venda para refletir o valor atual em Malta
             const inventoryValueInSellCurr = stock * sellPrice;
 
             const table = document.getElementById('inventoryBody');
@@ -209,6 +193,7 @@
                 <td class="${profit >= 0 ? 'profit-plus' : 'profit-minus'}">
                     ${sSell} ${profit.toFixed(2)}
                 </td>
+                <!-- CORRIGIDO: Agora usa sSell para mostrar a moeda correta (Euro/Dólar) -->
                 <td class="inv-val">${sSell} ${inventoryValueInSellCurr.toFixed(2)}</td>
                 <td><button style="color:red; border:none; background:none; cursor:pointer;" onclick="deleteRow(this)">Delete</button></td>
             `;
@@ -236,3 +221,4 @@
     </script>
 </body>
 </html>
+
