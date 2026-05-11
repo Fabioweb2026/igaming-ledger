@@ -63,7 +63,15 @@
         <section class="sidebar">
             <h2>Register Product</h2>
             <input type="text" id="pName" placeholder="Product Name">
-            <select id="pUnit"><option>Box</option><option>Unit</option></select>
+            
+            <!-- NOVAS UNIDADES ADICIONADAS AQUI -->
+            <select id="pUnit">
+                <option value="Caixas">Caixas (Boxes)</option>
+                <option value="Kg">Quilos (Kg)</option>
+                <option value="Toneladas">Toneladas (Tons)</option>
+                <option value="Unidade">Unidade (Unit)</option>
+            </select>
+            
             <input type="number" id="pEntry" placeholder="Entry">
             <input type="number" id="pExit" placeholder="Exit">
             <select id="pCurrency"><option value="USD">USD ($)</option><option value="EUR">EUR (€)</option></select>
@@ -89,7 +97,6 @@
                     </tr>
                 </thead>
                 <tbody id="inventoryBody">
-                    <!-- Linhas serão adicionadas aqui -->
                 </tbody>
             </table>
         </section>
@@ -101,7 +108,6 @@
 
     <script>
         function addProduct() {
-            // Pegar valores dos campos
             const name = document.getElementById('pName').value;
             const unit = document.getElementById('pUnit').value;
             const entry = Number(document.getElementById('pEntry').value);
@@ -109,18 +115,16 @@
             const currency = document.getElementById('pCurrency').value;
             const price = Number(document.getElementById('pPrice').value);
 
-            if (!name || entry === 0 || price === 0) {
-                alert("Please fill in the product name, entry and price.");
+            if (!name || entry < 0 || price <= 0) {
+                alert("Por favor, preencha o nome, entrada e preço.");
                 return;
             }
 
-            // Cálculos
             const stock = entry - exit;
             const revenue = exit * price;
             const cash = revenue - (entry * price);
             const symbol = currency === "USD" ? "$" : "€";
 
-            // Criar a linha na tabela
             const table = document.getElementById('inventoryBody');
             const row = table.insertRow();
 
@@ -136,7 +140,6 @@
                 <td><button class="btn-del-row" onclick="deleteRow(this)">Delete</button></td>
             `;
 
-            // Limpar campos após adicionar
             document.getElementById('pName').value = "";
             document.getElementById('pEntry').value = "";
             document.getElementById('pExit').value = "";
@@ -149,7 +152,7 @@
         }
 
         function clearAll() {
-            if (confirm("Are you sure you want to clear the entire inventory?")) {
+            if (confirm("Deseja realmente limpar todo o inventário?")) {
                 document.getElementById('inventoryBody').innerHTML = "";
             }
         }
@@ -157,4 +160,5 @@
 
 </body>
 </html>
+
 
