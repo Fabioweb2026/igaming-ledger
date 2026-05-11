@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Logistics Terminal</title>
+    <title>Sollene Group | Terminal</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -11,7 +11,7 @@
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #fdfaf6; 
+            background: #fdfaf6; /* Bege Premium */
             color: #1a1a1a; 
             padding-bottom: 60px;
             display: flex;
@@ -19,25 +19,19 @@
             align-items: center;
         }
 
-        /* BANNER */
-        .hero-banner {
+        /* ÁREA DO LOGO CENTRALIZADO */
+        .header-container {
             width: 100%;
             max-width: 1200px;
-            height: 300px;
-            background-color: #f7f4ed;
-            background-image: url('image.jpg');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: contain;
-            border-radius: 28px;
-            margin-top: 20px;
-            border: 1px solid #e5e1da;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.04);
+            padding: 50px 20px;
+            text-align: center;
         }
 
-        .company-header { text-align: center; margin: 40px 0; }
-        .company-header h1 { font-size: 56px; font-weight: 800; color: #1f2937; letter-spacing: -2px; text-transform: uppercase; }
-        .company-header p { color: #b39359; font-size: 13px; text-transform: uppercase; letter-spacing: 4px; font-weight: 800; margin-top: 10px; }
+        .logo-main {
+            max-width: 380px; /* Tamanho ideal para o logo */
+            height: auto;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05));
+        }
 
         .main-grid {
             display: grid;
@@ -59,17 +53,20 @@
             border-top: 4px solid #b39359;
         }
 
-        .sidebar-card h3 { font-size: 11px; text-transform: uppercase; color: #b39359; margin-bottom: 30px; letter-spacing: 2px; font-weight: 800; text-align: center; }
-
-        input, select {
-            width: 100%; padding: 16px; margin-bottom: 20px; border: 1px solid #374151; border-radius: 14px; background: #111827; font-size: 14px; color: #ffffff; outline: none;
+        .sidebar-card h3 { 
+            font-size: 11px; text-transform: uppercase; color: #b39359; 
+            margin-bottom: 30px; letter-spacing: 2px; font-weight: 800; text-align: center; 
         }
 
-        .qty-group { display: flex; gap: 10px; margin-bottom: 20px; }
-        .qty-group input, .qty-group select { margin-bottom: 0; }
+        input, select {
+            width: 100%; padding: 16px; margin-bottom: 20px; border: 1px solid #374151; 
+            border-radius: 14px; background: #111827; font-size: 14px; color: #ffffff; outline: none;
+        }
 
         #regBtn {
-            width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; border-radius: 16px; font-weight: 800; cursor: pointer; transition: 0.4s; text-transform: uppercase; font-size: 13px;
+            width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; 
+            border-radius: 16px; font-weight: 800; cursor: pointer; transition: 0.4s; 
+            text-transform: uppercase; font-size: 13px;
         }
 
         /* ÁREA DA TABELA BEGE */
@@ -90,16 +87,14 @@
         .currency-style { color: #b39359; font-weight: 800; }
         .del-btn { color: #ef4444; cursor: pointer; border: none; background: none; font-weight: 800; font-size: 11px; text-transform: uppercase; }
 
-        @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } .hero-banner { height: 220px; } }
+        @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <div class="hero-banner"></div>
-
-    <header class="company-header">
-        <h1>Sollene Group</h1>
-        <p>Premium Logistics & Global Trade</p>
+    <header class="header-container">
+        <!-- O LOGO DA EMPRESA ENTRA AQUI -->
+        <img src="Sollene Group.png" alt="Sollene Group" class="logo-main">
     </header>
 
     <div class="main-grid">
@@ -107,21 +102,17 @@
             <h3>Shipment Entry</h3>
             <input type="text" id="pName" placeholder="Product Name">
             <input type="text" id="pDest" placeholder="Destination Port">
+            
             <select id="pCurr">
                 <option value="USD">USD ($)</option>
                 <option value="EUR">EUR (€)</option>
                 <option value="BRL">BRL (R$)</option>
             </select>
-            <input type="number" id="pPrice" placeholder="Unit Price">
-            <div class="qty-group">
-                <input type="number" id="pQty" placeholder="Qty">
-                <select id="pUnit">
-                    <option value="Units">Units</option>
-                    <option value="KG">KG</option>
-                    <option value="Tons">Tons</option>
-                </select>
-            </div>
-            <button id="regBtn">Register Cargo</button>
+
+            <input type="number" id="pPrice" placeholder="Price">
+            <input type="number" id="pQty" placeholder="Quantity">
+            
+            <button id="regBtn">Process Trade</button>
         </aside>
 
         <main class="inventory-area">
@@ -131,7 +122,7 @@
                         <th>Product</th>
                         <th>Destination</th>
                         <th>Value</th>
-                        <th>Volume</th>
+                        <th>Qty</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -167,9 +158,8 @@
             const curr = document.getElementById('pCurr').value;
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
-            const unit = document.getElementById('pUnit').value;
 
-            if(!name || !price || !qty) return alert("Fill all fields.");
+            if(!name || !price || !qty) return alert("Please complete the fields.");
 
             let s = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
             const row = inventoryList.insertRow();
@@ -177,7 +167,7 @@
                 <td style="font-weight:700;">${name}</td>
                 <td style="color:#64748b">${dest || 'Global'}</td>
                 <td class="currency-style">${s} ${parseFloat(price).toFixed(2)}</td>
-                <td><strong>${qty}</strong> <small style="color:#b39359">${unit}</small></td>
+                <td><strong>${qty}</strong> units</td>
                 <td><button class="del-btn" onclick="this.parentElement.parentElement.remove(); saveData()">DELETE</button></td>
             `;
             saveData();
