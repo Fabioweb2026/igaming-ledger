@@ -25,18 +25,42 @@
             display: grid; grid-template-columns: 360px 1fr; gap: 30px;
             width: 95%; max-width: 1200px; margin-bottom: 80px;
         }
+/* CARD LATERAL DARK (SHIPMENT ENTRY) - COMPACTO E REFINADO */
+.sidebar-card {
+    background: #1a222e; 
+    padding: 22px; /* DIMINUÍDO: de 35px para 22px para encurtar o card */
+    border-radius: 20px; 
+    color: #ffffff; 
+    border: 1px solid rgba(179, 147, 89, 0.3); 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); 
+    height: fit-content;
+}
 
-        /* CARD LATERAL DARK (SHIPMENT ENTRY) */
-        .sidebar-card {
-            background: #1a222e; padding: 35px; border-radius: 24px;
-            color: #ffffff; border: 1px solid rgba(179, 147, 89, 0.2);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            height: fit-content;
-        }
+/* DESTAQUE NOS TÍTULOS (Product Name, Operation Type, etc) */
+label { 
+    font-size: 9px; 
+    text-transform: uppercase; 
+    color: #b39359; /* COR DOURADA: Para dar o destaque que você pediu */
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: 800; 
+    letter-spacing: 2px; /* Espaçamento para parecer etiqueta de luxo */
+}
 
-        .sidebar-card h3 { 
-            font-size: 12px; text-transform: uppercase; color: #b39359; 
-            margin-bottom: 30px; letter-spacing: 3px; text-align: center;
+/* AJUSTE DOS INPUTS PARA FICAREM MAIS BAIXOS */
+input, select {
+    width: 100%; 
+    padding: 10px; /* DIMINUÍDO: para o card não ficar tão alto */
+    margin-bottom: 12px; 
+    border: 1px solid #2d3748; 
+    border-radius: 8px; 
+    background: #0f172a; 
+    color: #ffffff; 
+    outline: none; 
+    font-size: 13px;
+}
+
+        
             border-bottom: 1px solid rgba(179, 147, 89, 0.2); padding-bottom: 15px;
         }
 
