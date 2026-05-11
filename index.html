@@ -10,41 +10,43 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fdfcf0; color: #1a1a1a; display: flex; flex-direction: column; align-items: center; }
 
-        /* BANNER */
+        /* BANNER - SEM CORTAR LETRAS */
         .banner-header { width: 100%; height: 9.5cm; margin-top: 0.5cm; background-color: #fdfcf0; overflow: hidden; display: flex; justify-content: center; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
         .banner-header img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
 
         /* NAVEGAÇÃO */
-        .nav-top { width: 100%; max-width: 1200px; padding: 20px; text-align: left; }
-        .btn-back { text-decoration: none; color: #b39359; border: 1px solid #b39359; padding: 8px 20px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
+        .nav-top { width: 100%; max-width: 1400px; padding: 15px 20px; text-align: left; }
+        .btn-back { text-decoration: none; color: #b39359; border: 1px solid #b39359; padding: 6px 15px; border-radius: 50px; font-size: 10px; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
         .btn-back:hover { background: #b39359; color: white; }
 
         /* CONTEÚDO PRINCIPAL */
-        .main-content { display: flex; width: 100%; max-width: 1400px; gap: 25px; padding: 0 20px 60px; flex: 1; }
+        .main-content { display: flex; width: 100%; max-width: 1400px; gap: 20px; padding: 0 20px 40px; flex: 1; }
 
-        /* SIDEBAR */
-        .sidebar { width: 340px; background-color: #1a1a1a; color: #b39359; padding: 30px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); height: fit-content; border: 1px solid rgba(179, 147, 89, 0.3); }
-        .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 20px; text-align: center; }
-        label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; color: #888; }
-        input, select { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #333; background: #fff; color: #1a1a1a; font-size: 13px; }
+        /* SIDEBAR - CARDS MAIS COMPACTOS */
+        .sidebar { width: 300px; background-color: #1a1a1a; color: #b39359; padding: 20px; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); height: fit-content; border: 1px solid rgba(179, 147, 89, 0.3); }
+        .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 15px; text-align: center; font-size: 1.1rem; }
+        label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: block; color: #888; }
+        
+        /* Ajuste de tamanho dos inputs e selects */
+        input, select { width: 100%; padding: 8px 10px; margin-bottom: 12px; border-radius: 6px; border: 1px solid #333; background: #fff; color: #1a1a1a; font-size: 12px; }
 
-        .btn-add { width: 100%; padding: 16px; background-color: #b39359; color: #1a1a1a; border: none; font-weight: 800; border-radius: 10px; cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-bottom: 10px; }
+        .btn-add { width: 100%; padding: 12px; background-color: #b39359; color: #1a1a1a; border: none; font-weight: 800; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 12px; transition: 0.3s; margin-bottom: 8px; }
         .btn-add:hover { background-color: #cbb07c; transform: translateY(-2px); }
+        .btn-clear { width: 100%; padding: 8px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 9px; transition: 0.3s; }
+        .btn-clear:hover { background-color: #e74c3c; color: #fff; }
 
-        .btn-clear { width: 100%; padding: 10px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 10px; cursor: pointer; text-transform: uppercase; font-size: 10px; transition: 0.3s; }
-
-        /* TABELA */
-        .table-container { flex: 1; background: white; border-radius: 20px; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2); }
-        table { width: 100%; border-collapse: collapse; min-width: 900px; }
+        /* TABELA COMPACTA */
+        .table-container { flex: 1; background: white; border-radius: 15px; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2); }
+        table { width: 100%; border-collapse: collapse; min-width: 850px; }
         thead { background-color: #000; color: #b39359; }
-        th, td { padding: 14px; text-align: center; font-size: 12px; border-bottom: 1px solid #f2f2f2; }
+        th, td { padding: 10px; text-align: center; font-size: 11px; border-bottom: 1px solid #f2f2f2; }
         
         .total-val { font-weight: bold; }
         .profit-plus { color: #27ae60; }
         .profit-minus { color: #e74c3c; }
 
-        footer { width: 100%; padding: 40px 20px; background-color: #1a1a1a; text-align: center; border-top: 3px solid #b39359; margin-top: auto; }
-        .footer-address { color: #b39359; font-size: 11px; text-transform: uppercase; }
+        footer { width: 100%; padding: 30px 20px; background-color: #1a1a1a; text-align: center; border-top: 3px solid #b39359; margin-top: auto; }
+        .footer-address { color: #b39359; font-size: 10px; text-transform: uppercase; }
 
         @media (max-width: 1100px) { .main-content { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
@@ -56,7 +58,7 @@
     </header>
 
     <nav class="nav-top">
-        <a href="index.html" class="btn-back">← BACK</a>
+        <a href="index.html" class="btn-back">← Back</a>
     </nav>
 
     <main class="main-content">
@@ -73,16 +75,16 @@
                 <option value="Toneladas">Tons</option>
             </select>
             
-            <label>Entry & Exit</label>
-            <div style="display: flex; gap: 10px;">
+            <label>In / Out</label>
+            <div style="display: flex; gap: 8px;">
                 <input type="number" id="pEntry" placeholder="In">
                 <input type="number" id="pExit" placeholder="Out">
             </div>
 
             <label>Buy Currency & Unit Cost</label>
-            <div style="display: flex; gap: 10px;">
-                <select id="pBuyCurr" style="width: 40%;">
-                    <option value="BRL">R$ (Real)</option>
+            <div style="display: flex; gap: 8px;">
+                <select id="pBuyCurr" style="width: 45%;">
+                    <option value="BRL">R$ (BRL)</option>
                     <option value="USD">$ (USD)</option>
                     <option value="EUR">€ (EUR)</option>
                 </select>
@@ -90,16 +92,16 @@
             </div>
 
             <label>Sell Currency & Sell Price</label>
-            <div style="display: flex; gap: 10px;">
-                <select id="pSellCurr" style="width: 40%;">
+            <div style="display: flex; gap: 8px;">
+                <select id="pSellCurr" style="width: 45%;">
+                    <option value="BRL">R$ (BRL)</option>
                     <option value="USD">$ (USD)</option>
                     <option value="EUR">€ (EUR)</option>
-                    <option value="BRL">R$ (Real)</option>
                 </select>
                 <input type="number" id="pSellPrice" placeholder="Price">
             </div>
 
-            <label>Exchange Rate (1 Buy Curr = ? Sell Curr)</label>
+            <label>Exchange Rate (1 Buy = ? Sell)</label>
             <input type="number" id="pExchange" step="0.0001" placeholder="Ex: 0.18">
             
             <button class="btn-add" onclick="addProduct()">Process Trade</button>
@@ -135,7 +137,6 @@
         }
 
         function addProduct() {
-            // Captura os dados
             const name = document.getElementById('pName').value;
             const unit = document.getElementById('pUnit').value;
             const entry = Number(document.getElementById('pEntry').value) || 0;
@@ -147,17 +148,15 @@
             const exchange = Number(document.getElementById('pExchange').value) || 1;
 
             if (!name || buyPrice === 0) {
-                alert("Por favor, preencha o nome e o custo do produto.");
+                alert("Por favor, preencha pelo menos o nome e o preço de custo.");
                 return;
             }
 
-            // Cálculos
             const stock = entry - exit;
-            const revenue = exit * sellPrice; // Receita na moeda de venda
-            const costInSellCurr = (entry * buyPrice) * exchange; // Custo total convertido
+            const revenue = exit * sellPrice;
+            const costInSellCurr = (entry * buyPrice) * exchange;
             const profit = revenue - costInSellCurr;
 
-            // Inserir na tabela
             const table = document.getElementById('inventoryBody');
             const row = table.insertRow();
 
@@ -171,23 +170,20 @@
                 <td class="total-val ${profit >= 0 ? 'profit-plus' : 'profit-minus'}">
                     ${getSymbol(sellCurr)} ${profit.toFixed(2)}
                 </td>
-                <td><button style="color: red; border: none; background: none; cursor: pointer;" onclick="this.parentElement.parentElement.remove()">Delete</button></td>
+                <td><button style="color: red; border: none; background: none; cursor: pointer; font-size: 10px;" onclick="this.parentElement.parentElement.remove()">Delete</button></td>
             `;
 
-            // Limpa os campos
+            // Limpar campos
             document.getElementById('pName').value = "";
-            document.getElementById('pBuyPrice').value = "";
-            document.getElementById('pSellPrice').value = "";
             document.getElementById('pEntry').value = "";
             document.getElementById('pExit').value = "";
+            document.getElementById('pBuyPrice').value = "";
+            document.getElementById('pSellPrice').value = "";
         }
 
         function clearAll() {
-            if (confirm("Resetar toda a lista?")) {
-                document.getElementById('inventoryBody').innerHTML = "";
-            }
+            if (confirm("Resetar toda a lista?")) document.getElementById('inventoryBody').innerHTML = "";
         }
     </script>
 </body>
 </html>
-
