@@ -11,28 +11,30 @@
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #fdfcf0;
+            background-color: #fdfcf0; /* Cor creme que combina com o fundo da imagem */
             color: #1a1a1a;
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        /* BANNER COM A NOVA IMAGEM HARMONIOSA */
+        /* BANNER AJUSTADO PARA NÃO CORTAR LETRAS */
         .banner-header {
             width: 100%;
             height: 9.5cm;
-            margin-top: 0.5cm; /* Espaçamento solicitado do navegador */
+            margin-top: 0.5cm; /* Espaço abaixo do navegador */
+            background-color: #fdfcf0; /* Cor idêntica ao fundo da imagem para fusão perfeita */
             overflow: hidden;
             display: flex;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
         }
 
         .banner-header img {
             width: 100%;
             height: 100%;
-            /* 'cover' faz a nova logo preencher o espaço lateral sem distorcer */
-            object-fit: cover; 
+            /* 'contain' garante que NENHUMA letra ou detalhe seja cortado */
+            object-fit: contain; 
             object-position: center; 
             display: block;
         }
@@ -93,7 +95,7 @@
         .btn-add {
             width: 100%;
             padding: 14px;
-            background-color: #b39359;
+            background-color: #b39359; /* Dourado combinando com o logo */
             color: #000;
             border: none;
             font-weight: 800;
@@ -132,12 +134,13 @@
         @media (max-width: 900px) {
             .main-content { flex-direction: column; }
             .sidebar { width: 100%; }
+            .banner-header { height: auto; min-height: 180px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- HEADER COM A NOVA IMAGEM -->
+    <!-- HEADER: IMAGEM.SOLLENE GROUP.PNG SEM CORTES -->
     <header class="banner-header">
         <img src="imagem.Sollene Group.png" alt="Sollene Group New Premium Logo">
     </header>
@@ -173,7 +176,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Exemplo da linha que conferimos -->
                     <tr>
                         <td>Coffee</td>
                         <td>Box</td>
