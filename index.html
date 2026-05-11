@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fábio | Tech Portfolio & Systems</title>
+    <title>Sollene Group | Inventory Control</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -11,81 +11,180 @@
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #f4f1ea; 
+            background: #fdfaf6; 
             color: #1a1a1a; 
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        /* HEADER COM FOTO ESFUMAÇADA */
-        .hero {
-            width: 100%;
-            height: 80vh;
-            background: linear-gradient(to bottom, rgba(244, 241, 234, 0) 50%, #f4f1ea 100%), 
-                        url('foto.fabio1.jpg') no-repeat center 20%;
-            background-size: cover;
-            display: flex; flex-direction: column; align-items: center; justify-content: flex-end; text-align: center; padding-bottom: 40px;
-        }
-        .hero h1 { font-size: 80px; font-weight: 800; letter-spacing: -4px; line-height: 0.8; }
-        .hero p { font-size: 13px; text-transform: uppercase; letter-spacing: 5px; color: #b39359; font-weight: 800; margin-top: 20px; }
+        /* HEADER COM LOGO */
+        .logo-container { width: 100%; max-width: 1200px; padding: 40px 20px; text-align: center; }
+        .logo-img { max-width: 300px; height: auto; }
 
-        /* CONTAINER DO PORTAL (IFRAME) */
-        .portal-section {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
+        /* GRID DO SISTEMA */
+        .main-grid {
+            display: grid; grid-template-columns: 360px 1fr; gap: 25px;
+            width: 95%; max-width: 1200px; margin-bottom: 80px;
         }
 
-        .portal-header {
-            text-align: center;
-            margin-bottom: 40px;
+        .sidebar-card {
+            background: #1f2937; padding: 35px; border-radius: 24px;
+            color: #ffffff; border-top: 4px solid #b39359; box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        .portal-header h2 { font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; }
-        
-        /* A JANELA DO SISTEMA */
-        .system-frame {
-            width: 100%;
-            height: 900px; /* Altura para o estoque aparecer inteiro */
-            border: 2px solid #b39359;
-            border-radius: 30px;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
-            background: #ffffff;
-            overflow: hidden;
+        .sidebar-card h3 { font-size: 11px; text-transform: uppercase; color: #b39359; margin-bottom: 25px; letter-spacing: 2px; text-align: center;}
+
+        label { font-size: 11px; text-transform: uppercase; color: #94a3b8; display: block; margin-bottom: 8px; font-weight: 700; }
+        input, select {
+            width: 100%; padding: 14px; margin-bottom: 18px; border: 1px solid #374151; 
+            border-radius: 12px; background: #111827; color: #ffffff; outline: none; font-size: 14px;
         }
 
-        .footer-global {
-            background: #000000;
-            color: #ffffff;
-            padding: 60px 20px;
-            text-align: center;
-            margin-top: 100px;
-            border-top: 4px solid #b39359;
+        #regBtn {
+            width: 100%; padding: 18px; background: #b39359; color: #111827; border: none; 
+            border-radius: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: 0.3s;
         }
+        #regBtn:hover { background: #ffffff; transform: translateY(-2px); }
+
+        /* TABELA */
+        .inventory-area { background: #ffffff; border-radius: 24px; border: 1px solid #e5e1da; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 18px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; }
+        td { padding: 18px; border-bottom: 1px solid #f1f1f1; font-size: 14px; }
+
+        .badge { padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+        .badge-in { background: #dcfce7; color: #166534; }
+        .badge-out { background: #fee2e2; color: #991b1b; }
+
+        .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 10px; }
+        .btn-delete:hover { background: #991b1b; color: #ffffff; }
+
+        /* RODAPÉ BLACK */
+        .footer-premium { background: #000000; color: #ffffff; padding: 60px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
+        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 10px; transition: 0.3s; }
+        .social-btn:hover { background: #b39359; color: #000000; }
+
+        @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <header class="hero">
-        <h1>Fábio</h1>
-        <p>EXPERT SOLUTIONS & GLOBAL SYSTEMS</p>
-    </header>
+    <div class="logo-container">
+        <!-- Certifique-se que o nome do arquivo no GitHub é exatamente este -->
+        <img src="Sollene Group.png" alt="Sollene Group Logo" class="logo-img">
+    </div>
 
-    <section class="portal-section">
-        <div class="portal-header">
-            <h2>Live System Demo</h2>
-            <p style="color: #b39359; font-weight: 700; font-size: 11px; letter-spacing: 2px; margin-top: 10px;">
-                TESTE O TERMINAL SOLLENE GROUP ABAIXO
-            </p>
+    <div class="main-grid">
+        <aside class="sidebar-card">
+            <h3>Shipment Entry</h3>
+            
+            <label>Product Name</label>
+            <input type="text" id="pName" placeholder="Ex: Premium Arabica">
+            
+            <label>Operation</label>
+            <select id="pType">
+                <option value="In">Entry (In)</option>
+                <option value="Out">Exit (Out)</option>
+            </select>
+
+            <label>Currency & Price</label>
+            <div style="display: flex; gap: 10px;">
+                <select id="pCurr" style="flex: 1;">
+                    <option value="USD">USD ($)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="BRL">BRL (R$)</option>
+                </select>
+                <input type="number" id="pPrice" placeholder="0.00" style="flex: 2;">
+            </div>
+
+            <label>Quantity</label>
+            <input type="number" id="pQty" placeholder="Ex: 1000">
+
+            <button id="regBtn">Process Trade</button>
+        </aside>
+
+        <main class="inventory-area">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Product</th>
+                        <th>Value</th>
+                        <th>Qty</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="list"></tbody>
+            </table>
+        </main>
+    </div>
+
+    <footer class="footer-premium">
+        <div style="margin-bottom: 20px;">
+            <a href="#" class="social-btn">LinkedIn</a>
+            <a href="https://github.com" class="social-btn">GitHub</a>
+            <a href="#" class="social-btn">WhatsApp</a>
         </div>
-
-        <!-- AQUI ABRE O ESTOQUE DENTRO DO PORTFÓLIO -->
-        <iframe src="estoque.html" class="system-frame" frameborder="0"></iframe>
-    </section>
-
-    <footer class="footer-global">
-        <p style="color: #b39359; font-weight: 800; letter-spacing: 3px;">GLOBAL CONNECTION</p>
-        <p style="font-size: 10px; margin-top: 20px; opacity: 0.6;">© 2026 FÁBIO — ENGINEERED FOR EXCELLENCE</p>
+        <p style="font-size: 10px; color: #b39359; letter-spacing: 2px;">© 2026 FÁBIO — GLOBAL LOGISTICS SOLUTIONS</p>
     </footer>
 
+    <script>
+        const inventoryList = document.getElementById('list');
+
+        function saveData() {
+            const items = [];
+            document.querySelectorAll('#list tr').forEach(row => {
+                items.push({
+                    type: row.cells[0].innerText,
+                    name: row.cells[1].innerText,
+                    value: row.cells[2].innerText,
+                    qty: row.cells[3].innerText
+                });
+            });
+            localStorage.setItem('sollene_inventory', JSON.stringify(items));
+        }
+
+        function loadData() {
+            const saved = localStorage.getItem('sollene_inventory');
+            if (saved) {
+                JSON.parse(saved).forEach(item => {
+                    renderRow(item.type, item.name, item.value, item.qty);
+                });
+            }
+        }
+
+        function renderRow(type, name, value, qty) {
+            const row = inventoryList.insertRow();
+            const badgeClass = type === 'In' ? 'badge-in' : 'badge-out';
+            row.innerHTML = `
+                <td><span class="badge ${badgeClass}">${type}</span></td>
+                <td><strong>${name}</strong></td>
+                <td style="color:#b39359; font-weight:800">${value}</td>
+                <td>${qty} units</td>
+                <td><button class="btn-delete" onclick="this.closest('tr').remove(); saveData();">DELETE</button></td>
+            `;
+        }
+
+        window.onload = loadData;
+
+        document.getElementById('regBtn').addEventListener('click', function() {
+            const name = document.getElementById('pName').value;
+            const type = document.getElementById('pType').value;
+            const curr = document.getElementById('pCurr').value;
+            const price = document.getElementById('pPrice').value;
+            const qty = document.getElementById('pQty').value;
+
+            if(!name || !price || !qty) return alert("Fill all fields.");
+
+            const symbol = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
+            const formattedValue = `${symbol} ${parseFloat(price).toFixed(2)}`;
+
+            renderRow(type, name, formattedValue, qty);
+            saveData();
+
+            document.getElementById('pName').value = "";
+            document.getElementById('pPrice').value = "";
+            document.getElementById('pQty').value = "";
+        });
+    </script>
 </body>
 </html>
-
