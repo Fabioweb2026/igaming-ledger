@@ -1,17 +1,20 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Sollene Group | Terminal</title>
+
     <style>
         @import url('https://googleapis.com');
-        
+
         *{ margin:0; padding:0; box-sizing:border-box; }
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: #fdfaf6; /* Bege Premium */
+            background: #fdfaf6;
             color: #1a1a1a; 
             padding-bottom: 60px;
             display: flex;
@@ -19,7 +22,6 @@
             align-items: center;
         }
 
-        /* ÁREA DO LOGO CENTRALIZADO */
         .header-container {
             width: 100%;
             max-width: 1200px;
@@ -28,9 +30,11 @@
         }
 
         .logo-main {
-            max-width: 380px; /* Tamanho ideal para o logo */
+            max-width: 320px;
             height: auto;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05));
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.08));
         }
 
         .main-grid {
@@ -42,67 +46,100 @@
             padding: 0 20px;
         }
 
-        /* CARD DE REGISTRO GRAFITE */
         .sidebar-card {
             background: #1f2937;
             padding: 40px 30px;
             border-radius: 30px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
-            height: fit-content;
-            color: #ffffff;
+            color: #fff;
             border-top: 4px solid #b39359;
         }
 
         .sidebar-card h3 { 
-            font-size: 11px; text-transform: uppercase; color: #b39359; 
-            margin-bottom: 30px; letter-spacing: 2px; font-weight: 800; text-align: center; 
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #b39359;
+            margin-bottom: 30px;
+            text-align: center;
+            letter-spacing: 2px;
+            font-weight: 800;
         }
 
         input, select {
-            width: 100%; padding: 16px; margin-bottom: 20px; border: 1px solid #374151; 
-            border-radius: 14px; background: #111827; font-size: 14px; color: #ffffff; outline: none;
+            width: 100%;
+            padding: 16px;
+            margin-bottom: 20px;
+            border: 1px solid #374151;
+            border-radius: 14px;
+            background: #111827;
+            color: #fff;
         }
 
         #regBtn {
-            width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; 
-            border-radius: 16px; font-weight: 800; cursor: pointer; transition: 0.4s; 
-            text-transform: uppercase; font-size: 13px;
+            width: 100%;
+            padding: 20px;
+            background: #b39359;
+            color: #111827;
+            border: none;
+            border-radius: 16px;
+            font-weight: 800;
+            cursor: pointer;
         }
 
-        /* ÁREA DA TABELA BEGE */
         .inventory-area {
             background-color: #f2ede4;
-            background-image: radial-gradient(#d6cdc0 1.5px, transparent 1.5px);
-            background-size: 30px 30px; 
             border-radius: 30px;
             border: 1px solid #e5e1da;
             min-height: 550px;
-            overflow: hidden;
         }
 
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 24px 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
-        td { padding: 24px 20px; border-bottom: 1px solid rgba(212, 163, 115, 0.2); font-size: 15px; color: #374151; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); }
-        
-        .currency-style { color: #b39359; font-weight: 800; }
-        .del-btn { color: #ef4444; cursor: pointer; border: none; background: none; font-weight: 800; font-size: 11px; text-transform: uppercase; }
 
-        @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+        th {
+            padding: 24px 20px;
+            background: #1f2937;
+            color: #b39359;
+            font-size: 10px;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 24px 20px;
+            border-bottom: 1px solid #ddd;
+            background: rgba(255,255,255,0.4);
+        }
+
+        .currency-style { color: #b39359; font-weight: 800; }
+
+        .del-btn {
+            color: red;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: 800;
+        }
+
+        @media(max-width: 900px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
+
 <body>
 
     <header class="header-container">
-        <!-- O LOGO DA EMPRESA ENTRA AQUI -->
-        <img src="Sollene Group.png" alt="Sollene Group" class="logo-main">
+        <!-- LOGO CORRIGIDO -->
+        <img src="sollene-group.png" alt="Sollene Group" class="logo-main">
     </header>
 
     <div class="main-grid">
+
         <aside class="sidebar-card">
             <h3>Shipment Entry</h3>
+
             <input type="text" id="pName" placeholder="Product Name">
             <input type="text" id="pDest" placeholder="Destination Port">
-            
+
             <select id="pCurr">
                 <option value="USD">USD ($)</option>
                 <option value="EUR">EUR (€)</option>
@@ -111,7 +148,7 @@
 
             <input type="number" id="pPrice" placeholder="Price">
             <input type="number" id="pQty" placeholder="Quantity">
-            
+
             <button id="regBtn">Process Trade</button>
         </aside>
 
@@ -129,6 +166,7 @@
                 <tbody id="list"></tbody>
             </table>
         </main>
+
     </div>
 
     <script>
@@ -136,7 +174,9 @@
 
         function saveData() {
             const rows = [];
-            document.querySelectorAll('#list tr').forEach(row => { rows.push(row.innerHTML); });
+            document.querySelectorAll('#list tr').forEach(row => {
+                rows.push(row.innerHTML);
+            });
             localStorage.setItem('solleneData', JSON.stringify(rows));
         }
 
@@ -162,17 +202,20 @@
             if(!name || !price || !qty) return alert("Please complete the fields.");
 
             let s = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
+
             const row = inventoryList.insertRow();
             row.innerHTML = `
-                <td style="font-weight:700;">${name}</td>
-                <td style="color:#64748b">${dest || 'Global'}</td>
+                <td><b>${name}</b></td>
+                <td>${dest || 'Global'}</td>
                 <td class="currency-style">${s} ${parseFloat(price).toFixed(2)}</td>
-                <td><strong>${qty}</strong> units</td>
+                <td>${qty}</td>
                 <td><button class="del-btn" onclick="this.parentElement.parentElement.remove(); saveData()">DELETE</button></td>
             `;
+
             saveData();
             document.querySelectorAll('input').forEach(i => i.value = "");
         });
     </script>
+
 </body>
-</html>
+</html>   
