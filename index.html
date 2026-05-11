@@ -6,7 +6,9 @@
     <title>Sollene Group | Inventory System</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* RESET & BASE STYLE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #fdfcf0;
@@ -16,63 +18,134 @@
             align-items: center;
         }
 
-        /* BANNER AJUSTADO: LARGURA TOTAL + LOGO VISÍVEL */
+        /* BANNER COM A NOVA IMAGEM HARMONIOSA */
         .banner-header {
             width: 100%;
             height: 9.5cm;
-            margin-top: 0.5cm;
+            margin-top: 0.5cm; /* Espaçamento solicitado do navegador */
             overflow: hidden;
             display: flex;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
+
         .banner-header img {
             width: 100%;
             height: 100%;
+            /* 'cover' faz a nova logo preencher o espaço lateral sem distorcer */
             object-fit: cover; 
-            object-position: left top; 
+            object-position: center; 
             display: block;
         }
 
-        .nav-top { width: 100%; max-width: 1200px; padding: 30px 20px 20px; }
-        .btn-back {
-            text-decoration: none; color: #b39359; border: 1px solid #b39359;
-            padding: 8px 20px; border-radius: 50px; font-size: 11px;
-            font-weight: 700; text-transform: uppercase; transition: 0.3s;
+        /* NAVEGAÇÃO */
+        .nav-top {
+            width: 100%;
+            max-width: 1200px;
+            padding: 30px 20px 20px;
+            text-align: left;
         }
+
+        .btn-back {
+            text-decoration: none;
+            color: #b39359;
+            border: 1px solid #b39359;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
         .btn-back:hover { background: #b39359; color: white; }
 
-        .main-content { display: flex; width: 100%; max-width: 1200px; gap: 25px; padding: 0 20px 60px; }
-        .sidebar {
-            width: 320px; background-color: #1a1a1a; color: #b39359;
-            padding: 25px; border-radius: 20px; box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-        }
-        .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 20px; text-align: center; }
-        input, select { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #333; }
-        .btn-add {
-            width: 100%; padding: 14px; background-color: #b39359; color: #000;
-            border: none; font-weight: 800; border-radius: 8px; cursor: pointer;
+        /* CONTEÚDO PRINCIPAL */
+        .main-content {
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            gap: 25px;
+            padding: 0 20px 60px;
+            flex: 1;
         }
 
-        .table-container {
-            flex: 1; background: white; border-radius: 20px; overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2);
+        .sidebar {
+            width: 320px;
+            background-color: #1a1a1a;
+            color: #b39359;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            height: fit-content;
         }
+
+        .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 20px; text-align: center; }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background: #fff;
+        }
+
+        .btn-add {
+            width: 100%;
+            padding: 14px;
+            background-color: #b39359;
+            color: #000;
+            border: none;
+            font-weight: 800;
+            border-radius: 8px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        /* TABELA DE ESTOQUE */
+        .table-container {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(179, 147, 89, 0.2);
+        }
+
         table { width: 100%; border-collapse: collapse; }
         thead { background-color: #000; color: #b39359; }
         th, td { padding: 18px; text-align: center; font-size: 14px; border-bottom: 1px solid #f2f2f2; }
         .total-val { color: #b39359; font-weight: bold; }
 
-        footer { width: 100%; padding: 60px 20px; background-color: #1a1a1a; text-align: center; border-top: 3px solid #b39359; }
+        /* RODAPÉ */
+        footer {
+            width: 100%;
+            padding: 40px 20px;
+            background-color: #1a1a1a;
+            text-align: center;
+            border-top: 3px solid #b39359;
+            margin-top: auto;
+        }
+
         .footer-address { color: #b39359; font-size: 11px; text-transform: uppercase; }
 
-        @media (max-width: 900px) { .main-content { flex-direction: column; } .sidebar { width: 100%; } }
+        @media (max-width: 900px) {
+            .main-content { flex-direction: column; }
+            .sidebar { width: 100%; }
+        }
     </style>
 </head>
 <body>
+
+    <!-- HEADER COM A NOVA IMAGEM -->
     <header class="banner-header">
-        <img src="sollene-group.jpg" alt="Sollene Group Dashboard">
+        <img src="imagem.Sollene Group.png" alt="Sollene Group New Premium Logo">
     </header>
-    <nav class="nav-top"><a href="index.html" class="btn-back">← BACK TO PORTFOLIO</a></nav>
+
+    <nav class="nav-top">
+        <a href="index.html" class="btn-back">← BACK TO PORTFOLIO</a>
+    </nav>
+
     <main class="main-content">
         <section class="sidebar">
             <h2>Register Product</h2>
@@ -84,21 +157,43 @@
             <input type="number" placeholder="Unit Price">
             <button class="btn-add">Add Product</button>
         </section>
+
         <section class="table-container">
             <table>
                 <thead>
-                    <tr><th>PRODUCT</th><th>UNIT</th><th>ENTRY</th><th>EXIT</th><th>STOCK</th><th>PRICE</th><th>REVENUE</th><th>CASH</th></tr>
+                    <tr>
+                        <th>PRODUCT</th>
+                        <th>UNIT</th>
+                        <th>ENTRY</th>
+                        <th>EXIT</th>
+                        <th>STOCK</th>
+                        <th>PRICE</th>
+                        <th>REVENUE</th>
+                        <th>CASH</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <tr><td>Coffee</td><td>Box</td><td>123</td><td>56</td><td>67</td><td>$ 6.78</td><td>$ 379.68</td><td class="total-val">$ -454.26</td></tr>
+                    <!-- Exemplo da linha que conferimos -->
+                    <tr>
+                        <td>Coffee</td>
+                        <td>Box</td>
+                        <td>123</td>
+                        <td>56</td>
+                        <td>67</td>
+                        <td>$ 6.78</td>
+                        <td>$ 379.68</td>
+                        <td class="total-val">$ -454.26</td>
+                    </tr>
                 </tbody>
             </table>
         </section>
     </main>
+
     <footer>
         <div class="footer-address">
             <p>SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
         </div>
     </footer>
+
 </body>
 </html>
