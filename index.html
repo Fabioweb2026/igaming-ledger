@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +32,7 @@
         @media (max-width: 1100px) { .main-content { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
-<body>
+<body onload="loadInventory()">
     <header class="banner-header"><img src="imagem.Sollene Group.png" alt="Sollene Group Logo"></header>
     <nav class="nav-top"><a href="index.html" class="btn-back">← Back</a></nav>
     <main class="main-content">
@@ -73,6 +74,44 @@
             if(curr === "USD") return "$";
             return "€";
         }
+
+        function saveInventory() {
+            const rows = document.querySelectorAll("#inventoryBody tr");
+            const data = [];
+            rows.forEach(row => {
+                const cols = row.querySelectorAll("td");
+                data.push({
+                    name: cols[0].innerText,
+                    unit: cols[1].innerText,
+                    stock: cols[2].innerText,
+                    buyPrice: cols[3].innerText,
+                    sellPrice: cols[4].innerText,
+                    revenue: cols[5].innerText,
+                    profit: cols[6].innerText,
+                    invVal: cols[7].innerText,
+                    profitClass: cols[6].className
+                });
+            });
+            localStorage.setItem("solleneInventory", JSON.stringify(data));
+        }
+
+        function loadInventory() {
+            const data = JSON.parse(localStorage.getItem("solleneInventory"));
+            if (!data) return;
+            const table = document.getElementById('inventoryBody');
+            data.forEach(item => {
+                const row = table.insertRow();
+                row.innerHTML = `
+                    <td>${item.name}</td><td>${item.unit}</td><td class="stock-val">${item.stock}</td>
+                    <td>${item.buyPrice}</td><td>${item.sellPrice}</td>
+                    <td style="color: #27ae60; font-weight: bold;">${item.revenue}</td>
+                    <td class="${item.profitClass}">${item.profit}</td>
+                    <td style="color: #2980b9; font-size: 10px;">${item.invVal}</td>
+                    <td><button style="color: red; border: none; background: none; cursor: pointer;" onclick="deleteRow(this)">Delete</button></td>
+                `;
+            });
+        }
+
         function addProduct() {
             const name = document.getElementById('pName').value;
             const unit = document.getElementById('pUnit').value;
@@ -84,13 +123,13 @@
             const sellPrice = Number(document.getElementById('pSellPrice').value) || 0;
 
             if (!name || buyPrice === 0) {
-                alert("Please fill in the product name and cost.");
+                alert("Preencha o nome e custo.");
                 return;
             }
 
             const stock = entry - exit;
             const revenue = exit * sellPrice; 
-            const profit = (sellPrice - buyPrice) * exit; // Lucro direto sem taxa de câmbio
+            const profit = (sellPrice - buyPrice) * exit;
             const inventoryValue = stock * buyPrice;
 
             const table = document.getElementById('inventoryBody');
@@ -102,11 +141,23 @@
                 <td style="color: #27ae60; font-weight: bold;">${getSymbol(sellCurr)} ${revenue.toFixed(2)}</td>
                 <td class="${profit >= 0 ? 'profit-plus' : 'profit-minus'}">${getSymbol(sellCurr)} ${profit.toFixed(2)}</td>
                 <td style="color: #2980b9; font-size: 10px;">${getSymbol(buyCurr)} ${inventoryValue.toFixed(2)}</td>
-                <td><button style="color: red; border: none; background: none; cursor: pointer;" onclick="this.parentElement.parentElement.remove()">Delete</button></td>
+                <td><button style="color: red; border: none; background: none; cursor: pointer;" onclick="deleteRow(this)">Delete</button></td>
             `;
+            saveInventory();
             document.getElementById('pName').value = ""; document.getElementById('pEntry').value = ""; document.getElementById('pExit').value = ""; document.getElementById('pBuyPrice').value = ""; document.getElementById('pSellPrice').value = "";
         }
-        function clearAll() { if (confirm("Reset the entire list?")) document.getElementById('inventoryBody').innerHTML = ""; }
+
+        function deleteRow(btn) {
+            btn.parentElement.parentElement.remove();
+            saveInventory();
+        }
+
+        function clearAll() {
+            if (confirm("Reset the entire list?")) {
+                document.getElementById('inventoryBody').innerHTML = "";
+                localStorage.removeItem("solleneInventory");
+            }
+        }
     </script>
 </body>
 </html>
