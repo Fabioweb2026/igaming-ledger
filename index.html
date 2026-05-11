@@ -18,20 +18,26 @@
 
         .main-content { display: flex; width: 100%; max-width: 1400px; gap: 20px; padding: 0 20px 40px; flex: 1; }
 
-        .sidebar { width: 300px; background-color: #1a1a1a; color: #b39359; padding: 20px; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); height: fit-content; border: 1px solid rgba(179, 147, 89, 0.3); }
-        .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 15px; text-align: center; font-size: 1.1rem; }
+        .sidebar { width: 320px; background-color: #1a1a1a; color: #b39359; padding: 25px; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); height: fit-content; border: 1px solid rgba(179, 147, 89, 0.3); }
+        .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 20px; text-align: center; font-size: 1.2rem; }
         label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: block; color: #888; }
-        input, select { width: 100%; padding: 8px 10px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #333; background: #fff; color: #1a1a1a; font-size: 12px; }
+        input, select { width: 100%; padding: 10px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #333; background: #fff; color: #1a1a1a; font-size: 12px; }
 
-        .btn-add { width: 100%; padding: 12px; background-color: #b39359; color: #1a1a1a; border: none; font-weight: 800; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 12px; transition: 0.3s; margin-top: 5px; }
-        .btn-clear { width: 100%; padding: 8px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 9px; transition: 0.3s; margin-top: 10px; }
+        .btn-add { width: 100%; padding: 14px; background-color: #b39359; color: #1a1a1a; border: none; font-weight: 800; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 12px; transition: 0.3s; margin-bottom: 10px; }
+        .btn-add:hover { background-color: #cbb07c; transform: translateY(-2px); }
+
+        /* NOVO BOTÃO SALVAR */
+        .btn-save-manual { width: 100%; padding: 10px; background-color: #27ae60; color: white; border: none; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 10px; transition: 0.3s; margin-bottom: 10px; }
+        .btn-save-manual:hover { background-color: #219150; }
+
+        .btn-clear { width: 100%; padding: 8px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 9px; transition: 0.3s; }
+        .btn-clear:hover { background-color: #e74c3c; color: white; }
 
         .table-container { flex: 1; background: white; border-radius: 15px; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2); }
         table { width: 100%; border-collapse: collapse; min-width: 900px; }
         thead { background-color: #000; color: #b39359; }
-        th, td { padding: 10px; text-align: center; font-size: 11px; border-bottom: 1px solid #f2f2f2; }
+        th, td { padding: 12px; text-align: center; font-size: 11px; border-bottom: 1px solid #f2f2f2; }
         
-        /* CORES CORRIGIDAS */
         .revenue-val { color: #27ae60 !important; font-weight: bold; }
         .profit-plus { color: #b39359 !important; font-weight: bold; }
         .profit-minus { color: #e74c3c !important; font-weight: bold; }
@@ -65,9 +71,12 @@
                 <select id="pSellCurr" style="width: 45%;"><option value="USD">$</option><option value="EUR">€</option><option value="BRL">R$</option></select>
                 <input type="number" id="pSellPrice" placeholder="Price">
             </div>
+            
             <button class="btn-add" onclick="addProduct()">Process Trade</button>
+            <button class="btn-save-manual" onclick="manualSave()">💾 Save Inventory</button>
             <button class="btn-clear" onclick="clearAll()">Reset List</button>
         </section>
+
         <section class="table-container">
             <table>
                 <thead>
@@ -91,6 +100,11 @@
             localStorage.setItem("solleneInventoryHTML", table.innerHTML);
         }
 
+        function manualSave() {
+            saveInventory();
+            alert("Inventory saved successfully!");
+        }
+
         function loadInventory() {
             const savedHTML = localStorage.getItem("solleneInventoryHTML");
             if (savedHTML) {
@@ -109,7 +123,7 @@
             const sellPrice = Number(document.getElementById('pSellPrice').value) || 0;
 
             if (!name || buyPrice === 0) {
-                alert("Preencha o nome e o custo.");
+                alert("Please fill in the product name and cost.");
                 return;
             }
 
@@ -120,11 +134,8 @@
 
             const table = document.getElementById('inventoryBody');
             const row = table.insertRow();
-            
             row.innerHTML = `
-                <td>${name}</td>
-                <td>${unit}</td>
-                <td style="font-weight:bold; color:#555;">${stock}</td>
+                <td>${name}</td><td>${unit}</td><td style="font-weight:bold; color:#555;">${stock}</td>
                 <td>${getSymbol(buyCurr)} ${buyPrice.toFixed(2)}</td>
                 <td>${getSymbol(sellCurr)} ${sellPrice.toFixed(2)}</td>
                 <td class="revenue-val">${getSymbol(sellCurr)} ${revenue.toFixed(2)}</td>
@@ -132,10 +143,8 @@
                 <td class="inv-val">${getSymbol(buyCurr)} ${inventoryValue.toFixed(2)}</td>
                 <td><button style="color:red; border:none; background:none; cursor:pointer;" onclick="deleteRow(this)">Delete</button></td>
             `;
+            saveInventory(); // Salva automaticamente ao adicionar
             
-            saveInventory();
-            
-            // Limpar campos
             document.getElementById('pName').value = "";
             document.getElementById('pEntry').value = "";
             document.getElementById('pExit').value = "";
@@ -145,11 +154,11 @@
 
         function deleteRow(btn) {
             btn.closest('tr').remove();
-            saveInventory();
+            saveInventory(); // Salva automaticamente ao deletar
         }
 
         function clearAll() {
-            if (confirm("Resetar toda a lista?")) {
+            if (confirm("Reset the entire list?")) {
                 document.getElementById('inventoryBody').innerHTML = "";
                 localStorage.removeItem("solleneInventoryHTML");
             }
@@ -157,5 +166,3 @@
     </script>
 </body>
 </html>
-
-
