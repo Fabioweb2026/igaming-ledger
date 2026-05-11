@@ -1,95 +1,231 @@
-<!-- Procure a tag <style> e atualize estes pontos -->
-<style>
-    /* Ajuste para a tabela ficar mais compacta */
-    th, td { padding: 15px 10px !important; font-size: 13px !important; }
-    
-    .profit-positive { color: #16a34a; font-weight: 800; }
-    .profit-negative { color: #dc2626; font-weight: 800; }
-</style>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sollene Group | Financial Management</title>
+    <style>
+        @import url('https://googleapis.com');
+        
+        *{ margin:0; padding:0; box-sizing:border-box; }
 
-<!-- Na parte da Tabela (dentro do main), substitua o <thead> -->
-<thead>
-    <tr>
-        <th>Status</th>
-        <th>Product</th>
-        <th>Purchase</th>
-        <th>Sale</th>
-        <th>Qty</th>
-        <th>Profit</th> <!-- Nova Coluna -->
-        <th>Action</th>
-    </tr>
-</thead>
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: #fdfaf6; 
+            color: #1a1a1a; 
+            display: flex; flex-direction: column; align-items: center;
+        }
 
-<!-- Substitua o <script> completo para incluir a lógica do lucro -->
-<script>
-    const inventoryList = document.getElementById('list');
+        /* HEADER LOGO */
+        .logo-container { width: 100%; max-width: 1200px; padding: 30px 30px; text-align: center; }
+        .logo-img { width: 100%; max-width: 900px; height: auto; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05)); object-fit: contain; }
 
-    function saveData() {
-        const items = [];
-        document.querySelectorAll('#list tr').forEach(row => {
-            items.push({
-                status: row.cells[0].innerHTML,
-                name: row.cells[1].innerHTML,
-                purchase: row.cells[2].innerHTML,
-                sale: row.cells[3].innerHTML,
-                qty: row.cells[4].innerHTML,
-                profit: row.cells[5].innerHTML
+        /* GRID PRINCIPAL */
+        .main-grid {
+            display: grid; grid-template-columns: 350px 1fr; gap: 25px;
+            width: 95%; max-width: 1200px; margin-bottom: 60px;
+        }
+
+        /* CARD EXECUTIVO DARK */
+        .sidebar-card {
+            background: #111827; padding: 25px; border-radius: 20px;
+            color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); height: fit-content;
+        }
+
+        .sidebar-card h3 { font-size: 18px; font-weight: 800; color: #ffffff; margin-bottom: 20px; letter-spacing: -0.5px; }
+
+        label { font-size: 9px; text-transform: uppercase; color: #b39359; display: block; margin-bottom: 6px; font-weight: 800; letter-spacing: 1.5px; }
+
+        input, select {
+            width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 10px; background: rgba(255, 255, 255, 0.03); color: #ffffff; outline: none; font-size: 13px;
+        }
+        select option { background-color: #ffffff; color: #111827; }
+
+        .row-group { display: flex; gap: 8px; }
+
+        #regBtn {
+            width: 100%; padding: 16px; background: #b39359; color: #111827; border: none; 
+            border-radius: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.4s;
+        }
+        #regBtn:hover { background: #ffffff; transform: translateY(-2px); }
+
+        /* ÁREA DA TABELA COMPACTA */
+        .inventory-area { background: #ffffff; border-radius: 20px; border: 1px solid #e5e1da; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 15px 10px; background: #1f2937; color: #b39359; font-size: 9px; text-transform: uppercase; }
+        td { padding: 15px 10px; border-bottom: 1px solid #f1f1f1; font-size: 13px; }
+
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
+        .badge-in { background: #dcfce7; color: #166534; }
+        .badge-out { background: #fee2e2; color: #991b1b; }
+
+        /* CORES DO LUCRO */
+        .profit-pos { color: #16a34a; font-weight: 800; }
+        .profit-neg { color: #dc2626; font-weight: 800; }
+
+        .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: 800; font-size: 9px; }
+
+        /* RODAPÉ BLACK */
+        .footer-premium { background: #000000; color: #ffffff; padding: 60px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
+        .social-btn { text-decoration: none; color: #ffffff; font-size: 10px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 8px; display: inline-block; transition: 0.3s; }
+        .social-btn:hover { background: #b39359; color: #000000; }
+    </style>
+</head>
+<body>
+
+    <div class="logo-container">
+        <img src="Sollene-Group.png" alt="Sollene Group Logo" class="logo-img">
+    </div>
+
+    <div class="main-grid">
+        <aside class="sidebar-card">
+            <h3>Shipment Entry</h3>
+            
+            <label>Product Name</label>
+            <input type="text" id="pName" placeholder="Ex: Premium Coffee">
+            
+            <label>Operation Type</label>
+            <select id="pType">
+                <option value="In">Import (Entry)</option>
+                <option value="Out">Export (Exit)</option>
+            </select>
+
+            <label>Purchase Price (R$ - Cost)</label>
+            <div class="row-group">
+                <select id="pCurrBuy" style="flex: 1.2;">
+                    <option value="R$">R$</option>
+                    <option value="$">$</option>
+                    <option value="€">€</option>
+                </select>
+                <input type="number" id="pCost" placeholder="0.00" style="flex: 2;">
+            </div>
+
+            <label>Sale Price (€ - Revenue)</label>
+            <div class="row-group">
+                <select id="pCurrSale" style="flex: 1.2;">
+                    <option value="€">€</option>
+                    <option value="$">$</option>
+                    <option value="R$">R$</option>
+                </select>
+                <input type="number" id="pSale" placeholder="0.00" style="flex: 2;">
+            </div>
+
+            <label>Quantity & Unit</label>
+            <div class="row-group">
+                <input type="number" id="pQty" placeholder="0" style="flex: 1;">
+                <select id="pUnit" style="flex: 1.5;">
+                    <option value="Boxes">Boxes</option>
+                    <option value="Tons">Tons</option>
+                    <option value="KG">KG</option>
+                </select>
+            </div>
+
+            <button id="regBtn">Process & Calculate</button>
+        </aside>
+
+        <main class="inventory-area">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Product</th>
+                        <th>Purchase</th>
+                        <th>Sale</th>
+                        <th>Volume</th>
+                        <th>Profit</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="list"></tbody>
+            </table>
+        </main>
+    </div>
+
+    <footer class="footer-premium">
+        <div style="margin-bottom: 25px;">
+            <a href="https://linkedin.com" target="_blank" class="social-btn">LinkedIn</a>
+            <a href="https://github.com" target="_blank" class="social-btn">GitHub</a>
+            <a href="https://wa.me" target="_blank" class="social-btn">WhatsApp</a>
+        </div>
+        <p style="font-size: 9px; color: #b39359; letter-spacing: 2px; opacity: 0.7;">SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
+    </footer>
+
+    <script>
+        const inventoryList = document.getElementById('list');
+
+        function saveData() {
+            const items = [];
+            document.querySelectorAll('#list tr').forEach(row => {
+                items.push({
+                    statusHtml: row.cells[0].innerHTML,
+                    name: row.cells[1].innerText,
+                    purchase: row.cells[2].innerText,
+                    sale: row.cells[3].innerText,
+                    volume: row.cells[4].innerText,
+                    profit: row.cells[5].innerText,
+                    profitClass: row.cells[5].className
+                });
             });
+            localStorage.setItem('sollene_financial_v1', JSON.stringify(items));
+        }
+
+        function loadData() {
+            const saved = localStorage.getItem('sollene_financial_v1');
+            if (saved) {
+                JSON.parse(saved).forEach(item => {
+                    renderRow(item.statusHtml, item.name, item.purchase, item.sale, item.volume, item.profit, item.profitClass);
+                });
+            }
+        }
+
+        function renderRow(statusHtml, name, purchase, sale, volume, profit, profitClass) {
+            const row = inventoryList.insertRow();
+            row.innerHTML = `
+                <td>${statusHtml}</td>
+                <td><strong>${name}</strong></td>
+                <td style="color:#64748b">${purchase}</td>
+                <td style="color:#b39359; font-weight:800">${sale}</td>
+                <td>${volume}</td>
+                <td class="${profitClass}">${profit}</td>
+                <td><button class="btn-delete" onclick="this.closest('tr').remove(); saveData();">DELETE</button></td>
+            `;
+        }
+
+        window.onload = loadData;
+
+        document.getElementById('regBtn').addEventListener('click', function() {
+            const name = document.getElementById('pName').value;
+            const type = document.getElementById('pType').value;
+            const cost = parseFloat(document.getElementById('pCost').value);
+            const sale = parseFloat(document.getElementById('pSale').value);
+            const qty = parseFloat(document.getElementById('pQty').value);
+            const unit = document.getElementById('pUnit').value;
+            const symBuy = document.getElementById('pCurrBuy').value;
+            const symSale = document.getElementById('pCurrSale').value;
+
+            if(!name || isNaN(cost) || isNaN(sale) || isNaN(qty)) return alert("Preencha todos os campos.");
+
+            // CÁLCULO DO LUCRO: (Venda - Custo) * Quantidade
+            const totalProfit = (sale - cost) * qty;
+            const profitClass = totalProfit >= 0 ? 'profit-pos' : 'profit-neg';
+            const formattedProfit = `${symSale} ${totalProfit.toFixed(2)}`;
+            
+            const purchaseVal = `${symBuy} ${cost.toFixed(2)}`;
+            const saleVal = `${symSale} ${sale.toFixed(2)}`;
+            const volumeVal = `${qty} ${unit}`;
+            const statusHtml = `<span class="badge ${type === 'In' ? 'badge-in' : 'badge-out'}">${type}</span>`;
+
+            renderRow(statusHtml, name, purchaseVal, saleVal, volumeVal, formattedProfit, profitClass);
+            saveData();
+
+            // Limpa campos
+            document.getElementById('pName').value = "";
+            document.getElementById('pCost').value = "";
+            document.getElementById('pSale').value = "";
+            document.getElementById('pQty').value = "";
         });
-        localStorage.setItem('sollene_profit_db', JSON.stringify(items));
-    }
-
-    function renderRow(status, name, purchase, sale, qty, profit) {
-        const row = inventoryList.insertRow();
-        const badgeClass = status.includes('In') ? 'badge-in' : 'badge-out';
-        
-        // Verifica se o lucro é positivo ou negativo para colorir
-        const profitClass = parseFloat(profit.replace(/[^0-9.-]+/g,"")) >= 0 ? 'profit-positive' : 'profit-negative';
-
-        row.innerHTML = `
-            <td>${status}</td>
-            <td><strong>${name}</strong></td>
-            <td style="color:#64748b">${purchase}</td>
-            <td style="color:#b39359; font-weight:800">${sale}</td>
-            <td>${qty}</td>
-            <td class="${profitClass}">${profit}</td>
-            <td><button class="btn-delete" onclick="this.closest('tr').remove(); saveData();">DELETE</button></td>
-        `;
-    }
-
-    document.getElementById('regBtn').addEventListener('click', function() {
-        const name = document.getElementById('pName').value;
-        const type = document.getElementById('pType').value;
-        const cost = parseFloat(document.getElementById('pCost').value);
-        const sale = parseFloat(document.getElementById('pSale').value);
-        const qty = parseFloat(document.getElementById('pQty').value);
-        const unit = document.getElementById('pUnit').value;
-        const symSale = document.getElementById('pCurrSale').value;
-        const symBuy = document.getElementById('pCurrBuy').value;
-
-        if(!name || isNaN(cost) || isNaN(sale) || isNaN(qty)) return alert("Preencha os valores.");
-
-        // CÁLCULO DO LUCRO: (Venda - Custo) * Quantidade
-        const totalProfit = (sale - cost) * qty;
-        const formattedProfit = `${symSale} ${totalProfit.toFixed(2)}`;
-        
-        const purchaseVal = `${symBuy} ${cost.toFixed(2)}`;
-        const saleVal = `${symSale} ${sale.toFixed(2)}`;
-        const volumeVal = `${qty} ${unit}`;
-        const statusHtml = `<span class="badge ${type === 'In' ? 'badge-in' : 'badge-out'}">${type}</span>`;
-
-        renderRow(statusHtml, name, purchaseVal, saleVal, volumeVal, formattedProfit);
-        saveData();
-
-        // Limpa campos
-        document.getElementById('pName').value = "";
-        document.getElementById('pCost').value = "";
-        document.getElementById('pSale').value = "";
-        document.getElementById('pQty').value = "";
-    });
-
-    window.onload = () => {
-        const saved = localStorage.getItem('sollene_profit_db');
-        if (saved) JSON.parse(saved).forEach(i => renderRow(i.status, i.name, i.purchase, i.sale, i.qty, i.profit));
-    };
-</script>
+    </script>
+</body>
+</html>
