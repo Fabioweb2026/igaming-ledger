@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Import & Export Terminal</title>
+    <title>Sollene Group | Global Trade Terminal</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -47,7 +47,7 @@
             border-radius: 12px; background: #0f172a; color: #ffffff; outline: none; font-size: 14px;
         }
 
-        input:focus { border-color: #b39359; }
+        .row-group { display: flex; gap: 10px; }
 
         #regBtn {
             width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; 
@@ -56,7 +56,7 @@
         }
         #regBtn:hover { background: #ffffff; transform: translateY(-3px); }
 
-        /* ÁREA DA TABELA (INVENTORY) */
+        /* ÁREA DA TABELA */
         .inventory-area { background: #ffffff; border-radius: 24px; border: 1px solid #e5e1da; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; }
@@ -66,14 +66,14 @@
         .badge-in { background: #dcfce7; color: #166534; }
         .badge-out { background: #fee2e2; color: #991b1b; }
 
-        .price-buy { color: #166534; font-weight: 700; }
+        .price-buy { color: #64748b; font-size: 13px; }
         .price-sale { color: #b39359; font-weight: 800; }
 
         .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 10px; }
 
         /* RODAPÉ */
         .footer-premium { background: #000000; color: #ffffff; padding: 60px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
-        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 10px; display: inline-block; transition: 0.3s; }
+        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 10px; display: inline-block; }
 
         @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
@@ -89,7 +89,7 @@
             <h3>Shipment Entry</h3>
             
             <label>Product Name</label>
-            <input type="text" id="pName" placeholder="Ex: Premium Coffee">
+            <input type="text" id="pName" placeholder="Ex: Premium Arabica">
             
             <label>Operation Type</label>
             <select id="pType">
@@ -97,14 +97,35 @@
                 <option value="Out">Export (Exit)</option>
             </select>
 
-            <label>Purchase Price (BRL - R$)</label>
-            <input type="number" id="pCost" placeholder="0.00">
+            <label>Purchase Price (Cost)</label>
+            <div class="row-group">
+                <select id="pCurrBuy" style="flex: 1;">
+                    <option value="BRL">R$</option>
+                    <option value="USD">$</option>
+                    <option value="EUR">€</option>
+                </select>
+                <input type="number" id="pCost" placeholder="0.00" style="flex: 2;">
+            </div>
 
-            <label>Sale Price (EUR - €)</label>
-            <input type="number" id="pSale" placeholder="0.00">
+            <label>Sale Price (Revenue)</label>
+            <div class="row-group">
+                <select id="pCurrSale" style="flex: 1;">
+                    <option value="EUR">€</option>
+                    <option value="USD">$</option>
+                    <option value="BRL">R$</option>
+                </select>
+                <input type="number" id="pSale" placeholder="0.00" style="flex: 2;">
+            </div>
 
-            <label>Quantity</label>
-            <input type="number" id="pQty" placeholder="Ex: 1000">
+            <label>Quantity & Unit</label>
+            <div class="row-group">
+                <input type="number" id="pQty" placeholder="0" style="flex: 2;">
+                <select id="pUnit" style="flex: 2;">
+                    <option value="Boxes">Boxes</option>
+                    <option value="Tons">Tons</option>
+                    <option value="KG">KG</option>
+                </select>
+            </div>
 
             <button id="regBtn">Process Trade</button>
         </aside>
@@ -115,9 +136,9 @@
                     <tr>
                         <th>Status</th>
                         <th>Product</th>
-                        <th>Cost (BRL)</th>
-                        <th>Sale (EUR)</th>
-                        <th>Qty</th>
+                        <th>Purchase</th>
+                        <th>Sale</th>
+                        <th>Volume</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -144,32 +165,32 @@
                 items.push({
                     status: row.cells[0].innerText,
                     name: row.cells[1].innerText,
-                    cost: row.cells[2].innerText,
+                    purchase: row.cells[2].innerText,
                     sale: row.cells[3].innerText,
-                    qty: row.cells[4].innerText
+                    volume: row.cells[4].innerText
                 });
             });
-            localStorage.setItem('sollene_trade_v1', JSON.stringify(items));
+            localStorage.setItem('sollene_global_v2', JSON.stringify(items));
         }
 
         function loadData() {
-            const saved = localStorage.getItem('sollene_trade_v1');
+            const saved = localStorage.getItem('sollene_global_v2');
             if (saved) {
                 JSON.parse(saved).forEach(item => {
-                    renderRow(item.status, item.name, item.cost, item.sale, item.qty);
+                    renderRow(item.status, item.name, item.purchase, item.sale, item.volume);
                 });
             }
         }
 
-        function renderRow(status, name, cost, sale, qty) {
+        function renderRow(status, name, purchase, sale, volume) {
             const row = inventoryList.insertRow();
             const badgeClass = status === 'In' ? 'badge-in' : 'badge-out';
             row.innerHTML = `
                 <td><span class="badge ${badgeClass}">${status}</span></td>
                 <td><strong>${name}</strong></td>
-                <td class="price-buy">${cost}</td>
+                <td class="price-buy">${purchase}</td>
                 <td class="price-sale">${sale}</td>
-                <td>${qty} units</td>
+                <td>${volume}</td>
                 <td><button class="btn-delete" onclick="this.closest('tr').remove(); saveData();">DELETE</button></td>
             `;
         }
@@ -179,18 +200,29 @@
         document.getElementById('regBtn').addEventListener('click', function() {
             const name = document.getElementById('pName').value;
             const type = document.getElementById('pType').value;
+            
+            const currBuy = document.getElementById('pCurrBuy').value;
             const cost = document.getElementById('pCost').value;
+            
+            const currSale = document.getElementById('pCurrSale').value;
             const sale = document.getElementById('pSale').value;
+            
             const qty = document.getElementById('pQty').value;
+            const unit = document.getElementById('pUnit').value;
 
-            if(!name || !cost || !sale || !qty) return alert("Please fill all fields.");
+            if(!name || !cost || !sale || !qty) return alert("Fill all fields.");
 
-            const formattedCost = `R$ ${parseFloat(cost).toFixed(2)}`;
-            const formattedSale = `€ ${parseFloat(sale).toFixed(2)}`;
+            const symBuy = currBuy === "USD" ? "$" : (currBuy === "EUR" ? "€" : "R$");
+            const symSale = currSale === "USD" ? "$" : (currSale === "EUR" ? "€" : "R$");
 
-            renderRow(type, name, formattedCost, formattedSale, qty);
+            const purchaseVal = `${symBuy} ${parseFloat(cost).toFixed(2)}`;
+            const saleVal = `${symSale} ${parseFloat(sale).toFixed(2)}`;
+            const volumeVal = `${qty} ${unit}`;
+
+            renderRow(type, name, purchaseVal, saleVal, volumeVal);
             saveData();
 
+            // Limpar
             document.getElementById('pName').value = "";
             document.getElementById('pCost').value = "";
             document.getElementById('pSale').value = "";
@@ -199,4 +231,3 @@
     </script>
 </body>
 </html>
-
