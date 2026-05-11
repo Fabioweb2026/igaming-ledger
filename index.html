@@ -1,37 +1,32 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Global Trade Terminal</title>
+    <title>Sollene Group | Terminal</title>
     <style>
         @import url('https://googleapis.com');
-        
         *{ margin:0; padding:0; box-sizing:border-box; }
 
         body { 
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background: #fdfaf6; 
-            color: #1a1a1a; 
             display: flex; flex-direction: column; align-items: center;
         }
 
-        /* HEADER COM LOGO */
         .logo-container { width: 100%; max-width: 1200px; padding: 40px 30px; text-align: center; }
-        .logo-img { width: 100%; max-width: 1000px; height: auto; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05)); object-fit: contain; }
+        .logo-img { width: 100%; max-width: 1000px; height: auto; object-fit: contain; }
 
-        /* GRID DO SISTEMA */
         .main-grid {
             display: grid; grid-template-columns: 360px 1fr; gap: 30px;
             width: 95%; max-width: 1200px; margin-bottom: 80px;
         }
 
-        /* CARD LATERAL DARK (SHIPMENT ENTRY) */
+        /* CARD DARK DO SEU PRINT */
         .sidebar-card {
             background: #1a222e; padding: 35px; border-radius: 24px;
             color: #ffffff; border: 1px solid rgba(179, 147, 89, 0.2);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            height: fit-content;
         }
 
         .sidebar-card h3 { 
@@ -49,6 +44,7 @@
 
         .row-group { display: flex; gap: 10px; }
 
+        /* BOTÃO PROCESS TRADE - O SALVADOR */
         #regBtn {
             width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; 
             border-radius: 12px; font-weight: 800; cursor: pointer; text-transform: uppercase; 
@@ -56,26 +52,17 @@
         }
         #regBtn:hover { background: #ffffff; transform: translateY(-3px); }
 
-        /* ÁREA DA TABELA */
-        .inventory-area { background: #ffffff; border-radius: 24px; border: 1px solid #e5e1da; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
+        /* TABELA */
+        .inventory-area { background: #ffffff; border-radius: 24px; border: 1px solid #e5e1da; overflow: hidden; }
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; }
-        td { padding: 20px; border-bottom: 1px solid #f1f1f1; font-size: 14px; vertical-align: middle; }
-
+        th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; }
+        td { padding: 20px; border-bottom: 1px solid #f1f1f1; font-size: 14px; }
+        
         .badge { padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; }
         .badge-in { background: #dcfce7; color: #166534; }
         .badge-out { background: #fee2e2; color: #991b1b; }
-
-        .price-buy { color: #64748b; font-size: 13px; }
-        .price-sale { color: #b39359; font-weight: 800; }
-
+        
         .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 10px; }
-
-        /* RODAPÉ */
-        .footer-premium { background: #000000; color: #ffffff; padding: 60px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
-        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 10px; display: inline-block; }
-
-        @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -100,9 +87,9 @@
             <label>Purchase Price (Cost)</label>
             <div class="row-group">
                 <select id="pCurrBuy" style="flex: 1;">
-                    <option value="BRL">R$</option>
-                    <option value="USD">$</option>
-                    <option value="EUR">€</option>
+                    <option value="R$">R$</option>
+                    <option value="$">$</option>
+                    <option value="€">€</option>
                 </select>
                 <input type="number" id="pCost" placeholder="0.00" style="flex: 2;">
             </div>
@@ -110,24 +97,24 @@
             <label>Sale Price (Revenue)</label>
             <div class="row-group">
                 <select id="pCurrSale" style="flex: 1;">
-                    <option value="EUR">€</option>
-                    <option value="USD">$</option>
-                    <option value="BRL">R$</option>
+                    <option value="€">€</option>
+                    <option value="$">$</option>
+                    <option value="R$">R$</option>
                 </select>
                 <input type="number" id="pSale" placeholder="0.00" style="flex: 2;">
             </div>
 
             <label>Quantity & Unit</label>
             <div class="row-group">
-                <input type="number" id="pQty" placeholder="0" style="flex: 2;">
-                <select id="pUnit" style="flex: 2;">
-                    <option value="Boxes">Boxes</option>
-                    <option value="Tons">Tons</option>
+                <input type="number" id="pQty" placeholder="0" style="flex: 1;">
+                <select id="pUnit" style="flex: 1;">
                     <option value="KG">KG</option>
+                    <option value="Tons">Tons</option>
+                    <option value="Boxes">Boxes</option>
                 </select>
             </div>
 
-            <button id="regBtn">Process Trade</button>
+            <button id="regBtn">Process Trade & Save</button>
         </aside>
 
         <main class="inventory-area">
@@ -147,18 +134,10 @@
         </main>
     </div>
 
-    <footer class="footer-premium">
-        <div style="margin-bottom: 25px;">
-            <a href="#" class="social-btn">LinkedIn</a>
-            <a href="https://github.com" class="social-btn">GitHub</a>
-            <a href="#" class="social-btn">WhatsApp</a>
-        </div>
-        <p style="font-size: 10px; color: #b39359; letter-spacing: 2px;">SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
-    </footer>
-
     <script>
         const inventoryList = document.getElementById('list');
 
+        // FUNÇÃO PARA SALVAR TUDO NA MEMÓRIA
         function saveData() {
             const items = [];
             document.querySelectorAll('#list tr').forEach(row => {
@@ -170,11 +149,12 @@
                     volume: row.cells[4].innerText
                 });
             });
-            localStorage.setItem('sollene_global_v2', JSON.stringify(items));
+            localStorage.setItem('sollene_database_v1', JSON.stringify(items));
         }
 
+        // CARREGAR DADOS AO ABRIR O SITE
         function loadData() {
-            const saved = localStorage.getItem('sollene_global_v2');
+            const saved = localStorage.getItem('sollene_database_v1');
             if (saved) {
                 JSON.parse(saved).forEach(item => {
                     renderRow(item.status, item.name, item.purchase, item.sale, item.volume);
@@ -188,8 +168,8 @@
             row.innerHTML = `
                 <td><span class="badge ${badgeClass}">${status}</span></td>
                 <td><strong>${name}</strong></td>
-                <td class="price-buy">${purchase}</td>
-                <td class="price-sale">${sale}</td>
+                <td style="color:#64748b">${purchase}</td>
+                <td style="color:#b39359; font-weight:800">${sale}</td>
                 <td>${volume}</td>
                 <td><button class="btn-delete" onclick="this.closest('tr').remove(); saveData();">DELETE</button></td>
             `;
@@ -200,29 +180,23 @@
         document.getElementById('regBtn').addEventListener('click', function() {
             const name = document.getElementById('pName').value;
             const type = document.getElementById('pType').value;
-            
-            const currBuy = document.getElementById('pCurrBuy').value;
+            const symBuy = document.getElementById('pCurrBuy').value;
             const cost = document.getElementById('pCost').value;
-            
-            const currSale = document.getElementById('pCurrSale').value;
+            const symSale = document.getElementById('pCurrSale').value;
             const sale = document.getElementById('pSale').value;
-            
             const qty = document.getElementById('pQty').value;
             const unit = document.getElementById('pUnit').value;
 
             if(!name || !cost || !sale || !qty) return alert("Fill all fields.");
-
-            const symBuy = currBuy === "USD" ? "$" : (currBuy === "EUR" ? "€" : "R$");
-            const symSale = currSale === "USD" ? "$" : (currSale === "EUR" ? "€" : "R$");
 
             const purchaseVal = `${symBuy} ${parseFloat(cost).toFixed(2)}`;
             const saleVal = `${symSale} ${parseFloat(sale).toFixed(2)}`;
             const volumeVal = `${qty} ${unit}`;
 
             renderRow(type, name, purchaseVal, saleVal, volumeVal);
-            saveData();
+            saveData(); // SALVA AUTOMATICAMENTE NO CLIQUE
 
-            // Limpar
+            // Limpa os campos
             document.getElementById('pName').value = "";
             document.getElementById('pCost').value = "";
             document.getElementById('pSale').value = "";
