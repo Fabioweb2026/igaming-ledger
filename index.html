@@ -1,250 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Sollene Group | Terminal</title>
-
+    <title>Fábio | Tech Portfolio & Systems</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        @import url('https://googleapis.com');
+        
+        *{ margin:0; padding:0; box-sizing:border-box; }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: #f4f1ea; 
+            color: #1a1a1a; 
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            background: #fdfaf6;
-            color: #1a1a1a;
-            padding-bottom: 60px;
-        }
-
-        /* ===== BANNER LOGO AJUSTADO ===== */
-        .header-container {
+        /* HEADER COM FOTO ESFUMAÇADA */
+        .hero {
             width: 100%;
-            height: 180px; /* altura equilibrada */
-            background: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 10px 20px;
-            border-bottom: 1px solid #eee;
+            height: 80vh;
+            background: linear-gradient(to bottom, rgba(244, 241, 234, 0) 50%, #f4f1ea 100%), 
+                        url('foto.fabio1.jpg') no-repeat center 20%;
+            background-size: cover;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-end; text-align: center; padding-bottom: 40px;
         }
+        .hero h1 { font-size: 80px; font-weight: 800; letter-spacing: -4px; line-height: 0.8; }
+        .hero p { font-size: 13px; text-transform: uppercase; letter-spacing: 5px; color: #b39359; font-weight: 800; margin-top: 20px; }
 
-        .logo-main {
-            max-width: 100%;
-            max-height: 160px; /* evita cortar letras */
-            width: auto;
-            height: auto;
-            object-fit: contain;
-        }
-
-        /* ===== LAYOUT ===== */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 360px 1fr;
-            gap: 30px;
-            width: 100%;
+        /* CONTAINER DO PORTAL (IFRAME) */
+        .portal-section {
             max-width: 1200px;
-            margin: 40px auto;
+            margin: 60px auto;
             padding: 0 20px;
         }
 
-        /* SIDEBAR */
-        .sidebar-card {
-            background: #1f2937;
-            padding: 40px 30px;
-            border-radius: 25px;
-            color: #fff;
-            border-top: 4px solid #b39359;
-        }
-
-        .sidebar-card h3 {
+        .portal-header {
             text-align: center;
-            margin-bottom: 25px;
-            color: #b39359;
-            text-transform: uppercase;
-            font-size: 12px;
-            letter-spacing: 2px;
+            margin-bottom: 40px;
         }
 
-        input, select {
+        .portal-header h2 { font-size: 28px; font-weight: 800; text-transform: uppercase; letter-spacing: 3px; }
+        
+        /* A JANELA DO SISTEMA */
+        .system-frame {
             width: 100%;
-            padding: 14px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            border: none;
-            background: #111827;
-            color: #fff;
-            outline: none;
-        }
-
-        #regBtn {
-            width: 100%;
-            padding: 16px;
-            background: #b39359;
-            border: none;
-            border-radius: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            color: #111;
-        }
-
-        /* TABELA */
-        .inventory-area {
-            background: #f2ede4;
-            border-radius: 25px;
-            min-height: 500px;
-            border: 1px solid #e5e1da;
+            height: 900px; /* Altura para o estoque aparecer inteiro */
+            border: 2px solid #b39359;
+            border-radius: 30px;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+            background: #ffffff;
             overflow: hidden;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            padding: 20px;
-            background: #1f2937;
-            color: #b39359;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-
-        td {
-            padding: 18px;
-            border-bottom: 1px solid #ddd;
-            background: rgba(255,255,255,0.5);
-        }
-
-        .currency-style {
-            color: #b39359;
-            font-weight: bold;
-        }
-
-        .del-btn {
-            color: red;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        /* RESPONSIVO */
-        @media(max-width: 900px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .header-container {
-                height: 140px;
-            }
-
-            .logo-main {
-                max-height: 120px;
-            }
+        .footer-global {
+            background: #000000;
+            color: #ffffff;
+            padding: 60px 20px;
+            text-align: center;
+            margin-top: 100px;
+            border-top: 4px solid #b39359;
         }
     </style>
 </head>
-
 <body>
 
-    <!-- HEADER LOGO FULL WIDTH AJUSTADO -->
-    <header class="header-container">
-        <img src="Sollene-Group.png" alt="Sollene Group Logo" class="logo-main">
+    <header class="hero">
+        <h1>Fábio</h1>
+        <p>EXPERT SOLUTIONS & GLOBAL SYSTEMS</p>
     </header>
 
-    <!-- CONTEÚDO -->
-    <div class="main-grid">
+    <section class="portal-section">
+        <div class="portal-header">
+            <h2>Live System Demo</h2>
+            <p style="color: #b39359; font-weight: 700; font-size: 11px; letter-spacing: 2px; margin-top: 10px;">
+                TESTE O TERMINAL SOLLENE GROUP ABAIXO
+            </p>
+        </div>
 
-        <aside class="sidebar-card">
-            <h3>Shipment Entry</h3>
+        <!-- AQUI ABRE O ESTOQUE DENTRO DO PORTFÓLIO -->
+        <iframe src="estoque.html" class="system-frame" frameborder="0"></iframe>
+    </section>
 
-            <input type="text" id="pName" placeholder="Product Name">
-            <input type="text" id="pDest" placeholder="Destination Port">
-
-            <select id="pCurr">
-                <option value="USD">USD ($)</option>
-                <option value="EUR">EUR (€)</option>
-                <option value="BRL">BRL (R$)</option>
-            </select>
-
-            <input type="number" id="pPrice" placeholder="Price">
-            <input type="number" id="pQty" placeholder="Quantity">
-
-            <button id="regBtn">Process Trade</button>
-        </aside>
-
-        <main class="inventory-area">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Destination</th>
-                        <th>Value</th>
-                        <th>Qty</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="list"></tbody>
-            </table>
-        </main>
-
-    </div>
-
-    <script>
-        const inventoryList = document.getElementById('list');
-
-        function saveData() {
-            const rows = [];
-            document.querySelectorAll('#list tr').forEach(row => {
-                rows.push(row.innerHTML);
-            });
-            localStorage.setItem('solleneData', JSON.stringify(rows));
-        }
-
-        function loadData() {
-            const saved = localStorage.getItem('solleneData');
-            if (saved) {
-                JSON.parse(saved).forEach(rowData => {
-                    const row = inventoryList.insertRow();
-                    row.innerHTML = rowData;
-                });
-            }
-        }
-
-        window.onload = loadData;
-
-        document.getElementById('regBtn').addEventListener('click', function () {
-            const name = document.getElementById('pName').value;
-            const dest = document.getElementById('pDest').value;
-            const curr = document.getElementById('pCurr').value;
-            const price = document.getElementById('pPrice').value;
-            const qty = document.getElementById('pQty').value;
-
-            if (!name || !price || !qty) {
-                alert("Please complete all fields.");
-                return;
-            }
-
-            let symbol = curr === "USD" ? "$" : curr === "EUR" ? "€" : "R$";
-
-            const row = inventoryList.insertRow();
-            row.innerHTML = `
-                <td><b>${name}</b></td>
-                <td>${dest || 'Global'}</td>
-                <td class="currency-style">${symbol} ${parseFloat(price).toFixed(2)}</td>
-                <td>${qty}</td>
-                <td><button class="del-btn" onclick="this.parentElement.parentElement.remove(); saveData()">DELETE</button></td>
-            `;
-
-            saveData();
-            document.querySelectorAll('input').forEach(i => i.value = "");
-        });
-    </script>
+    <footer class="footer-global">
+        <p style="color: #b39359; font-weight: 800; letter-spacing: 3px;">GLOBAL CONNECTION</p>
+        <p style="font-size: 10px; margin-top: 20px; opacity: 0.6;">© 2026 FÁBIO — ENGINEERED FOR EXCELLENCE</p>
+    </footer>
 
 </body>
 </html>
-   
+
