@@ -1,222 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Inventory System</title>
-    <link href="https://googleapis.com" rel="stylesheet">
+    <title>Sollene Group | Logistics Terminal</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fdfcf0; color: #1a1a1a; display: flex; flex-direction: column; align-items: center; }
-        .banner-header { width: 100%; height: 9.5cm; margin-top: 0.5cm; background-color: #fdfcf0; overflow: hidden; display: flex; justify-content: center; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
-        .banner-header img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
-        .nav-top { width: 100%; max-width: 1400px; padding: 15px 20px; text-align: left; }
-        .btn-back { text-decoration: none; color: #b39359; border: 1px solid #b39359; padding: 6px 15px; border-radius: 50px; font-size: 10px; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
-        .main-content { display: flex; width: 100%; max-width: 1400px; gap: 20px; padding: 0 20px 40px; flex: 1; }
-        .sidebar { width: 320px; background-color: #1a1a1a; color: #b39359; padding: 25px; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); height: fit-content; border: 1px solid rgba(179, 147, 89, 0.3); }
-        .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 20px; text-align: center; font-size: 1.2rem; }
-        label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: block; color: #888; }
-        input, select { width: 100%; padding: 10px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #333; background: #fff; color: #1a1a1a; font-size: 12px; }
-        .btn-add { width: 100%; padding: 14px; background-color: #b39359; color: #1a1a1a; border: none; font-weight: 800; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 12px; transition: 0.3s; margin-bottom: 10px; }
-        .btn-save-manual { width: 100%; padding: 10px; background-color: #27ae60; color: white; border: none; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 10px; transition: 0.3s; margin-bottom: 10px; }
-        .btn-clear { width: 100%; padding: 8px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 9px; transition: 0.3s; }
+        @import url('https://googleapis.com');
         
-        .table-container { flex: 1; background: white; border-radius: 15px; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2); }
-        table { width: 100%; border-collapse: collapse; min-width: 950px; }
-        thead { background-color: #000; color: #b39359; }
-        th, td { padding: 12px; text-align: center; font-size: 11px; border-bottom: 1px solid #f2f2f2; }
-        
-        .revenue-val { color: #27ae60 !important; font-weight: 800; } 
-        .profit-plus { color: #2ecc71 !important; font-weight: 800; } 
-        .profit-minus { color: #e74c3c !important; font-weight: 800; } 
-        .inv-val { color: #8e44ad !important; font-weight: bold; font-size: 11px; } 
-        
-        .btn-delete { color: #e74c3c; background: none; border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 10px; }
-        .btn-delete:hover { text-decoration: underline; }
+        *{ margin:0; padding:0; box-sizing:border-box; }
 
-        footer { width: 100%; padding: 30px 20px; background-color: #1a1a1a; text-align: center; border-top: 3px solid #b39359; margin-top: auto; }
-        .footer-address { color: #b39359; font-size: 10px; text-transform: uppercase; }
-        @media (max-width: 1100px) { .main-content { flex-direction: column; } .sidebar { width: 100%; } }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: #fdfaf6; 
+            color: #1a1a1a; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* BANNER */
+        .hero-banner {
+            width: 100%;
+            max-width: 1200px;
+            height: 300px;
+            background-color: #f7f4ed;
+            background-image: url('image.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            border-radius: 28px;
+            margin-top: 20px;
+            border: 1px solid #e5e1da;
+        }
+
+        .company-header { text-align: center; margin: 40px 0; }
+        .company-header h1 { font-size: 56px; font-weight: 800; color: #1f2937; letter-spacing: -2px; text-transform: uppercase; }
+        .company-header p { color: #b39359; font-size: 13px; text-transform: uppercase; letter-spacing: 4px; font-weight: 800; margin-top: 10px; }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 30px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
+            margin-bottom: 80px; /* Espaço para o rodapé */
+        }
+
+        /* CARD DE REGISTRO */
+        .sidebar-card {
+            background: #1f2937;
+            padding: 40px 30px;
+            border-radius: 30px;
+            color: #ffffff;
+            border-top: 4px solid #b39359;
+            height: fit-content;
+        }
+
+        input, select {
+            width: 100%; padding: 16px; margin-bottom: 20px; border: 1px solid #374151; border-radius: 14px; background: #111827; color: #ffffff; outline: none;
+        }
+
+        #regBtn {
+            width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; border-radius: 16px; font-weight: 800; cursor: pointer; text-transform: uppercase;
+        }
+
+        /* TABELA */
+        .inventory-area {
+            background-color: #f2ede4;
+            background-image: radial-gradient(#d6cdc0 1.5px, transparent 1.5px);
+            background-size: 30px 30px; 
+            border-radius: 30px;
+            border: 1px solid #e5e1da;
+            min-height: 550px;
+            overflow: hidden;
+        }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 24px 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; }
+        td { padding: 24px 20px; border-bottom: 1px solid rgba(212, 163, 115, 0.2); font-size: 15px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(4px); }
+
+        /* RODAPÉ GLOBAL PREMIUM */
+        .footer-premium {
+            background: #000000;
+            color: #ffffff;
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 4px solid #b39359;
+            width: 100%;
+        }
+
+        .footer-container { max-width: 1200px; margin: 0 auto; }
+        
+        .footer-premium h2 { 
+            font-size: 26px; 
+            font-weight: 800; 
+            margin-bottom: 30px; 
+            letter-spacing: 3px; 
+            color: #b39359; 
+            text-transform: uppercase; 
+        }
+        
+        .social-links { 
+            display: flex; 
+            justify-content: center; 
+            gap: 25px; 
+            flex-wrap: wrap; 
+        }
+        
+        .social-btn { 
+            text-decoration: none; 
+            color: #ffffff; 
+            font-size: 12px; 
+            font-weight: 700; 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            padding: 12px 30px; 
+            border: 2px solid #b39359; 
+            border-radius: 50px; 
+            transition: 0.4s; 
+        }
+        
+        .social-btn:hover { background: #b39359; color: #000000; }
+        
+        .footer-tag { 
+            font-size: 11px; 
+            color: #b39359; 
+            letter-spacing: 2px; 
+            margin-top: 40px; 
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
-<body onload="loadInventory()">
-    <header class="banner-header"><img src="imagem.Sollene Group.png" alt="Sollene Group Logo"></header>
-    <nav class="nav-top"><a href="index.html" class="btn-back">← Back</a></nav>
-    <main class="main-content">
-        <section class="sidebar">
-            <h2>Inventory Control</h2>
-            <label>Product Name</label>
-            <input type="text" id="pName" placeholder="Ex: Coffee">
-            <label>Unit</label>
-            <select id="pUnit"><option value="Caixas">Caixas</option><option value="Kg">Kg</option><option value="Toneladas">Tons</option></select>
-            <label>In / Out</label>
-            <div style="display: flex; gap: 8px;"><input type="number" id="pEntry" placeholder="In"><input type="number" id="pExit" placeholder="Out"></div>
-            <label>Buy Curr & Cost</label>
-            <div style="display: flex; gap: 8px;">
-                <select id="pBuyCurr" style="width: 45%;"><option value="BRL">R$</option><option value="USD">$</option><option value="EUR">€</option></select>
-                <input type="number" id="pBuyPrice" placeholder="Cost">
-            </div>
-            <label>Sell Curr & Price</label>
-            <div style="display: flex; gap: 8px;">
-                <select id="pSellCurr" style="width: 45%;"><option value="EUR">€</option><option value="USD">$</option><option value="BRL">R$</option></select>
-                <input type="number" id="pSellPrice" placeholder="Price">
-            </div>
-            <button class="btn-add" onclick="addProduct()">Process Trade</button>
-            <button class="btn-save-manual" onclick="manualSave()">💾 Save Inventory</button>
-            <button class="btn-clear" onclick="clearAll()">Reset List</button>
-        </section>
-        <section class="table-container">
+<body>
+
+    <div class="hero-banner"></div>
+
+    <header class="company-header">
+        <h1>Sollene Group</h1>
+        <p>Premium Logistics & Global Trade</p>
+    </header>
+
+    <div class="main-grid">
+        <aside class="sidebar-card">
+            <h3>Shipment Entry</h3>
+            <input type="text" id="pName" placeholder="Product Name">
+            <input type="text" id="pDest" placeholder="Destination Port">
+            <select id="pCurr"><option value="USD">USD ($)</option></select>
+            <input type="number" id="pPrice" placeholder="Unit Price">
+            <input type="number" id="pQty" placeholder="Quantity">
+            <button id="regBtn">Register Cargo</button>
+        </aside>
+
+        <main class="inventory-area">
             <table>
                 <thead>
-                    <tr>
-                        <th>PRODUCT</th>
-                        <th>UNIT</th>
-                        <th>STOCK</th>
-                        <th>COST (BUY)</th>
-                        <th>SELL PRICE</th>
-                        <th>REVENUE</th>
-                        <th>PROFIT (SALES)</th>
-                        <th>INV. VALUE (SELL CURR)</th>
-                        <th>ACTION</th>
-                    </tr>
+                    <tr><th>Product</th><th>Destination</th><th>Value</th><th>Volume</th></tr>
                 </thead>
-                <tbody id="inventoryBody"></tbody>
+                <tbody id="list"></tbody>
             </table>
-        </section>
-    </main>
-    <footer><div class="footer-address"><p>SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p></div></footer>
+        </main>
+    </div>
+
+    <!-- RODAPÉ GLOBAL NO FINAL -->
+    <footer class="footer-premium">
+        <div class="footer-container">
+            <h2>Global Connection</h2>
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank" class="social-btn">LinkedIn</a>
+                <a href="https://github.com" target="_blank" class="social-btn">GitHub</a>
+                <a href="https://wa.me" target="_blank" class="social-btn">WhatsApp</a>
+            </div>
+            <p class="footer-tag">SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
+        </div>
+    </footer>
 
     <script>
-        function getSymbol(curr) {
-            if(curr === "BRL") return "R$";
-            if(curr === "USD") return "$";
-            return "€";
+        const inventoryList = document.getElementById('list');
+        function saveData() {
+            const rows = [];
+            document.querySelectorAll('#list tr').forEach(row => { rows.push(row.innerHTML); });
+            localStorage.setItem('solleneData', JSON.stringify(rows));
         }
-        function saveInventory() { const table = document.getElementById('inventoryBody'); localStorage.setItem("solleneInventoryHTML", table.innerHTML); }
-        function manualSave() { saveInventory(); alert("Inventory saved successfully!"); }
-        function loadInventory() { const savedHTML = localStorage.getItem("solleneInventoryHTML"); if (savedHTML) { document.getElementById('inventoryBody').innerHTML = savedHTML; } }
-        
-        function addProduct() {
-            const name = document.getElementById('pName').value;
-            const unit = document.getElementById('pUnit').value;
-            const entry = Number(document.getElementById('pEntry').value) || 0;
-            const exit = Number(document.getElementById('pExit').value) || 0;
-            const buyCurr = document.getElementById('pBuyCurr').value;
-            const buyPrice = Number(document.getElementById('pBuyPrice').value) || 0;
-            const sellCurr = document.getElementById('pSellCurr').value;
-            const sellPrice = Number(document.getElementById('pSellPrice').value) || 0;
-
-            if (!name || buyPrice === 0) { alert("Please fill in the product name and cost."); return; }
-
-            const stock = entry - exit;
-            const revenue = exit * sellPrice; 
-            const profit = (sellPrice - buyPrice) * exit;
-            const inventoryValueInSellCurr = stock * sellPrice;
-
-            const table = document.getElementById('inventoryBody');
-            const row = table.insertRow();
-            const sBuy = getSymbol(buyCurr);
-            const sSell = getSymbol(sellCurr);
-
-            row.innerHTML = `
-                <td>${name}</td><td>${unit}</td><td style="font-weight:bold; color:#555;">${stock}</td>
-                <td>${sBuy} ${buyPrice.toFixed(2)}</td><td>${sSell} ${sellPrice.toFixed(2)}</td>
-                <td class="revenue-val">${sSell} ${revenue.toFixed(2)}</td>
-                <td class="${profit >= 0 ? 'profit-plus' : 'profit-minus'}">${sSell} ${profit.toFixed(2)}</td>
-                <td class="inv-val">${sSell} ${inventoryValueInSellCurr.toFixed(2)}</td>
-                <td><button class="btn-delete" onclick="deleteRow(this)">Delete</button></td>
-            `;
-            saveInventory();
-            document.getElementById('pName').value = ""; document.getElementById('pEntry').value = ""; document.getElementById('pExit').value = ""; document.getElementById('pBuyPrice').value = ""; document.getElementById('pSellPrice').value = "";
+        function loadData() {
+            const saved = localStorage.getItem('solleneData');
+            if (saved) { JSON.parse(saved).forEach(rowData => { const row = inventoryList.insertRow(); row.innerHTML = rowData; }); }
         }
-        function deleteRow(btn) { btn.closest('tr').remove(); saveInventory(); }
-       function clearAll() { if (confirm("Reset the entire list?")) { document.getElementById('inventoryBody').innerHTML = ""; localStorage.removeItem("solleneInventoryHTML"); } }
-    <!-- INÍCIO DO RODAPÉ GLOBAL -->
-<style>
-    .footer-premium {
-        background: #1f2937; /* Grafite para combinar com o cabeçalho do estoque */
-        color: #ffffff;
-        padding: 60px 20px;
-        text-align: center;
-        margin-top: 80px;
-        border-top: 3px solid #b39359;
-        width: 100%;
-    }
-    .footer-container { max-width: 800px; margin: 0 auto; }
-    .footer-premium h2 { font-size: 20px; font-weight: 800; margin-bottom: 20px; letter-spacing: 2px; color: #b39359; text-transform: uppercase; }
-    .social-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px; }
-    .social-btn { 
-        text-decoration: none; color: #ffffff; font-size: 11px; font-weight: 600; text-transform: uppercase; 
-        letter-spacing: 2px; padding: 10px 25px; border: 1px solid rgba(179, 147, 89, 0.4); border-radius: 50px; transition: 0.4s; 
-    }
-    .social-btn:hover { background: #b39359; color: #1f2937; border-color: #b39359; transform: translateY(-5px); }
-    .footer-tag { font-size: 10px; color: #94a3b8; letter-spacing: 4px; text-transform: uppercase; margin-top: 20px; }
-</style>
-<!-- RODAPÉ FINAL CORRIGIDO -->
-<style>
-    .footer-premium {
-        background: #000000 !important; /* Força o Preto total */
-        color: #ffffff !important;
-        padding: 80px 20px !important; /* Dá altura para o rodapé */
-        text-align: center;
-        margin-top: 50px;
-        border-top: 4px solid #b39359; /* Linha dourada grossa */
-        width: 100%;
-        display: block !important;
-    }
-    .footer-container { max-width: 1200px; margin: 0 auto; }
-    
-    .footer-premium h2 { 
-        font-size: 26px; 
-        font-weight: 800; 
-        margin-bottom: 30px; 
-        letter-spacing: 3px; 
-        color: #b39359 !important; 
-        text-transform: uppercase; 
-    }
-    
-    .social-links { 
-        display: flex; 
-        justify-content: center; 
-        gap: 25px; 
-        flex-wrap: wrap; 
-    }
-    
-    .social-btn { 
-        text-decoration: none; 
-        color: #ffffff !important; 
-        font-size: 12px; 
-        font-weight: 700; 
-        text-transform: uppercase; 
-        letter-spacing: 2px; 
-        padding: 12px 30px; 
-        border: 2px solid #b39359; 
-        border-radius: 50px; 
-        transition: 0.4s; 
-    }
-    
-    .social-btn:hover { background: #b39359; color: #000000 !important; }
-    
-    .footer-tag { 
-        font-size: 11px; 
-        color: #b39359; 
-        letter-spacing: 2px; 
-        margin-top: 40px; 
-        opacity: 0.8;
-    }
-</style>
-<footer class="footer-premium">
-    <div class="footer-container">
-        <h2>Global Connection</h2>
-        <div class="social-links">
-            <a href="https://linkedin.com" target="_blank" class="social-btn">LinkedIn</a>
-            <a href="https://github.com" target="_blank" class="social-btn">GitHub</a>
-            <a href="https://wa.me" target="_blank" class="social-btn">WhatsApp</a>
-        </div>
-        <p class="footer-tag">SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
-    </div>
-</footer>
+        window.onload = loadData;
+
+        document.getElementById('regBtn').addEventListener('click', function() {
+            const n = document.getElementById('pName').value;
+            const p = document.getElementById('pPrice').value;
+            const q = document.getElementById('pQty').value;
+            if(!n || !p || !q) return alert("Fill all fields.");
+            const row = inventoryList.insertRow();
+            row.innerHTML = `<td>${n}</td><td>${document.getElementById('pDest').value}</td><td style="color:#b39359; font-weight:800">$ ${parseFloat(p).toFixed(2)}</td><td>${q} units</td>`;
+            saveData();
+            document.querySelectorAll('input').forEach(i => i.value = "");
+        });
     </script>
-    
+
 </body>
 </html>
+
+           
