@@ -13,41 +13,24 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background: #fdfaf6; 
             color: #1a1a1a; 
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; flex-direction: column; align-items: center;
         }
 
-        /* LOGO AMPLO NO TOPO */
-        .logo-container { 
-            width: 100%; 
-            max-width: 1200px; 
-            padding: 40px 30px; 
-            text-align: center;
-        }
-        .logo-img { 
-            width: 100%; 
-            max-width: 1000px; 
-            height: auto; 
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05));
-            object-fit: contain;
-        }
+        /* HEADER LOGO */
+        .logo-container { width: 100%; max-width: 1200px; padding: 30px 30px; text-align: center; }
+        .logo-img { width: 100%; max-width: 900px; height: auto; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05)); object-fit: contain; }
 
         /* GRID PRINCIPAL */
         .main-grid {
-            display: grid; 
-            grid-template-columns: 360px 1fr; 
-            gap: 30px;
-            width: 95%; 
-            max-width: 1200px; 
-            margin-bottom: 80px;
+            display: grid; grid-template-columns: 350px 1fr; gap: 25px;
+            width: 95%; max-width: 1200px; margin-bottom: 60px;
         }
 
-        /* CARD EXECUTIVO (LADO ESQUERDO) */
+        /* CARD EXECUTIVO DARK */
         .sidebar-card {
-            background: #111827; /* Dark Mode Moderno */
-            padding: 30px; 
-            border-radius: 24px;
+            background: #111827;
+            padding: 25px; 
+            border-radius: 20px;
             color: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.05);
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -55,83 +38,56 @@
         }
 
         .sidebar-card h3 { 
-            font-size: 20px; 
-            font-weight: 800;
-            color: #ffffff; 
-            margin-bottom: 25px; 
-            text-align: left;
-            letter-spacing: -0.5px;
+            font-size: 18px; font-weight: 800; color: #ffffff; 
+            margin-bottom: 20px; letter-spacing: -0.5px;
         }
 
         label { 
-            font-size: 10px; 
-            text-transform: uppercase; 
-            color: #b39359; /* Dourado para destaque */
-            display: block; 
-            margin-bottom: 8px; 
-            font-weight: 700; 
-            letter-spacing: 1.5px;
+            font-size: 9px; text-transform: uppercase; color: #b39359; 
+            display: block; margin-bottom: 6px; font-weight: 800; letter-spacing: 1.5px;
         }
 
+        /* AJUSTE DO SELETOR (FIM DO TEXTO BRANCO) */
         input, select {
-            width: 100%; 
-            padding: 14px; 
-            margin-bottom: 18px; 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 12px; 
-            background: rgba(255, 255, 255, 0.03); 
-            color: #ffffff; 
-            outline: none; 
-            font-size: 14px;
-            transition: 0.3s ease;
+            width: 100%; padding: 12px; margin-bottom: 15px; 
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; 
+            background: rgba(255, 255, 255, 0.03); color: #ffffff; 
+            outline: none; font-size: 13px; transition: 0.3s ease;
         }
 
-        input:focus {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: #b39359;
+        /* FORÇA AS OPÇÕES DO MENU A FICAREM VISÍVEIS */
+        select option {
+            background-color: #ffffff; /* Fundo branco para a lista */
+            color: #111827; /* Texto preto para leitura fácil */
         }
 
-        .row-group { display: flex; gap: 10px; }
+        input:focus { border-color: #b39359; background: rgba(255, 255, 255, 0.07); }
+
+        .row-group { display: flex; gap: 8px; }
 
         #regBtn {
-            width: 100%;
-            padding: 18px;
-            background: #b39359;
-            color: #111827;
-            border: none;
-            border-radius: 12px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: 0.4s;
+            width: 100%; padding: 16px; background: #b39359; color: #111827; 
+            border: none; border-radius: 10px; font-weight: 800; 
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer; 
+            margin-top: 5px; transition: 0.4s;
         }
-        #regBtn:hover { background: #ffffff; transform: translateY(-3px); }
+        #regBtn:hover { background: #ffffff; transform: translateY(-2px); }
 
-        /* ÁREA DA TABELA (LADO DIREITO) */
-        .inventory-area { 
-            background: #ffffff; 
-            border-radius: 24px; 
-            border: 1px solid #e5e1da; 
-            overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.02); 
-        }
-
+        /* ÁREA DA TABELA */
+        .inventory-area { background: #ffffff; border-radius: 20px; border: 1px solid #e5e1da; overflow: hidden; }
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 20px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; }
-        td { padding: 20px; border-bottom: 1px solid #f1f1f1; font-size: 14px; vertical-align: middle; }
+        th { text-align: left; padding: 18px; background: #1f2937; color: #b39359; font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; }
+        td { padding: 18px; border-bottom: 1px solid #f1f1f1; font-size: 14px; }
 
-        .badge { padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
         .badge-in { background: #dcfce7; color: #166534; }
         .badge-out { background: #fee2e2; color: #991b1b; }
 
-        .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 10px; transition: 0.3s;}
-        .btn-delete:hover { background: #991b1b; color: #ffffff; }
+        .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: 800; font-size: 9px; }
 
         /* RODAPÉ BLACK */
-        .footer-premium { background: #000000; color: #ffffff; padding: 80px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
-        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 12px 30px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 10px; display: inline-block; transition: 0.3s; }
+        .footer-premium { background: #000000; color: #ffffff; padding: 60px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
+        .social-btn { text-decoration: none; color: #ffffff; font-size: 10px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 8px; display: inline-block; transition: 0.3s; }
         .social-btn:hover { background: #b39359; color: #000000; }
 
         @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
@@ -148,7 +104,7 @@
             <h3>Shipment Entry</h3>
             
             <label>Product Name</label>
-            <input type="text" id="pName" placeholder="Ex: Premium Arabica">
+            <input type="text" id="pName" placeholder="Ex: Raw Coffee">
             
             <label>Operation Type</label>
             <select id="pType">
@@ -158,7 +114,7 @@
 
             <label>Purchase Price (Cost)</label>
             <div class="row-group">
-                <select id="pCurrBuy" style="flex: 1;">
+                <select id="pCurrBuy" style="flex: 1.2;">
                     <option value="R$">R$</option>
                     <option value="$">$</option>
                     <option value="€">€</option>
@@ -168,7 +124,7 @@
 
             <label>Sale Price (Revenue)</label>
             <div class="row-group">
-                <select id="pCurrSale" style="flex: 1;">
+                <select id="pCurrSale" style="flex: 1.2;">
                     <option value="€">€</option>
                     <option value="$">$</option>
                     <option value="R$">R$</option>
@@ -179,7 +135,7 @@
             <label>Quantity & Unit</label>
             <div class="row-group">
                 <input type="number" id="pQty" placeholder="0" style="flex: 1;">
-                <select id="pUnit" style="flex: 1;">
+                <select id="pUnit" style="flex: 1.5;">
                     <option value="KG">KG</option>
                     <option value="Tons">Tons</option>
                     <option value="Boxes">Boxes</option>
@@ -207,12 +163,12 @@
     </div>
 
     <footer class="footer-premium">
-        <div style="margin-bottom: 30px;">
+        <div style="margin-bottom: 25px;">
             <a href="https://linkedin.com" target="_blank" class="social-btn">LinkedIn</a>
             <a href="https://github.com" target="_blank" class="social-btn">GitHub</a>
             <a href="https://wa.me" target="_blank" class="social-btn">WhatsApp</a>
         </div>
-        <p style="font-size: 10px; color: #b39359; letter-spacing: 2px;">SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
+        <p style="font-size: 9px; color: #b39359; letter-spacing: 2px; opacity: 0.7;">SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
     </footer>
 
     <script>
@@ -229,11 +185,11 @@
                     volume: row.cells[4].innerText
                 });
             });
-            localStorage.setItem('sollene_final_v10', JSON.stringify(items));
+            localStorage.setItem('sollene_final_v12', JSON.stringify(items));
         }
 
         function loadData() {
-            const saved = localStorage.getItem('sollene_final_v10');
+            const saved = localStorage.getItem('sollene_final_v12');
             if (saved) {
                 JSON.parse(saved).forEach(item => {
                     renderRow(item.status, item.name, item.purchase, item.sale, item.volume);
