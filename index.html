@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,9 +16,9 @@
             display: flex; flex-direction: column; align-items: center;
         }
 
-        /* HEADER COM LOGO */
+        /* HEADER COM LOGO CORRIGIDO */
         .logo-container { width: 100%; max-width: 1200px; padding: 40px 20px; text-align: center; }
-        .logo-img { max-width: 300px; height: auto; }
+        .logo-img { max-width: 320px; height: auto; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05)); }
 
         /* GRID DO SISTEMA */
         .main-grid {
@@ -45,11 +45,11 @@
         }
         #regBtn:hover { background: #ffffff; transform: translateY(-2px); }
 
-        /* TABELA */
+        /* TABELA DE RESULTADOS */
         .inventory-area { background: #ffffff; border-radius: 24px; border: 1px solid #e5e1da; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
         table { width: 100%; border-collapse: collapse; }
         th { text-align: left; padding: 18px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; }
-        td { padding: 18px; border-bottom: 1px solid #f1f1f1; font-size: 14px; }
+        td { padding: 18px; border-bottom: 1px solid #f1f1f1; font-size: 14px; vertical-align: middle; }
 
         .badge { padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; }
         .badge-in { background: #dcfce7; color: #166534; }
@@ -58,9 +58,9 @@
         .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 10px; }
         .btn-delete:hover { background: #991b1b; color: #ffffff; }
 
-        /* RODAPÉ BLACK */
+        /* RODAPÉ GLOBAL */
         .footer-premium { background: #000000; color: #ffffff; padding: 60px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
-        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 10px; transition: 0.3s; }
+        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 10px; display: inline-block; transition: 0.3s; }
         .social-btn:hover { background: #b39359; color: #000000; }
 
         @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
@@ -69,8 +69,8 @@
 <body>
 
     <div class="logo-container">
-        <!-- Certifique-se que o nome do arquivo no GitHub é exatamente este -->
-        <img src="Sollene Group.png" alt="Sollene Group Logo" class="logo-img">
+        <!-- O NOME DA IMAGEM ABAIXO DEVE SER IGUAL AO DO GITHUB -->
+        <img src="Sollene-Group.png" alt="Sollene Group Logo" class="logo-img">
     </div>
 
     <div class="main-grid">
@@ -78,9 +78,9 @@
             <h3>Shipment Entry</h3>
             
             <label>Product Name</label>
-            <input type="text" id="pName" placeholder="Ex: Premium Arabica">
+            <input type="text" id="pName" placeholder="Ex: Raw Tabaco">
             
-            <label>Operation</label>
+            <label>Operation Type</label>
             <select id="pType">
                 <option value="In">Entry (In)</option>
                 <option value="Out">Exit (Out)</option>
@@ -97,7 +97,7 @@
             </div>
 
             <label>Quantity</label>
-            <input type="number" id="pQty" placeholder="Ex: 1000">
+            <input type="number" id="pQty" placeholder="Ex: 500">
 
             <button id="regBtn">Process Trade</button>
         </aside>
@@ -119,12 +119,12 @@
     </div>
 
     <footer class="footer-premium">
-        <div style="margin-bottom: 20px;">
+        <div style="margin-bottom: 25px;">
             <a href="#" class="social-btn">LinkedIn</a>
             <a href="https://github.com" class="social-btn">GitHub</a>
             <a href="#" class="social-btn">WhatsApp</a>
         </div>
-        <p style="font-size: 10px; color: #b39359; letter-spacing: 2px;">© 2026 FÁBIO — GLOBAL LOGISTICS SOLUTIONS</p>
+        <p style="font-size: 10px; color: #b39359; letter-spacing: 2px;">SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
     </footer>
 
     <script>
@@ -140,11 +140,11 @@
                     qty: row.cells[3].innerText
                 });
             });
-            localStorage.setItem('sollene_inventory', JSON.stringify(items));
+            localStorage.setItem('sollene_v3', JSON.stringify(items));
         }
 
         function loadData() {
-            const saved = localStorage.getItem('sollene_inventory');
+            const saved = localStorage.getItem('sollene_v3');
             if (saved) {
                 JSON.parse(saved).forEach(item => {
                     renderRow(item.type, item.name, item.value, item.qty);
