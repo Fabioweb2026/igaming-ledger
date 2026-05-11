@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,26 +8,38 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fdfcf0; color: #1a1a1a; display: flex; flex-direction: column; align-items: center; }
+        
         .banner-header { width: 100%; height: 9.5cm; margin-top: 0.5cm; background-color: #fdfcf0; overflow: hidden; display: flex; justify-content: center; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
         .banner-header img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+
         .nav-top { width: 100%; max-width: 1400px; padding: 15px 20px; text-align: left; }
         .btn-back { text-decoration: none; color: #b39359; border: 1px solid #b39359; padding: 6px 15px; border-radius: 50px; font-size: 10px; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
+        .btn-back:hover { background: #b39359; color: white; }
+
         .main-content { display: flex; width: 100%; max-width: 1400px; gap: 20px; padding: 0 20px 40px; flex: 1; }
+
         .sidebar { width: 300px; background-color: #1a1a1a; color: #b39359; padding: 20px; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); height: fit-content; border: 1px solid rgba(179, 147, 89, 0.3); }
         .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 15px; text-align: center; font-size: 1.1rem; }
         label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: block; color: #888; }
         input, select { width: 100%; padding: 8px 10px; margin-bottom: 10px; border-radius: 6px; border: 1px solid #333; background: #fff; color: #1a1a1a; font-size: 12px; }
+
         .btn-add { width: 100%; padding: 12px; background-color: #b39359; color: #1a1a1a; border: none; font-weight: 800; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 12px; transition: 0.3s; margin-top: 5px; }
         .btn-clear { width: 100%; padding: 8px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 9px; transition: 0.3s; margin-top: 10px; }
+
         .table-container { flex: 1; background: white; border-radius: 15px; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2); }
         table { width: 100%; border-collapse: collapse; min-width: 900px; }
         thead { background-color: #000; color: #b39359; }
         th, td { padding: 10px; text-align: center; font-size: 11px; border-bottom: 1px solid #f2f2f2; }
-        .stock-val { color: #555; font-weight: bold; }
-        .profit-plus { color: #b39359; font-weight: bold; }
-        .profit-minus { color: #e74c3c; font-weight: bold; }
+        
+        /* CORES CORRIGIDAS */
+        .revenue-val { color: #27ae60 !important; font-weight: bold; }
+        .profit-plus { color: #b39359 !important; font-weight: bold; }
+        .profit-minus { color: #e74c3c !important; font-weight: bold; }
+        .inv-val { color: #2980b9 !important; font-size: 10px; }
+
         footer { width: 100%; padding: 30px 20px; background-color: #1a1a1a; text-align: center; border-top: 3px solid #b39359; margin-top: auto; }
         .footer-address { color: #b39359; font-size: 10px; text-transform: uppercase; }
+
         @media (max-width: 1100px) { .main-content { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
@@ -76,40 +87,15 @@
         }
 
         function saveInventory() {
-            const rows = document.querySelectorAll("#inventoryBody tr");
-            const data = [];
-            rows.forEach(row => {
-                const cols = row.querySelectorAll("td");
-                data.push({
-                    name: cols[0].innerText,
-                    unit: cols[1].innerText,
-                    stock: cols[2].innerText,
-                    buyPrice: cols[3].innerText,
-                    sellPrice: cols[4].innerText,
-                    revenue: cols[5].innerText,
-                    profit: cols[6].innerText,
-                    invVal: cols[7].innerText,
-                    profitClass: cols[6].className
-                });
-            });
-            localStorage.setItem("solleneInventory", JSON.stringify(data));
+            const table = document.getElementById('inventoryBody');
+            localStorage.setItem("solleneInventoryHTML", table.innerHTML);
         }
 
         function loadInventory() {
-            const data = JSON.parse(localStorage.getItem("solleneInventory"));
-            if (!data) return;
-            const table = document.getElementById('inventoryBody');
-            data.forEach(item => {
-                const row = table.insertRow();
-                row.innerHTML = `
-                    <td>${item.name}</td><td>${item.unit}</td><td class="stock-val">${item.stock}</td>
-                    <td>${item.buyPrice}</td><td>${item.sellPrice}</td>
-                    <td style="color: #27ae60; font-weight: bold;">${item.revenue}</td>
-                    <td class="${item.profitClass}">${item.profit}</td>
-                    <td style="color: #2980b9; font-size: 10px;">${item.invVal}</td>
-                    <td><button style="color: red; border: none; background: none; cursor: pointer;" onclick="deleteRow(this)">Delete</button></td>
-                `;
-            });
+            const savedHTML = localStorage.getItem("solleneInventoryHTML");
+            if (savedHTML) {
+                document.getElementById('inventoryBody').innerHTML = savedHTML;
+            }
         }
 
         function addProduct() {
@@ -123,7 +109,7 @@
             const sellPrice = Number(document.getElementById('pSellPrice').value) || 0;
 
             if (!name || buyPrice === 0) {
-                alert("Preencha o nome e custo.");
+                alert("Preencha o nome e o custo.");
                 return;
             }
 
@@ -134,30 +120,42 @@
 
             const table = document.getElementById('inventoryBody');
             const row = table.insertRow();
+            
             row.innerHTML = `
-                <td>${name}</td><td>${unit}</td><td class="stock-val">${stock}</td>
+                <td>${name}</td>
+                <td>${unit}</td>
+                <td style="font-weight:bold; color:#555;">${stock}</td>
                 <td>${getSymbol(buyCurr)} ${buyPrice.toFixed(2)}</td>
                 <td>${getSymbol(sellCurr)} ${sellPrice.toFixed(2)}</td>
-                <td style="color: #27ae60; font-weight: bold;">${getSymbol(sellCurr)} ${revenue.toFixed(2)}</td>
+                <td class="revenue-val">${getSymbol(sellCurr)} ${revenue.toFixed(2)}</td>
                 <td class="${profit >= 0 ? 'profit-plus' : 'profit-minus'}">${getSymbol(sellCurr)} ${profit.toFixed(2)}</td>
-                <td style="color: #2980b9; font-size: 10px;">${getSymbol(buyCurr)} ${inventoryValue.toFixed(2)}</td>
-                <td><button style="color: red; border: none; background: none; cursor: pointer;" onclick="deleteRow(this)">Delete</button></td>
+                <td class="inv-val">${getSymbol(buyCurr)} ${inventoryValue.toFixed(2)}</td>
+                <td><button style="color:red; border:none; background:none; cursor:pointer;" onclick="deleteRow(this)">Delete</button></td>
             `;
+            
             saveInventory();
-            document.getElementById('pName').value = ""; document.getElementById('pEntry').value = ""; document.getElementById('pExit').value = ""; document.getElementById('pBuyPrice').value = ""; document.getElementById('pSellPrice').value = "";
+            
+            // Limpar campos
+            document.getElementById('pName').value = "";
+            document.getElementById('pEntry').value = "";
+            document.getElementById('pExit').value = "";
+            document.getElementById('pBuyPrice').value = "";
+            document.getElementById('pSellPrice').value = "";
         }
 
         function deleteRow(btn) {
-            btn.parentElement.parentElement.remove();
+            btn.closest('tr').remove();
             saveInventory();
         }
 
         function clearAll() {
-            if (confirm("Reset the entire list?")) {
+            if (confirm("Resetar toda a lista?")) {
                 document.getElementById('inventoryBody').innerHTML = "";
-                localStorage.removeItem("solleneInventory");
+                localStorage.removeItem("solleneInventoryHTML");
             }
         }
     </script>
 </body>
 </html>
+
+
