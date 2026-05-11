@@ -6,46 +6,30 @@
     <title>Sollene Group | Inventory System</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
-        /* RESET & BASE STYLE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fdfcf0; color: #1a1a1a; display: flex; flex-direction: column; align-items: center; }
-
-        /* BANNER */
         .banner-header { width: 100%; height: 9.5cm; margin-top: 0.5cm; background-color: #fdfcf0; overflow: hidden; display: flex; justify-content: center; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
         .banner-header img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
-
-        /* NAVEGAÇÃO */
         .nav-top { width: 100%; max-width: 1200px; padding: 30px 20px 20px; text-align: left; }
         .btn-back { text-decoration: none; color: #b39359; border: 1px solid #b39359; padding: 8px 20px; border-radius: 50px; font-size: 11px; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
         .btn-back:hover { background: #b39359; color: white; }
-
-        /* CONTEÚDO PRINCIPAL */
         .main-content { display: flex; width: 100%; max-width: 1300px; gap: 25px; padding: 0 20px 60px; flex: 1; }
-
-        /* SIDEBAR */
         .sidebar { width: 320px; background-color: #1a1a1a; color: #b39359; padding: 30px; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); height: fit-content; border: 1px solid rgba(179, 147, 89, 0.3); }
         .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 25px; text-align: center; }
         input, select { width: 100%; padding: 14px; margin-bottom: 18px; border-radius: 10px; border: 1px solid #333; background: #fff; color: #1a1a1a; font-size: 14px; }
-
         .btn-add { width: 100%; padding: 16px; background-color: #b39359; color: #1a1a1a; border: none; font-weight: 800; border-radius: 10px; cursor: pointer; text-transform: uppercase; transition: 0.3s; margin-bottom: 10px; }
         .btn-add:hover { background-color: #cbb07c; transform: translateY(-2px); }
-
         .btn-clear { width: 100%; padding: 10px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 10px; cursor: pointer; text-transform: uppercase; font-size: 11px; transition: 0.3s; }
         .btn-clear:hover { background-color: #e74c3c; color: #fff; }
-
-        /* TABELA */
         .table-container { flex: 1; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2); }
         table { width: 100%; border-collapse: collapse; }
         thead { background-color: #000; color: #b39359; }
         th, td { padding: 15px; text-align: center; font-size: 13px; border-bottom: 1px solid #f2f2f2; }
-        
         .btn-del-row { background-color: #ffeded; color: #e74c3c; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer; font-weight: bold; font-size: 10px; transition: 0.3s; }
         .btn-del-row:hover { background-color: #e74c3c; color: #fff; }
-
         .total-val { color: #b39359; font-weight: bold; }
         footer { width: 100%; padding: 40px 20px; background-color: #1a1a1a; text-align: center; border-top: 3px solid #b39359; margin-top: auto; }
         .footer-address { color: #b39359; font-size: 11px; text-transform: uppercase; }
-
         @media (max-width: 1000px) { .main-content { flex-direction: column; } .sidebar { width: 100%; } }
     </style>
 </head>
@@ -63,20 +47,20 @@
         <section class="sidebar">
             <h2>Register Product</h2>
             <input type="text" id="pName" placeholder="Product Name">
-            
-            <!-- NOVAS UNIDADES ADICIONADAS AQUI -->
             <select id="pUnit">
                 <option value="Caixas">Caixas (Boxes)</option>
                 <option value="Kg">Quilos (Kg)</option>
                 <option value="Toneladas">Toneladas (Tons)</option>
                 <option value="Unidade">Unidade (Unit)</option>
             </select>
-            
             <input type="number" id="pEntry" placeholder="Entry">
             <input type="number" id="pExit" placeholder="Exit">
-            <select id="pCurrency"><option value="USD">USD ($)</option><option value="EUR">EUR (€)</option></select>
+            <select id="pCurrency">
+                <option value="USD">USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+                <option value="BRL">Real (R$)</option>
+            </select>
             <input type="number" id="pPrice" placeholder="Unit Price">
-            
             <button class="btn-add" onclick="addProduct()">Add Product</button>
             <button class="btn-clear" onclick="clearAll()">🗑️ Clear All</button>
         </section>
@@ -96,8 +80,7 @@
                         <th>ACTION</th>
                     </tr>
                 </thead>
-                <tbody id="inventoryBody">
-                </tbody>
+                <tbody id="inventoryBody"></tbody>
             </table>
         </section>
     </main>
@@ -123,7 +106,9 @@
             const stock = entry - exit;
             const revenue = exit * price;
             const cash = revenue - (entry * price);
-            const symbol = currency === "USD" ? "$" : "€";
+            
+            // Lógica de símbolos atualizada com Real (R$)
+            const symbol = currency === "USD" ? "$" : (currency === "EUR" ? "€" : "R$");
 
             const table = document.getElementById('inventoryBody');
             const row = table.insertRow();
@@ -157,8 +142,5 @@
             }
         }
     </script>
-
 </body>
 </html>
-
-
