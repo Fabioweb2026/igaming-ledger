@@ -20,14 +20,20 @@
         .btn-add { width: 100%; padding: 14px; background-color: #b39359; color: #1a1a1a; border: none; font-weight: 800; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 12px; transition: 0.3s; margin-bottom: 10px; }
         .btn-save-manual { width: 100%; padding: 10px; background-color: #27ae60; color: white; border: none; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 10px; transition: 0.3s; margin-bottom: 10px; }
         .btn-clear { width: 100%; padding: 8px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 9px; transition: 0.3s; }
+        
         .table-container { flex: 1; background: white; border-radius: 15px; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2); }
         table { width: 100%; border-collapse: collapse; min-width: 950px; }
         thead { background-color: #000; color: #b39359; }
         th, td { padding: 12px; text-align: center; font-size: 11px; border-bottom: 1px solid #f2f2f2; }
+        
         .revenue-val { color: #27ae60 !important; font-weight: 800; } 
         .profit-plus { color: #2ecc71 !important; font-weight: 800; } 
         .profit-minus { color: #e74c3c !important; font-weight: 800; } 
         .inv-val { color: #8e44ad !important; font-weight: bold; font-size: 11px; } 
+        
+        .btn-delete { color: #e74c3c; background: none; border: none; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 10px; }
+        .btn-delete:hover { text-decoration: underline; }
+
         footer { width: 100%; padding: 30px 20px; background-color: #1a1a1a; text-align: center; border-top: 3px solid #b39359; margin-top: auto; }
         .footer-address { color: #b39359; font-size: 10px; text-transform: uppercase; }
         @media (max-width: 1100px) { .main-content { flex-direction: column; } .sidebar { width: 100%; } }
@@ -62,7 +68,17 @@
         <section class="table-container">
             <table>
                 <thead>
-                    <tr><th>PRODUCT</th><th>UNIT</th><th>STOCK</th><th>COST (BUY)</th><th>SELL PRICE</th><th>REVENUE</th><th>PROFIT (SALES)</th><th>INV. VALUE (SELL CURR)</th><th>ACTION</th></tr>
+                    <tr>
+                        <th>PRODUCT</th>
+                        <th>UNIT</th>
+                        <th>STOCK</th>
+                        <th>COST (BUY)</th>
+                        <th>SELL PRICE</th>
+                        <th>REVENUE</th>
+                        <th>PROFIT (SALES)</th>
+                        <th>INV. VALUE (SELL CURR)</th>
+                        <th>ACTION</th>
+                    </tr>
                 </thead>
                 <tbody id="inventoryBody"></tbody>
             </table>
@@ -79,6 +95,7 @@
         function saveInventory() { const table = document.getElementById('inventoryBody'); localStorage.setItem("solleneInventoryHTML", table.innerHTML); }
         function manualSave() { saveInventory(); alert("Inventory saved successfully!"); }
         function loadInventory() { const savedHTML = localStorage.getItem("solleneInventoryHTML"); if (savedHTML) { document.getElementById('inventoryBody').innerHTML = savedHTML; } }
+        
         function addProduct() {
             const name = document.getElementById('pName').value;
             const unit = document.getElementById('pUnit').value;
@@ -93,7 +110,7 @@
 
             const stock = entry - exit;
             const revenue = exit * sellPrice; 
-            const profit = (sellPrice - buyPrice) * exit; // Cálculo simplificado
+            const profit = (sellPrice - buyPrice) * exit;
             const inventoryValueInSellCurr = stock * sellPrice;
 
             const table = document.getElementById('inventoryBody');
@@ -107,7 +124,7 @@
                 <td class="revenue-val">${sSell} ${revenue.toFixed(2)}</td>
                 <td class="${profit >= 0 ? 'profit-plus' : 'profit-minus'}">${sSell} ${profit.toFixed(2)}</td>
                 <td class="inv-val">${sSell} ${inventoryValueInSellCurr.toFixed(2)}</td>
-                <td><button style="color:red; border:none; background:none; cursor:pointer;" onclick="deleteRow(this)">Delete</button></td>
+                <td><button class="btn-delete" onclick="deleteRow(this)">Delete</button></td>
             `;
             saveInventory();
             document.getElementById('pName').value = ""; document.getElementById('pEntry').value = ""; document.getElementById('pExit').value = ""; document.getElementById('pBuyPrice').value = ""; document.getElementById('pSellPrice').value = "";
@@ -117,6 +134,3 @@
     </script>
 </body>
 </html>
-
-
-
