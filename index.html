@@ -1,5 +1,4 @@
-
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,12 +7,10 @@
     <title>Sollene Group | Terminal</title>
 
     <style>
-        @import url('https://googleapis.com');
-
         *{ margin:0; padding:0; box-sizing:border-box; }
 
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
+            font-family: Arial, sans-serif;
             background: #fdfaf6;
             color: #1a1a1a; 
             padding-bottom: 60px;
@@ -22,19 +19,19 @@
             align-items: center;
         }
 
+        /* HEADER */
         .header-container {
             width: 100%;
             max-width: 1200px;
-            padding: 50px 20px;
+            padding: 40px 20px;
             text-align: center;
         }
 
         .logo-main {
-            max-width: 320px;
+            max-width: 300px;
             height: auto;
             display: block;
             margin: 0 auto;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.08));
         }
 
         .main-grid {
@@ -46,80 +43,81 @@
             padding: 0 20px;
         }
 
+        /* SIDEBAR */
         .sidebar-card {
             background: #1f2937;
             padding: 40px 30px;
-            border-radius: 30px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.2);
+            border-radius: 25px;
             color: #fff;
             border-top: 4px solid #b39359;
         }
 
-        .sidebar-card h3 { 
-            font-size: 11px;
-            text-transform: uppercase;
-            color: #b39359;
-            margin-bottom: 30px;
+        .sidebar-card h3 {
             text-align: center;
-            letter-spacing: 2px;
-            font-weight: 800;
+            margin-bottom: 25px;
+            color: #b39359;
+            text-transform: uppercase;
+            font-size: 12px;
         }
 
         input, select {
             width: 100%;
-            padding: 16px;
-            margin-bottom: 20px;
-            border: 1px solid #374151;
-            border-radius: 14px;
+            padding: 14px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            border: none;
             background: #111827;
             color: #fff;
         }
 
         #regBtn {
             width: 100%;
-            padding: 20px;
+            padding: 16px;
             background: #b39359;
-            color: #111827;
             border: none;
-            border-radius: 16px;
-            font-weight: 800;
+            border-radius: 12px;
+            font-weight: bold;
             cursor: pointer;
         }
 
+        /* TABLE AREA */
         .inventory-area {
-            background-color: #f2ede4;
-            border-radius: 30px;
+            background: #f2ede4;
+            border-radius: 25px;
+            min-height: 500px;
             border: 1px solid #e5e1da;
-            min-height: 550px;
         }
 
         table { width: 100%; border-collapse: collapse; }
 
         th {
-            padding: 24px 20px;
+            padding: 20px;
             background: #1f2937;
             color: #b39359;
-            font-size: 10px;
+            font-size: 11px;
             text-transform: uppercase;
         }
 
         td {
-            padding: 24px 20px;
+            padding: 18px;
             border-bottom: 1px solid #ddd;
-            background: rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.5);
         }
 
-        .currency-style { color: #b39359; font-weight: 800; }
+        .currency-style {
+            color: #b39359;
+            font-weight: bold;
+        }
 
         .del-btn {
             color: red;
             background: none;
             border: none;
             cursor: pointer;
-            font-weight: 800;
+            font-weight: bold;
         }
 
-        @media(max-width: 900px) {
+        @media(max-width: 900px){
             .main-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -127,9 +125,9 @@
 
 <body>
 
+    <!-- LOGO NO TOPO (AQUI ESTÁ A IMAGEM INSERIDA) -->
     <header class="header-container">
-        <!-- LOGO CORRIGIDO -->
-        <img src="sollene-group.png" alt="Sollene Group" class="logo-main">
+        <img src="Sollene-Group.png" alt="Sollene Group Logo" class="logo-main">
     </header>
 
     <div class="main-grid">
@@ -199,7 +197,7 @@
             const price = document.getElementById('pPrice').value;
             const qty = document.getElementById('pQty').value;
 
-            if(!name || !price || !qty) return alert("Please complete the fields.");
+            if(!name || !price || !qty) return alert("Please complete all fields.");
 
             let s = curr === "USD" ? "$" : (curr === "EUR" ? "€" : "R$");
 
@@ -218,4 +216,15 @@
     </script>
 
 </body>
-</html>   
+</html>
+   
+    
+    
+   
+    
+
+
+  
+
+   
+
