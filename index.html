@@ -1,50 +1,166 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Estoque</title>
+<meta charset="UTF-8">
+<title>Stock System</title>
 
-    <link rel="stylesheet" href="style.css">
+<style>
+body{
+    font-family: Arial;
+    background:#f4f6f9;
+    margin:0;
+    padding:0;
+}
+
+header{
+    background:#0b2a4a;
+    color:white;
+    text-align:center;
+    padding:15px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+/* FORM */
+.form-container{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    padding:20px;
+    justify-content:center;
+}
+
+input{
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.add-btn{
+    background:green;
+    color:white;
+}
+
+/* CARDS */
+.container{
+    display:flex;
+    flex-wrap:wrap;
+    gap:15px;
+    justify-content:center;
+    padding:20px;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    width:220px;
+    border-radius:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.1);
+}
+
+.card h3{
+    margin:0;
+}
+
+.actions{
+    margin-top:10px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.edit{
+    background:#f0ad4e;
+    color:white;
+}
+
+.delete{
+    background:#d9534f;
+    color:white;
+}
+</style>
 </head>
 
 <body>
 
-    <!-- HEADER -->
-    <header style="display:flex; align-items:center; justify-content:space-between; padding:15px 30px; background:#1f2a38; color:white;">
+<header>STOCK MANAGEMENT SYSTEM</header>
 
-        <!-- LOGO -->
-        <div style="display:flex; align-items:center; gap:10px;">
-            <img src="imagem.Sollene Group.png" alt="Sollene Group Logo"
-                 style="width:50px; height:50px; object-fit:contain; border-radius:8px;">
+<div class="form-container">
+    <input id="name" placeholder="Product Name">
+    <input id="unit" placeholder="Unit">
+    <input id="entry" placeholder="Entry">
+    <input id="exit" placeholder="Exit">
+    <input id="price" placeholder="Buy Price">
+    <button class="add-btn" onclick="addProduct()">Add Product</button>
+</div>
 
-            <h2 style="margin:0; font-size:20px;">
-                Sollene Group
-            </h2>
+<div class="container" id="list"></div>
+
+<script>
+let products = [];
+
+function addProduct(){
+    let product = {
+        name:document.getElementById("name").value,
+        unit:document.getElementById("unit").value,
+        entry:Number(document.getElementById("entry").value),
+        exit:Number(document.getElementById("exit").value),
+        price:Number(document.getElementById("price").value)
+    };
+
+    product.stock = product.entry - product.exit;
+
+    products.push(product);
+    render();
+}
+
+function render(){
+    let list = document.getElementById("list");
+    list.innerHTML = "";
+
+    products.forEach((p,index)=>{
+        list.innerHTML += `
+        <div class="card">
+            <h3>${p.name}</h3>
+            <p>Unit: ${p.unit}</p>
+            <p>Entry: ${p.entry}</p>
+            <p>Exit: ${p.exit}</p>
+            <p><b>Stock: ${p.stock}</b></p>
+            <p>Price: ${p.price}</p>
+
+            <div class="actions">
+                <button class="edit" onclick="editProduct(${index})">Update</button>
+                <button class="delete" onclick="deleteProduct(${index})">Delete</button>
+            </div>
         </div>
+        `;
+    });
+}
 
-        <!-- MENU SIMPLES -->
-        <nav>
-            <a href="#" style="color:white; margin-right:15px; text-decoration:none;">Home</a>
-            <a href="#" style="color:white; text-decoration:none;">Estoque</a>
-        </nav>
+function deleteProduct(index){
+    products.splice(index,1);
+    render();
+}
 
-    </header>
+function editProduct(index){
+    let p = products[index];
 
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main style="padding:20px;">
+    document.getElementById("name").value = p.name;
+    document.getElementById("unit").value = p.unit;
+    document.getElementById("entry").value = p.entry;
+    document.getElementById("exit").value = p.exit;
+    document.getElementById("price").value = p.price;
 
-        <h1>Sistema de Controle de Estoque</h1>
-
-        <!-- EXEMPLO DE ÁREA DO SEU SISTEMA -->
-        <section>
-            <p>Bem-vindo ao sistema de estoque da Sollene Group.</p>
-        </section>
-
-    </main>
-
-    <!-- SCRIPT -->
-    <script src="script.js"></script>
+    products.splice(index,1);
+    render();
+}
+</script>
 
 </body>
 </html>
