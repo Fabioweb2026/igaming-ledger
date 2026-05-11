@@ -73,7 +73,127 @@
 
     <div class="main-grid">
         <aside class="sidebar-card">
-            <h3>Shipment Entry</h3>
+            <!-- Procure a sidebar-card e substitua os campos e o script final -->
+
+<aside class="sidebar-card">
+    <h3>Shipment Entry</h3>
+    
+    <label>Product Name</label>
+    <input type="text" id="pName" placeholder="Ex: Premium Arabica">
+    
+    <label>Operation Type</label>
+    <select id="pType">
+        <option value="In">Import (Entry)</option>
+        <option value="Out">Export (Exit)</option>
+    </select>
+
+    <label>Purchase Price (Cost)</label>
+    <div class="row-group">
+        <select id="pCurrBuy" style="flex: 1;">
+            <option value="R$">R$</option>
+            <option value="$">$</option>
+            <option value="€">€</option>
+        </select>
+        <input type="number" id="pCost" placeholder="0.00" style="flex: 2;">
+    </div>
+
+    <label>Sale Price (Revenue)</label>
+    <div class="row-group">
+        <select id="pCurrSale" style="flex: 1;">
+            <option value="€">€</option>
+            <option value="$">$</option>
+            <option value="R$">R$</option>
+        </select>
+        <input type="number" id="pSale" placeholder="0.00" style="flex: 2;">
+    </div>
+
+    <label>Quantity & Unit</label>
+    <div class="row-group">
+        <input type="number" id="pQty" placeholder="0" style="flex: 1;">
+        <!-- ADICIONADO: BOXES (CAIXAS) -->
+        <select id="pUnit" style="flex: 1;">
+            <option value="KG">KG</option>
+            <option value="Tons">Tons</option>
+            <option value="Boxes">Boxes (Caixas)</option>
+        </select>
+    </div>
+
+    <!-- BOTÃO COM FUNÇÃO DE SALVAMENTO -->
+    <button id="regBtn">Process Trade & Save</button>
+</aside>
+
+<script>
+    const inventoryList = document.getElementById('list');
+
+    // FUNÇÃO QUE SALVA NO BANCO DE DADOS DO NAVEGADOR
+    function saveData() {
+        const items = [];
+        document.querySelectorAll('#list tr').forEach(row => {
+            items.push({
+                status: row.cells[0].innerText,
+                name: row.cells[1].innerText,
+                purchase: row.cells[2].innerText,
+                sale: row.cells[3].innerText,
+                volume: row.cells[4].innerText
+            });
+        });
+        localStorage.setItem('sollene_database_v2', JSON.stringify(items));
+    }
+
+    // CARREGA OS DADOS SALVOS QUANDO VOCÊ ABRE O SITE
+    function loadData() {
+        const saved = localStorage.getItem('sollene_database_v2');
+        if (saved) {
+            JSON.parse(saved).forEach(item => {
+                renderRow(item.status, item.name, item.purchase, item.sale, item.volume);
+            });
+        }
+    }
+
+    function renderRow(status, name, purchase, sale, volume) {
+        const row = inventoryList.insertRow();
+        const badgeClass = status === 'In' ? 'badge-in' : 'badge-out';
+        row.innerHTML = `
+            <td><span class="badge ${badgeClass}">${status}</span></td>
+            <td><strong>${name}</strong></td>
+            <td style="color:#64748b">${purchase}</td>
+            <td style="color:#b39359; font-weight:800">${sale}</td>
+            <td>${volume}</td>
+            <td><button class="btn-delete" onclick="this.closest('tr').remove(); saveData();">DELETE</button></td>
+        `;
+    }
+
+    window.onload = loadData;
+
+    document.getElementById('regBtn').addEventListener('click', function() {
+        const name = document.getElementById('pName').value;
+        const type = document.getElementById('pType').value;
+        const symBuy = document.getElementById('pCurrBuy').value;
+        const cost = document.getElementById('pCost').value;
+        const symSale = document.getElementById('pCurrSale').value;
+        const sale = document.getElementById('pSale').value;
+        const qty = document.getElementById('pQty').value;
+        const unit = document.getElementById('pUnit').value;
+
+        if(!name || !cost || !sale || !qty) return alert("Please fill all fields.");
+
+        const purchaseVal = `${symBuy} ${parseFloat(cost).toFixed(2)}`;
+        const saleVal = `${symSale} ${parseFloat(sale).toFixed(2)}`;
+        const volumeVal = `${qty} ${unit}`;
+
+        renderRow(type, name, purchaseVal, saleVal, volumeVal);
+        
+        // SALVA AUTOMATICAMENTE AO CLICAR
+        saveData();
+
+        // LIMPA OS CAMPOS PARA O PRÓXIMO LANÇAMENTO
+        document.getElementById('pName').value = "";
+        document.getElementById('pCost').value = "";
+        document.getElementById('pSale').value = "";
+        document.getElementById('pQty').value = "";
+    });
+</script>
+
             
             <label>Product Name</label>
             <input type="text" id="pName" placeholder="Ex: Premium Arabica">
