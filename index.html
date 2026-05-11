@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Financial Management</title>
+    <title>Sollene Group | Executive Dashboard</title>
     <style>
         @import url('https://googleapis.com');
         
@@ -16,61 +16,68 @@
             display: flex; flex-direction: column; align-items: center;
         }
 
-        /* HEADER LOGO */
-        .logo-container { width: 100%; max-width: 1200px; padding: 30px 30px; text-align: center; }
-        .logo-img { width: 100%; max-width: 900px; height: auto; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.05)); object-fit: contain; }
+        /* HEADER POLIDO */
+        .logo-container { width: 100%; max-width: 1200px; padding: 40px 30px; text-align: center; }
+        .logo-img { width: 100%; max-width: 900px; height: auto; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.08)); object-fit: contain; }
 
         /* GRID PRINCIPAL */
         .main-grid {
-            display: grid; grid-template-columns: 350px 1fr; gap: 25px;
-            width: 95%; max-width: 1200px; margin-bottom: 60px;
+            display: grid; grid-template-columns: 350px 1fr; gap: 30px;
+            width: 95%; max-width: 1200px; margin-bottom: 80px;
         }
 
-        /* CARD EXECUTIVO DARK */
+        /* CARD DARK POLIDO */
         .sidebar-card {
-            background: #111827; padding: 25px; border-radius: 20px;
-            color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); height: fit-content;
+            background: #111827; padding: 30px; border-radius: 24px;
+            color: #ffffff; border: 1px solid rgba(179, 147, 89, 0.2);
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.4); height: fit-content;
         }
 
-        .sidebar-card h3 { font-size: 18px; font-weight: 800; color: #ffffff; margin-bottom: 20px; letter-spacing: -0.5px; }
+        .sidebar-card h3 { font-size: 18px; font-weight: 800; color: #ffffff; margin-bottom: 25px; border-left: 4px solid #b39359; padding-left: 15px; }
 
-        label { font-size: 9px; text-transform: uppercase; color: #b39359; display: block; margin-bottom: 6px; font-weight: 800; letter-spacing: 1.5px; }
+        label { font-size: 9px; text-transform: uppercase; color: #b39359; display: block; margin-bottom: 8px; font-weight: 800; letter-spacing: 2px; }
 
         input, select {
-            width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 10px; background: rgba(255, 255, 255, 0.03); color: #ffffff; outline: none; font-size: 13px;
+            width: 100%; padding: 14px; margin-bottom: 18px; border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 12px; background: rgba(255, 255, 255, 0.03); color: #ffffff; outline: none; font-size: 14px; transition: 0.3s;
         }
         select option { background-color: #ffffff; color: #111827; }
+        input:focus, select:focus { border-color: #b39359; background: rgba(255, 255, 255, 0.07); }
 
-        .row-group { display: flex; gap: 8px; }
+        .row-group { display: flex; gap: 10px; }
 
+        /* BOTÃO COM EFEITO DE BRILHO */
         #regBtn {
-            width: 100%; padding: 16px; background: #b39359; color: #111827; border: none; 
-            border-radius: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.4s;
+            width: 100%; padding: 20px; background: #b39359; color: #111827; border: none; 
+            border-radius: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; 
+            cursor: pointer; transition: 0.4s; box-shadow: 0 4px 15px rgba(179, 147, 89, 0.3);
         }
-        #regBtn:hover { background: #ffffff; transform: translateY(-2px); }
+        #regBtn:hover { background: #ffffff; transform: translateY(-3px); box-shadow: 0 10px 25px rgba(179, 147, 89, 0.4); }
 
-        /* ÁREA DA TABELA COMPACTA */
-        .inventory-area { background: #ffffff; border-radius: 20px; border: 1px solid #e5e1da; overflow: hidden; }
+        /* TABELA DE ALTA PERFORMANCE */
+        .inventory-area { background: #ffffff; border-radius: 24px; border: 1px solid #e5e1da; overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.03); }
         table { width: 100%; border-collapse: collapse; }
-        th { text-align: left; padding: 15px 10px; background: #1f2937; color: #b39359; font-size: 9px; text-transform: uppercase; }
-        td { padding: 15px 10px; border-bottom: 1px solid #f1f1f1; font-size: 13px; }
+        th { text-align: left; padding: 20px 15px; background: #1f2937; color: #b39359; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        td { padding: 20px 15px; border-bottom: 1px solid #f1f1f1; font-size: 14px; }
+        tr:hover { background: #fafafa; }
 
-        .badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
-        .badge-in { background: #dcfce7; color: #166534; }
-        .badge-out { background: #fee2e2; color: #991b1b; }
+        .badge { padding: 5px 12px; border-radius: 6px; font-size: 9px; font-weight: 800; }
+        .badge-in { background: #ecfdf5; color: #059669; }
+        .badge-out { background: #fef2f2; color: #dc2626; }
 
-        /* CORES DO LUCRO */
-        .profit-pos { color: #16a34a; font-weight: 800; }
-        .profit-neg { color: #dc2626; font-weight: 800; }
+        /* DESTAQUE FINANCEIRO */
+        .profit-pos { color: #059669; font-weight: 800; background: #f0fdf4; padding: 5px 10px; border-radius: 8px; }
+        .profit-neg { color: #dc2626; font-weight: 800; background: #fef2f2; padding: 5px 10px; border-radius: 8px; }
 
-        .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 6px 10px; border-radius: 6px; cursor: pointer; font-weight: 800; font-size: 9px; }
+        .btn-delete { background: #fee2e2; color: #991b1b; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; font-weight: 800; font-size: 9px; transition: 0.3s; }
+        .btn-delete:hover { background: #991b1b; color: #ffffff; }
 
-        /* RODAPÉ BLACK */
-        .footer-premium { background: #000000; color: #ffffff; padding: 60px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
-        .social-btn { text-decoration: none; color: #ffffff; font-size: 10px; padding: 10px 25px; border: 1px solid #b39359; border-radius: 50px; text-transform: uppercase; margin: 0 8px; display: inline-block; transition: 0.3s; }
-        .social-btn:hover { background: #b39359; color: #000000; }
+        /* RODAPÉ PREMIUM */
+        .footer-premium { background: #000000; color: #ffffff; padding: 80px 20px; text-align: center; border-top: 4px solid #b39359; width: 100%; }
+        .social-btn { text-decoration: none; color: #ffffff; font-size: 11px; padding: 12px 30px; border: 1px solid rgba(179, 147, 89, 0.4); border-radius: 50px; text-transform: uppercase; margin: 0 10px; display: inline-block; transition: 0.4s; }
+        .social-btn:hover { background: #b39359; color: #000000; border-color: #b39359; }
+
+        @media(max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -81,20 +88,20 @@
 
     <div class="main-grid">
         <aside class="sidebar-card">
-            <h3>Shipment Entry</h3>
+            <h3>Trade Entry</h3>
             
-            <label>Product Name</label>
-            <input type="text" id="pName" placeholder="Ex: Premium Coffee">
+            <label>Identification</label>
+            <input type="text" id="pName" placeholder="Ex: Premium Coffee Beans">
             
-            <label>Operation Type</label>
+            <label>Market Flow</label>
             <select id="pType">
                 <option value="In">Import (Entry)</option>
                 <option value="Out">Export (Exit)</option>
             </select>
 
-            <label>Purchase Price (R$ - Cost)</label>
+            <label>Acquisition (BRL)</label>
             <div class="row-group">
-                <select id="pCurrBuy" style="flex: 1.2;">
+                <select id="pCurrBuy" style="flex: 1;">
                     <option value="R$">R$</option>
                     <option value="$">$</option>
                     <option value="€">€</option>
@@ -102,9 +109,9 @@
                 <input type="number" id="pCost" placeholder="0.00" style="flex: 2;">
             </div>
 
-            <label>Sale Price (€ - Revenue)</label>
+            <label>Market Sale (EUR)</label>
             <div class="row-group">
-                <select id="pCurrSale" style="flex: 1.2;">
+                <select id="pCurrSale" style="flex: 1;">
                     <option value="€">€</option>
                     <option value="$">$</option>
                     <option value="R$">R$</option>
@@ -112,17 +119,17 @@
                 <input type="number" id="pSale" placeholder="0.00" style="flex: 2;">
             </div>
 
-            <label>Quantity & Unit</label>
+            <label>Volume Control</label>
             <div class="row-group">
-                <input type="number" id="pQty" placeholder="0" style="flex: 1;">
-                <select id="pUnit" style="flex: 1.5;">
+                <input type="number" id="pQty" placeholder="Qty" style="flex: 1;">
+                <select id="pUnit" style="flex: 1;">
                     <option value="Boxes">Boxes</option>
                     <option value="Tons">Tons</option>
                     <option value="KG">KG</option>
                 </select>
             </div>
 
-            <button id="regBtn">Process & Calculate</button>
+            <button id="regBtn">Process Trade & Save</button>
         </aside>
 
         <main class="inventory-area">
@@ -132,10 +139,10 @@
                         <th>Status</th>
                         <th>Product</th>
                         <th>Purchase</th>
-                        <th>Sale</th>
+                        <th>Target Sale</th>
                         <th>Volume</th>
-                        <th>Profit</th>
-                        <th>Action</th>
+                        <th>Net Profit</th>
+                        <th>Admin</th>
                     </tr>
                 </thead>
                 <tbody id="list"></tbody>
@@ -144,12 +151,12 @@
     </div>
 
     <footer class="footer-premium">
-        <div style="margin-bottom: 25px;">
-            <a href="https://linkedin.com" target="_blank" class="social-btn">LinkedIn</a>
-            <a href="https://github.com" target="_blank" class="social-btn">GitHub</a>
+        <div style="margin-bottom: 30px;">
+            <a href="https://linkedin.com" target="_blank" class="social-btn">LinkedIn Profile</a>
+            <a href="https://github.com" target="_blank" class="social-btn">GitHub Repo</a>
             <a href="https://wa.me" target="_blank" class="social-btn">WhatsApp</a>
         </div>
-        <p style="font-size: 9px; color: #b39359; letter-spacing: 2px; opacity: 0.7;">SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p>
+        <p style="font-size: 10px; color: #b39359; letter-spacing: 3px; opacity: 0.8;">SOLLENE GROUP ENTERPRISE • MARINA BUSINESS AVENUE • VALLETTA, MALTA</p>
     </footer>
 
     <script>
@@ -168,11 +175,11 @@
                     profitClass: row.cells[5].className
                 });
             });
-            localStorage.setItem('sollene_financial_v1', JSON.stringify(items));
+            localStorage.setItem('sollene_luxury_db', JSON.stringify(items));
         }
 
         function loadData() {
-            const saved = localStorage.getItem('sollene_financial_v1');
+            const saved = localStorage.getItem('sollene_luxury_db');
             if (saved) {
                 JSON.parse(saved).forEach(item => {
                     renderRow(item.statusHtml, item.name, item.purchase, item.sale, item.volume, item.profit, item.profitClass);
@@ -188,7 +195,7 @@
                 <td style="color:#64748b">${purchase}</td>
                 <td style="color:#b39359; font-weight:800">${sale}</td>
                 <td>${volume}</td>
-                <td class="${profitClass}">${profit}</td>
+                <td><span class="${profitClass}">${profit}</span></td>
                 <td><button class="btn-delete" onclick="this.closest('tr').remove(); saveData();">DELETE</button></td>
             `;
         }
@@ -205,22 +212,21 @@
             const symBuy = document.getElementById('pCurrBuy').value;
             const symSale = document.getElementById('pCurrSale').value;
 
-            if(!name || isNaN(cost) || isNaN(sale) || isNaN(qty)) return alert("Preencha todos os campos.");
+            if(!name || isNaN(cost) || isNaN(sale) || isNaN(qty)) return alert("Preencha todos os campos obrigatórios.");
 
-            // CÁLCULO DO LUCRO: (Venda - Custo) * Quantidade
             const totalProfit = (sale - cost) * qty;
             const profitClass = totalProfit >= 0 ? 'profit-pos' : 'profit-neg';
-            const formattedProfit = `${symSale} ${totalProfit.toFixed(2)}`;
+            const formattedProfit = `${symSale} ${totalProfit.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
             
-            const purchaseVal = `${symBuy} ${cost.toFixed(2)}`;
-            const saleVal = `${symSale} ${sale.toFixed(2)}`;
+            const purchaseVal = `${symBuy} ${cost.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
+            const saleVal = `${symSale} ${sale.toLocaleString('en-US', {minimumFractionDigits: 2})}`;
             const volumeVal = `${qty} ${unit}`;
             const statusHtml = `<span class="badge ${type === 'In' ? 'badge-in' : 'badge-out'}">${type}</span>`;
 
             renderRow(statusHtml, name, purchaseVal, saleVal, volumeVal, formattedProfit, profitClass);
             saveData();
 
-            // Limpa campos
+            // Limpeza suave dos campos
             document.getElementById('pName').value = "";
             document.getElementById('pCost').value = "";
             document.getElementById('pSale').value = "";
