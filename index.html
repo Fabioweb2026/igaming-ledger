@@ -6,42 +6,56 @@
     <title>Sollene Group | Inventory System</title>
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
+        /* RESET & BASE STYLE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fdfcf0; color: #1a1a1a; display: flex; flex-direction: column; align-items: center; }
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: #fdfcf0; 
+            color: #1a1a1a; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+        }
         
+        /* BANNER */
         .banner-header { width: 100%; height: 9.5cm; margin-top: 0.5cm; background-color: #fdfcf0; overflow: hidden; display: flex; justify-content: center; box-shadow: 0 10px 40px rgba(0,0,0,0.05); }
         .banner-header img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
 
+        /* NAVEGAÇÃO */
         .nav-top { width: 100%; max-width: 1400px; padding: 15px 20px; text-align: left; }
         .btn-back { text-decoration: none; color: #b39359; border: 1px solid #b39359; padding: 6px 15px; border-radius: 50px; font-size: 10px; font-weight: 700; text-transform: uppercase; transition: 0.3s; }
         .btn-back:hover { background: #b39359; color: white; }
 
+        /* CONTEÚDO PRINCIPAL */
         .main-content { display: flex; width: 100%; max-width: 1400px; gap: 20px; padding: 0 20px 40px; flex: 1; }
 
+        /* SIDEBAR PREMIUM */
         .sidebar { width: 320px; background-color: #1a1a1a; color: #b39359; padding: 25px; border-radius: 15px; box-shadow: 0 15px 30px rgba(0,0,0,0.3); height: fit-content; border: 1px solid rgba(179, 147, 89, 0.3); }
         .sidebar h2 { font-family: 'Playfair Display', serif; margin-bottom: 20px; text-align: center; font-size: 1.2rem; }
         label { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; display: block; color: #888; }
         input, select { width: 100%; padding: 10px; margin-bottom: 12px; border-radius: 8px; border: 1px solid #333; background: #fff; color: #1a1a1a; font-size: 12px; }
 
+        /* BOTÕES */
         .btn-add { width: 100%; padding: 14px; background-color: #b39359; color: #1a1a1a; border: none; font-weight: 800; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 12px; transition: 0.3s; margin-bottom: 10px; }
         .btn-add:hover { background-color: #cbb07c; transform: translateY(-2px); }
 
-        /* NOVO BOTÃO SALVAR */
         .btn-save-manual { width: 100%; padding: 10px; background-color: #27ae60; color: white; border: none; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 10px; transition: 0.3s; margin-bottom: 10px; }
         .btn-save-manual:hover { background-color: #219150; }
 
         .btn-clear { width: 100%; padding: 8px; background-color: transparent; color: #e74c3c; border: 1px solid #e74c3c; font-weight: 700; border-radius: 8px; cursor: pointer; text-transform: uppercase; font-size: 9px; transition: 0.3s; }
         .btn-clear:hover { background-color: #e74c3c; color: white; }
 
+        /* TABELA DE ALTA PERFORMANCE */
         .table-container { flex: 1; background: white; border-radius: 15px; overflow-x: auto; box-shadow: 0 10px 30px rgba(0,0,0,0.05); border: 1px solid rgba(179, 147, 89, 0.2); }
-        table { width: 100%; border-collapse: collapse; min-width: 900px; }
+        table { width: 100%; border-collapse: collapse; min-width: 950px; }
         thead { background-color: #000; color: #b39359; }
         th, td { padding: 12px; text-align: center; font-size: 11px; border-bottom: 1px solid #f2f2f2; }
         
-        .revenue-val { color: #27ae60 !important; font-weight: bold; }
-        .profit-plus { color: #b39359 !important; font-weight: bold; }
-        .profit-minus { color: #e74c3c !important; font-weight: bold; }
-        .inv-val { color: #2980b9 !important; font-size: 10px; }
+        /* CORES DE STATUS FINANCEIRO */
+        .revenue-val { color: #27ae60 !important; font-weight: 800; } 
+        .profit-plus { color: #2ecc71 !important; font-weight: 800; } /* Verde vibrante para lucro */
+        .profit-minus { color: #e74c3c !important; font-weight: 800; } /* Vermelho para prejuízo */
+        .inv-val { color: #2980b9 !important; font-weight: bold; font-size: 10px; } /* Azul para capital em estoque */
 
         footer { width: 100%; padding: 30px 20px; background-color: #1a1a1a; text-align: center; border-top: 3px solid #b39359; margin-top: auto; }
         .footer-address { color: #b39359; font-size: 10px; text-transform: uppercase; }
@@ -50,25 +64,51 @@
     </style>
 </head>
 <body onload="loadInventory()">
-    <header class="banner-header"><img src="imagem.Sollene Group.png" alt="Sollene Group Logo"></header>
-    <nav class="nav-top"><a href="index.html" class="btn-back">← Back</a></nav>
+
+    <header class="banner-header">
+        <img src="imagem.Sollene Group.png" alt="Sollene Group Logo">
+    </header>
+
+    <nav class="nav-top">
+        <a href="index.html" class="btn-back">← Back</a>
+    </nav>
+
     <main class="main-content">
         <section class="sidebar">
             <h2>Inventory Control</h2>
             <label>Product Name</label>
             <input type="text" id="pName" placeholder="Ex: Coffee">
+            
             <label>Unit</label>
-            <select id="pUnit"><option value="Caixas">Caixas</option><option value="Kg">Kg</option><option value="Toneladas">Tons</option></select>
+            <select id="pUnit">
+                <option value="Caixas">Caixas</option>
+                <option value="Kg">Kg</option>
+                <option value="Toneladas">Tons</option>
+            </select>
+            
             <label>In / Out</label>
-            <div style="display: flex; gap: 8px;"><input type="number" id="pEntry" placeholder="In"><input type="number" id="pExit" placeholder="Out"></div>
+            <div style="display: flex; gap: 8px;">
+                <input type="number" id="pEntry" placeholder="In">
+                <input type="number" id="pExit" placeholder="Out">
+            </div>
+
             <label>Buy Curr & Cost</label>
             <div style="display: flex; gap: 8px;">
-                <select id="pBuyCurr" style="width: 45%;"><option value="BRL">R$</option><option value="USD">$</option><option value="EUR">€</option></select>
+                <select id="pBuyCurr" style="width: 45%;">
+                    <option value="BRL">R$</option>
+                    <option value="USD">$</option>
+                    <option value="EUR">€</option>
+                </select>
                 <input type="number" id="pBuyPrice" placeholder="Cost">
             </div>
+
             <label>Sell Curr & Price</label>
             <div style="display: flex; gap: 8px;">
-                <select id="pSellCurr" style="width: 45%;"><option value="USD">$</option><option value="EUR">€</option><option value="BRL">R$</option></select>
+                <select id="pSellCurr" style="width: 45%;">
+                    <option value="USD">$</option>
+                    <option value="EUR">€</option>
+                    <option value="BRL">R$</option>
+                </select>
                 <input type="number" id="pSellPrice" placeholder="Price">
             </div>
             
@@ -80,12 +120,23 @@
         <section class="table-container">
             <table>
                 <thead>
-                    <tr><th>PRODUCT</th><th>UNIT</th><th>STOCK</th><th>COST (BUY)</th><th>SELL PRICE</th><th>REVENUE</th><th>PROFIT (SALES)</th><th>INV. VALUE</th><th>ACTION</th></tr>
+                    <tr>
+                        <th>PRODUCT</th>
+                        <th>UNIT</th>
+                        <th>STOCK</th>
+                        <th>COST (BUY)</th>
+                        <th>SELL PRICE</th>
+                        <th>REVENUE</th>
+                        <th>PROFIT (SALES)</th>
+                        <th>INV. VALUE</th>
+                        <th>ACTION</th>
+                    </tr>
                 </thead>
                 <tbody id="inventoryBody"></tbody>
             </table>
         </section>
     </main>
+
     <footer><div class="footer-address"><p>SOLLENE GROUP ENTERPRISE • VALLETTA, MALTA</p></div></footer>
 
     <script>
@@ -95,6 +146,7 @@
             return "€";
         }
 
+        // Função de Salvamento (LocalStorage)
         function saveInventory() {
             const table = document.getElementById('inventoryBody');
             localStorage.setItem("solleneInventoryHTML", table.innerHTML);
@@ -102,7 +154,7 @@
 
         function manualSave() {
             saveInventory();
-            alert("Inventory saved successfully!");
+            alert("Sollene Group: Inventory saved successfully!");
         }
 
         function loadInventory() {
@@ -129,22 +181,32 @@
 
             const stock = entry - exit;
             const revenue = exit * sellPrice; 
-            const profit = (sellPrice - buyPrice) * exit;
+            const profit = (sellPrice - buyPrice) * exit; // Lucro direto (simplificado)
             const inventoryValue = stock * buyPrice;
 
             const table = document.getElementById('inventoryBody');
             const row = table.insertRow();
+            
+            const sBuy = getSymbol(buyCurr);
+            const sSell = getSymbol(sellCurr);
+
             row.innerHTML = `
-                <td>${name}</td><td>${unit}</td><td style="font-weight:bold; color:#555;">${stock}</td>
-                <td>${getSymbol(buyCurr)} ${buyPrice.toFixed(2)}</td>
-                <td>${getSymbol(sellCurr)} ${sellPrice.toFixed(2)}</td>
-                <td class="revenue-val">${getSymbol(sellCurr)} ${revenue.toFixed(2)}</td>
-                <td class="${profit >= 0 ? 'profit-plus' : 'profit-minus'}">${getSymbol(sellCurr)} ${profit.toFixed(2)}</td>
-                <td class="inv-val">${getSymbol(buyCurr)} ${inventoryValue.toFixed(2)}</td>
+                <td>${name}</td>
+                <td>${unit}</td>
+                <td style="font-weight:bold; color:#555;">${stock}</td>
+                <td>${sBuy} ${buyPrice.toFixed(2)}</td>
+                <td>${sSell} ${sellPrice.toFixed(2)}</td>
+                <td class="revenue-val">${sSell} ${revenue.toFixed(2)}</td>
+                <td class="${profit >= 0 ? 'profit-plus' : 'profit-minus'}">
+                    ${sSell} ${profit.toFixed(2)}
+                </td>
+                <td class="inv-val">${sBuy} ${inventoryValue.toFixed(2)}</td>
                 <td><button style="color:red; border:none; background:none; cursor:pointer;" onclick="deleteRow(this)">Delete</button></td>
             `;
-            saveInventory(); // Salva automaticamente ao adicionar
             
+            saveInventory();
+            
+            // Limpa campos para novo registro
             document.getElementById('pName').value = "";
             document.getElementById('pEntry').value = "";
             document.getElementById('pExit').value = "";
@@ -154,7 +216,7 @@
 
         function deleteRow(btn) {
             btn.closest('tr').remove();
-            saveInventory(); // Salva automaticamente ao deletar
+            saveInventory();
         }
 
         function clearAll() {
@@ -166,3 +228,4 @@
     </script>
 </body>
 </html>
+
