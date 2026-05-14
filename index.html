@@ -21,23 +21,23 @@
         }
         .brand-title { font-size: 24px; font-weight: 800; color: #1a1a1a; letter-spacing: 3px; text-transform: uppercase; }
 
-        /* PAINEL OPERACIONAL LADO A LADO MULTI-COLUNAS */
+        /* PAINEL OPERACIONAL COM LARGURA DO CARD COMPACTADA */
         .dashboard-container { 
             max-width: 1750px; 
             margin: 30px auto; 
             padding: 0 2%; 
             display: grid; 
-            grid-template-columns: 420px 1fr 280px; /* Ajustada largura do card para 420px para caber a linha harmônica */
-            gap: 25px; 
+            grid-template-columns: 340px 1fr 260px; /* REDUZIDO: Card na esquerda com exatos 340px */
+            gap: 20px; 
             align-items: start;
         }
         
-        /* CARDS COM BORDAS BRONZE */
+        /* CARD COM BORDAS BRONZE ULTRA COMPACTO */
         .panel-card { 
             background: #ffffff; 
             border: 2px solid #7a5c33; 
-            border-radius: 16px; 
-            padding: 18px; 
+            border-radius: 14px; 
+            padding: 14px; /* Reduzido espaçamento interno */
             box-shadow: 0 10px 25px rgba(122,92,51,0.05); 
             color: #1a1a1a; 
             overflow: hidden;
@@ -46,46 +46,45 @@
         /* TÍTULOS EM BLACK ELEGANTE */
         .panel-card h2 { 
             font-size: 11px; text-transform: uppercase; letter-spacing: 2px; 
-            color: #d4af37; background: #000000; padding: 10px; margin: -18px -18px 15px -18px;
+            color: #d4af37; background: #000000; padding: 10px; margin: -14px -14px 12px -14px;
             font-weight: 800; text-align: center; border-bottom: 2px solid #7a5c33;
         }
         
-        .form-group { margin-bottom: 8px; } 
-        .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: #7a5c33; letter-spacing: 1px; white-space: nowrap; }
-        .form-control { width: 100%; padding: 8px 10px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 13px; font-weight: 600; outline: none; background: #fdfaf6; color: #1a1a1a; height: 38px; }
+        .form-group { margin-bottom: 6px; } 
+        .form-group label { display: block; font-size: 8.5px; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; color: #7a5c33; letter-spacing: 0.5px; white-space: nowrap; }
+        .form-control { width: 100%; padding: 6px 8px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 12px; font-weight: 600; outline: none; background: #fdfaf6; color: #1a1a1a; height: 34px; }
         
-        /* ALINHAMENTO HARMÔNICO EM LINHA RETA */
-        .form-row { display: flex; gap: 10px; align-items: flex-end; width: 100%; }
-        .col-qty { flex: 1; min-width: 70px; }
-        .col-price { flex: 1.2; min-width: 90px; }
-        .col-curr { flex: 1.5; min-width: 110px; }
+        /* DISTRIBUIÇÃO FOCADA PARA LARGURA REDUZIDA */
+        .form-row { display: flex; gap: 6px; align-items: flex-end; width: 100%; }
+        .col-qty { flex: 0.9; min-width: 50px; }
+        .col-price { flex: 1.1; min-width: 75px; }
+        .col-curr { flex: 1.4; min-width: 100px; }
 
-        .trade-section-title { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #7a5c33; margin: 12px 0 8px 0; padding-top: 5px; border-top: 1px dashed #e1dbcf; display: flex; align-items: center; gap: 4px; }
-        .btn-submit { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 12px; height: 42px; }
+        .trade-section-title { font-size: 8.5px; font-weight: 800; text-transform: uppercase; color: #7a5c33; margin: 10px 0 6px 0; padding-top: 4px; border-top: 1px dashed #e1dbcf; display: flex; align-items: center; gap: 4px; }
+        .btn-submit { width: 100%; padding: 10px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; height: 38px; }
         .btn-submit:hover { background: #7a5c33; }
 
         /* TABELA DE MANIFESTO RECONFIGURADA */
-        .table-container { width: 100%; overflow-x: auto; background: #ffffff; border-radius: 16px; border: 2px solid #7a5c33; padding: 18px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); overflow: hidden; }
+        .table-container { width: 100%; overflow-x: auto; background: #ffffff; border-radius: 16px; border: 2px solid #7a5c33; padding: 14px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); overflow: hidden; }
         .table-container h2 {
             font-size: 11px; text-transform: uppercase; letter-spacing: 2px; 
-            color: #d4af37; background: #000000; padding: 10px; margin: -18px -18px 15px -18px;
+            color: #d4af37; background: #000000; padding: 10px; margin: -14px -14px 12px -14px;
             font-weight: 800; text-align: center; border-bottom: 2px solid #7a5c33;
         }
 
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #1a1a1a; }
-        th { background: #fdfaf6; padding: 12px 14px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #7a5c33; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
-        td { padding: 10px 14px; border-bottom: 1px solid #f4f0e8; font-weight: 600; }
+        th { background: #fdfaf6; padding: 12px 10px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #7a5c33; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
+        td { padding: 10px; border-bottom: 1px solid #f4f0e8; font-weight: 600; }
         tr:hover { background-color: #fdfbf9; }
         
         /* CARD LATERAL DE ESTOQUE ATUAL */
-        .stock-item-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f4f0e8; font-size: 12px; font-weight: 700; }
+        .stock-item-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f4f0e8; font-size: 12px; font-weight: 700; }
         .stock-qty-badge { background: #7a5c33; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 10px; }
 
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
         .badge-profit { background: #e6f4ea; color: #137333; }
         .badge-loss { background: #fce8e6; color: #c5221f; }
         .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
-        .remove-btn:hover { color: #b91c1c; }
 
         @media(max-width: 1200px) { .dashboard-container { grid-template-columns: 1fr; } }
     </style>
@@ -98,7 +97,7 @@
 
     <main class="dashboard-container">
         
-        <!-- FORMULÁRIO ESQUERDO TOTALMENTE ALINHADO E SIMÉTRICO -->
+        <!-- FORMULÁRIO ESQUERDO ULTRA COMPACTO (340PX) -->
         <div class="panel-card">
             <h2>LAUNCH MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
@@ -126,11 +125,11 @@
                         <input type="number" id="buyQty" class="form-control" value="19" min="1" required>
                     </div>
                     <div class="form-group col-price">
-                        <label>Buy Unit Price</label>
+                        <label>Buy Price</label>
                         <input type="text" id="buyPrice" class="form-control" value="4,54" required>
                     </div>
                     <div class="form-group col-curr">
-                        <label>Buy Currency</label>
+                        <label>Buy Curr</label>
                         <select id="buyCurrency" class="form-control">
                             <option value="BRL">Real (R$)</option>
                             <option value="EUR">Euro (€)</option>
@@ -147,11 +146,11 @@
                         <input type="number" id="sellQty" class="form-control" value="5" min="0" required>
                     </div>
                     <div class="form-group col-price">
-                        <label>Sell Unit Price</label>
+                        <label>Sell Price</label>
                         <input type="text" id="sellPrice" class="form-control" value="12,50" required>
                     </div>
                     <div class="form-group col-curr">
-                        <label>Sell Currency</label>
+                        <label>Sell Curr</label>
                         <select id="sellCurrency" class="form-control">
                             <option value="EUR">Euro (€)</option>
                             <option value="USD">Dollar ($)</option>
@@ -160,7 +159,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" style="margin-top: 8px;">
+                <div class="form-group" style="margin-top: 6px;">
                     <label>Commercial Partner</label>
                     <input type="text" id="partner" class="form-control" value="ACME Supplies Europe" required>
                 </div>
@@ -209,8 +208,9 @@
 
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
 
+        // Alterada chave de salvamento para limpar o cache antigo da largura larga
         function loadTrades() {
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v10')) || [];
+            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v11')) || [];
             renderUI();
         }
 
@@ -255,13 +255,13 @@
                 totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner 
             });
             
-            window.localStorage.setItem('sollene_adv_trades_v10', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v11', JSON.stringify(trades));
             renderUI();
         }
 
         function deleteTrade(index) {
             trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_v10', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v11', JSON.stringify(trades));
             renderUI();
         }
 
@@ -303,7 +303,7 @@
 
                 stockList.innerHTML = Object.keys(stockMap).map(key => `
                     <div class="stock-item-row">
-                        <span style="text-transform: uppercase;">${key}</span>
+                        <span style="text-transform: uppercase; font-size: 11px;">${key}</span>
                         <span class="stock-qty-badge">${stockMap[key].qty} ${stockMap[key].unit}</span>
                     </div>
                 `).join('');
@@ -314,4 +314,3 @@
     </script>
 </body>
 </html>
-
