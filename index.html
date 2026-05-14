@@ -9,12 +9,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: sans-serif; background: #fbf9f6; color: #1a1a1a; padding-bottom: 60px; }
 
-        /* CORREÇÃO CIRÚRGICA: Força o encaixe completo da imagem de cima a baixo sem comer letras */
+        /* MANTÉM A PROPORÇÃO REAL DO BANNER SEM CORTES */
         .hero-top-banner {
             width: 100%;
-            aspect-ratio: 1920 / 480; /* Proporção ideal ajustada */
+            aspect-ratio: 1920 / 480; 
             background: #ffffff url('sollene-group.jpg') no-repeat center top;
-            background-size: 100% 100%; /* Força o navegador a mostrar a imagem inteira sem cortes de bordas */
+            background-size: 100% 100%; 
             border-bottom: 3px solid #7a5c33;
         }
 
@@ -34,10 +34,33 @@
         .btn-clear-cache { background: #ea4335; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
         .btn-clear-cache:hover { background: #fff; color: #ea4335; }
 
+        /* NOVO: CAIXA BLACK ELEGANTE COM DADOS INSTITUCIONAIS FICÇÕES */
+        .corporate-info-box {
+            max-width: 1750px;
+            margin: 25px auto 5px auto;
+            padding: 0 2%;
+            width: 100%;
+        }
+        .info-card-inner {
+            background: #111115;
+            border: 2px solid #7a5c33;
+            border-radius: 12px;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+        .info-block { display: flex; flex-direction: column; }
+        .info-block span { font-size: 8px; font-weight: 800; text-transform: uppercase; color: #7a5c33; letter-spacing: 1.5px; margin-bottom: 2px; }
+        .info-block p { font-size: 12px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px; }
+
         /* CONTAINER OPERACIONAL REBAIXADO */
         .dashboard-container { 
             max-width: 1750px; 
-            margin: 40px auto; 
+            margin: 20px auto; 
             padding: 0 2%; 
             display: grid; 
             grid-template-columns: 340px 1fr; 
@@ -108,7 +131,7 @@
         .badge-loss { background: #fce8e6; color: #c5221f; }
         .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
 
-        @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } }
+        @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } .info-card-inner { flex-direction: column; text-align: center; } }
     </style>
 </head>
 <body>
@@ -125,6 +148,25 @@
         <button class="btn-clear-cache" onclick="clearSystemMemory()">Reset System Storage</button>
     </header>
 
+    <!-- NOVO COMPONENTE: CAIXA BLACK ELEGANTE COM DADOS INSTITUCIONAIS -->
+    <section class="corporate-info-box">
+        <div class="info-card-inner">
+            <div class="info-block">
+                <span>📍 European Headquarters</span>
+                <p>Avenue Louise 523, 1050 Brussels, Belgium</p>
+            </div>
+            <div class="info-block">
+                <span>📞 International Hotline</span>
+                <p>+32 (2) 555-0190</p>
+            </div>
+            <div class="info-block">
+                <span>✉️ Global Trade Desk</span>
+                <p>trade@sollenegroup.com</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTAINER OPERACIONAL -->
     <main class="dashboard-container">
         
         <!-- FORMULÁRIO ESQUERDO COMPACTO -->
@@ -339,4 +381,3 @@
     </script>
 </body>
 </html>
-
