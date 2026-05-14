@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sollene Group | International Trade Ledger</title>
     <style>
-        /* DESIGN CORPORATIVO PREMIUM REFINADO */
+        /* DESIGN MINIMALISTA LUXO: FUNDO CLARO COM BORDAS EM BRONZE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: sans-serif; background: #fbf9f6; color: #1a1a1a; padding-bottom: 60px; }
 
@@ -16,7 +16,7 @@
         }
         .header-left { display: flex; align-items: center; gap: 15px; }
         .logo-circle { 
-            width: 55px; height: 55px; border-radius: 50%; border: 1px solid #d4af37; 
+            width: 55px; height: 55px; border-radius: 50%; border: 1px solid #7a5c33; 
             background: #fff url('Sollene-Group.png') no-repeat center center; background-size: cover; 
         }
         .brand-title { font-size: 24px; font-weight: 800; color: #1a1a1a; letter-spacing: 3px; text-transform: uppercase; }
@@ -24,44 +24,51 @@
         .btn-home-print { text-decoration: none; color: #7a5c33; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 8px 20px; border: 2px solid #7a5c33; border-radius: 6px; background: transparent; transition: 0.3s; }
         .btn-home-print:hover { background: #7a5c33; color: #fff; }
 
-        /* PAINEL OPERACIONAL COMPACTO LADO A LADO */
+        /* PAINEL OPERACIONAL LADO A LADO */
         .dashboard-container { 
             max-width: 1600px; 
             margin: 30px auto; 
             padding: 0 4%; 
             display: grid; 
-            grid-template-columns: 380px 1fr; /* Card reduzido para 380px de largura */
-            gap: 25px; 
+            grid-template-columns: 360px 1fr; /* Card ultra compacto de 360px */
+            gap: 30px; 
             align-items: start;
         }
         
-        /* CARD ULTRA COMPACTO GRAFITE FOSCO PRESTIGE */
-        .panel-card { background: #26262b; border: 1px solid #33333a; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); color: #fff; }
-        .panel-card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #d4af37; margin-bottom: 15px; border-bottom: 2px solid #7a5c33; padding-bottom: 8px; font-weight: 800; text-align: center; }
+        /* CARD COM FUNDO BRANCO E BORDAS BRONZE/OURO */
+        .panel-card { 
+            background: #ffffff; 
+            border: 2px solid #7a5c33; /* Linha fina e elegante em bronze */
+            border-radius: 16px; 
+            padding: 18px; /* Reduzido o espaçamento interno para encolher o card */
+            box-shadow: 0 10px 25px rgba(122,92,51,0.05); 
+            color: #1a1a1a; 
+        }
+        .panel-card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #7a5c33; margin-bottom: 15px; border-bottom: 2px solid #7a5c33; padding-bottom: 6px; font-weight: 800; text-align: center; }
         
-        .form-group { margin-bottom: 10px; }
-        .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: #a0a0ab; letter-spacing: 1px; }
-        .form-control { width: 100%; padding: 8px 12px; border: 1px solid #3d3d45; border-radius: 6px; font-size: 13px; font-weight: 600; outline: none; background: #1c1c1f; color: #fff; transition: 0.2s; }
-        .form-control:focus { border-color: #d4af37; }
-        .form-row { display: flex; gap: 10px; }
+        .form-group { margin-bottom: 8px; } /* Encolhimento vertical estrito */
+        .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; color: #7a5c33; letter-spacing: 1px; }
+        .form-control { width: 100%; padding: 6px 10px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 13px; font-weight: 600; outline: none; background: #fdfaf6; color: #1a1a1a; transition: 0.2s; }
+        .form-control:focus { border-color: #7a5c33; background: #fff; }
+        .form-row { display: flex; gap: 8px; }
 
-        .trade-section-title { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #d4af37; margin: 12px 0 8px 0; padding-top: 6px; border-top: 1px dashed #3d3d45; display: flex; align-items: center; gap: 4px; }
+        .trade-section-title { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #7a5c33; margin: 10px 0 6px 0; padding-top: 5px; border-top: 1px dashed #e1dbcf; display: flex; align-items: center; gap: 4px; }
 
-        .btn-submit { width: 100%; padding: 12px; background: #d4af37; color: #000; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.2s; margin-top: 10px; }
-        .btn-submit:hover { background: #fff; color: #000; }
+        .btn-submit { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.2s; margin-top: 8px; }
+        .btn-submit:hover { background: #7a5c33; }
 
-        /* TABELA DE MANIFESTO GRAFITE FOSCO */
-        .table-container { width: 100%; overflow-x: auto; background: #26262b; border-radius: 16px; border: 1px solid #33333a; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #e4e4e7; }
-        th { background: #1c1c1f; padding: 14px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #d4af37; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
-        td { padding: 12px 14px; border-bottom: 1px solid #1c1c1f; font-weight: 600; }
-        tr:hover { background-color: #1c1c1f; }
+        /* TABELA DE MANIFESTO TAMBÉM COMBINANDO */
+        .table-container { width: 100%; overflow-x: auto; background: #ffffff; border-radius: 16px; border: 2px solid #7a5c33; padding: 20px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #1a1a1a; }
+        th { background: #fdfaf6; padding: 12px 14px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #7a5c33; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
+        td { padding: 10px 14px; border-bottom: 1px solid #f4f0e8; font-weight: 600; }
+        tr:hover { background-color: #fdfbf9; }
         
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
-        .badge-profit { background: rgba(52, 168, 83, 0.15); color: #34a853; }
-        .badge-loss { background: rgba(234, 67, 53, 0.15); color: #ea4335; }
-        .remove-btn { color: #ea4335; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
-        .remove-btn:hover { color: #fff; }
+        .badge-profit { background: #e6f4ea; color: #137333; }
+        .badge-loss { background: #fce8e6; color: #c5221f; }
+        .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+        .remove-btn:hover { color: #b91c1c; }
 
         @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } }
     </style>
@@ -76,7 +83,7 @@
 
     <main class="dashboard-container">
         
-        <!-- FORMULÁRIO ESQUERDO ULTRA COMPACTO GRAFITE -->
+        <!-- FORMULÁRIO ESQUERDO ULTRA COMPACTO BRONZE -->
         <div class="panel-card">
             <h2>LAUNCH MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
@@ -102,7 +109,7 @@
                     </div>
                 </div>
 
-                <!-- INBOUND CONFIG (CUSTO) -->
+                <!-- INBOUND CONFIG -->
                 <div class="trade-section-title">📥 Inbound Config (Cost)</div>
                 <div class="form-row">
                     <div class="form-group" style="flex: 1;">
@@ -119,7 +126,7 @@
                     </div>
                 </div>
 
-                <!-- OUTBOUND CONFIG (RECEITA) -->
+                <!-- OUTBOUND CONFIG -->
                 <div class="trade-section-title">📤 Outbound Config (Revenue)</div>
                 <div class="form-row">
                     <div class="form-group" style="flex: 1;">
@@ -144,9 +151,9 @@
             </form>
         </div>
 
-        <!-- TABELA DIREITA GRAFITE -->
+        <!-- TABELA DIREITA PRESTIGE -->
         <div class="table-container">
-            <h2 style="font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #d4af37; margin-bottom: 20px; border-bottom: 2px solid #7a5c33; padding-bottom: 8px; font-weight: 800;">Global Cargo Manifesto Ledger</h2>
+            <h2 style="font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #7a5c33; margin-bottom: 20px; border-bottom: 2px solid #7a5c33; padding-bottom: 8px; font-weight: 800;">Global Cargo Manifesto Ledger</h2>
             <table>
                 <thead>
                     <tr>
@@ -179,7 +186,7 @@
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
 
         function loadTrades() {
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v5')) || [];
+            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v6')) || [];
             renderUI();
         }
 
@@ -212,13 +219,13 @@
                 totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner 
             });
             
-            window.localStorage.setItem('sollene_adv_trades_v5', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v6', JSON.stringify(trades));
             renderUI();
         }
 
         function deleteTrade(index) {
             trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_v5', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v6', JSON.stringify(trades));
             renderUI();
         }
 
@@ -227,22 +234,22 @@
             if (!tbody) return;
 
             if (trades.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#71717a; padding:30px;">No international operations recorded in the ledger.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:30px;">No international operations recorded in the ledger.</td></tr>';
             } else {
                 tbody.innerHTML = trades.map((item, index) => `
                     <tr>
-                        <td style="font-weight: 800; text-transform: uppercase; color: #fff;">${item.product}</td>
-                        <td style="font-weight: bold; color: #d4af37;">${item.quantity} ${item.unit}</td>
+                        <td style="font-weight: 800; text-transform: uppercase; color: #1a1a1a;">${item.product}</td>
+                        <td style="font-weight: bold; color: #7a5c33;">${item.quantity} ${item.unit}</td>
                         <td>${currencySymbols[item.buyCurrency]} ${item.buyPrice.toFixed(2)}</td>
                         <td>${currencySymbols[item.sellCurrency]} ${item.sellPrice.toFixed(2)}</td>
-                        <td style="color:#ea4335;">€ ${item.totalCostInEuro.toFixed(2)}</td>
-                        <td style="color:#34a853;">€ ${item.totalRevenueInEuro.toFixed(2)}</td>
+                        <td style="color:#c5221f;">€ ${item.totalCostInEuro.toFixed(2)}</td>
+                        <td style="color:#137333;">€ ${item.totalRevenueInEuro.toFixed(2)}</td>
                         <td>
-                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}" style="background: ${item.netProfitInEuro >= 0 ? 'rgba(52,168,83,0.15)' : 'rgba(234,67,53,0.15)'}; color: ${item.netProfitInEuro >= 0 ? '#34a853' : '#ea4335'};">
+                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}" style="background: ${item.netProfitInEuro >= 0 ? '#e6f4ea' : '#fce8e6'}; color: ${item.netProfitInEuro >= 0 ? '#137333' : '#c5221f'}; font-weight:bold;">
                                 € ${item.netProfitInEuro.toFixed(2)}
                             </span>
                         </td>
-                        <td style="text-transform: uppercase; font-size: 11px; color:#a0a0ab;">${item.partner}</td>
+                        <td style="text-transform: uppercase; font-size: 11px; color:#666;">${item.partner}</td>
                         <td><button class="remove-btn" onclick="deleteTrade(${index})">DELETE</button></td>
                     </tr>
                 `).join('');
