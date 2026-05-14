@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sollene Group | International Trade Ledger</title>
     <style>
-        /* DESIGN BLACK ELEGANTE & BRONZE */
+        /* ALTERADO: Fundo da página claro e cards em Black Elegante */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: sans-serif; background: #0f0f11; color: #f5f5f7; padding-bottom: 60px; }
+        body { font-family: sans-serif; background: #f7f3eb; color: #1a1a1a; padding-bottom: 60px; }
 
         /* HEADER PREMIUM SOLLENE */
         .main-header {
-            background: #16161a; display: flex; align-items: center; justify-content: space-between;
+            background: #f7f3eb; display: flex; align-items: center; justify-content: space-between;
             padding: 15px 5%; border-bottom: 1px solid #7a5c33; position: sticky; top: 0; z-index: 1000;
         }
         .header-left { display: flex; align-items: center; gap: 15px; }
@@ -19,9 +19,9 @@
             width: 55px; height: 55px; border-radius: 50%; border: 1px solid #d4af37; 
             background: #fff url('Sollene-Group.png') no-repeat center center; background-size: cover; 
         }
-        .brand-title { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: 3px; text-transform: uppercase; }
-        .brand-title span { color: #d4af37; }
-        .btn-home-print { text-decoration: none; color: #d4af37; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 8px 20px; border: 1px solid #7a5c33; border-radius: 6px; background: transparent; transition: 0.3s; }
+        .brand-title { font-size: 24px; font-weight: 800; color: #1a1a1a; letter-spacing: 3px; text-transform: uppercase; }
+        .brand-title span { color: #7a5c33; }
+        .btn-home-print { text-decoration: none; color: #7a5c33; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 8px 20px; border: 2px solid #7a5c33; border-radius: 6px; background: transparent; transition: 0.3s; }
         .btn-home-print:hover { background: #7a5c33; color: #fff; }
 
         /* PAINEL OPERACIONAL LADO A LADO */
@@ -30,13 +30,13 @@
             margin: 40px auto; 
             padding: 0 4%; 
             display: grid; 
-            grid-template-columns: 420px 1fr; /* Card compacto na esquerda */
+            grid-template-columns: 420px 1fr; 
             gap: 30px; 
             align-items: start;
         }
         
         /* CARD COMPACTO BLACK ELEGANTE */
-        .panel-card { background: #16161a; border: 1px solid #2a2a32; border-radius: 20px; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .panel-card { background: #16161a; border: 1px solid #2a2a32; border-radius: 20px; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); color: #fff; }
         .panel-card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #d4af37; margin-bottom: 20px; border-bottom: 2px solid #7a5c33; padding-bottom: 10px; font-weight: 800; }
         
         .form-group { margin-bottom: 14px; }
@@ -50,8 +50,8 @@
         .btn-submit { width: 100%; padding: 14px; background: #d4af37; color: #000; border: none; border-radius: 10px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; margin-top: 10px; }
         .btn-submit:hover { background: #fff; color: #000; }
 
-        /* TABELA DE MANIFESTO BLACK */
-        .table-container { width: 100%; overflow-x: auto; background: #16161a; border-radius: 24px; border: 1px solid #2a2a32; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        /* TABELA DE MANIFESTO BLACK ELEGANTE */
+        .table-container { width: 100%; overflow-x: auto; background: #16161a; border-radius: 24px; border: 1px solid #2a2a32; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #e4e4e7; }
         th { background: #1a1a22; padding: 16px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #d4af37; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
         td { padding: 14px 16px; border-bottom: 1px solid #202024; font-weight: 600; }
@@ -107,7 +107,6 @@
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label>Buy Unit Price</label>
-                        <!-- CORREÇÃO: Alterado para text para aceitar vírgula ou ponto de forma flexível via script -->
                         <input type="text" id="buyPrice" class="form-control" value="4,54" required>
                     </div>
                     <div class="form-group" style="flex: 3;">
@@ -145,7 +144,7 @@
             </form>
         </div>
 
-        <!-- TABELA DIREITA BLACK -->
+        <!-- TABELA DIREITA BLACK ELEGANTE -->
         <div class="table-container">
             <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #d4af37; margin-bottom: 25px; border-bottom: 2px solid #7a5c33; padding-bottom: 10px; font-weight: 800;">Global Cargo Manifesto Ledger</h2>
             <table>
@@ -173,8 +172,8 @@
         
         const exchangeRates = {
             EUR: 1.0,
-            BRL: 0.16, // R$ 1.00 = € 0.16
-            USD: 0.92  // $ 1.00 = € 0.92
+            BRL: 0.16, 
+            USD: 0.92  
         };
 
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
@@ -184,7 +183,6 @@
             renderUI();
         }
 
-        // CORREÇÃO TÁTICA: Converte automaticamente vírgula em ponto para não bloquear o envio
         function parsePrice(value) {
             let cleanValue = value.replace(',', '.');
             return parseFloat(cleanValue) || 0;
