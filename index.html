@@ -9,12 +9,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: sans-serif; background: #fbf9f6; color: #1a1a1a; padding-bottom: 60px; }
 
-        /* CORREÇÃO CIRÚRGICA: Mantém a proporção real do banner sem cortar letras nas pontas */
+        /* CORREÇÃO CIRÚRGICA: Força o encaixe completo da imagem de cima a baixo sem comer letras */
         .hero-top-banner {
             width: 100%;
-            aspect-ratio: 1920 / 450; /* Força o navegador a respeitar a proporção da imagem */
-            background: #111 url('sollene-group.jpg') no-repeat center center;
-            background-size: cover;
+            aspect-ratio: 1920 / 480; /* Proporção ideal ajustada */
+            background: #ffffff url('sollene-group.jpg') no-repeat center top;
+            background-size: 100% 100%; /* Força o navegador a mostrar a imagem inteira sem cortes de bordas */
             border-bottom: 3px solid #7a5c33;
         }
 
@@ -34,10 +34,10 @@
         .btn-clear-cache { background: #ea4335; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
         .btn-clear-cache:hover { background: #fff; color: #ea4335; }
 
-        /* CORREÇÃO VISUAL: margin-top empurra os cards para baixo de forma harmônica */
+        /* CONTAINER OPERACIONAL REBAIXADO */
         .dashboard-container { 
             max-width: 1750px; 
-            margin: 40px auto; /* 40px de espaçamento no topo cria o respiro ideal */
+            margin: 40px auto; 
             padding: 0 2%; 
             display: grid; 
             grid-template-columns: 340px 1fr; 
@@ -113,7 +113,7 @@
 </head>
 <body>
 
-    <!-- BANNER PANORÂMICO COM AJUSTE DE PROPORÇÃO ATIVO -->
+    <!-- BANNER PANORÂMICO COM TRATAMENTO INTEGRAL ANTI-CORTE -->
     <section class="hero-top-banner"></section>
 
     <!-- SOLLENE EUROPEAN HEADER -->
@@ -125,7 +125,6 @@
         <button class="btn-clear-cache" onclick="clearSystemMemory()">Reset System Storage</button>
     </header>
 
-    <!-- CONTAINER OPERACIONAL REBAIXADO E ESPAÇADO -->
     <main class="dashboard-container">
         
         <!-- FORMULÁRIO ESQUERDO COMPACTO -->
@@ -305,7 +304,7 @@
 
             if (trades.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:30px;">No international operations recorded in the ledger.</td></tr>';
-                stockList.innerHTML = '<p style="color:#999; font-size:11px; padding:5px 0;">Warehouse is currently empty.</p>';
+                stockList.innerHTML = '<p style="color:#999; font-size:11px;">Warehouse is currently empty.</p>';
             } else {
                 tbody.innerHTML = trades.map((item, index) => `
                     <tr>
@@ -340,5 +339,4 @@
     </script>
 </body>
 </html>
-
 
