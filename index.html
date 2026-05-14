@@ -21,13 +21,13 @@
         }
         .brand-title { font-size: 24px; font-weight: 800; color: #1a1a1a; letter-spacing: 3px; text-transform: uppercase; }
 
-        /* PAINEL OPERACIONAL LADO A LADO UNIFICADO (FORMULÁRIO NA ESQUERDA / HUB NA DIREITA) */
+        /* PAINEL OPERACIONAL LADO A LADO UNIFICADO */
         .dashboard-container { 
             max-width: 1750px; 
             margin: 30px auto; 
             padding: 0 2%; 
             display: grid; 
-            grid-template-columns: 340px 1fr; /* Duas colunas principais na tela */
+            grid-template-columns: 340px 1fr; /* Mantém o formulário na esquerda e a central unificada na direita */
             gap: 25px; 
             align-items: start;
         }
@@ -63,7 +63,7 @@
         .btn-submit { width: 100%; padding: 10px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; height: 38px; }
         .btn-submit:hover { background: #7a5c33; }
 
-        /* CONTÊINER DA CENTRAL UNIFICADA (MANIFESTO + ESTOQUE) */
+        /* CONTÊINER DA CENTRAL UNIFICADA (MANIFESTO + ESTOQUE ABAIXO) */
         .unified-hub-container { 
             background: #ffffff; 
             border: 2px solid #7a5c33; 
@@ -75,33 +75,35 @@
 
         .unified-hub-container .unified-header-black { margin: -14px -14px 15px -14px; }
 
-        /* ENGENHARIA DE DIVISÃO INTERNA DA TABELA UNIFICADA */
-        .hub-split-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 260px; /* Divide os registros da esquerda e o estoque na extrema direita */
-            gap: 20px; 
-            align-items: start;
+        /* CORREÇÃO VISUAL: EMPILHAMENTO VERTICAL DA TABELA E ESTOQUE PARA ELIMINAR A BARRA */
+        .hub-vertical-layout { 
+            display: flex;
+            flex-direction: column;
+            gap: 25px; 
+            width: 100%;
         }
 
-        .table-scroll-area { width: 100%; overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #1a1a1a; }
-        th { background: #fdfaf6; padding: 12px 10px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #7a5c33; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
-        td { padding: 10px; border-bottom: 1px solid #f4f0e8; font-weight: 600; }
+        .table-container-fixed { width: 100%; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #1a1a1a; table-layout: auto; }
+        th { background: #fdfaf6; padding: 10px 8px; font-weight: 800; text-transform: uppercase; font-size: 9.5px; color: #7a5c33; border-bottom: 2px solid #7a5c33; letter-spacing: 0.5px; }
+        td { padding: 10px 8px; border-bottom: 1px solid #f4f0e8; font-weight: 600; }
         tr:hover { background-color: #fdfbf9; }
         
-        /* BLOCO DE ESTOQUE ATUAL EMBUTIDO INTERNO */
-        .embedded-stock-panel { background: #fdfaf6; border: 1px solid #e1dbcf; border-radius: 10px; padding: 15px; }
-        .embedded-stock-panel h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #7a5c33; border-bottom: 2px solid #7a5c33; padding-bottom: 5px; margin-bottom: 10px; font-weight: 800; text-align: center; }
-        .stock-item-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #e1dbcf; font-size: 11px; font-weight: 700; }
-        .stock-item-row:last-child { border-bottom: none; }
-        .stock-qty-badge { background: #7a5c33; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 9px; }
+        /* BLOCO DE ESTOQUE ATUAL REALOCADO PARA A PARTE DE BAIXO */
+        .embedded-stock-panel { background: #fdfaf6; border: 1px solid #e1dbcf; border-radius: 10px; padding: 15px; width: 100%; }
+        .embedded-stock-panel h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #7a5c33; border-bottom: 2px solid #7a5c33; padding-bottom: 5px; margin-bottom: 10px; font-weight: 800; text-align: left; }
+        
+        /* ALINHAMENTO DO ESTOQUE EM CARDS HORIZONTAIS LADO A LADO */
+        .stock-items-flex { display: flex; flex-wrap: wrap; gap: 12px; }
+        .stock-item-row { display: flex; align-items: center; gap: 10px; background: #fff; padding: 6px 12px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 11px; font-weight: 700; }
+        .stock-qty-badge { background: #7a5c33; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: bold; }
 
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
         .badge-profit { background: #e6f4ea; color: #137333; }
         .badge-loss { background: #fce8e6; color: #c5221f; }
         .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
 
-        @media(max-width: 1200px) { .dashboard-container { grid-template-columns: 1fr; } .hub-split-grid { grid-template-columns: 1fr; } }
+        @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -184,14 +186,14 @@
             </form>
         </div>
 
-        <!-- CENTRAL UNIFICADA (TABELA + ESTOQUE DENTRO DO MESMO CARD) -->
+        <!-- CENTRAL UNIFICADA SEM BARRA DE ROLAGEM -->
         <div class="unified-hub-container">
             <div class="unified-header-black">Global Cargo Manifesto & Stock Ledger</div>
             
-            <div class="hub-split-grid">
+            <div class="hub-vertical-layout">
                 
-                <!-- ÁREA DA TABELA (ESQUERDA INTERNA) -->
-                <div class="table-scroll-area">
+                <!-- ÁREA DA TABELA (OCUPA 100% DA LARGURA SUPERIOR) -->
+                <div class="table-container-fixed">
                     <table>
                         <thead>
                             <tr>
@@ -210,10 +212,10 @@
                     </table>
                 </div>
 
-                <!-- ÁREA DE ESTOQUE ATUAL EMBUTIDA (DIREITA INTERNA) -->
+                <!-- ÁREA DE ESTOQUE ATUAL EMBUTIDA (REALOCADA PARA BAIXO) -->
                 <div class="embedded-stock-panel">
-                    <h3>CURRENT STOCK</h3>
-                    <div id="stock-levels-list"></div>
+                    <h3>CURRENT WAREHOUSE STOCK</h3>
+                    <div id="stock-levels-list" class="stock-items-flex"></div>
                 </div>
 
             </div>
@@ -232,9 +234,9 @@
 
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
 
-        // Alterada partição de persistência contínua para sincronizar a unificação de grids
         function loadTrades() {
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v12')) || [];
+            // Chave atualizada para sincronizar perfeitamente as tabelas sem resíduos de layouts anteriores
+            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v13')) || [];
             renderUI();
         }
 
@@ -279,13 +281,13 @@
                 totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner 
             });
             
-            window.localStorage.setItem('sollene_adv_trades_v12', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v13', JSON.stringify(trades));
             renderUI();
         }
 
         function deleteTrade(index) {
             trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_v12', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v13', JSON.stringify(trades));
             renderUI();
         }
 
@@ -296,7 +298,7 @@
 
             if (trades.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:30px;">No international operations recorded in the ledger.</td></tr>';
-                stockList.innerHTML = '<p style="color:#999; text-align:center; font-size:11px; padding:10px 0;">Warehouse is empty.</p>';
+                stockList.innerHTML = '<p style="color:#999; font-size:11px; padding:5px 0;">Warehouse is currently empty.</p>';
             } else {
                 tbody.innerHTML = trades.map((item, index) => `
                     <tr>
@@ -327,7 +329,7 @@
 
                 stockList.innerHTML = Object.keys(stockMap).map(key => `
                     <div class="stock-item-row">
-                        <span style="text-transform: uppercase;">${key}</span>
+                        <span style="text-transform: uppercase;">${key}:</span>
                         <span class="stock-qty-badge">${stockMap[key].qty} ${stockMap[key].unit}</span>
                     </div>
                 `).join('');
