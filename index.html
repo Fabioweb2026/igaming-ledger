@@ -23,11 +23,11 @@
 
         /* PAINEL OPERACIONAL LADO A LADO MULTI-COLUNAS */
         .dashboard-container { 
-            max-width: 1700px; 
+            max-width: 1750px; 
             margin: 30px auto; 
-            padding: 0 3%; 
+            padding: 0 2%; 
             display: grid; 
-            grid-template-columns: 360px 1fr 280px; 
+            grid-template-columns: 420px 1fr 280px; /* Ajustada largura do card para 420px para caber a linha harmônica */
             gap: 25px; 
             align-items: start;
         }
@@ -51,12 +51,17 @@
         }
         
         .form-group { margin-bottom: 8px; } 
-        .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; color: #7a5c33; letter-spacing: 1px; }
-        .form-control { width: 100%; padding: 6px 10px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 13px; font-weight: 600; outline: none; background: #fdfaf6; color: #1a1a1a; }
-        .form-row { display: flex; gap: 8px; }
+        .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: #7a5c33; letter-spacing: 1px; white-space: nowrap; }
+        .form-control { width: 100%; padding: 8px 10px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 13px; font-weight: 600; outline: none; background: #fdfaf6; color: #1a1a1a; height: 38px; }
+        
+        /* ALINHAMENTO HARMÔNICO EM LINHA RETA */
+        .form-row { display: flex; gap: 10px; align-items: flex-end; width: 100%; }
+        .col-qty { flex: 1; min-width: 70px; }
+        .col-price { flex: 1.2; min-width: 90px; }
+        .col-curr { flex: 1.5; min-width: 110px; }
 
-        .trade-section-title { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #7a5c33; margin: 10px 0 6px 0; padding-top: 5px; border-top: 1px dashed #e1dbcf; display: flex; align-items: center; gap: 4px; }
-        .btn-submit { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 8px; }
+        .trade-section-title { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #7a5c33; margin: 12px 0 8px 0; padding-top: 5px; border-top: 1px dashed #e1dbcf; display: flex; align-items: center; gap: 4px; }
+        .btn-submit { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 12px; height: 42px; }
         .btn-submit:hover { background: #7a5c33; }
 
         /* TABELA DE MANIFESTO RECONFIGURADA */
@@ -93,7 +98,7 @@
 
     <main class="dashboard-container">
         
-        <!-- FORMULÁRIO ESQUERDO -->
+        <!-- FORMULÁRIO ESQUERDO TOTALMENTE ALINHADO E SIMÉTRICO -->
         <div class="panel-card">
             <h2>LAUNCH MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
@@ -113,18 +118,18 @@
                     </select>
                 </div>
 
-                <!-- CONFIGURAÇÃO DE ENTRADA (COMPRA) -->
+                <!-- CONFIGURAÇÃO DE ENTRADA HARMÔNICA -->
                 <div class="trade-section-title">📥 Inbound Config (Cost Basis)</div>
                 <div class="form-row">
-                    <div class="form-group" style="flex: 1.2;">
-                        <label>Qty Purchased</label>
-                        <input type="number" id="buyQty" class="form-control" value="10" min="1" required>
+                    <div class="form-group col-qty">
+                        <label>Qty Buy</label>
+                        <input type="number" id="buyQty" class="form-control" value="19" min="1" required>
                     </div>
-                    <div class="form-group" style="flex: 1;">
+                    <div class="form-group col-price">
                         <label>Buy Unit Price</label>
                         <input type="text" id="buyPrice" class="form-control" value="4,54" required>
                     </div>
-                    <div class="form-group" style="flex: 1.2;">
+                    <div class="form-group col-curr">
                         <label>Buy Currency</label>
                         <select id="buyCurrency" class="form-control">
                             <option value="BRL">Real (R$)</option>
@@ -134,28 +139,28 @@
                     </div>
                 </div>
 
-                <!-- CONFIGURAÇÃO DE SAÍDA (VENDA) -->
+                <!-- CONFIGURAÇÃO DE SAÍDA HARMÔNICA -->
                 <div class="trade-section-title">📤 Outbound Config (Revenue Basis)</div>
                 <div class="form-row">
-                    <div class="form-group" style="flex: 1.2;">
+                    <div class="form-group col-qty">
                         <label>Qty Sold</label>
                         <input type="number" id="sellQty" class="form-control" value="5" min="0" required>
                     </div>
-                    <div class="form-group" style="flex: 1;">
+                    <div class="form-group col-price">
                         <label>Sell Unit Price</label>
                         <input type="text" id="sellPrice" class="form-control" value="12,50" required>
                     </div>
-                    <div class="form-group" style="flex: 1.2;">
+                    <div class="form-group col-curr">
                         <label>Sell Currency</label>
                         <select id="sellCurrency" class="form-control">
-                            <option value="USD">Dollar ($)</option>
                             <option value="EUR">Euro (€)</option>
+                            <option value="USD">Dollar ($)</option>
                             <option value="BRL">Real (R$)</option>
                         </select>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="margin-top: 8px;">
                     <label>Commercial Partner</label>
                     <input type="text" id="partner" class="form-control" value="ACME Supplies Europe" required>
                 </div>
@@ -164,7 +169,7 @@
             </form>
         </div>
 
-        <!-- TABELA CENTRAL CORRIGIDA -->
+        <!-- TABELA CENTRAL -->
         <div class="table-container">
             <h2>Global Cargo Manifesto Ledger</h2>
             <table>
@@ -275,11 +280,8 @@
                         <td style="color:#7a5c33; font-weight:800;">📥 ${item.buyQty} / 📤 ${item.sellQty}</td>
                         <td>${currencySymbols[item.buyCurrency]} ${item.buyPrice.toFixed(2)}</td>
                         <td>${currencySymbols[item.sellCurrency]} ${item.sellPrice.toFixed(2)}</td>
-                        
-                        <!-- CORREÇÃO CONSTATADA: Símbolos dinâmicos injetados de forma estrita em ambas as colunas totais -->
                         <td style="color:#c5221f; font-weight: bold;">${currencySymbols[item.buyCurrency]} ${item.origTotalCost.toFixed(2)}</td>
                         <td style="color:#137333; font-weight: bold;">${currencySymbols[item.sellCurrency]} ${item.origTotalRevenue.toFixed(2)}</td>
-                        
                         <td>
                             <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}">
                                 € ${item.netProfitInEuro.toFixed(2)}
