@@ -1,1 +1,129 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sollene Group | Sistema de Estoque</title>
+    <style>
+        /* LAYOUT ANTERIOR ORIGINAL */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: sans-serif; background: #f7f3eb; color: #1a1a1a; padding: 20px; }
+
+        .header-system { 
+            background: #111; color: #fff; padding: 20px; 
+            border-radius: 8px; border-bottom: 3px solid #7a5c33; margin-bottom: 25px; 
+        }
+        .header-system h1 { font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
+
+        .main-container { display: flex; gap: 20px; flex-wrap: wrap; }
+        .box-panel { background: #fff; border: 1px solid #e1dbcf; border-radius: 8px; padding: 20px; flex: 1; min-width: 300px; }
+        .box-panel h2 { font-size: 13px; text-transform: uppercase; color: #7a5c33; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+
+        .input-group { margin-bottom: 12px; }
+        .input-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
+        .input-control { width: 100%; padding: 8px; border: 1px solid #e1dbcf; border-radius: 4px; outline: none; background: #fdfaf6; }
+
+        .btn-action { width: 100%; padding: 10px; background: #000; color: #fff; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 11px; }
+        .btn-action:hover { background: #7a5c33; }
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
+        th { background: #fdfaf6; padding: 10px; text-align: left; color: #7a5c33; border-bottom: 2px solid #e1dbcf; }
+        td { padding: 10px; border-bottom: 1px solid #eee; }
+        
+        .delete-item { color: #ff4d4d; background: none; border: none; cursor: pointer; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <header class="header-system">
+        <h1>Sollene Group | Controle de Estoque Anterior</h1>
+    </header>
+
+    <main class="main-container">
+        <!-- FORMULÁRIO DE ENTRADAS/SAÍDAS -->
+        <div class="box-panel">
+            <h2>Registrar Item</h2>
+            <form id="form-estoque" onsubmit="adicionarItem(event)">
+                <div class="input-group">
+                    <label>Produto</label>
+                    <input type="text" id="prod-name" class="input-control" required>
+                </div>
+                <div class="input-group">
+                    <label>Quantidade</label>
+                    <input type="number" id="prod-qtd" class="input-control" min="1" required>
+                </div>
+                <div class="input-group">
+                    <label>Fornecedor / Cliente</label>
+                    <input type="text" id="prod-parceiro" class="input-control" required>
+                </div>
+                <button type="submit" class="btn-action">Salvar no Estoque</button>
+            </form>
+        </div>
+
+        <!-- TABELA DE EXIBIÇÃO -->
+        <div class="box-panel" style="flex: 2;">
+            <h2>Itens Cadastrados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Quantidade</th>
+                        <th>Parceiro</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="dados-tabela"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <script>
+        let dados = [];
+
+        function carregarDados() {
+            dados = JSON.parse(window.localStorage.getItem('estoque_anterior')) || [];
+            renderizar();
+        }
+
+        function adicionarItem(event) {
+            event.preventDefault();
+            const name = document.getElementById('prod-name').value;
+            const qtd = document.getElementById('prod-qtd').value;
+            const parceiro = document.getElementById('prod-parceiro').value;
+
+            dados.push({ name, qtd, parceiro });
+            window.localStorage.setItem('estoque_anterior', JSON.stringify(dados));
+            
+            document.getElementById('form-estoque').reset();
+            renderizar();
+        }
+
+        function deletarItem(index) {
+            dados.splice(index, 1);
+            window.localStorage.setItem('estoque_anterior', JSON.stringify(dados));
+            renderizar();
+        }
+
+        function renderizar() {
+            const lista = document.getElementById('dados-tabela');
+            if (!lista) return;
+            
+            if (dados.length === 0) {
+                lista.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#999;">Nenhum item em estoque.</td></tr>';
+            } else {
+                lista.innerHTML = dados.map((item, index) => `
+                    <tr>
+                        <td style="text-transform:uppercase; font-weight:bold;">${item.name}</td>
+                        <td>${item.qtd} un</td>
+                        <td>${item.parceiro}</td>
+                        <td><button class="delete-item" onclick="deletarItem(${index})">Excluir</button></td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        window.onload = carregarDados;
+    </script>
+</body>
+</html>
