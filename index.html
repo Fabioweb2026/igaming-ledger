@@ -1,129 +1,184 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Sistema de Estoque</title>
+    <title>Sollene Group | Official Luxury Hub</title>
     <style>
-        /* LAYOUT ANTERIOR ORIGINAL */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: sans-serif; background: #f7f3eb; color: #1a1a1a; padding: 20px; }
+        body { font-family: sans-serif; background: #f7f3eb; color: #1a1a1a; overflow-x: hidden; }
 
-        .header-system { 
-            background: #111; color: #fff; padding: 20px; 
-            border-radius: 8px; border-bottom: 3px solid #7a5c33; margin-bottom: 25px; 
+        /* HEADER PREMIUM IDÊNTICO AO SEU PADRÃO */
+        .main-header {
+            background: #f7f3eb; display: flex; align-items: center; justify-content: space-between;
+            padding: 15px 5%; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
         }
-        .header-system h1 { font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .logo-circle { 
+            width: 55px; height: 55px; border-radius: 50%; border: 1px solid #d4af37; 
+            background: #fff url('Sollene-Group.png') no-repeat center center; background-size: cover; 
+        }
+        .brand-title { font-size: 24px; font-weight: 800; color: #7a5c33; letter-spacing: 3px; text-transform: uppercase; }
 
-        .main-container { display: flex; gap: 20px; flex-wrap: wrap; }
-        .box-panel { background: #fff; border: 1px solid #e1dbcf; border-radius: 8px; padding: 20px; flex: 1; min-width: 300px; }
-        .box-panel h2 { font-size: 13px; text-transform: uppercase; color: #7a5c33; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+        nav ul { display: flex; list-style: none; gap: 20px; align-items: center; }
+        .nav-item { position: relative; }
+        .nav-link { text-decoration: none; color: #000; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 10px 20px; cursor: pointer; display: block; }
+        .btn-home-print { border: 2px solid #000; border-radius: 6px; padding: 8px 20px; background: transparent; font-weight: 800; }
 
-        .input-group { margin-bottom: 12px; }
-        .input-group label { display: block; font-size: 11px; font-weight: bold; margin-bottom: 4px; }
-        .input-control { width: 100%; padding: 8px; border: 1px solid #e1dbcf; border-radius: 4px; outline: none; background: #fdfaf6; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 0; background-color: #fff; min-width: 220px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border-radius: 4px; z-index: 1100; }
+        .dropdown-content a { color: #333; padding: 12px 16px; text-decoration: none; display: block; font-size: 10px; font-weight: 700; border-bottom: 1px solid #f9f9f9; }
+        .dropdown-content a:hover { background-color: #f7f3eb; color: #7a5c33; }
+        .nav-item:hover .dropdown-content { display: block; }
 
-        .btn-action { width: 100%; padding: 10px; background: #000; color: #fff; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 11px; }
-        .btn-action:hover { background: #7a5c33; }
+        .cart-icon { cursor: pointer; position: relative; padding: 5px; display: flex; align-items: center; background: none; border: none; }
+        .cart-badge { position: absolute; top: -10px; right: -8px; background: #7a5c33; color: #fff; font-size: 10px; font-weight: 800; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; border-radius: 50%; border: 2px solid #f7f3eb; }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 12px; }
-        th { background: #fdfaf6; padding: 10px; text-align: left; color: #7a5c33; border-bottom: 2px solid #e1dbcf; }
-        td { padding: 10px; border-bottom: 1px solid #eee; }
+        /* BANNER DO SEU PRINT ORIGINAL */
+        .hero-banner { width: 100%; height: 75vh; background: url('Sollene-Group.png') no-repeat center top; background-size: cover; }
+
+        /* PAINEL LATERAL DE CHECKOUT */
+        .side-menu { position: fixed; top: 0; right: -420px; width: 400px; height: 100%; background: #fff; box-shadow: -10px 0 50px rgba(0,0,0,0.1); z-index: 2000; transition: 0.5s; padding: 40px; overflow-y: auto; }
+        .side-menu.active { right: 0; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); display: none; z-index: 1900; }
+        .overlay.active { display: block; }
         
-        .delete-item { color: #ff4d4d; background: none; border: none; cursor: pointer; font-weight: bold; }
+        .cart-item { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee; }
+        .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+
+        /* CENTRAL DE LIQUIDAÇÃO */
+        .payment-box { margin-top: 30px; text-align: left; background: #fdfaf6; padding: 20px; border-radius: 12px; border: 1px solid #f1eee4; }
+        .payment-method-title { font-size: 11px; text-transform: uppercase; color: #7a5c33; margin-bottom: 15px; font-weight: 800; }
+        .payment-option { display: block; margin-bottom: 12px; font-size: 13px; font-weight: 600; cursor: pointer; }
+        .payment-option input { margin-right: 10px; accent-color: #7a5c33; }
+        
+        .card-fields { display: block; margin-top: 10px; }
+        .input-field { width: 100%; padding: 10px; margin-top: 5px; margin-bottom: 10px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 13px; outline: none; background: #fff; }
+
+        .btn-save-continue { width: 100%; padding: 18px; background: #000; color: #fff; border: none; border-radius: 12px; font-weight: 800; margin-top: 15px; cursor: pointer; text-transform: uppercase; text-align: center; font-size: 11px; letter-spacing: 1px; display: block; }
+        .btn-finalize-order { width: 100%; padding: 18px; background: #7a5c33; color: #fff; border: none; border-radius: 12px; font-weight: 800; margin-top: 10px; cursor: pointer; text-transform: uppercase; text-align: center; font-size: 11px; letter-spacing: 1px; display: block; }
+        
+        @media(max-width: 768px) { .side-menu { width: 100%; } }
     </style>
 </head>
 <body>
+    <div class="overlay" id="overlay" onclick="toggleCart()"></div>
 
-    <header class="header-system">
-        <h1>Sollene Group | Controle de Estoque Anterior</h1>
+    <header class="main-header">
+        <div class="header-left"><div class="logo-circle"></div><h1 class="brand-title">SOLLENE GROUP</h1></div>
+        <nav>
+            <ul>
+                <li class="nav-item"><a href="index.html" class="nav-link btn-home-print">HOME</a></li>
+                <li class="nav-item">
+                    <span class="nav-link">COLLECTIONS ▼</span>
+                    <div class="dropdown-content">
+                        <!-- Redirecionamentos ajustados para buscar as rotas do repositório correspondente -->
+                        <a href="menshirts.html">MEN'S SHIRTS</a>
+                        <a href="watches.html">WATCHES</a>
+                        <a href="bags.html">BAGS COLLECTION</a>
+                        <a href="women.html">WOMEN'S SELECTION</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+        <button class="cart-icon" onclick="toggleCart()">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#7a5c33" stroke-width="2"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            <div class="cart-badge" id="cart-count">0</div>
+        </button>
     </header>
 
-    <main class="main-container">
-        <!-- FORMULÁRIO DE ENTRADAS/SAÍDAS -->
-        <div class="box-panel">
-            <h2>Registrar Item</h2>
-            <form id="form-estoque" onsubmit="adicionarItem(event)">
-                <div class="input-group">
-                    <label>Produto</label>
-                    <input type="text" id="prod-name" class="input-control" required>
-                </div>
-                <div class="input-group">
-                    <label>Quantidade</label>
-                    <input type="number" id="prod-qtd" class="input-control" min="1" required>
-                </div>
-                <div class="input-group">
-                    <label>Fornecedor / Cliente</label>
-                    <input type="text" id="prod-parceiro" class="input-control" required>
-                </div>
-                <button type="submit" class="btn-action">Salvar no Estoque</button>
-            </form>
+    <section class="hero-banner"></section>
+
+    <!-- SACOLA GERAL ACUMULATIVA -->
+    <div class="side-menu" id="sideMenu">
+        <div onclick="toggleCart()" style="cursor:pointer; font-weight:800; color:#7a5c33; margin-bottom:30px; text-align: right;">✕ CLOSE</div>
+        <h2>Review & Pay</h2>
+        
+        <div id="cart-list" style="margin-top:20px;"></div>
+
+        <div style="margin-top:30px; padding-top:20px; border-top:2px solid #7a5c33; display:flex; justify-content:space-between; font-weight:800; font-size: 18px;">
+            <span>TOTAL:</span><span id="total-price">€ 0.00</span>
         </div>
 
-        <!-- TABELA DE EXIBIÇÃO -->
-        <div class="box-panel" style="flex: 2;">
-            <h2>Itens Cadastrados</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Produto</th>
-                        <th>Quantidade</th>
-                        <th>Parceiro</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody id="dados-tabela"></tbody>
-            </table>
+        <div class="payment-box">
+            <h4 class="payment-method-title">Payment Method</h4>
+            <label class="payment-option">
+                <input type="radio" name="pay" value="Card" checked onchange="togglePaymentFields()"> Credit / Debit Card
+            </label>
+            <div id="cardFields" class="card-fields">
+                <label style="font-size: 11px; font-weight:700;">Card Number:</label>
+                <input type="text" id="cardNumber" class="input-field" placeholder="0000 0000 0000 0000" maxlength="19">
+            </div>
+            <label class="payment-option">
+                <input type="radio" name="pay" value="Cash" onchange="togglePaymentFields()"> Cash on Delivery
+            </label>
         </div>
-    </main>
+
+        <button class="btn-save-continue" onclick="toggleCart()">Save & Continue Shopping</button>
+        <button class="btn-finalize-order" onclick="finalizeOrder()">Complete Purchase</button>
+    </div>
 
     <script>
-        let dados = [];
-
-        function carregarDados() {
-            dados = JSON.parse(window.localStorage.getItem('estoque_anterior')) || [];
-            renderizar();
+        let cart = [];
+        
+        function toggleCart() { 
+            document.getElementById('sideMenu').classList.toggle('active'); 
+            document.getElementById('overlay').classList.toggle('active'); 
         }
-
-        function adicionarItem(event) {
-            event.preventDefault();
-            const name = document.getElementById('prod-name').value;
-            const qtd = document.getElementById('prod-qtd').value;
-            const parceiro = document.getElementById('prod-parceiro').value;
-
-            dados.push({ name, qtd, parceiro });
-            window.localStorage.setItem('estoque_anterior', JSON.stringify(dados));
-            
-            document.getElementById('form-estoque').reset();
-            renderizar();
+        
+        function loadCart() { 
+            cart = JSON.parse(window.localStorage.getItem('sollene_cart')) || []; 
+            updateUI(); 
         }
+        
+        function updateUI() {
+            document.getElementById('cart-count').innerText = cart.length;
+            const list = document.getElementById('cart-list');
+            if (!list) return;
 
-        function deletarItem(index) {
-            dados.splice(index, 1);
-            window.localStorage.setItem('estoque_anterior', JSON.stringify(dados));
-            renderizar();
-        }
-
-        function renderizar() {
-            const lista = document.getElementById('dados-tabela');
-            if (!lista) return;
-            
-            if (dados.length === 0) {
-                lista.innerHTML = '<tr><td colspan="4" style="text-align:center; color:#999;">Nenhum item em estoque.</td></tr>';
-            } else {
-                lista.innerHTML = dados.map((item, index) => `
-                    <tr>
-                        <td style="text-transform:uppercase; font-weight:bold;">${item.name}</td>
-                        <td>${item.qtd} un</td>
-                        <td>${item.parceiro}</td>
-                        <td><button class="delete-item" onclick="deletarItem(${index})">Excluir</button></td>
-                    </tr>
-                `).join('');
+            if (cart.length === 0) { 
+                list.innerHTML = '<p style="color:#999; font-size:13px; text-align:center; padding:20px 0;">Your selection is empty.</p>'; 
+            } else { 
+                list.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div>
+                            <p style="font-size:12px; font-weight:800; text-transform:uppercase; max-width:220px; word-wrap:break-word;">${item.name}</p>
+                            <p style="font-size:12px; color:#7a5c33; margin-top:3px;">€ ${item.price}.00</p>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(${index})">DELETE</button>
+                    </div>
+                `).join(''); 
             }
+            
+            let total = cart.reduce((sum, i) => sum + (parseInt(i.price) || 0), 0);
+            document.getElementById('total-price').innerText = `€ ${total}.00`;
         }
 
-        window.onload = carregarDados;
+        function removeItem(index) { 
+            cart.splice(index, 1); 
+            window.localStorage.setItem('sollene_cart', JSON.stringify(cart)); 
+            updateUI(); 
+        }
+
+        function togglePaymentFields() {
+            const method = document.querySelector('input[name="pay"]:checked').value;
+            document.getElementById('cardFields').style.display = (method === 'Card') ? 'block' : 'none';
+        }
+
+        function finalizeOrder() { 
+            if(cart.length === 0) return alert("Select products before paying."); 
+            const method = document.querySelector('input[name="pay"]:checked').value;
+            alert("Success! Order finalized via " + method);
+            
+            cart = []; 
+            window.localStorage.removeItem('sollene_cart'); 
+            updateUI(); 
+            toggleCart(); 
+        }
+
+        // LEITURA COMPARTILHADA DA MEMÓRIA DO NAVEGADOR
+        window.onload = loadCart;
+        window.addEventListener('pageshow', loadCart);
+        document.addEventListener('DOMContentLoaded', loadCart);
     </script>
 </body>
 </html>
