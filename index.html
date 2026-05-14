@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sollene Group | International Trade Ledger</title>
     <style>
-        /* DESIGN MINIMALISTA LUXO: FUNDO CLARO COM BORDAS EM BRONZE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: sans-serif; background: #fbf9f6; color: #1a1a1a; padding-bottom: 60px; }
 
-        /* HEADER PREMIUM SOLLENE */
         .main-header {
             background: #fbf9f6; display: flex; align-items: center; justify-content: space-between;
             padding: 15px 5%; border-bottom: 1px solid rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 1000;
@@ -20,79 +18,49 @@
             background: #fff url('Sollene-Group.png') no-repeat center center; background-size: cover; 
         }
         .brand-title { font-size: 24px; font-weight: 800; color: #1a1a1a; letter-spacing: 3px; text-transform: uppercase; }
-        .brand-title span { color: #7a5c33; }
-        .btn-home-print { text-decoration: none; color: #7a5c33; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 8px 20px; border: 2px solid #7a5c33; border-radius: 6px; background: transparent; transition: 0.3s; }
-        .btn-home-print:hover { background: #7a5c33; color: #fff; }
+        .btn-home-print { text-decoration: none; color: #7a5c33; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 8px 20px; border: 2px solid #7a5c33; border-radius: 6px; background: transparent; }
 
-        /* PAINEL OPERACIONAL LADO A LADO */
         .dashboard-container { 
-            max-width: 1600px; 
-            margin: 30px auto; 
-            padding: 0 4%; 
-            display: grid; 
-            grid-template-columns: 360px 1fr; /* Card ultra compacto de 360px */
-            gap: 30px; 
-            align-items: start;
+            max-width: 1600px; margin: 30px auto; padding: 0 4%; 
+            display: grid; grid-template-columns: 360px 1fr; gap: 30px; align-items: start;
         }
         
-        /* CARD COM FUNDO BRANCO E BORDAS BRONZE/OURO */
-        .panel-card { 
-            background: #ffffff; 
-            border: 2px solid #7a5c33; /* Linha fina e elegante em bronze */
-            border-radius: 16px; 
-            padding: 18px; /* Reduzido o espaçamento interno para encolher o card */
-            box-shadow: 0 10px 25px rgba(122,92,51,0.05); 
-            color: #1a1a1a; 
-        }
+        .panel-card { background: #ffffff; border: 2px solid #7a5c33; border-radius: 16px; padding: 18px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); color: #1a1a1a; }
         .panel-card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #7a5c33; margin-bottom: 15px; border-bottom: 2px solid #7a5c33; padding-bottom: 6px; font-weight: 800; text-align: center; }
         
-        .form-group { margin-bottom: 8px; } /* Encolhimento vertical estrito */
+        .form-group { margin-bottom: 8px; }
         .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; color: #7a5c33; letter-spacing: 1px; }
-        .form-control { width: 100%; padding: 6px 10px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 13px; font-weight: 600; outline: none; background: #fdfaf6; color: #1a1a1a; transition: 0.2s; }
-        .form-control:focus { border-color: #7a5c33; background: #fff; }
+        .form-control { width: 100%; padding: 6px 10px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 13px; font-weight: 600; outline: none; background: #fdfaf6; color: #1a1a1a; }
         .form-row { display: flex; gap: 8px; }
 
         .trade-section-title { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #7a5c33; margin: 10px 0 6px 0; padding-top: 5px; border-top: 1px dashed #e1dbcf; display: flex; align-items: center; gap: 4px; }
+        .btn-submit { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 8px; }
 
-        .btn-submit { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.2s; margin-top: 8px; }
-        .btn-submit:hover { background: #7a5c33; }
-
-        /* TABELA DE MANIFESTO TAMBÉM COMBINANDO */
         .table-container { width: 100%; overflow-x: auto; background: #ffffff; border-radius: 16px; border: 2px solid #7a5c33; padding: 20px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #1a1a1a; }
         th { background: #fdfaf6; padding: 12px 14px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #7a5c33; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
         td { padding: 10px 14px; border-bottom: 1px solid #f4f0e8; font-weight: 600; }
-        tr:hover { background-color: #fdfbf9; }
         
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
         .badge-profit { background: #e6f4ea; color: #137333; }
         .badge-loss { background: #fce8e6; color: #c5221f; }
         .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
-        .remove-btn:hover { color: #b91c1c; }
-
-        @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <!-- SOLLENE EUROPEAN HEADER -->
     <header class="main-header">
-        <div class="header-left"><div class="logo-circle"></div><h1 class="brand-title">SOLLENE <span>GROUP</span></h1></div>
-        <nav><ul><li><a href="github.io" class="nav-link btn-home-print">PORTFOLIO</a></li></ul></nav>
+        <div class="header-left"><div class="logo-circle"></div><h1 class="brand-title">SOLLENE GROUP</h1></div>
     </header>
 
     <main class="dashboard-container">
-        
-        <!-- FORMULÁRIO ESQUERDO ULTRA COMPACTO BRONZE -->
         <div class="panel-card">
             <h2>LAUNCH MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
-                
                 <div class="form-group">
                     <label>Product / Item Description</label>
-                    <input type="text" id="product" class="form-control" value="amendoim" required>
+                    <input type="text" id="product" class="form-control" value="coffe" required>
                 </div>
-
                 <div class="form-row">
                     <div class="form-group" style="flex: 1;">
                         <label>Qty Traded</label>
@@ -103,13 +71,10 @@
                         <select id="unit" class="form-control">
                             <option value="Boxes">Boxes (BOX)</option>
                             <option value="KG">Kilograms (KG)</option>
-                            <option value="Tons">Metric Tons (TON)</option>
-                            <option value="Units">Units (UN)</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- INBOUND CONFIG -->
                 <div class="trade-section-title">📥 Inbound Config (Cost)</div>
                 <div class="form-row">
                     <div class="form-group" style="flex: 1;">
@@ -121,12 +86,10 @@
                         <select id="buyCurrency" class="form-control">
                             <option value="BRL">Real (R$)</option>
                             <option value="EUR">Euro (€)</option>
-                            <option value="USD">Dollar ($)</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- OUTBOUND CONFIG -->
                 <div class="trade-section-title">📤 Outbound Config (Revenue)</div>
                 <div class="form-row">
                     <div class="form-group" style="flex: 1;">
@@ -136,8 +99,7 @@
                     <div class="form-group" style="flex: 1.5;">
                         <label>Outbound Currency</label>
                         <select id="sellCurrency" class="form-control">
-                            <option value="EUR" selected>Euro (€)</option>
-                            <option value="USD">Dollar ($)</option>
+                            <option value="EUR">Euro (€)</option>
                         </select>
                     </div>
                 </div>
@@ -146,14 +108,12 @@
                     <label>Commercial Partner</label>
                     <input type="text" id="partner" class="form-control" value="ACME Supplies Europe" required>
                 </div>
-
                 <button type="submit" class="btn-submit">REGISTER MANIFEST</button>
             </form>
         </div>
 
-        <!-- TABELA DIREITA PRESTIGE -->
         <div class="table-container">
-            <h2 style="font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #7a5c33; margin-bottom: 20px; border-bottom: 2px solid #7a5c33; padding-bottom: 8px; font-weight: 800;">Global Cargo Manifesto Ledger</h2>
+            <h2>Global Cargo Manifesto Ledger</h2>
             <table>
                 <thead>
                     <tr>
@@ -171,91 +131,69 @@
                 <tbody id="table-body"></tbody>
             </table>
         </div>
-
     </main>
 
     <script>
         let trades = [];
-        
-        const exchangeRates = {
-            EUR: 1.0,
-            BRL: 0.16, 
-            USD: 0.92  
-        };
-
-        const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
+        const exchangeRates = { EUR: 1.0, BRL: 0.16 };
+        const currencySymbols = { EUR: '€', BRL: 'R$' };
 
         function loadTrades() {
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v6')) || [];
+            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v7')) || [];
             renderUI();
         }
 
         function parsePrice(value) {
-            let cleanValue = value.replace(',', '.');
-            return parseFloat(cleanValue) || 0;
+            return parseFloat(value.replace(',', '.')) || 0;
         }
 
         function registerTrade(event) {
             event.preventDefault(); 
-
             const product = document.getElementById('product').value;
             const quantity = parseInt(document.getElementById('quantity').value);
             const unit = document.getElementById('unit').value;
-            
             const buyPrice = parsePrice(document.getElementById('buyPrice').value);
             const buyCurrency = document.getElementById('buyCurrency').value;
             const sellPrice = parsePrice(document.getElementById('sellPrice').value);
             const sellCurrency = document.getElementById('sellCurrency').value;
-            
             const partner = document.getElementById('partner').value;
 
             const totalCostInEuro = (quantity * buyPrice) * exchangeRates[buyCurrency];
             const totalRevenueInEuro = (quantity * sellPrice) * exchangeRates[sellCurrency];
             const netProfitInEuro = totalRevenueInEuro - totalCostInEuro;
 
-            trades.push({ 
-                product, quantity, unit, 
-                buyPrice, buyCurrency, sellPrice, sellCurrency, 
-                totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner 
-            });
-            
-            window.localStorage.setItem('sollene_adv_trades_v6', JSON.stringify(trades));
+            trades.push({ product, quantity, unit, buyPrice, buyCurrency, sellPrice, sellCurrency, totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner });
+            window.localStorage.setItem('sollene_adv_trades_v7', JSON.stringify(trades));
             renderUI();
         }
 
         function deleteTrade(index) {
             trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_v6', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v7', JSON.stringify(trades));
             renderUI();
         }
 
         function renderUI() {
             const tbody = document.getElementById('table-body');
             if (!tbody) return;
-
             if (trades.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:30px;">No international operations recorded in the ledger.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:30px;">No records.</td></tr>';
             } else {
                 tbody.innerHTML = trades.map((item, index) => `
                     <tr>
-                        <td style="font-weight: 800; text-transform: uppercase; color: #1a1a1a;">${item.product}</td>
-                        <td style="font-weight: bold; color: #7a5c33;">${item.quantity} ${item.unit}</td>
+                        <td style="font-weight: 800; text-transform: uppercase;">${item.product}</td>
+                        <td>${item.quantity} ${item.unit}</td>
                         <td>${currencySymbols[item.buyCurrency]} ${item.buyPrice.toFixed(2)}</td>
                         <td>${currencySymbols[item.sellCurrency]} ${item.sellPrice.toFixed(2)}</td>
                         <td style="color:#c5221f;">€ ${item.totalCostInEuro.toFixed(2)}</td>
                         <td style="color:#137333;">€ ${item.totalRevenueInEuro.toFixed(2)}</td>
-                        <td>
-                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}" style="background: ${item.netProfitInEuro >= 0 ? '#e6f4ea' : '#fce8e6'}; color: ${item.netProfitInEuro >= 0 ? '#137333' : '#c5221f'}; font-weight:bold;">
-                                € ${item.netProfitInEuro.toFixed(2)}
-                            </span>
-                        </td>
-                        <td style="text-transform: uppercase; font-size: 11px; color:#666;">${item.partner}</td>
+                        <td><span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}">€ ${item.netProfitInEuro.toFixed(2)}</span></td>
+                        <td>${item.partner}</td>
                         <td><button class="remove-btn" onclick="deleteTrade(${index})">DELETE</button></td>
                     </tr>
                 `).join('');
             }
         }
-
         window.onload = loadTrades;
     </script>
 </body>
