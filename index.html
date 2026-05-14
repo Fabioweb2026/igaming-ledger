@@ -21,14 +21,14 @@
         }
         .brand-title { font-size: 24px; font-weight: 800; color: #1a1a1a; letter-spacing: 3px; text-transform: uppercase; }
 
-        /* PAINEL OPERACIONAL COM LARGURA DO CARD COMPACTADA */
+        /* PAINEL OPERACIONAL LADO A LADO UNIFICADO (FORMULÁRIO NA ESQUERDA / HUB NA DIREITA) */
         .dashboard-container { 
             max-width: 1750px; 
             margin: 30px auto; 
             padding: 0 2%; 
             display: grid; 
-            grid-template-columns: 340px 1fr 260px; /* REDUZIDO: Card na esquerda com exatos 340px */
-            gap: 20px; 
+            grid-template-columns: 340px 1fr; /* Duas colunas principais na tela */
+            gap: 25px; 
             align-items: start;
         }
         
@@ -36,17 +36,17 @@
         .panel-card { 
             background: #ffffff; 
             border: 2px solid #7a5c33; 
-            border-radius: 14px; 
-            padding: 14px; /* Reduzido espaçamento interno */
+            border-radius: 16px; 
+            padding: 14px; 
             box-shadow: 0 10px 25px rgba(122,92,51,0.05); 
             color: #1a1a1a; 
             overflow: hidden;
         }
 
         /* TÍTULOS EM BLACK ELEGANTE */
-        .panel-card h2 { 
+        .panel-card h2, .unified-header-black { 
             font-size: 11px; text-transform: uppercase; letter-spacing: 2px; 
-            color: #d4af37; background: #000000; padding: 10px; margin: -14px -14px 12px -14px;
+            color: #d4af37; background: #000000; padding: 12px; margin: -14px -14px 12px -14px;
             font-weight: 800; text-align: center; border-bottom: 2px solid #7a5c33;
         }
         
@@ -54,7 +54,6 @@
         .form-group label { display: block; font-size: 8.5px; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; color: #7a5c33; letter-spacing: 0.5px; white-space: nowrap; }
         .form-control { width: 100%; padding: 6px 8px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 12px; font-weight: 600; outline: none; background: #fdfaf6; color: #1a1a1a; height: 34px; }
         
-        /* DISTRIBUIÇÃO FOCADA PARA LARGURA REDUZIDA */
         .form-row { display: flex; gap: 6px; align-items: flex-end; width: 100%; }
         .col-qty { flex: 0.9; min-width: 50px; }
         .col-price { flex: 1.1; min-width: 75px; }
@@ -64,40 +63,57 @@
         .btn-submit { width: 100%; padding: 10px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; height: 38px; }
         .btn-submit:hover { background: #7a5c33; }
 
-        /* TABELA DE MANIFESTO RECONFIGURADA */
-        .table-container { width: 100%; overflow-x: auto; background: #ffffff; border-radius: 16px; border: 2px solid #7a5c33; padding: 14px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); overflow: hidden; }
-        .table-container h2 {
-            font-size: 11px; text-transform: uppercase; letter-spacing: 2px; 
-            color: #d4af37; background: #000000; padding: 10px; margin: -14px -14px 12px -14px;
-            font-weight: 800; text-align: center; border-bottom: 2px solid #7a5c33;
+        /* CONTÊINER DA CENTRAL UNIFICADA (MANIFESTO + ESTOQUE) */
+        .unified-hub-container { 
+            background: #ffffff; 
+            border: 2px solid #7a5c33; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 25px rgba(122,92,51,0.05); 
+            overflow: hidden; 
+            padding: 14px;
         }
 
+        .unified-hub-container .unified-header-black { margin: -14px -14px 15px -14px; }
+
+        /* ENGENHARIA DE DIVISÃO INTERNA DA TABELA UNIFICADA */
+        .hub-split-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 260px; /* Divide os registros da esquerda e o estoque na extrema direita */
+            gap: 20px; 
+            align-items: start;
+        }
+
+        .table-scroll-area { width: 100%; overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #1a1a1a; }
         th { background: #fdfaf6; padding: 12px 10px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #7a5c33; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
         td { padding: 10px; border-bottom: 1px solid #f4f0e8; font-weight: 600; }
         tr:hover { background-color: #fdfbf9; }
         
-        /* CARD LATERAL DE ESTOQUE ATUAL */
-        .stock-item-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #f4f0e8; font-size: 12px; font-weight: 700; }
-        .stock-qty-badge { background: #7a5c33; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 10px; }
+        /* BLOCO DE ESTOQUE ATUAL EMBUTIDO INTERNO */
+        .embedded-stock-panel { background: #fdfaf6; border: 1px solid #e1dbcf; border-radius: 10px; padding: 15px; }
+        .embedded-stock-panel h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #7a5c33; border-bottom: 2px solid #7a5c33; padding-bottom: 5px; margin-bottom: 10px; font-weight: 800; text-align: center; }
+        .stock-item-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #e1dbcf; font-size: 11px; font-weight: 700; }
+        .stock-item-row:last-child { border-bottom: none; }
+        .stock-qty-badge { background: #7a5c33; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 9px; }
 
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
         .badge-profit { background: #e6f4ea; color: #137333; }
         .badge-loss { background: #fce8e6; color: #c5221f; }
         .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
 
-        @media(max-width: 1200px) { .dashboard-container { grid-template-columns: 1fr; } }
+        @media(max-width: 1200px) { .dashboard-container { grid-template-columns: 1fr; } .hub-split-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
+    <!-- SOLLENE EUROPEAN HEADER -->
     <header class="main-header">
         <div class="header-left"><div class="logo-circle"></div><h1 class="brand-title">SOLLENE GROUP</h1></div>
     </header>
 
     <main class="dashboard-container">
         
-        <!-- FORMULÁRIO ESQUERDO ULTRA COMPACTO (340PX) -->
+        <!-- FORMULÁRIO ESQUERDO COMPACTO -->
         <div class="panel-card">
             <h2>LAUNCH MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
@@ -168,31 +184,39 @@
             </form>
         </div>
 
-        <!-- TABELA CENTRAL -->
-        <div class="table-container">
-            <h2>Global Cargo Manifesto Ledger</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Item Description</th>
-                        <th>In / Out Volume</th>
-                        <th>Buy Unit</th>
-                        <th>Sell Unit</th>
-                        <th>Total Cost</th>
-                        <th>Total Revenue</th>
-                        <th>Net Balance (€)</th>
-                        <th>Partner</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody id="table-body"></tbody>
-            </table>
-        </div>
+        <!-- CENTRAL UNIFICADA (TABELA + ESTOQUE DENTRO DO MESMO CARD) -->
+        <div class="unified-hub-container">
+            <div class="unified-header-black">Global Cargo Manifesto & Stock Ledger</div>
+            
+            <div class="hub-split-grid">
+                
+                <!-- ÁREA DA TABELA (ESQUERDA INTERNA) -->
+                <div class="table-scroll-area">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Item Description</th>
+                                <th>In / Out Volume</th>
+                                <th>Buy Unit</th>
+                                <th>Sell Unit</th>
+                                <th>Total Cost</th>
+                                <th>Total Revenue</th>
+                                <th>Net Balance (€)</th>
+                                <th>Partner</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body"></tbody>
+                    </table>
+                </div>
 
-        <!-- CARD DIREITO DE ESTOQUE RESTANTE -->
-        <div class="panel-card">
-            <h2>CURRENT STOCK LEVELS</h2>
-            <div id="stock-levels-list" style="margin-top: 10px;"></div>
+                <!-- ÁREA DE ESTOQUE ATUAL EMBUTIDA (DIREITA INTERNA) -->
+                <div class="embedded-stock-panel">
+                    <h3>CURRENT STOCK</h3>
+                    <div id="stock-levels-list"></div>
+                </div>
+
+            </div>
         </div>
 
     </main>
@@ -208,9 +232,9 @@
 
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
 
-        // Alterada chave de salvamento para limpar o cache antigo da largura larga
+        // Alterada partição de persistência contínua para sincronizar a unificação de grids
         function loadTrades() {
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v11')) || [];
+            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v12')) || [];
             renderUI();
         }
 
@@ -255,13 +279,13 @@
                 totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner 
             });
             
-            window.localStorage.setItem('sollene_adv_trades_v11', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v12', JSON.stringify(trades));
             renderUI();
         }
 
         function deleteTrade(index) {
             trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_v11', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v12', JSON.stringify(trades));
             renderUI();
         }
 
@@ -272,7 +296,7 @@
 
             if (trades.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:30px;">No international operations recorded in the ledger.</td></tr>';
-                stockList.innerHTML = '<p style="color:#999; text-align:center; font-size:12px; padding:10px 0;">Warehouse is empty.</p>';
+                stockList.innerHTML = '<p style="color:#999; text-align:center; font-size:11px; padding:10px 0;">Warehouse is empty.</p>';
             } else {
                 tbody.innerHTML = trades.map((item, index) => `
                     <tr>
@@ -303,7 +327,7 @@
 
                 stockList.innerHTML = Object.keys(stockMap).map(key => `
                     <div class="stock-item-row">
-                        <span style="text-transform: uppercase; font-size: 11px;">${key}</span>
+                        <span style="text-transform: uppercase;">${key}</span>
                         <span class="stock-qty-badge">${stockMap[key].qty} ${stockMap[key].unit}</span>
                     </div>
                 `).join('');
