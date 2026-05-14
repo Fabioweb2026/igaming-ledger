@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sollene Group | International Trade Ledger</title>
     <style>
-        /* ALTERADO: Fundo da página claro e cards em Black Elegante */
+        /* DESIGN CORPORATIVO PREMIUM REFINADO */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: sans-serif; background: #f7f3eb; color: #1a1a1a; padding-bottom: 60px; }
+        body { font-family: sans-serif; background: #fbf9f6; color: #1a1a1a; padding-bottom: 60px; }
 
         /* HEADER PREMIUM SOLLENE */
         .main-header {
-            background: #f7f3eb; display: flex; align-items: center; justify-content: space-between;
-            padding: 15px 5%; border-bottom: 1px solid #7a5c33; position: sticky; top: 0; z-index: 1000;
+            background: #fbf9f6; display: flex; align-items: center; justify-content: space-between;
+            padding: 15px 5%; border-bottom: 1px solid rgba(0,0,0,0.06); position: sticky; top: 0; z-index: 1000;
         }
         .header-left { display: flex; align-items: center; gap: 15px; }
         .logo-circle { 
@@ -24,42 +24,42 @@
         .btn-home-print { text-decoration: none; color: #7a5c33; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 8px 20px; border: 2px solid #7a5c33; border-radius: 6px; background: transparent; transition: 0.3s; }
         .btn-home-print:hover { background: #7a5c33; color: #fff; }
 
-        /* PAINEL OPERACIONAL LADO A LADO */
+        /* PAINEL OPERACIONAL COMPACTO LADO A LADO */
         .dashboard-container { 
             max-width: 1600px; 
-            margin: 40px auto; 
+            margin: 30px auto; 
             padding: 0 4%; 
             display: grid; 
-            grid-template-columns: 420px 1fr; 
-            gap: 30px; 
+            grid-template-columns: 380px 1fr; /* Card reduzido para 380px de largura */
+            gap: 25px; 
             align-items: start;
         }
         
-        /* CARD COMPACTO BLACK ELEGANTE */
-        .panel-card { background: #16161a; border: 1px solid #2a2a32; border-radius: 20px; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); color: #fff; }
-        .panel-card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #d4af37; margin-bottom: 20px; border-bottom: 2px solid #7a5c33; padding-bottom: 10px; font-weight: 800; }
+        /* CARD ULTRA COMPACTO GRAFITE FOSCO PRESTIGE */
+        .panel-card { background: #26262b; border: 1px solid #33333a; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); color: #fff; }
+        .panel-card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #d4af37; margin-bottom: 15px; border-bottom: 2px solid #7a5c33; padding-bottom: 8px; font-weight: 800; text-align: center; }
         
-        .form-group { margin-bottom: 14px; }
-        .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; color: #a0a0ab; letter-spacing: 1px; }
-        .form-control { width: 100%; padding: 10px 12px; border: 1px solid #2a2a32; border-radius: 8px; font-size: 13px; font-weight: 600; outline: none; background: #202024; color: #fff; transition: 0.3s; }
-        .form-control:focus { border-color: #7a5c33; }
-        .form-row { display: flex; gap: 12px; }
+        .form-group { margin-bottom: 10px; }
+        .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: #a0a0ab; letter-spacing: 1px; }
+        .form-control { width: 100%; padding: 8px 12px; border: 1px solid #3d3d45; border-radius: 6px; font-size: 13px; font-weight: 600; outline: none; background: #1c1c1f; color: #fff; transition: 0.2s; }
+        .form-control:focus { border-color: #d4af37; }
+        .form-row { display: flex; gap: 10px; }
 
-        .trade-section-title { font-size: 10px; font-weight: 800; text-transform: uppercase; color: #d4af37; margin: 15px 0 10px 0; padding-top: 8px; border-top: 1px dashed #2a2a32; display: flex; align-items: center; gap: 5px; }
+        .trade-section-title { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #d4af37; margin: 12px 0 8px 0; padding-top: 6px; border-top: 1px dashed #3d3d45; display: flex; align-items: center; gap: 4px; }
 
-        .btn-submit { width: 100%; padding: 14px; background: #d4af37; color: #000; border: none; border-radius: 10px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-submit { width: 100%; padding: 12px; background: #d4af37; color: #000; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.2s; margin-top: 10px; }
         .btn-submit:hover { background: #fff; color: #000; }
 
-        /* TABELA DE MANIFESTO BLACK ELEGANTE */
-        .table-container { width: 100%; overflow-x: auto; background: #16161a; border-radius: 24px; border: 1px solid #2a2a32; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); }
+        /* TABELA DE MANIFESTO GRAFITE FOSCO */
+        .table-container { width: 100%; overflow-x: auto; background: #26262b; border-radius: 16px; border: 1px solid #33333a; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #e4e4e7; }
-        th { background: #1a1a22; padding: 16px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #d4af37; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
-        td { padding: 14px 16px; border-bottom: 1px solid #202024; font-weight: 600; }
-        tr:hover { background-color: #1c1c21; }
+        th { background: #1c1c1f; padding: 14px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #d4af37; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
+        td { padding: 12px 14px; border-bottom: 1px solid #1c1c1f; font-weight: 600; }
+        tr:hover { background-color: #1c1c1f; }
         
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
-        .badge-profit { background: rgba(19, 115, 51, 0.15); color: #34a853; }
-        .badge-loss { background: rgba(197, 34, 31, 0.15); color: #ea4335; }
+        .badge-profit { background: rgba(52, 168, 83, 0.15); color: #34a853; }
+        .badge-loss { background: rgba(234, 67, 53, 0.15); color: #ea4335; }
         .remove-btn { color: #ea4335; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
         .remove-btn:hover { color: #fff; }
 
@@ -76,9 +76,9 @@
 
     <main class="dashboard-container">
         
-        <!-- FORMULÁRIO ESQUERDO BLACK & GOLD -->
+        <!-- FORMULÁRIO ESQUERDO ULTRA COMPACTO GRAFITE -->
         <div class="panel-card">
-            <h2>LAUNCH TRADE MOVEMENT</h2>
+            <h2>LAUNCH MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
                 
                 <div class="form-group">
@@ -87,11 +87,11 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group" style="flex: 2;">
-                        <label>Quantity Traded</label>
+                    <div class="form-group" style="flex: 1;">
+                        <label>Qty Traded</label>
                         <input type="number" id="quantity" class="form-control" value="10" min="1" required>
                     </div>
-                    <div class="form-group" style="flex: 3;">
+                    <div class="form-group" style="flex: 1.5;">
                         <label>Unit of Measure</label>
                         <select id="unit" class="form-control">
                             <option value="Boxes">Boxes (BOX)</option>
@@ -103,13 +103,13 @@
                 </div>
 
                 <!-- INBOUND CONFIG (CUSTO) -->
-                <div class="trade-section-title">📥 Inbound Config (Purchase / Cost)</div>
+                <div class="trade-section-title">📥 Inbound Config (Cost)</div>
                 <div class="form-row">
-                    <div class="form-group" style="flex: 2;">
+                    <div class="form-group" style="flex: 1;">
                         <label>Buy Unit Price</label>
                         <input type="text" id="buyPrice" class="form-control" value="4,54" required>
                     </div>
-                    <div class="form-group" style="flex: 3;">
+                    <div class="form-group" style="flex: 1.5;">
                         <label>Inbound Currency</label>
                         <select id="buyCurrency" class="form-control">
                             <option value="BRL">Real (R$)</option>
@@ -120,13 +120,13 @@
                 </div>
 
                 <!-- OUTBOUND CONFIG (RECEITA) -->
-                <div class="trade-section-title">📤 Outbound Config (Sale / Revenue)</div>
+                <div class="trade-section-title">📤 Outbound Config (Revenue)</div>
                 <div class="form-row">
-                    <div class="form-group" style="flex: 2;">
+                    <div class="form-group" style="flex: 1;">
                         <label>Sell Unit Price</label>
                         <input type="text" id="sellPrice" class="form-control" value="12,50" required>
                     </div>
-                    <div class="form-group" style="flex: 3;">
+                    <div class="form-group" style="flex: 1.5;">
                         <label>Outbound Currency</label>
                         <select id="sellCurrency" class="form-control">
                             <option value="EUR" selected>Euro (€)</option>
@@ -136,7 +136,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Commercial Partner / Destination</label>
+                    <label>Commercial Partner</label>
                     <input type="text" id="partner" class="form-control" value="ACME Supplies Europe" required>
                 </div>
 
@@ -144,9 +144,9 @@
             </form>
         </div>
 
-        <!-- TABELA DIREITA BLACK ELEGANTE -->
+        <!-- TABELA DIREITA GRAFITE -->
         <div class="table-container">
-            <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #d4af37; margin-bottom: 25px; border-bottom: 2px solid #7a5c33; padding-bottom: 10px; font-weight: 800;">Global Cargo Manifesto Ledger</h2>
+            <h2 style="font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #d4af37; margin-bottom: 20px; border-bottom: 2px solid #7a5c33; padding-bottom: 8px; font-weight: 800;">Global Cargo Manifesto Ledger</h2>
             <table>
                 <thead>
                     <tr>
@@ -238,7 +238,7 @@
                         <td style="color:#ea4335;">€ ${item.totalCostInEuro.toFixed(2)}</td>
                         <td style="color:#34a853;">€ ${item.totalRevenueInEuro.toFixed(2)}</td>
                         <td>
-                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}">
+                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}" style="background: ${item.netProfitInEuro >= 0 ? 'rgba(52,168,83,0.15)' : 'rgba(234,67,53,0.15)'}; color: ${item.netProfitInEuro >= 0 ? '#34a853' : '#ea4335'};">
                                 € ${item.netProfitInEuro.toFixed(2)}
                             </span>
                         </td>
