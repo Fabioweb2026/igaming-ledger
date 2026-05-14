@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | International Trade Ledger</title>
+    <title>Sollene Group | Global Trade Ledger</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: sans-serif; background: #f7f3eb; color: #1a1a1a; padding-bottom: 60px; }
@@ -21,9 +21,18 @@
         .brand-title { font-size: 24px; font-weight: 800; color: #7a5c33; letter-spacing: 3px; text-transform: uppercase; }
         .btn-home-print { text-decoration: none; color: #000; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 8px 20px; border: 2px solid #000; border-radius: 6px; background: transparent; }
 
-        /* PAINEL OPERACIONAL DUAL */
-        .dashboard-container { max-width: 1450px; margin: 40px auto; padding: 0 4%; display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; }
-        .panel-card { background: #fff; border: 1px solid #e1dbcf; border-radius: 24px; padding: 35px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); height: fit-content; }
+        /* PAINEL OPERACIONAL LADO A LADO */
+        .dashboard-container { 
+            max-width: 1500px; 
+            margin: 40px auto; 
+            padding: 0 4%; 
+            display: grid; 
+            grid-template-columns: 450px 1fr; /* Força o formulário na esquerda e a tabela na direita */
+            gap: 30px; 
+            align-items: start;
+        }
+        
+        .panel-card { background: #fff; border: 1px solid #e1dbcf; border-radius: 24px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
         .panel-card h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #7a5c33; margin-bottom: 25px; border-bottom: 2px solid #7a5c33; padding-bottom: 10px; font-weight: 800; }
         
         .form-group { margin-bottom: 16px; }
@@ -31,15 +40,13 @@
         .form-control { width: 100%; padding: 12px; border: 1px solid #e1dbcf; border-radius: 8px; font-size: 13px; font-weight: 600; outline: none; background: #fdfaf6; color: #1a1a1a; }
         .form-row { display: flex; gap: 15px; }
 
-        /* SEÇÃO DE CUSTO VS RECEITA SEPARADA */
         .trade-section-title { font-size: 11px; font-weight: 800; text-transform: uppercase; color: #7a5c33; margin: 20px 0 10px 0; padding-top: 10px; border-top: 1px dashed #e1dbcf; display: flex; align-items: center; gap: 5px; }
 
         .btn-submit { width: 100%; padding: 16px; background: #000; color: #fff; border: none; border-radius: 12px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; margin-top: 15px; }
         .btn-submit:hover { background: #7a5c33; }
 
-        /* TABELA DE MANIFESTO GERAL */
-        .table-panel { grid-column: span 2; }
-        .table-container { width: 100%; overflow-x: auto; background: #fff; border-radius: 16px; border: 1px solid #eee; }
+        /* TABELA DE MANIFESTO LADO A LADO */
+        .table-container { width: 100%; overflow-x: auto; background: #fff; border-radius: 24px; border: 1px solid #e1dbcf; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; }
         th { background: #fdfaf6; padding: 16px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #7a5c33; border-bottom: 2px solid #7a5c33; }
         td { padding: 14px 16px; border-bottom: 1px solid #f9f9f9; font-weight: 600; }
@@ -49,7 +56,7 @@
         .badge-loss { background: #fce8e6; color: #c5221f; }
         .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
 
-        @media(max-width: 1200px) { .table-panel { grid-column: span 1; } }
+        @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -62,39 +69,39 @@
 
     <main class="dashboard-container">
         
-        <!-- CARD DE CONTROLE EM INGLÊS COMPLETO -->
+        <!-- FORMULÁRIO ESQUERDO -->
         <div class="panel-card">
             <h2>LAUNCH TRADE MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
                 
                 <div class="form-group">
                     <label>Product / Item Description</label>
-                    <!-- CORREÇÃO: Removidos placeholders vazios. Agora possui valor real padrão para nunca travar o botão -->
-                    <input type="text" id="product" class="form-control" value="Coffee Beans" required>
+                    <input type="text" id="product" class="form-control" value="coffe" required>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label>Quantity Traded</label>
-                        <input type="number" id="quantity" class="form-control" value="9" min="1" required>
+                        <input type="number" id="quantity" class="form-control" value="10" min="1" required>
                     </div>
                     <div class="form-group" style="flex: 3;">
                         <label>Unit of Measure</label>
                         <select id="unit" class="form-control">
+                            <option value="Boxes">Boxes (BOX)</option>
                             <option value="KG">Kilograms (KG)</option>
                             <option value="Tons">Metric Tons (TON)</option>
-                            <option value="Boxes">Boxes (BOX)</option>
                             <option value="Units">Units (UN)</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- BLOCO 1: ENTRADA / COMPRA -->
+                <!-- INBOUND CONFIG (CUSTO) -->
                 <div class="trade-section-title">📥 Inbound Config (Purchase / Cost)</div>
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label>Buy Unit Price</label>
-                        <input type="number" id="buyPrice" class="form-control" value="7" min="0" required>
+                        <!-- CORREÇÃO: step="0.01" destrava centavos e impede o erro do navegador -->
+                        <input type="number" id="buyPrice" class="form-control" value="6.78" step="0.01" min="0" required>
                     </div>
                     <div class="form-group" style="flex: 3;">
                         <label>Inbound Currency</label>
@@ -106,12 +113,12 @@
                     </div>
                 </div>
 
-                <!-- BLOCO 2: SAÍDA / VENDA -->
+                <!-- OUTBOUND CONFIG (RECEITA) -->
                 <div class="trade-section-title">📤 Outbound Config (Sale / Revenue)</div>
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label>Sell Unit Price</label>
-                        <input type="number" id="sellPrice" class="form-control" value="15" min="0" required>
+                        <input type="number" id="sellPrice" class="form-control" value="12.50" step="0.01" min="0" required>
                     </div>
                     <div class="form-group" style="flex: 3;">
                         <label>Outbound Currency</label>
@@ -131,27 +138,25 @@
             </form>
         </div>
 
-        <!-- MANIFESTO ADUANEIRO UNIFICADO EUROPEU -->
-        <div class="panel-card table-panel">
-            <h2>Global Cargo Manifesto & Integrated Currency Exchange Ledger</h2>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Item Name</th>
-                            <th>Volume</th>
-                            <th>Buy Basis</th>
-                            <th>Sell Basis</th>
-                            <th>Total Cost (€)</th>
-                            <th>Total Revenue (€)</th>
-                            <th>Net Balance (€)</th>
-                            <th>Partner</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body"></tbody>
-                </table>
-            </div>
+        <!-- TABELA DIREITA (LADO A LADO) -->
+        <div class="table-container">
+            <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #7a5c33; margin-bottom: 25px; border-bottom: 2px solid #7a5c33; padding-bottom: 10px; font-weight: 800;">Global Cargo Manifesto Ledger</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Description</th>
+                        <th>Volume</th>
+                        <th>Buy Basis</th>
+                        <th>Sell Basis</th>
+                        <th>Total Cost (€)</th>
+                        <th>Total Revenue (€)</th>
+                        <th>Net Balance (€)</th>
+                        <th>Partner</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+            </table>
         </div>
 
     </main>
@@ -159,7 +164,6 @@
     <script>
         let trades = [];
         
-        // Conversor cambial fixo baseado na cotação oficial em Euros (€) para a Europa
         const exchangeRates = {
             EUR: 1.0,
             BRL: 0.16, // R$ 1.00 = € 0.16
@@ -169,12 +173,12 @@
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
 
         function loadTrades() {
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v3')) || [];
+            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v4')) || [];
             renderUI();
         }
 
         function registerTrade(event) {
-            event.preventDefault();
+            event.preventDefault(); 
 
             const product = document.getElementById('product').value;
             const quantity = parseInt(document.getElementById('quantity').value);
@@ -185,7 +189,6 @@
             const sellCurrency = document.getElementById('sellCurrency').value;
             const partner = document.getElementById('partner').value;
 
-            // Processamento Cambial Simultâneo convertido estritamente para Euros (€)
             const totalCostInEuro = (quantity * buyPrice) * exchangeRates[buyCurrency];
             const totalRevenueInEuro = (quantity * sellPrice) * exchangeRates[sellCurrency];
             const netProfitInEuro = totalRevenueInEuro - totalCostInEuro;
@@ -196,13 +199,13 @@
                 totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner 
             });
             
-            window.localStorage.setItem('sollene_adv_trades_v3', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v4', JSON.stringify(trades));
             renderUI();
         }
 
         function deleteTrade(index) {
             trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_v3', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v4', JSON.stringify(trades));
             renderUI();
         }
 
@@ -222,7 +225,7 @@
                         <td style="color:#c5221f;">€ ${item.totalCostInEuro.toFixed(2)}</td>
                         <td style="color:#137333;">€ ${item.totalRevenueInEuro.toFixed(2)}</td>
                         <td>
-                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'entrada' : 'saida'}">
+                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}" style="background: ${item.netProfitInEuro >= 0 ? '#e6f4ea' : '#fce8e6'}; color: ${item.netProfitInEuro >= 0 ? '#137333' : '#c5221f'};">
                                 € ${item.netProfitInEuro.toFixed(2)}
                             </span>
                         </td>
@@ -238,4 +241,3 @@
 </body>
 </html>
 
-    
