@@ -9,16 +9,16 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: sans-serif; background: #fbf9f6; color: #1a1a1a; padding-bottom: 60px; }
 
-        /* NOVO: BANNER PANORÂMICO CORPORATIVO SUPERIOR INTEGRADO */
+        /* CORREÇÃO CIRÚRGICA: Mantém a proporção real do banner sem cortar letras nas pontas */
         .hero-top-banner {
             width: 100%;
-            height: 180px; /* Altura ideal panorâmica para não cansar a vista */
+            aspect-ratio: 1920 / 450; /* Força o navegador a respeitar a proporção da imagem */
             background: #111 url('sollene-group.jpg') no-repeat center center;
             background-size: cover;
             border-bottom: 3px solid #7a5c33;
         }
 
-        /* HEADER PREMIUM SOLLENE AJUSTADO ABAIXO DO BANNER (ANTI-SOBREPOSIÇÃO) */
+        /* HEADER PREMIUM SOLLENE */
         .main-header {
             background: #000000; display: flex; align-items: center; justify-content: space-between;
             padding: 15px 5%; border-bottom: 1px solid #7a5c33; position: sticky; top: 0; z-index: 1000;
@@ -34,10 +34,10 @@
         .btn-clear-cache { background: #ea4335; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
         .btn-clear-cache:hover { background: #fff; color: #ea4335; }
 
-        /* PAINEL OPERACIONAL LADO A LADO MULTI-COLUNAS */
+        /* CORREÇÃO VISUAL: margin-top empurra os cards para baixo de forma harmônica */
         .dashboard-container { 
             max-width: 1750px; 
-            margin: 30px auto; 
+            margin: 40px auto; /* 40px de espaçamento no topo cria o respiro ideal */
             padding: 0 2%; 
             display: grid; 
             grid-template-columns: 340px 1fr; 
@@ -45,7 +45,7 @@
             align-items: start;
         }
         
-        /* CARDS COM BORDAS BRONZE ULTRA COMPACTO */
+        /* CARD COM BORDAS BRONZE ULTRA COMPACTO */
         .panel-card { 
             background: #ffffff; 
             border: 2px solid #7a5c33; 
@@ -76,7 +76,7 @@
         .btn-submit { width: 100%; padding: 10px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; height: 38px; }
         .btn-submit:hover { background: #7a5c33; }
 
-        /* CONTÊINER DA CENTRAL UNIFICADA (MANIFESTO + ESTOQUE ABAIXO) */
+        /* CONTÊINER DA CENTRAL UNIFICADA */
         .unified-hub-container { 
             background: #ffffff; 
             border: 2px solid #7a5c33; 
@@ -87,13 +87,7 @@
         }
 
         .unified-hub-container .unified-header-black { margin: -14px -14px 15px -14px; }
-
-        .hub-vertical-layout { 
-            display: flex;
-            flex-direction: column;
-            gap: 25px; 
-            width: 100%;
-        }
+        .hub-vertical-layout { display: flex; flex-direction: column; gap: 25px; width: 100%; }
 
         .table-container-fixed { width: 100%; overflow: hidden; }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #1a1a1a; table-layout: auto; }
@@ -119,10 +113,10 @@
 </head>
 <body>
 
-    <!-- NOVO COMPONENTE: BANNER PANORÂMICO DO TOPO -->
+    <!-- BANNER PANORÂMICO COM AJUSTE DE PROPORÇÃO ATIVO -->
     <section class="hero-top-banner"></section>
 
-    <!-- SOLLENE EUROPEAN HEADER (Ajustado abaixo do letreiro) -->
+    <!-- SOLLENE EUROPEAN HEADER -->
     <header class="main-header">
         <div class="header-left">
             <div class="logo-circle"></div>
@@ -131,6 +125,7 @@
         <button class="btn-clear-cache" onclick="clearSystemMemory()">Reset System Storage</button>
     </header>
 
+    <!-- CONTAINER OPERACIONAL REBAIXADO E ESPAÇADO -->
     <main class="dashboard-container">
         
         <!-- FORMULÁRIO ESQUERDO COMPACTO -->
@@ -204,7 +199,7 @@
             </form>
         </div>
 
-        <!-- CENTRAL UNIFICADA SEM BARRA DE ROLAGEM -->
+        <!-- CENTRAL UNIFICADA -->
         <div class="unified-hub-container">
             <div class="unified-header-black">Global Cargo Manifesto & Stock Ledger</div>
             
@@ -241,13 +236,7 @@
 
     <script>
         let trades = [];
-        
-        const exchangeRates = {
-            EUR: 1.0,
-            BRL: 0.16, 
-            USD: 0.92  
-        };
-
+        const exchangeRates = { EUR: 1.0, BRL: 0.16, USD: 0.92 };
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
 
         function loadTrades() {
@@ -256,23 +245,19 @@
         }
 
         function parsePrice(value) {
-            let cleanValue = value.replace(',', '.');
-            return parseFloat(cleanValue) || 0;
+            return parseFloat(value.replace(',', '.')) || 0;
         }
 
         function registerTrade(event) {
             event.preventDefault(); 
-
             const product = document.getElementById('product').value;
             const buyQty = parseInt(document.getElementById('buyQty').value);
             const sellQty = parseInt(document.getElementById('sellQty').value);
             const unit = document.getElementById('unit').value;
-            
             const buyPrice = parsePrice(document.getElementById('buyPrice').value);
             const buyCurrency = document.getElementById('buyCurrency').value;
             const sellPrice = parsePrice(document.getElementById('sellPrice').value);
             const sellCurrency = document.getElementById('sellCurrency').value;
-            
             const partner = document.getElementById('partner').value;
 
             if (sellQty > buyQty) {
@@ -289,8 +274,7 @@
             const netProfitInEuro = (sellUnitPriceInEuro - buyUnitPriceInEuro) * sellQty;
 
             trades.push({ 
-                product, buyQty, sellQty, unit, remainingStock,
-                buyPrice, buyCurrency, sellPrice, sellCurrency,
+                product, buyQty, sellQty, unit, remainingStock, buyPrice, buyCurrency, sellPrice, sellCurrency,
                 origTotalCost, origTotalRevenue,
                 totalCostInEuro: origTotalCost * exchangeRates[buyCurrency], 
                 totalRevenueInEuro: origTotalRevenue * exchangeRates[sellCurrency], 
@@ -331,11 +315,7 @@
                         <td>${currencySymbols[item.sellCurrency]} ${item.sellPrice.toFixed(2)}</td>
                         <td style="color:#c5221f; font-weight: bold;">${currencySymbols[item.buyCurrency]} ${item.origTotalCost.toFixed(2)}</td>
                         <td style="color:#137333; font-weight: bold;">${currencySymbols[item.sellCurrency]} ${item.origTotalRevenue.toFixed(2)}</td>
-                        <td>
-                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}">
-                                € ${item.netProfitInEuro.toFixed(2)}
-                            </span>
-                        </td>
+                        <td><span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}">€ ${item.netProfitInEuro.toFixed(2)}</span></td>
                         <td style="text-transform: uppercase; font-size: 11px; color:#666;">${item.partner}</td>
                         <td><button class="remove-btn" onclick="deleteTrade(${index})">DELETE</button></td>
                     </tr>
@@ -344,9 +324,7 @@
                 let stockMap = {};
                 trades.forEach(item => {
                     let prodName = item.product.toUpperCase();
-                    if (!stockMap[prodName]) {
-                        stockMap[prodName] = { qty: 0, unit: item.unit };
-                    }
+                    if (!stockMap[prodName]) { stockMap[prodName] = { qty: 0, unit: item.unit }; }
                     stockMap[prodName].qty += item.remainingStock;
                 });
 
@@ -358,9 +336,9 @@
                 `).join('');
             }
         }
-
         window.onload = loadTrades;
     </script>
 </body>
 </html>
+
 
