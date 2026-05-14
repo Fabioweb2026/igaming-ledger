@@ -21,7 +21,6 @@
         }
         .brand-title { font-size: 24px; font-weight: 800; color: #1a1a1a; letter-spacing: 3px; text-transform: uppercase; }
         .brand-title span { color: #7a5c33; }
-        .nav-link { text-decoration: none; color: #7a5c33; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 8px 20px; border: 2px solid #7a5c33; border-radius: 6px; background: transparent; }
 
         /* PAINEL OPERACIONAL LADO A LADO */
         .dashboard-container { 
@@ -54,7 +53,7 @@
         .btn-submit { width: 100%; padding: 12px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 8px; }
         .btn-submit:hover { background: #7a5c33; }
 
-        /* TABELA DE MANIFESTO */
+        /* TABELA DE MANIFESTO RECONFIGURADA */
         .table-container { width: 100%; overflow-x: auto; background: #ffffff; border-radius: 16px; border: 2px solid #7a5c33; padding: 20px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #1a1a1a; }
         th { background: #fdfaf6; padding: 12px 14px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #7a5c33; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
@@ -65,6 +64,7 @@
         .badge-profit { background: #e6f4ea; color: #137333; }
         .badge-loss { background: #fce8e6; color: #c5221f; }
         .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+        .remove-btn:hover { color: #b91c1c; }
 
         @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } }
     </style>
@@ -77,7 +77,6 @@
 
     <main class="dashboard-container">
         
-        <!-- FORMULÁRIO COM MULTI-MOEDAS DE COMPRA E VENDA -->
         <div class="panel-card">
             <h2>LAUNCH MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
@@ -120,7 +119,7 @@
                     </div>
                 </div>
 
-                <!-- CONFIGURAÇÃO DE SAÍDA (VENDA ATUALIZADA) -->
+                <!-- CONFIGURAÇÃO DE SAÍDA (VENDA) -->
                 <div class="trade-section-title">📤 Outbound Config (Revenue)</div>
                 <div class="form-row">
                     <div class="form-group" style="flex: 1;">
@@ -130,8 +129,8 @@
                     <div class="form-group" style="flex: 1.5;">
                         <label>Outbound Currency</label>
                         <select id="sellCurrency" class="form-control">
-                            <option value="EUR">Euro (€)</option>
                             <option value="USD">Dollar ($)</option>
+                            <option value="EUR">Euro (€)</option>
                             <option value="BRL">Real (R$)</option>
                         </select>
                     </div>
@@ -146,7 +145,7 @@
             </form>
         </div>
 
-        <!-- TABELA DE MANIFESTO CAMBIAL -->
+        <!-- TABELA CORRIGIDA COM MOEDAS DINÂMICAS NAS COLUNAS -->
         <div class="table-container">
             <h2>Global Cargo Manifesto Ledger</h2>
             <table>
@@ -156,8 +155,8 @@
                         <th>Volume</th>
                         <th>Buy Basis</th>
                         <th>Sell Basis</th>
-                        <th>Total Cost (€)</th>
-                        <th>Total Revenue (€)</th>
+                        <th>Total Cost (Orig)</th>
+                        <th>Total Revenue (Orig)</th>
                         <th>Net Balance (€)</th>
                         <th>Partner</th>
                         <th>Action</th>
@@ -172,7 +171,6 @@
     <script>
         let trades = [];
         
-        // Cotação cambial oficial para conversão simultânea de 3 vias em Euro (€)
         const exchangeRates = {
             EUR: 1.0,
             BRL: 0.16, 
@@ -182,7 +180,7 @@
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
 
         function loadTrades() {
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v7')) || [];
+            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v8')) || [];
             renderUI();
         }
 
@@ -205,24 +203,29 @@
             
             const partner = document.getElementById('partner').value;
 
-            // Converte tanto os custos quanto a receita para Euro antes de gerar o lucro líquido
-            const totalCostInEuro = (quantity * buyPrice) * exchangeRates[buyCurrency];
-            const totalRevenueInEuro = (quantity * sellPrice) * exchangeRates[sellCurrency];
+            // Mantém os totais originais de cada moeda para exibir na tabela
+            const origTotalCost = quantity * buyPrice;
+            const origTotalRevenue = quantity * sellPrice;
+
+            // Converte ambos para Euros (€) exclusivamente para gerar o balanço contábil
+            const totalCostInEuro = origTotalCost * exchangeRates[buyCurrency];
+            const totalRevenueInEuro = origTotalRevenue * exchangeRates[sellCurrency];
             const netProfitInEuro = totalRevenueInEuro - totalCostInEuro;
 
             trades.push({ 
                 product, quantity, unit, 
-                buyPrice, buyCurrency, sellPrice, sellCurrency, 
+                buyPrice, buyCurrency, sellPrice, sellCurrency,
+                origTotalCost, origTotalRevenue,
                 totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner 
             });
             
-            window.localStorage.setItem('sollene_adv_trades_v7', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v8', JSON.stringify(trades));
             renderUI();
         }
 
         function deleteTrade(index) {
             trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_v7', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v8', JSON.stringify(trades));
             renderUI();
         }
 
@@ -237,12 +240,18 @@
                     <tr>
                         <td style="font-weight: 800; text-transform: uppercase; color: #1a1a1a;">${item.product}</td>
                         <td style="font-weight: bold; color: #7a5c33;">${item.quantity} ${item.unit}</td>
+                        
+                        <!-- Exibe as moedas unitárias selecionadas corretamente -->
                         <td>${currencySymbols[item.buyCurrency]} ${item.buyPrice.toFixed(2)}</td>
                         <td>${currencySymbols[item.sellCurrency]} ${item.sellPrice.toFixed(2)}</td>
-                        <td style="color:#c5221f;">€ ${item.totalCostInEuro.toFixed(2)}</td>
-                        <td style="color:#137333;">€ ${item.totalRevenueInEuro.toFixed(2)}</td>
+                        
+                        <!-- CORREÇÃO: Mostra o valor total na moeda original usada na operação -->
+                        <td style="color:#c5221f;">${currencySymbols[item.buyCurrency]} ${item.origTotalCost.toFixed(2)}</td>
+                        <td style="color:#137333;">${currencySymbols[item.sellCurrency]} ${item.origTotalRevenue.toFixed(2)}</td>
+                        
+                        <!-- Balanço final convertido para o caixa oficial europeu da matriz -->
                         <td>
-                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}" style="background: ${item.netProfitInEuro >= 0 ? '#e6f4ea' : '#fce8e6'}; color: ${item.netProfitInEuro >= 0 ? '#137333' : '#c5221f'}; font-weight:bold;">
+                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}">
                                 € ${item.netProfitInEuro.toFixed(2)}
                             </span>
                         </td>
@@ -257,4 +266,3 @@
     </script>
 </body>
 </html>
-
