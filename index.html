@@ -43,7 +43,7 @@
             overflow: hidden;
         }
 
-        /* CORREÇÃO VISUAL: TÍTULOS EM BLACK ELEGANTE */
+        /* TÍTULOS EM BLACK ELEGANTE */
         .panel-card h2 { 
             font-size: 11px; text-transform: uppercase; letter-spacing: 2px; 
             color: #d4af37; background: #000000; padding: 10px; margin: -18px -18px 15px -18px;
@@ -93,7 +93,7 @@
 
     <main class="dashboard-container">
         
-        <!-- FORMULÁRIO ESQUERDO COM TÍTULO BLACK ELEGANTE -->
+        <!-- FORMULÁRIO ESQUERDO -->
         <div class="panel-card">
             <h2>LAUNCH MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
@@ -106,8 +106,8 @@
                 <div class="form-group">
                     <label>Unit of Measure</label>
                     <select id="unit" class="form-control">
-                        <option value="Units">Units (UN)</option>
                         <option value="Boxes">Boxes (BOX)</option>
+                        <option value="Units">Units (UN)</option>
                         <option value="KG">Kilograms (KG)</option>
                         <option value="Tons">Metric Tons (TON)</option>
                     </select>
@@ -164,7 +164,7 @@
             </form>
         </div>
 
-        <!-- TABELA CENTRAL COM TÍTULO BLACK ELEGANTE -->
+        <!-- TABELA CENTRAL CORRIGIDA -->
         <div class="table-container">
             <h2>Global Cargo Manifesto Ledger</h2>
             <table>
@@ -185,12 +185,10 @@
             </table>
         </div>
 
-        <!-- CARD DIREITO DE CONTROLE DE ESTOQUE COM TÍTULO BLACK ELEGANTE -->
+        <!-- CARD DIREITO DE ESTOQUE RESTANTE -->
         <div class="panel-card">
             <h2>CURRENT STOCK LEVELS</h2>
-            <div id="stock-levels-list" style="margin-top: 10px;">
-                <!-- Preenchido dinamicamente pelo cálculo de estoque restante -->
-            </div>
+            <div id="stock-levels-list" style="margin-top: 10px;"></div>
         </div>
 
     </main>
@@ -207,7 +205,7 @@
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
 
         function loadTrades() {
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v9')) || [];
+            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v10')) || [];
             renderUI();
         }
 
@@ -252,13 +250,13 @@
                 totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner 
             });
             
-            window.localStorage.setItem('sollene_adv_trades_v9', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v10', JSON.stringify(trades));
             renderUI();
         }
 
         function deleteTrade(index) {
             trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_v9', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v10', JSON.stringify(trades));
             renderUI();
         }
 
@@ -277,8 +275,11 @@
                         <td style="color:#7a5c33; font-weight:800;">📥 ${item.buyQty} / 📤 ${item.sellQty}</td>
                         <td>${currencySymbols[item.buyCurrency]} ${item.buyPrice.toFixed(2)}</td>
                         <td>${currencySymbols[item.sellCurrency]} ${item.sellPrice.toFixed(2)}</td>
-                        <td style="color:#c5221f;">${currencySymbols[item.buyCurrency]} ${item.origTotalCost.toFixed(2)}</td>
-                        <td style="color:#137333;">${currencySymbols[item.sellCurrency]} ${item.origTotalRevenue.toFixed(2)}</td>
+                        
+                        <!-- CORREÇÃO CONSTATADA: Símbolos dinâmicos injetados de forma estrita em ambas as colunas totais -->
+                        <td style="color:#c5221f; font-weight: bold;">${currencySymbols[item.buyCurrency]} ${item.origTotalCost.toFixed(2)}</td>
+                        <td style="color:#137333; font-weight: bold;">${currencySymbols[item.sellCurrency]} ${item.origTotalRevenue.toFixed(2)}</td>
+                        
                         <td>
                             <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}">
                                 € ${item.netProfitInEuro.toFixed(2)}
