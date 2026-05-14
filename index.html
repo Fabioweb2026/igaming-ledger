@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | International Trade Ledger</title>
+    <title>Sollene Group | International Trade & Inventory Ledger</title>
     <style>
         /* DESIGN MINIMALISTA LUXO: FUNDO CLARO COM BORDAS EM BRONZE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,20 +20,19 @@
             background: #fff url('Sollene-Group.png') no-repeat center center; background-size: cover; 
         }
         .brand-title { font-size: 24px; font-weight: 800; color: #1a1a1a; letter-spacing: 3px; text-transform: uppercase; }
-        .brand-title span { color: #7a5c33; }
 
-        /* PAINEL OPERACIONAL LADO A LADO */
+        /* PAINEL OPERACIONAL LADO A LADO MULTI-COLUNAS */
         .dashboard-container { 
-            max-width: 1600px; 
+            max-width: 1700px; 
             margin: 30px auto; 
-            padding: 0 4%; 
+            padding: 0 3%; 
             display: grid; 
-            grid-template-columns: 360px 1fr; 
-            gap: 30px; 
+            grid-template-columns: 360px 1fr 280px; /* Adicionada coluna para o card de estoque restante */
+            gap: 25px; 
             align-items: start;
         }
         
-        /* CARD COM BORDAS BRONZE */
+        /* CARDS COM BORDAS BRONZE */
         .panel-card { 
             background: #ffffff; 
             border: 2px solid #7a5c33; 
@@ -60,13 +59,16 @@
         td { padding: 10px 14px; border-bottom: 1px solid #f4f0e8; font-weight: 600; }
         tr:hover { background-color: #fdfbf9; }
         
+        /* CARD LATERAL DE ESTOQUE ATUAL */
+        .stock-item-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #f4f0e8; font-size: 12px; font-weight: 700; }
+        .stock-qty-badge { background: #7a5c33; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 10px; }
+
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
         .badge-profit { background: #e6f4ea; color: #137333; }
         .badge-loss { background: #fce8e6; color: #c5221f; }
         .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
-        .remove-btn:hover { color: #b91c1c; }
 
-        @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } }
+        @media(max-width: 1200px) { .dashboard-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -77,6 +79,7 @@
 
     <main class="dashboard-container">
         
+        <!-- FORMULÁRIO ESQUERDO COM SEPARAÇÃO DE COMPRA E VENDA -->
         <div class="panel-card">
             <h2>LAUNCH MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
@@ -86,31 +89,29 @@
                     <input type="text" id="product" class="form-control" value="amendoim" required>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group" style="flex: 1;">
-                        <label>Qty Traded</label>
-                        <input type="number" id="quantity" class="form-control" value="10" min="1" required>
-                    </div>
-                    <div class="form-group" style="flex: 1.5;">
-                        <label>Unit of Measure</label>
-                        <select id="unit" class="form-control">
-                            <option value="Boxes">Boxes (BOX)</option>
-                            <option value="KG">Kilograms (KG)</option>
-                            <option value="Tons">Metric Tons (TON)</option>
-                            <option value="Units">Units (UN)</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label>Unit of Measure</label>
+                    <select id="unit" class="form-control">
+                        <option value="Units">Units (UN)</option>
+                        <option value="Boxes">Boxes (BOX)</option>
+                        <option value="KG">Kilograms (KG)</option>
+                        <option value="Tons">Metric Tons (TON)</option>
+                    </select>
                 </div>
 
                 <!-- CONFIGURAÇÃO DE ENTRADA (COMPRA) -->
-                <div class="trade-section-title">📥 Inbound Config (Cost)</div>
+                <div class="trade-section-title">📥 Inbound Config (Cost Basis)</div>
                 <div class="form-row">
+                    <div class="form-group" style="flex: 1.2;">
+                        <label>Qty Purchased</label>
+                        <input type="number" id="buyQty" class="form-control" value="10" min="1" required>
+                    </div>
                     <div class="form-group" style="flex: 1;">
                         <label>Buy Unit Price</label>
                         <input type="text" id="buyPrice" class="form-control" value="4,54" required>
                     </div>
-                    <div class="form-group" style="flex: 1.5;">
-                        <label>Inbound Currency</label>
+                    <div class="form-group" style="flex: 1.2;">
+                        <label>Buy Currency</label>
                         <select id="buyCurrency" class="form-control">
                             <option value="BRL">Real (R$)</option>
                             <option value="EUR">Euro (€)</option>
@@ -120,14 +121,18 @@
                 </div>
 
                 <!-- CONFIGURAÇÃO DE SAÍDA (VENDA) -->
-                <div class="trade-section-title">📤 Outbound Config (Revenue)</div>
+                <div class="trade-section-title">📤 Outbound Config (Revenue Basis)</div>
                 <div class="form-row">
+                    <div class="form-group" style="flex: 1.2;">
+                        <label>Qty Sold</label>
+                        <input type="number" id="sellQty" class="form-control" value="5" min="0" required>
+                    </div>
                     <div class="form-group" style="flex: 1;">
                         <label>Sell Unit Price</label>
                         <input type="text" id="sellPrice" class="form-control" value="12,50" required>
                     </div>
-                    <div class="form-group" style="flex: 1.5;">
-                        <label>Outbound Currency</label>
+                    <div class="form-group" style="flex: 1.2;">
+                        <label>Sell Currency</label>
                         <select id="sellCurrency" class="form-control">
                             <option value="USD">Dollar ($)</option>
                             <option value="EUR">Euro (€)</option>
@@ -145,18 +150,18 @@
             </form>
         </div>
 
-        <!-- TABELA CORRIGIDA COM MOEDAS DINÂMICAS NAS COLUNAS -->
+        <!-- TABELA CENTRAL DE MANIFESTO DE CARGAS -->
         <div class="table-container">
             <h2>Global Cargo Manifesto Ledger</h2>
             <table>
                 <thead>
                     <tr>
                         <th>Item Description</th>
-                        <th>Volume</th>
-                        <th>Buy Basis</th>
-                        <th>Sell Basis</th>
-                        <th>Total Cost (Orig)</th>
-                        <th>Total Revenue (Orig)</th>
+                        <th>In / Out Volume</th>
+                        <th>Buy Unit</th>
+                        <th>Sell Unit</th>
+                        <th>Total Cost</th>
+                        <th>Total Revenue</th>
                         <th>Net Balance (€)</th>
                         <th>Partner</th>
                         <th>Action</th>
@@ -164,6 +169,14 @@
                 </thead>
                 <tbody id="table-body"></tbody>
             </table>
+        </div>
+
+        <!-- CARD DIREITO DE CONTROLE DE ESTOQUE RESTANTE -->
+        <div class="panel-card" style="border-color: #7a5c33;">
+            <h2>CURRENT STOCK LEVELS</h2>
+            <div id="stock-levels-list" style="margin-top: 10px;">
+                <!-- Preenchido dinamicamente pelo cálculo de estoque restante -->
+            </div>
         </div>
 
     </main>
@@ -180,7 +193,7 @@
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
 
         function loadTrades() {
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v8')) || [];
+            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v9')) || [];
             renderUI();
         }
 
@@ -193,7 +206,8 @@
             event.preventDefault(); 
 
             const product = document.getElementById('product').value;
-            const quantity = parseInt(document.getElementById('quantity').value);
+            const buyQty = parseInt(document.getElementById('buyQty').value);
+            const sellQty = parseInt(document.getElementById('sellQty').value);
             const unit = document.getElementById('unit').value;
             
             const buyPrice = parsePrice(document.getElementById('buyPrice').value);
@@ -203,53 +217,57 @@
             
             const partner = document.getElementById('partner').value;
 
-            // Mantém os totais originais de cada moeda para exibir na tabela
-            const origTotalCost = quantity * buyPrice;
-            const origTotalRevenue = quantity * sellPrice;
+            // Alerta de segurança: impede vender mais do que comprou
+            if (sellQty > buyQty) {
+                alert("Operation Denied! Quantity sold cannot exceed quantity purchased.");
+                return;
+            }
 
-            // Converte ambos para Euros (€) exclusivamente para gerar o balanço contábil
+            // Calcula o estoque restante desse lote específico
+            const remainingStock = buyQty - sellQty;
+
+            const origTotalCost = buyQty * buyPrice;
+            const origTotalRevenue = sellQty * sellPrice;
+
             const totalCostInEuro = origTotalCost * exchangeRates[buyCurrency];
             const totalRevenueInEuro = origTotalRevenue * exchangeRates[sellCurrency];
             const netProfitInEuro = totalRevenueInEuro - totalCostInEuro;
 
             trades.push({ 
-                product, quantity, unit, 
+                product, buyQty, sellQty, unit, remainingStock,
                 buyPrice, buyCurrency, sellPrice, sellCurrency,
                 origTotalCost, origTotalRevenue,
                 totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner 
             });
             
-            window.localStorage.setItem('sollene_adv_trades_v8', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v9', JSON.stringify(trades));
             renderUI();
         }
 
         function deleteTrade(index) {
             trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_v8', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v9', JSON.stringify(trades));
             renderUI();
         }
 
         function renderUI() {
             const tbody = document.getElementById('table-body');
-            if (!tbody) return;
+            const stockList = document.getElementById('stock-levels-list');
+            if (!tbody || !stockList) return;
 
+            // Renderização da Tabela de Manifesto
             if (trades.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:30px;">No international operations recorded in the ledger.</td></tr>';
+                stockList.innerHTML = '<p style="color:#999; text-align:center; font-size:12px; padding:10px 0;">Warehouse is empty.</p>';
             } else {
                 tbody.innerHTML = trades.map((item, index) => `
                     <tr>
-                        <td style="font-weight: 800; text-transform: uppercase; color: #1a1a1a;">${item.product}</td>
-                        <td style="font-weight: bold; color: #7a5c33;">${item.quantity} ${item.unit}</td>
-                        
-                        <!-- Exibe as moedas unitárias selecionadas corretamente -->
+                        <td style="font-weight: 800; text-transform: uppercase;">${item.product}</td>
+                        <td style="color:#7a5c33; font-weight:800;">📥 ${item.buyQty} / 📤 ${item.sellQty}</td>
                         <td>${currencySymbols[item.buyCurrency]} ${item.buyPrice.toFixed(2)}</td>
                         <td>${currencySymbols[item.sellCurrency]} ${item.sellPrice.toFixed(2)}</td>
-                        
-                        <!-- CORREÇÃO: Mostra o valor total na moeda original usada na operação -->
                         <td style="color:#c5221f;">${currencySymbols[item.buyCurrency]} ${item.origTotalCost.toFixed(2)}</td>
                         <td style="color:#137333;">${currencySymbols[item.sellCurrency]} ${item.origTotalRevenue.toFixed(2)}</td>
-                        
-                        <!-- Balanço final convertido para o caixa oficial europeu da matriz -->
                         <td>
                             <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}">
                                 € ${item.netProfitInEuro.toFixed(2)}
@@ -258,6 +276,23 @@
                         <td style="text-transform: uppercase; font-size: 11px; color:#666;">${item.partner}</td>
                         <td><button class="remove-btn" onclick="deleteTrade(${index})">DELETE</button></td>
                     </tr>
+                `).join('');
+
+                // Agrupamento e Renderização do Card de Estoque Atual Restante
+                let stockMap = {};
+                trades.forEach(item => {
+                    let prodName = item.product.toUpperCase();
+                    if (!stockMap[prodName]) {
+                        stockMap[prodName] = { qty: 0, unit: item.unit };
+                    }
+                    stockMap[prodName].qty += item.remainingStock;
+                });
+
+                stockList.innerHTML = Object.keys(stockMap).map(key => `
+                    <div class="stock-item-row">
+                        <span style="text-transform: uppercase;">${key}</span>
+                        <span class="stock-qty-badge">${stockMap[key].qty} ${stockMap[key].unit}</span>
+                    </div>
                 `).join('');
             }
         }
