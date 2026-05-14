@@ -18,68 +18,44 @@
             border-bottom: 3px solid #7a5c33;
         }
 
-        /* HEADER PREMIUM SOLLENE */
+        /* HEADER PREMIUM SOLLENE REESTILIZADO (BLACK & PREMIUM GOLD) */
         .main-header {
             background: #000000; display: flex; align-items: center; justify-content: space-between;
             padding: 15px 5%; border-bottom: 1px solid #7a5c33; position: sticky; top: 0; z-index: 1000;
         }
-        .header-left { display: flex; align-items: center; gap: 15px; }
-        .logo-circle { 
-            width: 45px; height: 45px; border-radius: 50%; border: 1px solid #d4af37; 
-            background: #fff url('Sollene-Group.png') no-repeat center center; background-size: cover; 
-        }
-        .brand-title { font-size: 20px; font-weight: 800; color: #ffffff; letter-spacing: 3px; text-transform: uppercase; }
+        .header-left { display: flex; align-items: center; gap: 12px; }
+        
+        /* CORREÇÃO DO LOGO: Ícone heráldico estilizado em vetor ouro */
+        .logo-premium-svg { width: 32px; height: 32px; fill: #d4af37; }
+        
+        .brand-title { font-size: 22px; font-weight: 800; color: #ffffff; letter-spacing: 4px; text-transform: uppercase; }
         .brand-title span { color: #d4af37; }
+        
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+        .btn-back-portfolio { text-decoration: none; color: #d4af37; border: 1px solid #7a5c33; padding: 8px 16px; border-radius: 6px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
+        .btn-back-portfolio:hover { background: #7a5c33; color: #fff; }
         
         .btn-clear-cache { background: #ea4335; color: #fff; border: none; padding: 8px 14px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
         .btn-clear-cache:hover { background: #fff; color: #ea4335; }
 
-        /* NOVO: CAIXA BLACK ELEGANTE COM DADOS INSTITUCIONAIS FICÇÕES */
-        .corporate-info-box {
-            max-width: 1750px;
-            margin: 25px auto 5px auto;
-            padding: 0 2%;
-            width: 100%;
-        }
+        /* CAIXA BLACK ELEGANTE COM DADOS INSTITUCIONAIS */
+        .corporate-info-box { max-width: 1750px; margin: 25px auto 5px auto; padding: 0 2%; width: 100%; }
         .info-card-inner {
-            background: #111115;
-            border: 2px solid #7a5c33;
-            border-radius: 12px;
-            padding: 15px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            background: #111115; border: 2px solid #7a5c33; border-radius: 12px; padding: 15px 25px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.06);
         }
         .info-block { display: flex; flex-direction: column; }
         .info-block span { font-size: 8px; font-weight: 800; text-transform: uppercase; color: #7a5c33; letter-spacing: 1.5px; margin-bottom: 2px; }
         .info-block p { font-size: 12px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px; }
 
-        /* CONTAINER OPERACIONAL REBAIXADO */
+        /* CONTAINER OPERACIONAL */
         .dashboard-container { 
-            max-width: 1750px; 
-            margin: 20px auto; 
-            padding: 0 2%; 
-            display: grid; 
-            grid-template-columns: 340px 1fr; 
-            gap: 25px; 
-            align-items: start;
+            max-width: 1750px; margin: 20px auto; padding: 0 2%; 
+            display: grid; grid-template-columns: 340px 1fr; gap: 25px; align-items: start;
         }
         
-        /* CARD COM BORDAS BRONZE ULTRA COMPACTO */
-        .panel-card { 
-            background: #ffffff; 
-            border: 2px solid #7a5c33; 
-            border-radius: 16px; 
-            padding: 14px; 
-            box-shadow: 0 10px 25px rgba(122,92,51,0.05); 
-            color: #1a1a1a; 
-            overflow: hidden;
-        }
-
-        /* TÍTULOS EM BLACK ELEGANTE */
+        .panel-card { background: #ffffff; border: 2px solid #7a5c33; border-radius: 16px; padding: 14px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); overflow: hidden; }
         .panel-card h2, .unified-header-black { 
             font-size: 11px; text-transform: uppercase; letter-spacing: 2px; 
             color: #d4af37; background: #000000; padding: 12px; margin: -14px -14px 12px -14px;
@@ -89,7 +65,6 @@
         .form-group { margin-bottom: 6px; } 
         .form-group label { display: block; font-size: 8.5px; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; color: #7a5c33; letter-spacing: 0.5px; white-space: nowrap; }
         .form-control { width: 100%; padding: 6px 8px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 12px; font-weight: 600; outline: none; background: #fdfaf6; color: #1a1a1a; height: 34px; }
-        
         .form-row { display: flex; gap: 6px; align-items: flex-end; width: 100%; }
         .col-qty { flex: 0.9; min-width: 50px; }
         .col-price { flex: 1.1; min-width: 75px; }
@@ -99,16 +74,7 @@
         .btn-submit { width: 100%; padding: 10px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; height: 38px; }
         .btn-submit:hover { background: #7a5c33; }
 
-        /* CONTÊINER DA CENTRAL UNIFICADA */
-        .unified-hub-container { 
-            background: #ffffff; 
-            border: 2px solid #7a5c33; 
-            border-radius: 16px; 
-            box-shadow: 0 10px 25px rgba(122,92,51,0.05); 
-            overflow: hidden; 
-            padding: 14px;
-        }
-
+        .unified-hub-container { background: #ffffff; border: 2px solid #7a5c33; border-radius: 16px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); overflow: hidden; padding: 14px; }
         .unified-hub-container .unified-header-black { margin: -14px -14px 15px -14px; }
         .hub-vertical-layout { display: flex; flex-direction: column; gap: 25px; width: 100%; }
 
@@ -118,7 +84,6 @@
         td { padding: 10px 8px; border-bottom: 1px solid #f4f0e8; font-weight: 600; }
         tr:hover { background-color: #fdfbf9; }
         
-        /* BLOCO DE ESTOQUE ATUAL REALOCADO PARA A PARTE DE BAIXO */
         .embedded-stock-panel { background: #fdfaf6; border: 1px solid #e1dbcf; border-radius: 10px; padding: 15px; width: 100%; }
         .embedded-stock-panel h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #7a5c33; border-bottom: 2px solid #7a5c33; padding-bottom: 5px; margin-bottom: 10px; font-weight: 800; text-align: left; }
         
@@ -136,19 +101,26 @@
 </head>
 <body>
 
-    <!-- BANNER PANORÂMICO COM TRATAMENTO INTEGRAL ANTI-CORTE -->
+    <!-- BANNER PANORÂMICO ANTI-CORTE -->
     <section class="hero-top-banner"></section>
 
-    <!-- SOLLENE EUROPEAN HEADER -->
+    <!-- SOLLENE EUROPEAN HEADER (REESTILIZADO) -->
     <header class="main-header">
         <div class="header-left">
-            <div class="logo-circle"></div>
+            <!-- Novo logo vetorial heráldico de luxo em SVG puro ouro -->
+            <svg class="logo-premium-svg" viewBox="0 0 24 24">
+                <path d="M12 2L2 22h20L12 2zm0 3.99L19.53 19H4.47L12 5.99zM11 10v4h2v-4h-2zm0 6v2h2v-2h-2z"/>
+            </svg>
             <h1 class="brand-title">SOLLENE <span>GROUP</span></h1>
         </div>
-        <button class="btn-clear-cache" onclick="clearSystemMemory()">Reset System Storage</button>
+        <div class="header-actions">
+            <!-- Botão de retorno direto para o portfólio web principal -->
+            <a href="https://github.io" class="btn-back-portfolio">← Back to Portfolio</a>
+            <button class="btn-clear-cache" onclick="clearSystemMemory()">Reset Storage</button>
+        </div>
     </header>
 
-    <!-- NOVO COMPONENTE: CAIXA BLACK ELEGANTE COM DADOS INSTITUCIONAIS -->
+    <!-- CAIXA INSTITUCIONAL COM DADOS -->
     <section class="corporate-info-box">
         <div class="info-card-inner">
             <div class="info-block">
@@ -189,7 +161,7 @@
                     </select>
                 </div>
 
-                <!-- CONFIGURAÇÃO DE ENTRADA HARMÔNICA -->
+                <!-- CONFIGURAÇÃO DE ENTRADA -->
                 <div class="trade-section-title">📥 Inbound Config (Cost Basis)</div>
                 <div class="form-row">
                     <div class="form-group col-qty">
@@ -210,7 +182,7 @@
                     </div>
                 </div>
 
-                <!-- CONFIGURAÇÃO DE SAÍDA HARMÔNICA -->
+                <!-- CONFIGURAÇÃO DE SAÍDA -->
                 <div class="trade-section-title">📤 Outbound Config (Revenue Basis)</div>
                 <div class="form-row">
                     <div class="form-group col-qty">
@@ -346,7 +318,7 @@
 
             if (trades.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:30px;">No international operations recorded in the ledger.</td></tr>';
-                stockList.innerHTML = '<p style="color:#999; font-size:11px;">Warehouse is currently empty.</p>';
+                stockList.innerHTML = '<p style="color:#999; font-size:11px; padding:5px 0;">Warehouse is currently empty.</p>';
             } else {
                 tbody.innerHTML = trades.map((item, index) => `
                     <tr>
