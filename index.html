@@ -3,58 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | Global Trade Ledger</title>
+    <title>Sollene Group | International Trade Ledger</title>
     <style>
+        /* DESIGN BLACK ELEGANTE & BRONZE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: sans-serif; background: #f7f3eb; color: #1a1a1a; padding-bottom: 60px; }
+        body { font-family: sans-serif; background: #0f0f11; color: #f5f5f7; padding-bottom: 60px; }
 
         /* HEADER PREMIUM SOLLENE */
         .main-header {
-            background: #f7f3eb; display: flex; align-items: center; justify-content: space-between;
-            padding: 15px 5%; border-bottom: 1px solid rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000;
+            background: #16161a; display: flex; align-items: center; justify-content: space-between;
+            padding: 15px 5%; border-bottom: 1px solid #7a5c33; position: sticky; top: 0; z-index: 1000;
         }
         .header-left { display: flex; align-items: center; gap: 15px; }
         .logo-circle { 
             width: 55px; height: 55px; border-radius: 50%; border: 1px solid #d4af37; 
             background: #fff url('Sollene-Group.png') no-repeat center center; background-size: cover; 
         }
-        .brand-title { font-size: 24px; font-weight: 800; color: #7a5c33; letter-spacing: 3px; text-transform: uppercase; }
-        .btn-home-print { text-decoration: none; color: #000; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 8px 20px; border: 2px solid #000; border-radius: 6px; background: transparent; }
+        .brand-title { font-size: 24px; font-weight: 800; color: #fff; letter-spacing: 3px; text-transform: uppercase; }
+        .brand-title span { color: #d4af37; }
+        .btn-home-print { text-decoration: none; color: #d4af37; font-size: 11px; font-weight: 800; text-transform: uppercase; padding: 8px 20px; border: 1px solid #7a5c33; border-radius: 6px; background: transparent; transition: 0.3s; }
+        .btn-home-print:hover { background: #7a5c33; color: #fff; }
 
         /* PAINEL OPERACIONAL LADO A LADO */
         .dashboard-container { 
-            max-width: 1500px; 
+            max-width: 1600px; 
             margin: 40px auto; 
             padding: 0 4%; 
             display: grid; 
-            grid-template-columns: 450px 1fr; /* Força o formulário na esquerda e a tabela na direita */
+            grid-template-columns: 420px 1fr; /* Card compacto na esquerda */
             gap: 30px; 
             align-items: start;
         }
         
-        .panel-card { background: #fff; border: 1px solid #e1dbcf; border-radius: 24px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
-        .panel-card h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #7a5c33; margin-bottom: 25px; border-bottom: 2px solid #7a5c33; padding-bottom: 10px; font-weight: 800; }
+        /* CARD COMPACTO BLACK ELEGANTE */
+        .panel-card { background: #16161a; border: 1px solid #2a2a32; border-radius: 20px; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        .panel-card h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: #d4af37; margin-bottom: 20px; border-bottom: 2px solid #7a5c33; padding-bottom: 10px; font-weight: 800; }
         
-        .form-group { margin-bottom: 16px; }
-        .form-group label { display: block; font-size: 10px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; color: #7a5c33; letter-spacing: 1px; }
-        .form-control { width: 100%; padding: 12px; border: 1px solid #e1dbcf; border-radius: 8px; font-size: 13px; font-weight: 600; outline: none; background: #fdfaf6; color: #1a1a1a; }
-        .form-row { display: flex; gap: 15px; }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 5px; color: #a0a0ab; letter-spacing: 1px; }
+        .form-control { width: 100%; padding: 10px 12px; border: 1px solid #2a2a32; border-radius: 8px; font-size: 13px; font-weight: 600; outline: none; background: #202024; color: #fff; transition: 0.3s; }
+        .form-control:focus { border-color: #7a5c33; }
+        .form-row { display: flex; gap: 12px; }
 
-        .trade-section-title { font-size: 11px; font-weight: 800; text-transform: uppercase; color: #7a5c33; margin: 20px 0 10px 0; padding-top: 10px; border-top: 1px dashed #e1dbcf; display: flex; align-items: center; gap: 5px; }
+        .trade-section-title { font-size: 10px; font-weight: 800; text-transform: uppercase; color: #d4af37; margin: 15px 0 10px 0; padding-top: 8px; border-top: 1px dashed #2a2a32; display: flex; align-items: center; gap: 5px; }
 
-        .btn-submit { width: 100%; padding: 16px; background: #000; color: #fff; border: none; border-radius: 12px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; margin-top: 15px; }
-        .btn-submit:hover { background: #7a5c33; }
+        .btn-submit { width: 100%; padding: 14px; background: #d4af37; color: #000; border: none; border-radius: 10px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-submit:hover { background: #fff; color: #000; }
 
-        /* TABELA DE MANIFESTO LADO A LADO */
-        .table-container { width: 100%; overflow-x: auto; background: #fff; border-radius: 24px; border: 1px solid #e1dbcf; padding: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.02); }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; }
-        th { background: #fdfaf6; padding: 16px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #7a5c33; border-bottom: 2px solid #7a5c33; }
-        td { padding: 14px 16px; border-bottom: 1px solid #f9f9f9; font-weight: 600; }
+        /* TABELA DE MANIFESTO BLACK */
+        .table-container { width: 100%; overflow-x: auto; background: #16161a; border-radius: 24px; border: 1px solid #2a2a32; padding: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #e4e4e7; }
+        th { background: #1a1a22; padding: 16px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #d4af37; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
+        td { padding: 14px 16px; border-bottom: 1px solid #202024; font-weight: 600; }
+        tr:hover { background-color: #1c1c21; }
         
         .badge { padding: 4px 8px; border-radius: 4px; font-size: 9px; font-weight: 800; text-transform: uppercase; }
-        .badge-profit { background: #e6f4ea; color: #137333; }
-        .badge-loss { background: #fce8e6; color: #c5221f; }
-        .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+        .badge-profit { background: rgba(19, 115, 51, 0.15); color: #34a853; }
+        .badge-loss { background: rgba(197, 34, 31, 0.15); color: #ea4335; }
+        .remove-btn { color: #ea4335; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+        .remove-btn:hover { color: #fff; }
 
         @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } }
     </style>
@@ -63,20 +70,20 @@
 
     <!-- SOLLENE EUROPEAN HEADER -->
     <header class="main-header">
-        <div class="header-left"><div class="logo-circle"></div><h1 class="brand-title">SOLLENE GROUP</h1></div>
+        <div class="header-left"><div class="logo-circle"></div><h1 class="brand-title">SOLLENE <span>GROUP</span></h1></div>
         <nav><ul><li><a href="github.io" class="nav-link btn-home-print">PORTFOLIO</a></li></ul></nav>
     </header>
 
     <main class="dashboard-container">
         
-        <!-- FORMULÁRIO ESQUERDO -->
+        <!-- FORMULÁRIO ESQUERDO BLACK & GOLD -->
         <div class="panel-card">
             <h2>LAUNCH TRADE MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
                 
                 <div class="form-group">
                     <label>Product / Item Description</label>
-                    <input type="text" id="product" class="form-control" value="coffe" required>
+                    <input type="text" id="product" class="form-control" value="amendoim" required>
                 </div>
 
                 <div class="form-row">
@@ -100,8 +107,8 @@
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label>Buy Unit Price</label>
-                        <!-- CORREÇÃO: step="0.01" destrava centavos e impede o erro do navegador -->
-                        <input type="number" id="buyPrice" class="form-control" value="6.78" step="0.01" min="0" required>
+                        <!-- CORREÇÃO: Alterado para text para aceitar vírgula ou ponto de forma flexível via script -->
+                        <input type="text" id="buyPrice" class="form-control" value="4,54" required>
                     </div>
                     <div class="form-group" style="flex: 3;">
                         <label>Inbound Currency</label>
@@ -118,7 +125,7 @@
                 <div class="form-row">
                     <div class="form-group" style="flex: 2;">
                         <label>Sell Unit Price</label>
-                        <input type="number" id="sellPrice" class="form-control" value="12.50" step="0.01" min="0" required>
+                        <input type="text" id="sellPrice" class="form-control" value="12,50" required>
                     </div>
                     <div class="form-group" style="flex: 3;">
                         <label>Outbound Currency</label>
@@ -138,9 +145,9 @@
             </form>
         </div>
 
-        <!-- TABELA DIREITA (LADO A LADO) -->
+        <!-- TABELA DIREITA BLACK -->
         <div class="table-container">
-            <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #7a5c33; margin-bottom: 25px; border-bottom: 2px solid #7a5c33; padding-bottom: 10px; font-weight: 800;">Global Cargo Manifesto Ledger</h2>
+            <h2 style="font-size: 14px; text-transform: uppercase; letter-spacing: 2px; color: #d4af37; margin-bottom: 25px; border-bottom: 2px solid #7a5c33; padding-bottom: 10px; font-weight: 800;">Global Cargo Manifesto Ledger</h2>
             <table>
                 <thead>
                     <tr>
@@ -173,8 +180,14 @@
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
 
         function loadTrades() {
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v4')) || [];
+            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v5')) || [];
             renderUI();
+        }
+
+        // CORREÇÃO TÁTICA: Converte automaticamente vírgula em ponto para não bloquear o envio
+        function parsePrice(value) {
+            let cleanValue = value.replace(',', '.');
+            return parseFloat(cleanValue) || 0;
         }
 
         function registerTrade(event) {
@@ -183,10 +196,12 @@
             const product = document.getElementById('product').value;
             const quantity = parseInt(document.getElementById('quantity').value);
             const unit = document.getElementById('unit').value;
-            const buyPrice = parseFloat(document.getElementById('buyPrice').value);
+            
+            const buyPrice = parsePrice(document.getElementById('buyPrice').value);
             const buyCurrency = document.getElementById('buyCurrency').value;
-            const sellPrice = parseFloat(document.getElementById('sellPrice').value);
+            const sellPrice = parsePrice(document.getElementById('sellPrice').value);
             const sellCurrency = document.getElementById('sellCurrency').value;
+            
             const partner = document.getElementById('partner').value;
 
             const totalCostInEuro = (quantity * buyPrice) * exchangeRates[buyCurrency];
@@ -199,13 +214,13 @@
                 totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner 
             });
             
-            window.localStorage.setItem('sollene_adv_trades_v4', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v5', JSON.stringify(trades));
             renderUI();
         }
 
         function deleteTrade(index) {
             trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_v4', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_v5', JSON.stringify(trades));
             renderUI();
         }
 
@@ -214,22 +229,22 @@
             if (!tbody) return;
 
             if (trades.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:30px;">No international operations recorded in the ledger.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#71717a; padding:30px;">No international operations recorded in the ledger.</td></tr>';
             } else {
                 tbody.innerHTML = trades.map((item, index) => `
                     <tr>
-                        <td style="font-weight: 800; text-transform: uppercase; color: #1a1a1a;">${item.product}</td>
-                        <td style="font-weight: bold;">${item.quantity} ${item.unit}</td>
+                        <td style="font-weight: 800; text-transform: uppercase; color: #fff;">${item.product}</td>
+                        <td style="font-weight: bold; color: #d4af37;">${item.quantity} ${item.unit}</td>
                         <td>${currencySymbols[item.buyCurrency]} ${item.buyPrice.toFixed(2)}</td>
                         <td>${currencySymbols[item.sellCurrency]} ${item.sellPrice.toFixed(2)}</td>
-                        <td style="color:#c5221f;">€ ${item.totalCostInEuro.toFixed(2)}</td>
-                        <td style="color:#137333;">€ ${item.totalRevenueInEuro.toFixed(2)}</td>
+                        <td style="color:#ea4335;">€ ${item.totalCostInEuro.toFixed(2)}</td>
+                        <td style="color:#34a853;">€ ${item.totalRevenueInEuro.toFixed(2)}</td>
                         <td>
-                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}" style="background: ${item.netProfitInEuro >= 0 ? '#e6f4ea' : '#fce8e6'}; color: ${item.netProfitInEuro >= 0 ? '#137333' : '#c5221f'};">
+                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}">
                                 € ${item.netProfitInEuro.toFixed(2)}
                             </span>
                         </td>
-                        <td style="text-transform: uppercase; font-size: 11px; color:#666;">${item.partner}</td>
+                        <td style="text-transform: uppercase; font-size: 11px; color:#a0a0ab;">${item.partner}</td>
                         <td><button class="remove-btn" onclick="deleteTrade(${index})">DELETE</button></td>
                     </tr>
                 `).join('');
@@ -240,4 +255,3 @@
     </script>
 </body>
 </html>
-
