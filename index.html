@@ -27,7 +27,7 @@
             margin: 30px auto; 
             padding: 0 2%; 
             display: grid; 
-            grid-template-columns: 340px 1fr; /* Mantém o formulário na esquerda e a central unificada na direita */
+            grid-template-columns: 340px 1fr; 
             gap: 25px; 
             align-items: start;
         }
@@ -75,7 +75,6 @@
 
         .unified-hub-container .unified-header-black { margin: -14px -14px 15px -14px; }
 
-        /* CORREÇÃO VISUAL: EMPILHAMENTO VERTICAL DA TABELA E ESTOQUE PARA ELIMINAR A BARRA */
         .hub-vertical-layout { 
             display: flex;
             flex-direction: column;
@@ -93,7 +92,6 @@
         .embedded-stock-panel { background: #fdfaf6; border: 1px solid #e1dbcf; border-radius: 10px; padding: 15px; width: 100%; }
         .embedded-stock-panel h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #7a5c33; border-bottom: 2px solid #7a5c33; padding-bottom: 5px; margin-bottom: 10px; font-weight: 800; text-align: left; }
         
-        /* ALINHAMENTO DO ESTOQUE EM CARDS HORIZONTAIS LADO A LADO */
         .stock-items-flex { display: flex; flex-wrap: wrap; gap: 12px; }
         .stock-item-row { display: flex; align-items: center; gap: 10px; background: #fff; padding: 6px 12px; border: 1px solid #e1dbcf; border-radius: 6px; font-size: 11px; font-weight: 700; }
         .stock-qty-badge { background: #7a5c33; color: #fff; padding: 2px 6px; border-radius: 4px; font-size: 9px; font-weight: bold; }
@@ -103,7 +101,7 @@
         .badge-loss { background: #fce8e6; color: #c5221f; }
         .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
 
-        @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } }
+        @media(max-width: 1200px) { .dashboard-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -122,7 +120,7 @@
                 
                 <div class="form-group">
                     <label>Product / Item Description</label>
-                    <input type="text" id="product" class="form-control" value="amendoim" required>
+                    <input type="text" id="product" class="form-control" value="coffe" required>
                 </div>
 
                 <div class="form-group">
@@ -140,11 +138,11 @@
                 <div class="form-row">
                     <div class="form-group col-qty">
                         <label>Qty Buy</label>
-                        <input type="number" id="buyQty" class="form-control" value="19" min="1" required>
+                        <input type="number" id="buyQty" class="form-control" value="20" min="1" required>
                     </div>
                     <div class="form-group col-price">
                         <label>Buy Price</label>
-                        <input type="text" id="buyPrice" class="form-control" value="4,54" required>
+                        <input type="text" id="buyPrice" class="input-control form-control" value="245,53" required>
                     </div>
                     <div class="form-group col-curr">
                         <label>Buy Curr</label>
@@ -165,13 +163,13 @@
                     </div>
                     <div class="form-group col-price">
                         <label>Sell Price</label>
-                        <input type="text" id="sellPrice" class="form-control" value="12,50" required>
+                        <input type="text" id="sellPrice" class="input-control form-control" value="12,50" required>
                     </div>
                     <div class="form-group col-curr">
                         <label>Sell Curr</label>
                         <select id="sellCurrency" class="form-control">
-                            <option value="EUR">Euro (€)</option>
                             <option value="USD">Dollar ($)</option>
+                            <option value="EUR">Euro (€)</option>
                             <option value="BRL">Real (R$)</option>
                         </select>
                     </div>
@@ -179,20 +177,19 @@
 
                 <div class="form-group" style="margin-top: 6px;">
                     <label>Commercial Partner</label>
-                    <input type="text" id="partner" class="form-control" value="ACME Supplies Europe" required>
+                    <input type="text" id="partner" class="form-control" value="ACME SUPPLIES EUROPE" required>
                 </div>
 
                 <button type="submit" class="btn-submit">REGISTER MANIFEST</button>
             </form>
         </div>
 
-        <!-- CENTRAL UNIFICADA SEM BARRA DE ROLAGEM -->
+        <!-- CENTRAL UNIFICADA -->
         <div class="unified-hub-container">
             <div class="unified-header-black">Global Cargo Manifesto & Stock Ledger</div>
             
             <div class="hub-vertical-layout">
                 
-                <!-- ÁREA DA TABELA (OCUPA 100% DA LARGURA SUPERIOR) -->
                 <div class="table-container-fixed">
                     <table>
                         <thead>
@@ -212,7 +209,6 @@
                     </table>
                 </div>
 
-                <!-- ÁREA DE ESTOQUE ATUAL EMBUTIDA (REALOCADA PARA BAIXO) -->
                 <div class="embedded-stock-panel">
                     <h3>CURRENT WAREHOUSE STOCK</h3>
                     <div id="stock-levels-list" class="stock-items-flex"></div>
@@ -226,17 +222,17 @@
     <script>
         let trades = [];
         
+        // Cotações oficiais para unificação contábil europeia na matriz
         const exchangeRates = {
             EUR: 1.0,
-            BRL: 0.16, 
-            USD: 0.92  
+            BRL: 0.16, // R$ 1.00 = € 0.16
+            USD: 0.92  // $ 1.00 = € 0.92
         };
 
         const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
 
         function loadTrades() {
-            // Chave atualizada para sincronizar perfeitamente as tabelas sem resíduos de layouts anteriores
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_v13')) || [];
+            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_final_v14')) || [];
             renderUI();
         }
 
@@ -270,6 +266,7 @@
             const origTotalCost = buyQty * buyPrice;
             const origTotalRevenue = sellQty * sellPrice;
 
+            // CORREÇÃO TÉCNICA ENCONTRADA: Ambas as variáveis são unificadas para Euro ANTES de calcular o Net Balance
             const totalCostInEuro = origTotalCost * exchangeRates[buyCurrency];
             const totalRevenueInEuro = origTotalRevenue * exchangeRates[sellCurrency];
             const netProfitInEuro = totalRevenueInEuro - totalCostInEuro;
@@ -281,13 +278,13 @@
                 totalCostInEuro, totalRevenueInEuro, netProfitInEuro, partner 
             });
             
-            window.localStorage.setItem('sollene_adv_trades_v13', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_final_v14', JSON.stringify(trades));
             renderUI();
         }
 
         function deleteTrade(index) {
             trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_v13', JSON.stringify(trades));
+            window.localStorage.setItem('sollene_adv_trades_final_v14', JSON.stringify(trades));
             renderUI();
         }
 
@@ -309,12 +306,13 @@
                         <td style="color:#c5221f; font-weight: bold;">${currencySymbols[item.buyCurrency]} ${item.origTotalCost.toFixed(2)}</td>
                         <td style="color:#137333; font-weight: bold;">${currencySymbols[item.sellCurrency]} ${item.origTotalRevenue.toFixed(2)}</td>
                         <td>
-                            <span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}">
+                            <!-- Estilização condicional em Badge real baseada no lucro unificado -->
+                            <span class="badge" style="background: ${item.netProfitInEuro >= 0 ? '#e6f4ea' : '#fce8e6'}; color: ${item.netProfitInEuro >= 0 ? '#137333' : '#c5221f'}; font-weight:bold;">
                                 € ${item.netProfitInEuro.toFixed(2)}
                             </span>
                         </td>
                         <td style="text-transform: uppercase; font-size: 11px; color:#666;">${item.partner}</td>
-                        <td><button class="remove-btn" onclick="deleteTrade(${index})">DELETE</button></td>
+                        <td><button class="remove-btn" onclick="deleteTrade(${index})" style="color: #ff4d4d; font-weight:800;">DELETE</button></td>
                     </tr>
                 `).join('');
 
@@ -329,7 +327,7 @@
 
                 stockList.innerHTML = Object.keys(stockMap).map(key => `
                     <div class="stock-item-row">
-                        <span style="text-transform: uppercase;">${key}:</span>
+                        <span style="text-transform: uppercase; font-size: 11px;">${key}:</span>
                         <span class="stock-qty-badge">${stockMap[key].qty} ${stockMap[key].unit}</span>
                     </div>
                 `).join('');
