@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sollene Group | International Trade & Inventory Ledger</title>
     <style>
-        /* DESIGN MINIMALISTA LUXO: FUNDO CLARO COM BORDAS EM BRONZE */
+        /* DESIGN MINIMALISTA LUXO COM TÍTULOS EM BLACK ELEGANTE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: sans-serif; background: #fbf9f6; color: #1a1a1a; padding-bottom: 60px; }
 
@@ -27,7 +27,7 @@
             margin: 30px auto; 
             padding: 0 3%; 
             display: grid; 
-            grid-template-columns: 360px 1fr 280px; /* Adicionada coluna para o card de estoque restante */
+            grid-template-columns: 360px 1fr 280px; 
             gap: 25px; 
             align-items: start;
         }
@@ -40,8 +40,15 @@
             padding: 18px; 
             box-shadow: 0 10px 25px rgba(122,92,51,0.05); 
             color: #1a1a1a; 
+            overflow: hidden;
         }
-        .panel-card h2 { font-size: 12px; text-transform: uppercase; letter-spacing: 2px; color: #7a5c33; margin-bottom: 15px; border-bottom: 2px solid #7a5c33; padding-bottom: 6px; font-weight: 800; text-align: center; }
+
+        /* CORREÇÃO VISUAL: TÍTULOS EM BLACK ELEGANTE */
+        .panel-card h2 { 
+            font-size: 11px; text-transform: uppercase; letter-spacing: 2px; 
+            color: #d4af37; background: #000000; padding: 10px; margin: -18px -18px 15px -18px;
+            font-weight: 800; text-align: center; border-bottom: 2px solid #7a5c33;
+        }
         
         .form-group { margin-bottom: 8px; } 
         .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 3px; color: #7a5c33; letter-spacing: 1px; }
@@ -53,7 +60,13 @@
         .btn-submit:hover { background: #7a5c33; }
 
         /* TABELA DE MANIFESTO RECONFIGURADA */
-        .table-container { width: 100%; overflow-x: auto; background: #ffffff; border-radius: 16px; border: 2px solid #7a5c33; padding: 20px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); }
+        .table-container { width: 100%; overflow-x: auto; background: #ffffff; border-radius: 16px; border: 2px solid #7a5c33; padding: 18px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); overflow: hidden; }
+        .table-container h2 {
+            font-size: 11px; text-transform: uppercase; letter-spacing: 2px; 
+            color: #d4af37; background: #000000; padding: 10px; margin: -18px -18px 15px -18px;
+            font-weight: 800; text-align: center; border-bottom: 2px solid #7a5c33;
+        }
+
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #1a1a1a; }
         th { background: #fdfaf6; padding: 12px 14px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #7a5c33; border-bottom: 2px solid #7a5c33; letter-spacing: 1px; }
         td { padding: 10px 14px; border-bottom: 1px solid #f4f0e8; font-weight: 600; }
@@ -67,6 +80,7 @@
         .badge-profit { background: #e6f4ea; color: #137333; }
         .badge-loss { background: #fce8e6; color: #c5221f; }
         .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
+        .remove-btn:hover { color: #b91c1c; }
 
         @media(max-width: 1200px) { .dashboard-container { grid-template-columns: 1fr; } }
     </style>
@@ -79,7 +93,7 @@
 
     <main class="dashboard-container">
         
-        <!-- FORMULÁRIO ESQUERDO COM SEPARAÇÃO DE COMPRA E VENDA -->
+        <!-- FORMULÁRIO ESQUERDO COM TÍTULO BLACK ELEGANTE -->
         <div class="panel-card">
             <h2>LAUNCH MOVEMENT</h2>
             <form id="trade-form" onsubmit="registerTrade(event)">
@@ -150,7 +164,7 @@
             </form>
         </div>
 
-        <!-- TABELA CENTRAL DE MANIFESTO DE CARGAS -->
+        <!-- TABELA CENTRAL COM TÍTULO BLACK ELEGANTE -->
         <div class="table-container">
             <h2>Global Cargo Manifesto Ledger</h2>
             <table>
@@ -171,8 +185,8 @@
             </table>
         </div>
 
-        <!-- CARD DIREITO DE CONTROLE DE ESTOQUE RESTANTE -->
-        <div class="panel-card" style="border-color: #7a5c33;">
+        <!-- CARD DIREITO DE CONTROLE DE ESTOQUE COM TÍTULO BLACK ELEGANTE -->
+        <div class="panel-card">
             <h2>CURRENT STOCK LEVELS</h2>
             <div id="stock-levels-list" style="margin-top: 10px;">
                 <!-- Preenchido dinamicamente pelo cálculo de estoque restante -->
@@ -217,13 +231,11 @@
             
             const partner = document.getElementById('partner').value;
 
-            // Alerta de segurança: impede vender mais do que comprou
             if (sellQty > buyQty) {
                 alert("Operation Denied! Quantity sold cannot exceed quantity purchased.");
                 return;
             }
 
-            // Calcula o estoque restante desse lote específico
             const remainingStock = buyQty - sellQty;
 
             const origTotalCost = buyQty * buyPrice;
@@ -255,7 +267,6 @@
             const stockList = document.getElementById('stock-levels-list');
             if (!tbody || !stockList) return;
 
-            // Renderização da Tabela de Manifesto
             if (trades.length === 0) {
                 tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:30px;">No international operations recorded in the ledger.</td></tr>';
                 stockList.innerHTML = '<p style="color:#999; text-align:center; font-size:12px; padding:10px 0;">Warehouse is empty.</p>';
@@ -278,7 +289,6 @@
                     </tr>
                 `).join('');
 
-                // Agrupamento e Renderização do Card de Estoque Atual Restante
                 let stockMap = {};
                 trades.forEach(item => {
                     let prodName = item.product.toUpperCase();
@@ -301,3 +311,4 @@
     </script>
 </body>
 </html>
+
