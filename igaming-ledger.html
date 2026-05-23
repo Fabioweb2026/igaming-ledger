@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sollene iGaming | Operator Risk & Player Ledger</title>
     <style>
-        /* DESIGN MINIMALISTA LUXO COM TÍTULOS EM BLACK ELEGANTE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: sans-serif; background: #fbf9f6; color: #1a1a1a; padding-bottom: 60px; }
 
-        /* MANTÉM A PROPORÇÃO REAL DO BANNER SEM CORTES */
         .hero-top-banner {
             width: 100%;
             aspect-ratio: 1920 / 480; 
@@ -18,14 +16,12 @@
             border-bottom: 3px solid #7a5c33;
         }
 
-        /* HEADER PREMIUM SOLLENE REESTILIZADO (BLACK & PREMIUM GOLD) */
         .main-header {
             background: #000000; display: flex; align-items: center; justify-content: space-between;
             padding: 12px 5%; border-bottom: 1px solid #7a5c33; position: sticky; top: 0; z-index: 1000;
         }
         .header-left { display: flex; align-items: center; gap: 14px; }
         
-        /* CORREÇÃO DO LOGO: "S" Oficial da Sollene em tamanho reduzido e elegante */
         .logo-wrapper {
             width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
             background: transparent; border: 1.5px solid #d4af37; border-radius: 50%;
@@ -42,7 +38,6 @@
         .btn-clear-cache { background: #ea4335; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
         .btn-clear-cache:hover { background: #fff; color: #ea4335; }
 
-        /* CAIXA BLACK ELEGANTE COM DADOS DE COMPLIANCE / AUDITORIA */
         .corporate-info-box { max-width: 1750px; margin: 25px auto 5px auto; padding: 0 2%; width: 100%; }
         .info-card-inner {
             background: #111115; border: 2px solid #7a5c33; border-radius: 12px; padding: 15px 25px;
@@ -53,7 +48,6 @@
         .info-block span { font-size: 8px; font-weight: 800; text-transform: uppercase; color: #7a5c33; letter-spacing: 1px; margin-bottom: 2px; }
         .info-block p { font-size: 12px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px; }
 
-        /* CONTAINER OPERACIONAL */
         .dashboard-container { 
             max-width: 1750px; margin: 20px auto; padding: 0 2%; 
             display: grid; grid-template-columns: 340px 1fr; gap: 25px; align-items: start;
@@ -72,21 +66,17 @@
         .form-row { display: flex; gap: 6px; align-items: flex-end; width: 100%; }
         .col-qty { flex: 0.9; min-width: 50px; }
         .col-price { flex: 1.1; min-width: 75px; }
-        .col-curr { flex: 1.4; min-width: 100px; }
 
-        .trade-section-title { font-size: 8.5px; font-weight: 800; text-transform: uppercase; color: #7a5c33; margin: 10px 0 6px 0; padding-top: 4px; border-top: 1px dashed #e1dbcf; display: flex; align-items: center; gap: 4px; }
         .btn-submit { width: 100%; padding: 10px; background: #000; color: #fff; border: none; border-radius: 8px; font-weight: 800; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; height: 38px; }
         .btn-submit:hover { background: #7a5c33; }
 
         .unified-hub-container { background: #ffffff; border: 2px solid #7a5c33; border-radius: 16px; box-shadow: 0 10px 25px rgba(122,92,51,0.05); overflow: hidden; padding: 14px; }
         .unified-hub-container .unified-header-black { margin: -14px -14px 15px -14px; }
-        .hub-vertical-layout { display: flex; flex-direction: column; gap: 25px; width: 100%; }
-
-        .table-container-fixed { width: 100%; overflow: hidden; }
+        
+        .table-container-fixed { width: 100%; overflow: hidden; margin-top: 15px; }
         table { width: 100%; border-collapse: collapse; text-align: left; font-size: 12px; color: #1a1a1a; table-layout: auto; }
         th { background: #fdfaf6; padding: 10px 8px; font-weight: 800; text-transform: uppercase; font-size: 9.5px; color: #7a5c33; border-bottom: 2px solid #7a5c33; letter-spacing: 0.5px; }
         td { padding: 10px 8px; border-bottom: 1px solid #f4f0e8; font-weight: 600; }
-        tr:hover { background-color: #fdfbf9; }
         
         .embedded-stock-panel { background: #fdfaf6; border: 1px solid #e1dbcf; border-radius: 10px; padding: 15px; width: 100%; }
         .embedded-stock-panel h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #7a5c33; border-bottom: 2px solid #7a5c33; padding-bottom: 5px; margin-bottom: 10px; font-weight: 800; text-align: left; }
@@ -100,15 +90,13 @@
         .badge-loss { background: #fce8e6; color: #c5221f; }
         .remove-btn { color: #ff4d4d; border: none; background: none; cursor: pointer; font-size: 10px; font-weight: 800; text-transform: uppercase; }
 
-        @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } .info-card-inner { flex-direction: column; text-align: center; } }
+        @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <!-- BANNER PANORÂMICO -->
     <section class="hero-top-banner"></section>
 
-    <!-- SOLLENE HEADER -->
     <header class="main-header">
         <div class="header-left">
             <div class="logo-wrapper">
@@ -119,12 +107,11 @@
             <h1 class="brand-title">Sollene <span>Gaming</span></h1>
         </div>
         <div class="header-actions">
-            <a href="#" class="btn-back-portfolio">Portfolio</a>
+            <a href="index.html" class="btn-back-portfolio">Portfolio</a>
             <button class="btn-clear-cache" id="clearCacheBtn">Clear Ledger</button>
         </div>
     </header>
 
-    <!-- CAIXA COM DADOS DE AUDITORIA E MGA COMPLIANCE -->
     <section class="corporate-info-box">
         <div class="info-card-inner">
             <div class="info-block">
@@ -136,30 +123,45 @@
                 <p style="color: #137333;">● SECURE / AUDITED</p>
             </div>
             <div class="info-block">
-                <span>GGR Target (Gross Gaming Revenue)</span>
-                <p>€250,000 / Weekly</p>
-            </div>
-            <div class="info-block">
                 <span>Compliance Code</span>
                 <p>MGA/B2C/1581/2026</p>
             </div>
         </div>
     </section>
 
-    <!-- CONTAINER OPERACIONAL -->
     <main class="dashboard-container">
-        
-        <!-- FORMULÁRIO DE ENTRADA DE TRANSAÇÕES -->
         <section class="panel-card">
             <h2>Transaction Entry</h2>
             <form id="transactionForm">
-                
                 <div class="form-group">
                     <label for="playerID">Player Reference / ID</label>
                     <input type="text" id="playerID" class="form-control" placeholder="EX: PLAYER_777" required>
                 </div>
-
                 <div class="form-group">
                     <label for="gameType">Product / Game Type</label>
                     <select id="gameType" class="form-control">
-                        <option value="Live Casino">Live Casino (Blackjack/Roulette)</option>
+                        <option value="Live Casino">Live Casino</option>
+                        <option value="Online Slots">Online Slots</option>
+                        <option value="Sportsbook">Sportsbook</option>
+                        <option value="Crash Games">Crash Games</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Financial Breakdown</label>
+                    <div class="form-row">
+                        <div class="col-qty">
+                            <label for="betAmount">Bet (€)</label>
+                            <input type="number" id="betAmount" class="form-control" min="1" placeholder="10" required>
+                        </div>
+                        <div class="col-price">
+                            <label for="payoutAmount">Payout (€)</label>
+                            <input type="number" id="payoutAmount" class="form-control" min="0" placeholder="20" required>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn-submit">Commit Transaction</button>
+            </form>
+        </section>
+
+        <section class="unified-hub-container">
+            <div class="unified-header-black">Real-Time Auditing Hub</div>
