@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fabio | Software Engineer Portfolio</title>
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: sans-serif;
+    min-height: 100vh;
+    background: #0f0f12; 
+    color: #e4e4e7;
+    padding: 60px 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* HEADER DO PORTFÓLIO */
+header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+header h1 {
+    color: #b39359;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+header p {
+    color: #a1a1aa;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: auto;
+}
+
+/* GRID DE PROJETOS */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* CARD PROFISSIONAL */
+.card {
+    background: #18181b;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #27272a;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #b39359;
+    box-shadow: 0 20px 30px rgba(0,0,0,0.7);
+}
+
+/* CONTAINER DA IMAGEM */
+.card-img {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    background: #09090b;
+    position: relative;
+}
+
+.card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img img {
+    transform: scale(1.05);
+}
+
+/* CONTEÚDO DO CARD */
+.card-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.card h3 {
+    color: #f4f4f5;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: #a1a1aa;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+/* BADGES DE TECNOLOGIAS */
+.tech-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+    margin-bottom: 20px;
+}
+
+.badge {
+    background: #27272a;
+    color: #d4d4d8;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* BOTÕES DE AÇÃO */
+.card-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background: #b39359;
+    color: #0f0f12;
+}
+
+.btn-primary:hover {
+    background: #c5a873;
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 600px) {
+    body { padding: 40px 15px; }
+    header h1 { font-size: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>Fabio | Software Engineer</h1>
+        <p>M.Sc. & Tech Compliance Specialist focusing on System Architecture and iGaming Core Ledger operations.</p>
+    </header>
+
+    <div class="projects-grid">
+
+        <!-- PROJETO 1: SOLLENE GAMING (HUB DE AUDITORIA REAL-TIME) -->
+        <div class="card">
+            <div class="card-img">
+                <img src="sollene-group.jpg" alt="Sollene Gaming Hub">
+            </div>
+            <div class="card-content">
+                <h3>Sollene Gaming Ledger</h3>
+                <p>Real-time casino transaction logging and core auditing system simulating Malta Gaming Authority (MGA) metrics and GGR risk monitoring.</p>
+                <div class="tech-badges">
+                    <span class="badge">HTML5</span>
+                    <span class="badge">CSS3 Minimalist</span>
+                    <span class="badge">JavaScript DOM</span>
+                </div>
+                <div class="card-actions">
+                    <a href="igaming-ledger.html" class="btn btn-primary">Live Demo</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJETO 2: MALTA PROJECT -->
+        <div class="card">
+            <div class="card-img">
+                <img src="malta01.jpg.png" alt="Malta Project">
+            </div>
+            <div class="card-content">
+                <h3>Malta Project</h3>
+                <p>Global business platform concept structured to showcase modern landing page layouts, digital nomad metrics, and full responsiveness.</p>
+                <div class="tech-badges">
+                    <span class="badge">HTML5</span>
+                    <span class="badge">CSS3</span>
+                    <span class="badge">UI Design</span>
+                </div>
+                <div class="card-actions">
+                    <a href="malta.htm" class="btn btn-primary">Live Demo</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PROJETO 3: CURRÍCULO -->
+        <div class="card">
+            <div class="card-img">
+                <img src="homem-trabalhao-TI.png" alt="TI Professional">
+            </div>
+            <div class="card-content">
+                <h3>Professional Resume</h3>
+                <p>Complete background profile details, teaching expertise, core tech stack, and strategic European career objectives.</p>
+                <div class="tech-badges">
+                    <span class="badge">PDF Profile</span>
+                    <span class="badge">English Matrix</span>
+                </div>
+                <div class="card-actions">
+                    <a href="resume.pdf" target="_blank" class="btn btn-primary">View CV</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
