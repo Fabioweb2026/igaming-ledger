@@ -7,14 +7,14 @@
     <style>
         /* DESIGN INDIVIDUAL CORPORATIVO - FOCO TÉCNICO COMPLIANCE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: sans-serif; background: #121214; color: #e4e4e7; padding-bottom: 60px; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: #121214; color: #e4e4e7; padding-bottom: 60px; }
 
-        /* BANNER EXCLUSIVO DO PROJETO - CARREGA A SUA IMAGEM DE BEBÍDAS LUXO DO REPOSITÓRIO */
+        /* BANNER EXCLUSIVO DO PROJETO */
         .hero-top-banner {
             width: 100%;
             aspect-ratio: 1920 / 480; 
             background: #000000 url('Sollene-Group.png') no-repeat center top;
-            background-size: 100% 100%; 
+            background-size: cover; 
             border-bottom: 3px solid #b39359;
         }
 
@@ -69,8 +69,6 @@
         .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; color: #b39359; letter-spacing: 0.5px; }
         .form-control { width: 100%; padding: 10px 12px; border: 1px solid #27272a; border-radius: 8px; font-size: 13px; font-weight: 600; outline: none; background: #09090b; color: #ffffff; height: 40px; }
         .form-control:focus { border-color: #b39359; }
-        .form-row { display: flex; gap: 10px; width: 100%; }
-        .col-qty, .col-price { flex: 1; }
 
         .btn-submit { width: 100%; padding: 12px; background: #b39359; color: #0f0f12; border: none; border-radius: 8px; font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; height: 44px; transition: 0.2s; }
         .btn-submit:hover { background: #c5a873; }
@@ -84,13 +82,6 @@
         td { padding: 12px 10px; border-bottom: 1px solid #27272a; font-weight: 600; }
         tr:hover { background-color: #27272a; }
         
-        .embedded-stock-panel { background: #09090b; border: 1px solid #27272a; border-radius: 10px; padding: 15px; width: 100%; }
-        .embedded-stock-panel h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #b39359; border-bottom: 1px solid #27272a; padding-bottom: 6px; margin-bottom: 12px; font-weight: 800; }
-        
-        .stock-items-flex { display: flex; flex-wrap: wrap; gap: 12px; }
-        .stock-item-row { display: flex; align-items: center; gap: 10px; background: #18181b; padding: 8px 14px; border: 1px solid #27272a; border-radius: 6px; font-size: 12px; font-weight: 700; }
-        .stock-qty-badge { background: #b39359; color: #0f0f12; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-weight: bold; }
-
         .badge { padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 800; text-transform: uppercase; display: inline-block; text-align: center; min-width: 85px; }
         .badge-profit { background: rgba(22, 163, 74, 0.2); color: #4ade80; border: 1px solid #22c55e; }
         .badge-loss { background: rgba(220, 38, 38, 0.2); color: #f87171; border: 1px solid #ef4444; }
@@ -116,51 +107,74 @@
             <h1 class="brand-title">Sollene <span>Gaming</span></h1>
         </div>
         <div class="header-actions">
-            <!-- Botão configurado de forma limpa para retornar ao menu inicial -->
             <a href="index.html" class="btn-back-portfolio">Back to Portfolio</a>
             <button class="btn-clear-cache" id="clearCacheBtn">Clear Ledger</button>
         </div>
     </header>
 
-    <!-- METADADOS DE AUDITORIA DE MALTA -->
+    <!-- METADADOS DE AUDITORIA DE MALTA (COMPLETADO) -->
     <section class="corporate-info-box">
         <div class="info-card-inner">
             <div class="info-block">
-                <span>Licensing Jurisdiction</span>
+                <span>Regulatory Jurisdiction</span>
                 <p>Malta Gaming Authority (MGA)</p>
             </div>
             <div class="info-block">
-                <span>System Status</span>
-                <p style="color: #4ade80;">● SECURE / AUDITED</p>
+                <span>Total Bets (Turnover)</span>
+                <p id="totalBets">€0.00</p>
             </div>
             <div class="info-block">
-                <span>Compliance Code</span>
-                <p>MGA/B2C/1581/2026</p>
+                <span>Total Wins (Payouts)</span>
+                <p id="totalWins">€0.00</p>
+            </div>
+            <div class="info-block">
+                <span>Gross Gaming Revenue (GGR)</span>
+                <p id="ggrValue">€0.00</p>
+            </div>
+            <div class="info-block">
+                <span>Compliance Status</span>
+                <p style="color: #4ade80;">✓ AUDIT READY</p>
             </div>
         </div>
     </section>
 
-    <!-- WORKSPACE DO DASHBOARD TÉCNICO -->
+    <!-- DASHBOARD GRID TRABALHO -->
     <main class="dashboard-container">
         
-        <!-- ENTRADA DE FORMULÁRIO -->
+        <!-- FORMULÁRIO DE ENTRADA DE TRANSAÇÕES -->
         <section class="panel-card">
-            <h2>Transaction Entry</h2>
+            <h2>Log Transaction</h2>
             <form id="transactionForm">
                 <div class="form-group">
-                    <label for="playerID">Player Reference / ID</label>
-                    <input type="text" id="playerID" class="form-control" placeholder="EX: PLAYER_777" required>
+                    <label for="playerId">Player ID / Wallet</label>
+                    <input type="text" id="playerId" class="form-control" placeholder="e.g. PL-9082" required>
                 </div>
                 <div class="form-group">
-                    <label for="gameType">Product / Game Type</label>
-                    <select id="gameType" class="form-control">
-                        <option value="Live Casino">Live Casino</option>
-                        <option value="Online Slots">Online Slots</option>
-                        <option value="Sportsbook">Sportsbook</option>
-                        <option value="Crash Games">Crash Games</option>
+                    <label for="txType">Transaction Type</label>
+                    <select id="txType" class="form-control" required>
+                        <option value="bet">Bet (Player Stake)</option>
+                        <option value="win">Win (Operator Payout)</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>Financial Breakdown</label>
-                    <div class="form-row">
-                        <div class="col-qty">
+                    <label for="amount">Amount (€)</label>
+                    <input type="number" id="amount" class="form-control" step="0.01" min="0.10" placeholder="0.00" required>
+                </div>
+                <button type="submit" class="btn-submit">Commit to Ledger</button>
+            </form>
+        </section>
+
+        <!-- CENTRAL AUDIT LOG TABLE -->
+        <section class="unified-hub-container">
+            <div class="unified-header-black">Real-Time Core Ledger Transaction Stream</div>
+            <div class="table-container-fixed">
+                <table id="ledgerTable">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Transaction ID</th>
+                            <th>Player ID</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Risk Impact</th>
+                            <th>Action</th>
