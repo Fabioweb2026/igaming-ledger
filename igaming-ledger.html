@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene Group | International Trade & Inventory Ledger</title>
+    <title>Sollene iGaming | Operator Risk & Player Ledger</title>
     <style>
         /* DESIGN MINIMALISTA LUXO COM TÍTULOS EM BLACK ELEGANTE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -13,7 +13,7 @@
         .hero-top-banner {
             width: 100%;
             aspect-ratio: 1920 / 480; 
-            background: #ffffff url('sollene-group.jpg') no-repeat center top;
+            background: #000000 url('sollene-group.jpg') no-repeat center top;
             background-size: 100% 100%; 
             border-bottom: 3px solid #7a5c33;
         }
@@ -27,21 +27,10 @@
         
         /* CORREÇÃO DO LOGO: "S" Oficial da Sollene em tamanho reduzido e elegante */
         .logo-wrapper {
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            border: 1.5px solid #d4af37;
-            border-radius: 50%; /* Formato circular sutil ao redor do S */
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            background: transparent; border: 1.5px solid #d4af37; border-radius: 50%;
         }
-        .logo-premium-svg { 
-            width: 16px; 
-            height: 16px; 
-            fill: #d4af37; 
-            display: block;
-        }
+        .logo-premium-svg { width: 16px; height: 16px; fill: #d4af37; display: block; }
         
         .brand-title { font-size: 18px; font-weight: 800; color: #ffffff; letter-spacing: 4px; text-transform: uppercase; }
         .brand-title span { color: #d4af37; }
@@ -53,7 +42,7 @@
         .btn-clear-cache { background: #ea4335; color: #fff; border: none; padding: 6px 12px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
         .btn-clear-cache:hover { background: #fff; color: #ea4335; }
 
-        /* CAIXA BLACK ELEGANTE COM DADOS INSTITUCIONAIS */
+        /* CAIXA BLACK ELEGANTE COM DADOS DE COMPLIANCE / AUDITORIA */
         .corporate-info-box { max-width: 1750px; margin: 25px auto 5px auto; padding: 0 2%; width: 100%; }
         .info-card-inner {
             background: #111115; border: 2px solid #7a5c33; border-radius: 12px; padding: 15px 25px;
@@ -116,40 +105,43 @@
 </head>
 <body>
 
-    <!-- BANNER PANORÂMICO ANTI-CORTE -->
+    <!-- BANNER PANORÂMICO -->
     <section class="hero-top-banner"></section>
 
-    <!-- SOLLENE EUROPEAN HEADER CORRIGIDO -->
+    <!-- SOLLENE HEADER -->
     <header class="main-header">
         <div class="header-left">
-            <!-- LOGO CORRIGIDO: "S" vetorial clássico e minimalista em tamanho reduzido -->
             <div class="logo-wrapper">
                 <svg class="logo-premium-svg" viewBox="0 0 24 24">
-                    <path d="M12.2 2C6.6 2 2 6.6 2 12.2c0 3.3 1.6 6.2 4.1 8l1.4-1.2C5.4 17.5 4 15 4 12.2 4 7.7 7.7 4 12.2 4s8.2 3.7 8.2 8.2c0 2.4-1.1 4.6-2.8 6.1l-1.3-1.3c1.1-1.2 1.8-2.9 1.8-4.8 0-3.7-3-6.7-6.7-6.7s-6.7 3-6.7 6.7c0 1.9.8 3.6 2 4.8L10 15.6c-.8-.9-1.3-2.1-1.3-3.4 0-2.6 2.1-4.7 4.7-4.7s4.7 2.1 4.7 4.7c0 1.4-.6 2.6-1.5 3.5l1.3 1.3c1.4-1.3 2.3-3.2 2.3-5.3 0-4.8-3.9-8.7-8.7-8.7z"/>
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
                 </svg>
             </div>
-            <h1 class="brand-title">SOLLENE GROUP</h1>
+            <h1 class="brand-title">Sollene <span>Gaming</span></h1>
         </div>
         <div class="header-actions">
-            <a href="https://github.io" class="btn-back-portfolio">← Back to Portfolio</a>
-            <button class="btn-clear-cache" onclick="clearSystemMemory()">Reset Storage</button>
+            <a href="#" class="btn-back-portfolio">Portfolio</a>
+            <button class="btn-clear-cache" id="clearCacheBtn">Clear Ledger</button>
         </div>
     </header>
 
-    <!-- CAIXA INSTITUCIONAL COM DADOS -->
+    <!-- CAIXA COM DADOS DE AUDITORIA E MGA COMPLIANCE -->
     <section class="corporate-info-box">
         <div class="info-card-inner">
             <div class="info-block">
-                <span>📍 European Headquarters</span>
-                <p>Avenue Louise 523, 1050 Brussels, Belgium</p>
+                <span>Licensing Jurisdiction</span>
+                <p>Malta Gaming Authority (MGA)</p>
             </div>
             <div class="info-block">
-                <span>📞 International Hotline</span>
-                <p>+32 (2) 555-0190</p>
+                <span>System Status</span>
+                <p style="color: #137333;">● SECURE / AUDITED</p>
             </div>
             <div class="info-block">
-                <span>✉️ Global Trade Desk</span>
-                <p>trade@sollenegroup.com</p>
+                <span>GGR Target (Gross Gaming Revenue)</span>
+                <p>€250,000 / Weekly</p>
+            </div>
+            <div class="info-block">
+                <span>Compliance Code</span>
+                <p>MGA/B2C/1581/2026</p>
             </div>
         </div>
     </section>
@@ -157,216 +149,17 @@
     <!-- CONTAINER OPERACIONAL -->
     <main class="dashboard-container">
         
-        <!-- FORMULÁRIO ESQUERDO COMPACTO -->
-        <div class="panel-card">
-            <h2>LAUNCH MOVEMENT</h2>
-            <form id="trade-form" onsubmit="registerTrade(event)">
+        <!-- FORMULÁRIO DE ENTRADA DE TRANSAÇÕES -->
+        <section class="panel-card">
+            <h2>Transaction Entry</h2>
+            <form id="transactionForm">
                 
                 <div class="form-group">
-                    <label>Product / Item Description</label>
-                    <input type="text" id="product" class="form-control" value="coffe" required>
+                    <label for="playerID">Player Reference / ID</label>
+                    <input type="text" id="playerID" class="form-control" placeholder="EX: PLAYER_777" required>
                 </div>
 
                 <div class="form-group">
-                    <label>Unit of Measure</label>
-                    <select id="unit" class="form-control">
-                        <option value="Boxes">Boxes (BOX)</option>
-                        <option value="Units">Units (UN)</option>
-                        <option value="KG">Kilograms (KG)</option>
-                        <option value="Tons">Metric Tons (TON)</option>
-                    </select>
-                </div>
-
-                <!-- CONFIGURAÇÃO DE ENTRADA -->
-                <div class="trade-section-title">📥 Inbound Config (Cost Basis)</div>
-                <div class="form-row">
-                    <div class="form-group col-qty">
-                        <label>Qty Buy</label>
-                        <input type="number" id="buyQty" class="form-control" value="20" min="1" required>
-                    </div>
-                    <div class="form-group col-price">
-                        <label>Buy Price</label>
-                        <input type="text" id="buyPrice" class="form-control" value="245,53" required>
-                    </div>
-                    <div class="form-group col-curr">
-                        <label>Buy Curr</label>
-                        <select id="buyCurrency" class="form-control">
-                            <option value="BRL">Real (R$)</option>
-                            <option value="EUR">Euro (€)</option>
-                            <option value="USD">Dollar ($)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- CONFIGURAÇÃO DE SAÍDA -->
-                <div class="trade-section-title">📤 Outbound Config (Revenue Basis)</div>
-                <div class="form-row">
-                    <div class="form-group col-qty">
-                        <label>Qty Sold</label>
-                        <input type="number" id="sellQty" class="form-control" value="5" min="0" required>
-                    </div>
-                    <div class="form-group col-price">
-                        <label>Sell Price</label>
-                        <input type="text" id="sellPrice" class="form-control" value="45,67" required>
-                    </div>
-                    <div class="form-group col-curr">
-                        <label>Sell Curr</label>
-                        <select id="sellCurrency" class="form-control">
-                            <option value="USD" selected>Dollar ($)</option>
-                            <option value="EUR">Euro (€)</option>
-                            <option value="BRL">Real (R$)</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group" style="margin-top: 6px;">
-                    <label>Commercial Partner</label>
-                    <input type="text" id="partner" class="form-control" value="ACME SUPPLIES EUROPE" required>
-                </div>
-
-                <button type="submit" class="btn-submit">REGISTER MANIFEST</button>
-            </form>
-        </div>
-
-        <!-- CENTRAL UNIFICADA -->
-        <div class="unified-hub-container">
-            <div class="unified-header-black">Global Cargo Manifesto & Stock Ledger</div>
-            
-            <div class="hub-vertical-layout">
-                
-                <div class="table-container-fixed">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Item Description</th>
-                                <th>In / Out Volume</th>
-                                <th>Buy Unit</th>
-                                <th>Sell Unit</th>
-                                <th>Total Cost</th>
-                                <th>Total Revenue</th>
-                                <th>Net Balance (€)</th>
-                                <th>Partner</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="table-body"></tbody>
-                    </table>
-                </div>
-
-                <div class="embedded-stock-panel">
-                    <h3>CURRENT WAREHOUSE STOCK</h3>
-                    <div id="stock-levels-list" class="stock-items-flex"></div>
-                </div>
-
-            </div>
-        </div>
-
-    </main>
-
-    <script>
-        let trades = [];
-        const exchangeRates = { EUR: 1.0, BRL: 0.16, USD: 0.92 };
-        const currencySymbols = { EUR: '€', BRL: 'R$', USD: '$' };
-
-        function loadTrades() {
-            trades = JSON.parse(window.localStorage.getItem('sollene_adv_trades_final_v15')) || [];
-            renderUI();
-        }
-
-        function parsePrice(value) {
-            return parseFloat(value.replace(',', '.')) || 0;
-        }
-
-        function registerTrade(event) {
-            event.preventDefault(); 
-            const product = document.getElementById('product').value;
-            const buyQty = parseInt(document.getElementById('buyQty').value);
-            const sellQty = parseInt(document.getElementById('sellQty').value);
-            const unit = document.getElementById('unit').value;
-            const buyPrice = parsePrice(document.getElementById('buyPrice').value);
-            const buyCurrency = document.getElementById('buyCurrency').value;
-            const sellPrice = parsePrice(document.getElementById('sellPrice').value);
-            const sellCurrency = document.getElementById('sellCurrency').value;
-            const partner = document.getElementById('partner').value;
-
-            if (sellQty > buyQty) {
-                alert("Operation Denied! Quantity sold cannot exceed quantity purchased.");
-                return;
-            }
-
-            const remainingStock = buyQty - sellQty;
-            const origTotalCost = buyQty * buyPrice;
-            const origTotalRevenue = sellQty * sellPrice;
-
-            const buyUnitPriceInEuro = buyPrice * exchangeRates[buyCurrency];
-            const sellUnitPriceInEuro = sellPrice * exchangeRates[sellCurrency];
-            const netProfitInEuro = (sellUnitPriceInEuro - buyUnitPriceInEuro) * sellQty;
-
-            trades.push({ 
-                product, buyQty, sellQty, unit, remainingStock, buyPrice, buyCurrency, sellPrice, sellCurrency,
-                origTotalCost, origTotalRevenue,
-                totalCostInEuro: origTotalCost * exchangeRates[buyCurrency], 
-                totalRevenueInEuro: origTotalRevenue * exchangeRates[sellCurrency], 
-                netProfitInEuro, partner 
-            });
-            
-            window.localStorage.setItem('sollene_adv_trades_final_v15', JSON.stringify(trades));
-            renderUI();
-        }
-
-        function deleteTrade(index) {
-            trades.splice(index, 1);
-            window.localStorage.setItem('sollene_adv_trades_final_v15', JSON.stringify(trades));
-            renderUI();
-        }
-
-        function clearSystemMemory() {
-            window.localStorage.removeItem('sollene_adv_trades_final_v15');
-            trades = [];
-            renderUI();
-            alert("Memory completely cleared!");
-        }
-
-        function renderUI() {
-            const tbody = document.getElementById('table-body');
-            const stockList = document.getElementById('stock-levels-list');
-            if (!tbody || !stockList) return;
-
-            if (trades.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; color:#999; padding:30px;">No international operations recorded in the ledger.</td></tr>';
-                stockList.innerHTML = '<p style="color:#999; font-size:11px;">Warehouse is currently empty.</p>';
-            } else {
-                tbody.innerHTML = trades.map((item, index) => `
-                    <tr>
-                        <td style="font-weight: 800; text-transform: uppercase;">${item.product}</td>
-                        <td style="color:#7a5c33; font-weight:800;">📥 ${item.buyQty} / 📤 ${item.sellQty}</td>
-                        <td>${currencySymbols[item.buyCurrency]} ${item.buyPrice.toFixed(2)}</td>
-                        <td>${currencySymbols[item.sellCurrency]} ${item.sellPrice.toFixed(2)}</td>
-                        <td style="color:#c5221f; font-weight: bold;">${currencySymbols[item.buyCurrency]} ${item.origTotalCost.toFixed(2)}</td>
-                        <td style="color:#137333; font-weight: bold;">${currencySymbols[item.sellCurrency]} ${item.origTotalRevenue.toFixed(2)}</td>
-                        <td><span class="badge badge-${item.netProfitInEuro >= 0 ? 'profit' : 'loss'}">€ ${item.netProfitInEuro.toFixed(2)}</span></td>
-                        <td style="text-transform: uppercase; font-size: 11px; color:#666;">${item.partner}</td>
-                        <td><button class="remove-btn" onclick="deleteTrade(${index})">DELETE</button></td>
-                    </tr>
-                `).join('');
-
-                let stockMap = {};
-                trades.forEach(item => {
-                    let prodName = item.product.toUpperCase();
-                    if (!stockMap[prodName]) { stockMap[prodName] = { qty: 0, unit: item.unit }; }
-                    stockMap[prodName].qty += item.remainingStock;
-                });
-
-                stockList.innerHTML = Object.keys(stockMap).map(key => `
-                    <div class="stock-item-row">
-                        <span style="text-transform: uppercase;">${key}:</span>
-                        <span class="stock-qty-badge">${stockMap[key].qty} ${stockMap[key].unit}</span>
-                    </div>
-                `).join('');
-            }
-        }
-        window.onload = loadTrades;
-    </script>
-</body>
-</html>
-
+                    <label for="gameType">Product / Game Type</label>
+                    <select id="gameType" class="form-control">
+                        <option value="Live Casino">Live Casino (Blackjack/Roulette)</option>
