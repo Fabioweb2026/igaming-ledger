@@ -1,218 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fabio | Software Engineer Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sollene iGaming | Operator Risk & Player Ledger</title>
+    <style>
+        /* DESIGN INDIVIDUAL CORPORATIVO - FOCO TÉCNICO COMPLIANCE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: system-ui, -apple-system, sans-serif; background: #121214; color: #e4e4e7; padding-bottom: 60px; }
 
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
+        /* BANNER EXCLUSIVO DO PROJETO */
+        .hero-top-banner {
+            width: 100%;
+            aspect-ratio: 1920 / 480; 
+            background: #000000 url('Sollene-Group.png') no-repeat center top;
+            background-size: cover; 
+            border-bottom: 3px solid #b39359;
+        }
 
-body {
-    font-family: sans-serif;
-    min-height: 100vh;
-    background: #0f0f12; 
-    color: #e4e4e7;
-    padding: 60px 20px;
-}
+        /* HEADER INDEPENDENTE DO PROJETO */
+        .main-header {
+            background: #18181b; display: flex; align-items: center; justify-content: space-between;
+            padding: 15px 5%; border-bottom: 1px solid #27272a; position: sticky; top: 0; z-index: 1000;
+        }
+        .header-left { display: flex; align-items: center; gap: 14px; }
+        
+        .logo-wrapper {
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            background: transparent; border: 1.5px solid #b39359; border-radius: 50%;
+        }
+        .logo-premium-svg { width: 16px; height: 16px; fill: #b39359; display: block; }
+        
+        .brand-title { font-size: 18px; font-weight: 800; color: #ffffff; letter-spacing: 4px; text-transform: uppercase; }
+        .brand-title span { color: #b39359; }
+        
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+        .btn-back-portfolio { text-decoration: none; color: #b39359; border: 1px solid #3f3f46; padding: 8px 16px; border-radius: 6px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; background: transparent; }
+        .btn-back-portfolio:hover { background: #b39359; color: #0f0f12; border-color: #b39359; }
+        
+        .btn-clear-cache { background: #ea4335; color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-size: 11px; font-weight: bold; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+        .btn-clear-cache:hover { background: #fff; color: #ea4335; }
 
-.container {
-    max-width: 1200px;
-    margin: auto;
-}
+        /* SEÇÃO DE DADOS MGA COMPLIANCE */
+        .corporate-info-box { max-width: 1400px; margin: 30px auto 10px auto; padding: 0 2%; width: 100%; }
+        .info-card-inner {
+            background: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 20px 30px;
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .info-block { display: flex; flex-direction: column; }
+        .info-block span { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #b39359; letter-spacing: 1px; margin-bottom: 4px; }
+        .info-block p { font-size: 13px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px; }
 
-/* HEADER DO PORTFÓLIO */
-header {
-    text-align: center;
-    margin-bottom: 60px;
-}
+        /* DASHBOARD GRID TRABALHO */
+        .dashboard-container { 
+            max-width: 1400px; margin: 20px auto; padding: 0 2%; 
+            display: grid; grid-template-columns: 350px 1fr; gap: 30px; align-items: start;
+        }
+        
+        .panel-card { background: #18181b; border: 1px solid #27272a; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        .panel-card h2, .unified-header-black { 
+            font-size: 12px; text-transform: uppercase; letter-spacing: 2px; 
+            color: #b39359; background: #09090b; padding: 14px; margin: -20px -20px 20px -20px;
+            font-weight: 800; text-align: center; border-bottom: 1px solid #27272a;
+        }
+        
+        .form-group { margin-bottom: 15px; } 
+        .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; color: #b39359; letter-spacing: 0.5px; }
+        .form-control { width: 100%; padding: 10px 12px; border: 1px solid #27272a; border-radius: 8px; font-size: 13px; font-weight: 600; outline: none; background: #09090b; color: #ffffff; height: 40px; }
+        .form-control:focus { border-color: #b39359; }
 
-header h1 {
-    color: #b39359;
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    margin-bottom: 10px;
-}
+        .btn-submit { width: 100%; padding: 12px; background: #b39359; color: #0f0f12; border: none; border-radius: 8px; font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; height: 44px; transition: 0.2s; }
+        .btn-submit:hover { background: #c5a873; }
 
-header p {
-    color: #a1a1aa;
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin: auto;
-}
+        .unified-hub-container { background: #18181b; border: 1px solid #27272a; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); overflow: hidden; padding: 20px; }
+        .unified-hub-container .unified-header-black { margin: -20px -20px 20px -20px; }
+        
+        .table-container-fixed { width: 100%; overflow-x: auto; margin-top: 20px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; color: #e4e4e7; }
+        th { background: #09090b; padding: 12px 10px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #b39359; border-bottom: 2px solid #27272a; letter-spacing: 0.5px; }
+        td { padding: 12px 10px; border-bottom: 1px solid #27272a; font-weight: 600; }
+        tr:hover { background-color: #27272a; }
+        
+        .badge { padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 800; text-transform: uppercase; display: inline-block; text-align: center; min-width: 85px; }
+        .badge-profit { background: rgba(22, 163, 74, 0.2); color: #4ade80; border: 1px solid #22c55e; }
+        .badge-loss { background: rgba(220, 38, 38, 0.2); color: #f87171; border: 1px solid #ef4444; }
+        .remove-btn { color: #f87171; border: none; background: none; cursor: pointer; font-size: 11px; font-weight: 800; text-transform: uppercase; }
+        .remove-btn:hover { color: #ef4444; }
 
-/* GRID DE PROJETOS */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-}
-
-/* CARD PROFISSIONAL */
-.card {
-    background: #18181b;
-    border-radius: 16px;
-    overflow: hidden;
-    border: 1px solid #27272a;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-    border-color: #b39359;
-    box-shadow: 0 20px 30px rgba(0,0,0,0.7);
-}
-
-/* CONTAINER DA IMAGEM */
-.card-img {
-    width: 100%;
-    height: 180px;
-    overflow: hidden;
-    background: #09090b;
-    position: relative;
-}
-
-.card-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-}
-
-.card:hover .card-img img {
-    transform: scale(1.05);
-}
-
-/* CONTEÚDO DO CARD */
-.card-content {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.card h3 {
-    color: #f4f4f5;
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-}
-
-.card p {
-    font-size: 0.95rem;
-    color: #a1a1aa;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-/* BADGES DE TECNOLOGIAS */
-.tech-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: auto;
-    margin-bottom: 20px;
-}
-
-.badge {
-    background: #27272a;
-    color: #d4d4d8;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* BOTÕES DE AÇÃO */
-.card-actions {
-    display: flex;
-    gap: 12px;
-}
-
-.btn {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: 0.2s;
-}
-
-.btn-primary {
-    background: #b39359;
-    color: #0f0f12;
-}
-
-.btn-primary:hover {
-    background: #c5a873;
-}
-
-/* RESPONSIVIDADE */
-@media (max-width: 600px) {
-    body { padding: 40px 15px; }
-    header h1 { font-size: 2rem; }
-}
-</style>
+        @media(max-width: 1024px) { .dashboard-container { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
 
-<div class="container">
+    <!-- BANNER CORPORATIVO INDIVIDUAL DO PROJETO -->
+    <section class="hero-top-banner"></section>
 
-    <header>
-        <h1>Fabio | Software Engineer</h1>
-        <p>M.Sc. & Tech Compliance Specialist focusing on System Architecture and iGaming Core Ledger operations.</p>
+    <!-- HEADER DO OPERADOR -->
+    <header class="main-header">
+        <div class="header-left">
+            <div class="logo-wrapper">
+                <svg class="logo-premium-svg" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
+                </svg>
+            </div>
+            <h1 class="brand-title">Sollene <span>Gaming</span></h1>
+        </div>
+        <div class="header-actions">
+            <a href="index.html" class="btn-back-portfolio">Back to Portfolio</a>
+            <button class="btn-clear-cache" id="clearCacheBtn">Clear Ledger</button>
+        </div>
     </header>
 
-    <div class="projects-grid">
-
-        <!-- PROJETO 1: SOLLENE GAMING (HUB DE AUDITORIA REAL-TIME) -->
-        <div class="card">
-            <div class="card-img">
-                <!-- Ajustado exatamente para a imagem da sua lista -->
-                <img src="Sollene-Group.png" alt="Sollene Gaming Hub">
+    <!-- METADADOS DE AUDITORIA DE MALTA (COMPLETADO) -->
+    <section class="corporate-info-box">
+        <div class="info-card-inner">
+            <div class="info-block">
+                <span>Regulatory Jurisdiction</span>
+                <p>Malta Gaming Authority (MGA)</p>
             </div>
-            <div class="card-content">
-                <h3>Sollene Gaming Ledger</h3>
-                <p>Real-time casino transaction logging and core auditing system simulating Malta Gaming Authority (MGA) metrics and GGR risk monitoring.</p>
-                <div class="tech-badges">
-                    <span class="badge">HTML5</span>
-                    <span class="badge">CSS3 Minimalist</span>
-                    <span class="badge">JavaScript DOM</span>
-                </div>
-                <div class="card-actions">
-                    <a href="igaming-ledger.html" class="btn btn-primary">Live Demo</a>
-                </div>
+            <div class="info-block">
+                <span>Total Bets (Turnover)</span>
+                <p id="totalBets">€0.00</p>
             </div>
-        </div>
-
-        <!-- PROJETO 2: MALTA PROJECT -->
-        <div class="card">
-            <div class="card-img">
-                <!-- Ajustado exatamente para a imagem da sua lista -->
-                <img src="mata.png14.png" alt="Malta Project">
+            <div class="info-block">
+                <span>Total Wins (Payouts)</span>
+                <p id="totalWins">€0.00</p>
             </div>
-            <div class="card-content">
-                <h3>Malta Project</h3>
-                <p>Global business platform concept structured to showcase modern landing page layouts, digital nomad metrics, and full responsiveness.</p>
-                <div class="tech-badges">
-                    <span class="badge">HTML5</span>
-                    <span class="badge">CSS3</span>
-                    <span class="badge">UI Design</span>
-                </div>
-                <div class="card-actions">
-                    <a href="#" class="btn btn-primary">Coming Soon</a>
-                </div>
+            <div class="info-block">
+                <span>Gross Gaming Revenue (GGR)</span>
+                <p id="ggrValue">€0.00</p>
+            </div>
+            <div class="info-block">
+                <span>Compliance Status</span>
+                <p style="color: #4ade80;">✓ AUDIT READY</p>
             </div>
         </div>
+    </section>
 
-    </div>
-</div>
+    <!-- DASHBOARD GRID TRABALHO -->
+    <main class="dashboard-container">
+        
+        <!-- FORMULÁRIO DE ENTRADA DE TRANSAÇÕES -->
+        <section class="panel-card">
+            <h2>Log Transaction</h2>
+            <form id="transactionForm">
+                <div class="form-group">
+                    <label for="playerId">Player ID / Wallet</label>
+                    <input type="text" id="playerId" class="form-control" placeholder="e.g. PL-9082" required>
+                </div>
+                <div class="form-group">
+                    <label for="txType">Transaction Type</label>
+                    <select id="txType" class="form-control" required>
+                        <option value="bet">Bet (Player Stake)</option>
+                        <option value="win">Win (Operator Payout)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount (€)</label>
+                    <input type="number" id="amount" class="form-control" step="0.01" min="0.10" placeholder="0.00" required>
+                </div>
+                <button type="submit" class="btn-submit">Commit to Ledger</button>
+            </form>
+        </section>
 
-</body>
-</html>
+        <!-- CENTRAL AUDIT LOG TABLE -->
+        <section class="unified-hub-container">
+            <div class="unified-header-black">Real-Time Core Ledger Transaction Stream</div>
+            <div class="table-container-fixed">
+                <table id="ledgerTable">
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Transaction ID</th>
+                            <th>Player ID</th>
+                            <th>Type</th>
+                            <th>Amount</th>
+                            <th>Risk Impact</th>
+                            <th>Action</th>
