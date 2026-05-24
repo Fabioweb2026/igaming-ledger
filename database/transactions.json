@@ -1,1 +1,10 @@
-
+[
+  {
+    "transactionId": "TX-1001",
+    "playerId": "MLT-1001",
+    "type": "Deposit",
+    "amount": 500,
+    "currency": "EUR",
+    "status": "Completed"
+  }
+]
