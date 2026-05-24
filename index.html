@@ -188,6 +188,7 @@
 
             <div class="form-group">
                 <label>Jurisdiction / Country of Residence:</label>
+                <!-- FIXED: Values are now completely aligned with JavaScript keys -->
                 <select id="p-country" onchange="configurarFiltroKYC()">
                     <option value="Brazil" selected>Brazil (South America)</option>
                     <option value="United States">United States (North America)</option>
@@ -275,6 +276,3 @@
     <script>
         // Financial Balance States
         let saldo = 100.00;
-        let totalAlocado = 0.00;
-        let lucros = 0.00;
-        let perdas = 0.00;
