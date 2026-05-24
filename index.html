@@ -3,17 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mediterranea Casino - Enterprise Risk & Compliance Infrastructure</title>
+    <title>Mediterranea Casino - Player Terminal</title>
     <style>
-        /* =====================================================
-           CORPORATE MEDITERRANEAN PALETTE: IVORY, NAVY & GOLD
-           ===================================================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background: linear-gradient(135deg, #f4f1ea 0%, #e4ded0 100%);
             min-height: 100vh;
@@ -21,292 +13,142 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             display: flex;
             flex-direction: column;
-        }
-
-        /* COMPLIANCE HEADER */
-        .topbar {
-            display: flex;
-            justify-content: space-between;
             align-items: center;
-            padding: 15px 40px;
-            background: #0b1a30;
-            border-bottom: 4px solid #c5a059;
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            justify-content: center;
+            padding: 20px;
         }
-
-        .brand-details h1 {
-            font-size: 20px;
-            font-weight: 800;
-            color: #e5c17d;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .brand-details p {
-            font-size: 11px;
-            color: #8fa4be;
-        }
-
-        .license-badge {
-            font-size: 11px;
-            background: rgba(197, 160, 89, 0.15);
-            border: 1px solid #c5a059;
-            color: #e5c17d;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        /* ARCHITECTURE SPLIT: PLAYER VS ADMIN */
-        .workspace-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 25px;
-            padding: 25px;
-            flex: 1;
-            max-width: 1800px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 14px;
-            color: #0b1a30;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #cbd5e1;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* 📱 INTERFACE 1: PLAYER ENVIRONMENT */
-        .player-module {
+        .player-card {
             background: #ffffff;
             border: 1px solid #d1c9bc;
             border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-
-        .player-hardware-frame {
-            background: #0f172a;
-            border-radius: 10px;
             padding: 25px;
-            color: #ffffff;
-            margin-top: 15px;
-            border: 2px solid #334155;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
         }
-
+        .brand-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e4ded0;
+            padding-bottom: 15px;
+        }
+        .logo { height: 45px; border-radius: 4px; border: 1px solid #c5a059; }
         .hud-screen {
             background: #020617;
-            border-radius: 6px;
+            border-radius: 8px;
             padding: 15px;
             font-family: monospace;
-            font-size: 13px;
             color: #38bdf8;
             margin-bottom: 20px;
-            border: 1px solid #1e293b;
         }
-
-        .hud-line {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px dashed rgba(56, 189, 248, 0.15);
-        }
-
-        .game-engine-box {
+        .hud-line { display: flex; justify-content: space-between; padding: 4px 0; }
+        .engine-box {
             background: #1e293b;
+            color: #ffffff;
             border-radius: 8px;
-            padding: 30px 10px;
+            padding: 40px 10px;
             text-align: center;
+            font-size: 45px;
+            font-weight: bold;
             margin-bottom: 20px;
             border: 1px solid #c5a059;
         }
-
-        .engine-display { font-size: 45px; font-weight: bold; letter-spacing: 5px; min-height: 60px; }
-        
-        .btn-wager {
-            width: 100%;
-            padding: 15px;
+        .input-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 15px; }
+        .input-group label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #475569; }
+        .input-group select, .input-group input { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; }
+        .btn-bet {
+            width: 100%; padding: 15px;
             background: linear-gradient(180deg, #d8b467 0%, #b38f43 100%);
-            border: none;
-            border-radius: 6px;
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 12px rgba(179, 143, 67, 0.3);
+            border: none; border-radius: 6px; color: #ffffff;
+            font-size: 16px; font-weight: 700; text-transform: uppercase;
+            cursor: pointer; letter-spacing: 1px;
         }
-
-        /* 🖥️ INTERFACE 2: ADMIN & AUDIT ENVIRONMENT */
-        .admin-module {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .admin-panel {
-            background: #ffffff;
-            border: 1px solid #d1c9bc;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-
-        /* RELATIONAL DATABASE SIMULATOR VIEW */
-        .db-table-wrapper {
-            overflow-x: auto;
-            margin-top: 10px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            max-height: 220px;
-        }
-
-        .db-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 11px;
-            font-family: monospace;
-            text-align: left;
-        }
-
-        .db-table th {
-            background: #1e293b;
-            color: #f8fafc;
-            padding: 8px 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .db-table td {
-            padding: 8px 12px;
-            border-bottom: 1px solid #e2e8f0;
-            color: #334155;
-        }
-
-        .db-table tr:hover { background: #f1f5f9; }
-
-        /* MGA AUDIT MONITOR */
-        .audit-stream {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-height: 250px;
-            overflow-y: auto;
-            padding-right: 5px;
-        }
-
-        .audit-card {
-            background: #fcfbfa;
-            border: 1px solid #e2dcd0;
-            border-left: 4px solid #0b1a30;
-            border-radius: 6px;
-            padding: 10px;
-            font-size: 11px;
-        }
-        .audit-card.win { border-left-color: #10b981; background: #f0fdf4; }
-        .audit-card.loss { border-left-color: #ef4444; background: #fef2f2; }
-
-        .hash-seal {
-            font-family: monospace;
-            background: #e2e8f0;
-            padding: 3px;
-            border-radius: 4px;
-            color: #475569;
-            font-size: 9px;
-            margin-top: 4px;
-            word-break: break-all;
-        }
-
-        .badge-live {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin-bottom: 12px;
-        }
-
-        .input-group label { font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase; }
-        .input-group select, .input-group input { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; }
+        .nav-link { display: block; text-align: center; margin-top: 15px; font-size: 12px; color: #b38f43; text-decoration: none; }
     </style>
 </head>
 <body>
 
-    <!-- MGA COMPLIANCE TOPBAR -->
-    <header class="topbar">
-        <div class="brand-details">
-            <h1>Mediterranea Corporate</h1>
-            <p>Malta Jurisdiction Gaming Infrastructure Platform</p>
+    <div class="player-card">
+        <div class="brand-header">
+            <img src="mediterranea.png.png" class="logo" alt="Casino Logo">
+            <div>
+                <h1 style="font-size: 18px; color: #0b1a30; text-transform: uppercase;">Mediterranea Terminal</h1>
+                <p style="font-size: 11px; color: #64748b;">MGA Certified Client Environment</p>
+            </div>
         </div>
-        <div class="license-badge">MGA/B2C/213/2026 • Production Sandbox Active</div>
-    </header>
 
-    <main class="workspace-grid">
+        <div class="input-group">
+            <label>Choose Game</label>
+            <select id="game-select" onchange="updateHUD()">
+                <option value="SLOTS">🎰 Azure Coast Slots (RTP 96.4%)</option>
+                <option value="ROULETTE">🎡 Valletta Roulette (RTP 97.3%)</option>
+                <option value="BLACKJACK">🃏 Gozo Blackjack (RTP 99.5%)</option>
+            </select>
+        </div>
 
-        <!-- LEFT SIDE: ACTIVE PLAYER WEB INTERFACE -->
-        <section class="player-module">
-            <h2 class="section-title">🌐 UI Interface 1: Player Front-End</h2>
-            
-            <div class="input-group">
-                <label>Select Game Motor</label>
-                <select id="player-game-select" onchange="syncPlayerUI()">
-                    <option value="SLOTS">🎰 Azure Coast Slots (RTP 96.4%)</option>
-                    <option value="ROULETTE">🎡 Valletta Premium Roulette (RTP 97.3%)</option>
-                    <option value="BLACKJACK">🃏 Gozo Grand Blackjack (RTP 99.5%)</option>
-                </select>
-            </div>
+        <div class="input-group">
+            <label>Stake Amount (€)</label>
+            <input type="number" id="bet-amount" value="10" min="1">
+        </div>
 
-            <div class="input-group">
-                <label>Wager Stake Amount (€)</label>
-                <input type="number" id="player-bet-amount" value="20" min="1">
-            </div>
+        <div class="hud-screen">
+            <div class="hud-line"><span>User ID:</span><span>PLY_MALTA_9921</span></div>
+            <div class="hud-line"><span>Active Core:</span><span id="hud-game">SLOTS</span></div>
+            <div class="hud-line"><span>Your Wallet:</span><span id="hud-balance" style="color: #10b981; font-weight: bold;">€1,000.00</span></div>
+        </div>
 
-            <div class="player-hardware-frame">
-                <div class="hud-screen">
-                    <div class="hud-line"><span>Player Identity:</span><span style="color:#ffffff;">PLY_MALTA_9921</span></div>
-                    <div class="hud-line"><span>Active Session Core:</span><span id="hud-game">SLOTS</span></div>
-                    <div class="hud-line"><span>Secure Wallet Balance:</span><span id="hud-balance" style="color: #10b981; font-weight: bold;">€1,000.00</span></div>
-                </div>
+        <div class="engine-box" id="display">🍋 🍒 💎</div>
 
-                <div class="game-engine-box">
-                    <div class="engine-display" id="visual-engine-output">🍋 🍒 💎</div>
-                </div>
+        <button class="btn-bet" onclick="playWager()">Place Secure Bet</button>
+        
+        <a href="igaming-ledger.html" class="nav-link" target="_blank">⚠️ Switch to Administrator & Auditor Dashboard →</a>
+    </div>
 
-                <button class="btn-wager" onclick="triggerWagerCycle()">Submit Secure Bet</button>
-            </div>
-        </section>
+    <script>
+        let balance = parseFloat(localStorage.getItem('p_balance')) || 1000.00;
 
-        <!-- RIGHT SIDE: REAL-TIME AUDITOR PANEL & SQL DATABASE VIEW -->
-        <section class="admin-module">
-            
-            <!-- AUDITOR LOG FEED -->
-            <div class="admin-panel">
-                <h2 class="section-title">
-                    <span>📋 UI Interface 2: Malta Authority Audit Feed</span>
-                    <span class="badge-live"></span>
-                </h2>
-                <div class="audit-stream" id="mga-audit-stream">
-                    <!-- Logs append live here -->
-                </div>
-            </div>
+        function updateHUD() {
+            document.getElementById('hud-game').innerText = document.getElementById('game-select').value;
+            document.getElementById('hud-balance').innerText = `€${balance.toFixed(2)}`;
+            localStorage.setItem('p_balance', balance);
+        }
 
-            <!-- RELATIONAL DATABASE VIEWER -->
-            <div class="admin-panel">
-                <h2 class="section-title">💾 System Administrator Database Viewer (`audit_ledger` Table)</h2>
+        function playWager() {
+            const bet = parseFloat(document.getElementById('bet-amount').value);
+            const game = document.getElementById('game-select').value;
 
+            if (isNaN(bet) || bet <= 0 || bet > balance) {
+                alert("Invalid funds."); return;
+            }
+
+            balance -= bet;
+            let isWin = Math.random() > 0.65;
+            let payout = isWin ? (game === "SLOTS" ? bet * 5 : bet * 2) : 0;
+            balance += payout;
+            updateHUD();
+
+            if(game === "SLOTS") {
+                const items = ['🍒', '🍋', '💎'];
+                document.getElementById('display').innerText = `${items[Math.floor(Math.random()*3)]} ${items[Math.floor(Math.random()*3)]} ${items[Math.floor(Math.random()*3)]}`;
+            } else {
+                document.getElementById('display').innerText = isWin ? "🎉 WINNER" : "❌ LOSE";
+            }
+
+            // Grava a transação no "Banco de Dados centralizado" compartilhado via LocalStorage
+            let ledger = JSON.parse(localStorage.getItem('mga_db_ledger')) || [];
+            ledger.unshift({
+                timestamp: new Date().toLocaleTimeString(),
+                tx_id: crypto.randomUUID(),
+                game: game,
+                bet: bet,
+                payout: payout,
+                hash: 'sha256-' + Math.random().toString(16).substring(2, 10)
+            });
+            localStorage.setItem('mga_db_ledger', JSON.stringify(ledger));
+        }
+        window.onload = updateHUD;
+    </script>
+</body>
+</html>
