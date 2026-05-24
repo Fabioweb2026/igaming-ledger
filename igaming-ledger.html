@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mediterranea Casino - AAA+ UI</title>
-    <!-- Carregando React e ReactDOM via CDN de forma estável -->
+    <!-- Bibliotecas React e ReactDOM via CDN estável -->
     <script src="https://unpkg.com" crossorigin></script>
     <script src="https://unpkg.com" crossorigin></script>
-    <!-- Babel para compilar JSX no navegador em tempo real -->
+    <!-- Compilador Babel para rodar JSX direto no navegador -->
     <script src="https://unpkg.com"></script>
 
     <style>
@@ -98,6 +98,7 @@
             border-radius: 10px;
             border: 1px solid #333;
             transition: all 0.1s ease;
+            user-select: none;
         }
 
         .reel.spinning {
@@ -169,7 +170,7 @@
                 
                 setSpinning(true);
 
-                // Animação visual local rápida
+                // Animação visual local embaralhando os símbolos
                 intervalRef.current = setInterval(() => {
                     setSlot([
                         symbols[Math.floor(Math.random() * symbols.length)],
@@ -178,7 +179,7 @@
                     ]);
                 }, 100);
 
-                // Resposta simulada do Servidor após 2 segundos
+                // Resposta segura simulada do Servidor após 2 segundos
                 setTimeout(() => {
                     if (intervalRef.current) clearInterval(intervalRef.current);
 
@@ -190,7 +191,7 @@
 
                     setSlot(finalResult);
 
-                    // CORREÇÃO: Comparação correta de matriz de elementos
+                    // CORREÇÃO LOGICA: Verifica se todos os três itens do array são idênticos
                     const isWin = finalResult[0] === finalResult[1] && finalResult[1] === finalResult[2];
 
                     if (isWin) {
@@ -212,9 +213,8 @@
                                 alt="Mediterranea Logo" 
                                 className="brand-logo"
                                 onError={(e) => {
-                                    // Fallback visual sutil caso a imagem ainda não exista no repositório
-                                    e.target.style.opacity = '0';
-                                    e.target.style.width = '0px';
+                                    // Esconde a tag caso a imagem falte ou mude de diretório
+                                    e.target.style.display = 'none';
                                 }}
                             />
                             <div className="brand">Mediterranea Casino</div>
@@ -224,6 +224,7 @@
 
                     <main className="game-area">
                         <div className="slot-machine">
+                            {/* CORREÇÃO VISUAL: Mapeamento explícito de cada rolo individual por índice */}
                             <div className={`reel ${spinning ? 'spinning' : ''}`}>{slot[0]}</div>
                             <div className={`reel ${spinning ? 'spinning' : ''}`}>{slot[1]}</div>
                             <div className={`reel ${spinning ? 'spinning' : ''}`}>{slot[2]}</div>
@@ -237,9 +238,10 @@
             );
         }
 
-        // CORREÇÃO: Chamada global do ReactDOM limpa e corrigida sem caracteres inválidos
+        // Renderização estável na Div Root
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<CasinoApp />);
     </script>
 </body>
 </html>
+
