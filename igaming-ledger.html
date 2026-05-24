@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mediterranea Casino - AAA+ UI</title>
-    <!-- Carregando React e ReactDOM via CDN de forma segura -->
+    <!-- Carregando React e ReactDOM via CDN de forma estável -->
     <script src="https://unpkg.com" crossorigin></script>
     <script src="https://unpkg.com" crossorigin></script>
-    <!-- Babel para compilar JSX no navegador (Apenas para simulação/desenvolvimento) -->
+    <!-- Babel para compilar JSX no navegador em tempo real -->
     <script src="https://unpkg.com"></script>
 
     <style>
@@ -25,6 +25,7 @@
             min-height: 100vh;
             color: white;
             font-family: 'Segoe UI', Arial, sans-serif;
+            overflow-x: hidden;
         }
 
         .topbar {
@@ -78,7 +79,6 @@
         .slot-machine {
             display: flex;
             gap: 20px;
-            font-size: 80px;
             background: #111;
             padding: 40px 60px;
             border-radius: 20px;
@@ -89,21 +89,24 @@
 
         .reel {
             width: 120px;
-            text-align: center;
+            height: 120px;
+            font-size: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: #17171c;
             border-radius: 10px;
-            padding: 10px;
             border: 1px solid #333;
             transition: all 0.1s ease;
         }
 
         .reel.spinning {
-            animation: glow 0.1s infinite alternate;
+            animation: blurGlow 0.1s infinite alternate;
         }
 
-        @keyframes glow {
-            from { text-shadow: 0 0 10px gold; transform: translateY(-2px); }
-            to { text-shadow: 0 0 25px gold; transform: translateY(2px); }
+        @keyframes blurGlow {
+            from { text-shadow: 0 0 10px gold; transform: translateY(-2px); filter: blur(1px); }
+            to { text-shadow: 0 0 25px gold; transform: translateY(2px); filter: blur(2px); }
         }
 
         .spin-btn {
@@ -153,9 +156,8 @@
             const [spinning, setSpinning] = useState(false);
             
             const symbols = ["🍒", "💎", "🔔", "7️⃣", "⭐", "🍀"];
-            const intervalRef = useRef(null); // Ref para evitar vazamento de memória
+            const intervalRef = useRef(null);
 
-            // Limpeza preventiva de memória caso o componente desmonte
             useEffect(() => {
                 return () => {
                     if (intervalRef.current) clearInterval(intervalRef.current);
@@ -167,7 +169,7 @@
                 
                 setSpinning(true);
 
-                // Animação visual local (Roleta rodando rápido)
+                // Animação visual local rápida
                 intervalRef.current = setInterval(() => {
                     setSlot([
                         symbols[Math.floor(Math.random() * symbols.length)],
@@ -176,11 +178,10 @@
                     ]);
                 }, 100);
 
-                // Simulação de resposta segura do Servidor após 2 segundos
+                // Resposta simulada do Servidor após 2 segundos
                 setTimeout(() => {
                     if (intervalRef.current) clearInterval(intervalRef.current);
 
-                    // Resultado definitivo gerado estritamente do "lado do servidor" fictício
                     const finalResult = [
                         symbols[Math.floor(Math.random() * symbols.length)],
                         symbols[Math.floor(Math.random() * symbols.length)],
@@ -189,7 +190,7 @@
 
                     setSlot(finalResult);
 
-                    // Validação de regras de vitória (3 símbolos iguais)
+                    // CORREÇÃO: Comparação correta de matriz de elementos
                     const isWin = finalResult[0] === finalResult[1] && finalResult[1] === finalResult[2];
 
                     if (isWin) {
@@ -206,18 +207,19 @@
                 <div className="casino-container">
                     <header className="topbar">
                         <div className="brand-container">
-                            {/* Logo inserida conforme solicitado. Certifique-se de que a imagem está na mesma pasta. */}
                             <img 
                                 src="mediterranea.png.png" 
                                 alt="Mediterranea Logo" 
                                 className="brand-logo"
                                 onError={(e) => {
-                                    e.target.style.display = 'none'; // Esconde a tag caso a imagem ainda não exista na pasta
+                                    // Fallback visual sutil caso a imagem ainda não exista no repositório
+                                    e.target.style.opacity = '0';
+                                    e.target.style.width = '0px';
                                 }}
                             />
                             <div className="brand">Mediterranea Casino</div>
                         </div>
-                        <div className="balance">Balance: €{balance}</div>
+                        <div className="balance">Balanço: €{balance}</div>
                     </header>
 
                     <main className="game-area">
@@ -228,15 +230,15 @@
                         </div>
 
                         <button onClick={spin} disabled={spinning} className="spin-btn">
-                            {spinning ? "SPINNING..." : "SPIN"}
+                            {spinning ? "RODANDO..." : "JOGAR"}
                         </button>
                     </main>
                 </div>
             );
         }
 
-        // Renderização na div Root
-        const root = React盤DOM.createRoot(document.getElementById('root'));
+        // CORREÇÃO: Chamada global do ReactDOM limpa e corrigida sem caracteres inválidos
+        const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<CasinoApp />);
     </script>
 </body>
