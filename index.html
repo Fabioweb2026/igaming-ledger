@@ -3,205 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sollene iGaming | Operator Risk & Player Ledger</title>
+    <title>Mediterranea Casino - AAA+ UI</title>
+    <!-- Carregando React e ReactDOM via CDN de forma segura -->
+    <script src="https://unpkg.com" crossorigin></script>
+    <script src="https://unpkg.com" crossorigin></script>
+    <!-- Babel para compilar JSX no navegador (Apenas para simulação/desenvolvimento) -->
+    <script src="https://unpkg.com"></script>
+
     <style>
-        /* DESIGN CORPORATIVO PREMIUM - TÉCNICO & COMPLIANCE */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: #121214; 
-            color: #e4e4e7; 
-            padding-bottom: 60px; 
+        /* =====================================================
+           2. AAA+ CASINO UI STYLE (CSS - PREMIUM DESIGN)
+           ===================================================== */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
-        /* BANNER EXCLUSIVO DO PROJETO */
-        .hero-top-banner {
-            width: 100%;
-            aspect-ratio: 1920 / 480; 
-            background: #000000 url('Sollene-Group.png') no-repeat center top;
-            background-size: cover; 
-            border-bottom: 3px solid #b39359;
+        body {
+            background: radial-gradient(circle at top, #1a1a1f, #0b0b10);
+            min-height: 100vh;
+            color: white;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
-        /* HEADER INDEPENDENTE DO PROJETO */
-        .main-header {
-            background: #18181b; 
-            display: flex; 
-            align-items: center; 
+        .topbar {
+            display: flex;
             justify-content: space-between;
-            padding: 15px 5%; 
-            border-bottom: 1px solid #27272a; 
-            position: sticky; 
-            top: 0; 
-            z-index: 1000;
+            align-items: center;
+            padding: 15px 30px;
+            background: #111;
+            border-bottom: 2px solid gold;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
         }
-        
-        .header-left { display: flex; align-items: center; gap: 14px; }
-        
-        .logo-wrapper {
-            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
-            background: transparent; border: 1.5px solid #b39359; border-radius: 50%;
-        }
-        
-        .logo-premium-svg { width: 16px; height: 16px; fill: #b39359; display: block; }
-        
-        .brand-title { font-size: 18px; font-weight: 800; color: #ffffff; letter-spacing: 4px; text-transform: uppercase; }
-        .brand-title span { color: #b39359; }
-        
-        .header-actions { display: flex; align-items: center; gap: 15px; }
-        
-        .btn-back-portfolio { 
-            text-decoration: none; 
-            color: #b39359; 
-            border: 1px solid #3f3f46; 
-            padding: 8px 16px; 
-            border-radius: 6px; 
-            font-size: 11px; 
-            font-weight: 800; 
-            text-transform: uppercase; 
-            letter-spacing: 1px; 
-            transition: 0.3s; 
-            background: transparent; 
-        }
-        .btn-back-portfolio:hover { background: #b39359; color: #0f0f12; border-color: #b39359; }
-        
-        .btn-clear-cache { 
-            background: #ea4335; 
-            color: #fff; 
-            border: none; 
-            padding: 8px 16px; 
-            border-radius: 6px; 
-            font-size: 11px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            text-transform: uppercase; 
-            transition: 0.3s; 
-        }
-        .btn-clear-cache:hover { background: #fff; color: #ea4335; }
 
-        /* METADADOS DE AUDITORIA DE MALTA */
-        .corporate-info-box { max-width: 1400px; margin: 30px auto 10px auto; padding: 0 2%; width: 100%; }
-        
-        .info-card-inner {
-            background: #18181b; border: 1px solid #27272a; border-radius: 12px; padding: 20px 30px;
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
-        
-        .info-block { display: flex; flex-direction: column; }
-        .info-block span { font-size: 9px; font-weight: 800; text-transform: uppercase; color: #b39359; letter-spacing: 1px; margin-bottom: 4px; }
-        .info-block p { font-size: 14px; font-weight: bold; color: #ffffff; letter-spacing: 0.5px; }
 
-        /* DASHBOARD GRID E TRABALHO */
-        .dashboard-container { 
-            max-width: 1400px; margin: 20px auto; padding: 0 2%; 
-            display: grid; grid-template-columns: 350px 1fr; gap: 30px; align-items: start;
+        .brand-logo {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            border-radius: 4px;
         }
-        
-        .panel-card { background: #18181b; border: 1px solid #27272a; border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        
-        .panel-card h2, .unified-header-black { 
-            font-size: 12px; text-transform: uppercase; letter-spacing: 2px; 
-            color: #b39359; background: #09090b; padding: 14px; margin: -20px -20px 20px -20px;
-            font-weight: 800; text-align: center; border-bottom: 1px solid #27272a;
+
+        .brand {
+            font-size: 22px;
+            font-weight: bold;
+            color: gold;
+            letter-spacing: 1px;
         }
-        
-        .form-group { margin-bottom: 15px; } 
-        .form-group label { display: block; font-size: 9px; font-weight: 800; text-transform: uppercase; margin-bottom: 6px; color: #b39359; letter-spacing: 0.5px; }
-        .form-control { width: 100%; padding: 10px 12px; border: 1px solid #27272a; border-radius: 8px; font-size: 13px; font-weight: 600; outline: none; background: #09090b; color: #ffffff; height: 40px; }
-        .form-control:focus { border-color: #b39359; }
 
-        .btn-submit { width: 100%; padding: 12px; background: #b39359; color: #0f0f12; border: none; border-radius: 8px; font-weight: 800; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; margin-top: 10px; height: 44px; transition: 0.2s; }
-        .btn-submit:hover { background: #c5a873; }
+        .balance {
+            font-size: 18px;
+            color: #4ade80;
+            font-weight: 600;
+            background: rgba(74, 222, 128, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
 
-        .unified-hub-container { background: #18181b; border: 1px solid #27272a; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); overflow: hidden; padding: 20px; }
-        .unified-hub-container .unified-header-black { margin: -20px -20px 20px -20px; }
-        
-        .table-container-fixed { width: 100%; overflow-x: auto; margin-top: 20px; }
-        table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; color: #e4e4e7; min-width: 700px; }
-        th { background: #09090b; padding: 12px 10px; font-weight: 800; text-transform: uppercase; font-size: 10px; color: #b39359; border-bottom: 2px solid #27272a; letter-spacing: 0.5px; }
-        td { padding: 12px 10px; border-bottom: 1px solid #27272a; font-weight: 600; }
-        tr:hover { background-color: #27272a; }
-        
-        /* BADGES DINÂMICOS */
-        .badge { padding: 4px 10px; border-radius: 4px; font-size: 10px; font-weight: 800; text-transform: uppercase; display: inline-block; text-align: center; min-width: 85px; }
-        .badge-profit { background: rgba(22, 163, 74, 0.2); color: #4ade80; border: 1px solid #22c55e; }
-        .badge-loss { background: rgba(220, 38, 38, 0.2); color: #f87171; border: 1px solid #ef4444; }
-        
-        .remove-btn { color: #f87171; border: none; background: none; cursor: pointer; font-size: 11px; font-weight: 800; text-transform: uppercase; }
-        .remove-btn:hover { color: #ef4444; }
+        .game-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 60px;
+            padding: 20px;
+        }
 
-        @media(max-width: 1024px) { 
-            .dashboard-container { grid-template-columns: 1fr; } 
-            .main-header { padding: 15px 20px; flex-direction: column; gap: 15px; text-align: center; }
+        .slot-machine {
+            display: flex;
+            gap: 20px;
+            font-size: 80px;
+            background: #111;
+            padding: 40px 60px;
+            border-radius: 20px;
+            border: 2px solid #222;
+            box-shadow: 0 0 50px rgba(255,215,0,0.15);
+            margin-bottom: 40px;
+        }
+
+        .reel {
+            width: 120px;
+            text-align: center;
+            background: #17171c;
+            border-radius: 10px;
+            padding: 10px;
+            border: 1px solid #333;
+            transition: all 0.1s ease;
+        }
+
+        .reel.spinning {
+            animation: glow 0.1s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { text-shadow: 0 0 10px gold; transform: translateY(-2px); }
+            to { text-shadow: 0 0 25px gold; transform: translateY(2px); }
+        }
+
+        .spin-btn {
+            padding: 18px 60px;
+            font-size: 20px;
+            background: linear-gradient(185deg, #ffe066, #f5b000);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            letter-spacing: 2px;
+            box-shadow: 0 6px 20px rgba(245, 176, 0, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .spin-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 176, 0, 0.6);
+        }
+
+        .spin-btn:active:not(:disabled) {
+            transform: translateY(1px);
+        }
+
+        .spin-btn:disabled {
+            background: #444;
+            color: #888;
+            cursor: not-allowed;
+            box-shadow: none;
         }
     </style>
 </head>
 <body>
 
-    <!-- BANNER CORPORATIVO INDIVIDUAL -->
-    <section class="hero-top-banner" aria-label="Corporate Banner"></section>
+    <div id="root"></div>
 
-    <!-- HEADER DO OPERADOR -->
-    <header class="main-header">
-        <div class="header-left">
-            <div class="logo-wrapper">
-                <svg class="logo-premium-svg" viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm1.07-7.75l-.9.92C12.45 11.9 12 12.5 12 14h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/>
-                </svg>
-            </div>
-            <h1 class="brand-title">Sollene <span>Gaming</span></h1>
-        </div>
-        <nav class="header-actions" aria-label="Quick Actions">
-            <a href="index.html" class="btn-back-portfolio">Back to Portfolio</a>
-            <button class="btn-clear-cache" id="clearCacheBtn">Clear Ledger</button>
-        </nav>
-    </header>
+    <!-- =====================================================
+       1. AAA+ VISUAL FRONTEND (REACT - CASINO UI)
+       ===================================================== -->
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
 
-    <!-- METADADOS DE AUDITORIA MGA -->
-    <section class="corporate-info-box" aria-label="MGA Compliance Live Metrics">
-        <div class="info-card-inner">
-            <div class="info-block">
-                <span>Regulatory Jurisdiction</span>
-                <p>Malta Gaming Authority (MGA)</p>
-            </div>
-            <div class="info-block">
-                <span>Total Bets (Turnover)</span>
-                <p id="totalBets">€0.00</p>
-            </div>
-            <div class="info-block">
-                <span>Total Wins (Payouts)</span>
-                <p id="totalWins">€0.00</p>
-            </div>
-            <div class="info-block">
-                <span>Gross Gaming Revenue (GGR)</span>
-                <p id="ggrValue">€0.00</p>
-            </div>
-            <div class="info-block">
-                <span>Compliance Status</span>
-                <p style="color: #4ade80; font-weight: 800;">✓ AUDIT READY</p>
-            </div>
-        </div>
-    </section>
+        function CasinoApp() {
+            const [balance, setBalance] = useState(1000);
+            const [slot, setSlot] = useState(["❔", "❔", "❔"]);
+            const [spinning, setSpinning] = useState(false);
+            
+            const symbols = ["🍒", "💎", "🔔", "7️⃣", "⭐", "🍀"];
+            const intervalRef = useRef(null); // Ref para evitar vazamento de memória
 
-    <!-- DASHBOARD WORKSPACE -->
-    <main class="dashboard-container">
-        
-        <!-- FORMULÁRIO DE ENTRADA -->
-        <section class="panel-card" aria-labelledby="formHeading">
-            <h2 id="formHeading">Log Transaction</h2>
-            <form id="transactionForm">
-                <div class="form-group">
-                    <label for="playerId">Player ID / Wallet</label>
-                    <input type="text" id="playerId" class="form-control" placeholder="e.g. PL-9082" required>
+            // Limpeza preventiva de memória caso o componente desmonte
+            useEffect(() => {
+                return () => {
+                    if (intervalRef.current) clearInterval(intervalRef.current);
+                };
+            }, []);
+
+            function spin() {
+                if (spinning) return;
+                
+                setSpinning(true);
+
+                // Animação visual local (Roleta rodando rápido)
+                intervalRef.current = setInterval(() => {
+                    setSlot([
+                        symbols[Math.floor(Math.random() * symbols.length)],
+                        symbols[Math.floor(Math.random() * symbols.length)],
+                        symbols[Math.floor(Math.random() * symbols.length)]
+                    ]);
+                }, 100);
+
+                // Simulação de resposta segura do Servidor após 2 segundos
+                setTimeout(() => {
+                    if (intervalRef.current) clearInterval(intervalRef.current);
+
+                    // Resultado definitivo gerado estritamente do "lado do servidor" fictício
+                    const finalResult = [
+                        symbols[Math.floor(Math.random() * symbols.length)],
+                        symbols[Math.floor(Math.random() * symbols.length)],
+                        symbols[Math.floor(Math.random() * symbols.length)]
+                    ];
+
+                    setSlot(finalResult);
+
+                    // Validação de regras de vitória (3 símbolos iguais)
+                    const isWin = finalResult[0] === finalResult[1] && finalResult[1] === finalResult[2];
+
+                    if (isWin) {
+                        setBalance(prev => prev + 200);
+                    } else {
+                        setBalance(prev => prev - 50);
+                    }
+
+                    setSpinning(false);
+                }, 2000);
+            }
+
+            return (
+                <div className="casino-container">
+                    <header className="topbar">
+                        <div className="brand-container">
+                            {/* Logo inserida conforme solicitado. Certifique-se de que a imagem está na mesma pasta. */}
+                            <img 
+                                src="mediterranea.png.png" 
+                                alt="Mediterranea Logo" 
+                                className="brand-logo"
+                                onError={(e) => {
+                                    e.target.style.display = 'none'; // Esconde a tag caso a imagem ainda não exista na pasta
+                                }}
+                            />
+                            <div className="brand">Mediterranea Casino</div>
+                        </div>
+                        <div className="balance">Balance: €{balance}</div>
+                    </header>
+
+                    <main className="game-area">
+                        <div className="slot-machine">
+                            <div className={`reel ${spinning ? 'spinning' : ''}`}>{slot[0]}</div>
+                            <div className={`reel ${spinning ? 'spinning' : ''}`}>{slot[1]}</div>
+                            <div className={`reel ${spinning ? 'spinning' : ''}`}>{slot[2]}</div>
+                        </div>
+
+                        <button onClick={spin} disabled={spinning} className="spin-btn">
+                            {spinning ? "SPINNING..." : "SPIN"}
+                        </button>
+                    </main>
                 </div>
-                <div class="form-group">
-                    <label for="txType">Transaction Type</label>
-                    <select id="txType" class="form-control" required>
-                        <option value="bet">Bet (Player Stake)</option>
-                        <option value="win">Win (Operator Payout)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="amount">Amount (€)</label>
+            );
+        }
+
+        // Renderização na div Root
+        const root = React盤DOM.createRoot(document.getElementById('root'));
+        root.render(<CasinoApp />);
+    </script>
+</body>
+</html>
