@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma Malta iGaming - MGA Gateway</title>
+    <!-- Vinculando seu arquivo styles.css existente -->
+    <link rel="stylesheet" href="styles.css">
     <style>
-        /* DESIGN CORPORATIVO ESCURO NEON - REPARADO */
+        /* DESIGN CORPORATIVO ESCURO NEON - SEGURO */
         * { 
             margin: 0; 
             padding: 0; 
@@ -229,43 +231,45 @@
                 <label>Aporte Emergencial / Adicionar Fundos (€):</label>
                 <input type="number" id="dep-val" value="50">
             </div>
-            <button onclick="adicionarSaldo()">Processar Depósito Instantâneo</button>
-            <h2>📊 Histórico Geral Auditado (Ledger Logs)</h2>
+            <button onclick="adicionarFundos()" style="margin-bottom: 25px;">Depositar Fundos no Ledger</button>
+
+            <h2>📜 Histórico de Auditoria (Ledger Logs)</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Transação / Origem</th>
-                        <th>Custo Alocado</th>
-                        <th>Balanço Líquido</th>
-                        <th>Auditoria MGA</th>
+                        <th>Transação</th>
+                        <th>Jogo / Tipo</th>
+                        <th>Montante (€)</th>
+                        <th>Resultado</th>
                     </tr>
                 </thead>
-                <tbody id="ledger-table-body">
-                    <tr>
-                        <td>Aporte de Boas-Vindas</td>
-                        <td>€0.00</td>
-                        <td class="win">+€100.00</td>
-                        <td style="color: #4ecca3; font-weight: bold;">Compensado</td>
-                    </tr>
+                <tbody id="ledger-rows">
+                    <!-- Logs entram aqui dinamicamente -->
                 </tbody>
             </table>
         </div>
     </div>
 
+    <!-- Vinculando seu arquivo app.js existente -->
+    <script src="app.js"></script>
+    
+    <!-- Lógica de funcionamento estático -->
     <script>
-        let userData = { nome: "", verificado: false };
-        let financeLedger = { saldo: 100.00, investido: 0.00, ganhos: 0.00, perdas: 0.00 };
+        let saldo = 100.00;
+        let totalAlocado = 0.00;
+        let lucros = 0.00;
+        let perdas = 0.00;
+        let verificado = false;
 
         function changeSection(sectionId) {
             document.getElementById('sec-cadastro').classList.add('hidden');
             document.getElementById('sec-jogos').classList.add('hidden');
             document.getElementById('sec-carteira').classList.add('hidden');
-            document.getElementById(sectionId).classList.remove('hidden');
-
+            
             document.getElementById('tab-cadastro').classList.remove('active');
             document.getElementById('tab-jogos').classList.remove('active');
             document.getElementById('tab-carteira').classList.remove('active');
-            
+
+            document.getElementById(sectionId).classList.remove('hidden');
+
             if(sectionId === 'sec-cadastro') document.getElementById('tab-cadastro').classList.add('active');
-
-
