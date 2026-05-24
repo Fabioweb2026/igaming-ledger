@@ -1,90 +1,83 @@
-let currentBalance = 0;
+<!DOCTYPE html>
+<html lang="en">
 
-async function loadPlayer() {
+<head>
 
-    const response =
-        await fetch('../database/players.json');
+    <meta charset="UTF-8">
 
-    const players =
-        await response.json();
+    <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-    const player = players[0];
+    <title>Malta iGaming Wallet</title>
 
-    currentBalance = player.walletBalance;
+    <link rel="stylesheet"
+    href="../assets/styles.css">
 
-    document.getElementById('player-name').innerText =
-        player.username;
+</head>
 
-    document.getElementById('bonus-balance').innerText =
-        '€' + player.bonusBalance;
+<body>
 
-    document.getElementById('kyc-status').innerText =
-        player.kycStatus;
+    <div class="wallet-card">
 
-    document.getElementById('vip-level').innerText =
-        player.vipLevel;
+        <h1>Player Wallet</h1>
 
-    updateBalance();
-}
+        <p>
+            Player:
+            <span id="player-name"></span>
+        </p>
 
-function updateBalance() {
+        <p>
+            Balance:
+            <span id="wallet-balance"></span>
+        </p>
 
-    document.getElementById('wallet-balance').innerText =
-        '€' + currentBalance.toFixed(2);
-}
+        <p>
+            Bonus:
+            <span id="bonus-balance"></span>
+        </p>
 
-function depositMoney() {
+        <p>
+            KYC:
+            <span id="kyc-status"></span>
+        </p>
 
-    currentBalance += 100;
+        <p>
+            VIP:
+            <span id="vip-level"></span>
+        </p>
 
-    updateBalance();
+        <button onclick="depositMoney()">
+            Deposit €100
+        </button>
 
-    alert('Deposit Successful!');
-}
+        <button onclick="placeBet()">
+            Bet €25
+        </button>
 
-function placeBet() {
+    </div>
 
-    if (currentBalance < 25) {
+    <h2>Transaction History</h2>
 
-        alert('Insufficient Balance');
+    <table>
 
-        return;
-    }
+        <thead>
 
-    currentBalance -= 25;
+            <tr>
+                <th>ID</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Status</th>
+            </tr>
 
-    updateBalance();
+        </thead>
 
-    alert('Bet Placed!');
-}
+        <tbody id="transactions-table">
 
-async function loadTransactions() {
+        </tbody>
 
-    const response =
-        await fetch('../database/transactions.json');
+    </table>
 
-    const transactions =
-        await response.json();
+    <script src="app.js"></script>
 
-    const table =
-        document.getElementById('transactions-table');
-
-    transactions.forEach(transaction => {
-
-        const row =
-            document.createElement('tr');
-
-        row.innerHTML = `
-            <td>${transaction.transactionId}</td>
-            <td>${transaction.type}</td>
-            <td>${transaction.amount} ${transaction.currency}</td>
-            <td>${transaction.status}</td>
-        `;
-
-        table.appendChild(row);
-    });
-}
-
-loadPlayer();
-
-loadTransactions();
+</body>
+</html>
