@@ -1,6 +1,27 @@
 [
   {
-    "id": 1,
-    "username": "player1"
+    "playerId": "MLT-1001",
+    "username": "alex_malta",
+    "email": "alex@mediterraneagaming.com",
+    "country": "Malta",
+    "currency": "EUR",
+    "walletBalance": 1250.50,
+    "bonusBalance": 100,
+    "kycStatus": "Approved",
+    "vipLevel": "Gold",
+    "registeredAt": "2026-05-24"
+  },
+
+  {
+    "playerId": "MLT-1002",
+    "username": "sofia_eu",
+    "email": "sofia@mediterraneagaming.com",
+    "country": "Spain",
+    "currency": "EUR",
+    "walletBalance": 520.25,
+    "bonusBalance": 25,
+    "kycStatus": "Pending",
+    "vipLevel": "Silver",
+    "registeredAt": "2026-05-20"
   }
 ]
