@@ -6,140 +6,73 @@
     <title>Malta iGaming Platform - MGA Gateway</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #121212; color: #ffffff; margin: 20px; }
-        section { background-color: #1e1e1e; padding: 20px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #333; }
-        h1, h2 { color: #ff9900; }
-        label { display: block; margin-top: 10px; font-weight: bold; }
-        select, input { width: 100%; padding: 10px; margin-top: 5px; background-color: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 4px; box-sizing: border-box; }
-        button { background-color: #ff9900; color: #000; border: none; padding: 12px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 15px; border-radius: 4px; }
+        section { background-color: #1e1e1e; padding: 20px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #333; max-width: 500px; margin: 20px auto; }
+        h1 { color: #ff9900; font-size: 22px; }
+        label { display: block; margin-top: 15px; font-weight: bold; color: #ccc; }
+        select, input { width: 100%; padding: 12px; margin-top: 5px; background-color: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #ff9900; color: #000; border: none; padding: 14px; width: 100%; margin-top: 20px; border-radius: 4px; font-weight: bold; cursor: pointer; }
         button:hover { background-color: #e68a00; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { border: 1px solid #444; padding: 10px; text-align: left; }
-        th { background-color: #2a2a2a; }
-        .status-unverified { color: #ff3333; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <!-- 🆔 REGISTRO E KYC DINÂMICO -->
     <section id="registration">
-        <h1>🆔 Operator Corporate Registration (MGA Gateway)</h1>
-        <p>In compliance with international regulations from the Malta Gaming Authority, select your country for immediate identity data verification.</p>
+        <h1>🆔 Operator Corporate Registration</h1>
         
         <form id="kycForm" onsubmit="event.preventDefault(); alert('Gateway Authenticated Successfully (Simulated)!');">
-            <label for="fullName">Beneficiary Full Name:</label>
-            <input type="text" id="fullName" placeholder="John Doe" required>
-
-            <label for="country">Jurisdiction / Country of Residence:</label>
-            <!-- CORREÇÃO: Função inline 'atualizarDocumento(this.value)' direto no select -->
-            <select id="country" onchange="atualizarDocumento(this.value)" required>
+            
+            <!-- 1. Campo de Seleção de Países -->
+            <label for="country">Jurisdiction / Country:</label>
+            <select id="country" required>
                 <option value="" disabled selected>Select your country...</option>
                 <option value="BR">Brazil (South America)</option>
-                <option value="US">United States (North America)</option>
-                <option value="MT">Malta (MGA Host Country)</option>
                 <option value="PT">Portugal (European Union)</option>
-                <option value="UK">United Kingdom (Continental Europe)</option>
+                <option value="US">United States (North America)</option>
             </select>
-
-            <label id="docLabel" for="docInput">Required Legal Document Type:</label>
-            <input type="text" id="docInput" placeholder="Select a country first" disabled required>
-
-            <label for="riskNumber">Risk Identification Number:</label>
-            <input type="text" id="riskNumber" placeholder="RISK-XXXX-FICK" required>
-
-            <button type="submit">Authenticate Gateway & Grant Access</button>
+            
+            <!-- 2. Rótulo do Documento Requerido -->
+            <label id="docLabel" for="docInput">Required Legal Document:</label>
+            
+            <!-- 3. Caixa de Entrada do Texto (Corrigida e Isolada do Botão) -->
+            <input type="text" id="docInput" placeholder="Select a country first..." required>
+            
+            <!-- 4. Botão de Envio Isolado com Fechamento Correto -->
+            <button type="submit">Authenticate Gateway</button>
+            
         </form>
     </section>
 
-    <!-- 🎰 GAMES HUB -->
-    <section id="games">
-        <h1>🎰 Games Hub & API Connection</h1>
-        <p>Status: <span class="status-unverified">Account Unverified</span></p>
-        
-        <label for="gameEngine">Choose Game Engine:</label>
-        <select id="gameEngine">
-            <option>🎰 Slot Mediterranea Gold (RTP 97.4%)</option>
-            <option>🍒 European Live Roulette Hub</option>
-            <option>🃏 Blackjack VIP Premium (Sliema)</option>
-        </select>
-
-        <label for="betAmount">Allocated Bet Amount (€):</label>
-        <input type="number" id="betAmount" value="20">
-
-        <button onclick="alert('Launch Game simulated')">Validate Gateway & Launch Game</button>
-    </section>
-
-    <!-- 💰 LEDGER BALANCE SHEET -->
-    <section id="ledger">
-        <h1>💰 Ledger Financial Balance Sheet</h1>
-        <p>Centralized accounting transaction registry for real-time risk control and regulatory audits.</p>
-        
-        <table>
-            <tr>
-                <th>Account Balance</th>
-                <td>€100.00</td>
-            </tr>
-            <tr>
-                <th>Total Allocated</th>
-                <td>€0.00</td>
-            </tr>
-            <tr>
-                <th>Generated Wins</th>
-                <td>€0.00</td>
-            </tr>
-            <tr>
-                <th>Collected Losses</th>
-                <td>€0.00</td>
-            </tr>
-        </table>
-
-        <label for="addFunds">Emergency Aport / Add Ledger Funds (€):</label>
-        <input type="number" id="addFunds" value="50">
-        
-        <button onclick="alert('Funds added into ledger registry')">Deposit Funds Into Ledger</button>
-
-        <h2>📜 Audit Trail Database (Ledger Log History)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Transaction</th>
-                    <th>Target Engine</th>
-                    <th>Amount (€)</th>
-                    <th>Gateway Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="4" style="text-align: center; color: #888;">No recent simulation records found.</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-
-    <!-- ⚙️ LÓGICA SIMPLIFICADA SEM EVENTOS TRAVADOS -->
+    <!-- ⚙️ LÓGICA JAVASCRIPT ATUALIZADA -->
     <script>
-        function atualizarDocumento(selectedCountry) {
+        document.addEventListener("DOMContentLoaded", function() {
+            const countrySelect = document.getElementById('country');
             const docLabel = document.getElementById('docLabel');
             const docInput = document.getElementById('docInput');
-
+            
+            // Mapeamento dos documentos fictícios
             const documentRules = {
-                'BR': { label: 'Required Legal Document Type: CPF (Cadastro de Pessoas Físicas)', placeholder: 'Ex: 000.000.000-00 (Fictício)' },
-                'PT': { label: 'Required Legal Document Type: Cartão de Cidadão (CC / ID Card)', placeholder: 'Ex: 00000000 0 ZZ0 (Fictício)' },
-                'MT': { label: 'Required Legal Document Type: Malta ID Card / Residence Card', placeholder: 'Ex: 123456M (Fictício)' },
-                'US': { label: 'Required Legal Document Type: Social Security Number (SSN) or Passport', placeholder: 'Ex: XXX-XX-XXXX / US-Pass (Fictício)' },
-                'UK': { label: 'Required Legal Document Type: Biometric Residence Permit (BRP) or Passport', placeholder: 'Ex: UK987654321 (Fictício)' }
+                'BR': { label: 'CPF (Cadastro de Pessoas Físicas)', placeholder: 'Ex: 000.000.000-00 (Fictício)' },
+                'PT': { label: 'Cartão de Cidadão (CC)', placeholder: 'Ex: 00000000 0 ZZ0 (Fictício)' },
+                'US': { label: 'Social Security Number (SSN)', placeholder: 'Ex: 000-00-0000 (Fictício)' }
             };
 
-            if (documentRules[selectedCountry]) {
-                docLabel.textContent = documentRules[selectedCountry].label;
-                docInput.placeholder = documentRules[selectedCountry].placeholder;
-                docInput.disabled = false;
-                docInput.value = "";
-            } else {
-                docLabel.textContent = 'Required Legal Document Type:';
-                docInput.placeholder = 'Select a country first';
-                docInput.disabled = true;
-            }
-        }
+            // Evento de escuta para quando o usuário mudar o país
+            countrySelect.addEventListener('change', function() {
+                const selected = this.value;
+                
+                if (documentRules[selected]) {
+                    // Altera o rótulo do campo e o placeholder interno da caixa cinza
+                    docLabel.textContent = "Required Legal Document: " + documentRules[selected].label;
+                    docInput.placeholder = documentRules[selected].placeholder;
+                    docInput.focus();
+                } else {
+                    docLabel.textContent = "Required Legal Document:";
+                    docInput.placeholder = "Select a country first...";
+                }
+            });
+        });
     </script>
+
 </body>
 </html>
+
