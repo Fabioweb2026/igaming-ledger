@@ -1,13 +1,13 @@
 body{
     margin:0;
-    font-family:Arial;
     background:#0f172a;
     color:white;
+    font-family:Arial;
 }
 
 header{
-    padding:20px;
     background:#111827;
+    padding:20px;
 }
 
 .card{
@@ -23,5 +23,4 @@ button{
     border-radius:8px;
     background:#22c55e;
     color:white;
-    cursor:pointer;
 }
