@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mediterranea Casino - AAA+ UI & Compliance Ledger</title>
+    <title>Mediterranea Casino - Enterprise Operational Monitor</title>
     <style>
         /* =====================================================
-           DESIGN CORPORATIVO PREMIUM - CASINO UI
+           MEDITERRANEA BRANDING: ROYAL NAVY BLUE & MATTE GOLD
            ===================================================== */
         * {
             box-sizing: border-box;
@@ -15,23 +15,24 @@
         }
 
         body {
-            background: radial-gradient(circle at top, #16161a, #08080c);
+            background: radial-gradient(circle at top, #0a1128, #02040a);
             min-height: 100vh;
-            color: white;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            color: #f0f4f8;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
         }
 
+        /* BARRA SUPERIOR */
         .topbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 30px;
-            background: #0f0f12;
-            border-bottom: 2px solid #d4af37;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            padding: 18px 40px;
+            background: rgba(4, 11, 31, 0.95);
+            border-bottom: 3px solid #c5a059;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.7);
         }
 
         .brand-container {
@@ -41,215 +42,303 @@
         }
 
         .brand-logo {
-            height: 45px;
+            height: 50px;
             width: auto;
             object-fit: contain;
-            border-radius: 4px;
+            border-radius: 6px;
+            border: 1px solid #c5a059;
         }
 
         .brand {
-            font-size: 22px;
-            font-weight: 700;
-            color: #d4af37;
-            letter-spacing: 1px;
+            font-size: 26px;
+            font-weight: 800;
+            color: #c5a059;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .stats-container {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 25px;
         }
 
         .session-timer {
             font-size: 14px;
-            color: #a0aec0;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 6px 14px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #8da2bb;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(197, 160, 89, 0.2);
         }
 
         .balance {
-            font-size: 18px;
-            color: #4ade80;
-            font-weight: 600;
-            background: rgba(74, 222, 128, 0.1);
-            padding: 8px 20px;
-            border-radius: 20px;
-            border: 1px solid rgba(74, 222, 128, 0.2);
-            box-shadow: 0 0 15px rgba(74, 222, 128, 0.1);
+            font-size: 20px;
+            color: #52e08e;
+            font-weight: 700;
+            background: rgba(82, 224, 142, 0.08);
+            padding: 10px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(82, 224, 142, 0.25);
+            box-shadow: 0 0 20px rgba(82, 224, 142, 0.1);
         }
 
+        /* LAYOUT CORPORATIVO TRIPLE-SPLIT */
         .main-layout {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 30px;
-            padding: 40px 30px;
+            grid-template-columns: 320px 1fr 380px;
+            gap: 25px;
+            padding: 30px;
             flex: 1;
-            max-width: 1600px;
             width: 100%;
             margin: 0 auto;
         }
 
-        /* PAINEL DE CONTROLE DE COMPLIANCE */
+        /* PAINEL LATERAL 1: CONFIGURAÇÕES E PARÂMETROS */
         .compliance-panel {
-            background: #111115;
-            border: 1px solid #222;
+            background: #060d1f;
+            border: 1px solid #142347;
             border-radius: 16px;
-            padding: 20px;
+            padding: 22px;
             display: flex;
             flex-direction: column;
             gap: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .compliance-panel h3 {
-            color: #d4af37;
-            font-size: 16px;
+            color: #c5a059;
+            font-size: 15px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid #222;
-            padding-bottom: 10px;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #142347;
+            padding-bottom: 12px;
         }
 
         .control-group {
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .control-group label {
             font-size: 12px;
-            color: #a0aec0;
+            color: #8da2bb;
             text-transform: uppercase;
+            font-weight: 600;
         }
 
         .control-group select, .control-group input {
-            background: #17171c;
-            border: 1px solid #333;
-            color: white;
-            padding: 10px;
+            background: #020612;
+            border: 1px solid #1d3366;
+            color: #ffffff;
+            padding: 12px;
             border-radius: 8px;
             font-size: 14px;
             outline: none;
+            transition: border 0.2s;
         }
 
-        .mga-badge {
-            margin-top: auto;
-            font-size: 11px;
-            color: #718096;
-            text-align: center;
-            border-top: 1px solid #222;
-            padding-top: 15px;
-            line-height: 1.4;
+        .control-group select:focus, .control-group input:focus {
+            border-color: #c5a059;
         }
 
-        /* ÁREA PRINCIPAL DO JOGO */
+        /* PAINEL CENTRAL: INTERFACE DA MÁQUINA */
         .game-area {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: #0f0f13;
+            background: #030816;
             border-radius: 16px;
-            border: 1px solid #222;
+            border: 1px solid #101c3a;
             padding: 40px;
+            position: relative;
         }
 
         .slot-machine {
             display: flex;
-            gap: 20px;
-            background: #09090b;
-            padding: 30px 40px;
-            border-radius: 24px;
-            border: 2px solid #1a1a22;
-            box-shadow: 0 0 60px rgba(212, 175, 55, 0.1);
-            margin-bottom: 40px;
+            gap: 25px;
+            background: #01030a;
+            padding: 35px 50px;
+            border-radius: 28px;
+            border: 2px solid #1d3366;
+            box-shadow: 0 0 60px rgba(197, 160, 89, 0.15);
+            margin-bottom: 45px;
         }
 
         .reel {
-            width: 140px;
-            height: 140px;
-            font-size: 75px;
+            width: 130px;
+            height: 130px;
+            font-size: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(180deg, #131317, #1c1c24);
-            border-radius: 16px;
-            border: 1px solid #2d2d37;
+            background: linear-gradient(180deg, #050b1a, #0b1530);
+            border-radius: 20px;
+            border: 1px solid #223a73;
             transition: all 0.1s ease;
             user-select: none;
         }
 
         .reel.spinning {
-            animation: blurGlow 0.1s infinite alternate;
+            animation: blurGlow 0.08s infinite alternate;
         }
 
         @keyframes blurGlow {
-            from { text-shadow: 0 0 10px #d4af37; transform: translateY(-4px); filter: blur(1px); }
-            to { text-shadow: 0 0 30px #d4af37; transform: translateY(4px); filter: blur(2px); }
+            from { text-shadow: 0 0 15px #c5a059; transform: translateY(-5px); filter: blur(1px); }
+            to { text-shadow: 0 0 35px #c5a059; transform: translateY(5px); filter: blur(3px); }
         }
 
         .spin-btn {
-            padding: 20px 80px;
-            font-size: 22px;
-            background: linear-gradient(185deg, #fff3a8, #d4af37);
-            color: #000;
+            padding: 22px 90px;
+            font-size: 24px;
+            background: linear-gradient(185deg, #f3d498, #c5a059);
+            color: #02040a;
             border: none;
-            border-radius: 14px;
+            border-radius: 16px;
             cursor: pointer;
-            font-weight: 700;
-            letter-spacing: 2px;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.3);
+            font-weight: 800;
+            letter-spacing: 3px;
+            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.3);
             transition: all 0.2s ease;
             text-transform: uppercase;
         }
 
         .spin-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.5);
         }
 
         .spin-btn:disabled {
-            background: #2d2d35;
-            color: #555;
+            background: #121a2e;
+            color: #405275;
             cursor: not-allowed;
             box-shadow: none;
         }
 
-        /* SEÇÃO DA TRILHA DE AUDITORIA (LEDGER) */
+        /* PAINEL LATERAL 2: TELÃO DE DADOS EM TEMPO REAL */
+        .live-stream-panel {
+            background: #060d1f;
+            border: 1px solid #142347;
+            border-radius: 16px;
+            padding: 22px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .live-stream-panel h3 {
+            color: #c5a059;
+            font-size: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #142347;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .live-indicator {
+            width: 8px;
+            height: 8px;
+            background: #52e08e;
+            border-radius: 50%;
+            animation: pulse 1s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { opacity: 0.4; box-shadow: 0 0 2px #52e08e; }
+            to { opacity: 1; box-shadow: 0 0 10px #52e08e; }
+        }
+
+        .stream-container {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 480px;
+            padding-right: 5px;
+        }
+
+        .stream-card {
+            background: #020612;
+            border: 1px solid #101c3a;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 13px;
+            animation: slideIn 0.3s ease-out;
+            border-left: 3px solid #c5a059;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .stream-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .player-name { color: #8da2bb; }
+        .game-type {
+            font-size: 11px;
+            background: #142347;
+            color: #c5a059;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .stream-body {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Courier New', monospace;
+        }
+
+        .player-bet { color: #f87171; }
+        .player-wallet { color: #a0aec0; }
+
+        /* ABAIXO: TRILHA DE AUDITORIA LOCAL (LEDGER) */
         .ledger-section {
-            padding: 0 30px 40px 30px;
-            max-width: 1600px;
+            padding: 0 30px 30px 30px;
             width: 100%;
             margin: 0 auto;
         }
 
         .ledger-card {
-            background: #111115;
-            border: 1px solid #222;
+            background: #060d1f;
+            border: 1px solid #142347;
             border-radius: 16px;
             padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .ledger-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid #142347;
             padding-bottom: 15px;
             margin-bottom: 15px;
         }
 
         .ledger-header h4 {
-            color: #d4af37;
+            color: #c5a059;
             font-size: 14px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         .ledger-table-wrapper {
-            max-height: 200px;
+            max-height: 180px;
             overflow-y: auto;
         }
 
@@ -261,79 +350,5 @@
         }
 
         .ledger-table th {
-            color: #718096;
+            color: #8da2bb;
             padding: 10px;
-            border-bottom: 1px solid #1a1a22;
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 11px;
-        }
-
-        .ledger-table td {
-            padding: 12px 10px;
-            border-bottom: 1px solid #1a1a22;
-            font-family: 'Courier New', Courier, monospace;
-        }
-
-        .status-win { color: #4ade80; font-weight: bold; }
-        .status-loss { color: #f87171; }
-        .hash-text { color: #63b3ed; font-size: 11px; }
-    </style>
-</head>
-<body>
-
-    <!-- BARRA SUPERIOR REGULAMENTADA -->
-    <header class="topbar">
-        <div class="brand-container">
-            <img src="mediterranea.png.png" alt="Logo" class="brand-logo" id="logo-img" />
-            <div class="brand">Mediterranea</div>
-        </div>
-        <div class="stats-container">
-            <div class="session-timer" id="session-clock">Sessão: 00:00</div>
-            <div class="balance" id="balance-display">Balanço: €1.000,00</div>
-        </div>
-    </header>
-
-    <div class="main-layout">
-        <!-- PAINEL LATERAL DE COMPLIANCE / CONFIGURAÇÃO -->
-        <aside class="compliance-panel">
-            <h3>Jogo Responsável</h3>
-            
-            <div class="control-group">
-                <label>Aposta por Jogada</label>
-                <select id="bet-size">
-                    <option value="10">€10,00</option>
-                    <option value="25">€25,00</option>
-                    <option value="50" selected>€50,00</option>
-                    <option value="100">€100,00</option>
-                </select>
-            </div>
-
-            <div class="control-group">
-                <label>Limite de Perda da Sessão</label>
-                <input type="text" value="€500,00" disabled style="color: #718096;" />
-            </div>
-
-            <div class="mga-badge">
-                Licença MGA/B2C/2026<br>
-                Operação Segura Submetida a Auditoria Criptográfica Contínua.
-            </div>
-        </aside>
-
-        <!-- ÁREA CENTRAL DO MÓDULO CASINO -->
-        <main class="game-area">
-            <div class="slot-machine">
-                <div class="reel" id="reel-0">🎰</div>
-                <div class="reel" id="reel-1">🎰</div>
-                <div class="reel" id="reel-2">🎰</div>
-            </div>
-
-            <button class="spin-btn" id="spin-button">Rodar</button>
-        </main>
-    </div>
-
-    <!-- SISTEMA DE TRILHA DE AUDITORIA (LEDGER LOGS) -->
-    <section class="ledger-section">
-        <div class="ledger-card">
-            <div class="ledger-header">
-                <h4>Trilha de Auditoria em Tempo Real (RNG Ledger Logs)</h4>
