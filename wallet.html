@@ -1,60 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iGaming - Player Wallet</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #0f0f1a; color: #f1f1f6; padding-bottom: 50px; }
-        .gaming-nav { background: #1a1a2e; padding: 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border-bottom: 2px solid #232342; }
-        .gaming-nav a { color: #fff; margin: 0 12px; text-decoration: none; font-size: 14px; transition: all 0.3s; }
-        .gaming-nav a:hover, .gaming-nav a.active { color: #4ecca3; text-shadow: 0 0 8px rgba(78, 204, 163, 0.6); }
-        .container { max-width: 600px; margin: 40px auto; padding: 0 20px; }
-        .wallet-card { background: #16162a; border: 1px solid #232342; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        h1 { font-size: 24px; color: #fff; margin-bottom: 20px; border-bottom: 2px solid #4ecca3; padding-bottom: 8px; }
-        p { font-size: 16px; margin-bottom: 12px; color: #b5b5c6; display: flex; justify-content: space-between; }
-        span.value { font-weight: bold; color: #ffffff; }
-        button { background: #4ecca3; color: #0f0f1a; border: none; padding: 12px 24px; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; text-transform: uppercase; transition: all 0.2s; width: 100%; margin-top: 15px; }
-        button:hover { background-color: #3db892; box-shadow: 0 5px 15px rgba(78, 204, 163, 0.4); }
-    </style>
+    <title>Wallet</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <nav class="gaming-nav">
-        <a href="index.html">🏠 Home Portfólio</a>
-        <a href="igaming-ledger.html">📊 Ledger</a>
-        <a href="lobby.html">🎮 Lobby</a>
-        <a href="wallet.html" class="active">💰 Wallet</a>
-        <a href="kyc.html">🆔 KYC</a>
-        <a href="games.html">🎰 Games</a>
-        <a href="admin.html">⚙️ Admin</a>
-    </nav>
+<nav class="gaming-nav">
+    <a href="index.html">🏠 Home</a>
+</nav>
 
-    <div class="container">
-        <div class="wallet-card">
-            <h1>Player Wallet</h1>
-            <p>Player: <span class="value">Fabio Web Developer</span></p>
-            <p>Balance: <span id="w-bal" class="value">€250.00</span></p>
-            <p>Bonus: <span id="w-bon" class="value">€50.00</span></p>
-            <p>KYC: <span class="value" style="color: #4ecca3;">Verified</span></p>
-            <p>VIP: <span class="value">VIP Bronze</span></p>
+<section class="card">
+    <h1>Wallet Module</h1>
+    <p>Coming Soon...</p>
+</section>
 
-            <button onclick="addFunds()">Deposit €100</button>
-        </div>
-    </div>
-
-    <script>
-        let currentBal = 250.00;
-        let currentBon = 50.00;
-        function addFunds() {
-            currentBal += 100.00;
-            currentBon += 10.00;
-            document.getElementById('w-bal').innerText = `€${currentBal.toFixed(2)}`;
-            document.getElementById('w-bon').innerText = `€${currentBon.toFixed(2)}`;
-            alert("Depósito de €100.00 creditado!");
-        }
-    </script>
 </body>
 </html>
-
