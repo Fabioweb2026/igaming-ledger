@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mediterranea Casino - Player Terminal</title>
-    <!-- SUPABASE CORE SDK -->
+    <!-- SUPABASE CLIENT CORE SDK -->
     <script src="https://jsdelivr.net"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,13 +37,9 @@
         }
         .logo-img { height: 45px; border-radius: 4px; border: 1px solid #c5a059; }
         
-        /* CONTROLE RÍGIDO DE TELAS */
-        .screen { display: none; }
-        .screen.active-view { display: block !important; }
-
         .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 15px; }
         .form-group label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: #475569; }
-        .form-group input { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; }
+        .form-group input { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 14px; background: #fff; color: #1a2a3a; }
         
         .hud-display {
             background: #020617;
@@ -68,6 +64,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: #1a2a3a;
         }
         .game-btn:hover { border-color: #c5a059; background: #fffdf9; }
 
@@ -95,141 +92,139 @@
 </head>
 <body>
 
-    <div class="app-container">
-        <!-- CABEÇALHO CORPORATIVO GLOBAL -->
-        <div class="header-block">
-            <img src="mediterranea.png.png" class="logo-img" alt="Casino Logo">
-            <div>
-                <h1 style="font-size: 18px; color: #0b1a30; text-transform: uppercase;">Mediterranea Core</h1>
-                <p style="font-size: 11px; color: #64748b;">MGA Certified Player Environment</p>
-            </div>
-        </div>
-
-        <!-- TELA 1: CADASTRO INICIAL DO JOGADOR -->
-        <div id="view-register" class="screen active-view">
-            <h2 style="font-size: 13px; text-transform: uppercase; margin-bottom: 15px; color: #0b1a30;">Global Registration Terminal</h2>
-            
-            <div class="form-group">
-                <label>Create Player Username</label>
-                <input type="text" id="player-username" value="PLAYER_GLOBAL_1">
-            </div>
-
-            <div class="form-group">
-                <label>Initial Wallet Funding Deposit (€)</label>
-                <input type="number" id="player-deposit" value="1000">
-            </div>
-
-            <button class="btn-core" onclick="submitRegistration()">Register & Open Wallet</button>
-        </div>
-
-        <!-- TELA 2: LOBBY DE SELEÇÃO DE JOGOS (ESCONDIDO POR PADRÃO) -->
-        <div id="view-lobby" class="screen">
-            <div class="hud-display">
-                <div class="hud-line"><span>Account Owner:</span><span id="lobby-username" style="color:white;">-</span></div>
-                <div class="hud-line"><span>Certified Balance:</span><span id="lobby-wallet" style="color: #10b981; font-weight: bold;">€0.00</span></div>
-            </div>
-
-            <h2 style="font-size: 12px; text-transform: uppercase; color: #475569;">Select Live iGaming Engine:</h2>
-            <div class="lobby-channels">
-                <div class="game-btn" onclick="openGameScreen('SLOTS')">
-                    <span>🎰 Azure Coast Slots</span>
-                    <span style="font-size:11px; color:#64748b;">RTP 96.4% →</span>
-                </div>
-                <div class="game-btn" onclick="openGameScreen('ROULETTE')">
-                    <span>🎡 Valletta Premium Roulette</span>
-                    <span style="font-size:11px; color:#64748b;">RTP 97.3% →</span>
-                </div>
-            </div>
-            
-            <button class="btn-core" style="background: #475569;" onclick="exitSession()">Disconnect Wallet</button>
-        </div>
-
-        <!-- TELA 3: INTERFACE DE APOSTA ATIVA (ESCONDIDO POR PADRÃO) -->
-        <div id="view-game" class="screen">
-            <div class="hud-display">
-                <div class="hud-line"><span>Active User:</span><span id="game-username" style="color:white;">-</span></div>
-                <div class="hud-line"><span>Active Module:</span><span id="game-core-name" style="color:#38bdf8;">-</span></div>
-                <div class="hud-line"><span>Wallet Balance:</span><span id="game-wallet" style="color: #10b981; font-weight: bold;">€0.00</span></div>
-            </div>
-
-            <div class="form-group">
-                <label>Stake Amount (€)</label>
-                <input type="number" id="bet-stake" value="20" min="1">
-            </div>
-
-            <div class="display-matrix" id="display-output">---</div>
-
-            <button class="btn-core" onclick="commitCloudBet()">Place Verified Bet</button>
-            <a href="#" class="btn-link" onclick="backToLobby()">← Back to Casino Lobby</a>
-        </div>
-
+    <div class="app-container" id="main-injector">
+        <!-- O CONTEÚDO SERÁ INJETADO DINAMICAMENTE AQUI PARA EVITAR ERRO DE LAYOUT EMPILHADO -->
     </div>
 
     <script>
-        // CONFIGURAÇÕES DO BANCO DE DADOS EM NUVEM
+        // CONFIGURAÇÕES DE CONEXÃO COM O BANCO DE DADOS EM NUVEM
         const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
         const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Estado da sessão em tempo real
-        let playerSession = { username: "", balance: 0, activeGame: "" };
+        // Estado Global da Sessão Ativa
+        let playerSession = { 
+            fullName: "",
+            documentId: "",
+            username: "", 
+            balance: 0, 
+            activeGame: "" 
+        };
 
-        // Função limpa e rígida de troca de telas via JavaScript
-        function changeScreen(targetId) {
-            document.getElementById('view-register').className = 'screen';
-            document.getElementById('view-lobby').className = 'screen';
-            document.getElementById('view-game').className = 'screen';
+        // Template do Cabeçalho Global
+        const headerHTML = `
+            <div class="header-block">
+                <img src="mediterranea.png.png" class="logo-img" alt="Casino Logo">
+                <div>
+                    <h1 style="font-size: 18px; color: #0b1a30; text-transform: uppercase;">Mediterranea Core</h1>
+                    <p style="font-size: 11px; color: #64748b;">MGA Certified Player Environment</p>
+                </div>
+            </div>
+        `;
 
-            document.getElementById(targetId).className = 'screen active-view';
+        // 1. CARREGA A TELA DE CADASTRO REAL NA INICIALIZAÇÃO
+        window.onload = function() {
+            renderRegisterScreen();
+        };
+
+        function renderRegisterScreen() {
+            const container = document.getElementById('main-injector');
+            container.innerHTML = headerHTML + `
+                <h2 style="font-size: 13px; text-transform: uppercase; margin-bottom: 15px; color: #0b1a30;">Reception & KYC Registration Terminal</h2>
+                
+                <div class="form-group">
+                    <label>Full Legal Name</label>
+                    <input type="text" id="reg-name" placeholder="John Doe">
+                </div>
+
+                <div class="form-group">
+                    <label>Document Number (Passport / CPF / ID)</label>
+                    <input type="text" id="reg-doc" placeholder="A1234567B / 123.456.789-00">
+                </div>
+
+                <div class="form-group">
+                    <label>Create Player Account Username</label>
+                    <input type="text" id="reg-user" placeholder="e.g. johndoe77">
+                </div>
+
+                <div class="form-group">
+                    <label>Initial Wallet Ingestion Deposit (€)</label>
+                    <input type="number" id="reg-deposit" value="1000">
+                </div>
+
+                <button class="btn-core" onclick="submitRegistration()">Register & Load System Lobby</button>
+            `;
         }
 
+        // 2. PROCESSA O CADASTRO E INJETA O LOBBY (LIMPA A TELA TOTALMENTE)
         function submitRegistration() {
-            const user = document.getElementById('player-username').value.trim();
-            const deposit = parseFloat(document.getElementById('player-deposit').value);
+            const name = document.getElementById('reg-name').value.trim();
+            const doc = document.getElementById('reg-doc').value.trim();
+            const user = document.getElementById('reg-user').value.trim();
+            const deposit = parseFloat(document.getElementById('reg-deposit').value);
 
-            if(!user || isNaN(deposit) || deposit <= 0) {
-                alert("Please insert valid registration details."); return;
+            if(!name || !doc || !user || isNaN(deposit) || deposit <= 0) {
+                alert("Please fill all legal registration and compliance fields."); return;
             }
 
+            // Salva as credenciais no estado contábil
+            playerSession.fullName = name;
+            playerSession.documentId = doc;
             playerSession.username = user;
             playerSession.balance = deposit;
 
-            document.getElementById('lobby-username').innerText = user;
-            document.getElementById('lobby-wallet').innerText = `€${deposit.toFixed(2)}`;
-
-            changeScreen('view-lobby');
+            renderLobbyScreen();
         }
 
-        function openGameScreen(gameType) {
+        function renderLobbyScreen() {
+            const container = document.getElementById('main-injector');
+            container.innerHTML = headerHTML + `
+                <div class="hud-display">
+                    <div class="hud-line"><span>Name:</span><span style="color:white;">${playerSession.fullName}</span></div>
+                    <div class="hud-line"><span>Document Verified:</span><span style="color:white;">${playerSession.documentId}</span></div>
+                    <div class="hud-line"><span>Username ID:</span><span style="color:white;">${playerSession.username}</span></div>
+                    <div class="hud-line"><span>Certified Balance:</span><span style="color: #10b981; font-weight: bold;">€${playerSession.balance.toFixed(2)}</span></div>
+                </div>
+
+                <h2 style="font-size: 12px; text-transform: uppercase; color: #475569; margin-bottom: 10px;">Select Certified iGaming Engine:</h2>
+                <div class="lobby-channels">
+                    <div class="game-btn" onclick="launchGameEngine('SLOTS')">
+                        <span>🎰 Azure Coast Slots</span>
+                        <span style="font-size:11px; color:#64748b;">RTP 96.4% →</span>
+                    </div>
+                    <div class="game-btn" onclick="launchGameEngine('ROULETTE')">
+                        <span>🎡 Valletta Premium Roulette</span>
+                        <span style="font-size:11px; color:#64748b;">RTP 97.3% →</span>
+                    </div>
+                </div>
+                
+                <button class="btn-core" style="background: #475569;" onclick="renderRegisterScreen()">Disconnect Session</button>
+            `;
+        }
+
+        // 3. ENTRA NA TELA DO JOGO ESCOLHIDO
+        function launchGameEngine(gameType) {
             playerSession.activeGame = gameType;
-            document.getElementById('game-username').innerText = playerSession.username;
-            document.getElementById('game-core-name').innerText = gameType;
-            document.getElementById('game-wallet').innerText = `€${playerSession.balance.toFixed(2)}`;
-            document.getElementById('display-output').innerText = gameType === 'SLOTS' ? "🍋 🍒 💎" : "🟢 0";
-
-            changeScreen('view-game');
+            renderGameScreen();
         }
 
-        function backToLobby() {
-            document.getElementById('lobby-wallet').innerText = `€${playerSession.balance.toFixed(2)}`;
-            changeScreen('view-lobby');
-        }
+        function renderGameScreen() {
+            const container = document.getElementById('main-injector');
+            const defaultVisual = playerSession.activeGame === 'SLOTS' ? "🍋 🍒 💎" : "🟢 0";
 
-        function exitSession() {
-            playerSession = { username: "", balance: 0, activeGame: "" };
-            changeScreen('view-register');
-        }
+            container.innerHTML = headerHTML + `
+                <div class="hud-display">
+                    <div class="hud-line"><span>Active Account:</span><span style="color:white;">${playerSession.username}</span></div>
+                    <div class="hud-line"><span>Active Module:</span><span style="color:#38bdf8; font-weight:bold;">${playerSession.activeGame}</span></div>
+                    <div class="hud-line"><span>Wallet Balance:</span><span style="color: #10b981; font-weight: bold;">€${playerSession.balance.toFixed(2)}</span></div>
+                </div>
 
-        async function commitCloudBet() {
-            const stake = parseFloat(document.getElementById('bet-stake').value);
-            if(isNaN(stake) || stake <= 0 || stake > playerSession.balance) {
-                alert("Transaction Rejected: Insufficient balance."); return;
-            }
+                <div class="form-group" style="margin-top: 15px;">
+                    <label>Stake Amount (€)</label>
+                    <input type="number" id="bet-stake" value="20" min="1">
+                </div>
 
-            playerSession.balance -= stake;
-            let isWin = Math.random() > 0.70;
-            let payout = isWin ? (playerSession.activeGame === 'SLOTS' ? stake * 5 : stake * 2) : 0;
-            playerSession.balance += payout;
+                <div class="display-matrix" id="display-output">${defaultVisual}</div>
 
-            // Roda os motores visuais na tela pequena do jogador
-            if(playerSession.activeGame === 'SLOTS') {
+                <button class="btn-core" onclick="commitCloudBet()">Place Verified Bet</button>
+
