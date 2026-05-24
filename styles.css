@@ -1,1 +1,88 @@
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0f0f1a;
+    color: #f1f1f6;
+    line-height: 1.6;
+    padding-bottom: 50px;
+}
+
+/* Customização do Menu Global */
+.gaming-nav {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    border-bottom: 2px solid #232342;
+}
+
+.gaming-nav a {
+    transition: all 0.3s ease;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+}
+
+.gaming-nav a:hover {
+    color: #4ecca3 !important;
+    text-shadow: 0 0 8px rgba(78, 204, 163, 0.6);
+}
+
+/* Containers e Cards de Layout */
+.wallet-card, .ledger-container, .lobby-container, .kyc-container, .games-container, .admin-container {
+    background: #16162a;
+    border: 1px solid #232342;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    color: #ffffff;
+    font-size: 28px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #4ecca3;
+    padding-bottom: 10px;
+}
+
+p {
+    font-size: 16px;
+    margin-bottom: 12px;
+    color: #b5b5c6;
+}
+
+strong, span {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Botões Estilizados */
+button {
+    background-color: #4ecca3;
+    color: #0f0f1a;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background-color: #3db892;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(78, 204, 163, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+}
 
