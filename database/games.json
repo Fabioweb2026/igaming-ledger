@@ -1,1 +1,9 @@
-
+[
+  {
+    "gameId": "SLOT-001",
+    "name": "Mediterranean Fortune",
+    "provider": "MGA Studio",
+    "type": "Slot",
+    "rtp": 96.5
+  }
+]
