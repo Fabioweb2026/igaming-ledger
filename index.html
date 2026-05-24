@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma Malta iGaming - MGA Gateway</title>
+    <title>Malta iGaming Platform - MGA Gateway</title>
     <style>
-        /* DESIGN CORPORATIVO ESCURO NEON - GLOBAL COMPLIANCE */
+        /* CORPORATE DARK NEON DESIGN - GLOBAL COMPLIANCE */
         * { 
             margin: 0; 
             padding: 0; 
@@ -119,123 +119,124 @@
 <body>
 
     <div class="container">
-        <!-- Navegação Principal -->
+        <!-- Main Navigation Nav -->
         <nav class="gaming-nav">
-            <a id="tab-cadastro" onclick="changeSection('sec-cadastro')" class="active">🆔 Registro & Global KYC</a>
-            <a id="tab-jogos" onclick="changeSection('sec-jogos')">🎰 Lobby de Jogos</a>
+            <a id="tab-cadastro" onclick="changeSection('sec-cadastro')" class="active">🆔 Registration & Global KYC</a>
+            <a id="tab-jogos" onclick="changeSection('sec-jogos')">🎰 Games Lobby</a>
         </nav>
 
-        <!-- ABA 1: REGISTRO GLOBAL & KYC DINÂMICO -->
+        <!-- TAB 1: REGISTRATION & DYNAMIC KYC -->
         <div id="sec-cadastro" class="card">
-            <h1>🆔 Registro Regulatório do Operador (MGA Gateway)</h1>
-            <p>Em conformidade com as diretivas internacionais da Malta Gaming Authority, selecione seu país para processamento imediato dos dados de identidade corporativa.</p>
+            <h1>🆔 Operator Corporate Registration (MGA Gateway)</h1>
+            <p>In compliance with international regulations from the Malta Gaming Authority, select your country for immediate identity data processing.</p>
             
             <div class="form-group">
-                <label>Nome Completo do Beneficiário:</label>
-                <input type="text" id="p-name" placeholder="Ex: Fabio Web Developer">
+                <label>Beneficiary Full Name:</label>
+                <input type="text" id="p-name" placeholder="e.g., Fabio Web Developer">
             </div>
 
             <div class="form-group">
-                <label>País de Jurisdição / Residência:</label>
+                <label>Jurisdiction / Country of Residence:</label>
                 <select id="p-country" onchange="configurarFiltroKYC()">
-                    <!-- América do Sul -->
-                    <option value="Brasil" selected>Brasil (América do Sul)</option>
-                    <option value="Argentina">Argentina (América do Sul)</option>
-                    <!-- América do Norte -->
-                    <option value="Estados Unidos">Estados Unidos (América do Norte)</option>
-                    <option value="Canadá">Canadá (América do Norte)</option>
-                    <!-- Europa (União Europeia) -->
-                    <option value="Portugal">Portugal (União Europeia)</option>
+                    <!-- South America -->
+                    <option value="Brazil" selected>Brazil (South America)</option>
+                    <option value="Argentina">Argentina (South America)</option>
+                    <!-- North America -->
+                    <option value="United States">United States (North America)</option>
+                    <option value="Canada">Canada (North America)</option>
+                    <!-- Europe -->
+                    <option value="Portugal">Portugal (European Union)</option>
                     <option value="Malta">Malta (MGA Host Country)</option>
-                    <option value="Alemanha">Alemanha (União Europeia)</option>
-                    <option value="Reino Unido">Reino Unido (Europa Continental)</option>
-                    <!-- Ásia / Oceania / África -->
-                    <option value="Japão">Japão (Ásia)</option>
-                    <option value="Austrália">Austrália (Oceania)</option>
-                    <option value="África do Sul">África do Sul (África)</option>
+                    <option value="Germany">Germany (European Union)</option>
+                    <option value="United Kingdom">United Kingdom (Continental Europe)</option>
+                    <!-- Asia / Oceania / Africa -->
+                    <option value="Japan">Japan (Asia)</option>
+                    <option value="Australia">Australia (Oceania)</option>
+                    <option value="South Africa">South Africa (Africa)</option>
                 </select>
             </div>
 
-            <!-- Caixa informativa de Compliance Dinâmica -->
+            <!-- Dynamic Compliance Info Box -->
             <div id="compliance-box" class="info-compliance">
-                Regra Aplicada: Validação de CPF via base compartilhada nacional (Lei Geral de Proteção e Apostas).
+                Applied Rule: CPF verification via national shared database (Betting & Data Protection Law).
             </div>
 
             <div class="form-group">
-                <label id="lbl-doc-type">Tipo de Documento Legal Exigido:</label>
+                <label id="lbl-doc-type">Required Legal Document Type:</label>
                 <select id="p-doc-type">
-                    <!-- Gerado dinamicamente via JS -->
+                    <!-- Dynamic entries injected via JS -->
                 </select>
             </div>
 
             <div class="form-group">
-                <label id="lbl-doc-num">Número de Identificação de Risco:</label>
+                <label id="lbl-doc-num">Risk Identification Number:</label>
                 <input type="text" id="p-doc-num" placeholder="000.000.000-00">
             </div>
 
-            <button onclick="registrarUsuarioGlobal()">Autenticar Gateway & Liberar Acesso</button>
+            <button onclick="registrarUsuarioGlobal()">Authenticate Gateway & Grant Access</button>
         </div>
 
-        <!-- ABA 2: HUB / LOBBY DE JOGOS -->
+        <!-- TAB 2: GAMES LOBBY -->
         <div id="sec-jogos" class="card hidden">
-            <h1>🎰 Hub de Jogos & Conexão de API</h1>
-            <p id="player-status" style="color: #4ecca3; font-weight: bold;">Status: Conta Não Verificada</p>
-            <p>O gateway de transações está pronto para operar moedas internacionais indexadas ao balanço patrimonial do Ledger.</p>
-            <button onclick="alert('Conexão realizada com sucesso com os servidores de Malta!')">Validar Gateway & Iniciar Partida</button>
+            <h1>🎰 Games Hub & API Connection</h1>
+            <p id="player-status" style="color: #4ecca3; font-weight: bold;">Status: Account Unverified</p>
+            <p style="margin-top: 15px;">The transactions gateway is ready to operate international currencies indexed to the Ledger balance sheet.</p>
+            <button onclick="alert('Successfully connected to Malta Secure Servers!')">Validate Gateway & Launch Game</button>
         </div>
     </div>
 
     <script>
-        // Sistema Base de Configurações KYC Globais por País
+        // Global KYC Rules Dataset mapped in English
         const regrasKYC = {
-            "Brasil": {
-                documentos: ["CPF (Cadastro de Pessoas Físicas)", "Passaporte Federal"],
-                placeholder: "Ex: 000.000.000-00",
-                info: "Regra SPA/MF: Cruzamento obrigatório de dados via número do CPF e validações biométricas fiscais."
+            "Brazil": {
+                documentos: ["CPF (Taxpayer Registry Number)", "Federal Passport"],
+                placeholder: "e.g., 000.000.000-00",
+                info: "SPA/MF Regulation: Mandatory cross-check data validation using national tax registries."
             },
             "Argentina": {
-                documentos: ["DNI (Documento Nacional de Identidade)", "Passaporte"],
-                placeholder: "Ex: 20.123.456-7",
-                info: "Regra LatAm: Validação através de acordos de identificação mútua do Mercosul."
+                documentos: ["DNI (National Identity Document)", "Passport"],
+                placeholder: "e.g., 20.123.456-7",
+                info: "LatAm Rule: Validation via Mercosul mutual legal identification frameworks."
             },
-            "Estados Unidos": {
+            "United States": {
                 documentos: ["SSN (Social Security Number)", "Driver's License (US ID)"],
-                placeholder: "Ex: 000-00-0000",
-                info: "Regra FinCEN: Verificação em conformidade com as diretivas do US Patriot Act contra lavagem de dinheiro."
+                placeholder: "e.g., 000-00-0000",
+                info: "FinCEN Directive: Identity check compliant with Anti-Money Laundering (AML) Patriot Act standards."
             },
-            "Canadá": {
+            "Canada": {
                 documentos: ["SIN (Social Insurance Number)", "Passport"],
-                placeholder: "Ex: 000-000-000",
-                info: "Regra Canadense: Rastreamento em banco de dados centralizado de risco e maioridade legal."
+                placeholder: "e.g., 000-000-000",
+                info: "Canadian Framework: Background validation against centralized data risk and legal age limits."
             },
             "Portugal": {
-                documentos: ["Cartão de Cidadão (EU National ID)", "Passaporte Europeu"],
-                placeholder: "Ex: 12345678 9 ZZ0",
-                info: "Regra GDPR/UE: Acesso simplificado baseado nos direitos de livre trânsito do Espaço Econômico Europeu."
+                documentos: ["Cartão de Cidadão (EU National ID)", "European Passport"],
+                placeholder: "e.g., 12345678 9 ZZ0",
+                info: "GDPR/EU Rule: Streamlined identity routing backed by European Economic Area free transit policies."
             },
             "Malta": {
                 documentos: ["Malta eID Card", "MGA Special Operator License"],
-                placeholder: "Ex: 123456(M)",
-                info: "Jurisdição Interna MGA: Verificação imediata na base local da Malta Gaming Authority."
+                placeholder: "e.g., 123456(M)",
+                info: "MGA Host Jurisdiction: Immediate real-time record check inside the Malta Gaming Authority databases."
             },
-            "Alemanha": {
+            "Germany": {
                 documentos: ["Personalausweis (National ID)", "Reisepass (Passport)"],
-                placeholder: "Ex: T2200012P",
-                info: "Regra GwG (Alemanha): Verificação documental extremamente rígida com conferência de criptografia MRZ."
+                placeholder: "e.g., T2200012P",
+                info: "GwG AML Act: Highly strict electronic document validation scanning MRZ cryptographic lines."
             },
-            "Reino Unido": {
+            "United Kingdom": {
                 documentos: ["UK Driving License", "Biometric Residence Permit (BRP)"],
-                placeholder: "Ex: SMITH957052A999OF",
-                info: "Regra UKGC: Exige verificação ativa de acessibilidade financeira pós-cadastro."
+                placeholder: "e.g., SMITH957052A999OF",
+                info: "UKGC Standard: Active checking for consumer affordability metrics immediately post-registration."
             },
-            "Japão": {
+            "Japan": {
                 documentos: ["My Number Card (Individual Number)", "Passport"],
-                placeholder: "Ex: 1234-5678-1234",
-                info: "Diretiva Asiática: Validação focada na integridade do endereço residencial e idade mínima."
+                placeholder: "e.g., 1234-5678-1234",
+                info: "Asian Protocol: Security focus points on residential address matching and strict legal age verification."
             },
-            "Austrália": {
+            "Australia": {
                 documentos: ["Australian Driver's License", "Medicare Card"],
-                placeholder: "Ex: 12345678",
-                info: "Regra AUSTRAC: Monitoramento rígido de identidade digital e geolocalização."
+                placeholder: "e.g., 12345678",
+                info: "AUSTRAC Rules: Heavy tracking filters regarding digital identity tokens and geo-fencing logs."
             },
-            "África do Sul": {
+            "South Africa": {
+                documentos: ["Smart ID Card", "Passport"],
