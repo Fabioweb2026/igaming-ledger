@@ -1,278 +1,203 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malta iGaming Platform - MGA Gateway</title>
     <style>
-        /* CORPORATE DARK NEON DESIGN - GLOBAL COMPLIANCE */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            font-family: 'Segoe UI', sans-serif; 
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 20px;
         }
-        body { 
-            background-color: #0d0d18; 
-            color: #e1e1e6; 
-            padding: 20px; 
-        }
-        .container { 
-            max-width: 850px; 
-            margin: 0 auto; 
-        }
-        .gaming-nav { 
-            background: #161626; 
-            padding: 15px; 
-            text-align: center; 
-            border-radius: 8px; 
-            margin-bottom: 25px; 
-            border: 1px solid #262642; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
-        }
-        .gaming-nav a { 
-            color: #fff; 
-            margin: 0 15px; 
-            text-decoration: none; 
-            font-size: 15px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            transition: 0.3s; 
-        }
-        .gaming-nav a:hover, .gaming-nav a.active { 
-            color: #4ecca3; 
-            text-shadow: 0 0 8px rgba(78,204,163,0.5); 
-        }
-        .card { 
-            background: #121222; 
-            border: 1px solid #262642; 
-            padding: 30px; 
-            border-radius: 12px; 
-            margin-bottom: 25px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
-        }
-        h1, h2 { 
-            color: #fff; 
-            margin-bottom: 15px; 
-            border-bottom: 2px solid #4ecca3; 
-            padding-bottom: 8px; 
-            font-size: 24px; 
-        }
-        p { 
-            color: #aaa; 
-            margin-bottom: 20px; 
-            font-size: 15px; 
-        }
-        .form-group { 
-            margin-bottom: 20px; 
-        }
-        label { 
-            display: block; 
-            margin-bottom: 8px; 
-            color: #4ecca3; 
-            font-weight: 600; 
-        }
-        input, select { 
-            width: 100%; 
-            padding: 12px; 
-            background: #1a1a30; 
-            border: 1px solid #262642; 
-            color: #fff; 
-            border-radius: 6px; 
-            font-size: 15px; 
-        }
-        input:focus, select:focus { 
-            border-color: #4ecca3; 
-            outline: none; 
-        }
-        button { 
-            width: 100%; 
-            padding: 14px; 
-            background: #4ecca3; 
-            color: #0d0d18; 
-            border: none; 
-            border-radius: 6px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            text-transform: uppercase; 
-            font-size: 15px; 
-            transition: 0.2s; 
-        }
-        button:hover { 
-            background: #3db892; 
-            box-shadow: 0 0 15px rgba(78,204,163,0.4); 
-        }
-        .btn-bet { 
-            background: #e2b659; 
-        }
-        .btn-bet:hover { 
-            background: #cda34b; 
-            box-shadow: 0 0 15px rgba(226, 182, 89, 0.4); 
-        }
-        .wallet-grid { 
-            display: grid; 
-            grid-template-columns: repeat(4, 1fr); 
-            gap: 15px; 
-            margin-bottom: 20px; 
-        }
-        .wallet-stat { 
-            background: #161626; 
-            padding: 15px; 
-            border-radius: 8px; 
-            border: 1px solid #262642; 
-            text-align: center; 
-        }
-        .wallet-stat p { 
-            font-size: 13px; 
-            color: #aaa; 
-            margin-bottom: 5px; 
-        }
-        .wallet-stat span { 
-            font-size: 18px; 
-            font-weight: bold; 
-            color: #fff; 
-        }
-        table { 
-            width: 100%; 
-            border-collapse: collapse; 
-            margin-top: 15px; 
-            background: #161626; 
-            border-radius: 8px; 
-            overflow: hidden; 
-            border: 1px solid #262642; 
-        }
-        th, td { 
-            padding: 14px; 
-            text-align: left; 
-            font-size: 14px; 
-            border-bottom: 1px solid #262642; 
-        }
-        th { 
-            background: #1b1b32; 
-            color: #4ecca3; 
-            font-weight: 600; 
-        }
-        .win { color: #4ecca3; font-weight: bold; }
-        .loss { color: #ff4a4a; font-weight: bold; }
-        .hidden { display: none !important; }
-        .info-compliance {
-            background: #1c1c3a;
-            border-left: 4px solid #e2b659;
-            padding: 12px;
+        section {
+            background-color: #1e1e1e;
+            padding: 20px;
             margin-bottom: 20px;
-            border-radius: 0 6px 6px 0;
-            font-size: 14px;
-            color: #e2b659;
+            border-radius: 8px;
+            border: 1px solid #333;
+        }
+        h1, h2 {
+            color: #ff9900;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        select, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            background-color: #2a2a2a;
+            color: #fff;
+            border: 1px solid #444;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #ff9900;
+            color: #000;
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color: #e68a00;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+        th, td {
+            border: 1px solid #444;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #2a2a2a;
+        }
+        .status-unverified {
+            color: #ff3333;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- Main Navigation Bar -->
-        <nav class="gaming-nav">
-            <a id="tab-cadastro" onclick="changeSection('sec-cadastro')" class="active">🆔 Registration & KYC</a>
-            <a id="tab-jogos" onclick="changeSection('sec-jogos')">🎰 Games Lobby</a>
-            <a id="tab-carteira" onclick="changeSection('sec-carteira')">💰 Wallet & Ledger</a>
-        </nav>
+    <!-- 🆔 REGISTRO E KYC DINÂMICO -->
+    <section id="registration">
+        <h1>🆔 Operator Corporate Registration (MGA Gateway)</h1>
+        <p>In compliance with international regulations from the Malta Gaming Authority, select your country for immediate identity data verification.</p>
+        
+        <form id="kycForm" onsubmit="event.preventDefault(); alert('Gateway Authenticated Successfully (Simulated)!');">
+            <label for="fullName">Beneficiary Full Name:</label>
+            <input type="text" id="fullName" placeholder="John Doe" required>
 
-        <!-- TAB 1: REGISTRATION & DYNAMIC GLOBAL KYC -->
-        <div id="sec-cadastro" class="card">
-            <h1>🆔 Operator Corporate Registration (MGA Gateway)</h1>
-            <p>In compliance with international regulations from the Malta Gaming Authority, select your country for immediate identity data verification.</p>
-            
-            <div class="form-group">
-                <label>Beneficiary Full Name:</label>
-                <input type="text" id="p-name" placeholder="e.g., Fabio Web Developer">
-            </div>
+            <label for="country">Jurisdiction / Country of Residence:</label>
+            <select id="country" required>
+                <option value="" disabled selected>Select your country...</option>
+                <option value="BR">Brazil (South America)</option>
+                <option value="US">United States (North America)</option>
+                <option value="MT">Malta (MGA Host Country)</option>
+                <option value="PT">Portugal (European Union)</option>
+                <option value="UK">United Kingdom (Continental Europe)</option>
+            </select>
 
-            <div class="form-group">
-                <label>Jurisdiction / Country of Residence:</label>
-                <!-- FIXED: Values are now completely aligned with JavaScript keys -->
-                <select id="p-country" onchange="configurarFiltroKYC()">
-                    <option value="Brazil" selected>Brazil (South America)</option>
-                    <option value="United States">United States (North America)</option>
-                    <option value="Malta">Malta (MGA Host Country)</option>
-                    <option value="Portugal">Portugal (European Union)</option>
-                    <option value="United Kingdom">United Kingdom (Continental Europe)</option>
-                </select>
-            </div>
+            <!-- CAMPO CORRIGIDO: O texto padrão inicial agora é neutro -->
+            <label id="docLabel" for="docInput">Required Legal Document:</label>
+            <input type="text" id="docInput" placeholder="Select a country first" disabled required>
 
-            <!-- Dynamic Compliance Box -->
-            <div id="compliance-box" class="info-compliance"></div>
+            <label for="riskNumber">Risk Identification Number:</label>
+            <input type="text" id="riskNumber" placeholder="RISK-XXXX-FICK" required>
 
-            <div class="form-group">
-                <label>Required Legal Document Type:</label>
-                <select id="p-doc-type">
-                    <!-- Automatically Injected by JS -->
-                </select>
-            </div>
+            <button type="submit">Authenticate Gateway & Grant Access</button>
+        </form>
+    </section>
 
-            <div class="form-group">
-                <label>Risk Identification Number:</label>
-                <input type="text" id="p-doc-num" placeholder="">
-            </div>
+    <!-- 🎰 GAMES HUB -->
+    <section id="games">
+        <h1>🎰 Games Hub & API Connection</h1>
+        <p>Status: <span class="status-unverified">Account Unverified</span></p>
+        
+        <label for="gameEngine">Choose Game Engine:</label>
+        <select id="gameEngine">
+            <option>🎰 Slot Mediterranea Gold (RTP 97.4%)</option>
+            <option>🍒 European Live Roulette Hub</option>
+            <option>🃏 Blackjack VIP Premium (Sliema)</option>
+        </select>
 
-            <button onclick="registrarUsuarioGlobal()">Authenticate Gateway & Grant Access</button>
-        </div>
+        <label for="betAmount">Allocated Bet Amount (€):</label>
+        <input type="number" id="betAmount" value="20">
 
-        <!-- TAB 2: GAMES LOBBY SELECTION -->
-        <div id="sec-jogos" class="card hidden">
-            <h1>🎰 Games Hub & API Connection</h1>
-            <p id="player-status" style="color: #ff4a4a; font-weight: bold;">Status: Account Unverified</p>
-            <br>
-            <div class="form-group">
-                <label>Choose Game Engine:</label>
-                <select id="game-select">
-                    <option value="Slot Mediterranea Gold">🎰 Slot Mediterranea Gold (RTP 97.4%)</option>
-                    <option value="Malta Live Roulette">🍒 European Live Roulette Hub</option>
-                    <option value="Blackjack VIP Sliema">🃏 Blackjack VIP Premium (Sliema)</option>
-                </select>
-            </div>
-            
-            <div class="form-group">
-                <label>Allocated Bet Amount (€):</label>
-                <input type="number" id="bet-val" value="20" min="1">
-            </div>
-            
-            <button class="btn-bet" onclick="realizarRodada()">Validate Gateway & Launch Game</button>
-        </div>
+        <button onclick="alert('Launch Game simulated')">Validate Gateway & Launch Game</button>
+    </section>
 
-        <!-- TAB 3: REAL-TIME LEDGER WALLET & DATABASE LOGS -->
-        <div id="sec-carteira" class="card hidden">
-            <h1>💰 Ledger Financial Balance Sheet</h1>
-            <p>Centralized accounting transaction registry for real-time risk control and regulatory audits.</p>
-            
-            <div class="wallet-grid">
-                <div class="wallet-stat"><p>Account Balance</p><span id="lbl-balance">€100.00</span></div>
-                <div class="wallet-stat"><p>Total Allocated</p><span id="lbl-invested" style="color: #e2b659;">€0.00</span></div>
-                <div class="wallet-stat"><p>Generated Wins</p><span id="lbl-wins" style="color: #4ecca3;">€0.00</span></div>
-                <div class="wallet-stat"><p>Collected Losses</p><span id="lbl-losses" style="color: #ff4a4a;">€0.00</span></div>
-            </div>
+    <!-- 💰 LEDGER BALANCE SHEET -->
+    <section id="ledger">
+        <h1>💰 Ledger Financial Balance Sheet</h1>
+        <p>Centralized accounting transaction registry for real-time risk control and regulatory audits.</p>
+        
+        <table>
+            <tr>
+                <th>Account Balance</th>
+                <td>€100.00</td>
+            </tr>
+            <tr>
+                <th>Total Allocated</th>
+                <td>€0.00</td>
+            </tr>
+            <tr>
+                <th>Generated Wins</th>
+                <td>€0.00</td>
+            </tr>
+            <tr>
+                <th>Collected Losses</th>
+                <td>€0.00</td>
+            </tr>
+        </table>
 
-            <div class="form-group">
-                <label>Emergency Aport / Add Ledger Funds (€):</label>
-                <input type="number" id="dep-val" value="50">
-            </div>
-            <button onclick="adicionarFundos()" style="margin-bottom: 25px;">Deposit Funds Into Ledger</button>
+        <label for="addFunds">Emergency Aport / Add Ledger Funds (€):</label>
+        <input type="number" id="addFunds" value="50">
+        
+        <button onclick="alert('Funds added into ledger registry')">Deposit Funds Into Ledger</button>
 
-            <h2>📜 Audit Trail Database (Ledger Log History)</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Transaction</th>
-                        <th>Target Engine</th>
-                        <th>Amount (€)</th>
-                        <th>Gateway Status</th>
-                    </tr>
-                </thead>
-                <tbody id="ledger-rows">
-                    <!-- Mock Database Rows Injected via JS -->
-                </tbody>
-            </table>
-        </div>
-    </div>
+        <h2>📜 Audit Trail Database (Ledger Log History)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Transaction</th>
+                    <th>Target Engine</th>
+                    <th>Amount (€)</th>
+                    <th>Gateway Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" style="text-align: center; color: #888;">No recent simulation records found.</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 
+    <!-- ⚙️ LÓGICA JAVASCRIPT: FAZ A MUDANÇA AUTOMÁTICA E FICTÍCIA DOS DOCUMENTOS -->
     <script>
-        // Financial Balance States
-        let saldo = 100.00;
+        const countrySelect = document.getElementById('country');
+        const docLabel = document.getElementById('docLabel');
+        const docInput = document.getElementById('docInput');
+
+        // Mapeamento dos tipos de documentos para cada país selecionado
+        const documentRules = {
+            'BR': { label: 'Required Legal Document Type: CPF', placeholder: 'Ex: 000.000.000-00 (Fictício)' },
+            'PT': { label: 'Required Legal Document Type: Cartão de Cidadão (CC)', placeholder: 'Ex: 00000000 0 ZZ0 (Fictício)' },
+            'MT': { label: 'Required Legal Document Type: Malta ID / Residence Card', placeholder: 'Ex: 123456M (Fictício)' },
+            'US': { label: 'Required Legal Document Type: Social Security Number (SSN)', placeholder: 'Ex: 000-00-0000 (Fictício)' },
+            'UK': { label: 'Required Legal Document Type: Biometric Residence Permit (BRP)', placeholder: 'Ex: UK987654321 (Fictício)' }
+        };
+
+        // Escuta a mudança de país selecionado
+        countrySelect.addEventListener('change', function() {
+            const selectedCountry = this.value;
+            
+            if (documentRules[selectedCountry]) {
+                // Altera o texto e o exemplo fictício dentro da caixa
+                docLabel.textContent = documentRules[selectedCountry].label;
+                docInput.placeholder = documentRules[selectedCountry].placeholder;
+                docInput.disabled = false; // Desbloqueia o campo para digitação
+                docInput.value = ""; // Limpa o campo caso mude de país de novo
+            } else {
+                // Caso volte para a opção padrão vazia
+                docLabel.textContent = 'Required Legal Document:';
+                docInput.placeholder = 'Select a country first';
+                docInput.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
