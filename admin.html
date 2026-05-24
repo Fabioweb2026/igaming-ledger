@@ -4,32 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iGaming - Backoffice Admin</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #0f0f1a; color: #f1f1f6; padding-bottom: 50px; }
+        .gaming-nav { background: #1a1a2e; padding: 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border-bottom: 2px solid #232342; }
+        .gaming-nav a { color: #fff; margin: 0 12px; text-decoration: none; font-size: 14px; transition: all 0.3s; }
+        .gaming-nav a:hover, .gaming-nav a.active { color: #4ecca3; text-shadow: 0 0 8px rgba(78, 204, 163, 0.6); }
+        .container { max-width: 750px; margin: 40px auto; padding: 0 20px; }
+        .admin-card { background: #16162a; border: 1px solid #232342; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        h1 { font-size: 24px; color: #fff; margin-bottom: 15px; border-bottom: 2px solid #4ecca3; padding-bottom: 8px; }
+        p { color: #b5b5c6; margin-bottom: 15px; }
+        .metrics-box { background: #1f1f38; border: 1px solid #232342; padding: 20px; border-radius: 8px; margin-top: 20px; }
+        .metrics-box h3 { color: #4ecca3; font-size: 18px; margin-bottom: 10px; }
+    </style>
 </head>
 <body>
 
-    <!-- Menu de Navegação Global -->
-    <nav class="gaming-nav" style="background: #1a1a2e; padding: 15px; text-align: center; margin-bottom: 20px;">
-        <a href="index.html" style="color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold;">🏠 Home Portfólio</a> |
-        <a href="igaming-ledger.html" style="color: #fff; margin: 0 15px; text-decoration: none;">📊 Ledger</a> |
-        <a href="lobby.html" style="color: #fff; margin: 0 15px; text-decoration: none;">🎮 Lobby</a> |
-        <a href="wallet.html" style="color: #fff; margin: 0 15px; text-decoration: none;">💰 Wallet</a> |
-        <a href="kyc.html" style="color: #fff; margin: 0 15px; text-decoration: none;">🆔 KYC</a> |
-        <a href="games.html" style="color: #fff; margin: 0 15px; text-decoration: none;">🎰 Games</a> |
-        <a href="admin.html" style="color: #4ecca3; margin: 0 15px; text-decoration: none; font-weight: bold;">⚙️ Admin</a>
+    <nav class="gaming-nav">
+        <a href="index.html">🏠 Home Portfólio</a>
+        <a href="igaming-ledger.html">📊 Ledger</a>
+        <a href="lobby.html">🎮 Lobby</a>
+        <a href="wallet.html">💰 Wallet</a>
+        <a href="kyc.html">🆔 KYC</a>
+        <a href="games.html">🎰 Games</a>
+        <a href="admin.html" class="active">⚙️ Admin</a>
     </nav>
 
-    <div class="admin-container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
-        <h1>⚙️ Backoffice & Gerenciamento Admin</h1>
-        <p>Painel restrito para operadores de Malta monitorarem o ecossistema GGR e RTP.</p>
-        
-        <div style="background: #333; color: #fff; padding: 15px; border-radius: 5px; margin-top: 20px;">
-            <h3>Métricas Ativas</h3>
-            <p>Total Depositado hoje: €14,200.00</p>
+    <div class="container">
+        <div class="admin-card">
+            <h1>⚙️ Backoffice & Gerenciamento Admin</h1>
+            <p>Painel de monitoramento restrito para operadores sediados em Malta avaliarem métricas de segurança GGR e RTP da API.</p>
+            
+            <div class="metrics-box">
+                <h3>Métricas de Auditoria Ativas</h3>
+                <p>Volume Operado Hoje: <strong>€14,200.00</strong></p>
+                <p>Status da API Conectada: <strong style="color: #4ecca3;">Online / MGA Gateway v2</strong></p>
+            </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
 </body>
 </html>
+
 
