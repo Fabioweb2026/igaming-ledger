@@ -1,134 +1,241 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma Malta iGaming - MGA Gateway</title>
     <style>
-        /* Design escuro neon fixado com alta especificidade */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #0d0d18; color: #e1e1e6; padding: 20px; }
-        .container { max-width: 850px; margin: 0 auto; }
-        .gaming-nav { background: #161626; padding: 15px; text-align: center; border-radius: 8px; margin-bottom: 25px; border: 1px solid #262642; }
-        .gaming-nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; cursor: pointer; }
-        .gaming-nav a:hover, .gaming-nav a.active { color: #4ecca3; }
-        .card { background: #121222; border: 1px solid #262642; padding: 30px; border-radius: 12px; margin-bottom: 25px; }
-        h1 { color: #fff; margin-bottom: 15px; border-bottom: 2px solid #4ecca3; padding-bottom: 8px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; color: #4ecca3; font-weight: 600; }
-        input, select { width: 100%; padding: 12px; background: #1a1a30; border: 1px solid #262642; color: #fff; border-radius: 6px; }
-        button { width: 100%; padding: 14px; background: #4ecca3; color: #0d0d18; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
-        button:hover { background: #3db892; }
-        .hidden { display: none !important; }
+        /* DESIGN CORPORATIVO ESCURO NEON - GLOBAL COMPLIANCE */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', sans-serif; 
+        }
+        body { 
+            background-color: #0d0d18; 
+            color: #e1e1e6; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 850px; 
+            margin: 0 auto; 
+        }
+        .gaming-nav { 
+            background: #161626; 
+            padding: 15px; 
+            text-align: center; 
+            border-radius: 8px; 
+            margin-bottom: 25px; 
+            border: 1px solid #262642; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+        }
+        .gaming-nav a { 
+            color: #fff; 
+            margin: 0 15px; 
+            text-decoration: none; 
+            font-size: 15px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        .gaming-nav a:hover, .gaming-nav a.active { 
+            color: #4ecca3; 
+            text-shadow: 0 0 8px rgba(78,204,163,0.5); 
+        }
+        .card { 
+            background: #121222; 
+            border: 1px solid #262642; 
+            padding: 30px; 
+            border-radius: 12px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
+        }
+        h1 { 
+            color: #fff; 
+            margin-bottom: 15px; 
+            border-bottom: 2px solid #4ecca3; 
+            padding-bottom: 8px; 
+            font-size: 24px; 
+        }
+        p { 
+            color: #aaa; 
+            margin-bottom: 20px; 
+            font-size: 15px; 
+        }
+        .form-group { 
+            margin-bottom: 20px; 
+        }
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            color: #4ecca3; 
+            font-weight: 600; 
+        }
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            background: #1a1a30; 
+            border: 1px solid #262642; 
+            color: #fff; 
+            border-radius: 6px; 
+            font-size: 15px; 
+        }
+        input:focus, select:focus { 
+            border-color: #4ecca3; 
+            outline: none; 
+        }
+        button { 
+            width: 100%; 
+            padding: 14px; 
+            background: #4ecca3; 
+            color: #0d0d18; 
+            border: none; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            font-size: 15px; 
+            transition: 0.2s; 
+        }
+        button:hover { 
+            background: #3db892; 
+            box-shadow: 0 0 15px rgba(78,204,163,0.4); 
+        }
+        .hidden { 
+            display: none !important; 
+        }
+        .info-compliance {
+            background: #1c1c3a;
+            border-left: 4px solid #e2b659;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 14px;
+            color: #e2b659;
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
+        <!-- Navegação Principal -->
         <nav class="gaming-nav">
-            <a id="tab-cadastro" onclick="changeSection('sec-cadastro')" class="active">🆔 Registro & KYC</a>
-            <a id="tab-jogos" onclick="changeSection('sec-jogos')">🎰 Lobby</a>
+            <a id="tab-cadastro" onclick="changeSection('sec-cadastro')" class="active">🆔 Registro & Global KYC</a>
+            <a id="tab-jogos" onclick="changeSection('sec-jogos')">🎰 Lobby de Jogos</a>
         </nav>
 
-        <!-- ABA 1: REGISTRO (Atualizado com Países e Documentos Corretos) -->
+        <!-- ABA 1: REGISTRO GLOBAL & KYC DINÂMICO -->
         <div id="sec-cadastro" class="card">
-            <h1>🆔 Registro Corporativo do Operador (MGA Compliance)</h1>
-            <p>De acordo com os regulamentos de Malta, selecione seu país de origem e o documento de identidade correspondente.</p>
+            <h1>🆔 Registro Regulatório do Operador (MGA Gateway)</h1>
+            <p>Em conformidade com as diretivas internacionais da Malta Gaming Authority, selecione seu país para processamento imediato dos dados de identidade corporativa.</p>
             
             <div class="form-group">
-                <label>Nome Completo:</label>
+                <label>Nome Completo do Beneficiário:</label>
                 <input type="text" id="p-name" placeholder="Ex: Fabio Web Developer">
             </div>
 
             <div class="form-group">
-                <label>País de Residência:</label>
-                <select id="p-country" onchange="atualizarDocumentosDisponiveis()">
-                    <option value="Brasil">Brasil (South America)</option>
-                    <option value="Portugal">Portugal (European Union)</option>
+                <label>País de Jurisdição / Residência:</label>
+                <select id="p-country" onchange="configurarFiltroKYC()">
+                    <!-- América do Sul -->
+                    <option value="Brasil" selected>Brasil (América do Sul)</option>
+                    <option value="Argentina">Argentina (América do Sul)</option>
+                    <!-- América do Norte -->
+                    <option value="Estados Unidos">Estados Unidos (América do Norte)</option>
+                    <option value="Canadá">Canadá (América do Norte)</option>
+                    <!-- Europa (União Europeia) -->
+                    <option value="Portugal">Portugal (União Europeia)</option>
                     <option value="Malta">Malta (MGA Host Country)</option>
-                    <option value="Outro">Outro (International)</option>
+                    <option value="Alemanha">Alemanha (União Europeia)</option>
+                    <option value="Reino Unido">Reino Unido (Europa Continental)</option>
+                    <!-- Ásia / Oceania / África -->
+                    <option value="Japão">Japão (Ásia)</option>
+                    <option value="Austrália">Austrália (Oceania)</option>
+                    <option value="África do Sul">África do Sul (África)</option>
                 </select>
             </div>
 
+            <!-- Caixa informativa de Compliance Dinâmica -->
+            <div id="compliance-box" class="info-compliance">
+                Regra Aplicada: Validação de CPF via base compartilhada nacional (Lei Geral de Proteção e Apostas).
+            </div>
+
             <div class="form-group">
-                <label>Tipo de Documento Legal:</label>
+                <label id="lbl-doc-type">Tipo de Documento Legal Exigido:</label>
                 <select id="p-doc-type">
-                    <!-- Opções serão injetadas de forma inteligente via JavaScript -->
+                    <!-- Gerado dinamicamente via JS -->
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Número do Documento:</label>
-                <input type="text" id="p-doc-num" placeholder="Digite o número do documento">
+                <label id="lbl-doc-num">Número de Identificação de Risco:</label>
+                <input type="text" id="p-doc-num" placeholder="000.000.000-00">
             </div>
 
-            <button onclick="registrarUsuario()">Concluir Cadastro & Verificar Documentação</button>
+            <button onclick="registrarUsuarioGlobal()">Autenticar Gateway & Liberar Acesso</button>
         </div>
 
-        <!-- ABA 2: JOGOS -->
+        <!-- ABA 2: HUB / LOBBY DE JOGOS -->
         <div id="sec-jogos" class="card hidden">
             <h1>🎰 Hub de Jogos & Conexão de API</h1>
-            <p id="player-status" style="color: #4ecca3; font-weight: bold;">Status: Aguardando cadastro...</p>
-            <br>
-            <button onclick="alert('Conectando ao servidor de Malta...')">Validar Gateway & Iniciar Partida</button>
+            <p id="player-status" style="color: #4ecca3; font-weight: bold;">Status: Conta Não Verificada</p>
+            <p>O gateway de transações está pronto para operar moedas internacionais indexadas ao balanço patrimonial do Ledger.</p>
+            <button onclick="alert('Conexão realizada com sucesso com os servidores de Malta!')">Validar Gateway & Iniciar Partida</button>
         </div>
     </div>
 
     <script>
-        // Função para alternar as abas
-        function changeSection(sectionId) {
-            document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
-            document.querySelectorAll('.gaming-nav a').forEach(a => a.classList.remove('active'));
-            
-            document.getElementById(sectionId).classList.remove('hidden');
-            
-            const tabId = 'tab-' + sectionId.replace('sec-', '');
-            if(document.getElementById(tabId)) document.getElementById(tabId).classList.add('active');
-        }
-
-        // Filtro Inteligente de Documentos com base no País selecionado
-        function atualizarDocumentosDisponiveis() {
-            const pais = document.getElementById('p-country').value;
-            const selectDoc = document.getElementById('p-doc-type');
-            
-            // Limpa as opções atuais
-            selectDoc.innerHTML = "";
-
-            if (pais === "Brasil") {
-                selectDoc.innerHTML += `<option value="RG/CNH">RG ou CNH (Validação Nacional)</option>`;
-                selectDoc.innerHTML += `<option value="Passaporte">Passaporte Internacional</option>`;
-            } else if (pais === "Portugal" || pais === "Malta") {
-                selectDoc.innerHTML += `National Identity Card (EU/EEA Citizen)</option>`;
-                selectDoc.innerHTML += `<option value="Passaporte">Passaporte Internacional</option>`;
-            } else {
-                selectDoc.innerHTML += `<option value="Passaporte">Passaporte Internacional Válido</option>`;
-            }
-        }
-
-        // Executa a função uma vez ao carregar a página para preencher o primeiro país
-        window.onload = function() {
-            atualizarDocumentosDisponiveis();
-        };
-
-        // Função de Registro Corrigida (Avança de aba sem travar)
-        function registrarUsuario() {
-            const nome = document.getElementById('p-name').value;
-            const docNum = document.getElementById('p-doc-num').value;
-            const pais = document.getElementById('p-country').value;
-            const docTipo = document.getElementById('p-doc-type').value;
-
-            if(!nome || !docNum) {
-                alert("Por favor, preencha todos os campos do documento para validação MGA.");
-                return;
-            }
-
-            // Atualiza o status no painel de jogos
-            const statusLabel = document.getElementById('player-status');
-            statusLabel.innerText = `Status: Operador Verificado (${nome}) | Origem: ${pais} | Doc: ${docTipo}`;
-            
-            alert("Documentação e KYC validados com sucesso no gateway de Malta!");
-            changeSection('sec-jogos'); // Move o usuário para a aba de jogos
-        }
-    </script>
-</body>
-</html>
-
+        // Sistema Base de Configurações KYC Globais por País
+        const regrasKYC = {
+            "Brasil": {
+                documentos: ["CPF (Cadastro de Pessoas Físicas)", "Passaporte Federal"],
+                placeholder: "Ex: 000.000.000-00",
+                info: "Regra SPA/MF: Cruzamento obrigatório de dados via número do CPF e validações biométricas fiscais."
+            },
+            "Argentina": {
+                documentos: ["DNI (Documento Nacional de Identidade)", "Passaporte"],
+                placeholder: "Ex: 20.123.456-7",
+                info: "Regra LatAm: Validação através de acordos de identificação mútua do Mercosul."
+            },
+            "Estados Unidos": {
+                documentos: ["SSN (Social Security Number)", "Driver's License (US ID)"],
+                placeholder: "Ex: 000-00-0000",
+                info: "Regra FinCEN: Verificação em conformidade com as diretivas do US Patriot Act contra lavagem de dinheiro."
+            },
+            "Canadá": {
+                documentos: ["SIN (Social Insurance Number)", "Passport"],
+                placeholder: "Ex: 000-000-000",
+                info: "Regra Canadense: Rastreamento em banco de dados centralizado de risco e maioridade legal."
+            },
+            "Portugal": {
+                documentos: ["Cartão de Cidadão (EU National ID)", "Passaporte Europeu"],
+                placeholder: "Ex: 12345678 9 ZZ0",
+                info: "Regra GDPR/UE: Acesso simplificado baseado nos direitos de livre trânsito do Espaço Econômico Europeu."
+            },
+            "Malta": {
+                documentos: ["Malta eID Card", "MGA Special Operator License"],
+                placeholder: "Ex: 123456(M)",
+                info: "Jurisdição Interna MGA: Verificação imediata na base local da Malta Gaming Authority."
+            },
+            "Alemanha": {
+                documentos: ["Personalausweis (National ID)", "Reisepass (Passport)"],
+                placeholder: "Ex: T2200012P",
+                info: "Regra GwG (Alemanha): Verificação documental extremamente rígida com conferência de criptografia MRZ."
+            },
+            "Reino Unido": {
+                documentos: ["UK Driving License", "Biometric Residence Permit (BRP)"],
+                placeholder: "Ex: SMITH957052A999OF",
+                info: "Regra UKGC: Exige verificação ativa de acessibilidade financeira pós-cadastro."
+            },
+            "Japão": {
+                documentos: ["My Number Card (Individual Number)", "Passport"],
+                placeholder: "Ex: 1234-5678-1234",
+                info: "Diretiva Asiática: Validação focada na integridade do endereço residencial e idade mínima."
+            },
+            "Austrália": {
+                documentos: ["Australian Driver's License", "Medicare Card"],
+                placeholder: "Ex: 12345678",
+                info: "Regra AUSTRAC: Monitoramento rígido de identidade digital e geolocalização."
+            },
+            "África do Sul": {
