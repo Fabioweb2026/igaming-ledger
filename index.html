@@ -6,87 +6,276 @@
     <title>Malta iGaming Platform - MGA Gateway</title>
     <style>
         /* CORPORATE DARK NEON DESIGN - GLOBAL COMPLIANCE */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #0d0d18; color: #e1e1e6; padding: 20px; }
-        .container { max-width: 850px; margin: 0 auto; }
-        .gaming-nav { background: #161626; padding: 15px; text-align: center; border-radius: 8px; margin-bottom: 25px; border: 1px solid #262642; }
-        .gaming-nav a { color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .gaming-nav a:hover, .gaming-nav a.active { color: #4ecca3; }
-        .card { background: #121222; border: 1px solid #262642; padding: 30px; border-radius: 12px; margin-bottom: 25px; }
-        h1 { color: #fff; margin-bottom: 15px; border-bottom: 2px solid #4ecca3; padding-bottom: 8px; font-size: 24px; }
-        label { display: block; margin-bottom: 8px; color: #4ecca3; font-weight: 600; }
-        input, select { width: 100%; padding: 12px; background: #1a1a30; border: 1px solid #262642; color: #fff; border-radius: 6px; }
-        button { width: 100%; padding: 14px; background: #4ecca3; color: #0d0d18; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', sans-serif; 
+        }
+        body { 
+            background-color: #0d0d18; 
+            color: #e1e1e6; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 850px; 
+            margin: 0 auto; 
+        }
+        .gaming-nav { 
+            background: #161626; 
+            padding: 15px; 
+            text-align: center; 
+            border-radius: 8px; 
+            margin-bottom: 25px; 
+            border: 1px solid #262642; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+        }
+        .gaming-nav a { 
+            color: #fff; 
+            margin: 0 15px; 
+            text-decoration: none; 
+            font-size: 15px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        .gaming-nav a:hover, .gaming-nav a.active { 
+            color: #4ecca3; 
+            text-shadow: 0 0 8px rgba(78,204,163,0.5); 
+        }
+        .card { 
+            background: #121222; 
+            border: 1px solid #262642; 
+            padding: 30px; 
+            border-radius: 12px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
+        }
+        h1, h2 { 
+            color: #fff; 
+            margin-bottom: 15px; 
+            border-bottom: 2px solid #4ecca3; 
+            padding-bottom: 8px; 
+            font-size: 24px; 
+        }
+        p { 
+            color: #aaa; 
+            margin-bottom: 20px; 
+            font-size: 15px; 
+        }
+        .form-group { 
+            margin-bottom: 20px; 
+        }
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            color: #4ecca3; 
+            font-weight: 600; 
+        }
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            background: #1a1a30; 
+            border: 1px solid #262642; 
+            color: #fff; 
+            border-radius: 6px; 
+            font-size: 15px; 
+        }
+        input:focus, select:focus { 
+            border-color: #4ecca3; 
+            outline: none; 
+        }
+        button { 
+            width: 100%; 
+            padding: 14px; 
+            background: #4ecca3; 
+            color: #0d0d18; 
+            border: none; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            font-size: 15px; 
+            transition: 0.2s; 
+        }
+        button:hover { 
+            background: #3db892; 
+            box-shadow: 0 0 15px rgba(78,204,163,0.4); 
+        }
+        .btn-bet { 
+            background: #e2b659; 
+        }
+        .btn-bet:hover { 
+            background: #cda34b; 
+            box-shadow: 0 0 15px rgba(226, 182, 89, 0.4); 
+        }
+        .wallet-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 15px; 
+            margin-bottom: 20px; 
+        }
+        .wallet-stat { 
+            background: #161626; 
+            padding: 15px; 
+            border-radius: 8px; 
+            border: 1px solid #262642; 
+            text-align: center; 
+        }
+        .wallet-stat p { 
+            font-size: 13px; 
+            color: #aaa; 
+            margin-bottom: 5px; 
+        }
+        .wallet-stat span { 
+            font-size: 18px; 
+            font-weight: bold; 
+            color: #fff; 
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 15px; 
+            background: #161626; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            border: 1px solid #262642; 
+        }
+        th, td { 
+            padding: 14px; 
+            text-align: left; 
+            font-size: 14px; 
+            border-bottom: 1px solid #262642; 
+        }
+        th { 
+            background: #1b1b32; 
+            color: #4ecca3; 
+            font-weight: 600; 
+        }
+        .win { color: #4ecca3; font-weight: bold; }
+        .loss { color: #ff4a4a; font-weight: bold; }
         .hidden { display: none !important; }
-        .info-compliance { background: #1c1c3a; border-left: 4px solid #e2b659; padding: 12px; margin-bottom: 20px; color: #e2b659; }
+        .info-compliance {
+            background: #1c1c3a;
+            border-left: 4px solid #e2b659;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 0 6px 6px 0;
+            font-size: 14px;
+            color: #e2b659;
+        }
     </style>
 </head>
 <body>
+
     <div class="container">
+        <!-- Main Navigation Bar -->
         <nav class="gaming-nav">
-            <a id="tab-cadastro" onclick="changeSection('sec-cadastro')" class="active">🆔 Registration & Global KYC</a>
+            <a id="tab-cadastro" onclick="changeSection('sec-cadastro')" class="active">🆔 Registration & KYC</a>
             <a id="tab-jogos" onclick="changeSection('sec-jogos')">🎰 Games Lobby</a>
+            <a id="tab-carteira" onclick="changeSection('sec-carteira')">💰 Wallet & Ledger</a>
         </nav>
+
+        <!-- TAB 1: REGISTRATION & DYNAMIC GLOBAL KYC -->
         <div id="sec-cadastro" class="card">
             <h1>🆔 Operator Corporate Registration (MGA Gateway)</h1>
+            <p>In compliance with international regulations from the Malta Gaming Authority, select your country for immediate identity data verification.</p>
+            
+            <div class="form-group">
+                <label>Beneficiary Full Name:</label>
+                <input type="text" id="p-name" placeholder="e.g., Fabio Web Developer">
+            </div>
+
             <div class="form-group">
                 <label>Jurisdiction / Country of Residence:</label>
                 <select id="p-country" onchange="configurarFiltroKYC()">
-                    <option value="Brazil" selected>Brazil</option>
-                    <option value="United States">United States</option>
-                    <option value="Malta">Malta</option>
+                    <option value="Brazil" selected>Brazil (South America)</option>
+                    <option value="United States">United States (North America)</option>
+                    <option value="Malta">Malta (MGA Host Country)</option>
+                    <option value="Portugal">Portugal (European Union)</option>
+                    <option value="United Kingdom">United Kingdom (Continental Europe)</option>
                 </select>
             </div>
+
+            <!-- Dynamic Compliance Box -->
             <div id="compliance-box" class="info-compliance"></div>
+
             <div class="form-group">
-                <label id="lbl-doc-type">Required Legal Document Type:</label>
-                <select id="p-doc-type"></select>
+                <label>Required Legal Document Type:</label>
+                <select id="p-doc-type">
+                    <!-- Automatically Injected by JS -->
+                </select>
             </div>
-            <button onclick="registrarUsuarioGlobal()">Authenticate</button>
+
+            <div class="form-group">
+                <label>Risk Identification Number:</label>
+                <input type="text" id="p-doc-num" placeholder="">
+            </div>
+
+            <button onclick="registrarUsuarioGlobal()">Authenticate Gateway & Grant Access</button>
         </div>
+
+        <!-- TAB 2: GAMES LOBBY SELECTION -->
         <div id="sec-jogos" class="card hidden">
             <h1>🎰 Games Hub & API Connection</h1>
-            <p id="player-status" style="color: #4ecca3;">Status: Account Unverified</p>
+            <p id="player-status" style="color: #ff4a4a; font-weight: bold;">Status: Account Unverified</p>
+            
+            <div class="form-group">
+                <label>Choose Game Engine:</label>
+                <select id="game-select">
+                    <option value="Slot Mediterranea Gold">🎰 Slot Mediterranea Gold (RTP 97.4%)</option>
+                    <option value="Malta Live Roulette">🍒 European Live Roulette Hub</option>
+                    <option value="Blackjack VIP Sliema">🃏 Blackjack VIP Premium (Sliema)</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label>Allocated Bet Amount (€):</label>
+                <input type="number" id="bet-val" value="20" min="1">
+            </div>
+            
+            <button class="btn-bet" onclick="realizarRodada()">Validate Gateway & Launch Game</button>
+        </div>
+
+        <!-- TAB 3: REAL-TIME LEDGER WALLET & DATABASE LOGS -->
+        <div id="sec-carteira" class="card hidden">
+            <h1>💰 Ledger Financial Balance Sheet</h1>
+            <p>Centralized accounting transaction registry for real-time risk control and regulatory audits.</p>
+            
+            <div class="wallet-grid">
+                <div class="wallet-stat"><p>Account Balance</p><span id="lbl-balance">€100.00</span></div>
+                <div class="wallet-stat"><p>Total Allocated</p><span id="lbl-invested" style="color: #e2b659;">€0.00</span></div>
+                <div class="wallet-stat"><p>Generated Wins</p><span id="lbl-wins" style="color: #4ecca3;">€0.00</span></div>
+                <div class="wallet-stat"><p>Collected Losses</p><span id="lbl-losses" style="color: #ff4a4a;">€0.00</span></div>
+            </div>
+
+            <div class="form-group">
+                <label>Emergency Aport / Add Ledger Funds (€):</label>
+                <input type="number" id="dep-val" value="50">
+            </div>
+            <button onclick="adicionarFundos()" style="margin-bottom: 25px;">Deposit Funds Into Ledger</button>
+
+            <h2>📜 Audit Trail Database (Ledger Log History)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Transaction</th>
+                        <th>Target Engine</th>
+                        <th>Amount (€)</th>
+                        <th>Gateway Status</th>
+                    </tr>
+                </thead>
+                <tbody id="ledger-rows">
+                    <!-- Mock Database Rows Injected via JS -->
+                </tbody>
+            </table>
         </div>
     </div>
+
     <script>
-        // Data Schema - All in English
-        const regrasKYC = {
-            "Brazil": { documentos: ["CPF", "Passport"], info: "Applied Rule: CPF verification via shared database." },
-            "United States": { documentos: ["SSN", "Driver's License"], info: "Applied Rule: FinCEN database scanning (AML)." },
-            "Malta": { documentos: ["Malta ID", "MGA License"], info: "Applied Rule: MGA database lookup." }
-        };
+        // Financial Balance States
+        let saldo = 100.00;
+        let totalAlocado = 0.00;
+        let lucros = 0.00;
+        let perdas = 0.00;
 
-        function configurarFiltroKYC() {
-            const pais = document.getElementById('p-country').value;
-            const selectDoc = document.getElementById('p-doc-type');
-            const boxInfo = document.getElementById('compliance-box');
-            const config = regrasKYC[pais];
-            
-            if (config) {
-                selectDoc.innerHTML = "";
-                config.documentos.forEach(doc => {
-                    const opt = document.createElement('option');
-                    opt.value = doc; opt.textContent = doc;
-                    selectDoc.appendChild(opt);
-                });
-                boxInfo.innerText = config.info;
-            }
-        }
-
-        function changeSection(sectionId) {
-            document.querySelectorAll('.card').forEach(card => card.classList.add('hidden'));
-            document.getElementById(sectionId).classList.remove('hidden');
-        }
-
-        function registrarUsuarioGlobal() {
-            const pais = document.getElementById('p-country').value;
-            const doc = document.getElementById('p-doc-type').value;
-            document.getElementById('player-status').innerHTML = `🛡️ Verified | Jurisdiction: ${pais} | Doc: ${doc}`;
-            changeSection('sec-jogos');
-        }
-
-        document.addEventListener("DOMContentLoaded", configurarFiltroKYC);
-    </script>
-</body>
-</html>
