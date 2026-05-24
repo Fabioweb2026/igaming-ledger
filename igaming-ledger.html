@@ -3,32 +3,267 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iGaming Malta - Ledger</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Malta iGaming Wallet & Ledger</title>
+    <style>
+        /* CSS Integrado para garantir o funcionamento imediato no GitHub Pages */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f0f1a;
+            color: #f1f1f6;
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        /* Menu de Navegação */
+        .gaming-nav {
+            background: #1a1a2e;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            border-bottom: 2px solid #232342;
+        }
+
+        .gaming-nav a {
+            color: #fff;
+            margin: 0 12px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .gaming-nav a:hover, .gaming-nav a.active {
+            color: #4ecca3;
+            text-shadow: 0 0 8px rgba(78, 204, 163, 0.6);
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 750px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Card da Carteira */
+        .wallet-card {
+            background: #16162a;
+            border: 1px solid #232342;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4ecca3;
+            padding-bottom: 8px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #ffffff;
+            margin: 25px 0 15px 0;
+        }
+
+        p {
+            font-size: 16px;
+            margin-bottom: 12px;
+            color: #b5b5c6;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        span.value {
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        /* Área de Botões */
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        .btn-deposit {
+            background-color: #4ecca3;
+            color: #0f0f1a;
+        }
+
+        .btn-deposit:hover {
+            background-color: #3db892;
+            box-shadow: 0 5px 15px rgba(78, 204, 163, 0.4);
+        }
+
+        .btn-bet {
+            background-color: #e2b659;
+            color: #0f0f1a;
+        }
+
+        .btn-bet:hover {
+            background-color: #cda34b;
+            box-shadow: 0 5px 15px rgba(226, 182, 89, 0.4);
+        }
+
+        /* Tabela do Histórico (Ledger) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: #16162a;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #232342;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        th {
+            background-color: #1a1a2e;
+            color: #4ecca3;
+            font-weight: 600;
+            border-bottom: 2px solid #232342;
+        }
+
+        tr {
+            border-bottom: 1px solid #1f1f38;
+        }
+
+        tr:last-child {
+            border-bottom: none;
+        }
+
+        .status-success {
+            color: #4ecca3;
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Menu de Navegação Global -->
-    <nav class="gaming-nav" style="background: #1a1a2e; padding: 15px; text-align: center; margin-bottom: 20px;">
-        <a href="index.html" style="color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold;">🏠 Home Portfólio</a> |
-        <a href="igaming-ledger.html" style="color: #4ecca3; margin: 0 15px; text-decoration: none; font-weight: bold;">📊 Ledger</a> |
-        <a href="lobby.html" style="color: #fff; margin: 0 15px; text-decoration: none;">🎮 Lobby</a> |
-        <a href="wallet.html" style="color: #fff; margin: 0 15px; text-decoration: none;">💰 Wallet</a> |
-        <a href="kyc.html" style="color: #fff; margin: 0 15px; text-decoration: none;">🆔 KYC</a> |
-        <a href="games.html" style="color: #fff; margin: 0 15px; text-decoration: none;">🎰 Games</a> |
-        <a href="admin.html" style="color: #fff; margin: 0 15px; text-decoration: none;">⚙️ Admin</a>
+    <!-- Menu de Navegação Integrado -->
+    <nav class="gaming-nav">
+        <a href="index.html">🏠 Home Portfólio</a>
+        <a href="igaming-ledger.html" class="active">📊 Ledger</a>
+        <a href="lobby.html">🎮 Lobby</a>
+        <a href="wallet.html">💰 Wallet</a>
+        <a href="kyc.html">🆔 KYC</a>
+        <a href="games.html">🎰 Games</a>
+        <a href="admin.html">⚙️ Admin</a>
     </nav>
 
-    <div class="ledger-container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
-        <h1>📊 Histórico de Transações (Ledger)</h1>
-        <p>Empresa operadora sediada em Malta. Registro oficial de transações e auditoria financeira de segurança.</p>
-        
-        <div class="ledger-card">
-            <h3>Filtros de Auditoria</h3>
-            <p>Status do Servidor: <span id="server-status" style="color: #4ecca3;">Online</span></p>
+    <div class="container">
+        <!-- Card de Informações da Carteira -->
+        <div class="wallet-card">
+            <h1>Player Wallet</h1>
+            
+            <p>Player: <span id="player-name" class="value">Fabio Web Developer</span></p>
+            <p>Balance: <span id="wallet-balance" class="value">€250.00</span></p>
+            <p>Bonus: <span id="bonus-balance" class="value">€50.00</span></p>
+            <p>KYC: <span id="kyc-status" class="value" style="color: #4ecca3;">Verified</span></p>
+            <p>VIP: <span id="vip-level" class="value">VIP Bronze</span></p>
+
+            <div class="btn-group">
+                <button class="btn-deposit" onclick="handleDeposit()">Deposit €100</button>
+                <button class="btn-bet" onclick="handleBet()">Bet €25</button>
+            </div>
         </div>
+
+        <!-- Seção do Histórico de Transações -->
+        <h2>Transaction History</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody id="ledger-rows">
+                <tr>
+                    <td>#TR-9082</td>
+                    <td>Initial Deposit</td>
+                    <td>€250.00</td>
+                    <td class="status-success">Success</td>
+                </tr>
+                <tr>
+                    <td>#TR-9083</td>
+                    <td>Welcome Bonus</td>
+                    <td>€50.00</td>
+                    <td class="status-success">Success</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
-    <script src="app.js"></script>
+    <!-- Script de Funcionalidade Integrado -->
+    <script>
+        let balance = 250.00;
+        let bonus = 50.00;
+        let transactionCount = 9084;
+
+        function updateDisplay() {
+            document.getElementById('wallet-balance').innerText = `€${balance.toFixed(2)}`;
+            document.getElementById('bonus-balance').innerText = `€${bonus.toFixed(2)}`;
+        }
+
+        function addTransactionRow(type, amount) {
+            const tbody = document.getElementById('ledger-rows');
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>#TR-${transactionCount++}</td>
+                <td>${type}</td>
+                <td>€${amount.toFixed(2)}</td>
+                <td class="status-success">Success</td>
+            `;
+            tbody.insertBefore(row, tbody.firstChild);
+        }
+
+        function handleDeposit() {
+            balance += 100.00;
+            bonus += 10.00; // 10% bônus regulamentação Malta
+            updateDisplay();
+            addTransactionRow('Deposit Gateway', 100.00);
+            alert('Depósito de €100.00 processado pelo Ledger de Malta!');
+        }
+
+        function handleBet() {
+            if (balance >= 25) {
+                balance -= 25;
+                updateDisplay();
+                addTransactionRow('Casino Bet', 25.00);
+            } else {
+                alert('Saldo insuficiente para apostar!');
+            }
+        }
+    </script>
+
 </body>
 </html>
+
