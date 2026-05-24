@@ -6,23 +6,19 @@
     <title>Malta iGaming Platform</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #121212; color: #ffffff; margin: 20px; text-align: center; }
-        section { background-color: #1e1e1e; padding: 30px; border-radius: 8px; border: 1px solid #333; max-width: 450px; margin: 50px auto; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        section { background-color: #1e1e1e; padding: 30px; border-radius: 8px; border: 1px solid #333; max-width: 450px; margin: 50px auto; }
         h1 { color: #ff9900; font-size: 22px; margin-bottom: 20px; }
         label { display: block; margin-top: 15px; font-weight: bold; color: #ccc; text-align: left; }
-        select, input { width: 100%; padding: 12px; margin-top: 5px; background-color: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 4px; box-sizing: border-box; font-size: 14px; }
-        input:focus, select:focus { border-color: #ff9900; outline: none; }
-        button { background-color: #ff9900; color: #000; border: none; padding: 14px; width: 100%; margin-top: 25px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 16px; }
-        button:hover { background-color: #e68a00; }
+        select, input { width: 100%; padding: 12px; margin-top: 5px; background-color: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 4px; box-sizing: border-box; }
+        button { background-color: #ff9900; color: #000; border: none; padding: 14px; width: 100%; margin-top: 25px; border-radius: 4px; font-weight: bold; cursor: pointer; width: 100%; }
     </style>
 </head>
 <body>
 
     <section id="registration">
         <h1>🆔 Operator Corporate Registration</h1>
-        
-        <form id="kycForm" onsubmit="event.preventDefault(); alert('Gateway Authenticated Successfully (Simulated)!');">
+        <form id="kycForm" onsubmit="event.preventDefault(); alert('Gateway Authenticated!');">
             
-            <!-- Campo de seleção de países -->
             <label for="country">Jurisdiction / Country:</label>
             <select id="country" required>
                 <option value="" disabled selected>Select your country...</option>
@@ -30,45 +26,33 @@
                 <option value="PT">Portugal (European Union)</option>
             </select>
             
-            <!-- Rótulo do documento que muda via JS -->
             <label id="docLabel" for="docInput">Required Legal Document:</label>
-            
-            <!-- Caixa de entrada de texto que recebe os placeholders fictícios -->
             <input type="text" id="docInput" placeholder="Select a country first..." required>
             
-            <!-- Botão separado corretamente -->
             <button type="submit">Authenticate Gateway</button>
         </form>
     </section>
 
-    <!-- Script simplificado e direto executado após o carregamento da página -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const countrySelect = document.getElementById('country');
             const docLabel = document.getElementById('docLabel');
             const docInput = document.getElementById('docInput');
             
-            // Mapeamento dos dados dinâmicos e fictícios
             const documentRules = {
                 'BR': { label: 'CPF (Cadastro de Pessoas Físicas)', placeholder: 'Ex: 000.000.000-00 (Fictício)' },
                 'PT': { label: 'Cartão de Cidadão (CC)', placeholder: 'Ex: 00000000 0 ZZ0 (Fictício)' }
             };
 
-            // Monitora a troca de jurisdição no select
             countrySelect.addEventListener('change', function() {
-                const selectedValue = this.value;
-                
-                if (documentRules[selectedValue]) {
-                    docLabel.textContent = "Required Legal Document: " + documentRules[selectedValue].label;
-                    docInput.placeholder = documentRules[selectedValue].placeholder;
-                    docInput.focus();
-                } else {
-                    docLabel.textContent = "Required Legal Document:";
-                    docInput.placeholder = "Select a country first...";
+                const selected = this.value;
+                if (documentRules[selected]) {
+                    docLabel.textContent = "Required Legal Document: " + documentRules[selected].label;
+                    docInput.placeholder = documentRules[selected].placeholder;
                 }
             });
         });
     </script>
-
 </body>
 </html>
+
