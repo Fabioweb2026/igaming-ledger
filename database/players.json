@@ -1,8 +1,10 @@
-{
-  "playerId": "MLT-1001",
-  "username": "alex_malta",
-  "walletBalance": 1250.50,
-  "bonusBalance": 100,
-  "kycStatus": "Approved",
-   VIP: Gold
-}
+[
+  {
+    "playerId": "MLT-1001",
+    "username": "alex_malta",
+    "walletBalance": 1250.50,
+    "bonusBalance": 100,
+    "kycStatus": "Approved",
+    "vipLevel": "Gold"
+  }
+]
