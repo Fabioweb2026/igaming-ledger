@@ -4,5 +4,5 @@
   "walletBalance": 1250.50,
   "bonusBalance": 100,
   "kycStatus": "Approved",
-  "vipLevel": "Gold"
+   vip: Gold
 }
