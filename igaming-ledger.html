@@ -1,108 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mediterranea Corporate - Audit Ledger</title>
-    <!-- SUPABASE GLOBAL CLIENT SDK -->
-    <script src="https://jsdelivr.net"></script>
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            background: linear-gradient(135deg, #f4f1ea 0%, #e4ded0 100%);
-            min-height: 100vh;
-            color: #1a2a3a;
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            padding: 30px;
-        }
-        .admin-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
-        .header { background: #0b1a30; border-bottom: 4px solid #c5a059; padding: 20px; color: #ffffff; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
-        .card { background: #ffffff; border: 1px solid #d1c9bc; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
-        .title { font-size: 14px; font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #cbd5e1; padding-bottom: 8px; margin-bottom: 15px; color: #0b1a30; }
-        .table-frame { overflow-x: auto; max-height: 400px; border: 1px solid #cbd5e1; border-radius: 6px; }
-        table { width: 100%; border-collapse: collapse; font-family: monospace; font-size: 12px; text-align: left; }
-        th { background: #1e293b; color: #ffffff; padding: 10px; }
-        td { padding: 10px; border-bottom: 1px solid #e2e8f0; }
-        tr:hover { background: #f8fafc; }
-        .btn-refresh { padding: 8px 16px; background: #c5a059; color: #0b1a30; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; text-transform: uppercase; font-weight: bold; }
-    </style>
+    <title>iGaming Wallet</title>
+
+    <link rel="stylesheet" href="../assets/styles.css">
 </head>
+
 <body>
 
-    <div class="admin-container">
-        <div class="header">
-            <div>
-                <h1 style="color: #e5c17d; font-size: 20px;">MEDITERRANEA CONTROL PANEL</h1>
-                <p style="font-size: 11px; color: #8fa4be;">Malta Gaming Authority (MGA) Relational Database Mirror</p>
-            </div>
-            <button class="btn-refresh" onclick="fetchCloudData()">🔄 Query Postgres Table</button>
-        </div>
-        <div class="wallet-card">
-  <h2>Player Wallet</h2>
+    <div class="wallet-card">
 
-  <p>Balance: €1250.50</p>
-  <p>Bonus: €100</p>
-  <p>Status: Active</p>
-</div>
+        <h1>Player Wallet</h1>
 
-        <div class="card">
-            <h2 class="title">💾 Database Relation Table: `audit_ledger`</h2>
-            <div class="table-frame">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>SERVER TIMESTAMP</th>
-                            <th>TRANSACTION ID (UUID)</th>
-                            <th>GAME MOTOR</th>
-                            <th>STAKE (DEBIT)</th>
-                            <th>PAYOUT (CREDIT)</th>
-                            <th>PROVABLY FAIR HASH</th>
-                        </tr>
-                    </thead>
-                    <tbody id="db-rows">
-                        <!-- Database entries injected dynamically -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <p>Player:
+            <span id="player-name"></span>
+        </p>
+
+        <p>Balance:
+            <span id="wallet-balance"></span>
+        </p>
+
+        <p>Bonus:
+            <span id="bonus-balance"></span>
+        </p>
+
+        <p>KYC:
+            <span id="kyc-status"></span>
+        </p>
+
     </div>
 
-    <script>
-        // REPLACE WITH SAME CREDENTIALS USED IN INDEX.HTML
-        const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
-        const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    <script src="app.js"></script>
 
-        async function fetchCloudData() {
-            const tbody = document.getElementById('db-rows');
-            tbody.innerHTML = "";
-
-            // Query public relation table ordered by insertion order
-            let { data: audit_ledger, error } = await _supabase
-                .from('audit_ledger')
-                .select('*')
-                .order('id', { ascending: false });
-
-            if(error || !audit_ledger || audit_ledger.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding:30px;">No records or connection failure. Check API configuration keys.</td></tr>`;
-                return;
-            }
-
-            audit_ledger.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td><strong>${row.timestamp}</strong></td>
-                    <td style="color:#0284c7;">${row.tx_id}</td>
-                    <td><span style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:bold;">${row.game_type}</span></td>
-                    <td style="color:#ef4444; font-weight:bold;">-€${parseFloat(row.bet_amount).toFixed(2)}</td>
-                    <td style="color:${row.payout_amount > 0 ? '#10b981' : '#475569'}; font-weight:bold;">+€${parseFloat(row.payout_amount).toFixed(2)}</td>
-                    <td style="font-size:10px; color:#64748b;">${row.crypto_hash}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-        window.onload = fetchCloudData;
-    </script>
 </body>
 </html>
-
