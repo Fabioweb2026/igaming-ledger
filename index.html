@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mediterranea Casino - Player Terminal</title>
+    <!-- SUPABASE GLOBAL CLIENT SDK -->
+    <script src="https://jsdelivr.net"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -102,11 +104,15 @@
         <div class="engine-box" id="display">🍋 🍒 💎</div>
 
         <button class="btn-bet" onclick="playWager()">Place Secure Bet</button>
-        
-        <a href="igaming-ledger.html" class="nav-link" target="_blank">⚠️ Switch to Administrator & Auditor Dashboard →</a>
+        <a href="igaming-ledger.html" class="nav-link" target="_blank">⚠️ Access Audit Dashboard Table →</a>
     </div>
 
     <script>
+        // REPLACE WITH YOUR ACTUAL SUPABASE CREDENTIALS FROM SETTINGS -> API
+        const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+        const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         let balance = parseFloat(localStorage.getItem('p_balance')) || 1000.00;
 
         function updateHUD() {
@@ -115,7 +121,7 @@
             localStorage.setItem('p_balance', balance);
         }
 
-        function playWager() {
+        async function playWager() {
             const bet = parseFloat(document.getElementById('bet-amount').value);
             const game = document.getElementById('game-select').value;
 
@@ -136,17 +142,14 @@
                 document.getElementById('display').innerText = isWin ? "🎉 WINNER" : "❌ LOSE";
             }
 
-            // Grava a transação no "Banco de Dados centralizado" compartilhado via LocalStorage
-            let ledger = JSON.parse(localStorage.getItem('mga_db_ledger')) || [];
-            ledger.unshift({
-                timestamp: new Date().toLocaleTimeString(),
-                tx_id: crypto.randomUUID(),
-                game: game,
-                bet: bet,
-                payout: payout,
-                hash: 'sha256-' + Math.random().toString(16).substring(2, 10)
-            });
-            localStorage.setItem('mga_db_ledger', JSON.stringify(ledger));
+            // INSERT DATA TO CLOUD RELATIONAL DATABASE
+            const txId = crypto.randomUUID();
+            const timeStr = new Date().toLocaleTimeString();
+            const cryptoHash = 'sha256-' + Math.random().toString(16).substring(2, 12);
+
+            await _supabase.from('audit_ledger').insert([
+                { tx_id: txId, timestamp: timeStr, game_type: game, bet_amount: bet, payout_amount: payout, crypto_hash: cryptoHash }
+            ]);
         }
         window.onload = updateHUD;
     </script>
