@@ -19,36 +19,48 @@
 <body>
     <section id="registration">
         <h1>🆔 Operator Corporate Registration</h1>
-        <form id="kycForm" onsubmit="event.preventDefault(); alert('Gateway Authenticated');">
-            <label for="country">Jurisdiction:</label>
+        <form id="kycForm" onsubmit="event.preventDefault(); alert('Gateway Authenticated Successfully (Simulated)!');">
+            <label for="country">Jurisdiction / Country:</label>
             <select id="country" required>
-                <option value="" disabled selected>Select...</option>
-                <option value="BR">Brazil</option>
-                <option value="PT">Portugal</option>
+                <option value="" disabled selected>Select your country...</option>
+                <option value="BR">Brazil (South America)</option>
+                <option value="PT">Portugal (European Union)</option>
             </select>
-            <!-- CORREÇÃO: ID único para manipulação JS -->
-            <label id="docLabel" for="docInput">Required Document:</label>
-            <input type="text" id="docInput" placeholder="Select a country..." disabled required>
-            <button type="submit">Authenticate</button>
+            
+            <!-- CORREÇÃO: Removido 'disabled' e adicionado 'readonly' para permitir a mudança via JS -->
+            <label id="docLabel" for="docInput">Required Legal Document:</label>
+            <input type="text" id="docInput" placeholder="Select a country first..." readonly required>
+            
+            <button type="submit">Authenticate Gateway</button>
         </form>
     </section>
 
+    <!-- INTERRUPTOR LOGICO JAVASCRIPT CORRIGIDO -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const countrySelect = document.getElementById('country');
             const docLabel = document.getElementById('docLabel');
             const docInput = document.getElementById('docInput');
-            const rules = {
-                'BR': { label: 'CPF:', placeholder: '000.000.000-00' },
-                'PT': { label: 'Cartão de Cidadão:', placeholder: '00000000' }
+            
+            // Definição das regras fictícias de documentos
+            const documentRules = {
+                'BR': { label: 'CPF (Cadastro de Pessoas Físicas)', placeholder: 'Ex: 000.000.000-00 (Fictício)' },
+                'PT': { label: 'Cartão de Cidadão (CC / ID Card)', placeholder: 'Ex: 00000000 0 ZZ0 (Fictício)' }
             };
 
             countrySelect.addEventListener('change', function() {
-                const rule = rules[this.value];
-                if (rule) {
-                    docLabel.textContent = "Required Document: " + rule.label;
-                    docInput.placeholder = rule.placeholder;
-                    docInput.disabled = false;
+                const selectedValue = this.value;
+                
+                if (documentRules[selectedValue]) {
+                    // Atualiza o texto e remove a proteção de escrita do campo
+                    docLabel.textContent = "Required Legal Document: " + documentRules[selectedValue].label;
+                    docInput.placeholder = documentRules[selectedValue].placeholder;
+                    docInput.removeAttribute('readonly'); 
+                    docInput.focus();
+                } else {
+                    docLabel.textContent = "Required Legal Document:";
+                    docInput.placeholder = "Select a country first...";
+                    docInput.setAttribute('readonly', true);
                 }
             });
         });
