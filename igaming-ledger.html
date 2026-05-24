@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mediterranea Casino - Enterprise Operational Monitor</title>
+    <title>Mediterranea Casino - Enterprise Operational Monitor (Malta)</title>
     <style>
         /* =====================================================
-           MEDITERRANEA BRANDING: ROYAL NAVY BLUE & MATTE GOLD
+           PALETA MEDITERRÂNEA CORPORATIVA: BEGE, AZUL E OURO
            ===================================================== */
         * {
             box-sizing: border-box;
@@ -15,24 +15,25 @@
         }
 
         body {
-            background: radial-gradient(circle at top, #0a1128, #02040a);
+            background: linear-gradient(135deg, #f7f5f0 0%, #e8e2d5 100%);
             min-height: 100vh;
-            color: #f0f4f8;
+            color: #1c2d42;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             overflow-x: hidden;
             display: flex;
             flex-direction: column;
         }
 
-        /* BARRA SUPERIOR */
+        /* BARRA SUPERIOR CORPORATIVA */
         .topbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 18px 40px;
-            background: rgba(4, 11, 31, 0.95);
-            border-bottom: 3px solid #c5a059;
-            box-shadow: 0 4px 30px rgba(0,0,0,0.7);
+            padding: 15px 40px;
+            background: #0a1e38; /* Azul Marinho Profundo */
+            border-bottom: 4px solid #c5a059; /* Ouro Fosco */
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            color: #ffffff;
         }
 
         .brand-container {
@@ -41,315 +42,305 @@
             gap: 15px;
         }
 
-        .brand-logo {
-            height: 50px;
-            width: auto;
-            object-fit: contain;
-            border-radius: 6px;
-            border: 1px solid #c5a059;
+        .brand-details h1 {
+            font-size: 22px;
+            font-weight: 800;
+            color: #e5c17d;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        .brand {
-            font-size: 26px;
-            font-weight: 800;
-            color: #c5a059;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        .brand-details p {
+            font-size: 11px;
+            color: #a2b7d4;
+            letter-spacing: 0.5px;
         }
 
         .stats-container {
             display: flex;
             align-items: center;
-            gap: 25px;
-        }
-
-        .session-timer {
-            font-size: 14px;
-            color: #8da2bb;
-            background: rgba(255, 255, 255, 0.04);
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: 1px solid rgba(197, 160, 89, 0.2);
-        }
-
-        .balance {
-            font-size: 20px;
-            color: #52e08e;
-            font-weight: 700;
-            background: rgba(82, 224, 142, 0.08);
-            padding: 10px 24px;
-            border-radius: 30px;
-            border: 1px solid rgba(82, 224, 142, 0.25);
-            box-shadow: 0 0 20px rgba(82, 224, 142, 0.1);
-        }
-
-        /* LAYOUT CORPORATIVO TRIPLE-SPLIT */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 320px 1fr 380px;
-            gap: 25px;
-            padding: 30px;
-            flex: 1;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        /* PAINEL LATERAL 1: CONFIGURAÇÕES E PARÂMETROS */
-        .compliance-panel {
-            background: #060d1f;
-            border: 1px solid #142347;
-            border-radius: 16px;
-            padding: 22px;
-            display: flex;
-            flex-direction: column;
             gap: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
-        .compliance-panel h3 {
-            color: #c5a059;
-            font-size: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #142347;
-            padding-bottom: 12px;
-        }
-
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .control-group label {
-            font-size: 12px;
-            color: #8da2bb;
-            text-transform: uppercase;
+        .license-badge {
+            font-size: 11px;
+            background: rgba(197, 160, 89, 0.15);
+            border: 1px solid #c5a059;
+            color: #e5c17d;
+            padding: 6px 12px;
+            border-radius: 4px;
             font-weight: 600;
         }
 
-        .control-group select, .control-group input {
-            background: #020612;
-            border: 1px solid #1d3366;
-            color: #ffffff;
-            padding: 12px;
+        .balance-box {
+            background: #112d52;
+            padding: 10px 20px;
             border-radius: 8px;
+            border-left: 4px solid #52e08e;
+        }
+
+        .balance-label {
+            font-size: 10px;
+            color: #a2b7d4;
+            text-transform: uppercase;
+        }
+
+        .balance-value {
+            font-size: 20px;
+            color: #52e08e;
+            font-weight: 700;
+        }
+
+        /* LAYOUT TRIPLE-SPLIT */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 340px 1fr 420px;
+            gap: 25px;
+            padding: 25px;
+            flex: 1;
+            width: 100%;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        /* PAINÉIS GERAIS */
+        .panel {
+            background: #ffffff;
+            border: 1px solid #dcd6cd;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.04);
+        }
+
+        .panel-title {
+            color: #0a1e38;
             font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #e8e2d5;
+            padding-bottom: 10px;
+            font-weight: 700;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* FORMULÁRIOS E CONTROLES */
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .control-group label {
+            font-size: 11px;
+            color: #627285;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+
+        .control-group select, .control-group input {
+            background: #fcfbfa;
+            border: 1px solid #ccd1d9;
+            color: #1c2d42;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 13px;
             outline: none;
-            transition: border 0.2s;
+            transition: all 0.2s;
         }
 
         .control-group select:focus, .control-group input:focus {
-            border-color: #c5a059;
+            border-color: #0a1e38;
+            box-shadow: 0 0 5px rgba(10, 30, 56, 0.1);
         }
 
-        /* PAINEL CENTRAL: INTERFACE DA MÁQUINA */
-        .game-area {
+        /* ÁREA CENTRAL DE JOGO */
+        .game-center {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .game-screen {
+            background: #0a1e38;
+            border-radius: 12px;
+            padding: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: #030816;
-            border-radius: 16px;
-            border: 1px solid #101c3a;
-            padding: 40px;
-            position: relative;
+            border: 2px solid #c5a059;
+            min-height: 400px;
         }
 
         .slot-machine {
             display: flex;
-            gap: 25px;
-            background: #01030a;
-            padding: 35px 50px;
-            border-radius: 28px;
-            border: 2px solid #1d3366;
-            box-shadow: 0 0 60px rgba(197, 160, 89, 0.15);
-            margin-bottom: 45px;
+            gap: 20px;
+            background: #061324;
+            padding: 25px 40px;
+            border-radius: 16px;
+            border: 1px solid #c5a059;
+            margin-bottom: 30px;
         }
 
         .reel {
-            width: 130px;
-            height: 130px;
-            font-size: 80px;
+            width: 110px;
+            height: 110px;
+            font-size: 65px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(180deg, #050b1a, #0b1530);
-            border-radius: 20px;
-            border: 1px solid #223a73;
-            transition: all 0.1s ease;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.2);
             user-select: none;
         }
 
         .reel.spinning {
-            animation: blurGlow 0.08s infinite alternate;
+            animation: spinBlur 0.1s infinite linear;
         }
 
-        @keyframes blurGlow {
-            from { text-shadow: 0 0 15px #c5a059; transform: translateY(-5px); filter: blur(1px); }
-            to { text-shadow: 0 0 35px #c5a059; transform: translateY(5px); filter: blur(3px); }
+        @keyframes spinBlur {
+            0% { transform: translateY(-5px); filter: blur(1px); }
+            100% { transform: translateY(5px); filter: blur(2px); }
         }
 
-        .spin-btn {
-            padding: 22px 90px;
-            font-size: 24px;
-            background: linear-gradient(185deg, #f3d498, #c5a059);
-            color: #02040a;
+        .action-btn {
+            padding: 18px 60px;
+            font-size: 18px;
+            background: linear-gradient(180deg, #d8b467 0%, #b38f43 100%);
+            color: #ffffff;
             border: none;
-            border-radius: 16px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 800;
-            letter-spacing: 3px;
-            box-shadow: 0 10px 30px rgba(197, 160, 89, 0.3);
-            transition: all 0.2s ease;
+            font-weight: 700;
+            letter-spacing: 2px;
             text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(179, 143, 67, 0.4);
+            transition: all 0.2s;
         }
 
-        .spin-btn:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(197, 160, 89, 0.5);
+        .action-btn:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(179, 143, 67, 0.6);
         }
 
-        .spin-btn:disabled {
-            background: #121a2e;
-            color: #405275;
+        .action-btn:disabled {
+            background: #627285;
             cursor: not-allowed;
             box-shadow: none;
         }
 
-        /* PAINEL LATERAL 2: TELÃO DE DADOS EM TEMPO REAL */
-        .live-stream-panel {
-            background: #060d1f;
-            border: 1px solid #142347;
-            border-radius: 16px;
-            padding: 22px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .live-stream-panel h3 {
-            color: #c5a059;
-            font-size: 15px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #142347;
-            padding-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .live-indicator {
-            width: 8px;
-            height: 8px;
-            background: #52e08e;
-            border-radius: 50%;
-            animation: pulse 1s infinite alternate;
-        }
-
-        @keyframes pulse {
-            from { opacity: 0.4; box-shadow: 0 0 2px #52e08e; }
-            to { opacity: 1; box-shadow: 0 0 10px #52e08e; }
-        }
-
-        .stream-container {
+        /* AUDITORIA EM TEMPO REAL (TELÃO) */
+        .live-monitor {
             flex: 1;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            max-height: 480px;
+            gap: 10px;
+            max-height: 600px;
             padding-right: 5px;
         }
 
-        .stream-card {
-            background: #020612;
-            border: 1px solid #101c3a;
-            border-radius: 10px;
+        .log-card {
+            background: #fdfcf9;
+            border: 1px solid #e1dbd0;
+            border-left: 4px solid #0a1e38;
+            border-radius: 6px;
             padding: 12px;
-            font-size: 13px;
-            animation: slideIn 0.3s ease-out;
-            border-left: 3px solid #c5a059;
+            font-size: 12px;
         }
 
-        @keyframes slideIn {
-            from { transform: translateX(50px); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
+        .log-card.win { border-left-color: #52e08e; background: #f4fdf7; }
+        .log-card.loss { border-left-color: #e05252; background: #fdf5f5; }
 
-        .stream-header {
+        .log-header {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 6px;
-            font-weight: 600;
+            margin-bottom: 5px;
+            font-weight: 700;
         }
 
-        .player-name { color: #8da2bb; }
-        .game-type {
-            font-size: 11px;
-            background: #142347;
-            color: #c5a059;
+        .status-badge {
+            display: inline-block;
             padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-online { background: #e6f9ed; color: #229a53; }
+        .status-offline { background: #feecef; color: #bc2842; }
+
+        .hash-verifiable {
+            font-family: monospace;
+            background: #eef2f7;
+            padding: 4px;
             border-radius: 4px;
-            text-transform: uppercase;
+            color: #51637a;
+            font-size: 10px;
+            word-break: break-all;
+            margin-top: 5px;
         }
 
-        .stream-body {
-            display: flex;
-            justify-content: space-between;
-            font-family: 'Courier New', monospace;
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #229a53;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 1s infinite alternate;
         }
 
-        .player-bet { color: #f87171; }
-        .player-wallet { color: #a0aec0; }
-
-        /* ABAIXO: TRILHA DE AUDITORIA LOCAL (LEDGER) */
-        .ledger-section {
-            padding: 0 30px 30px 30px;
-            width: 100%;
-            margin: 0 auto;
+        @keyframes pulse {
+            from { opacity: 0.4; } to { opacity: 1; }
         }
+    </style>
+</head>
+<body>
 
-        .ledger-card {
-            background: #060d1f;
-            border: 1px solid #142347;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+    <!-- BARRA DE COMPLIANCE SUPERIOR -->
+    <header class="topbar">
+        <div class="brand-container">
+            <div class="brand-details">
+                <h1>Mediterranea Corporate</h1>
+                <p>Enterprise Risk & Compliance Infrastructure</p>
+            </div>
+        </div>
+        <div class="stats-container">
+            <div class="license-badge">MGA/B2C/213/2026 • Malta Jurisdiction</div>
+            <div class="balance-box">
+                <p class="balance-label">Carteira Corporativa (EUR)</p>
+                <p class="balance-value" id="wallet-display">€10,000.00</p>
+            </div>
+        </div>
+    </header>
 
-        .ledger-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #142347;
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-        }
+    <!-- LAYOUT PRINCIPAL -->
+    <main class="main-layout">
 
-        .ledger-header h4 {
-            color: #c5a059;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
+        <!-- PAINEL 1: PARAMETRIZAÇÃO DO SISTEMA -->
+        <section class="panel">
+            <h2 class="panel-title">Parâmetros de Risco (MGA)</h2>
+            
+            <div class="control-group">
+                <label>Identificador do Jogador</label>
+                <input type="text" id="player-id" value="PLY_MALTA_9921" readonly>
+            </div>
 
-        .ledger-table-wrapper {
-            max-height: 180px;
-            overflow-y: auto;
-        }
+            <div class="control-group">
+                <label>Seleção de Jogo Ativo</label>
+                <select id="game-select" onchange="switchGame()">
+                    <option value="slots">🎰 Azure Coast Slots (RTP 96.4%)</option>
+                    <option value="roulette">🎡 Valletta Premium Roulette (RTP 97.3%)</option>
+                    <option value="blackjack">🃏 Gozo Grand Blackjack (RTP 99.5%)</option>
+                </select>
+            </div>
 
-        .ledger-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 13px;
-            text-align: left;
-        }
-
-        .ledger-table th {
-            color: #8da2bb;
-            padding: 10px;
+            <div class="control-group">
 
