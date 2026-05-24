@@ -3,15 +3,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Portfólio</title>
-
-    <link rel="stylesheet" href="styles.css">
+    <title>Plataforma Malta iGaming - MGA Gateway</title>
+    <style>
+        /* DESIGN CORPORATIVO ESCURO NEON - REPARADO */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Segoe UI', sans-serif; 
+        }
+        body { 
+            background-color: #0d0d18; 
+            color: #e1e1e6; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 850px; 
+            margin: 0 auto; 
+        }
+        .gaming-nav { 
+            background: #161626; 
+            padding: 15px; 
+            text-align: center; 
+            border-radius: 8px; 
+            margin-bottom: 25px; 
+            border: 1px solid #262642; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+        }
+        .gaming-nav a { 
+            color: #fff; 
+            margin: 0 15px; 
+            text-decoration: none; 
+            font-size: 15px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: 0.3s; 
+        }
+        .gaming-nav a:hover, .gaming-nav a.active { 
+            color: #4ecca3; 
+            text-shadow: 0 0 8px rgba(78,204,163,0.5); 
+        }
+        .card { 
+            background: #121222; 
+            border: 1px solid #262642; 
+            padding: 30px; 
+            border-radius: 12px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6); 
+        }
+        h1, h2 { 
+            color: #fff; 
+            margin-bottom: 15px; 
+            border-bottom: 2px solid #4ecca3; 
+            padding-bottom: 8px; 
+        }
+        p { 
+            color: #aaa; 
+            margin-bottom: 20px; 
+            font-size: 15px; 
+        }
+        .form-group { 
+            margin-bottom: 20px; 
+        }
+        label { 
+            display: block; 
+            margin-bottom: 8px; 
+            color: #4ecca3; 
+            font-weight: 600; 
+        }
+        input, select { 
+            width: 100%; 
+            padding: 12px; 
+            background: #1a1a30; 
+            border: 1px solid #262642; 
+            color: #fff; 
+            border-radius: 6px; 
+            font-size: 15px; 
+        }
+        input:focus, select:focus { 
+            border-color: #4ecca3; 
+            outline: none; 
+        }
+        button { 
+            width: 100%; 
+            padding: 14px; 
+            background: #4ecca3; 
+            color: #0d0d18; 
+            border: none; 
+            border-radius: 6px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            text-transform: uppercase; 
+            font-size: 15px; 
+            transition: 0.2s; 
+        }
+        button:hover { 
+            background: #3db892; 
+            box-shadow: 0 0 15px rgba(78,204,163,0.4); 
+        }
+        .btn-bet { 
+            background: #e2b659; 
+        }
+        .btn-bet:hover { 
+            background: #cda34b; 
+            box-shadow: 0 0 15px rgba(226, 182, 89, 0.4); 
+        }
+        .wallet-grid { 
+            display: grid; 
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 15px; 
+            margin-bottom: 20px; 
+        }
+        .wallet-stat { 
+            background: #161626; 
+            padding: 15px; 
+            border-radius: 8px; 
+            border: 1px solid #262642; 
+            text-align: center; 
+        }
+        .wallet-stat p { 
+            font-size: 13px; 
+            color: #aaa; 
+            margin-bottom: 5px; 
+        }
+        .wallet-stat span { 
+            font-size: 18px; 
+            font-weight: bold; 
+            color: #fff; 
+        }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin-top: 15px; 
+            background: #161626; 
+            border-radius: 8px; 
+            overflow: hidden; 
+            border: 1px solid #262642; 
+        }
+        th, td { 
+            padding: 14px; 
+            text-align: left; 
+            font-size: 14px; 
+            border-bottom: 1px solid #262642; 
+        }
+        th { 
+            background: #1b1b32; 
+            color: #4ecca3; 
+            font-weight: 600; 
+        }
+        .win { 
+            color: #4ecca3; 
+            font-weight: bold; 
+        }
+        .loss { 
+            color: #ff4a4a; 
+            font-weight: bold; 
+        }
+        .hidden { 
+            display: none; 
+        }
+    </style>
 </head>
-
 <body>
 
-    <h1>Meu Portfólio</h1>
+    <div class="container">
+        <!-- Abas de Navegação Interna -->
+        <nav class="gaming-nav">
+            <a id="tab-cadastro" onclick="changeSection('sec-cadastro')" class="active">🆔 Registro & KYC</a>
+            <a id="tab-jogos" onclick="changeSection('sec-jogos')">🎰 Lobby de Jogos</a>
+            <a id="tab-carteira" onclick="changeSection('sec-carteira')">💰 Carteira & Ledger</a>
+        </nav>
 
-</body>
-</html>
+        <!-- ABA 1: REGISTRO / KYC -->
+        <div id="sec-cadastro" class="card">
+            <h1>🆔 Registro Corporativo do Operador (MGA Compliance)</h1>
+            <p>De acordo com os protocolos de Malta, o envio de identificação válida é indispensável para liberação de saques e apostas.</p>
+            <div class="form-group">
+                <label>Nome Completo:</label>
+                <input type="text" id="p-name" placeholder="Ex: Fabio Web Developer">
+            </div>
+            <div class="form-group">
+                <label>Tipo de Documento Legal:</label>
+                <select id="p-doc-type">
+                    <option value="Passaporte">Passaporte Internacional Válido</option>
+                    <option value="ID Europeu">Documento de Identidade Nacional / CNH</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Número do Documento:</label>
+                <input type="text" id="p-doc-num" placeholder="Ex: YA1234567">
+            </div>
+            <button onclick="registrarUsuario()">Concluir Cadastro & Verificar Documentação</button>
+        </div>
+
+        <!-- ABA 2: MULTI-SELEÇÃO DE JOGOS -->
+        <div id="sec-jogos" class="card hidden">
+            <h1>🎰 Hub de Jogos & Conexão de API</h1>
+            <p id="player-status" style="color: #ff4a4a; font-weight: bold;">Status: Conta Não Verificada</p>
+            <div class="form-group">
+                <label>Escolha o Tipo de Jogo:</label>
+                <select id="game-select">
+                    <option value="Slot Mediterranea Gold">🎰 Slot Mediterranea Gold (RTP 97.4%)</option>
+                    <option value="Roleta Malta Live">🍒 Roleta Europeia ao Vivo</option>
+                    <option value="Blackjack VIP Sliema">🃏 Blackjack VIP Premium (Sliema Hub)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Valor da Aposta Alocado (€):</label>
+                <input type="number" id="bet-val" value="20" min="1">
+            </div>
+            <button class="btn-bet" onclick="realizarRodada()">Validar Gateway & Iniciar Partida</button>
+        </div>
+
+        <!-- ABA 3: CARTEIRA INTELIGENTE & LEDGER LOGS -->
+        <div id="sec-carteira" class="card hidden">
+            <h1>💰 Sistema Ledger de Balanço Patrimonial</h1>
+            <p>Registro centralizado de contabilidade de transações para auditorias financeiras e controle de risco.</p>
+            <div class="wallet-grid">
+                <div class="wallet-stat"><p>Saldo em Conta</p><span id="lbl-balance">€100.00</span></div>
+                <div class="wallet-stat"><p>Total Alocado</p><span id="lbl-invested" style="color: #e2b659;">€0.00</span></div>
+                <div class="wallet-stat"><p>Lucros Gerados</p><span id="lbl-wins" style="color: #4ecca3;">€0.00</span></div>
+                <div class="wallet-stat"><p>Perdas Coletadas</p><span id="lbl-losses" style="color: #ff4a4a;">€0.00</span></div>
+            </div>
+            <div class="form-group">
+                <label>Aporte Emergencial / Adicionar Fundos (€):</label>
+                <input type="number" id="dep-val" value="50">
+            </div>
+            <button onclick="adicionarSaldo()">Processar Depósito Instantâneo</button>
+            <h2>📊 Histórico Geral Auditado (Ledger Logs)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Transação / Origem</th>
+                        <th>Custo Alocado</th>
+                        <th>Balanço Líquido</th>
+                        <th>Auditoria MGA</th>
+                    </tr>
+                </thead>
+                <tbody id="ledger-table-body">
+                    <tr>
+                        <td>Aporte de Boas-Vindas</td>
+                        <td>€0.00</td>
+                        <td class="win">+€100.00</td>
+                        <td style="color: #4ecca3; font-weight: bold;">Compensado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let userData = { nome: "", verificado: false };
+        let financeLedger = { saldo: 100.00, investido: 0.00, ganhos: 0.00, perdas: 0.00 };
+
+        function changeSection(sectionId) {
+            document.getElementById('sec-cadastro').classList.add('hidden');
+            document.getElementById('sec-jogos').classList.add('hidden');
+            document.getElementById('sec-carteira').classList.add('hidden');
+            document.getElementById(sectionId).classList.remove('hidden');
+
+            document.getElementById('tab-cadastro').classList.remove('active');
+            document.getElementById('tab-jogos').classList.remove('active');
+            document.getElementById('tab-carteira').classList.remove('active');
+            
+            if(sectionId === 'sec-cadastro') document.getElementById('tab-cadastro').classList.add('active');
+
 
