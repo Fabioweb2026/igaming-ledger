@@ -6,7 +6,6 @@
     "currency": "EUR",
     "status": "Completed"
   },
-
   {
     "transactionId": "TX-1002",
     "type": "Bet",
@@ -14,7 +13,6 @@
     "currency": "EUR",
     "status": "Completed"
   },
-
   {
     "transactionId": "TX-1003",
     "type": "Win",
