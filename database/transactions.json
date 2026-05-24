@@ -3,13 +3,23 @@
     "transactionId": "TX-1001",
     "type": "Deposit",
     "amount": 500,
-    "currency": "EUR"
+    "currency": "EUR",
+    "status": "Completed"
   },
 
   {
     "transactionId": "TX-1002",
     "type": "Bet",
     "amount": -25,
-    "currency": "EUR"
+    "currency": "EUR",
+    "status": "Completed"
+  },
+
+  {
+    "transactionId": "TX-1003",
+    "type": "Win",
+    "amount": 80,
+    "currency": "EUR",
+    "status": "Completed"
   }
 ]
