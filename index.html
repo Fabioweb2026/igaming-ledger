@@ -8,7 +8,7 @@
         body { font-family: Arial, sans-serif; background-color: #121212; color: #ffffff; margin: 20px; }
         section { background-color: #1e1e1e; padding: 20px; border-radius: 8px; border: 1px solid #333; max-width: 500px; margin: 0 auto; }
         h1 { color: #ff9900; font-size: 22px; }
-        label { display: block; margin-top: 15px; font-weight: bold; }
+        label { display: block; margin-top: 15px; font-weight: bold; color: #ccc; }
         select, input { width: 100%; padding: 12px; margin-top: 5px; background-color: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 4px; box-sizing: border-box; }
         button { background-color: #ff9900; color: #000; border: none; padding: 14px; width: 100%; margin-top: 20px; border-radius: 4px; font-weight: bold; cursor: pointer; }
     </style>
@@ -20,12 +20,14 @@
         <form id="kycForm" onsubmit="event.preventDefault(); alert('Formulário Enviado!');">
             
             <label for="country">Jurisdiction / Country:</label>
+            <!-- O select agora fecha corretamente após as opções -->
             <select id="country" required>
                 <option value="" disabled selected>Select your country...</option>
                 <option value="BR">Brazil (South America)</option>
                 <option value="PT">Portugal (European Union)</option>
             </select>
             
+            <!-- Os campos abaixo agora estão fora do select e vão aparecer na tela -->
             <label id="docLabel" for="docInput">Required Legal Document:</label>
             <input type="text" id="docInput" placeholder="Select a country first..." required>
             
@@ -34,14 +36,13 @@
     </section>
 
     <script>
-        // Código direto e sem travas de carregamento
         const countrySelect = document.getElementById('country');
         const docLabel = document.getElementById('docLabel');
         const docInput = document.getElementById('docInput');
         
         const documentRules = {
-            'BR': { label: 'CPF (Cadastro de Pessoas Físicas)', placeholder: 'Ex: 000.000.000-00' },
-            'PT': { label: 'Cartão de Cidadão (CC)', placeholder: 'Ex: 00000000 0 ZZ0' }
+            'BR': { label: 'CPF (Cadastro de Pessoas Físicas)', placeholder: 'Ex: 000.000.000-00 (Fictício)' },
+            'PT': { label: 'Cartão de Cidadão (CC)', placeholder: 'Ex: 00000000 0 ZZ0 (Fictício)' }
         };
 
         countrySelect.onchange = function() {
