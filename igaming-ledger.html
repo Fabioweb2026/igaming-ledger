@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malta iGaming Wallet & Ledger</title>
     <style>
-        /* CSS Integrado para garantir o funcionamento imediato no GitHub Pages */
+        /* Tema Escuro Neon Integrado */
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +20,7 @@
             padding-bottom: 50px;
         }
 
-        /* Menu de Navegação */
+        /* Menu de Navegação Global */
         .gaming-nav {
             background: #1a1a2e;
             padding: 15px;
@@ -43,14 +43,13 @@
             text-shadow: 0 0 8px rgba(78, 204, 163, 0.6);
         }
 
-        /* Container Principal */
+        /* Container do App */
         .container {
             max-width: 750px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
-        /* Card da Carteira */
         .wallet-card {
             background: #16162a;
             border: 1px solid #232342;
@@ -87,7 +86,6 @@
             color: #ffffff;
         }
 
-        /* Área de Botões */
         .btn-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -126,7 +124,7 @@
             box-shadow: 0 5px 15px rgba(226, 182, 89, 0.4);
         }
 
-        /* Tabela do Histórico (Ledger) */
+        /* Histórico Ledger */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -154,10 +152,6 @@
             border-bottom: 1px solid #1f1f38;
         }
 
-        tr:last-child {
-            border-bottom: none;
-        }
-
         .status-success {
             color: #4ecca3;
             font-weight: bold;
@@ -166,7 +160,7 @@
 </head>
 <body>
 
-    <!-- Menu de Navegação Integrado -->
+    <!-- Navegação Unificada -->
     <nav class="gaming-nav">
         <a href="index.html">🏠 Home Portfólio</a>
         <a href="igaming-ledger.html" class="active">📊 Ledger</a>
@@ -178,10 +172,8 @@
     </nav>
 
     <div class="container">
-        <!-- Card de Informações da Carteira -->
         <div class="wallet-card">
             <h1>Player Wallet</h1>
-            
             <p>Player: <span id="player-name" class="value">Fabio Web Developer</span></p>
             <p>Balance: <span id="wallet-balance" class="value">€250.00</span></p>
             <p>Bonus: <span id="bonus-balance" class="value">€50.00</span></p>
@@ -194,8 +186,7 @@
             </div>
         </div>
 
-        <!-- Seção do Histórico de Transações -->
-        <h2>Transaction History</h2>
+        <h2>Transaction History (Ledger)</h2>
         <table>
             <thead>
                 <tr>
@@ -212,58 +203,36 @@
                     <td>€250.00</td>
                     <td class="status-success">Success</td>
                 </tr>
-                <tr>
-                    <td>#TR-9083</td>
-                    <td>Welcome Bonus</td>
-                    <td>€50.00</td>
-                    <td class="status-success">Success</td>
-                </tr>
             </tbody>
         </table>
     </div>
 
-    <!-- Script de Funcionalidade Integrado -->
     <script>
         let balance = 250.00;
         let bonus = 50.00;
-        let transactionCount = 9084;
+        let transactionCount = 9083;
 
         function updateDisplay() {
             document.getElementById('wallet-balance').innerText = `€${balance.toFixed(2)}`;
             document.getElementById('bonus-balance').innerText = `€${bonus.toFixed(2)}`;
         }
 
-        function addTransactionRow(type, amount) {
-            const tbody = document.getElementById('ledger-rows');
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>#TR-${transactionCount++}</td>
-                <td>${type}</td>
-                <td>€${amount.toFixed(2)}</td>
-                <td class="status-success">Success</td>
-            `;
-            tbody.insertBefore(row, tbody.firstChild);
-        }
-
         function handleDeposit() {
             balance += 100.00;
-            bonus += 10.00; // 10% bônus regulamentação Malta
+            bonus += 10.00;
             updateDisplay();
-            addTransactionRow('Deposit Gateway', 100.00);
-            alert('Depósito de €100.00 processado pelo Ledger de Malta!');
+            alert('Depósito de €100.00 processado com sucesso!');
         }
 
         function handleBet() {
             if (balance >= 25) {
                 balance -= 25;
                 updateDisplay();
-                addTransactionRow('Casino Bet', 25.00);
+                alert('Aposta de €25.00 registrada no Ledger!');
             } else {
-                alert('Saldo insuficiente para apostar!');
+                alert('Saldo insuficiente!');
             }
         }
     </script>
-
 </body>
 </html>
-
