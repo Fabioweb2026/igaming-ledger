@@ -11,9 +11,9 @@ header{
 }
 
 .card{
+    background:#1e293b;
     margin:40px;
     padding:20px;
-    background:#1e293b;
     border-radius:12px;
 }
 
@@ -23,4 +23,5 @@ button{
     border-radius:8px;
     background:#22c55e;
     color:white;
+    cursor:pointer;
 }
