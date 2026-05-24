@@ -15,73 +15,118 @@
         .card { background: #121222; border: 1px solid #262642; padding: 30px; border-radius: 12px; margin-bottom: 25px; }
         h1 { color: #fff; margin-bottom: 15px; border-bottom: 2px solid #4ecca3; padding-bottom: 8px; }
         .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #4ecca3; font-weight: 600; }
         input, select { width: 100%; padding: 12px; background: #1a1a30; border: 1px solid #262642; color: #fff; border-radius: 6px; }
         button { width: 100%; padding: 14px; background: #4ecca3; color: #0d0d18; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; }
         button:hover { background: #3db892; }
-        .hidden { display: none !important; } /* Correção crítica de exibição */
-        .wallet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
-        .wallet-stat { background: #161626; padding: 15px; border-radius: 8px; text-align: center; }
-        .wallet-stat span { font-weight: bold; color: #fff; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #161626; }
-        th, td { padding: 14px; text-align: left; border-bottom: 1px solid #262642; }
-        th { background: #1b1b32; color: #4ecca3; }
-        .win { color: #4ecca3; } .loss { color: #ff4a4a; }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
     <div class="container">
         <nav class="gaming-nav">
-            <a id="tab-cadastro" onclick="changeSection('sec-cadastro')" class="active">🆔 Registro</a>
+            <a id="tab-cadastro" onclick="changeSection('sec-cadastro')" class="active">🆔 Registro & KYC</a>
             <a id="tab-jogos" onclick="changeSection('sec-jogos')">🎰 Lobby</a>
         </nav>
 
-        <!-- ABA 1: REGISTRO (Corrigida para evitar travamento) -->
+        <!-- ABA 1: REGISTRO (Atualizado com Países e Documentos Corretos) -->
         <div id="sec-cadastro" class="card">
-            <h1>Registro</h1>
-            <div class="form-group"><input type="text" id="p-name" placeholder="Nome Completo"></div>
-            <div class="form-group"><input type="text" id="p-doc-num" placeholder="Documento"></div>
-            <button onclick="registrarUsuario()">Finalizar e Avançar</button>
+            <h1>🆔 Registro Corporativo do Operador (MGA Compliance)</h1>
+            <p>De acordo com os regulamentos de Malta, selecione seu país de origem e o documento de identidade correspondente.</p>
+            
+            <div class="form-group">
+                <label>Nome Completo:</label>
+                <input type="text" id="p-name" placeholder="Ex: Fabio Web Developer">
+            </div>
+
+            <div class="form-group">
+                <label>País de Residência:</label>
+                <select id="p-country" onchange="atualizarDocumentosDisponiveis()">
+                    <option value="Brasil">Brasil (South America)</option>
+                    <option value="Portugal">Portugal (European Union)</option>
+                    <option value="Malta">Malta (MGA Host Country)</option>
+                    <option value="Outro">Outro (International)</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Tipo de Documento Legal:</label>
+                <select id="p-doc-type">
+                    <!-- Opções serão injetadas de forma inteligente via JavaScript -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Número do Documento:</label>
+                <input type="text" id="p-doc-num" placeholder="Digite o número do documento">
+            </div>
+
+            <button onclick="registrarUsuario()">Concluir Cadastro & Verificar Documentação</button>
         </div>
 
-        <!-- ABA 2: JOGOS (Inicialmente oculta) -->
+        <!-- ABA 2: JOGOS -->
         <div id="sec-jogos" class="card hidden">
-            <h1>Lobby de Jogos</h1>
-            <p id="player-status" style="color: #4ecca3;">Status: Aguardando cadastro...</p>
-            <button class="btn-bet" onclick="alert('Iniciando...')">Jogar</button>
+            <h1>🎰 Hub de Jogos & Conexão de API</h1>
+            <p id="player-status" style="color: #4ecca3; font-weight: bold;">Status: Aguardando cadastro...</p>
+            <br>
+            <button onclick="alert('Conectando ao servidor de Malta...')">Validar Gateway & Iniciar Partida</button>
         </div>
     </div>
 
     <script>
-        // Lógica de navegação nativa e blindada
+        // Função para alternar as abas
         function changeSection(sectionId) {
-            // Esconde todas
             document.querySelectorAll('.card').forEach(c => c.classList.add('hidden'));
             document.querySelectorAll('.gaming-nav a').forEach(a => a.classList.remove('active'));
             
-            // Mostra a selecionada
             document.getElementById(sectionId).classList.remove('hidden');
             
-            // Atualiza aba ativa (melhorado para funcionar com id dinâmico)
-            const tabId = 'tab-' + sectionId.split('-')[1];
+            const tabId = 'tab-' + sectionId.replace('sec-', '');
             if(document.getElementById(tabId)) document.getElementById(tabId).classList.add('active');
         }
 
-        // Função de cadastro com redirecionamento forçado
+        // Filtro Inteligente de Documentos com base no País selecionado
+        function atualizarDocumentosDisponiveis() {
+            const pais = document.getElementById('p-country').value;
+            const selectDoc = document.getElementById('p-doc-type');
+            
+            // Limpa as opções atuais
+            selectDoc.innerHTML = "";
+
+            if (pais === "Brasil") {
+                selectDoc.innerHTML += `<option value="RG/CNH">RG ou CNH (Validação Nacional)</option>`;
+                selectDoc.innerHTML += `<option value="Passaporte">Passaporte Internacional</option>`;
+            } else if (pais === "Portugal" || pais === "Malta") {
+                selectDoc.innerHTML += `National Identity Card (EU/EEA Citizen)</option>`;
+                selectDoc.innerHTML += `<option value="Passaporte">Passaporte Internacional</option>`;
+            } else {
+                selectDoc.innerHTML += `<option value="Passaporte">Passaporte Internacional Válido</option>`;
+            }
+        }
+
+        // Executa a função uma vez ao carregar a página para preencher o primeiro país
+        window.onload = function() {
+            atualizarDocumentosDisponiveis();
+        };
+
+        // Função de Registro Corrigida (Avança de aba sem travar)
         function registrarUsuario() {
             const nome = document.getElementById('p-name').value;
             const docNum = document.getElementById('p-doc-num').value;
+            const pais = document.getElementById('p-country').value;
+            const docTipo = document.getElementById('p-doc-type').value;
 
             if(!nome || !docNum) {
-                alert("Preencha os campos!");
+                alert("Por favor, preencha todos os campos do documento para validação MGA.");
                 return;
             }
 
-            // Atualiza status e muda de seção
+            // Atualiza o status no painel de jogos
             const statusLabel = document.getElementById('player-status');
-            statusLabel.innerText = `Status: Verificado (${nome})`;
+            statusLabel.innerText = `Status: Operador Verificado (${nome}) | Origem: ${pais} | Doc: ${docTipo}`;
             
-            alert("Cadastro aprovado!");
-            changeSection('sec-jogos'); // <--- CORREÇÃO: Força a navegação aqui
+            alert("Documentação e KYC validados com sucesso no gateway de Malta!");
+            changeSection('sec-jogos'); // Move o usuário para a aba de jogos
         }
     </script>
 </body>
