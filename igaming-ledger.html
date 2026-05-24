@@ -1,312 +1,91 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mediterranea Casino - Enterprise Risk & Compliance Infrastructure</title>
+    <title>Mediterranea Corporate - Audit Ledger</title>
     <style>
-        /* =====================================================
-           CORPORATE MEDITERRANEAN PALETTE: IVORY, NAVY & GOLD
-           ===================================================== */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             background: linear-gradient(135deg, #f4f1ea 0%, #e4ded0 100%);
             min-height: 100vh;
             color: #1a2a3a;
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-            display: flex;
-            flex-direction: column;
+            padding: 30px;
         }
-
-        /* COMPLIANCE HEADER */
-        .topbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background: #0b1a30;
-            border-bottom: 4px solid #c5a059;
-            color: #ffffff;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        .brand-details h1 {
-            font-size: 20px;
-            font-weight: 800;
-            color: #e5c17d;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .brand-details p {
-            font-size: 11px;
-            color: #8fa4be;
-        }
-
-        .license-badge {
-            font-size: 11px;
-            background: rgba(197, 160, 89, 0.15);
-            border: 1px solid #c5a059;
-            color: #e5c17d;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-weight: 600;
-        }
-
-        /* ARCHITECTURE SPLIT: PLAYER VS ADMIN */
-        .workspace-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 25px;
-            padding: 25px;
-            flex: 1;
-            max-width: 1800px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 14px;
-            color: #0b1a30;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 2px solid #cbd5e1;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-            font-weight: 700;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        /* 📱 INTERFACE 1: PLAYER ENVIRONMENT */
-        .player-module {
-            background: #ffffff;
-            border: 1px solid #d1c9bc;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-
-        .player-hardware-frame {
-            background: #0f172a;
-            border-radius: 10px;
-            padding: 25px;
-            color: #ffffff;
-            margin-top: 15px;
-            border: 2px solid #334155;
-        }
-
-        .hud-screen {
-            background: #020617;
-            border-radius: 6px;
-            padding: 15px;
-            font-family: monospace;
-            font-size: 13px;
-            color: #38bdf8;
-            margin-bottom: 20px;
-            border: 1px solid #1e293b;
-        }
-
-        .hud-line {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            border-bottom: 1px dashed rgba(56, 189, 248, 0.15);
-        }
-
-        .game-engine-box {
-            background: #1e293b;
-            border-radius: 8px;
-            padding: 30px 10px;
-            text-align: center;
-            margin-bottom: 20px;
-            border: 1px solid #c5a059;
-        }
-
-        .engine-display { font-size: 45px; font-weight: bold; letter-spacing: 5px; min-height: 60px; }
-        
-        .btn-wager {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(180deg, #d8b467 0%, #b38f43 100%);
-            border: none;
-            border-radius: 6px;
-            color: #ffffff;
-            font-size: 15px;
-            font-weight: 700;
-            text-transform: uppercase;
-            cursor: pointer;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 12px rgba(179, 143, 67, 0.3);
-        }
-
-        /* 🖥️ INTERFACE 2: ADMIN & AUDIT ENVIRONMENT */
-        .admin-module {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .admin-panel {
-            background: #ffffff;
-            border: 1px solid #d1c9bc;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-        }
-
-        /* RELATIONAL DATABASE SIMULATOR VIEW */
-        .db-table-wrapper {
-            overflow-x: auto;
-            margin-top: 10px;
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 6px;
-            max-height: 220px;
-        }
-
-        .db-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 11px;
-            font-family: monospace;
-            text-align: left;
-        }
-
-        .db-table th {
-            background: #1e293b;
-            color: #f8fafc;
-            padding: 8px 12px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .db-table td {
-            padding: 8px 12px;
-            border-bottom: 1px solid #e2e8f0;
-            color: #334155;
-        }
-
-        .db-table tr:hover { background: #f1f5f9; }
-
-        /* MGA AUDIT MONITOR */
-        .audit-stream {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-height: 250px;
-            overflow-y: auto;
-            padding-right: 5px;
-        }
-
-        .audit-card {
-            background: #fcfbfa;
-            border: 1px solid #e2dcd0;
-            border-left: 4px solid #0b1a30;
-            border-radius: 6px;
-            padding: 10px;
-            font-size: 11px;
-        }
-        .audit-card.win { border-left-color: #10b981; background: #f0fdf4; }
-        .audit-card.loss { border-left-color: #ef4444; background: #fef2f2; }
-
-        .hash-seal {
-            font-family: monospace;
-            background: #e2e8f0;
-            padding: 3px;
-            border-radius: 4px;
-            color: #475569;
-            font-size: 9px;
-            margin-top: 4px;
-            word-break: break-all;
-        }
-
-        .badge-live {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            margin-bottom: 12px;
-        }
-
-        .input-group label { font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase; }
-        .input-group select, .input-group input { padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; }
+        .admin-container { max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; }
+        .header { background: #0b1a30; border-bottom: 4px solid #c5a059; padding: 20px; color: #ffffff; border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .card { background: #ffffff; border: 1px solid #d1c9bc; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+        .title { font-size: 14px; font-weight: bold; text-transform: uppercase; border-bottom: 2px solid #cbd5e1; padding-bottom: 8px; margin-bottom: 15px; color: #0b1a30; }
+        .table-frame { overflow-x: auto; max-height: 400px; border: 1px solid #cbd5e1; border-radius: 6px; }
+        table { width: 100%; border-collapse: collapse; font-family: monospace; font-size: 12px; text-align: left; }
+        th { background: #1e293b; color: #ffffff; padding: 10px; }
+        td { padding: 10px; border-bottom: 1px solid #e2e8f0; }
+        tr:hover { background: #f8fafc; }
+        .btn-refresh { padding: 8px 16px; background: #0b1a30; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; text-transform: uppercase; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <!-- MGA COMPLIANCE TOPBAR -->
-    <header class="topbar">
-        <div class="brand-details">
-            <h1>Mediterranea Corporate</h1>
-            <p>Malta Jurisdiction Gaming Infrastructure Platform</p>
+    <div class="admin-container">
+        <div class="header">
+            <div>
+                <h1 style="color: #e5c17d; font-size: 20px;">MEDITERRANEA CONTROL PANEL</h1>
+                <p style="font-size: 11px; color: #8fa4be;">Malta Gaming Authority (MGA) Regulatory Node</p>
+            </div>
+            <button class="btn-refresh" onclick="reloadDatabase()">🔄 Refresh DB Queries</button>
         </div>
-        <div class="license-badge">MGA/B2C/213/2026 • Production Sandbox Active</div>
-    </header>
 
-    <main class="workspace-grid">
+        <!-- RELATIONAL DATABASE VIEW -->
+        <div class="card">
+            <h2 class="title">💾 Database Relation Table: `audit_ledger`</h2>
+            <div class="table-frame">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SERVER TIMESTAMP</th>
+                            <th>TRANSACTION ID (UUID)</th>
+                            <th>GAME MOTOR</th>
+                            <th>STAKE (DEBIT)</th>
+                            <th>PAYOUT (CREDIT)</th>
+                            <th>PROVABLY FAIR HASH</th>
+                        </tr>
+                    </thead>
+                    <tbody id="db-rows">
+                        <!-- Instanced relational records render here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
-        <!-- LEFT SIDE: ACTIVE PLAYER WEB INTERFACE -->
-        <section class="player-module">
-            <h2 class="section-title">🌐 UI Interface 1: Player Front-End</h2>
+    <script>
+        function reloadDatabase() {
+            const tbody = document.getElementById('db-rows');
+            tbody.innerHTML = "";
             
-            <div class="input-group">
-                <label>Select Game Motor</label>
-                <select id="player-game-select" onchange="syncPlayerUI()">
-                    <option value="SLOTS">🎰 Azure Coast Slots (RTP 96.4%)</option>
-                    <option value="ROULETTE">🎡 Valletta Premium Roulette (RTP 97.3%)</option>
-                    <option value="BLACKJACK">🃏 Gozo Grand Blackjack (RTP 99.5%)</option>
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>Wager Stake Amount (€)</label>
-                <input type="number" id="player-bet-amount" value="20" min="1">
-            </div>
-
-            <div class="player-hardware-frame">
-                <div class="hud-screen">
-                    <div class="hud-line"><span>Player Identity:</span><span style="color:#ffffff;">PLY_MALTA_9921</span></div>
-                    <div class="hud-line"><span>Active Session Core:</span><span id="hud-game">SLOTS</span></div>
-                    <div class="hud-line"><span>Secure Wallet Balance:</span><span id="hud-balance" style="color: #10b981; font-weight: bold;">€1,000.00</span></div>
-                </div>
-
-                <div class="game-engine-box">
-                    <div class="engine-display" id="visual-engine-output">🍋 🍒 💎</div>
-                </div>
-
-                <button class="btn-wager" onclick="triggerWagerCycle()">Submit Secure Bet</button>
-            </div>
-        </section>
-
-        <!-- RIGHT SIDE: REAL-TIME AUDITOR PANEL & SQL DATABASE VIEW -->
-        <section class="admin-module">
+            let ledger = JSON.parse(localStorage.getItem('mga_db_ledger')) || [];
             
-            <!-- AUDITOR LOG FEED -->
-            <div class="admin-panel">
-                <h2 class="section-title">
-                    <span>📋 UI Interface 2: Malta Authority Audit Feed</span>
-                    <span class="badge-live"></span>
-                </h2>
-                <div class="audit-stream" id="mga-audit-stream">
-                    <!-- Logs append live here -->
-                </div>
-            </div>
+            if(ledger.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding:30px;">Database empty. No active transactions detected from Player Terminal.</td></tr>`;
+                return;
+            }
 
-            <!-- RELATIONAL DATABASE VIEWER -->
-            <div class="admin-panel">
-                <h2 class="section-title">💾 System Administrator Database Viewer (`audit_ledger` Table)</h2>
-
+            ledger.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${row.timestamp}</strong></td>
+                    <td style="color:#0284c7;">${row.tx_id}</td>
+                    <td><span style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:bold;">${row.game}</span></td>
+                    <td style="color:#ef4444; font-weight:bold;">-€${row.bet.toFixed(2)}</td>
+                    <td style="color:${row.payout > 0 ? '#10b981' : '#475569'}; font-weight:bold;">+€${row.payout.toFixed(2)}</td>
+                    <td style="font-size:10px; color:#64748b;">${row.hash}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        window.onload = reloadDatabase;
+    </script>
+</body>
+</html>
