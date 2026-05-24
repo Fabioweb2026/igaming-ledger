@@ -38,3 +38,18 @@ function depositMoney() {
 
     alert('Deposit Successful!');
 }
+function placeBet() {
+
+    if (currentBalance < 25) {
+
+        alert('Insufficient Balance');
+
+        return;
+    }
+
+    currentBalance -= 25;
+
+    updateBalance();
+
+    alert('Bet Placed!');
+}
