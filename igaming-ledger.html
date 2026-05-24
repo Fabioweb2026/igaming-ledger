@@ -44,15 +44,13 @@
         th { background: #1b1b32; color: #4ecca3; font-weight: 600; }
         .win { color: #4ecca3; font-weight: bold; }
         .loss { color: #ff4a4a; font-weight: bold; }
-        
-        /* Sistema de Abas */
         .hidden { display: none; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Navegação Comercial -->
+        <!-- Menu Corporativo Interno -->
         <nav class="gaming-nav">
             <a id="tab-cadastro" onclick="changeSection('sec-cadastro')" class="active">🆔 Registro & KYC</a>
             <a id="tab-jogos" onclick="changeSection('sec-jogos')">🎰 Lobby de Jogos</a>
@@ -63,7 +61,6 @@
         <div id="sec-cadastro" class="card">
             <h1>🆔 Registro Corporativo do Operador (MGA Compliance)</h1>
             <p>De acordo com os protocolos de Malta, o envio de identificação válida é indispensável para liberação de saques e apostas.</p>
-            
             <div class="form-group">
                 <label>Nome Completo:</label>
                 <input type="text" id="p-name" placeholder="Ex: Fabio Web Developer">
@@ -82,11 +79,10 @@
             <button onclick="registrarUsuario()">Concluir Cadastro & Verificar Documentação</button>
         </div>
 
-        <!-- ABA 2: SELEÇÃO DE JOGOS E ENTRADA DE VALORES -->
+        <!-- ABA 2: JOGOS -->
         <div id="sec-jogos" class="card hidden">
             <h1>🎰 Hub de Jogos & Conexão de API</h1>
             <p id="player-status" style="color: #ff4a4a; font-weight: bold;">Status: Conta Não Verificada</p>
-            
             <div class="form-group">
                 <label>Escolha o Tipo de Jogo:</label>
                 <select id="game-select">
@@ -102,24 +98,21 @@
             <button class="btn-bet" onclick="realizarRodada()">Validar Gateway & Iniciar Partida</button>
         </div>
 
-        <!-- ABA 3: CARTEIRA DE FLUXO (SALDO, INVESTIDO, GANHOS E PERDAS) -->
+        <!-- ABA 3: CARTEIRA -->
         <div id="sec-carteira" class="card hidden">
             <h1>💰 Sistema Ledger de Balanço Patrimonial</h1>
             <p>Registro centralizado de contabilidade de transações para auditorias financeiras e controle de risco.</p>
-            
             <div class="wallet-grid">
                 <div class="wallet-stat"><p>Saldo em Conta</p><span id="lbl-balance">€100.00</span></div>
                 <div class="wallet-stat"><p>Total Alocado</p><span id="lbl-invested" style="color: #e2b659;">€0.00</span></div>
                 <div class="wallet-stat"><p>Lucros Gerados</p><span id="lbl-wins" style="color: #4ecca3;">€0.00</span></div>
                 <div class="wallet-stat"><p>Perdas Coletadas</p><span id="lbl-losses" style="color: #ff4a4a;">€0.00</span></div>
             </div>
-
             <div class="form-group">
                 <label>Aporte Emergencial / Adicionar Fundos (€):</label>
                 <input type="number" id="dep-val" value="50">
             </div>
             <button onclick="adicionarSaldo()">Processar Depósito Instantâneo</button>
-
             <h2>📊 Histórico Geral Auditado (Ledger Logs)</h2>
             <table>
                 <thead>
@@ -173,12 +166,15 @@
 
             userData.nome = txtNome;
             userData.verificado = true;
-
             document.getElementById('player-status').innerText = `👤 Operador: ${txtNome} | KYC: ${typeDoc} (${txtDoc}) Aprovado ✓`;
             document.getElementById('player-status').style.color = "#4ecca3";
-            alert("✅ Conformidade KYC Aprovada! Seu documento foi indexado nos servidores reguladores de Malta.");
+            alert("✅ Conformidade KYC Aprovada!");
             changeSection('sec-jogos');
         }
 
         function adicionarSaldo() {
+            const quantia = parseFloat(document.getElementById('dep-val').value);
+            if (quantia <= 0 || isNaN(quantia)) return;
+            financeLedger.saldo += quantia;
+            renderFinanceData();
 
