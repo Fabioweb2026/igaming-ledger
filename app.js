@@ -23,6 +23,8 @@ async function loadPlayer() {
     document.getElementById('kyc-status').innerText =
         player.kycStatus;
 }
+document.getElementById('vip-level').innerText =
+    player.vipLevel;
 
 function updateBalance() {
 
