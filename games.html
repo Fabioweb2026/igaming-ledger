@@ -3,35 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iGaming - Games List</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>iGaming - Games</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #0f0f1a; color: #f1f1f6; padding-bottom: 50px; }
+        .gaming-nav { background: #1a1a2e; padding: 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border-bottom: 2px solid #232342; }
+        .gaming-nav a { color: #fff; margin: 0 12px; text-decoration: none; font-size: 14px; transition: all 0.3s; }
+        .gaming-nav a:hover, .gaming-nav a.active { color: #4ecca3; text-shadow: 0 0 8px rgba(78, 204, 163, 0.6); }
+        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 20px; }
+        .game-card { background: #16162a; border: 1px solid #232342; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        h1 { font-size: 26px; border-bottom: 2px solid #4ecca3; padding-bottom: 8px; margin-bottom: 10px; }
+        h3 { margin: 15px 0 10px 0; font-size: 18px; }
+        .game-img { width: 100%; height: 180px; background: #1f1f38; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #b5b5c6; font-weight: bold; border: 1px dashed #333; }
+        button { background: #4ecca3; color: #0f0f1a; border: none; padding: 10px 20px; font-weight: bold; border-radius: 6px; cursor: pointer; text-transform: uppercase; width: 100%; transition: 0.2s; }
+        button:hover { background: #3db892; box-shadow: 0 5px 15px rgba(78, 204, 163, 0.4); }
+    </style>
 </head>
 <body>
 
-    <!-- Menu de Navegação Global -->
-    <nav class="gaming-nav" style="background: #1a1a2e; padding: 15px; text-align: center; margin-bottom: 20px;">
-        <a href="index.html" style="color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold;">🏠 Home Portfólio</a> |
-        <a href="igaming-ledger.html" style="color: #fff; margin: 0 15px; text-decoration: none;">📊 Ledger</a> |
-        <a href="lobby.html" style="color: #fff; margin: 0 15px; text-decoration: none;">🎮 Lobby</a> |
-        <a href="wallet.html" style="color: #fff; margin: 0 15px; text-decoration: none;">💰 Wallet</a> |
-        <a href="kyc.html" style="color: #fff; margin: 0 15px; text-decoration: none;">🆔 KYC</a> |
-        <a href="games.html" style="color: #4ecca3; margin: 0 15px; text-decoration: none; font-weight: bold;">🎰 Games</a> |
-        <a href="admin.html" style="color: #fff; margin: 0 15px; text-decoration: none;">⚙️ Admin</a>
+    <nav class="gaming-nav">
+        <a href="index.html">🏠 Home Portfólio</a>
+        <a href="igaming-ledger.html">📊 Ledger</a>
+        <a href="lobby.html">🎮 Lobby</a>
+        <a href="wallet.html">💰 Wallet</a>
+        <a href="kyc.html">🆔 KYC</a>
+        <a href="games.html" class="active">🎰 Games</a>
+        <a href="admin.html">⚙️ Admin</a>
     </nav>
 
-    <div class="games-container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
-        <h1>🎰 Catálogo de Jogos</h1>
-        <p>Selecione um dos nossos títulos integrados via API.</p>
-        
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
-            <div style="border: 1px solid #333; padding: 15px; border-radius: 5px; text-align: center;">
-                <h3>Slot Mediterranea</h3>
-                <img src="mediterranea.png.png" alt="Mediterranea Slot" style="max-width: 100%; height: auto; border-radius: 4px; margin-bottom: 10px;">
-                <button style="padding: 5px 15px;">Jogar Demo</button>
+    <div class="container">
+        <h1>🎰 Catálogo de Jogos Integrados</h1>
+        <div class="games-grid">
+            <div class="game-card">
+                <div class="game-img" style="background-image: url('mediterranea.png.png'); background-size: cover; background-position: center;">
+                    <!-- Caso a imagem mediterranea.png.png exista na raiz, ela carrega aqui -->
+                    Slot Mediterranea
+                </div>
+                <h3>Mediterranea Gold Slots</h3>
+                <button onclick="alert('Iniciando o modo Demo homologado pela MGA...')">Jogar Demo</button>
             </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
 </body>
 </html>
