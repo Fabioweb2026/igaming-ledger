@@ -1,85 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Portfólio de Desenvolvedor</title>
-    
-    <!-- O caminho correto do CSS é direto na raiz, sem "../" -->
     <link rel="stylesheet" href="styles.css">
 </head>
-
-<body> <!-- ABRA A TAG BODY BEM AQUI -->
-
-    <!-- Agora sim, o botão fica no início do corpo da página -->
-    <div class="projeto-card" style="margin-top: 20px; text-align: center;">
-    <!-- Atualizado para o novo nome limpo do arquivo -->
-    <a href="igaming-malta.html" style="display: inline-block; padding: 12px 24px; background-color: #4ecca3; color: #0f0f1a; text-decoration: none; font-weight: bold; border-radius: 6px;">
-        Ver Projeto iGaming
-    </a>
-</div>
-    <!-- O restante do conteúdo do seu portfólio continua daqui para baixo -->
-</head>
 <body>
-    <div class="wallet-card">
-        <h1>Player Wallet</h1>
-        <p>
-            Player:
-            <span id="player-name"></span>
-        </p>
 
-        <p>
-            Balance:
-            <span id="wallet-balance"></span>
-        </p>
-
-        <p>
-            Bonus:
-            <span id="bonus-balance"></span>
-        </p>
-
-        <p>
-            KYC:
-            <span id="kyc-status"></span>
-        </p>
-
-        <p>
-            VIP:
-            <span id="vip-level"></span>
-        </p>
-
-        <button onclick="depositMoney()">
-            Deposit €100
-        </button>
-
-        <button onclick="placeBet()">
-            Bet €25
-        </button>
-
+    <!-- O botão para abrir o jogo fica aqui dentro do body -->
+    <div class="projeto-card" style="margin: 40px auto; text-align: center;">
+        <a href="igaming-ledger.html" style="display: inline-block; padding: 12px 24px; background-color: #4ecca3; color: #0f0f1a; text-decoration: none; font-weight: bold; border-radius: 6px;">
+            Ver Projeto iGaming
+        </a>
     </div>
 
-    <h2>Transaction History</h2>
+<!-- O restante do seu portfólio continua aqui para baixo -->
 
-    <table>
-
-        <thead>
-
-            <tr>
-                <th>ID</th>
-                <th>Type</th>
-                <th>Amount</th>
-                <th>Status</th>
-            </tr>
-
-        </thead>
-
-        <tbody id="transactions-table">
-
-        </tbody>
-
-    </table>
-
-    <script src="app.js"></script>
-
-</body>
-</html>
