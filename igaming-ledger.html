@@ -1,10 +1,11 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mediterranea Corporate - Audit Ledger</title>
+    <!-- SUPABASE GLOBAL CLIENT SDK -->
+    <script src="https://jsdelivr.net"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -23,7 +24,7 @@
         th { background: #1e293b; color: #ffffff; padding: 10px; }
         td { padding: 10px; border-bottom: 1px solid #e2e8f0; }
         tr:hover { background: #f8fafc; }
-        .btn-refresh { padding: 8px 16px; background: #0b1a30; color: #fff; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; text-transform: uppercase; font-weight: bold; }
+        .btn-refresh { padding: 8px 16px; background: #c5a059; color: #0b1a30; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; text-transform: uppercase; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -32,12 +33,11 @@
         <div class="header">
             <div>
                 <h1 style="color: #e5c17d; font-size: 20px;">MEDITERRANEA CONTROL PANEL</h1>
-                <p style="font-size: 11px; color: #8fa4be;">Malta Gaming Authority (MGA) Regulatory Node</p>
+                <p style="font-size: 11px; color: #8fa4be;">Malta Gaming Authority (MGA) Relational Database Mirror</p>
             </div>
-            <button class="btn-refresh" onclick="reloadDatabase()">🔄 Refresh DB Queries</button>
+            <button class="btn-refresh" onclick="fetchCloudData()">🔄 Query Postgres Table</button>
         </div>
 
-        <!-- RELATIONAL DATABASE VIEW -->
         <div class="card">
             <h2 class="title">💾 Database Relation Table: `audit_ledger`</h2>
             <div class="table-frame">
@@ -53,7 +53,7 @@
                         </tr>
                     </thead>
                     <tbody id="db-rows">
-                        <!-- Instanced relational records render here -->
+                        <!-- Database entries injected dynamically -->
                     </tbody>
                 </table>
             </div>
@@ -61,31 +61,41 @@
     </div>
 
     <script>
-        function reloadDatabase() {
+        // REPLACE WITH SAME CREDENTIALS USED IN INDEX.HTML
+        const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+        const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        async function fetchCloudData() {
             const tbody = document.getElementById('db-rows');
             tbody.innerHTML = "";
-            
-            let ledger = JSON.parse(localStorage.getItem('mga_db_ledger')) || [];
-            
-            if(ledger.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding:30px;">Database empty. No active transactions detected from Player Terminal.</td></tr>`;
+
+            // Query public relation table ordered by insertion order
+            let { data: audit_ledger, error } = await _supabase
+                .from('audit_ledger')
+                .select('*')
+                .order('id', { ascending: false });
+
+            if(error || !audit_ledger || audit_ledger.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" style="text-align:center; color:#94a3b8; padding:30px;">No records or connection failure. Check API configuration keys.</td></tr>`;
                 return;
             }
 
-            ledger.forEach(row => {
+            audit_ledger.forEach(row => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td><strong>${row.timestamp}</strong></td>
                     <td style="color:#0284c7;">${row.tx_id}</td>
-                    <td><span style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:bold;">${row.game}</span></td>
-                    <td style="color:#ef4444; font-weight:bold;">-€${row.bet.toFixed(2)}</td>
-                    <td style="color:${row.payout > 0 ? '#10b981' : '#475569'}; font-weight:bold;">+€${row.payout.toFixed(2)}</td>
-                    <td style="font-size:10px; color:#64748b;">${row.hash}</td>
+                    <td><span style="background:#f1f5f9; padding:2px 6px; border-radius:4px; font-weight:bold;">${row.game_type}</span></td>
+                    <td style="color:#ef4444; font-weight:bold;">-€${parseFloat(row.bet_amount).toFixed(2)}</td>
+                    <td style="color:${row.payout_amount > 0 ? '#10b981' : '#475569'}; font-weight:bold;">+€${parseFloat(row.payout_amount).toFixed(2)}</td>
+                    <td style="font-size:10px; color:#64748b;">${row.crypto_hash}</td>
                 `;
                 tbody.appendChild(tr);
             });
         }
-        window.onload = reloadDatabase;
+        window.onload = fetchCloudData;
     </script>
 </body>
 </html>
+
