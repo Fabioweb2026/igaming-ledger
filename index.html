@@ -7,19 +7,21 @@
     <style>
         body { font-family: Arial, sans-serif; background-color: #121212; color: #ffffff; margin: 20px; }
         section { background-color: #1e1e1e; padding: 20px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #333; }
-        h1, h2 { color: #ff9900; }
+        h1 { color: #ff9900; font-size: 24px; margin-bottom: 15px; }
         label { display: block; margin-top: 15px; font-weight: bold; color: #ccc; }
         select, input { width: 100%; padding: 12px; margin-top: 5px; background-color: #2a2a2a; color: #fff; border: 1px solid #444; border-radius: 4px; box-sizing: border-box; }
+        input:focus, select:focus { border-color: #ff9900; outline: none; }
         button { background-color: #ff9900; color: #000; border: none; padding: 14px; width: 100%; margin-top: 20px; border-radius: 4px; font-weight: bold; cursor: pointer; }
-        .status-unverified { color: #ff3333; font-weight: bold; }
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; }
-        th, td { border: 1px solid #444; padding: 10px; text-align: left; }
+        button:hover { background-color: #e68a00; }
     </style>
 </head>
 <body>
+
     <section id="registration">
         <h1>🆔 Operator Corporate Registration</h1>
+        
         <form id="kycForm" onsubmit="event.preventDefault(); alert('Gateway Authenticated Successfully (Simulated)!');">
+            
             <label for="country">Jurisdiction / Country:</label>
             <select id="country" required>
                 <option value="" disabled selected>Select your country...</option>
@@ -27,43 +29,45 @@
                 <option value="PT">Portugal (European Union)</option>
             </select>
             
-            <!-- CORREÇÃO: Removido 'disabled' e adicionado 'readonly' para permitir a mudança via JS -->
+            <!-- TEXTO INTERATIVO -->
             <label id="docLabel" for="docInput">Required Legal Document:</label>
-            <input type="text" id="docInput" placeholder="Select a country first..." readonly required>
+            
+            <!-- CAIXA DE TEXTO RETORNADA (O que estava faltando no seu código) -->
+            <input type="text" id="docInput" placeholder="Select a country first..." required>
             
             <button type="submit">Authenticate Gateway</button>
         </form>
     </section>
 
-    <!-- INTERRUPTOR LOGICO JAVASCRIPT CORRIGIDO -->
+    <!-- MOTOR LÓGICO JAVASCRIPT -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const countrySelect = document.getElementById('country');
             const docLabel = document.getElementById('docLabel');
             const docInput = document.getElementById('docInput');
             
-            // Definição das regras fictícias de documentos
+            // Regras de textos fictícios para cada país
             const documentRules = {
                 'BR': { label: 'CPF (Cadastro de Pessoas Físicas)', placeholder: 'Ex: 000.000.000-00 (Fictício)' },
                 'PT': { label: 'Cartão de Cidadão (CC / ID Card)', placeholder: 'Ex: 00000000 0 ZZ0 (Fictício)' }
             };
 
+            // Escuta a caixa de seleção de países
             countrySelect.addEventListener('change', function() {
                 const selectedValue = this.value;
                 
                 if (documentRules[selectedValue]) {
-                    // Atualiza o texto e remove a proteção de escrita do campo
+                    // Injeta dinamicamente as informações no HTML
                     docLabel.textContent = "Required Legal Document: " + documentRules[selectedValue].label;
                     docInput.placeholder = documentRules[selectedValue].placeholder;
-                    docInput.removeAttribute('readonly'); 
                     docInput.focus();
                 } else {
                     docLabel.textContent = "Required Legal Document:";
                     docInput.placeholder = "Select a country first...";
-                    docInput.setAttribute('readonly', true);
                 }
             });
         });
     </script>
+
 </body>
 </html>
