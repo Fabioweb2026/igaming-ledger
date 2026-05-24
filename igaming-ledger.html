@@ -5,49 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malta iGaming Gateway - MGA Compliance</title>
     <style>
-        /* Design Premium Escuro Neon para iGaming de Malta */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #0d0d18; color: #e1e1e6; padding: 20px; }
-        .container { max-width: 850px; margin: 0 auto; }
-        
-        /* Menu do Ecossistema */
-        .gaming-nav { background: #161626; padding: 15px; text-align: center; border-radius: 8px; margin-bottom: 25px; border: 1px solid #262642; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
-        .gaming-nav a { color: #fff; margin: 0 15px; text-decoration: none; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .gaming-nav a:hover, .gaming-nav a.active { color: #4ecca3; text-shadow: 0 0 8px rgba(78,204,163,0.5); }
+       <style>
+    /* Design Premium Escuro Neon para iGaming de Malta */
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background-color: #0d0d18; color: #e1e1e6; padding: 20px; }
+    .container { max-width: 850px; margin: 0 auto; }
+    
+    /* Menu do Ecossistema */
+    .gaming-nav { background: #161626; padding: 15px; text-align: center; border-radius: 8px; margin-bottom: 25px; border: 1px solid #262642; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+    .gaming-nav a { color: #fff; margin: 0 15px; text-decoration: none; font-size: 15px; font-weight: bold; cursor: pointer; transition: 0.3s; }
+    .gaming-nav a:hover, .gaming-nav a.active { color: #4ecca3; text-shadow: 0 0 8px rgba(78,204,163,0.5); }
 
-        /* Painéis Interativos */
-        .card { background: #121222; border: 1px solid #262642; padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
-        h1, h2 { color: #fff; margin-bottom: 15px; border-bottom: 2px solid #4ecca3; padding-bottom: 8px; }
-        p { color: #aaa; margin-bottom: 20px; font-size: 15px; }
-        
-        /* Configuração de Formulários */
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; color: #4ecca3; font-weight: 600; }
-        input, select { width: 100%; padding: 12px; background: #1a1a30; border: 1px solid #262642; color: #fff; border-radius: 6px; font-size: 15px; }
-        input:focus, select:focus { border-color: #4ecca3; outline: none; }
-        
-        /* Botões Estilizados */
-        button { width: 100%; padding: 14px; background: #4ecca3; color: #0d0d18; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 15px; transition: 0.2s; }
-        button:hover { background: #3db892; box-shadow: 0 0 15px rgba(78,204,163,0.4); }
-        .btn-bet { background: #e2b659; }
-        .btn-bet:hover { background: #cda34b; box-shadow: 0 0 15px rgba(226,182,89,0.4); }
+    /* Painéis Interativos */
+    .card { background: #121222; border: 1px solid #262642; padding: 30px; border-radius: 12px; margin-bottom: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+    h1, h2 { color: #fff; margin-bottom: 15px; border-bottom: 2px solid #4ecca3; padding-bottom: 8px; }
+    p { color: #aaa; margin-bottom: 20px; font-size: 15px; }
+    
+    /* Configuração de Formulários */
+    .form-group { margin-bottom: 20px; }
+    label { display: block; margin-bottom: 8px; color: #4ecca3; font-weight: 600; }
+    input, select { width: 100%; padding: 12px; background: #1a1a30; border: 1px solid #262642; color: #fff; border-radius: 6px; font-size: 15px; }
+    input:focus, select:focus { border-color: #4ecca3; outline: none; }
+    
+    /* Botões Estilizados */
+    button { width: 100%; padding: 14px; background: #4ecca3; color: #0d0d18; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; text-transform: uppercase; font-size: 15px; transition: 0.2s; }
+    button:hover { background: #3db892; box-shadow: 0 0 15px rgba(78,204,163,0.4); }
+    .btn-bet { background: #e2b659; }
+    .btn-bet:hover { background: #cda34b; box-shadow: 0 0 15px rgba(226, 182, 89, 0.4); }
 
-        /* Grid da Carteira Avançada */
-        .wallet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
-        .wallet-stat { background: #161626; padding: 15px; border-radius: 8px; border: 1px solid #262642; text-align: center; }
-        .wallet-stat p { font-size: 13px; color: #aaa; margin-bottom: 5px; }
-        .wallet-stat span { font-size: 18px; font-weight: bold; color: #fff; }
+    /* Grid da Carteira Avançada */
+    .wallet-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px; }
+    .wallet-stat { background: #161626; padding: 15px; border-radius: 8px; border: 1px solid #262642; text-align: center; }
+    .wallet-stat p { font-size: 13px; color: #aaa; margin-bottom: 5px; }
+    .wallet-stat span { font-size: 18px; font-weight: bold; color: #fff; }
 
-        /* Tabela do Histórico Financeiro (Ledger) */
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #161626; border-radius: 8px; overflow: hidden; border: 1px solid #262642; }
-        th, td { padding: 14px; text-align: left; font-size: 14px; border-bottom: 1px solid #262642; }
-        th { background: #1b1b32; color: #4ecca3; font-weight: 600; }
-        .win { color: #4ecca3; font-weight: bold; }
-        .loss { color: #ff4a4a; font-weight: bold; }
-        
-        /* Sistema de Abas */
-        .hidden { display: none; }
-    </style>
+    /* Tabela do Histórico Financeiro (Ledger) */
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #161626; border-radius: 8px; overflow: hidden; border: 1px solid #262642; }
+    th, td { padding: 14px; text-align: left; font-size: 14px; border-bottom: 1px solid #262642; }
+    th { background: #1b1b32; color: #4ecca3; font-weight: 600; }
+    .win { color: #4ecca3; font-weight: bold; }
+    .loss { color: #ff4a4a; font-weight: bold; }
+    
+    /* Sistema de Abas */
+    .hidden { display: none; }
+</style>
+
 </head>
 <body>
 
