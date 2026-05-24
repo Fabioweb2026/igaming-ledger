@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html>
 
+<head>
+    <title>Login</title>
+</head>
+
+<body>
+
+<h1>Player Login</h1>
+
+<input type="text" id="username"
+placeholder="Username">
+
+<button onclick="loginPlayer()">
+Login
+</button>
+
+<script>
+
+function loginPlayer() {
+
+    const username =
+        document.getElementById('username').value;
+
+    localStorage.setItem('player', username);
+
+    window.location.href =
+        'igaming-ledger.html';
+}
+
+</script>
+
+</body>
+</html>
