@@ -1,238 +1,207 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malta iGaming Wallet & Ledger</title>
+    <title>Plataforma Malta iGaming</title>
     <style>
-        /* Tema Escuro Neon Integrado */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #0f0f1a; color: #f1f1f6; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        /* Menu Global */
+        .gaming-nav { background: #1a1a2e; padding: 15px; text-align: center; border-radius: 8px; margin-bottom: 20px; border: 1px solid #232342; }
+        .gaming-nav a { color: #fff; margin: 0 10px; text-decoration: none; font-size: 14px; font-weight: bold; }
+        .gaming-nav a:hover { color: #4ecca3; }
 
-        body {
-            background-color: #0f0f1a;
-            color: #f1f1f6;
-            line-height: 1.6;
-            padding-bottom: 50px;
-        }
+        /* Painéis e Cards */
+        .card { background: #16162a; border: 1px solid #232342; padding: 25px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        h1, h2 { color: #fff; margin-bottom: 15px; border-bottom: 2px solid #4ecca3; padding-bottom: 8px; }
+        
+        /* Formulários e Inputs */
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; color: #b5b5c6; }
+        input, select { width: 100%; padding: 10px; background: #1f1f38; border: 1px solid #232342; color: #fff; border-radius: 6px; }
+        
+        /* Botões */
+        button { width: 100%; padding: 12px; background: #4ecca3; color: #0f0f1a; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 10px; transition: 0.2s; }
+        button:hover { background: #3db892; box-shadow: 0 0 15px rgba(78,204,163,0.4); }
+        .btn-bet { background: #e2b659; }
+        .btn-bet:hover { background: #cda34b; }
 
-        /* Menu de Navegação Global */
-        .gaming-nav {
-            background: #1a1a2e;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            border-bottom: 2px solid #232342;
-        }
+        /* Status da Carteira */
+        .wallet-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px; }
+        .wallet-stat { background: #1f1f38; padding: 15px; border-radius: 8px; border: 1px solid #232342; }
+        .wallet-stat p { font-size: 14px; color: #b5b5c6; }
+        .wallet-stat span { font-size: 20px; font-weight: bold; color: #fff; }
 
-        .gaming-nav a {
-            color: #fff;
-            margin: 0 12px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .gaming-nav a:hover, .gaming-nav a.active {
-            color: #4ecca3;
-            text-shadow: 0 0 8px rgba(78, 204, 163, 0.6);
-        }
-
-        /* Container do App */
-        .container {
-            max-width: 750px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        .wallet-card {
-            background: #16162a;
-            border: 1px solid #232342;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            margin-bottom: 25px;
-        }
-
-        h1 {
-            font-size: 24px;
-            color: #ffffff;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #4ecca3;
-            padding-bottom: 8px;
-        }
-
-        h2 {
-            font-size: 20px;
-            color: #ffffff;
-            margin: 25px 0 15px 0;
-        }
-
-        p {
-            font-size: 16px;
-            margin-bottom: 12px;
-            color: #b5b5c6;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        span.value {
-            font-weight: bold;
-            color: #ffffff;
-        }
-
-        .btn-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        button {
-            padding: 12px;
-            font-size: 15px;
-            font-weight: bold;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.2s ease;
-        }
-
-        .btn-deposit {
-            background-color: #4ecca3;
-            color: #0f0f1a;
-        }
-
-        .btn-deposit:hover {
-            background-color: #3db892;
-            box-shadow: 0 5px 15px rgba(78, 204, 163, 0.4);
-        }
-
-        .btn-bet {
-            background-color: #e2b659;
-            color: #0f0f1a;
-        }
-
-        .btn-bet:hover {
-            background-color: #cda34b;
-            box-shadow: 0 5px 15px rgba(226, 182, 89, 0.4);
-        }
-
-        /* Histórico Ledger */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-            background: #16162a;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid #232342;
-        }
-
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            font-size: 14px;
-        }
-
-        th {
-            background-color: #1a1a2e;
-            color: #4ecca3;
-            font-weight: 600;
-            border-bottom: 2px solid #232342;
-        }
-
-        tr {
-            border-bottom: 1px solid #1f1f38;
-        }
-
-        .status-success {
-            color: #4ecca3;
-            font-weight: bold;
-        }
+        /* Tabelas */
+        table { width: 100%; border-collapse: collapse; margin-top: 15px; background: #16162a; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px; text-align: left; font-size: 14px; border-bottom: 1px solid #232342; }
+        th { background: #1a1a2e; color: #4ecca3; }
+        .win { color: #4ecca3; font-weight: bold; }
+        .loss { color: #ff4a4a; font-weight: bold; }
+        
+        /* Abas de Navegação interna */
+        .hidden { display: none; }
     </style>
 </head>
 <body>
 
-    <!-- Navegação Unificada -->
-    <nav class="gaming-nav">
-        <a href="index.html">🏠 Home Portfólio</a>
-        <a href="igaming-ledger.html" class="active">📊 Ledger</a>
-        <a href="lobby.html">🎮 Lobby</a>
-        <a href="wallet.html">💰 Wallet</a>
-        <a href="kyc.html">🆔 KYC</a>
-        <a href="games.html">🎰 Games</a>
-        <a href="admin.html">⚙️ Admin</a>
-    </nav>
-
     <div class="container">
-        <div class="wallet-card">
-            <h1>Player Wallet</h1>
-            <p>Player: <span id="player-name" class="value">Fabio Web Developer</span></p>
-            <p>Balance: <span id="wallet-balance" class="value">€250.00</span></p>
-            <p>Bonus: <span id="bonus-balance" class="value">€50.00</span></p>
-            <p>KYC: <span id="kyc-status" class="value" style="color: #4ecca3;">Verified</span></p>
-            <p>VIP: <span id="vip-level" class="value">VIP Bronze</span></p>
+        <!-- Menu Superior -->
+        <nav class="gaming-nav">
+            <a href="#" onclick="showSection('sec-cadastro')">🆔 Cadastro / KYC</a> |
+            <a href="#" onclick="showSection('sec-jogos')">🎰 Lobby de Jogos</a> |
+            <a href="#" onclick="showSection('sec-carteira')">💰 Minha Carteira</a>
+        </nav>
 
-            <div class="btn-group">
-                <button class="btn-deposit" onclick="handleDeposit()">Deposit €100</button>
-                <button class="btn-bet" onclick="handleBet()">Bet €25</button>
+        <!-- SEÇÃO 1: CADASTRO E COMPLIANCE KYC -->
+        <div id="sec-cadastro" class="card">
+            <h1>🆔 Registro Oficial do Jogador (Malta MGA)</h1>
+            <p style="color:#b5b5c6; margin-bottom: 15px;">Insira seus dados reais para verificação obrigatória de conformidade internacional.</p>
+            <div class="form-group">
+                <label>Nome Completo:</label>
+                <input type="text" id="reg-name" placeholder="Ex: Fabio Developer">
             </div>
+            <div class="form-group">
+                <label>Tipo de Documento:</label>
+                <select id="reg-doc-type">
+                    <option value="Passaporte">Passaporte Internacional</option>
+                    <option value="ID">Identidade Governamental (RG/CNH)</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Número do Documento:</label>
+                <input type="text" id="reg-doc-num" placeholder="Ex: PT123456">
+            </div>
+            <button onclick="finalizarCadastro()">Concluir Registro & Validar KYC</button>
         </div>
 
-        <h2>Transaction History (Ledger)</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Type</th>
-                    <th>Amount</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody id="ledger-rows">
-                <tr>
-                    <td>#TR-9082</td>
-                    <td>Initial Deposit</td>
-                    <td>€250.00</td>
-                    <td class="status-success">Success</td>
-                </tr>
-            </tbody>
-        </table>
+        <!-- SEÇÃO 2: LOBBY DE JOGOS E APOSTAS -->
+        <div id="sec-jogos" class="card hidden">
+            <h1>🎰 Arena de Apostas Regulamentada</h1>
+            <p id="welcome-player" style="color: #4ecca3; margin-bottom: 15px; font-weight: bold;">Jogador: Visitante</p>
+            
+            <div class="form-group">
+                <label>Escolha o Tipo de Jogo:</label>
+                <select id="game-type">
+                    <option value="Slot Mediterranea">Slot Mediterranea Gold (RTP 96.5%)</option>
+                    <option value="Roleta Malta">Roleta Europeia ao Vivo</option>
+                    <option value="Blackjack">Blackjack VIP Premium</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Valor da Aposta (€):</label>
+                <input type="number" id="bet-amount" value="20" min="1">
+            </div>
+            <button class="btn-bet" onclick="jogarPartida()">Confirmar e Girar Aposta</button>
+        </div>
+
+        <!-- SEÇÃO 3: CARTEIRA COMPLETA E LEDGER -->
+        <div id="sec-carteira" class="card hidden">
+            <h1>💰 Painel Financeiro e Controle de Perdas/Ganhos</h1>
+            
+            <div class="wallet-grid">
+                <div class="wallet-stat"><p>Saldo Atual</p><span id="w-balance">€100.00</span></div>
+                <div class="wallet-stat"><p>Total Investido</p><span id="w-invested" style="color: #e2b659;">€0.00</span></div>
+                <div class="wallet-stat"><p>Total de Lucros</p><span id="w-wins" style="color: #4ecca3;">€0.00</span></div>
+                <div class="wallet-stat"><p>Total de Perdas</p><span id="w-losses" style="color: #ff4a4a;">€0.00</span></div>
+            </div>
+
+            <div class="form-group">
+                <label>Adicionar Fundos na Carteira (€):</label>
+                <input type="number" id="deposit-amount" value="50">
+            </div>
+            <button onclick="depositarDinheiro()">Depositar Dinheiro</button>
+
+            <h2>📊 Histórico Geral de Transações (Ledger)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jogo/Ação</th>
+                        <th>Investido</th>
+                        <th>Resultado</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="ledger-history">
+                    <tr>
+                        <td>Depósito Inicial</td>
+                        <td>€0.00</td>
+                        <td class="win">+€100.00</td>
+                        <td>Sucesso</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
-        let balance = 250.00;
-        let bonus = 50.00;
-        let transactionCount = 9083;
+        // ESTADO GLOBAL DA CARTEIRA E SISTEMA
+        let dadosJogador = { nome: "Visitante", registrado: false };
+        let carteira = { saldo: 100.00, investido: 0.00, lucros: 0.00, perdas: 0.00 };
 
-        function updateDisplay() {
-            document.getElementById('wallet-balance').innerText = `€${balance.toFixed(2)}`;
-            document.getElementById('bonus-balance').innerText = `€${bonus.toFixed(2)}`;
+        function showSection(sectionId) {
+            document.getElementById('sec-cadastro').classList.add('hidden');
+            document.getElementById('sec-jogos').classList.add('hidden');
+            document.getElementById('sec-carteira').classList.add('hidden');
+            document.getElementById(sectionId).classList.remove('hidden');
         }
 
-        function handleDeposit() {
-            balance += 100.00;
-            bonus += 10.00;
-            updateDisplay();
-            alert('Depósito de €100.00 processado com sucesso!');
-        }
-
-        function handleBet() {
-            if (balance >= 25) {
-                balance -= 25;
-                updateDisplay();
-                alert('Aposta de €25.00 registrada no Ledger!');
-            } else {
-                alert('Saldo insuficiente!');
+        function finalizarCadastro() {
+            const nome = document.getElementById('reg-name').value;
+            const docNum = document.getElementById('reg-doc-num').value;
+            
+            if(!nome || !docNum) {
+                alert("Por favor, preencha todos os campos do cadastro!");
+                return;
             }
+
+            dadosJogador.nome = nome;
+            dadosJogador.registrado = true;
+            document.getElementById('welcome-player').innerText = `Jogador Autenticado: ${nome} (KYC Verificado)`;
+            alert("Cadastro concluído e documentos aprovados pela MGA de Malta! Você foi redirecionado ao Lobby.");
+            showSection('sec-jogos');
         }
-    </script>
-</body>
-</html>
+
+        function depositarDinheiro() {
+            const valor = parseFloat(document.getElementById('deposit-amount').value);
+            if (valor <= 0 || isNaN(valor)) return;
+
+            carteira.saldo += valor;
+            atualizarInterface();
+            adicionarLinhaLedger("Depósito via Gateway", 0, `+€${valor.toFixed(2)}`, "win");
+            alert(`Sucesso! €${valor.toFixed(2)} adicionados.`);
+        }
+
+        function jogarPartida() {
+            if(!dadosJogador.registrado) {
+                alert("Regulamentação Antilavagem de Dinheiro (AML): Faça seu cadastro e envie o Passaporte na primeira aba antes de jogar!");
+                showSection('sec-cadastro');
+                return;
+            }
+
+            const aposta = parseFloat(document.getElementById('bet-amount').value);
+            if(aposta > carteira.saldo) {
+                alert("Saldo insuficiente na carteira! Vá na aba de Carteira e adicione fundos.");
+                showSection('sec-carteira');
+                return;
+            }
+
+            const jogoSelecionado = document.getElementById('game-type').value;
+            carteira.saldo -= aposta;
+            carteira.investido += aposta;
+
+            // Simulação matemática de Ganho/Perda (50% de chance)
+            const ganhou = Math.random() > 0.45; 
+            let retornoTexto = "";
+            let classeEstilo = "";
+
+            if(ganhou) {
+                const lucroGerado = aposta * 2; // Dobrou o dinheiro
+                carteira.saldo += lucroGerado;
+                carteira.lucros += lucroGerado - aposta;
+                retornoTexto = `+€${lucroGerado.toFixed(2)} (Ganhou)`;
+                classeEstilo = "win";
+                alert(`🎉 Parabéns! Você ganhou €${lucroGerado.toFixed(2)} no ${jogoSelecionado}!`);
