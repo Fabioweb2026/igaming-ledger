@@ -4,31 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iGaming - Casino Lobby</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #0f0f1a; color: #f1f1f6; padding-bottom: 50px; }
+        .gaming-nav { background: #1a1a2e; padding: 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.5); border-bottom: 2px solid #232342; }
+        .gaming-nav a { color: #fff; margin: 0 12px; text-decoration: none; font-size: 14px; transition: all 0.3s; }
+        .gaming-nav a:hover, .gaming-nav a.active { color: #4ecca3; text-shadow: 0 0 8px rgba(78, 204, 163, 0.6); }
+        .container { max-width: 750px; margin: 40px auto; padding: 0 20px; text-align: center; }
+        .lobby-card { background: #16162a; border: 1px solid #232342; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
+        h1 { font-size: 28px; color: #fff; margin-bottom: 15px; border-bottom: 2px solid #4ecca3; padding-bottom: 10px; }
+        p { color: #b5b5c6; font-size: 16px; margin-bottom: 30px; }
+        .btn-launch { display: inline-block; background: #4ecca3; color: #0f0f1a; padding: 15px 35px; font-size: 16px; font-weight: bold; text-decoration: none; border-radius: 6px; text-transform: uppercase; transition: all 0.2s; }
+        .btn-launch:hover { background-color: #3db892; box-shadow: 0 5px 15px rgba(78, 204, 163, 0.4); transform: translateY(-2px); }
+    </style>
 </head>
 <body>
 
-    <!-- Menu de Navegação Global -->
-    <nav class="gaming-nav" style="background: #1a1a2e; padding: 15px; text-align: center; margin-bottom: 20px;">
-        <a href="index.html" style="color: #fff; margin: 0 15px; text-decoration: none; font-weight: bold;">🏠 Home Portfólio</a> |
-        <a href="igaming-ledger.html" style="color: #fff; margin: 0 15px; text-decoration: none;">📊 Ledger</a> |
-        <a href="lobby.html" style="color: #4ecca3; margin: 0 15px; text-decoration: none; font-weight: bold;">🎮 Lobby</a> |
-        <a href="wallet.html" style="color: #fff; margin: 0 15px; text-decoration: none;">💰 Wallet</a> |
-        <a href="kyc.html" style="color: #fff; margin: 0 15px; text-decoration: none;">🆔 KYC</a> |
-        <a href="games.html" style="color: #fff; margin: 0 15px; text-decoration: none;">🎰 Games</a> |
-        <a href="admin.html" style="color: #fff; margin: 0 15px; text-decoration: none;">⚙️ Admin</a>
+    <nav class="gaming-nav">
+        <a href="index.html">🏠 Home Portfólio</a>
+        <a href="igaming-ledger.html">📊 Ledger</a>
+        <a href="lobby.html" class="active">🎮 Lobby</a>
+        <a href="wallet.html">💰 Wallet</a>
+        <a href="kyc.html">🆔 KYC</a>
+        <a href="games.html">🎰 Games</a>
+        <a href="admin.html">⚙️ Admin</a>
     </nav>
 
-    <div class="lobby-container" style="max-width: 800px; margin: 0 auto; padding: 20px; text-align: center;">
-        <h1>🎮 Cassino Lobby Principal</h1>
-        <p>Bem-vindo ao centro de apostas regulamentado pela MGA (Malta Gaming Authority).</p>
-        
-        <div style="margin-top: 30px;">
-            <a href="games.html" style="display: inline-block; padding: 15px 30px; background: #4ecca3; color: #1a1a2e; text-decoration: none; font-weight: bold; border-radius: 5px;">Explorar Slots e Jogos</a>
+    <div class="container">
+        <div class="lobby-card">
+            <h1>🎮 Casino Lobby Principal</h1>
+            <p>Bem-vindo ao centro de apostas internacional regulamentado pela MGA (Malta Gaming Authority).</p>
+            <a href="games.html" class="btn-launch">Explorar Slots e Jogos</a>
         </div>
     </div>
 
-    <script src="app.js"></script>
 </body>
 </html>
-
