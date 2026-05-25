@@ -2,7 +2,7 @@
  * iGaming Ledger - Core Engine (Official Supabase SDK Integration)
  */
 // 1. Substitua pela URL real do SEU projeto (Pegue no painel do Supabase em Settings > API)
-const SUPABASE_URL = 'https://SEU_PROJETO_AQUI.supabase.co'; 
+const SUPABASE_URL = 'https://SEU_PROJETO_AQUI.supabase.co'; // ⚠️ Mude isso!
 const SUPABASE_KEY = 'sb_publishable_k0e7oUjMRbCynrzeK6N2Xw_mjyXVInMb'; 
 
 // 2. CORREÇÃO DA BIBLIOTECA: O "S" deve ser maiúsculo para CDN v2 (window.Supabase)
@@ -12,11 +12,19 @@ const supabaseClient = window.Supabase ? window.Supabase.createClient(SUPABASE_U
 if (!supabaseClient) {
     alert("ERRO DE REDE: A biblioteca do Supabase não foi carregada. Certifique-se de que o script de CDN está no seu cadastro.html.");
 }
+
+// 🌟 CORREÇÃO: Escuta o carregamento da página e vincula o evento de envio do formulário
 document.addEventListener("DOMContentLoaded", () => {
     if (!localStorage.getItem("igaming_balance")) {
         localStorage.setItem("igaming_balance", "0.00");
     }
     atualizarCamposInterface();
+
+    // 🌟 VINCULA A FUNÇÃO AO FORMULÁRIO DE CADASTRO
+    const formulario = document.querySelector("form"); // Altere para id do form se tiver, ex: document.getElementById("formCadastro")
+    if (formulario) {
+        formulario.addEventListener("submit", processarCadastro);
+    }
 });
 
 /**
@@ -49,21 +57,21 @@ async function processarCadastro(event) {
 
     try {
         // Envia os dados de forma nativa e limpa para o PostgreSQL
-        const { error } = await supabaseClient
-            .from('players')
-            .insert([
-                {
-                    id: playerId,
-                    fullname: fullName,
-                    dob: dob,
-                    country: country,
-                    document_type: docType,
-                    document_number: docNumber,
-                    ledger_hash: ledgerHash,
-                    balance: 50.00
-                }
-            ]);
-
+        // Envia os dados de forma nativa e limpa para o PostgreSQL
+const { error } = await supabaseClient
+    .from('players')
+    .insert([
+        {
+            id: playerId,
+            fullname: fullName,
+            dob: dob,
+            country: country,
+            document_type: docType,
+            document_number: docNumber,
+            ledger_hash: ledgerHash
+            // 🌟 REMOVIDO: O balance não é mais enviado pelo frontend!
+        }
+    ]);      
         if (error) throw error;
 
         // Guarda a sessão local se o banco gravou com sucesso
