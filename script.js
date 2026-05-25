@@ -1,13 +1,17 @@
 /**
  * iGaming Ledger - Core Engine (Official Supabase SDK Integration)
  */
-
-const SUPABASE_URL = 'https://supabase.co'; 
+// 1. Substitua pela URL real do SEU projeto (Pegue no painel do Supabase em Settings > API)
+const SUPABASE_URL = 'https://SEU_PROJETO_AQUI.supabase.co'; 
 const SUPABASE_KEY = 'sb_publishable_k0e7oUjMRbCynrzeK6N2Xw_mjyXVInMb'; 
 
-// Inicializa o cliente usando a biblioteca oficial carregada no HTML
-const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+// 2. CORREÇÃO DA BIBLIOTECA: O "S" deve ser maiúsculo para CDN v2 (window.Supabase)
+const supabaseClient = window.Supabase ? window.Supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
+// Sistema de segurança contra falha de carregamento
+if (!supabaseClient) {
+    alert("ERRO DE REDE: A biblioteca do Supabase não foi carregada. Certifique-se de que o script de CDN está no seu cadastro.html.");
+}
 document.addEventListener("DOMContentLoaded", () => {
     if (!localStorage.getItem("igaming_balance")) {
         localStorage.setItem("igaming_balance", "0.00");
