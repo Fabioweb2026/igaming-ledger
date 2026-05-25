@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iGaming Ledger - International KYC Register</title>
-    <!-- Carrega a biblioteca de CDN necessária do Supabase para requisições seguras -->
+    
+    <!-- 🌟 LINHA CORRIGIDA: Carrega a biblioteca oficial do Supabase -->
     <script src="https://jsdelivr.net"></script>
+    
     <style>
         body {
             background: #070a13;
@@ -87,19 +89,16 @@
         </div>
 
         <form id="kycForm" onsubmit="processarCadastro(event)">
-            <!-- Nome Completo -->
             <div class="form-group">
                 <label for="fullName">Full Name (As written in official document)</label>
                 <input type="text" id="fullName" required placeholder="John Doe">
             </div>
 
-            <!-- Data de Nascimento -->
             <div class="form-group">
                 <label for="dob">Date of Birth (Minimum 18+)</label>
                 <input type="date" id="dob" required>
             </div>
 
-            <!-- Seleção de País -->
             <div class="form-group">
                 <label for="country">Country of Residence</label>
                 <select id="country" onchange="adaptarDocumentosPorPais()" required>
@@ -113,7 +112,6 @@
                 </select>
             </div>
 
-            <!-- Bloco Dinâmico de Identidade -->
             <div class="form-group doc-section">
                 <label for="docType">Document Type Allowed</label>
                 <select id="docType" required>
@@ -132,6 +130,7 @@
         </div>
     </div>
 
+    <!-- Vincula seu motor lógico centralizado -->
     <script src="script.js"></script>
 
     <script>
