@@ -1,78 +1,72 @@
-// 1. Chaves de conexão com o banco de dados (COLADAS NO TOPO)
+// 1. CHAVES DE CONEXÃO COM O SUPABASE (JÁ CONFIGURADAS)
 const SUPABASE_URL = 'https://supabase.co'; 
 const SUPABASE_KEY = 'sb_publishable_k0e7oUjMRbCynrzeK6N2Xw_mjyXVInMb'; 
 
-// 2. Importação das bibliotecas (O código que você já tem)
+// 2. IMPORTAÇÃO DE BIBLIOTECAS
 const express = require('express');
 const cors = require('cors');
-const { createClient } = require('@supabase/supabase-js'); // Garanta que esta linha também esteja aqui
+const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middlewares obrigatórios para leitura de dados e segurança da API
+// 3. MIDDLEWARES OBRIGATÓRIOS
 app.use(cors());
 app.use(express.json());
 
-// ... o restante do código que criamos vem logo abaixo ...
-const express = require('express');
-const cors = require('cors');
-// Caso use SQLite para testes rápidos ou PostgreSQL/MySQL em produção, importe o drive correspondente aqui
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-// Middlewares obrigatórios para leitura de dados e segurança da API
-app.use(cors());
-app.use(express.json());
-
-// Banco de dados em memória simulado (Substitua pela conexão do seu banco real como PostgreSQL, MySQL ou MongoDB)
-let playersDatabase = [];
+// Inicializa a conexão oficial com o PostgreSQL do Supabase
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 /**
- * ROTA: Cadastro de Jogador Internacional (KYC Endpoint)
+ * ROTA: Cadastro de Jogador Internacional (KYC Endpoint com Gravação no Banco)
  * POST /api/register
  */
-app.post('/api/register', (req, res) => {
+app.post('/api/register', async (req, res) => {
     const { fullName, dob, country, docType, docNumber } = req.body;
 
-    // Validação de segurança básica no servidor (Anti-fraude)
     if (!fullName || !dob || !country || !docType || !docNumber) {
         return res.status(400).json({ error: "FIELDS_REQUIRED", message: "Todos os campos de KYC são obrigatórios." });
     }
 
-    // Regra regulatória de Malta: Validação técnica de Idade
+    // Regra regulatória de Malta: Validação de maioridade (18+)
     const idade = Math.floor((new Date() - new Date(dob)) / 31557600000);
     if (idade < 18) {
         return res.status(403).json({ error: "UNDERAGE", message: "Registro negado por conformidade com a MGA (Menor de 18 anos)." });
     }
 
-    // Geração dos identificadores de segurança do Ledger
+    // Identificadores de segurança do Ledger
     const playerId = "PL-" + Math.floor(100000 + Math.random() * 900000);
     const ledgerHash = "0x" + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
 
-    const newPlayer = {
-        id: playerId,
-        fullName,
-        dob,
-        country,
-        docType,
-        docNumber,
-        ledgerHash,
-        balance: 50.00 // Crédito inicial em Euros
-    };
+    // Insere os dados diretamente na tabela 'players' do Supabase
+    const { data, error } = await supabase
+        .from('players')
+        .insert([
+            { 
+                id: playerId, 
+                fullname: fullName, 
+                dob: dob, 
+                country: country, 
+                document_type: docType, 
+                document_number: docNumber, 
+                ledger_hash: ledgerHash,
+                balance: 50.00 // Crédito inicial regulamentado de 50 Euros
+            }
+        ]);
 
-    // Salva no banco de dados
-    playersDatabase.push(newPlayer);
+    if (error) {
+        console.error("Erro no Supabase:", error);
+        return res.status(500).json({ error: "DATABASE_ERROR", message: "Falha ao gravar no banco central do Supabase." });
+    }
 
-    // Retorna a aprovação em conformidade técnica
     res.status(201).json({
         status: "APPROVED",
         player: {
-            id: newPlayer.id,
-            nome: newPlayer.fullName,
-            pais: newPlayer.country,
-            hashSeguranca: newPlayer.ledgerHash,
-            balance: newPlayer.balance
+            id: playerId,
+            nome: fullName,
+            pais: country,
+            hashSeguranca: ledgerHash,
+            balance: 50.00
         }
     });
 });
@@ -81,13 +75,22 @@ app.post('/api/register', (req, res) => {
  * ROTA: Consulta de Saldo unificado do Ledger
  * GET /api/balance/:id
  */
-app.get('/api/balance/:id', (req, res) => {
-    const player = playersDatabase.find(p => p.id === req.params.id);
-    if (!player) return res.status(404).json({ error: "PLAYER_NOT_FOUND" });
+app.get('/api/balance/:id', async (req, res) => {
+    const { data, error } = await supabase
+        .from('players')
+        .select('balance')
+        .eq('id', req.params.id)
+        .single();
+
+    if (error || !data) {
+        return res.status(404).json({ error: "PLAYER_NOT_FOUND" });
+    }
     
-    res.json({ balance: player.balance });
+    res.json({ balance: data.balance });
 });
 
 app.listen(PORT, () => {
-    console.log(`📡 iGaming Ledger Backend rodando com sucesso na porta ${PORT}`);
+    console.log(`📡 iGaming Ledger Engine conectada ao Supabase Postgres na porta ${PORT}`);
 });
+
+    
