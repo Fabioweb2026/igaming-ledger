@@ -3,30 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iGaming Ledger</title>
-    <!-- Vincula o seu arquivo de estilos existente -->
+    <title>iGaming Ledger Portal</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Estilos modernos embutidos para garantir o visual perfeito */
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .card {
+            background: #1e293b;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            border: 1px solid #334155;
+        }
+        h1 {
+            font-size: 24px;
+            color: #38bdf8;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        p {
+            color: #94a3b8;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .logo-img {
+            max-width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .btn {
+            padding: 14px;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+            display: block;
+        }
+        .btn-lobby { background: #2563eb; }
+        .btn-lobby:hover { background: #1d4ed8; }
+        
+        .btn-painel { background: #16a34a; }
+        .btn-painel:hover { background: #15803d; }
+        
+        .btn-plataforma { background: #0d9488; }
+        .btn-plataforma:hover { background: #0f766e; }
+        
+        .btn-wallet { background: #ea580c; }
+        .btn-wallet:hover { background: #c2410c; }
+    </style>
 </head>
 <body>
 
-    <div class="container" style="text-align: center; padding: 50px; font-family: sans-serif;">
-        <!-- Imagem do seu repositório (com a extensão corrigida se necessário) -->
-        <img src="mediterranea.png.png" alt="Logo" style="max-width: 200px; margin-bottom: 20px;">
+    <div class="card">
+        <!-- Tentativa de carregar a imagem da raiz. Se continuar quebrando, verifique o nome exato no seu repositório -->
+        <img src="mediterranea.png.png" alt="iGaming Logo" class="logo-img" onerror="this.style.display='none';">
 
         <h1>IGAMING LEDGER</h1>
-        <p>Selecione uma das opções abaixo para acessar o sistema:</p>
+        <p>Selecione um painel para gerenciar o sistema</p>
 
-        <!-- Menu de Navegação para as suas páginas -->
-        <div class="menu-links" style="display: flex; flex-direction: column; gap: 15px; max-width: 300px; margin: 30px auto;">
-            <a href="lobby.html" style="padding: 12px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Ir para o Lobby</a>
-            <a href="painel.html" style="padding: 12px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Acessar Painel</a>
-            <a href="plataforma.html" style="padding: 12px; background: #17a2b8; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">Plataforma</a>
-            <a href="wallet.html" style="padding: 12px; background: #ffc107; color: black; text-decoration: none; border-radius: 5px; font-weight: bold;">Minha Carteira (Wallet)</a>
+        <div class="menu-links">
+            <a href="lobby.html" class="btn btn-lobby">🕹️ Ir para o Lobby</a>
+            <a href="painel.html" class="btn btn-painel">📊 Acessar Painel</a>
+            <a href="plataforma.html" class="btn btn-plataforma">🖥️ Plataforma</a>
+            <a href="wallet.html" class="btn btn-wallet">💳 Minha Carteira (Wallet)</a>
         </div>
     </div>
 
-    <!-- Vincula o seu arquivo de funções javascript existente -->
     <script src="script.js"></script>
 </body>
 </html>
-
