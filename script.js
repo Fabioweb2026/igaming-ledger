@@ -2,9 +2,9 @@
  * iGaming Ledger - Core Engine (Official Supabase SDK Integration)
  */
 // 1. Substitua pela URL real do SEU projeto (Pegue no painel do Supabase em Settings > API)
-const SUPABASE_URL = 'https://SEU_PROJETO_AQUI.supabase.co'; // ⚠️ Mude isso!
-const SUPABASE_KEY = 'sb_publishable_k0e7oUjMRbCynrzeK6N2Xw_mjyXVInMb'; 
-
+// 🌟 URL Corrigida (Apenas até o .co, sem barras no final)
+const SUPABASE_URL = 'https://supabase.co'; 
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZXhud2h5dGpncmNza21hem9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NTMyOTQsImV4cCI6MjA5NTIyOTI5NH0.Ua0q2qgxqZrWjeTjS_gaSFylS8Y6amcAY5vrmzsCl1o';
 // 2. CORREÇÃO DA BIBLIOTECA: O "S" deve ser maiúsculo para CDN v2 (window.Supabase)
 const supabaseClient = window.Supabase ? window.Supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
