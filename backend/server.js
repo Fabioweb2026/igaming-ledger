@@ -1,3 +1,20 @@
+// 1. Chaves de conexão com o banco de dados (COLADAS NO TOPO)
+const SUPABASE_URL = 'https://supabase.co'; 
+const SUPABASE_KEY = 'sb_publishable_k0e7oUjMRbCynrzeK6N2Xw_mjyXVInMb'; 
+
+// 2. Importação das bibliotecas (O código que você já tem)
+const express = require('express');
+const cors = require('cors');
+const { createClient } = require('@supabase/supabase-js'); // Garanta que esta linha também esteja aqui
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middlewares obrigatórios para leitura de dados e segurança da API
+app.use(cors());
+app.use(express.json());
+
+// ... o restante do código que criamos vem logo abaixo ...
 const express = require('express');
 const cors = require('cors');
 // Caso use SQLite para testes rápidos ou PostgreSQL/MySQL em produção, importe o drive correspondente aqui
