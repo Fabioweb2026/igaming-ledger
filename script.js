@@ -1,9 +1,12 @@
 /**
- * iGaming Ledger - Core Engine (Direct Supabase Connection)
+ * iGaming Ledger - Core Engine (Official Supabase SDK Integration)
  */
 
 const SUPABASE_URL = 'https://supabase.co'; 
 const SUPABASE_KEY = 'sb_publishable_k0e7oUjMRbCynrzeK6N2Xw_mjyXVInMb'; 
+
+// Inicializa o cliente usando a biblioteca oficial carregada no HTML
+const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
 document.addEventListener("DOMContentLoaded", () => {
     if (!localStorage.getItem("igaming_balance")) {
@@ -13,9 +16,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * Cadastra o jogador direto no PostgreSQL do Supabase via API REST
+ * Cadastra o jogador usando o SDK oficial do Supabase
  */
-function processarCadastro(event) {
+async function processarCadastro(event) {
     event.preventDefault();
 
     const fullName = document.getElementById('fullName').value.trim();
@@ -34,34 +37,32 @@ function processarCadastro(event) {
     const playerId = "PL-" + Math.floor(100000 + Math.random() * 900000);
     const ledgerHash = "0x" + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
 
-    // Dados empacotados para a tabela 'players'
-    const payload = {
-        id: playerId,
-        fullname: fullName,
-        dob: dob,
-        country: country,
-        document_type: docType,
-        document_number: docNumber,
-        ledger_hash: ledgerHash,
-        balance: 50.00
-    };
+    // Verifica se a biblioteca do Supabase carregou corretamente na página
+    if (!supabaseClient) {
+        alert("❌ ERRO DE REDE: A biblioteca do Supabase não foi carregada. Certifique-se de que o script de CDN está no seu cadastro.html.");
+        return;
+    }
 
-    // Envia direto para a API Rest nativa do seu Supabase
-    fetch(`${SUPABASE_URL}/rest/v1/players`, {
-        method: 'POST',
-        headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=representation'
-        },
-        body: JSON.stringify(payload)
-    })
-    .then(response => {
-        if (!response.ok) throw new Error("Falha na sincronização com o banco PostgreSQL.");
-        return response.json();
-    })
-    .then(() => {
+    try {
+        // Envia os dados de forma nativa e limpa para o PostgreSQL
+        const { error } = await supabaseClient
+            .from('players')
+            .insert([
+                {
+                    id: playerId,
+                    fullname: fullName,
+                    dob: dob,
+                    country: country,
+                    document_type: docType,
+                    document_number: docNumber,
+                    ledger_hash: ledgerHash,
+                    balance: 50.00
+                }
+            ]);
+
+        if (error) throw error;
+
+        // Guarda a sessão local se o banco gravou com sucesso
         const dadosJogador = {
             id: playerId,
             nome: fullName,
@@ -74,10 +75,10 @@ function processarCadastro(event) {
 
         alert(`✅ BANCO DE DADOS SYNCED:\nWelcome ${fullName}!\nYour data is safely stored in the Cloud Database.\nID: ${playerId}`);
         window.location.href = "index.html";
-    })
-    .catch(error => {
+
+    } catch (error) {
         alert("❌ FALHA NO REGISTRO: " + error.message);
-    });
+    }
 }
 
 function atualizarCamposInterface() {
