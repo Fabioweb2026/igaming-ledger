@@ -6,7 +6,6 @@
     <title>iGaming Ledger Portal</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Estilos modernos embutidos para garantir o visual perfeito */
         body {
             background-color: #0f172a;
             color: #f8fafc;
@@ -23,26 +22,31 @@
             border-radius: 16px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             text-align: center;
-            max-width: 400px;
+            max-width: 450px;
             width: 90%;
             border: 1px solid #334155;
         }
         h1 {
             font-size: 24px;
             color: #38bdf8;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             letter-spacing: 1px;
         }
-        p {
+        .subtitle {
             color: #94a3b8;
-            font-size: 14px;
-            margin-bottom: 30px;
+            font-size: 13px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
         }
-        .logo-img {
-            max-width: 150px;
-            height: auto;
-            margin-bottom: 20px;
-            border-radius: 8px;
+        .section-title {
+            color: #cbd5e1;
+            font-size: 14px;
+            text-align: left;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
         }
         .menu-links {
             display: flex;
@@ -60,6 +64,7 @@
             text-align: center;
             display: block;
         }
+        /* Botões do Sistema Geral */
         .btn-lobby { background: #2563eb; }
         .btn-lobby:hover { background: #1d4ed8; }
         
@@ -71,22 +76,44 @@
         
         .btn-wallet { background: #ea580c; }
         .btn-wallet:hover { background: #c2410c; }
+
+        /* Novos Botões de Administração e Auditoria */
+        .btn-admin { background: #475569; border: 1px solid #64748b; }
+        .btn-admin:hover { background: #334155; }
+
+        .btn-audit { background: #7c3aed; }
+        .btn-audit:hover { background: #6d28d9; }
+
+        .logo-img {
+            max-width: 140px;
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 8px;
+        }
     </style>
 </head>
 <body>
 
     <div class="card">
-        <!-- Tentativa de carregar a imagem da raiz. Se continuar quebrando, verifique o nome exato no seu repositório -->
         <img src="mediterranea.png.png" alt="iGaming Logo" class="logo-img" onerror="this.style.display='none';">
 
         <h1>IGAMING LEDGER</h1>
-        <p>Selecione um painel para gerenciar o sistema</p>
+        <div class="subtitle">Regulated Environment</div>
 
+        <!-- SEÇÃO: OPERAÇÃO DO USUÁRIO -->
+        <div class="section-title">🕹️ Painéis Operacionais</div>
         <div class="menu-links">
-            <a href="lobby.html" class="btn btn-lobby">🕹️ Ir para o Lobby</a>
-            <a href="painel.html" class="btn btn-painel">📊 Acessar Painel</a>
-            <a href="plataforma.html" class="btn btn-plataforma">🖥️ Plataforma</a>
-            <a href="wallet.html" class="btn btn-wallet">💳 Minha Carteira (Wallet)</a>
+            <a href="lobby.html" class="btn btn-lobby">Ir para o Lobby</a>
+            <a href="plataforma.html" class="btn btn-plataforma">Plataforma Jogos</a>
+            <a href="wallet.html" class="btn btn-wallet">Minha Carteira (Wallet)</a>
+        </div>
+
+        <!-- SEÇÃO: ADMINISTRAÇÃO E COMPLIANCE MALTA -->
+        <div class="section-title">⚖️ Governança & Auditoria (MGA)</div>
+        <div class="menu-links">
+            <a href="admin.html" class="btn btn-admin">🛡️ Painel do Administrador</a>
+            <!-- Redireciona para o arquivo de logs e auditoria regulatória -->
+            <a href="igaming-ledger.html" class="btn btn-audit">📊 Trilha de Auditoria (System Audit)</a>
         </div>
     </div>
 
