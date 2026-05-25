@@ -2,19 +2,128 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Wallet</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iGaming Ledger - Wallet Dashboard</title>
+    <style>
+        body {
+            background: #070a13;
+            color: #f8fafc;
+            font-family: 'Inter', system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 100%;
+            max-width: 550px;
+            margin-top: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 15px;
+        }
+        .back-btn { color: #94a3b8; text-decoration: none; font-size: 14px; }
+        .back-btn:hover { color: #f97316; }
+
+        /* Card de Exibição de Saldo */
+        .balance-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border: 1px solid rgba(249, 115, 22, 0.2);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(249, 115, 22, 0.05);
+        }
+        .balance-label { color: #94a3b8; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
+        .balance-amount { font-size: 36px; font-weight: 800; color: #ffffff; margin: 10px 0; }
+        .currency { color: #f97316; }
+
+        /* Ações Finaceiras */
+        .actions-group { display: flex; gap: 15px; margin-bottom: 30px; }
+        .action-btn {
+            flex: 1;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s, background 0.2s;
+        }
+        .btn-deposit { background: #f97316; color: white; }
+        .btn-deposit:hover { background: #ea580c; transform: translateY(-2px); }
+        .btn-withdraw { background: rgba(255,255,255,0.05); color: #fff; border: 1px solid rgba(255,255,255,0.1); }
+        .btn-withdraw:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); }
+
+        /* Histórico de Transações Recentes */
+        .history-section {
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(255,255,255,0.03);
+        }
+        .section-title { font-size: 15px; font-weight: 600; margin-bottom: 15px; color: #cbd5e1; }
+        .tx-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 14px;
+        }
+        .tx-item:last-child { border-bottom: none; }
+        .tx-type { font-weight: 500; }
+        .tx-date { color: #64748b; font-size: 12px; margin-top: 3px; }
+        .tx-value-pos { color: #10b981; font-weight: 600; }
+    </style>
 </head>
 <body>
 
-<nav class="gaming-nav">
-    <a href="index.html">🏠 Home</a>
-</nav>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-btn">⬅️ Voltar ao Portal</a>
+            <h1 style="margin:0; font-size:22px;">💳 MINHA CARTEIRA</h1>
+        </div>
 
-<section class="card">
-    <h1>Wallet Module</h1>
-    <p>Coming Soon...</p>
-</section>
+        <!-- Visão de Saldo do Jogador -->
+        <div class="balance-card">
+            <div class="balance-label">Saldo Disponível (MGA Escrow)</div>
+            <div class="balance-amount"><span class="currency">€</span> 14,850.00</div>
+            <div style="font-size: 12px; color: #64748b;">Moeda corrente de Malta (EUR)</div>
+        </div>
+
+        <!-- Botões de Gerenciamento -->
+        <div class="actions-group">
+            <button class="action-btn btn-deposit" onclick="alert('Abrindo gateway de depósito seguro MGA...')">➕ Depositar via PIX / Cripto</button>
+            <button class="action-btn btn-withdraw" onclick="alert('Solicitação enviada para verificação de KYC da auditoria.')">💸 Solicitar Saque</button>
+        </div>
+
+        <!-- Logs de Transações Fictícias -->
+        <div class="history-section">
+            <div class="section-title">Últimas Movimentações</div>
+            <div class="tx-item">
+                <div>
+                    <div class="tx-type">Ganho em Ledger Slots</div>
+                    <div class="tx-date">Hoje, 14:32</div>
+                </div>
+                <div class="tx-value-pos">+ € 250.00</div>
+            </div>
+            <div class="tx-item">
+                <div>
+                    <div class="tx-type">Depósito Aprovado</div>
+                    <div class="tx-date">Ontem, 09:15</div>
+                </div>
+                <div class="tx-value-pos">+ € 5,000.00</div>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>
