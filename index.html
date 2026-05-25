@@ -6,137 +6,144 @@
     <title>iGaming Ledger Portal</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Estilos de alta conversão inspirados no mercado de Malta */
+        /* Fundo estilo plataforma de Malta de alto padrão */
         body {
-            background: linear-gradient(135deg, #090d16 0%, #111827 100%);
+            background: #070a13;
             color: #f8fafc;
             font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Banner Dinâmico Superior */
-        .hero-container {
-            text-align: center;
-            width: 100%;
-            max-width: 800px;
-            padding: 20px;
-            box-sizing: border-box;
+        /* Seção do Topo que cobre de ponta a ponta da tela */
+        .hero-banner {
+            width: 100vw;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #090d16;
+            overflow: hidden;
+            border-bottom: 2px solid rgba(56, 189, 248, 0.1);
         }
 
-        /* Imagem Ampliada com Efeito Sutil de Brilho */
+        /* Imagem ampliada de ponta a ponta com fade suave na base */
         .logo-img {
             width: 100%;
-            max-width: 480px; /* Imagem ampliada e imersiva */
+            max-width: 100%;
             height: auto;
-            margin-bottom: 10px;
-            filter: drop-shadow(0 0 20px rgba(56, 189, 248, 0.2));
-            transition: transform 0.3s ease;
+            max-height: 380px; /* Limita a altura para não esconder os botões */
+            object-fit: cover; /* Faz a imagem cobrir as laterais de forma responsiva */
+            display: block;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
         }
-        .logo-img:hover {
-            transform: scale(1.02);
+
+        /* Conteúdo textual centralizado abaixo do banner */
+        .brand-container {
+            text-align: center;
+            padding: 25px 20px 10px 20px;
         }
 
         h1 {
-            font-size: 28px;
-            font-weight: 800;
+            font-size: 32px;
+            font-weight: 900;
             color: #ffffff;
-            margin: 10px 0;
-            letter-spacing: 2px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            margin: 0;
+            letter-spacing: 3px;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
         }
 
         .subtitle {
             color: #38bdf8;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            margin-bottom: 35px;
+            margin-top: 6px;
+            margin-bottom: 0;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
         }
 
-        /* Grid de Painéis Operacionais (Disposição Lado a Lado no Desktop) */
+        /* Grid Organizador de Opções */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             width: 100%;
-            max-width: 750px;
-            padding: 0 20px;
+            max-width: 900px;
+            margin: 30px auto auto auto;
+            padding: 0 24px;
             box-sizing: border-box;
         }
 
-        /* Cartões de Ação Estilo Glassmorphism */
+        /* Cartões Premium estilo Neomórfico/Glassmorphism */
         .panel-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 25px 20px;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 24px;
             text-align: center;
             text-decoration: none;
             color: white;
-            transition: all 0.25s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.24);
         }
 
         .panel-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(56, 189, 248, 0.4);
-            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.15);
+            transform: translateY(-4px);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 12px 40px rgba(56, 189, 248, 0.12);
         }
 
         .panel-icon {
-            font-size: 32px;
-            margin-bottom: 15px;
+            font-size: 30px;
+            margin-bottom: 12px;
             display: block;
         }
 
         .panel-title {
             font-size: 16px;
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
+            letter-spacing: 0.5px;
         }
 
         .panel-desc {
             color: #94a3b8;
             font-size: 12px;
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
-        /* Cores Temáticas Neon nos Ícones */
-        .card-lobby .panel-icon { color: #3b82f6; text-shadow: 0 0 15px rgba(59,130,246,0.4); }
-        .card-plataforma .panel-icon { color: #10b981; text-shadow: 0 0 15px rgba(16,185,129,0.4); }
-        .card-wallet .panel-icon { color: #f97316; text-shadow: 0 0 15px rgba(249,115,22,0.4); }
+        /* Cores exclusivas e efeitos nos ícones */
+        .card-lobby .panel-icon { color: #3b82f6; text-shadow: 0 0 10px rgba(59,130,246,0.3); }
+        .card-plataforma .panel-icon { color: #10b981; text-shadow: 0 0 10px rgba(16,185,129,0.3); }
+        .card-wallet .panel-icon { color: #f97316; text-shadow: 0 0 10px rgba(249,115,22,0.3); }
 
-        /* Barra Inferior Discreta de Governança / Tech Zone */
+        /* Rodapé Institucional Técnico */
         .compliance-bar {
             margin-top: 50px;
-            background: rgba(15, 23, 42, 0.8);
-            border-top: 1px solid #1e293b;
+            background: #04060c;
+            border-top: 1px solid #111827;
             width: 100%;
-            padding: 20px 0;
+            padding: 24px 0;
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 40px;
             flex-wrap: wrap;
         }
 
         .comp-link {
-            color: #64748b;
+            color: #475569;
             text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            transition: color 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+            letter-spacing: 0.5px;
         }
 
         .comp-link:hover {
@@ -146,14 +153,17 @@
 </head>
 <body>
 
-    <div class="hero-container">
-        <!-- Imagem centralizada e significativamente ampliada -->
-        <img src="mediterranea.png.png" alt="iGaming Logo" class="logo-img" onerror="this.style.display='none';">
+    <!-- O NOVO BANNER COMPLETO: Cobre do lado esquerdo ao direito da tela -->
+    <div class="hero-banner">
+        <img src="mediterranea.png.png" alt="iGaming Banner" class="logo-img" onerror="this.style.display='none';">
+    </div>
+
+    <div class="brand-container">
         <h1>IGAMING LEDGER</h1>
         <div class="subtitle">Malta Gaming Authority Compliant</div>
     </div>
 
-    <!-- Interface em Blocos: Atrativo de Verdade para o Usuário/Jogador -->
+    <!-- Área de Navegação Rápida -->
     <div class="grid-container">
         <a href="lobby.html" class="panel-card card-lobby">
             <span class="panel-icon">🕹️</span>
@@ -174,10 +184,10 @@
         </a>
     </div>
 
-    <!-- Links de Governança realocados para o rodapé técnico institucional -->
+    <!-- Rodapé Regulatório/Governança -->
     <footer class="compliance-bar">
-        <a href="admin.html" class="comp-link">🛡️ Admin System</a>
-        <a href="igaming-ledger.html" class="comp-link">📊 System Audit Trail (MGA)</a>
+        <a href="admin.html" class="comp-link">🛡️ CONTROL PANEL</a>
+        <a href="igaming-ledger.html" class="comp-link">📊 COMPLIANCE AUDIT TRAIL</a>
     </footer>
 
     <script src="script.js"></script>
