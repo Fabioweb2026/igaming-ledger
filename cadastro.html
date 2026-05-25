@@ -1,144 +1,177 @@
-/**
- * iGaming Ledger - Core Engine (Direct Supabase Connection)
- * Configurado com as credenciais oficiais da sua plataforma
- */
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iGaming Ledger - International KYC Register</title>
+    <!-- Carrega a biblioteca de CDN necessária do Supabase para requisições seguras -->
+    <script src="https://jsdelivr.net"></script>
+    <style>
+        body {
+            background: #070a13;
+            color: #f8fafc;
+            font-family: 'Inter', system-ui, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .register-container {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 16px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+        .header { text-align: center; margin-bottom: 30px; }
+        .header h1 { font-size: 24px; color: #fff; margin: 0; letter-spacing: 1px; }
+        .header p { color: #38bdf8; font-size: 11px; text-transform: uppercase; font-weight: 700; margin-top: 5px; }
+        
+        .form-group { margin-bottom: 20px; display: flex; flex-direction: column; }
+        label { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #94a3b8; }
+        
+        input, select {
+            background: #0f172a;
+            border: 1px solid #334155;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 8px rgba(56, 189, 248, 0.2);
+        }
+        
+        .doc-section {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #38bdf8;
+            margin-top: 10px;
+        }
 
-const SUPABASE_URL = 'https://supabase.co'; 
-const SUPABASE_KEY = 'sb_publishable_k0e7oUjMRbCynrzeK6N2Xw_mjyXVInMb'; 
+        .btn-submit {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+        .btn-submit:hover { background: #1d4ed8; }
+        
+        .footer-links { text-align: center; margin-top: 20px; font-size: 13px; }
+        .footer-links a { color: #64748b; text-decoration: none; }
+        .footer-links a:hover { color: #94a3b8; }
+    </style>
+</head>
+<body>
 
-document.addEventListener("DOMContentLoaded", () => {
-    if (!localStorage.getItem("igaming_balance")) {
-        localStorage.setItem("igaming_balance", "0.00");
-    }
-    atualizarCamposInterface();
-});
+    <div class="register-container">
+        <div class="header">
+            <h1>PLAYER REGISTRATION</h1>
+            <p>MGA / International Compliance KYC</p>
+        </div>
 
-/**
- * Cadastra o jogador direto no PostgreSQL do Supabase via API REST
- */
-function processarCadastro(event) {
-    event.preventDefault();
+        <form id="kycForm" onsubmit="processarCadastro(event)">
+            <!-- Nome Completo -->
+            <div class="form-group">
+                <label for="fullName">Full Name (As written in official document)</label>
+                <input type="text" id="fullName" required placeholder="John Doe">
+            </div>
 
-    const fullName = document.getElementById('fullName').value.trim();
-    const dob = document.getElementById('dob').value;
-    const country = document.getElementById('country').value;
-    const docType = document.getElementById('docType').value;
-    const docNumber = document.getElementById('docNumber').value.trim();
+            <!-- Data de Nascimento -->
+            <div class="form-group">
+                <label for="dob">Date of Birth (Minimum 18+)</label>
+                <input type="date" id="dob" required>
+            </div>
 
-    // Validação de Idade mínima exigida por Malta (MGA)
-    const idade = Math.floor((new Date() - new Date(dob)) / 31557600000);
-    if (idade < 18) {
-        alert("❌ REGISTRATION DENIED: Under MGA regulations, players must be at least 18 years old.");
-        return;
-    }
+            <!-- Seleção de País -->
+            <div class="form-group">
+                <label for="country">Country of Residence</label>
+                <select id="country" onchange="adaptarDocumentosPorPais()" required>
+                    <option value="">Select country...</option>
+                    <option value="EU">European Union (Malta, Germany, etc.)</option>
+                    <option value="US">United States of America (USA)</option>
+                    <option value="AU">Australia</option>
+                    <option value="CN">China</option>
+                    <option value="BR">Brazil</option>
+                    <option value="GLOBAL">Other Country / International</option>
+                </select>
+            </div>
 
-    const playerId = "PL-" + Math.floor(100000 + Math.random() * 900000);
-    const ledgerHash = "0x" + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
+            <!-- Bloco Dinâmico de Identidade -->
+            <div class="form-group doc-section">
+                <label for="docType">Document Type Allowed</label>
+                <select id="docType" required>
+                    <option value="">Select a country first...</option>
+                </select>
 
-    // Dados mapeados exatamente com as colunas do seu banco PostgreSQL
-    const payload = {
-        id: playerId,
-        fullname: fullName,
-        dob: dob,
-        country: country,
-        document_type: docType,
-        document_number: docNumber,
-        ledger_hash: ledgerHash,
-        balance: 50.00
-    };
+                <label for="docNumber" style="margin-top: 15px;">Document Identification Number</label>
+                <input type="text" id="docNumber" required placeholder="Enter ID number">
+            </div>
 
-    // Envia direto para a API Rest nativa do seu Supabase
-    fetch(`${SUPABASE_URL}/rest/v1/players`, {
-        method: 'POST',
-        headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`,
-            'Content-Type': 'application/json',
-            'Prefer': 'return=representation'
-        },
-        body: JSON.stringify(payload)
-    })
-    .then(response => {
-        if (!response.ok) throw new Error("Falha na sincronização com o banco PostgreSQL.");
-        return response.json();
-    })
-    .then(() => {
-        const dadosJogador = {
-            id: playerId,
-            nome: fullName,
-            pais: country,
-            hashSeguranca: ledgerHash,
-            statusKYC: "APPROVED"
-        };
-        localStorage.setItem("current_player", JSON.stringify(dadosJogador));
-        localStorage.setItem("igaming_balance", "50.00");
+            <button type="submit" class="btn-submit">Verify & Register Account</button>
+        </form>
 
-        alert(`✅ BANCO DE DADOS SYNCED:\nWelcome ${fullName}!\nYour data is safely stored in the Cloud Database.\nID: ${playerId}`);
-        window.location.href = "index.html";
-    })
-    .catch(error => {
-        alert("❌ FALHA NO REGISTRO: " + error.message);
-    });
-}
+        <div class="footer-links">
+            <a href="index.html">⬅️ Cancel & Return to Portal</a>
+        </div>
+    </div>
 
-function atualizarCamposInterface() {
-    const jogadorSessao = localStorage.getItem("current_player");
-    const saldoAtual = localStorage.getItem("igaming_balance") || "0.00";
+    <script src="script.js"></script>
 
-    const elementoSaldo = document.querySelector(".balance-amount");
-    if (elementoSaldo) {
-        elementoSaldo.innerHTML = `<span class="currency">€</span> ${parseFloat(saldoAtual).toFixed(2)}`;
-    }
+    <script>
+        function adaptarDocumentosPorPais() {
+            const country = document.getElementById('country').value;
+            const docTypeSelect = document.getElementById('docType');
+            const docNumberInput = document.getElementById('docNumber');
+            
+            docTypeSelect.innerHTML = '';
 
-    const elementoSaldoPlat = document.getElementById("platformBalance");
-    if (elementoSaldoPlat) {
-        elementoSaldoPlat.innerText = `€ ${parseFloat(saldoAtual).toFixed(2)}`;
-    }
-
-    const botaoRegistro = document.querySelector(".btn-register-main");
-    if (botaoRegistro && jogadorSessao) {
-        const jogador = JSON.parse(jogadorSessao);
-        botaoRegistro.innerHTML = `👤 Player: ${jogador.nome} (ID: ${jogador.id})`;
-        botaoRegistro.style.background = "linear-gradient(90deg, #10b981 0%, #059669 100%)";
-        botaoRegistro.href = "#";
-        botaoRegistro.onclick = (e) => {
-            e.preventDefault();
-            alert(`ℹ️ PLAYER PROFILE\n\nName: ${jogador.nome}\nID: ${jogador.id}\nLedger Security Hash:\n${jogador.hashSeguranca}`);
-        };
-    }
-}
-
-function executarDeposito() {
-    const jogadorSessao = localStorage.getItem("current_player");
-    if (!jogadorSessao) { alert("❌ KYC Registration required."); return; }
-    const valor = parseFloat(prompt("Enter deposit amount (€):", "100.00"));
-    if (isNaN(valor) || valor <= 0) return;
-
-    let saldo = parseFloat(localStorage.getItem("igaming_balance") || "0.00") + valor;
-    localStorage.setItem("igaming_balance", saldo.toString());
-    adicionarTransacaoHistorico("Deposit Approved", valor, true);
-    atualizarCamposInterface();
-}
-
-function executarSaque() {
-    const jogadorSessao = localStorage.getItem("current_player");
-    if (!jogadorSessao) return;
-    let saldo = parseFloat(localStorage.getItem("igaming_balance") || "0.00");
-    const valor = parseFloat(prompt(`Enter withdrawal amount (Max: € ${saldo.toFixed(2)}):`, "50.00"));
-    if (isNaN(valor) || valor <= 0 || valor > saldo) { alert("Invalid amount or insufficient funds."); return; }
-
-    saldo -= valor;
-    localStorage.setItem("igaming_balance", saldo.toString());
-    adicionarTransacaoHistorico("Withdrawal Requested", valor, false);
-    atualizarCamposInterface();
-}
-
-function adicionarTransacaoHistorico(tipo, valor, IsPositivo) {
-    const secaoHistorico = document.querySelector(".history-section");
-    if (!secaoHistorico) return;
-    const novoItem = document.createElement("div");
-    novoItem.className = "tx-item";
-    novoItem.innerHTML = `<div><div class="tx-type">${tipo}</div></div><div class="${IsPositivo ? 'tx-value-pos' : ''}" style="${!IsPositivo ? 'color:#ef4444;' : ''}">${IsPositivo ? '+' : '-'} € ${valor.toFixed(2)}</div>`;
-    const titulo = secaoHistorico.querySelector(".section-title");
-    titulo.parentNode.insertBefore(novoItem, titulo.nextSibling);
-}
+            if (country === 'EU') {
+                docTypeSelect.options.add(new Option('National ID Card (Identity Card)', 'EU_ID'));
+                docTypeSelect.options.add(new Option('International Passport', 'PASSPORT'));
+                docNumberInput.placeholder = "e.g. 12345678A";
+            } else if (country === 'US') {
+                docTypeSelect.options.add(new Option('US Driver\'s License', 'US_DL'));
+                docTypeSelect.options.add(new Option('Social Security Number (SSN)', 'US_SSN'));
+                docTypeSelect.options.add(new Option('US Passport', 'PASSPORT'));
+                docNumberInput.placeholder = "e.g. 999-99-9999";
+            } else if (country === 'AU') {
+                docTypeSelect.options.add(new Option('Australian Driver\'s License', 'AU_DL'));
+                docTypeSelect.options.add(new Option('Medicare Card', 'AU_MED'));
+                docTypeSelect.options.add(new Option('Passport', 'PASSPORT'));
+                docNumberInput.placeholder = "Enter card number";
+            } else if (country === 'CN') {
+                docTypeSelect.options.add(new Option('Resident Identity Card (居民身份证)', 'CN_ID'));
+                docTypeSelect.options.add(new Option('Passport', 'PASSPORT'));
+                docNumberInput.placeholder = "18-digit identity number";
+            } else if (country === 'BR') {
+                docTypeSelect.options.add(new Option('CPF (Cadastro de Pessoas Físicas)', 'BR_CPF'));
+                docTypeSelect.options.add(new Option('RG / CNH', 'BR_RG'));
+                docNumberInput.placeholder = "000.000.000-00";
+            } else if (country === 'GLOBAL') {
+                docTypeSelect.options.add(new Option('International Passport', 'PASSPORT'));
+                docTypeSelect.options.add(new Option('Government Issued National ID', 'GOV_ID'));
+                docNumberInput.placeholder = "Enter international ID";
+            } else {
+                docTypeSelect.options.add(new Option('Select a country first...', ''));
+            }
+        }
+    </script>
+</body>
+</html>
