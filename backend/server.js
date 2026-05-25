@@ -1,4 +1,4 @@
-// 1. CHAVES DE CONEXÃO COM O SUPABASE (JÁ CONFIGURADAS)
+// 1. CHAVES DE CONEXÃO COM O SUPABASE
 const SUPABASE_URL = 'https://supabase.co'; 
 const SUPABASE_KEY = 'sb_publishable_k0e7oUjMRbCynrzeK6N2Xw_mjyXVInMb'; 
 
@@ -92,5 +92,6 @@ app.get('/api/balance/:id', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`📡 iGaming Ledger Engine conectada ao Supabase Postgres na porta ${PORT}`);
 });
+
 
     
