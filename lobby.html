@@ -1,120 +1,26 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iGaming Ledger - Game Lobby</title>
-    <style>
-        body {
-            background: #070a13;
-            color: #f8fafc;
-            font-family: 'Inter', system-ui, sans-serif;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .header {
-            width: 100%;
-            max-width: 1000px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 40px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 15px;
-        }
-        .back-btn {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 14px;
-            transition: color 0.2s;
-        }
-        .back-btn:hover { color: #38bdf8; }
-        h1 { margin: 0; font-size: 24px; color: #fff; }
-        
-        .game-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            width: 100%;
-            max-width: 1000px;
-        }
-        .game-card {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.8) 100%);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .game-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(56, 189, 248, 0.3);
-            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.1);
-        }
-        .badge {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: #10b981;
-            color: #fff;
-            font-size: 10px;
-            padding: 4px 8px;
-            border-radius: 20px;
-            font-weight: 700;
-            text-transform: uppercase;
-        }
-        .game-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
-        .game-desc { color: #94a3b8; font-size: 13px; margin-bottom: 20px; line-height: 1.4; }
-        .play-btn {
-            background: #2563eb;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            border-radius: 8px;
-            display: block;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: background 0.2s;
-        }
-        .play-btn:hover { background: #1d4ed8; }
-    </style>
-</head>
-<body>
-
-    <div class="header">
-        <a href="index.html" class="back-btn">⬅️ Voltar ao Portal</a>
-        <h1>🎰 GAME LOBBY</h1>
-        <div style="font-size: 13px; color: #38bdf8; font-weight:600;">ID: LIVE_MGA_01</div>
-    </div>
-
+    <!-- GRID DE JOGOS CORRIGIDA (ABRINDO O TELÃO DA PLATAFORMA) -->
     <div class="game-grid">
+        <!-- JOGO 1: SLOTS -->
         <div class="game-card">
             <span class="badge">Ativo</span>
             <div class="game-title" style="color: #38bdf8;">Ledger Slots Classic</div>
             <div class="game-desc">Máquina de slots de alta volatilidade auditada pela blockchain da rede.</div>
-            <a href="#" class="play-btn" onclick="alert('Iniciando o jogo...')">Jogar Agora</a>
+            <a href="plataforma.html" class="play-btn">Jogar Agora</a>
         </div>
 
+        <!-- JOGO 2: ROLETA -->
         <div class="game-card">
             <span class="badge">Ativo</span>
             <div class="game-title" style="color: #10b981;">Crypto Roulette Live</div>
             <div class="game-desc">Mesa ao vivo com atualizações de transações em ledger em tempo real.</div>
-            <a href="#" class="play-btn" onclick="alert('Conectando à mesa...')">Entrar na Mesa</a>
+            <a href="plataforma.html" class="play-btn">Entrar na Mesa</a>
         </div>
 
+        <!-- JOGO 3: CRASH (ATIVADO SEM MANUTENÇÃO) -->
         <div class="game-card">
-            <span class="badge" style="background:#f59e0b;">Manutenção</span>
-            <div class="game-title" style="color: #f59e0b;">Crash Ledger Multiplier</div>
-            <div class="game-desc">Aguardando sincronização de nós regulatórios de Malta para reabertura.</div>
-            <a href="#" class="play-btn" style="background:#334155; pointer-events: none;">Indisponível</a>
+            <span class="badge" style="background:#10b981;">Ativo</span>
+            <div class="game-title" style="color: #38bdf8;">Crash Ledger Multiplier</div>
+            <div class="game-desc">Multiplicador rápido integrado e auditado via nós regulatórios de Malta.</div>
+            <a href="plataforma.html" class="play-btn">Jogar Agora</a>
         </div>
     </div>
-
-</body>
-</html>
