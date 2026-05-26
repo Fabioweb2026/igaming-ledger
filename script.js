@@ -21,9 +21,26 @@ document.addEventListener("DOMContentLoaded", () => {
     atualizarCamposInterface();
 
     // 🌟 VINCULA A FUNÇÃO AO FORMULÁRIO DE CADASTRO
-    const formulario = document.querySelector("form"); // Altere para id do form se tiver, ex: document.getElementById("formCadastro")
-    if (formulario) {
-        formulario.addEventListener("submit", processarCadastro);
+// Procura o formulário da página de cadastro
+const formulario = document.querySelector('form');
+
+formulario.addEventListener('submit', async (event) => {
+    // 1. Trava a página imediatamente para ela não apagar tudo e piscar
+    event.preventDefault(); 
+
+    // 2. Coleta os dados digitados do seu cliente de iGaming
+    const nome = document.getElementById('nome').value; // mude para o ID correto
+
+    // 3. Executa a inserção no banco de dados do Supabase
+    const { data, error } = await supabase
+      .from('players')
+      .insert([{ full_name: nome }]);
+
+    if (error) {
+        console.error("Erro ao salvar:", error.message);
+        alert("Erro ao registrar no Ledger: " + error.message);
+    } else {
+        alert("Conta registrada com sucesso internacional em Malta!");
     }
 });
 
