@@ -21,51 +21,52 @@ document.addEventListener("DOMContentLoaded", () => {
     atualizarCamposInterface();
 
 // 🌟 VINCULA A FUNÇÃO AO FORMULÁRIO DE CADASTRO
+// 🌟 VINCULA A FUNÇÃO AO FORMULÁRIO DE CADASTRO
 const formulario = document.querySelector('form');
 
 formulario.addEventListener('submit', async (event) => {
     // 1. Trava a página imediatamente para ela não apagar tudo e piscar
     event.preventDefault(); 
 
-    // Verificação de segurança da biblioteca
     if (!supabaseClient) {
-        alert("Erro: O cliente do Supabase não está configurado corretamente.");
+        alert("Erro: O cliente do Supabase não foi inicializado.");
         return;
     }
 
     try {
-        // 2. Coleta os dados reais digitados nos campos do formulário de iGaming
-        // (Certifique-se de que os IDs abaixo batem com os IDs do seu cadastro.html)
-        const nomeCompleto = document.getElementById('fullName')?.value || document.querySelector('input[type="text"]')?.value;
-        const dataNascimento = document.querySelector('input[type="date"]')?.value;
-        const paisResidencia = document.querySelector('select')?.value;
-        const numeroDocumento = document.querySelector('input[placeholder*="ID number"]')?.value;
+        // 2. Captura os dados usando os seletores universais baseados no seu formulário
+        const nomeCompleto = document.querySelector('input[placeholder*="John Doe"]')?.value || document.getElementById('fullName')?.value;
+        const dataNascimento = document.querySelector('input[type="date"]')?.value || document.getElementById('dob')?.value;
+        const paisResidencia = document.querySelector('select')?.value || document.getElementById('country')?.value;
+        
+        // 🔥 AQUI: Captura usando exatamente o ID "docNumber" que está no seu HTML!
+        const numeroDocumento = document.getElementById('docNumber')?.value;
 
-        // Validação simples antes de enviar
-        if (!nomeCompleto) {
-            alert("Por favor, preencha o campo de Nome Completo.");
+        // Validação básica de segurança antes de enviar para o banco
+        if (!nomeCompleto || !numeroDocumento) {
+            alert("Por favor, preencha os campos obrigatórios.");
             return;
         }
 
-        // 3. Executa a inserção usando a variável correta: supabaseClient
+        // 3. Insere os dados na tabela do Supabase
         const { data, error } = await supabaseClient
           .from('players')
           .insert([
               { 
                   full_name: nomeCompleto,
-                  dob: dataNascimento,         // Certifique-se de que esses são os nomes das colunas no banco
+                  dob: dataNascimento,         
                   country: paisResidencia,
                   document_number: numeroDocumento
               }
           ]);
 
-        // 4. Tratamento de respostas
+        // 4. Feedback visual para o operador em Malta
         if (error) {
-            console.error("Erro retornado pelo Supabase:", error);
+            console.error("Erro do Supabase:", error);
             alert("Erro ao registrar no Ledger: " + error.message);
         } else {
-            alert("Conta registrada com sucesso internacional em Malta!");
-            formulario.reset(); // Limpa os campos de forma segura após o sucesso
+            alert("Cliente de iGaming registrado com sucesso em Malta!");
+            formulario.reset(); // Limpa a tela após o sucesso
         }
 
     } catch (err) {
@@ -73,7 +74,6 @@ formulario.addEventListener('submit', async (event) => {
         alert("Ocorreu um erro no processamento do cadastro.");
     }
 });
-
 /**
  * Cadastra o jogador usando o SDK oficial do Supabase
  */
