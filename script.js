@@ -3,7 +3,7 @@
  */
 // 1. Substitua pela URL real do SEU projeto (Pegue no painel do Supabase em Settings > API)
 // 🌟 URL Corrigida (Apenas até o .co, sem barras no final)
-const SUPABASE_URL = 'https://supabase.co'; 
+const SUPABASE_URL = 'https://njexnwhyjtgrcskmazon.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZXhud2h5dGpncmNza21hem9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NTMyOTQsImV4cCI6MjA5NTIyOTI5NH0.Ua0q2qgxqZrWjeTjS_gaSFylS8Y6amcAY5vrmzsCl1o';
 // 2. CORREÇÃO DA BIBLIOTECA: O "S" deve ser maiúsculo para CDN v2 (window.Supabase)
 const supabaseClient = window.Supabase ? window.Supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
@@ -153,5 +153,5 @@ function adicionarTransacaoHistorico(tipo, valor, IsPositivo) {
     novoItem.innerHTML = `<div><div class="tx-type">${tipo}</div></div><div class="${IsPositivo ? 'tx-value-pos' : ''}" style="${!IsPositivo ? 'color:#ef4444;' : ''}">${IsPositivo ? '+' : '-'} € ${valor.toFixed(2)}</div>`;
     const titulo = secaoHistorico.querySelector(".section-title");
     titulo.parentNode.insertBefore(novoItem, titulo.nextSibling);
+</> JavaScript
 }
-
