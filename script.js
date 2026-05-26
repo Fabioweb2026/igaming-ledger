@@ -20,27 +20,57 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     atualizarCamposInterface();
 
-    // 🌟 VINCULA A FUNÇÃO AO FORMULÁRIO DE CADASTRO
-// Procura o formulário da página de cadastro
+// 🌟 VINCULA A FUNÇÃO AO FORMULÁRIO DE CADASTRO
 const formulario = document.querySelector('form');
 
 formulario.addEventListener('submit', async (event) => {
     // 1. Trava a página imediatamente para ela não apagar tudo e piscar
     event.preventDefault(); 
 
-    // 2. Coleta os dados digitados do seu cliente de iGaming
-    const nome = document.getElementById('nome').value; // mude para o ID correto
+    // Verificação de segurança da biblioteca
+    if (!supabaseClient) {
+        alert("Erro: O cliente do Supabase não está configurado corretamente.");
+        return;
+    }
 
-    // 3. Executa a inserção no banco de dados do Supabase
-    const { data, error } = await supabase
-      .from('players')
-      .insert([{ full_name: nome }]);
+    try {
+        // 2. Coleta os dados reais digitados nos campos do formulário de iGaming
+        // (Certifique-se de que os IDs abaixo batem com os IDs do seu cadastro.html)
+        const nomeCompleto = document.getElementById('fullName')?.value || document.querySelector('input[type="text"]')?.value;
+        const dataNascimento = document.querySelector('input[type="date"]')?.value;
+        const paisResidencia = document.querySelector('select')?.value;
+        const numeroDocumento = document.querySelector('input[placeholder*="ID number"]')?.value;
 
-    if (error) {
-        console.error("Erro ao salvar:", error.message);
-        alert("Erro ao registrar no Ledger: " + error.message);
-    } else {
-        alert("Conta registrada com sucesso internacional em Malta!");
+        // Validação simples antes de enviar
+        if (!nomeCompleto) {
+            alert("Por favor, preencha o campo de Nome Completo.");
+            return;
+        }
+
+        // 3. Executa a inserção usando a variável correta: supabaseClient
+        const { data, error } = await supabaseClient
+          .from('players')
+          .insert([
+              { 
+                  full_name: nomeCompleto,
+                  dob: dataNascimento,         // Certifique-se de que esses são os nomes das colunas no banco
+                  country: paisResidencia,
+                  document_number: numeroDocumento
+              }
+          ]);
+
+        // 4. Tratamento de respostas
+        if (error) {
+            console.error("Erro retornado pelo Supabase:", error);
+            alert("Erro ao registrar no Ledger: " + error.message);
+        } else {
+            alert("Conta registrada com sucesso internacional em Malta!");
+            formulario.reset(); // Limpa os campos de forma segura após o sucesso
+        }
+
+    } catch (err) {
+        console.error("Erro interno no script:", err);
+        alert("Ocorreu um erro no processamento do cadastro.");
     }
 });
 
