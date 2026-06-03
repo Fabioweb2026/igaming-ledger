@@ -85,6 +85,7 @@
             <p>MGA / International Compliance KYC</p>
         </div>
 
+        <!-- ID unificado mapeado exatamente para a escuta do JS -->
         <form id="kycForm">
             <div class="form-group">
                 <label for="fullName">Full Name (As written in official document)</label>
@@ -167,11 +168,11 @@
                 docTypeSelect.options.add(new Option('Select a country first...', ''));
             }
         }
-
     </script>
 
-    <!-- CORREÇÃO: Adicionado defer para carregar na ordem correta -->
-    <script src="https://jsdelivr.net" defer></script>
-    <script src="script.js" defer></script>
+    <!-- INJEÇÃO DA BIBLIOTECA DIRETAMENTE NO FLUXO DE COMPILAÇÃO SÍNCRONA -->
+    <script src="https://jsdelivr.net"></script>
+    <script src="script.js"></script>
+
 </body>
 </html>
