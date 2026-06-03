@@ -2,14 +2,11 @@
  * iGaming Ledger - Core Engine (Otimizado com LocalStorage Database)
  */
 
-// Configurações executadas assim que a página carrega por completo
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicializa o saldo global na primeira execução se não existir
     if (!localStorage.getItem("igaming_balance")) {
         localStorage.setItem("igaming_balance", "0.00");
     }
     
-    // Inicializa a tabela de players local se não existir
     if (!localStorage.getItem("local_players_db")) {
         localStorage.setItem("local_players_db", JSON.stringify([]));
     }
@@ -22,9 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-/**
- * Cadastra o jogador salvando localmente de forma segura e síncrona
- */
 function processarCadastro(event) {
     event.preventDefault();
 
@@ -34,22 +28,18 @@ function processarCadastro(event) {
     const docType = document.getElementById('docType').value;
     const docNumber = document.getElementById('docNumber').value.trim();
 
-    // Validação de Idade (MGA Malta)
     const idade = Math.floor((new Date() - new Date(dob)) / 31557600000);
     if (idade < 18) {
         alert("❌ REGISTRATION DENIED: Under MGA regulations, players must be at least 18 years old.");
         return;
     }
 
-    // Geração de credenciais únicas e Hash fictício do Ledger
     const playerId = "PL-" + Math.floor(100000 + Math.random() * 900000);
     const ledgerHash = "0x" + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
 
     try {
-        // Busca o banco de dados local do navegador
         const dbPlayers = JSON.parse(localStorage.getItem("local_players_db") || "[]");
         
-        // Estrutura o novo registro do jogador
         const novoJogador = {
             id: playerId,
             fullname: fullName,
@@ -60,11 +50,9 @@ function processarCadastro(event) {
             ledger_hash: ledgerHash
         };
 
-        // Salva no banco de dados local
         dbPlayers.push(novoJogador);
         localStorage.setItem("local_players_db", JSON.stringify(dbPlayers));
 
-        // Define a sessão activa do jogador atual
         const dadosSessao = {
             id: playerId,
             nome: fullName,
@@ -74,51 +62,41 @@ function processarCadastro(event) {
         };
         
         localStorage.setItem("current_player", JSON.stringify(dadosSessao));
-        localStorage.setItem("igaming_balance", "50.00"); // Concede o bônus inicial regulamentar
+        localStorage.setItem("igaming_balance", "50.00"); 
 
-        alert(`✅ LOCAL DATABASE SYNCED:\nWelcome ${fullName}!\nYour data is safely stored in the Cloud Database.\nID: ${playerId}`);
-        
-        // Redireciona imediatamente de volta para a tela inicial
+        alert(`✅ LOCAL DATABASE SYNCED:\nWelcome!\nYour data is safely stored in the Cloud Database.\nID: ${playerId}`);
         window.location.href = "index.html";
 
     } catch (error) {
-        console.error("Erro no processamento do banco local:", error);
+        console.error("Erro no banco local:", error);
         alert("❌ FALHA NO REGISTRO: " + error.message);
     }
 }
 
-/**
- * Atualiza a interface visual do painel (Saldo e Identificação do Player)
- */
 function atualizarCamposInterface() {
     const jogadorSessao = localStorage.getItem("current_player");
     const saldoAtual = localStorage.getItem("igaming_balance") || "0.00";
 
-    // Atualiza todas as caixas de saldo que usam a classe .balance-amount
     const elementosSaldoClasse = document.querySelectorAll(".balance-amount");
     elementosSaldoClasse.forEach(el => {
         el.innerHTML = `<span class="currency">€</span> ${parseFloat(saldoAtual).toFixed(2)}`;
     });
 
-    // CORREÇÃO: Atualiza especificamente pelo ID para cobrir ambos os layouts (index e wallet)
     const elementoSaldoPlat = document.getElementById("platformBalance");
     if (elementoSaldoPlat) {
         elementoSaldoPlat.innerText = `€ ${parseFloat(saldoAtual).toFixed(2)}`;
     }
+
     const botaoRegistro = document.querySelector(".btn-register-main");
-    if (botaoRegistro && jogadorSessao) {
-        const jogador = JSON.parse(jogadorSessao);
-        
-        // CORREÇÃO: Oculta o nome e exibe apenas o ID e o status regulatório
-        botaoRegistro.innerHTML = `👤 Ledger Account Active (ID: ${jogador.id}) | KYC: APPROVED`;
-        botaoRegistro.style.background = "linear-gradient(90deg, #10b981 0%, #059669 100%)";
-        botaoRegistro.href = "#";
-        botaoRegistro.onclick = (e) => {
-            e.preventDefault();
-            alert(`ℹ️ SECURE ENCRYPTED LEDGER PROFILE\n\nPlayer ID: ${jogador.id}\nCountry Jurisdiction: ${jogador.pais}\nLedger Security Hash:\n${jogador.hashSeguranca}\n\n* Personal Identification Data is masked for compliance under GDPR/MGA.`);
-        };
-    }
-    uranca}`);
+    if (botaoRegistro) {
+        if (jogadorSessao) {
+            const jogador = JSON.parse(jogadorSessao);
+            botaoRegistro.innerHTML = `👤 Ledger Account Active (ID: ${jogador.id}) | KYC: APPROVED`;
+            botaoRegistro.style.background = "linear-gradient(90deg, #10b981 0%, #059669 100%)";
+            botaoRegistro.href = "#";
+            botaoRegistro.onclick = (e) => {
+                e.preventDefault();
+                alert(`ℹ️ SECURE ENCRYPTED LEDGER PROFILE\n\nPlayer ID: ${jogador.id}\nCountry Jurisdiction: ${jogador.pais}\nLedger Security Hash:\n${jogador.hashSeguranca}`);
             };
         } else {
             botaoRegistro.innerHTML = `👤 Create Account / Register (International KYC)`;
@@ -129,9 +107,6 @@ function atualizarCamposInterface() {
     }
 }
 
-/**
- * CORREÇÃO: Nome corrigido para "executar" com X para bater com o HTML das páginas
- */
 function executarDeposito() {
     const jogadorSessao = localStorage.getItem("current_player");
     if (!jogadorSessao) { alert("❌ KYC Registration required."); return; }
@@ -145,9 +120,6 @@ function executarDeposito() {
     atualizarCamposInterface();
 }
 
-/**
- * Executa a lógica de Saque da Carteira
- */
 function executarSaque() {
     const jogadorSessao = localStorage.getItem("current_player");
     if (!jogadorSessao) return;
@@ -164,17 +136,12 @@ function executarSaque() {
     atualizarCamposInterface();
 }
 
-/**
- * Adiciona linhas de auditoria visual no histórico das transações
- */
 function adicionarTransacaoHistorico(tipo, valor, IsPositivo) {
     const secaoHistorico = document.querySelector(".history-section");
     if (!secaoHistorico) return;
     
     const novoItem = document.createElement("div");
     novoItem.className = "tx-item";
-    
-    // Configura estilos in-line caso as classes css falhem no carregamento
     novoItem.style.display = "flex";
     novoItem.style.justify = "space-between";
     novoItem.style.padding = "10px 5px";
@@ -184,19 +151,17 @@ function adicionarTransacaoHistorico(tipo, valor, IsPositivo) {
     const sinal = IsPositivo ? '+' : '-';
     
     novoItem.innerHTML = `
-        <div>
-            <div class="tx-type" style="font-weight:bold;">${tipo}</div>
-        </div>
+        <div><div class="tx-type" style="font-weight:bold;">${tipo}</div></div>
         <div class="${IsPositivo ? 'tx-value-pos' : ''}" style="color: ${corValor}; font-weight: bold;">
             ${sinal} € ${valor.toFixed(2)}
         </div>
     `;
     
-    // Injeta logo após o título da seção
-    const titulo = secaoHistorico.querySelector(".section-title") || secaoHistorico.querySelector("h2") || secaoHistorico.querySelector("h3");
+    const titulo = secaoHistorico.querySelector(".section-title") || secaoHistorico.querySelector("h2");
     if (titulo) {
         titulo.parentNode.insertBefore(novoItem, titulo.nextSibling);
     } else {
         secaoHistorico.appendChild(novoItem);
     }
 }
+
