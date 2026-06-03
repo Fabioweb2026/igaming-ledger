@@ -91,12 +91,20 @@ function atualizarCamposInterface() {
     if (botaoRegistro) {
         if (jogadorSessao) {
             const jogador = JSON.parse(jogadorSessao);
-            botaoRegistro.innerHTML = `👤 Ledger Account Active (ID: ${jogador.id}) | KYC: APPROVED`;
+            
+            // ALTERAÇÃO COMPLETA: Transforma o botão em um gerenciador que permite Deslogar/Resetar
+            botaoRegistro.innerHTML = `👤 ID: ${jogador.id} | KYC: APPROVED (Clique para Deslogar / Resetar)`;
             botaoRegistro.style.background = "linear-gradient(90deg, #10b981 0%, #059669 100%)";
             botaoRegistro.href = "#";
             botaoRegistro.onclick = (e) => {
                 e.preventDefault();
-                alert(`ℹ️ SECURE ENCRYPTED LEDGER PROFILE\n\nPlayer ID: ${jogador.id}\nCountry Jurisdiction: ${jogador.pais}\nLedger Security Hash:\n${jogador.hashSeguranca}`);
+                if (confirm(`ℹ️ PLAYER PROFILE (ID: ${jogador.id})\n\nDeseja deslogar desta conta para realizar um novo cadastro de teste?`)) {
+                    // Remove apenas o jogador ativo e o saldo, mantendo o histórico geral
+                    localStorage.removeItem("current_player");
+                    localStorage.removeItem("igaming_balance");
+                    alert("Conta deslogada! Redirecionando para a tela de cadastro...");
+                    window.location.href = "cadastro.html";
+                }
             };
         } else {
             botaoRegistro.innerHTML = `👤 Create Account / Register (International KYC)`;
