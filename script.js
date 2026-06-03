@@ -64,7 +64,7 @@ function processarCadastro(event) {
         dbPlayers.push(novoJogador);
         localStorage.setItem("local_players_db", JSON.stringify(dbPlayers));
 
-        // Define a sessão ativa do jogador atual
+        // Define a sessão activa do jogador atual
         const dadosSessao = {
             id: playerId,
             nome: fullName,
@@ -94,11 +94,13 @@ function atualizarCamposInterface() {
     const jogadorSessao = localStorage.getItem("current_player");
     const saldoAtual = localStorage.getItem("igaming_balance") || "0.00";
 
-    const elementoSaldo = document.querySelector(".balance-amount");
-    if (elementoSaldo) {
-        elementoSaldo.innerHTML = `<span class="currency">€</span> ${parseFloat(saldoAtual).toFixed(2)}`;
-    }
+    // Atualiza todas as caixas de saldo que usam a classe .balance-amount
+    const elementosSaldoClasse = document.querySelectorAll(".balance-amount");
+    elementosSaldoClasse.forEach(el => {
+        el.innerHTML = `<span class="currency">€</span> ${parseFloat(saldoAtual).toFixed(2)}`;
+    });
 
+    // CORREÇÃO: Atualiza especificamente pelo ID para cobrir ambos os layouts (index e wallet)
     const elementoSaldoPlat = document.getElementById("platformBalance");
     if (elementoSaldoPlat) {
         elementoSaldoPlat.innerText = `€ ${parseFloat(saldoAtual).toFixed(2)}`;
@@ -125,9 +127,9 @@ function atualizarCamposInterface() {
 }
 
 /**
- * Executa a lógica de Depósito na Carteira
+ * CORREÇÃO: Nome corrigido para "executar" com X para bater com o HTML das páginas
  */
-function ejecutarDeposito() {
+function executarDeposito() {
     const jogadorSessao = localStorage.getItem("current_player");
     if (!jogadorSessao) { alert("❌ KYC Registration required."); return; }
     const valor = parseFloat(prompt("Enter deposit amount (€):", "100.00"));
@@ -160,7 +162,7 @@ function executarSaque() {
 }
 
 /**
- * Adiciona linhas de auditoria visual no histórico do index.html
+ * Adiciona linhas de auditoria visual no histórico das transações
  */
 function adicionarTransacaoHistorico(tipo, valor, IsPositivo) {
     const secaoHistorico = document.querySelector(".history-section");
@@ -168,10 +170,30 @@ function adicionarTransacaoHistorico(tipo, valor, IsPositivo) {
     
     const novoItem = document.createElement("div");
     novoItem.className = "tx-item";
-    novoItem.innerHTML = `<div><div class="tx-type">${tipo}</div></div><div class="${IsPositivo ? 'tx-value-pos' : ''}" style="${!IsPositivo ? 'color:#ef4444;' : ''}">${IsPositivo ? '+' : '-'} € ${valor.toFixed(2)}</div>`;
     
-    const titulo = secaoHistorico.querySelector(".section-title");
+    // Configura estilos in-line caso as classes css falhem no carregamento
+    novoItem.style.display = "flex";
+    novoItem.style.justify = "space-between";
+    novoItem.style.padding = "10px 5px";
+    novoItem.style.borderBottom = "1px solid rgba(255,255,255,0.1)";
+    
+    const corValor = IsPositivo ? '#22c55e' : '#ef4444';
+    const sinal = IsPositivo ? '+' : '-';
+    
+    novoItem.innerHTML = `
+        <div>
+            <div class="tx-type" style="font-weight:bold;">${tipo}</div>
+        </div>
+        <div class="${IsPositivo ? 'tx-value-pos' : ''}" style="color: ${corValor}; font-weight: bold;">
+            ${sinal} € ${valor.toFixed(2)}
+        </div>
+    `;
+    
+    // Injeta logo após o título da seção
+    const titulo = secaoHistorico.querySelector(".section-title") || secaoHistorico.querySelector("h2") || secaoHistorico.querySelector("h3");
     if (titulo) {
         titulo.parentNode.insertBefore(novoItem, titulo.nextSibling);
+    } else {
+        secaoHistorico.appendChild(novoItem);
     }
 }
