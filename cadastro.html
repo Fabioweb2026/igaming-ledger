@@ -167,11 +167,12 @@
                 docTypeSelect.options.add(new Option('Select a country first...', ''));
             }
         }
+
     </script>
 
-    <!-- Chamadas de Scripts Externos Sem Duplicidade -->
-    <script src="https://jsdelivr.net"></script>
-    <script src="script.js"></script>
+    <!-- CORREÇÃO: Adicionado defer para carregar na ordem correta -->
+    <script src="https://jsdelivr.net" defer></script>
+    <script src="script.js" defer></script>
 
 </body>
 </html>
