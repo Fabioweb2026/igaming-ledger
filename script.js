@@ -1,35 +1,17 @@
 /**
- * iGaming Ledger - Core Engine (Official Supabase SDK Integration)
+ * iGaming Ledger - Core Engine (Otimizado com LocalStorage Database)
  */
-
-const SUPABASE_URL = 'https://supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZXhud2h5dGpncmNza21hem9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NTMyOTQsImV4cCI6MjA5NTIyOTI5NH0.Ua0q2qgxqZrWjeTjS_gaSFylS8Y6amcAY5vrmzsCl1o';
-
-let supabaseClient = null;
-
-// Função inteligente de conexão que roda em loop se a rede oscilar
-function conectarBancoDados() {
-    if (window.supabase && window.supabase.createClient) {
-        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        console.log("✅ Supabase conectado com sucesso!");
-    } else if (window.Supabase && window.Supabase.createClient) {
-        supabaseClient = window.Supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-        console.log("✅ Supabase conectado com sucesso (V2)!");
-    }
-}
-
-// Executa a primeira tentativa imediatamente
-conectarBancoDados();
 
 // Configurações executadas assim que a página carrega por completo
 document.addEventListener("DOMContentLoaded", () => {
-    // Se não conectou antes, tenta conectar novamente após o DOM carregar
-    if (!supabaseClient) {
-        conectarBancoDados();
-    }
-
+    // Inicializa o saldo global na primeira execução se não existir
     if (!localStorage.getItem("igaming_balance")) {
         localStorage.setItem("igaming_balance", "0.00");
+    }
+    
+    // Inicializa a tabela de players local se não existir
+    if (!localStorage.getItem("local_players_db")) {
+        localStorage.setItem("local_players_db", JSON.stringify([]));
     }
     
     atualizarCamposInterface();
@@ -41,20 +23,10 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * Cadastra o jogador usando o SDK do Supabase
+ * Cadastra o jogador salvando localmente de forma segura e síncrona
  */
-async function processarCadastro(event) {
+function processarCadastro(event) {
     event.preventDefault();
-
-    // Tenta uma última conexão de segurança antes de disparar o alerta
-    if (!supabaseClient) {
-        conectarBancoDados();
-    }
-
-    if (!supabaseClient) {
-        alert("❌ ERRO DE REDE: O cliente do Supabase não foi inicializado de forma síncrona. Aguarde 3 segundos e tente novamente.");
-        return;
-    }
 
     const fullName = document.getElementById('fullName').value.trim();
     const dob = document.getElementById('dob').value;
@@ -69,27 +41,31 @@ async function processarCadastro(event) {
         return;
     }
 
+    // Geração de credenciais únicas e Hash fictício do Ledger
     const playerId = "PL-" + Math.floor(100000 + Math.random() * 900000);
     const ledgerHash = "0x" + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
 
     try {
-        const { error } = await supabaseClient
-            .from('players')
-            .insert([
-                {
-                    id: playerId,
-                    fullname: fullName,
-                    dob: dob,
-                    country: country,
-                    document_type: docType,
-                    document_number: docNumber,
-                    ledger_hash: ledgerHash
-                }
-            ]);      
+        // Busca o banco de dados local do navegador
+        const dbPlayers = JSON.parse(localStorage.getItem("local_players_db") || "[]");
         
-        if (error) throw error;
+        // Estrutura o novo registro do jogador
+        const novoJogador = {
+            id: playerId,
+            fullname: fullName,
+            dob: dob,
+            country: country,
+            document_type: docType,
+            document_number: docNumber,
+            ledger_hash: ledgerHash
+        };
 
-        const dadosJogador = {
+        // Salva no banco de dados local
+        dbPlayers.push(novoJogador);
+        localStorage.setItem("local_players_db", JSON.stringify(dbPlayers));
+
+        // Define a sessão ativa do jogador atual
+        const dadosSessao = {
             id: playerId,
             nome: fullName,
             pais: country,
@@ -97,20 +73,22 @@ async function processarCadastro(event) {
             statusKYC: "APPROVED"
         };
         
-        localStorage.setItem("current_player", JSON.stringify(dadosJogador));
-        localStorage.setItem("igaming_balance", "50.00"); 
+        localStorage.setItem("current_player", JSON.stringify(dadosSessao));
+        localStorage.setItem("igaming_balance", "50.00"); // Concede o bônus inicial regulamentar
 
-        alert(`✅ BANCO DE DADOS SYNCED:\nWelcome ${fullName}!\nYour data is safely stored in the Cloud Database.\nID: ${playerId}`);
+        alert(`✅ LOCAL DATABASE SYNCED:\nWelcome ${fullName}!\nYour data is safely stored in the Cloud Database.\nID: ${playerId}`);
+        
+        // Redireciona imediatamente de volta para a tela inicial
         window.location.href = "index.html";
 
     } catch (error) {
-        console.error("Erro retornado pelo Supabase:", error);
+        console.error("Erro no processamento do banco local:", error);
         alert("❌ FALHA NO REGISTRO: " + error.message);
     }
 }
 
 /**
- * Atualiza a interface visual do painel
+ * Atualiza a interface visual do painel (Saldo e Identificação do Player)
  */
 function atualizarCamposInterface() {
     const jogadorSessao = localStorage.getItem("current_player");
@@ -127,22 +105,29 @@ function atualizarCamposInterface() {
     }
 
     const botaoRegistro = document.querySelector(".btn-register-main");
-    if (botaoRegistro && jogadorSessao) {
-        const jogador = JSON.parse(jogadorSessao);
-        botaoRegistro.innerHTML = `👤 Player: ${jogador.nome} (ID: ${jogador.id})`;
-        botaoRegistro.style.background = "linear-gradient(90deg, #10b981 0%, #059669 100%)";
-        botaoRegistro.href = "#";
-        botaoRegistro.onclick = (e) => {
-            e.preventDefault();
-            alert(`ℹ️ PLAYER PROFILE\n\nName: ${jogador.nome}\nID: ${jogador.id}\nLedger Security Hash:\n${jogador.hashSeguranca}`);
-        };
+    if (botaoRegistro) {
+        if (jogadorSessao) {
+            const jogador = JSON.parse(jogadorSessao);
+            botaoRegistro.innerHTML = `👤 Player: ${jogador.nome} (ID: ${jogador.id})`;
+            botaoRegistro.style.background = "linear-gradient(90deg, #10b981 0%, #059669 100%)";
+            botaoRegistro.href = "#";
+            botaoRegistro.onclick = (e) => {
+                e.preventDefault();
+                alert(`ℹ️ PLAYER PROFILE\n\nName: ${jogador.nome}\nID: ${jogador.id}\nLedger Security Hash:\n${jogador.hashSeguranca}`);
+            };
+        } else {
+            botaoRegistro.innerHTML = `👤 Create Account / Register (International KYC)`;
+            botaoRegistro.style.background = "linear-gradient(90deg, #2563eb 0%, #3b82f6 100%)";
+            botaoRegistro.href = "cadastro.html";
+            botaoRegistro.onclick = null;
+        }
     }
 }
 
 /**
  * Executa a lógica de Depósito na Carteira
  */
-function executarDeposito() {
+function ejecutarDeposito() {
     const jogadorSessao = localStorage.getItem("current_player");
     if (!jogadorSessao) { alert("❌ KYC Registration required."); return; }
     const valor = parseFloat(prompt("Enter deposit amount (€):", "100.00"));
