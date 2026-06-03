@@ -164,4 +164,3 @@ function adicionarTransacaoHistorico(tipo, valor, IsPositivo) {
         secaoHistorico.appendChild(novoItem);
     }
 }
-
