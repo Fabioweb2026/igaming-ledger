@@ -2,10 +2,10 @@
  * iGaming Ledger - Core Engine (Official Supabase SDK Integration)
  */
 
-const SUPABASE_URL = 'https://njexnwhyjtgrcskmazon.supabase.co';
+const SUPABASE_URL = 'https://supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZXhud2h5dGpncmNza21hem9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NTMyOTQsImV4cCI6MjA5NTIyOTI5NH0.Ua0q2qgxqZrWjeTjS_gaSFylS8Y6amcAY5vrmzsCl1o';
 
-// Inicializa o cliente do Supabase com tratamento seguro
+// Inicializa o cliente do Supabase
 const supabaseClient = window.Supabase ? window.Supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
 if (!supabaseClient) {
@@ -14,15 +14,12 @@ if (!supabaseClient) {
 
 // Configurações executadas assim que a página carrega
 document.addEventListener("DOMContentLoaded", () => {
-    // Inicializa o saldo local se não existir
     if (!localStorage.getItem("igaming_balance")) {
         localStorage.setItem("igaming_balance", "0.00");
     }
     
-    // Atualiza elementos visuais na tela
     atualizarCamposInterface();
 
-    // Vincula o evento de envio ao formulário de cadastro de forma segura
     const formulario = document.getElementById('kycForm');
     if (formulario) {
         formulario.addEventListener('submit', processarCadastro);
@@ -33,35 +30,30 @@ document.addEventListener("DOMContentLoaded", () => {
  * Cadastra o jogador usando o SDK oficial do Supabase
  */
 async function processarCadastro(event) {
-    // 1. Impede o recarregamento imediato da página
     event.preventDefault();
 
     if (!supabaseClient) {
-        alert("❌ ERRO DE REDE: O cliente do Supabase não foi inicializado. Verifique suas credenciais.");
+        alert("❌ ERRO DE REDE: O cliente do Supabase não foi inicializado.");
         return;
     }
 
-    // 2. Captura os valores dos inputs do HTML
     const fullName = document.getElementById('fullName').value.trim();
     const dob = document.getElementById('dob').value;
     const country = document.getElementById('country').value;
     const docType = document.getElementById('docType').value;
     const docNumber = document.getElementById('docNumber').value.trim();
 
-    // 3. Validação de Idade (Regulamentação MGA Malta)
+    // Validação de Idade (MGA Malta)
     const idade = Math.floor((new Date() - new Date(dob)) / 31557600000);
     if (idade < 18) {
         alert("❌ REGISTRATION DENIED: Under MGA regulations, players must be at least 18 years old.");
         return;
     }
 
-    // 4. Criação de chaves únicas do Ledger fictício
     const playerId = "PL-" + Math.floor(100000 + Math.random() * 900000);
     const ledgerHash = "0x" + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
 
     try {
-        // 5. Envia os dados estruturados para a tabela 'players' no banco PostgreSQL do Supabase
-        // Certifique-se de que os nomes das colunas abaixo batem EXATAMENTE com as colunas criadas no banco
         const { error } = await supabaseClient
             .from('players')
             .insert([
@@ -78,7 +70,6 @@ async function processarCadastro(event) {
         
         if (error) throw error;
 
-        // 6. Salva o estado de sessão local do navegador se gravou no banco com sucesso
         const dadosJogador = {
             id: playerId,
             nome: fullName,
@@ -88,11 +79,9 @@ async function processarCadastro(event) {
         };
         
         localStorage.setItem("current_player", JSON.stringify(dadosJogador));
-        localStorage.setItem("igaming_balance", "50.00"); // Concede bônus inicial fictício
+        localStorage.setItem("igaming_balance", "50.00"); // Bônus inicial fictício
 
         alert(`✅ BANCO DE DADOS SYNCED:\nWelcome ${fullName}!\nYour data is safely stored in the Cloud Database.\nID: ${playerId}`);
-        
-        // 7. Redireciona o usuário de volta para o painel principal
         window.location.href = "index.html";
 
     } catch (error) {
@@ -102,7 +91,7 @@ async function processarCadastro(event) {
 }
 
 /**
- * Atualiza o cabeçalho e saldo com os dados do jogador atual
+ * Atualiza a interface visual do painel
  */
 function atualizarCamposInterface() {
     const jogadorSessao = localStorage.getItem("current_player");
@@ -131,6 +120,9 @@ function atualizarCamposInterface() {
     }
 }
 
+/**
+ * Executa a lógica de Depósito na Carteira
+ */
 function executarDeposito() {
     const jogadorSessao = localStorage.getItem("current_player");
     if (!jogadorSessao) { alert("❌ KYC Registration required."); return; }
@@ -139,5 +131,49 @@ function executarDeposito() {
 
     let saldo = parseFloat(localStorage.getItem("igaming_balance") || "0.00") + valor;
     localStorage.setItem("igaming_balance", saldo.toString());
+    
+    // Vinculado à função do histórico que você enviou
+    adicionarTransacaoHistorico("Deposit Approved", valor, true);
     atualizarCamposInterface();
 }
+
+/**
+ * Executa a lógica de Saque da Carteira
+ */
+function executarSaque() {
+    const jogadorSessao = localStorage.getItem("current_player");
+    if (!jogadorSessao) return;
+    
+    let saldo = parseFloat(localStorage.getItem("igaming_balance") || "0.00");
+    const valor = parseFloat(prompt(`Enter withdrawal amount (Max: € ${saldo.toFixed(2)}):`, "50.00"));
+    
+    if (isNaN(valor) || valor <= 0 || valor > saldo) { 
+        alert("Invalid amount or insufficient funds."); 
+        return; 
+    }
+
+    saldo -= valor;
+    localStorage.setItem("igaming_balance", saldo.toString());
+    
+    // Vinculado à função do histórico que você enviou
+    adicionarTransacaoHistorico("Withdrawal Requested", valor, false);
+    atualizarCamposInterface();
+}
+
+/**
+ * Adiciona uma linha visual na seção de histórico da página
+ */
+function adicionarTransacaoHistorico(tipo, valor, IsPositivo) {
+    const secaoHistorico = document.querySelector(".history-section");
+    if (!secaoHistorico) return;
+    
+    const novoItem = document.createElement("div");
+    novoItem.className = "tx-item";
+    novoItem.innerHTML = `<div><div class="tx-type">${tipo}</div></div><div class="${IsPositivo ? 'tx-value-pos' : ''}" style="${!IsPositivo ? 'color:#ef4444;' : ''}">${IsPositivo ? '+' : '-'} € ${valor.toFixed(2)}</div>`;
+    
+    const titulo = secaoHistorico.querySelector(".section-title");
+    if (titulo) {
+        titulo.parentNode.insertBefore(novoItem, titulo.nextSibling);
+    }
+}
+
