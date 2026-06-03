@@ -266,25 +266,29 @@
     <!-- O BANNER COMPLETO -->
     <div class="hero-banner">
         <img src="mediterranea.png.png" alt="iGaming Banner" class="logo-img" onerror="this.style.display='none';">
+    </div>  
+ </div>
     </div>
 
     <div class="brand-container">
         <h1>IGAMING LEDGER</h1>
         <div class="subtitle">Malta Gaming Authority Compliant</div>
     </div>
-
+   </div>
+   </div>
+    
     <!-- BOTÃO DE CADASTRO INTERNACIONAL (KYC) INTEGRADO -->
     <div class="kyc-cta-container">
         <a href="cadastro.html" class="btn-register-main">
             👤 Create Account / Register (International KYC)
         </a>
     </div>
-
-    <!-- NOVO: PAINEL DE CONTROLE DE SALDO E HISTÓRICO CONECTADO AO SCRIPT -->
+       <!-- PAINEL DE CONTROLE DE SALDO E HISTÓRICO -->
     <div class="px-6 w-full max-w-[900px] mx-auto">
         <div class="ledger-balance-card">
             <div class="balance-header">Available Ledger Balance</div>
-            <!-- O script.js vai injetar o valor atualizado aqui -->
+            
+            <!-- CORREÇÃO: O elemento precisa ter a classe e o ID para o JS atualizar o valor -->
             <div class="balance-amount" id="platformBalance">€ 0.00</div>
             
             <div class="financial-actions">
@@ -292,12 +296,16 @@
                 <button onclick="executarSaque()" class="btn-finance btn-withdraw">📤 Withdraw Funds</button>
             </div>
 
-            <!-- Seção onde a função adicionarTransacaoHistorico vai injetar as linhas -->
             <div class="history-section mt-4">
                 <div class="section-title">Ledger Transaction Audit Trail</div>
             </div>
         </div>
     </div>
+
+            <!-- Seção onde a função adicionarTransacaoHistorico vai injetar as linhas -->
+            <div class="history-section mt-4">
+                <div class="section-title">Ledger Transaction Audit Trail</div>
+            </div>
 
     <!-- Área de Navegação Rápida -->
     <div class="grid-container">
