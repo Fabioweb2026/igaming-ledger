@@ -4,17 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>iGaming Ledger</title>
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- CDN CORRETA -->
+    
+    <!-- Bootstrap & Tailwind CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Seu CSS -->
+    <!-- Seu CSS Customizado -->
     <link rel="stylesheet" href="styles.css">
-</head>
-</html>
+
     <style>
         /* Fundo estilo plataforma de Malta de alto padrão */
         body {
@@ -46,8 +44,8 @@
             width: 100%;
             max-width: 100%;
             height: auto;
-            max-height: 380px; /* Limita a altura para não esconder os botões */
-            object-fit: cover; /* Faz a imagem cobrir as laterais de forma responsiva */
+            max-height: 380px;
+            object-fit: cover;
             display: block;
             mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
             -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 75%, rgba(0,0,0,0) 100%);
@@ -77,6 +75,71 @@
             text-transform: uppercase;
             letter-spacing: 4px;
         }
+
+        /* Painel de Saldo e Ações Financeiras */
+        .ledger-balance-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(34, 197, 94, 0.2);
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 900px;
+            margin: 25px auto 0 auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .balance-header {
+            font-size: 14px;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .balance-amount {
+            font-size: 36px;
+            font-weight: 900;
+            color: #22c55e;
+            margin: 10px 0 20px 0;
+            text-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+        }
+
+        .currency {
+            color: #38bdf8;
+            margin-right: 5px;
+        }
+
+        .financial-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn-finance {
+            flex: 1;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            color: white;
+        }
+
+        .btn-deposit {
+            background: #16a34a;
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
+        }
+        .btn-deposit:hover { background: #15803d; transform: translateY(-1px); }
+
+        .btn-withdraw {
+            background: #dc2626;
+            box-shadow: 0 4px 12px rgba(220, 38, 38, 0.2);
+        }
+        .btn-withdraw:hover { background: #b91c1c; transform: translateY(-1px); }
 
         /* Destaque Central para o Fluxo de Cadastro e KYC */
         .kyc-cta-container {
@@ -111,6 +174,7 @@
             transform: scale(1.01);
             box-shadow: 0 0 30px rgba(56, 189, 248, 0.6);
             border-color: #38bdf8;
+            color: white;
         }
 
         /* Grid Organizador de Opções */
@@ -143,6 +207,7 @@
             transform: translateY(-4px);
             border-color: rgba(56, 189, 248, 0.3);
             box-shadow: 0 12px 40px rgba(56, 189, 248, 0.12);
+            color: white;
         }
 
         .panel-icon {
@@ -164,7 +229,6 @@
             line-height: 1.5;
         }
 
-        /* Cores exclusivas e efeitos nos ícones */
         .card-lobby .panel-icon { color: #3b82f6; text-shadow: 0 0 10px rgba(59,130,246,0.3); }
         .card-plataforma .panel-icon { color: #10b981; text-shadow: 0 0 10px rgba(16,185,129,0.3); }
         .card-wallet .panel-icon { color: #f97316; text-shadow: 0 0 10px rgba(249,115,22,0.3); }
@@ -196,9 +260,10 @@
         }
     </style>
 </head>
+
 <body>
 
-    <!-- O NOVO BANNER COMPLETO -->
+    <!-- O BANNER COMPLETO -->
     <div class="hero-banner">
         <img src="mediterranea.png.png" alt="iGaming Banner" class="logo-img" onerror="this.style.display='none';">
     </div>
@@ -215,6 +280,25 @@
         </a>
     </div>
 
+    <!-- NOVO: PAINEL DE CONTROLE DE SALDO E HISTÓRICO CONECTADO AO SCRIPT -->
+    <div class="px-6 w-full max-w-[900px] mx-auto">
+        <div class="ledger-balance-card">
+            <div class="balance-header">Available Ledger Balance</div>
+            <!-- O script.js vai injetar o valor atualizado aqui -->
+            <div class="balance-amount" id="platformBalance">€ 0.00</div>
+            
+            <div class="financial-actions">
+                <button onclick="executarDeposito()" class="btn-finance btn-deposit">📥 Deposit Funds</button>
+                <button onclick="executarSaque()" class="btn-finance btn-withdraw">📤 Withdraw Funds</button>
+            </div>
+
+            <!-- Seção onde a função adicionarTransacaoHistorico vai injetar as linhas -->
+            <div class="history-section mt-4">
+                <div class="section-title">Ledger Transaction Audit Trail</div>
+            </div>
+        </div>
+    </div>
+
     <!-- Área de Navegação Rápida -->
     <div class="grid-container">
         <a href="lobby.html" class="panel-card card-lobby">
@@ -226,22 +310,3 @@
         <a href="plataforma.html" class="panel-card card-plataforma">
             <span class="panel-icon">🖥️</span>
             <div class="panel-title">Plataforma</div>
-            <div class="panel-desc">Acesse os jogos e módulos ativos.</div>
-        </a>
-
-        <a href="wallet.html" class="panel-card card-wallet">
-            <span class="panel-icon">💳</span>
-            <div class="panel-title">Minha Carteira</div>
-            <div class="panel-desc">Gerencie depósitos e saldos de jogos.</div>
-        </a>
-    </div>
-
-    <!-- Rodapé Regulatório/Governança -->
-    <footer class="compliance-bar">
-        <a href="admin.html" class="comp-link">🛡️ CONTROL PANEL</a>
-        <a href="igaming-ledger.html" class="comp-link">📊 COMPLIANCE AUDIT TRAIL</a>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-</html>
