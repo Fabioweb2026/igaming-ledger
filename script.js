@@ -5,14 +5,14 @@
 const SUPABASE_URL = 'https://supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZXhud2h5dGpncmNza21hem9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NTMyOTQsImV4cCI6MjA5NTIyOTI5NH0.Ua0q2qgxqZrWjeTjS_gaSFylS8Y6amcAY5vrmzsCl1o';
 
-// Inicializa o cliente do Supabase
+// Inicializa o cliente do Supabase de forma segura
 const supabaseClient = window.Supabase ? window.Supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
 if (!supabaseClient) {
     console.error("ERRO DE INICIALIZAÇÃO: A biblioteca do Supabase não foi detectada.");
 }
 
-// Configurações executadas assim que a página carrega
+// Configurações disparadas ao carregar o DOM
 document.addEventListener("DOMContentLoaded", () => {
     if (!localStorage.getItem("igaming_balance")) {
         localStorage.setItem("igaming_balance", "0.00");
@@ -43,7 +43,7 @@ async function processarCadastro(event) {
     const docType = document.getElementById('docType').value;
     const docNumber = document.getElementById('docNumber').value.trim();
 
-    // Validação de Idade (MGA Malta)
+    // Validação MGA de Malta (18 anos ou mais)
     const idade = Math.floor((new Date() - new Date(dob)) / 31557600000);
     if (idade < 18) {
         alert("❌ REGISTRATION DENIED: Under MGA regulations, players must be at least 18 years old.");
@@ -79,7 +79,7 @@ async function processarCadastro(event) {
         };
         
         localStorage.setItem("current_player", JSON.stringify(dadosJogador));
-        localStorage.setItem("igaming_balance", "50.00"); // Bônus inicial fictício
+        localStorage.setItem("igaming_balance", "50.00"); // Concede saldo inicial em carteira
 
         alert(`✅ BANCO DE DADOS SYNCED:\nWelcome ${fullName}!\nYour data is safely stored in the Cloud Database.\nID: ${playerId}`);
         window.location.href = "index.html";
@@ -91,7 +91,7 @@ async function processarCadastro(event) {
 }
 
 /**
- * Atualiza a interface visual do painel
+ * Atualiza o painel visual
  */
 function atualizarCamposInterface() {
     const jogadorSessao = localStorage.getItem("current_player");
@@ -121,24 +121,24 @@ function atualizarCamposInterface() {
 }
 
 /**
- * Executa a lógica de Depósito na Carteira
+ * Operação de Depósito
  */
 function executarDeposito() {
     const jogadorSessao = localStorage.getItem("current_player");
     if (!jogadorSessao) { alert("❌ KYC Registration required."); return; }
+    
     const valor = parseFloat(prompt("Enter deposit amount (€):", "100.00"));
     if (isNaN(valor) || valor <= 0) return;
 
     let saldo = parseFloat(localStorage.getItem("igaming_balance") || "0.00") + valor;
     localStorage.setItem("igaming_balance", saldo.toString());
     
-    // Vinculado à função do histórico que você enviou
     adicionarTransacaoHistorico("Deposit Approved", valor, true);
     atualizarCamposInterface();
 }
 
 /**
- * Executa a lógica de Saque da Carteira
+ * Operação de Saque
  */
 function executarSaque() {
     const jogadorSessao = localStorage.getItem("current_player");
@@ -146,22 +146,17 @@ function executarSaque() {
     
     let saldo = parseFloat(localStorage.getItem("igaming_balance") || "0.00");
     const valor = parseFloat(prompt(`Enter withdrawal amount (Max: € ${saldo.toFixed(2)}):`, "50.00"));
-    
-    if (isNaN(valor) || valor <= 0 || valor > saldo) { 
-        alert("Invalid amount or insufficient funds."); 
-        return; 
-    }
+    if (isNaN(valor) || valor <= 0 || valor > saldo) { alert("Invalid amount or insufficient funds."); return; }
 
     saldo -= valor;
     localStorage.setItem("igaming_balance", saldo.toString());
     
-    // Vinculado à função do histórico que você enviou
     adicionarTransacaoHistorico("Withdrawal Requested", valor, false);
     atualizarCamposInterface();
 }
 
 /**
- * Adiciona uma linha visual na seção de histórico da página
+ * Adiciona linhas de auditoria visual no histórico do index.html
  */
 function adicionarTransacaoHistorico(tipo, valor, IsPositivo) {
     const secaoHistorico = document.querySelector(".history-section");
@@ -176,4 +171,3 @@ function adicionarTransacaoHistorico(tipo, valor, IsPositivo) {
         titulo.parentNode.insertBefore(novoItem, titulo.nextSibling);
     }
 }
-
