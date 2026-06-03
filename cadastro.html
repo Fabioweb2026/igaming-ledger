@@ -4,115 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>iGaming Ledger - International KYC Register</title>
-    <!-- Seu JS -->
-    <script src="script.js" defer></script>
+    
     <style>
-       <body>
-
-    <div class="register-container">
-        <div class="header">
-            <h1>PLAYER REGISTRATION</h1>
-            <p>MGA / International Compliance KYC</p>
-        </div>
-
-        <!-- CORREÇÃO: Formulário aberto corretamente e englobando todos os campos -->
-        <form id="kycForm">
-            
-            <div class="form-group">
-                <label for="fullName">Full Name (As written in official document)</label>
-                <input type="text" id="fullName" required placeholder="John Doe">
-            </div>
-
-            <div class="form-group">
-                <label for="dob">Date of Birth (Minimum 18+)</label>
-                <input type="date" id="dob" required>
-            </div>
-
-            <div class="form-group">
-                <label for="country">Country of Residence</label>
-                <select id="country" onchange="adaptarDocumentosPorPais()" required>
-                    <option value="">Select country...</option>
-                    <option value="EU">European Union (Malta, Germany, etc.)</option>
-                    <option value="US">United States of America (USA)</option>
-                    <option value="AU">Australia</option>
-                    <option value="CN">China</option>
-                    <option value="BR">Brazil</option>
-                    <option value="GLOBAL">Other Country / International</option>
-                </select>
-            </div>
-
-            <!-- Os campos de documento agora estão DENTRO do formulário -->
-            <div class="form-group doc-section">
-                <label for="docType">Document Type Allowed</label>
-                <select id="docType" required>
-                    <option value="">Select a country first...</option>
-                </select>
-                
-                <label for="docNumber" style="margin-top: 15px;">Document Identification Number</label>
-                <input type="text" id="docNumber" required placeholder="Enter ID number">
-            </div>
-
-            <!-- O botão deve ficar por último, antes de fechar o </form> -->
-            <button type="submit" class="btn-submit">
-                Verify & Register Account
-            </button>
-
-        </form>
-
-        <div class="footer-links">
-            <a href="index.html">⬅️ Cancel & Return to Portal</a>
-        </div>
-    </div>
-
-    <!-- Script de lógica interna do formulário -->
-    <script>
-        function adaptarDocumentosPorPais() {
-            const country = document.getElementById('country').value;
-            const docTypeSelect = document.getElementById('docType');
-            const docNumberInput = document.getElementById('docNumber');
-            
-            docTypeSelect.innerHTML = '';
-
-            if (country === 'EU') {
-                docTypeSelect.options.add(new Option('National ID Card (Identity Card)', 'EU_ID'));
-                docTypeSelect.options.add(new Option('International Passport', 'PASSPORT'));
-                docNumberInput.placeholder = "e.g. 12345678A";
-            } else if (country === 'US') {
-                docTypeSelect.options.add(new Option('US Driver\'s License', 'US_DL'));
-                docTypeSelect.options.add(new Option('Social Security Number (SSN)', 'US_SSN'));
-                docTypeSelect.options.add(new Option('US Passport', 'PASSPORT'));
-                docNumberInput.placeholder = "e.g. 999-99-9999";
-            } else if (country === 'AU') {
-                docTypeSelect.options.add(new Option('Australian Driver\'s License', 'AU_DL'));
-                docTypeSelect.options.add(new Option('Medicare Card', 'AU_MED'));
-                docTypeSelect.options.add(new Option('Passport', 'PASSPORT'));
-                docNumberInput.placeholder = "Enter card number";
-            } else if (country === 'CN') {
-                docTypeSelect.options.add(new Option('Resident Identity Card (居民身份证)', 'CN_ID'));
-                docTypeSelect.options.add(new Option('Passport', 'PASSPORT'));
-                docNumberInput.placeholder = "18-digit identity number";
-            } else if (country === 'BR') {
-                docTypeSelect.options.add(new Option('CPF (Cadastro de Pessoas Físicas)', 'BR_CPF'));
-                docTypeSelect.options.add(new Option('RG / CNH', 'BR_RG'));
-                docNumberInput.placeholder = "000.000.000-00";
-            } else if (country === 'GLOBAL') {
-                docTypeSelect.options.add(new Option('International Passport', 'PASSPORT'));
-                docTypeSelect.options.add(new Option('Government Issued National ID', 'GOV_ID'));
-                docNumberInput.placeholder = "Enter international ID";
-            } else {
-                docTypeSelect.options.add(new Option('Select a country first...', ''));
-            }
-        }
-    </script>
-
-    <!-- Scripts externos essenciais (Supabase + Script customizado apenas UMA vez) -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="script.js"></script>
-
-</body>
-     <style>
-        
-        {
+        body {
             background: #070a13;
             color: #f8fafc;
             font-family: 'Inter', system-ui, sans-serif;
@@ -185,4 +79,99 @@
 </head>
 <body>
 
+    <div class="register-container">
+        <div class="header">
+            <h1>PLAYER REGISTRATION</h1>
+            <p>MGA / International Compliance KYC</p>
+        </div>
+
+        <form id="kycForm">
+            <div class="form-group">
+                <label for="fullName">Full Name (As written in official document)</label>
+                <input type="text" id="fullName" required placeholder="John Doe">
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth (Minimum 18+)</label>
+                <input type="date" id="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label for="country">Country of Residence</label>
+                <select id="country" onchange="adaptarDocumentosPorPais()" required>
+                    <option value="">Select country...</option>
+                    <option value="EU">European Union (Malta, Germany, etc.)</option>
+                    <option value="US">United States of America (USA)</option>
+                    <option value="AU">Australia</option>
+                    <option value="CN">China</option>
+                    <option value="BR">Brazil</option>
+                    <option value="GLOBAL">Other Country / International</option>
+                </select>
+            </div>
+
+            <div class="form-group doc-section">
+                <label for="docType">Document Type Allowed</label>
+                <select id="docType" required>
+                    <option value="">Select a country first...</option>
+                </select>
+                
+                <label for="docNumber" style="margin-top: 15px;">Document Identification Number</label>
+                <input type="text" id="docNumber" required placeholder="Enter ID number">
+            </div>
+
+            <button type="submit" class="btn-submit">
+                Verify & Register Account
+            </button>
+        </form>
+
+        <div class="footer-links">
+            <a href="index.html">⬅️ Cancel & Return to Portal</a>
+        </div>
+    </div>
+
+    <script>
+        function adaptarDocumentosPorPais() {
+            const country = document.getElementById('country').value;
+            const docTypeSelect = document.getElementById('docType');
+            const docNumberInput = document.getElementById('docNumber');
+            
+            docTypeSelect.innerHTML = '';
+
+            if (country === 'EU') {
+                docTypeSelect.options.add(new Option('National ID Card (Identity Card)', 'EU_ID'));
+                docTypeSelect.options.add(new Option('International Passport', 'PASSPORT'));
+                docNumberInput.placeholder = "e.g. 12345678A";
+            } else if (country === 'US') {
+                docTypeSelect.options.add(new Option('US Driver\'s License', 'US_DL'));
+                docTypeSelect.options.add(new Option('Social Security Number (SSN)', 'US_SSN'));
+                docTypeSelect.options.add(new Option('US Passport', 'PASSPORT'));
+                docNumberInput.placeholder = "e.g. 999-99-9999";
+            } else if (country === 'AU') {
+                docTypeSelect.options.add(new Option('Australian Driver\'s License', 'AU_DL'));
+                docTypeSelect.options.add(new Option('Medicare Card', 'AU_MED'));
+                docTypeSelect.options.add(new Option('Passport', 'PASSPORT'));
+                docNumberInput.placeholder = "Enter card number";
+            } else if (country === 'CN') {
+                docTypeSelect.options.add(new Option('Resident Identity Card (居民身份证)', 'CN_ID'));
+                docTypeSelect.options.add(new Option('Passport', 'PASSPORT'));
+                docNumberInput.placeholder = "18-digit identity number";
+            } else if (country === 'BR') {
+                docTypeSelect.options.add(new Option('CPF (Cadastro de Pessoas Físicas)', 'BR_CPF'));
+                docTypeSelect.options.add(new Option('RG / CNH', 'BR_RG'));
+                docNumberInput.placeholder = "000.000.000-00";
+            } else if (country === 'GLOBAL') {
+                docTypeSelect.options.add(new Option('International Passport', 'PASSPORT'));
+                docTypeSelect.options.add(new Option('Government Issued National ID', 'GOV_ID'));
+                docNumberInput.placeholder = "Enter international ID";
+            } else {
+                docTypeSelect.options.add(new Option('Select a country first...', ''));
+            }
+        }
+    </script>
+
+    <!-- Chamadas de Scripts Externos Sem Duplicidade -->
+    <script src="https://jsdelivr.net"></script>
+    <script src="script.js"></script>
+
+</body>
 </html>
