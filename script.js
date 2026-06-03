@@ -7,21 +7,26 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 let supabaseClient = null;
 
-// Função que força a inicialização mesmo se houver delay na rede do jsDelivr
-function inicializarSupabase() {
-    if (window.Supabase) {
+// Função inteligente de conexão que roda em loop se a rede oscilar
+function conectarBancoDados() {
+    if (window.supabase && window.supabase.createClient) {
+        supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        console.log("✅ Supabase conectado com sucesso!");
+    } else if (window.Supabase && window.Supabase.createClient) {
         supabaseClient = window.Supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    } else {
-        console.warn("Aguardando carregamento da biblioteca Supabase...");
+        console.log("✅ Supabase conectado com sucesso (V2)!");
     }
 }
 
-// Tenta inicializar imediatamente
-inicializarSupabase();
+// Executa a primeira tentativa imediatamente
+conectarBancoDados();
 
+// Configurações executadas assim que a página carrega por completo
 document.addEventListener("DOMContentLoaded", () => {
-    // Tenta uma segunda inicialização caso o DOM tenha carregado rápido demais
-    if (!supabaseClient) inicializarSupabase();
+    // Se não conectou antes, tenta conectar novamente após o DOM carregar
+    if (!supabaseClient) {
+        conectarBancoDados();
+    }
 
     if (!localStorage.getItem("igaming_balance")) {
         localStorage.setItem("igaming_balance", "0.00");
@@ -36,13 +41,18 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * Cadastra o jogador usando o SDK oficial do Supabase
+ * Cadastra o jogador usando o SDK do Supabase
  */
 async function processarCadastro(event) {
     event.preventDefault();
 
+    // Tenta uma última conexão de segurança antes de disparar o alerta
     if (!supabaseClient) {
-        alert("❌ ERRO DE REDE: O cliente do Supabase não foi inicializado.");
+        conectarBancoDados();
+    }
+
+    if (!supabaseClient) {
+        alert("❌ ERRO DE REDE: O cliente do Supabase não foi inicializado de forma síncrona. Aguarde 3 segundos e tente novamente.");
         return;
     }
 
@@ -52,7 +62,7 @@ async function processarCadastro(event) {
     const docType = document.getElementById('docType').value;
     const docNumber = document.getElementById('docNumber').value.trim();
 
-    // Validação MGA de Malta (18 anos ou mais)
+    // Validação de Idade (MGA Malta)
     const idade = Math.floor((new Date() - new Date(dob)) / 31557600000);
     if (idade < 18) {
         alert("❌ REGISTRATION DENIED: Under MGA regulations, players must be at least 18 years old.");
@@ -88,7 +98,7 @@ async function processarCadastro(event) {
         };
         
         localStorage.setItem("current_player", JSON.stringify(dadosJogador));
-        localStorage.setItem("igaming_balance", "50.00"); // Concede saldo inicial em carteira
+        localStorage.setItem("igaming_balance", "50.00"); 
 
         alert(`✅ BANCO DE DADOS SYNCED:\nWelcome ${fullName}!\nYour data is safely stored in the Cloud Database.\nID: ${playerId}`);
         window.location.href = "index.html";
@@ -100,7 +110,7 @@ async function processarCadastro(event) {
 }
 
 /**
- * Atualiza o painel visual
+ * Atualiza a interface visual do painel
  */
 function atualizarCamposInterface() {
     const jogadorSessao = localStorage.getItem("current_player");
@@ -130,12 +140,11 @@ function atualizarCamposInterface() {
 }
 
 /**
- * Operação de Depósito
+ * Executa a lógica de Depósito na Carteira
  */
 function executarDeposito() {
     const jogadorSessao = localStorage.getItem("current_player");
     if (!jogadorSessao) { alert("❌ KYC Registration required."); return; }
-    
     const valor = parseFloat(prompt("Enter deposit amount (€):", "100.00"));
     if (isNaN(valor) || valor <= 0) return;
 
@@ -147,7 +156,7 @@ function executarDeposito() {
 }
 
 /**
- * Operação de Saque
+ * Executa a lógica de Saque da Carteira
  */
 function executarSaque() {
     const jogadorSessao = localStorage.getItem("current_player");
@@ -155,6 +164,7 @@ function executarSaque() {
     
     let saldo = parseFloat(localStorage.getItem("igaming_balance") || "0.00");
     const valor = parseFloat(prompt(`Enter withdrawal amount (Max: € ${saldo.toFixed(2)}):`, "50.00"));
+    
     if (isNaN(valor) || valor <= 0 || valor > saldo) { alert("Invalid amount or insufficient funds."); return; }
 
     saldo -= valor;
