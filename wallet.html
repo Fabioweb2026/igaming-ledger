@@ -95,18 +95,24 @@
         <!-- Visão de Saldo do Jogador -->
         <div class="balance-card">
             <div class="balance-label">Saldo Disponível (MGA Escrow)</div>
-            <div class="balance-amount"><span class="currency">€</span> 14,850.00</div>
+            <div class="balance-amount" id="platformBalance">€ 0.00</div>
             <div style="font-size: 12px; color: #64748b;">Moeda corrente de Malta (EUR)</div>
         </div>
 
         <!-- Botões de Gerenciamento -->
         <div class="actions-group">
-            <button class="action-btn btn-deposit" onclick="alert('Abrindo gateway de depósito seguro MGA...')">➕ Depositar via PIX / Cripto</button>
-            <button class="action-btn btn-withdraw" onclick="alert('Solicitação enviada para verificação de KYC da auditoria.')">💸 Solicitar Saque</button>
+           <button onclick="executarDeposito()" class="seu-botao-class">+ Depositar via PIX / Cripto</button>
+            <button onclick="executarSaque()" class="seu-botao-class">💸 Solicitar Saque</button> 
+            ')">💸 Solicitar Saque</button>
         </div>
 
         <!-- Logs de Transações Fictícias -->
         <div class="history-section">
+            <div class="history-section">
+    <div class="section-title">Últimas Movimentações</div>
+    
+    <!-- O script.js vai injetar os novos itens automaticamente bem aqui abaixo do título -->
+</div>
             <div class="section-title">Últimas Movimentações</div>
             <div class="tx-item">
                 <div>
