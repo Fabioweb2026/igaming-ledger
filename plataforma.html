@@ -32,7 +32,6 @@
         .back-btn { color: #94a3b8; text-decoration: none; font-size: 14px; }
         .back-btn:hover { color: #10b981; }
         
-        /* Dashboard Superior de Info */
         .info-bar {
             display: flex;
             justify-content: space-between;
@@ -45,7 +44,6 @@
         }
         .balance-display { font-weight: 700; color: #10b981; }
 
-        /* Área de Execução do Jogo */
         .game-screen {
             background: linear-gradient(135deg, #111827 0%, #0f172a 100%);
             border: 2px solid #1e293b;
@@ -57,7 +55,6 @@
         }
         .game-screen h2 { margin-top: 0; color: #fff; font-size: 22px; letter-spacing: 1px; }
         
-        /* Simulador de Roleta/Slots Interno */
         .slots-display {
             display: flex;
             justify-content: center;
@@ -112,25 +109,22 @@
 
     <div class="container">
         <div class="header">
-            <a href="index.html" class="back-btn">⬅️ Voltar ao Portal</a>
-            <h1 style="margin:0; font-size:24px;">🖥️ PLATAFORMA DE JOGOS</h1>
+            <a href="lobby.html" class="back-btn">⬅️ Voltar ao Lobby</a>
+            <h1 style="margin:0; font-size:24px;" id="gameTitle">🖥️ GAME TERMINAL</h1>
         </div>
 
-        <!-- Barra de Informações síncronas do Jogador -->
         <div class="info-bar">
-            <div id="playerNameDisplay">Player: Guest / Anonymous</div>
+            <!-- PROTEÇÃO PRIVACIDADE: O nome do jogador não é mais exposto aqui -->
+            <div id="playerNameDisplay">Ledger Status: Anonymous Node</div>
             <div>Ledger Balance: <span class="balance-display" id="platformBalance">€ 0.00</span></div>
         </div>
 
-        <!-- Console do Cassino -->
         <div class="game-screen">
             <h2>MGA Certified Random Number Generator (RNG)</h2>
-            <p style="color:#64748b; font-size:13px;">As rodadas geram registros criptográficos automáticos na trilha de auditoria.</p>
+            <p style="color:#64748b; font-size:13px;">As rodadas geram registros criptográficos automáticos no rastro de auditoria.</p>
 
-            <!-- Tela do Jogo -->
             <div class="slots-display" id="slotMachine">🎰 🎰 🎰</div>
 
-            <!-- Controles do Jogador -->
             <div class="control-panel">
                 <div>
                     <span style="font-size: 13px; color: #94a3b8; display: block; margin-bottom: 5px;">Aposta (€)</span>
@@ -141,23 +135,26 @@
         </div>
     </div>
 
-    <!-- Importa o script principal para garantir o controle centralizado de saldo -->
+    <!-- Script de Auditoria e Controle Global Centralizado -->
     <script src="script.js"></script>
 
     <script>
-        // Sincroniza a tela local com os dados salvos no script principal
         document.addEventListener("DOMContentLoaded", () => {
             const jogadorSessao = localStorage.getItem("current_player");
             const saldoAtual = localStorage.getItem("igaming_balance") || "0.00";
             
+            // Lê dinamicamente qual jogo foi selecionado no Lobby (Padrão: Slots)
+            const jogoAtivo = localStorage.getItem("active_lobby_game") || "Ledger Slots";
+            document.getElementById("gameTitle").innerText = `🖥️ PLATAFORMA: ${jogoAtivo.toUpperCase()}`;
+            
             if (jogadorSessao) {
                 const jogador = JSON.parse(jogadorSessao);
-                document.getElementById("playerNameDisplay").innerText = `Player: ${jogador.nome} (${jogador.id})`;
+                // PROTEÇÃO: Exibe apenas ID e Jurisdição, omitindo o nome civil
+                document.getElementById("playerNameDisplay").innerText = `Account Node ID: ${jogador.id} [${jogador.pais}] | KYC Approved`;
             }
             document.getElementById("platformBalance").innerText = `€ ${parseFloat(saldoAtual).toFixed(2)}`;
         });
 
-        // Lógica simulada de aposta real baseada no localStorage
         function girarSlots() {
             const jogadorSessao = localStorage.getItem("current_player");
             if (!jogadorSessao) {
@@ -168,6 +165,7 @@
 
             let saldo = parseFloat(localStorage.getItem("igaming_balance") || "0.00");
             const aposta = parseFloat(document.getElementById("betAmount").value);
+            const jogoAtivo = localStorage.getItem("active_lobby_game") || "Ledger Slots";
 
             if (isNaN(aposta) || aposta <= 0) {
                 alert("❌ Digite um valor de aposta válido.");
@@ -175,41 +173,55 @@
             }
 
             if (aposta > saldo) {
-                alert("❌ SALDO INSUFICIENTE: Realize um depósito na sua Carteira.");
+                alert("❌ SALDO INSUFFICIENT: Realize um depósito na sua Carteira.");
                 window.location.href = "wallet.html";
                 return;
             }
 
-            // Consome a aposta do saldo
+            // Consome o valor da aposta
             saldo -= aposta;
+            localStorage.setItem("igaming_balance", saldo.toString());
             
-            // Sorteio de Ícones
+            // Sorteio de Ícones RNG
             const icones = ["🍒", "🍋", "🔔", "💎", "🎰"];
             const r1 = icones[Math.floor(Math.random() * icones.length)];
             const r2 = icones[Math.floor(Math.random() * icones.length)];
             const r3 = icones[Math.floor(Math.random() * icones.length)];
 
-            // Atualiza o painel visual
             document.getElementById("slotMachine").innerText = `${r1} ${r2} ${r3}`;
 
-            // Validação de Prêmios
             let ganho = 0;
             if (r1 === r2 && r2 === r3) {
-                ganho = aposta * 5; // Três iguais: ganha 5x
+                ganho = aposta * 5;
                 alert(`🎉 JACKPOT! Três símbolos iguais. Você ganhou € ${ganho.toFixed(2)}!`);
             } else if (r1 === r2 || r2 === r3 || r1 === r3) {
-                ganho = aposta * 2; // Dois iguais: ganha 2x
+                ganho = aposta * 2;
                 alert(`💰 VITÓRIA! Dois símbolos iguais. Você ganhou € ${ganho.toFixed(2)}.`);
             } else {
                 alert("😢 Não foi dessa vez! Tente novamente.");
             }
 
-            // Atualiza o banco de dados local
+            // Atualiza o saldo final com os ganhos pós-rodada
             saldo += ganho;
             localStorage.setItem("igaming_balance", saldo.toString());
             
-            // Sincroniza a tela
+            // INTEGRAÇÃO DE AUDITORIA: Registra a movimentação financeira no histórico global do player
+            if (ganho > 0) {
+                // Se a função estiver presente na instância global do script.js
+                if (typeof adicionarTransacaoHistorico === "function") {
+                    adicionarTransacaoHistorico(`Win - ${jogoAtivo}`, ganho, true);
+                }
+            } else {
+                if (typeof adicionarTransacaoHistorico === "function") {
+                    adicionarTransacaoHistorico(`Loss - ${jogoAtivo}`, aposta, false);
+                }
+            }
+
+            // Atualiza e sincroniza os elementos de interface
             document.getElementById("platformBalance").innerText = `€ ${saldo.toFixed(2)}`;
+            if (typeof atualizarCamposInterface === "function") {
+                atualizarCamposInterface();
+            }
         }
     </script>
 </body>
