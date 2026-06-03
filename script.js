@@ -10,8 +10,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!localStorage.getItem("local_players_db")) {
         localStorage.setItem("local_players_db", JSON.stringify([]));
     }
-    
-    atualizarCamposInterface();
+    function atualizarCamposInterface() {
+    const jogadorSessao = localStorage.getItem("current_player");
+    const saldoAtual = localStorage.getItem("igaming_balance") || "0.00";
+
+    // Atualiza todas as exibições de saldo pela classe
+    const elementosSaldoClasse = document.querySelectorAll(".balance-amount");
+    elementosSaldoClasse.forEach(el => {
+        el.innerHTML = `<span class="currency">€</span> ${parseFloat(saldoAtual).toFixed(2)}`;
+    });
 
     const formulario = document.getElementById('kycForm');
     if (formulario) {
@@ -81,12 +88,36 @@ function atualizarCamposInterface() {
     elementosSaldoClasse.forEach(el => {
         el.innerHTML = `<span class="currency">€</span> ${parseFloat(saldoAtual).toFixed(2)}`;
     });
-
-    const elementoSaldoPlat = document.getElementById("platformBalance");
+const elementoSaldoPlat = document.getElementById("platformBalance");
     if (elementoSaldoPlat) {
         elementoSaldoPlat.innerText = `€ ${parseFloat(saldoAtual).toFixed(2)}`;
     }
+    ESTÃO PRIVADA DENTRO DA CARTEIRA (wallet.html)
+    const painelPrivado = document.getElementById("userPrivatePanel");
+    const txtNodeId = document.getElementById("privateNodeId");
+    const txtNodeHash = document.getElementById("privateNodeHash");
 
+    if (painelPrivado && jogadorSessao) {
+        const jogador = JSON.parse(jogadorSessao);
+        painelPrivado.style.display = "block"; // Mostra o painel se estiver logado
+        txtNodeId.innerText = `Node ID: ${jogador.id} [Jurisdiction: ${jogador.pais}]`;
+        txtNodeHash.innerText = `Ledger Hash: ${jogador.hashSeguranca}`;
+    } else if (painelPrivado) {
+        painelPrivado.style.display = "none"; // Esconde se estiver deslogado
+    }
+}
+
+/**
+ * Função executada pelo próprio usuário dentro da carteira para resetar
+ */
+function executarLogoutUsuario() {
+    if (confirm("⚠️ DISCONNECT NODE?\n\nDeseja encerrar a sessão do seu Ledger criptográfico e limpar o cache local?")) {
+        localStorage.removeItem("current_player");
+        localStorage.removeItem("igaming_balance");
+        alert("Sessão encerrada com sucesso!");
+        window.location.href = "index.html"; // Joga ele de volta para a Home limpa
+    }
+}
     const botaoRegistro = document.querySelector(".btn-register-main");
     if (botaoRegistro) {
         if (jogadorSessao) {
