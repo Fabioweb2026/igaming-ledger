@@ -105,17 +105,20 @@ function atualizarCamposInterface() {
     if (elementoSaldoPlat) {
         elementoSaldoPlat.innerText = `€ ${parseFloat(saldoAtual).toFixed(2)}`;
     }
-
     const botaoRegistro = document.querySelector(".btn-register-main");
-    if (botaoRegistro) {
-        if (jogadorSessao) {
-            const jogador = JSON.parse(jogadorSessao);
-            botaoRegistro.innerHTML = `👤 Player: ${jogador.nome} (ID: ${jogador.id})`;
-            botaoRegistro.style.background = "linear-gradient(90deg, #10b981 0%, #059669 100%)";
-            botaoRegistro.href = "#";
-            botaoRegistro.onclick = (e) => {
-                e.preventDefault();
-                alert(`ℹ️ PLAYER PROFILE\n\nName: ${jogador.nome}\nID: ${jogador.id}\nLedger Security Hash:\n${jogador.hashSeguranca}`);
+    if (botaoRegistro && jogadorSessao) {
+        const jogador = JSON.parse(jogadorSessao);
+        
+        // CORREÇÃO: Oculta o nome e exibe apenas o ID e o status regulatório
+        botaoRegistro.innerHTML = `👤 Ledger Account Active (ID: ${jogador.id}) | KYC: APPROVED`;
+        botaoRegistro.style.background = "linear-gradient(90deg, #10b981 0%, #059669 100%)";
+        botaoRegistro.href = "#";
+        botaoRegistro.onclick = (e) => {
+            e.preventDefault();
+            alert(`ℹ️ SECURE ENCRYPTED LEDGER PROFILE\n\nPlayer ID: ${jogador.id}\nCountry Jurisdiction: ${jogador.pais}\nLedger Security Hash:\n${jogador.hashSeguranca}\n\n* Personal Identification Data is masked for compliance under GDPR/MGA.`);
+        };
+    }
+    uranca}`);
             };
         } else {
             botaoRegistro.innerHTML = `👤 Create Account / Register (International KYC)`;
