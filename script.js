@@ -5,15 +5,24 @@
 const SUPABASE_URL = 'https://supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5qZXhud2h5dGpncmNza21hem9uIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk2NTMyOTQsImV4cCI6MjA5NTIyOTI5NH0.Ua0q2qgxqZrWjeTjS_gaSFylS8Y6amcAY5vrmzsCl1o';
 
-// Inicializa o cliente do Supabase de forma segura
-const supabaseClient = window.Supabase ? window.Supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+let supabaseClient = null;
 
-if (!supabaseClient) {
-    console.error("ERRO DE INICIALIZAÇÃO: A biblioteca do Supabase não foi detectada.");
+// Função que força a inicialização mesmo se houver delay na rede do jsDelivr
+function inicializarSupabase() {
+    if (window.Supabase) {
+        supabaseClient = window.Supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    } else {
+        console.warn("Aguardando carregamento da biblioteca Supabase...");
+    }
 }
 
-// Configurações disparadas ao carregar o DOM
+// Tenta inicializar imediatamente
+inicializarSupabase();
+
 document.addEventListener("DOMContentLoaded", () => {
+    // Tenta uma segunda inicialização caso o DOM tenha carregado rápido demais
+    if (!supabaseClient) inicializarSupabase();
+
     if (!localStorage.getItem("igaming_balance")) {
         localStorage.setItem("igaming_balance", "0.00");
     }
