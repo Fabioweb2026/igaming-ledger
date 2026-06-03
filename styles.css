@@ -75,3 +75,64 @@ button{
 button:hover{
     transform:scale(1.05);
 }
+
+/* ==========================================
+   NOVAS CLASSES: INTERFACE DE SALDO E HISTÓRICO 
+   ========================================== */
+
+/* Container do Saldo */
+.balance-amount {
+    font-size: 32px;
+    font-weight: bold;
+    color: #22c55e;
+    margin: 15px 0;
+}
+
+.currency {
+    color: #a855f7; /* Roxo neon para a moeda € */
+    margin-right: 5px;
+}
+
+/* Seção do Histórico */
+.history-section {
+    background: #111827;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 25px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #94a3b8;
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 8px;
+}
+
+/* Linha de cada transação criada pelo JS */
+.tx-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+    font-size: 14px;
+}
+
+.tx-item:last-child {
+    border-bottom: none;
+}
+
+.tx-type {
+    font-weight: 500;
+    color: #e2e8f0;
+}
+
+/* Cores dos valores de Depósito (+) e Saque (-) */
+.tx-value-pos {
+    color: #22c55e !important; /* Verde para positivo */
+    font-weight: bold;
+}
