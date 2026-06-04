@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
 <meta charset="UTF-8">
@@ -8,7 +8,6 @@
 <title>iGaming Ledger</title>
 
 <style>
-
 *{
     margin:0;
     padding:0;
@@ -22,7 +21,6 @@ body{
 }
 
 /* TOPO */
-
 .top-header{
     width:100%;
     background:#020817;
@@ -37,7 +35,6 @@ body{
 }
 
 /* HERO */
-
 .hero{
     text-align:center;
     padding:60px 20px 40px;
@@ -53,17 +50,9 @@ body{
     color:#cbd5e1;
 }
 
-.sub{
-    margin-top:12px;
-    color:#94a3b8;
-    font-size:16px;
-}
-
 /* BOTÕES */
-
 .buttons{
     margin-top:40px;
-
     display:flex;
     justify-content:center;
     gap:15px;
@@ -79,6 +68,7 @@ body{
     font-weight:bold;
     transition:0.3s;
     min-width:170px;
+    text-align:center;
 }
 
 .buttons a:hover{
@@ -98,16 +88,12 @@ body{
 }
 
 /* MINI CARDS */
-
 .cards{
     max-width:1200px;
     margin:50px auto;
     padding:0 20px;
-
     display:grid;
-    grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
-
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
     gap:20px;
 }
 
@@ -136,7 +122,6 @@ body{
 }
 
 /* FOOTER */
-
 footer{
     margin-top:50px;
     padding:30px;
@@ -144,111 +129,53 @@ footer{
     color:#64748b;
     border-top:1px solid #0f172a;
 }
-
 </style>
-
 </head>
 
 <body>
 
 <!-- LOGO -->
-
 <div class="top-header">
-
-<img
-class="logo"
-src="mediterranea.png.png"
->
-
+    <img class="logo" src="mediterranea.png.png" alt="Logo">
 </div>
 
-<!-- BOTÕES -->
-
+<!-- BOTÕES (LINKS CORRIGIDOS) -->
 <div class="buttons">
-
-<a
-href="cadastro.html"
-class="register"
->
-Cadastro
-</a>
-
-<a
-href="login-admin.html"
-class="admin"
->
-Admin
-</a>
-
-<a
-href="login-auditor.html"
-class="auditor"
->
-Auditor
-</a>
-
+    <a href="cadastro.html" class="register">Cadastro</a>
+    <a href="gaming-ledger.html" class="admin">Ver Tabela (Admin)</a>
+    <a href="auditor.html" class="auditor">Painel Auditor</a>
 </div>
-
-</section>
 
 <!-- MINI CARDS -->
-
 <section class="cards">
+    <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Security">
+        <h3>Security</h3>
+        <p>Advanced protection and encrypted infrastructure.</p>
+    </div>
 
-<div class="card">
+    <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="KYC">
+        <h3>KYC</h3>
+        <p>Player verification and identity compliance.</p>
+    </div>
 
-<img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png">
+    <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/2920/2920277.png" alt="Monitoring">
+        <h3>Monitoring</h3>
+        <p>Real-time transaction and risk monitoring.</p>
+    </div>
 
-<h3>Security</h3>
-<p>
-Advanced protection and encrypted infrastructure.
-</p>
-
-</div>
-
-<div class="card">
-
-<img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png">
-
-<h3>KYC</h3>
-
-<p>
-Player verification and identity compliance.
-</p>
-
-</div>
-
-<div class="card">
-
-<img src="https://cdn-icons-png.flaticon.com/512/2920/2920277.png">
-
-<h3>Monitoring</h3>
-
-<p>
-Real-time transaction and risk monitoring.
-</p>
-
-</div>
-
-<div class="card">
-
-<img src="https://cdn-icons-png.flaticon.com/512/942/942748.png">
-
-<h3>Audit</h3>
-
-<p>
-Compliance reports and operational analysis.
-</p>
-
-</div>
-
+    <div class="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Audit">
+        <h3>Audit</h3>
+        <p>Compliance reports and operational analysis.</p>
+    </div>
 </section>
 
 <footer>
-
-© 2026 Mediterranea Group • Malta Compliance Division
-
+    © 2026 Mediterranea Group • Malta Compliance Division
 </footer>
 
 </body>
-</html
+</html>
