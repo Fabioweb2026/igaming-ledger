@@ -1,1 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Audit Access Login</title>
+
+<style>
+
+body{
+    background:#070a13;
+    color:white;
+    font-family:Arial, sans-serif;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    height:100vh;
+    margin:0;
+}
+
+.login-box{
+    background:#111827;
+
+    padding:40px;
+
+    border-radius:16px;
+
+    width:360px;
+
+    border:1px solid #38bdf8;
+
+    box-shadow:0 0 25px rgba(56,189,248,0.15);
+}
+
+h1{
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#94a3b8;
+    margin-bottom:30px;
+    font-size:14px;
+}
+
+input{
+    width:100%;
+
+    padding:14px;
+
+    margin-top:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#1e293b;
+
+    color:white;
+
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+
+    padding:14px;
+
+    margin-top:25px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+button:hover{
+    background:#1d4ed8;
+}
+
+.error-message{
+    color:#ef4444;
+    margin-top:15px;
+    text-align:center;
+    display:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <h1>📊 AUDIT ACCESS</h1>
+
+    <div class="subtitle">
+        Compliance Monitoring & Audit Control
+    </div>
+
+    <input
+        type="text"
+        id="auditUser"
+        placeholder="Auditor Username"
+    >
+
+    <input
+        type="password"
+        id="auditPass"
+        placeholder="Password"
+    >
+
+    <button onclick="loginAudit()">
+        ACCESS AUDIT PANEL
+    </button>
+
+    <div id="errorMessage" class="error-message">
+        Invalid credentials
+    </div>
+
+</div>
+
+<script>
+
+function loginAudit(){
+
+    const user =
+        document.getElementById("auditUser").value;
+
+    const pass =
+        document.getElementById("auditPass").value;
+
+    /*
+        LOGIN MOCKADO
+        Você pode alterar depois
+    */
+
+    if(
+        user === "auditor"
+        &&
+        pass === "audit123"
+    ){
+
+        localStorage.setItem(
+            "auditLogged",
+            "true"
+        );
+
+        window.location.href =
+            "audit.html";
+
+    }else{
+
+        document
+        .getElementById("errorMessage")
+        .style.display = "block";
+    }
+}
+
+</script>
+
+</body>
+</html>
