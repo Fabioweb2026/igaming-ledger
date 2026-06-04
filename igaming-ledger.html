@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>MGA - Decentralized Audit Trail</title>
@@ -7,16 +7,50 @@
     <style>
         body { background: #070a13; color: #fff; padding: 40px; font-family: sans-serif; }
         .ledger-log { background: #0f172a; border-left: 4px solid #f59e0b; padding: 15px; margin: 10px 0; border-radius: 4px; font-family: monospace; }
+        
+        /* Estilos para a tabela ficar bonita e organizada */
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; background: #0f172a; border-radius: 8px; overflow: hidden; }
+        th, td { padding: 12px 15px; text-align: left; border-bottom: 1px solid #1e293b; font-family: sans-serif; font-size: 14px; }
+        th { background: #1e293b; color: #f59e0b; font-weight: bold; text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
+        tr:hover { background: #1e293b; }
     </style>
 </head>
 <body>
     <nav class="gaming-nav"><a href="index.html">🏠 Return to Portal</a></nav>
-    <div class="card" style="max-width: 900px;">
+    <div class="card" style="max-width: 1000px; margin: 0 auto;">
         <h1>📊 Public Compliance Audit Trail</h1>
         <p>Real-time node verifications under Malta Escrow Regulations.</p>
+        
         <div id="auditContainer">
-            <div class="ledger-log">[NODE-01] GENESIS BLOCK INITIALIZED - Escrow balance verified.</div>
+            
+            <!-- SUA NOVA TABELA COMEÇA AQUI -->
+            <table>
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Prompt ID</th>
+                    <th>Resposta IA</th>
+                    <th>Nota 1-5</th>
+                    <th>Tipo de Erro</th>
+                    <th>Comentário</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Exemplo de como os dados vão aparecer na tabela -->
+                  <tr>
+                    <td>04/06/2026</td>
+                    <td>#9482</td>
+                    <td>O cabeçalho foi alterado...</td>
+                    <td>5</td>
+                    <td>Nenhum</td>
+                    <td>Resposta correta.</td>
+                  </tr>
+                </tbody>
+            </table>
+            <!-- SUA NOVA TABELA TERMINA AQUI -->
+
         </div>
     </div>
 </body>
 </html>
+
