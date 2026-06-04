@@ -1,91 +1,67 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Auditor Login</title>
-
-<style>
-
-body{
-    background:#111827;
-    color:white;
-    font-family:Arial;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-}
-
-.box{
-    background:#1f2937;
-    padding:40px;
-    border-radius:10px;
-    width:320px;
-}
-
-input{
-    width:100%;
-    padding:12px;
-    margin-top:10px;
-}
-
-button{
-    width:100%;
-    padding:12px;
-    margin-top:15px;
-    background:#059669;
-    border:none;
-    color:white;
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iGaming Ledger - IA Auditor Panel</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #070a13; color: #ffffff; margin: 20px; }
+        section { background-color: #0f172a; padding: 30px; border-radius: 8px; border: 1px solid #1e293b; max-width: 500px; margin: 40px auto; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        h1 { color: #f59e0b; font-size: 22px; margin-bottom: 20px; text-align: center; }
+        label { display: block; margin-top: 15px; font-weight: bold; color: #94a3b8; font-size: 14px; }
+        select, input, textarea { width: 100%; padding: 12px; margin-top: 5px; background-color: #0f172a; color: #fff; border: 1px solid #334155; border-radius: 4px; box-sizing: border-box; }
+        select:focus, input:focus, textarea:focus { outline: none; border-color: #38bdf8; }
+        button { background-color: #2563eb; color: white; border: none; padding: 14px; width: 100%; margin-top: 25px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 16px; transition: 0.2s; }
+        button:hover { background-color: #1d4ed8; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #64748b; text-decoration: none; font-size: 14px; }
+        .back-link:hover { color: #94a3b8; }
+    </style>
 </head>
-
 <body>
 
-<div class="box">
+    <section id="auditorPanel">
+        <h1>🔍 IA Audit & Evaluation Form</h1>
+        <form id="evalForm">
+            
+            <label for="data">Data:</label>
+            <input type="date" id="data" required>
 
-<h2>Auditor Login</h2>
+            <label for="promptId">Prompt ID:</label>
+            <input type="text" id="promptId" placeholder="Ex: #9482" required>
 
-<input id="user" placeholder="Usuário">
+            <label for="respostaIa">Resposta IA:</label>
+            <textarea id="respostaIa" rows="3" placeholder="Cole a resposta da IA aqui..." required></textarea>
 
-<input
-id="pass"
-type="password"
-placeholder="Senha"
->
+            <label for="nota">Nota (1 a 5):</label>
+            <select id="nota" required>
+                <option value="" disabled selected>Escolha uma nota...</option>
+                <option value="1">1 - Muito Ruim</option>
+                <option value="2">2 - Ruim</option>
+                <option value="3">3 - Regular</option>
+                <option value="4">4 - Boa</option>
+                <option value="5">5 - Excelente</option>
+            </select>
 
-<button onclick="login()">
-Entrar
-</button>
+            <!-- O SEU NOVO SELECT DE ERROS PEDIDO ESTÁ AQUI: -->
+            <label for="tipoErro">Tipo de Erro:</label>
+            <select id="tipoErro" required>
+              <option value="">Sem erro</option>
+              <option value="Factualidade">Factualidade</option>
+              <option value="Idioma">Idioma/PT-BR</option>
+              <option value="Segurança">Segurança</option>
+              <option value="Instrução">Seguiu instrução</option>
+              <option value="Formato">Formato</option>
+            </select>
+            
+            <label for="comentario">Comentário:</label>
+            <input type="text" id="comentario" placeholder="Escreva observações adicionais...">
+            
+            <button type="submit">Enviar Avaliação para o Ledger</button>
+        </form>
 
-<script>
-
-function login(){
-
-const u =
-document.getElementById("user").value;
-
-const p =
-document.getElementById("pass").value;
-
-if(u==="auditor" && p==="123456"){
-
-window.location.href =
-"auditor-dashboard.html";
-
-}else{
-
-alert("Login inválido");
-
-}
-
-}
-
-</script>
-
-</div>
+        <a href="index.html" class="back-link">⬅️ Voltar ao Portal Inicial</a>
+    </section>
 
 </body>
 </html>
+
