@@ -1,205 +1,50 @@
 /**
- * iGaming Ledger - Core Engine (Otimizado com LocalStorage Database)
+ * iGaming Ledger - AI Evaluation Engine
  */
 
+// 1. VARIÁVEIS GLOBAIS PEDIDAS PELO PROFESSOR (Substituindo o antigo sistema de saldo)
+let totalNotas = 0;
+let qtdAval = 0;
+
+// 2. FUNÇÃO DE CÁLCULO DE MÉDIA PEDIDA PELO PROFESSOR
+function atualizarMedia(nota) {
+  totalNotas += Number(nota);
+  qtdAval += 1;
+  let media = (totalNotas / qtdAval).toFixed(2);
+  
+  // Atualiza o valor na tela se o elemento existir
+  const elementoMedia = document.getElementById('mediaNota');
+  if (elementoMedia) {
+      elementoMedia.innerText = media;
+  }
+}
+
+// 3. INICIALIZAÇÃO DA PÁGINA
 document.addEventListener("DOMContentLoaded", () => {
-    if (!localStorage.getItem("igaming_balance")) {
-        localStorage.setItem("igaming_balance", "0.00");
-    }
     
-    if (!localStorage.getItem("local_players_db")) {
-        localStorage.setItem("local_players_db", JSON.stringify([]));
-    }
-    function atualizarCamposInterface() {
-    const jogadorSessao = localStorage.getItem("current_player");
-    const saldoAtual = localStorage.getItem("igaming_balance") || "0.00";
+    // Captura o formulário de auditoria do arquivo auditor.html
+    const formAuditoria = document.getElementById('evalForm');
+    
+    if (formAuditoria) {
+        formAuditoria.addEventListener('submit', (event) => {
+            event.preventDefault(); // Impede a página de recarregar
 
-    // Atualiza todas as exibições de saldo pela classe
-    const elementosSaldoClasse = document.querySelectorAll(".balance-amount");
-    elementosSaldoClasse.forEach(el => {
-        el.innerHTML = `<span class="currency">€</span> ${parseFloat(saldoAtual).toFixed(2)}`;
-    });
+            // Captura os dados digitados no formulário
+            const dataVal = document.getElementById('data').value;
+            const promptIdVal = document.getElementById('promptId').value;
+            const respostaIaVal = document.getElementById('respostaIa').value;
+            const notaVal = document.getElementById('nota').value;
+            const tipoErroVal = document.getElementById('tipoErro').value;
+            const comentarioVal = document.getElementById('comentario').value;
 
-    const formulario = document.getElementById('kycForm');
-    if (formulario) {
-        formulario.addEventListener('submit', processarCadastro);
+            // Chama a função obrigatória passando a nota selecionada
+            atualizarMedia(notaVal);
+
+            // Alerta de sucesso para o usuário demonstrando que funcionou
+            alert(`✅ AVALIAÇÃO PROCESSADA!\nPrompt ID: ${promptIdVal}\nNota Computada: ${notaVal}\nTipo de Erro: ${tipoErroVal || "Sem erro"}`);
+            
+            // Limpa o formulário após o envio
+            formAuditoria.reset();
+        });
     }
 });
-
-function processarCadastro(event) {
-    event.preventDefault();
-
-    const fullName = document.getElementById('fullName').value.trim();
-    const dob = document.getElementById('dob').value;
-    const country = document.getElementById('country').value;
-    const docType = document.getElementById('docType').value;
-    const docNumber = document.getElementById('docNumber').value.trim();
-
-    const idade = Math.floor((new Date() - new Date(dob)) / 31557600000);
-    if (idade < 18) {
-        alert("❌ REGISTRATION DENIED: Under MGA regulations, players must be at least 18 years old.");
-        return;
-    }
-
-    const playerId = "PL-" + Math.floor(100000 + Math.random() * 900000);
-    const ledgerHash = "0x" + Array.from({length: 40}, () => Math.floor(Math.random()*16).toString(16)).join('');
-
-    try {
-        const dbPlayers = JSON.parse(localStorage.getItem("local_players_db") || "[]");
-        
-        const novoJogador = {
-            id: playerId,
-            fullname: fullName,
-            dob: dob,
-            country: country,
-            document_type: docType,
-            document_number: docNumber,
-            ledger_hash: ledgerHash
-        };
-
-        dbPlayers.push(novoJogador);
-        localStorage.setItem("local_players_db", JSON.stringify(dbPlayers));
-
-        const dadosSessao = {
-            id: playerId,
-            nome: fullName,
-            pais: country,
-            hashSeguranca: ledgerHash,
-            statusKYC: "APPROVED"
-        };
-        
-        localStorage.setItem("current_player", JSON.stringify(dadosSessao));
-        localStorage.setItem("igaming_balance", "50.00"); 
-
-        alert(`✅ LOCAL DATABASE SYNCED:\nWelcome!\nYour data is safely stored in the Cloud Database.\nID: ${playerId}`);
-        window.location.href = "index.html";
-
-    } catch (error) {
-        console.error("Erro no banco local:", error);
-        alert("❌ FALHA NO REGISTRO: " + error.message);
-    }
-}
-
-function atualizarCamposInterface() {
-    const jogadorSessao = localStorage.getItem("current_player");
-    const saldoAtual = localStorage.getItem("igaming_balance") || "0.00";
-
-    const elementosSaldoClasse = document.querySelectorAll(".balance-amount");
-    elementosSaldoClasse.forEach(el => {
-        el.innerHTML = `<span class="currency">€</span> ${parseFloat(saldoAtual).toFixed(2)}`;
-    });
-const elementoSaldoPlat = document.getElementById("platformBalance");
-    if (elementoSaldoPlat) {
-        elementoSaldoPlat.innerText = `€ ${parseFloat(saldoAtual).toFixed(2)}`;
-    }
-    ESTÃO PRIVADA DENTRO DA CARTEIRA (wallet.html)
-    const painelPrivado = document.getElementById("userPrivatePanel");
-    const txtNodeId = document.getElementById("privateNodeId");
-    const txtNodeHash = document.getElementById("privateNodeHash");
-
-    if (painelPrivado && jogadorSessao) {
-        const jogador = JSON.parse(jogadorSessao);
-        painelPrivado.style.display = "block"; // Mostra o painel se estiver logado
-        txtNodeId.innerText = `Node ID: ${jogador.id} [Jurisdiction: ${jogador.pais}]`;
-        txtNodeHash.innerText = `Ledger Hash: ${jogador.hashSeguranca}`;
-    } else if (painelPrivado) {
-        painelPrivado.style.display = "none"; // Esconde se estiver deslogado
-    }
-}
-
-/**
- * Função executada pelo próprio usuário dentro da carteira para resetar
- */
-function executarLogoutUsuario() {
-    if (confirm("⚠️ DISCONNECT NODE?\n\nDeseja encerrar a sessão do seu Ledger criptográfico e limpar o cache local?")) {
-        localStorage.removeItem("current_player");
-        localStorage.removeItem("igaming_balance");
-        alert("Sessão encerrada com sucesso!");
-        window.location.href = "index.html"; // Joga ele de volta para a Home limpa
-    }
-}
-    const botaoRegistro = document.querySelector(".btn-register-main");
-    if (botaoRegistro) {
-        if (jogadorSessao) {
-            const jogador = JSON.parse(jogadorSessao);
-            
-            // ALTERAÇÃO COMPLETA: Transforma o botão em um gerenciador que permite Deslogar/Resetar
-            botaoRegistro.innerHTML = `👤 ID: ${jogador.id} | KYC: APPROVED (Clique para Deslogar / Resetar)`;
-            botaoRegistro.style.background = "linear-gradient(90deg, #10b981 0%, #059669 100%)";
-            botaoRegistro.href = "#";
-            botaoRegistro.onclick = (e) => {
-                e.preventDefault();
-                if (confirm(`ℹ️ PLAYER PROFILE (ID: ${jogador.id})\n\nDeseja deslogar desta conta para realizar um novo cadastro de teste?`)) {
-                    // Remove apenas o jogador ativo e o saldo, mantendo o histórico geral
-                    localStorage.removeItem("current_player");
-                    localStorage.removeItem("igaming_balance");
-                    alert("Conta deslogada! Redirecionando para a tela de cadastro...");
-                    window.location.href = "cadastro.html";
-                }
-            };
-        } else {
-            botaoRegistro.innerHTML = `👤 Create Account / Register (International KYC)`;
-            botaoRegistro.style.background = "linear-gradient(90deg, #2563eb 0%, #3b82f6 100%)";
-            botaoRegistro.href = "cadastro.html";
-            botaoRegistro.onclick = null;
-        }
-    }
-}
-
-function executarDeposito() {
-    const jogadorSessao = localStorage.getItem("current_player");
-    if (!jogadorSessao) { alert("❌ KYC Registration required."); return; }
-    const valor = parseFloat(prompt("Enter deposit amount (€):", "100.00"));
-    if (isNaN(valor) || valor <= 0) return;
-
-    let saldo = parseFloat(localStorage.getItem("igaming_balance") || "0.00") + valor;
-    localStorage.setItem("igaming_balance", saldo.toString());
-    
-    adicionarTransacaoHistorico("Deposit Approved", valor, true);
-    atualizarCamposInterface();
-}
-
-function executarSaque() {
-    const jogadorSessao = localStorage.getItem("current_player");
-    if (!jogadorSessao) return;
-    
-    let saldo = parseFloat(localStorage.getItem("igaming_balance") || "0.00");
-    const valor = parseFloat(prompt(`Enter withdrawal amount (Max: € ${saldo.toFixed(2)}):`, "50.00"));
-    
-    if (isNaN(valor) || valor <= 0 || valor > saldo) { alert("Invalid amount or insufficient funds."); return; }
-
-    saldo -= valor;
-    localStorage.setItem("igaming_balance", saldo.toString());
-    
-    adicionarTransacaoHistorico("Withdrawal Requested", valor, false);
-    atualizarCamposInterface();
-}
-
-function adicionarTransacaoHistorico(tipo, valor, IsPositivo) {
-    const secaoHistorico = document.querySelector(".history-section");
-    if (!secaoHistorico) return;
-    
-    const novoItem = document.createElement("div");
-    novoItem.className = "tx-item";
-    novoItem.style.display = "flex";
-    novoItem.style.justify = "space-between";
-    novoItem.style.padding = "10px 5px";
-    novoItem.style.borderBottom = "1px solid rgba(255,255,255,0.1)";
-    
-    const corValor = IsPositivo ? '#22c55e' : '#ef4444';
-    const sinal = IsPositivo ? '+' : '-';
-    
-    novoItem.innerHTML = `
-        <div><div class="tx-type" style="font-weight:bold;">${tipo}</div></div>
-        <div class="${IsPositivo ? 'tx-value-pos' : ''}" style="color: ${corValor}; font-weight: bold;">
-            ${sinal} € ${valor.toFixed(2)}
-        </div>
-    `;
-    
-    const titulo = secaoHistorico.querySelector(".section-title") || secaoHistorico.querySelector("h2");
-    if (titulo) {
-        titulo.parentNode.insertBefore(novoItem, titulo.nextSibling);
-    } else {
-        secaoHistorico.appendChild(novoItem);
-    }
-}
