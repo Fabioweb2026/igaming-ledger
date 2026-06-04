@@ -7,8 +7,6 @@
 
 <title>iGaming Ledger</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
 <style>
 
 *{
@@ -18,26 +16,25 @@
 }
 
 body{
-    font-family:Arial, sans-serif;
     background:#020617;
+    font-family:Arial,sans-serif;
     color:white;
-    min-height:100vh;
 }
 
 /* HEADER */
 
 header{
+    padding:30px;
     text-align:center;
-    padding:40px 20px;
 }
 
 .logo{
-    width:90px;
+    width:120px;
     margin-bottom:15px;
 }
 
 header h1{
-    font-size:38px;
+    font-size:42px;
     margin-bottom:10px;
 }
 
@@ -45,13 +42,42 @@ header p{
     color:#94a3b8;
 }
 
+/* NAV */
+
+.top-buttons{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin-top:25px;
+    flex-wrap:wrap;
+}
+
+.top-buttons a{
+    text-decoration:none;
+    padding:12px 24px;
+    border-radius:8px;
+    font-weight:bold;
+    color:white;
+}
+
+.btn-register{
+    background:#dc2626;
+}
+
+.btn-admin{
+    background:#2563eb;
+}
+
+.btn-auditor{
+    background:#059669;
+}
+
 /* CARDS */
 
 .container{
-    width:100%;
     max-width:1200px;
     margin:auto;
-    padding:40px 20px;
+    padding:50px 20px;
 
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
@@ -60,16 +86,14 @@ header p{
 
 .card{
     background:#0f172a;
-    border:1px solid #1e293b;
-    border-radius:20px;
+    border-radius:18px;
     overflow:hidden;
+    border:1px solid #1e293b;
     transition:0.3s;
-    box-shadow:0 0 20px rgba(0,0,0,0.5);
 }
 
 .card:hover{
     transform:translateY(-8px);
-    border-color:#2563eb;
 }
 
 .card img{
@@ -89,32 +113,26 @@ header p{
 
 .card p{
     color:#cbd5e1;
-    margin-bottom:25px;
     line-height:1.6;
+    margin-bottom:25px;
 }
 
-.btn{
-    display:inline-block;
-    padding:12px 25px;
-    border-radius:8px;
+.card a{
     text-decoration:none;
     color:white;
+    padding:12px 20px;
+    border-radius:8px;
+    display:inline-block;
     font-weight:bold;
 }
 
-.admin-btn{
+.admin-access{
     background:#2563eb;
 }
 
-.audit-btn{
+.audit-access{
     background:#059669;
 }
-
-.btn:hover{
-    opacity:0.9;
-}
-
-/* FOOTER */
 
 footer{
     text-align:center;
@@ -123,7 +141,6 @@ footer{
 }
 
 </style>
-
 </head>
 
 <body>
@@ -132,80 +149,98 @@ footer{
 
 <img
 class="logo"
-src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png"
-/>
+src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+>
 
 <h1>iGaming Ledger</h1>
 
 <p>
-Enterprise gaming compliance and audit platform
+Gaming Compliance • AML • KYC • Audit System
 </p>
+
+<div class="top-buttons">
+
+<a
+href="cadastro.html"
+class="btn-register"
+>
+Cadastro
+</a>
+
+<a
+href="login-admin.html"
+class="btn-admin"
+>
+Admin
+</a>
+
+<a
+href="login-auditor.html"
+class="btn-auditor"
+>
+Auditor
+</a>
+
+</div>
 
 </header>
 
 <div class="container">
 
-    <!-- ADMIN CARD -->
+<div class="card">
 
-    <div class="card">
+<img
+src="https://images.unsplash.com/photo-1556155092-490a1ba16284?q=80&w=1200"
+>
 
-        <img
-        src="https://images.unsplash.com/photo-1556155092-490a1ba16284?q=80&w=1200"
-        />
+<div class="card-content">
 
-        <div class="card-content">
+<h2>Administrative Access</h2>
 
-            <h2>Admin Panel</h2>
+<p>
+Manage players, transactions,
+gaming reports and operational controls.
+</p>
 
-            <p>
-                Administrative management access for
-                gaming operations, player control,
-                financial overview and platform monitoring.
-            </p>
+<a
+href="login-admin.html"
+class="admin-access"
+>
+Open Admin Panel
+</a>
 
-            <a
-            href="login-admin.html"
-            class="btn admin-btn"
-            >
-                Access Admin
-            </a>
+</div>
+</div>
 
-        </div>
+<div class="card">
 
-    </div>
+<img
+src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200"
+>
 
-    <!-- AUDITOR CARD -->
+<div class="card-content">
 
-    <div class="card">
+<h2>Audit & Compliance</h2>
 
-        <img
-        src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200"
-        />
+<p>
+Monitor transactions,
+AML verification and compliance operations.
+</p>
 
-        <div class="card-content">
+<a
+href="login-auditor.html"
+class="audit-access"
+>
+Open Auditor Panel
+</a>
 
-            <h2>Audit Access</h2>
-
-            <p>
-                Compliance and transaction audit monitoring,
-                anti-fraud verification and operational review.
-            </p>
-
-            <a
-            href="login-auditor.html"
-            class="btn audit-btn"
-            >
-                Access Auditor
-            </a>
-
-        </div>
-
-    </div>
+</div>
+</div>
 
 </div>
 
 <footer>
-© 2026 iGaming Ledger — Compliance System
+© 2026 iGaming Ledger Enterprise System
 </footer>
 
 </body>
