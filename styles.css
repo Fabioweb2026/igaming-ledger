@@ -1,138 +1,37 @@
-body{
-    margin:0;
-    background:#0f172a;
-    color:white;
-    font-family:Arial, sans-serif;
+body { 
+  font-family: Arial; 
+  padding: 20px; 
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  margin: 0;
 }
 
-/* NAVBAR */
-
-.gaming-nav{
-    background:#111827;
-    padding:15px 30px;
-    display:flex;
-    flex-wrap:wrap;
-    gap:20px;
-    align-items:center;
-    border-bottom:2px solid #22c55e;
+h1 {
+  color: white;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-.gaming-nav a{
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-    transition:0.3s;
+table, form {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
 
-.gaming-nav a:hover{
-    color:#22c55e;
+th { 
+  background: #667eea; 
+  color: white;
 }
 
-.gaming-nav .active{
-    color:#22c55e;
+button {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
 }
-
-/* HERO */
-
-.hero{
-    padding:80px 40px;
-    text-align:center;
-}
-
-.hero h1{
-    font-size:48px;
-    margin-bottom:20px;
-}
-
-.hero p{
-    font-size:20px;
-    color:#cbd5e1;
-}
-
-/* CARD */
-
-.card{
-    background:#1e293b;
-    margin:40px auto;
-    padding:30px;
-    border-radius:16px;
-    max-width:900px;
-}
-
-/* BUTTON */
-
-button{
-    padding:12px 24px;
-    background:#22c55e;
-    border:none;
-    border-radius:10px;
-    color:white;
-    font-weight:bold;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-button:hover{
-    transform:scale(1.05);
-}
-
-/* ==========================================
-   NOVAS CLASSES: INTERFACE DE SALDO E HISTÓRICO 
-   ========================================== */
-
-/* Container do Saldo */
-.balance-amount {
-    font-size: 32px;
-    font-weight: bold;
-    color: #22c55e;
-    margin: 15px 0;
-}
-
-.currency {
-    color: #a855f7; /* Roxo neon para a moeda € */
-    margin-right: 5px;
-}
-
-/* Seção do Histórico */
-.history-section {
-    background: #111827;
-    border: 1px solid #334155;
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 25px;
-}
-
-.section-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #94a3b8;
-    margin-top: 0;
-    margin-bottom: 15px;
-    border-bottom: 1px solid #334155;
-    padding-bottom: 8px;
-}
-
-/* Linha de cada transação criada pelo JS */
-.tx-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 12px;
-    border-bottom: 1px solid rgba(51, 65, 85, 0.5);
-    font-size: 14px;
-}
-
-.tx-item:last-child {
-    border-bottom: none;
-}
-
-.tx-type {
-    font-weight: 500;
-    color: #e2e8f0;
-}
-
-/* Cores dos valores de Depósito (+) e Saque (-) */
-.tx-value-pos {
-    color: #22c55e !important; /* Verde para positivo */
-    font-weight: bold;
+button:hover {
+  background: #5568d3;
 }
