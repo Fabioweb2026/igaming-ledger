@@ -1,8 +1,23 @@
-<h1>Admin Dashboard</h1>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Painel Admin</title>
+</head>
 
-<ul>
-    <li>Total Players: 1250</li>
-    <li>Active Wallets: 842</li>
-    <li>KYC Pending: 42</li>
-    <li>Transactions Today: 9321</li>
-</ul>
+<body style="background:black;color:white;font-family:Arial">
+
+<h1>Painel do Administrador</h1>
+
+<p>Área restrita.</p>
+
+<script>
+
+if(localStorage.getItem("adminAuth") !== "true"){
+    window.location.href = "login-admin.html";
+}
+
+</script>
+
+</body>
+</html>
