@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Painel Auditor</title>
+</head>
+
+<body style="background:#111827;color:white;font-family:Arial">
+
+<h1>Painel do Auditor</h1>
+
+<p>Área de auditoria.</p>
+
+<script>
+
+if(localStorage.getItem("auditorAuth") !== "true"){
+    window.location.href = "login-auditor.html";
+}
+
+</script>
+
+</body>
+</html>
