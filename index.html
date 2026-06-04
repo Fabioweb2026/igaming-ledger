@@ -1,181 +1,90 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>iGaming Ledger</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    background:#07111f;
-    font-family:Arial,sans-serif;
-    color:white;
-}
-
-/* TOPO */
-.top-header{
-    width:100%;
-    background:#020817;
-    padding:20px;
-    border-bottom:1px solid #0f172a;
-    text-align:center;
-}
-
-.logo{
-    width:320px;
-    max-width:90%;
-}
-
-/* HERO */
-.hero{
-    text-align:center;
-    padding:60px 20px 40px;
-}
-
-.hero h1{
-    font-size:58px;
-    margin-bottom:15px;
-}
-
-.hero p{
-    font-size:22px;
-    color:#cbd5e1;
-}
-
-/* BOTÕES */
-.buttons{
-    margin-top:40px;
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    flex-wrap:wrap;
-}
-
-.buttons a{
-    text-decoration:none;
-    color:white;
-    padding:14px 28px;
-    border-radius:10px;
-    font-size:17px;
-    font-weight:bold;
-    transition:0.3s;
-    min-width:170px;
-    text-align:center;
-}
-
-.buttons a:hover{
-    transform:translateY(-3px);
-}
-
-.register{
-    background:#dc2626;
-}
-
-.admin{
-    background:#2563eb;
-}
-
-.auditor{
-    background:#059669;
-}
-
-/* MINI CARDS */
-.cards{
-    max-width:1200px;
-    margin:50px auto;
-    padding:0 20px;
-    display:grid;
-    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-    gap:20px;
-}
-
-.card{
-    background:#0f172a;
-    border:1px solid #1e293b;
-    border-radius:14px;
-    padding:25px;
-    text-align:center;
-}
-
-.card img{
-    width:60px;
-    margin-bottom:15px;
-}
-
-.card h3{
-    margin-bottom:10px;
-    font-size:20px;
-}
-
-.card p{
-    color:#94a3b8;
-    font-size:14px;
-    line-height:1.5;
-}
-
-/* FOOTER */
-footer{
-    margin-top:50px;
-    padding:30px;
-    text-align:center;
-    color:#64748b;
-    border-top:1px solid #0f172a;
-}
-</style>
+  <meta charset="UTF-8">
+  <title>IA Quality Ledger</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+    th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    th { background: #f2f2f2; }
+    form { margin-bottom: 20px; }
+    input, select, textarea { margin: 5px; padding: 5px; }
+  </style>
 </head>
-
 <body>
+  <h1>IA Quality Ledger</h1>
+  
+  <form id="form">
+    <input type="text" id="promptId" placeholder="Prompt ID" required>
+    <textarea id="resposta" placeholder="Resposta da IA" required></textarea>
+    <select id="nota" required>
+      <option value="">Nota 1-5</option>
+      <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+    </select>
+    <select id="tipoErro">
+      <option value="">Sem erro</option>
+      <option>Factualidade</option>
+      <option>Idioma/PT-BR</option>
+      <option>Segurança</option>
+      <option>Instrução</option>
+      <option>Formato</option>
+    </select>
+    <input type="text" id="comentario" placeholder="Comentário">
+    <button type="submit">Adicionar</button>
+  </form>
 
-<!-- LOGO -->
-<div class="top-header">
-    <img class="logo" src="mediterranea.png.png" alt="Logo">
-</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Prompt ID</th>
+        <th>Resposta IA</th>
+        <th>Nota</th>
+        <th>Tipo de Erro</th>
+        <th>Comentário</th>
+      </tr>
+    </thead>
+    <tbody id="tbody"></tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3">Média Geral:</td>
+        <td id="mediaNota">0</td>
+        <td colspan="2"></td>
+      </tr>
+    </tfoot>
+  </table>
 
-<!-- BOTÕES (LINKS CORRIGIDOS) -->
-<div class="buttons">
-    <a href="cadastro.html" class="register">Cadastro</a>
-    <a href="gaming-ledger.html" class="admin">Ver Tabela (Admin)</a>
-    <a href="auditor.html" class="auditor">Painel Auditor</a>
-</div>
+<script>
+let totalNotas = 0;
+let qtdAval = 0;
 
-<!-- MINI CARDS -->
-<section class="cards">
-    <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png" alt="Security">
-        <h3>Security</h3>
-        <p>Advanced protection and encrypted infrastructure.</p>
-    </div>
+document.getElementById('form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const data = new Date().toLocaleDateString('pt-BR');
+  const promptId = document.getElementById('promptId').value;
+  const resposta = document.getElementById('resposta').value;
+  const nota = document.getElementById('nota').value;
+  const tipoErro = document.getElementById('tipoErro').value;
+  const comentario = document.getElementById('comentario').value;
 
-    <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="KYC">
-        <h3>KYC</h3>
-        <p>Player verification and identity compliance.</p>
-    </div>
+  const row = `<tr>
+    <td>${data}</td>
+    <td>${promptId}</td>
+    <td>${resposta}</td>
+    <td>${nota}</td>
+    <td>${tipoErro}</td>
+    <td>${comentario}</td>
+  </tr>`;
+  
+  document.getElementById('tbody').insertAdjacentHTML('beforeend', row);
 
-    <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/2920/2920277.png" alt="Monitoring">
-        <h3>Monitoring</h3>
-        <p>Real-time transaction and risk monitoring.</p>
-    </div>
+  totalNotas += Number(nota);
+  qtdAval += 1;
+  document.getElementById('mediaNota').innerText = (totalNotas / qtdAval).toFixed(2);
 
-    <div class="card">
-        <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png" alt="Audit">
-        <h3>Audit</h3>
-        <p>Compliance reports and operational analysis.</p>
-    </div>
-</section>
-
-<footer>
-    © 2026 Mediterranea Group • Malta Compliance Division
-</footer>
-
+  e.target.reset();
+});
+</script>
 </body>
 </html>
