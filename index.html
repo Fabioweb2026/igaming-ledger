@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
 <meta charset="UTF-8">
@@ -7,204 +7,206 @@
 
 <title>iGaming Ledger</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<script src="https://cdn.tailwindcss.com"></script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
 
 <style>
 
-body{
-    background:#070a13;
-    color:#f8fafc;
-    font-family:'Inter','Segoe UI',system-ui,sans-serif;
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#020617;
+    color:white;
     min-height:100vh;
 }
 
-.hero-banner{
-    width:100%;
-    background:#090d16;
-    overflow:hidden;
-}
+/* HEADER */
 
-.logo-img{
-    width:100%;
-    max-height:380px;
-    object-fit:cover;
-}
-
-.brand-container{
+header{
     text-align:center;
-    padding:25px;
+    padding:40px 20px;
 }
 
-h1{
-    font-size:38px;
-    font-weight:900;
-    letter-spacing:3px;
-}
-
-.subtitle{
-    color:#38bdf8;
-    font-size:12px;
-    letter-spacing:3px;
-    margin-top:8px;
-}
-
-.grid-container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-    max-width:1000px;
-    margin:40px auto;
-    padding:20px;
-}
-
-.panel-card{
-    background:#111827;
-    border-radius:16px;
-    padding:30px;
-    text-align:center;
-    text-decoration:none;
-    color:white;
-    transition:0.3s;
-    border:1px solid transparent;
-}
-
-.panel-card:hover{
-    transform:translateY(-5px);
-    border-color:#38bdf8;
-}
-
-.panel-icon{
-    font-size:42px;
+.logo{
+    width:90px;
     margin-bottom:15px;
 }
 
-.panel-title{
-    font-size:18px;
-    font-weight:800;
+header h1{
+    font-size:38px;
     margin-bottom:10px;
 }
 
-.panel-desc{
+header p{
     color:#94a3b8;
-    font-size:14px;
 }
 
-.compliance-bar{
-    background:#04060c;
-    padding:24px;
-    display:flex;
-    justify-content:center;
+/* CARDS */
+
+.container{
+    width:100%;
+    max-width:1200px;
+    margin:auto;
+    padding:40px 20px;
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
     gap:30px;
-    margin-top:50px;
 }
 
-.comp-link{
-    color:#94a3b8;
+.card{
+    background:#0f172a;
+    border:1px solid #1e293b;
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.3s;
+    box-shadow:0 0 20px rgba(0,0,0,0.5);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    border-color:#2563eb;
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card-content{
+    padding:25px;
+}
+
+.card h2{
+    margin-bottom:15px;
+    font-size:28px;
+}
+
+.card p{
+    color:#cbd5e1;
+    margin-bottom:25px;
+    line-height:1.6;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 25px;
+    border-radius:8px;
     text-decoration:none;
-    font-size:13px;
+    color:white;
+    font-weight:bold;
+}
+
+.admin-btn{
+    background:#2563eb;
+}
+
+.audit-btn{
+    background:#059669;
+}
+
+.btn:hover{
+    opacity:0.9;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:40px;
+    color:#64748b;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<!-- BANNER -->
-<div class="hero-banner">
+<header>
 
-    <!-- CONFIRA O NOME REAL DA IMAGEM -->
-    <img src="mediterranea.png.png" alt="Banner" class="logo-img">
+<img
+class="logo"
+src="https://cdn-icons-png.flaticon.com/512/3064/3064197.png"
+/>
 
-</div>
+<h1>iGaming Ledger</h1>
 
-<!-- LOGO / TITULO -->
-<div class="brand-container">
+<p>
+Enterprise gaming compliance and audit platform
+</p>
 
-    <h1>IGAMING LEDGER</h1>
+</header>
 
-    <div class="subtitle">
-        Malta Gaming Authority Compliant
+<div class="container">
+
+    <!-- ADMIN CARD -->
+
+    <div class="card">
+
+        <img
+        src="https://images.unsplash.com/photo-1556155092-490a1ba16284?q=80&w=1200"
+        />
+
+        <div class="card-content">
+
+            <h2>Admin Panel</h2>
+
+            <p>
+                Administrative management access for
+                gaming operations, player control,
+                financial overview and platform monitoring.
+            </p>
+
+            <a
+            href="login-admin.html"
+            class="btn admin-btn"
+            >
+                Access Admin
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- AUDITOR CARD -->
+
+    <div class="card">
+
+        <img
+        src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200"
+        />
+
+        <div class="card-content">
+
+            <h2>Audit Access</h2>
+
+            <p>
+                Compliance and transaction audit monitoring,
+                anti-fraud verification and operational review.
+            </p>
+
+            <a
+            href="login-auditor.html"
+            class="btn audit-btn"
+            >
+                Access Auditor
+            </a>
+
+        </div>
+
     </div>
 
 </div>
 
-<!-- CARDS PRINCIPAIS -->
-<div class="grid-container">
-
-    <!-- USER REGISTER -->
-    <a href="cadastro.html" class="panel-card">
-
-        <div class="panel-icon">
-            👤
-        </div>
-
-        <div class="panel-title">
-            USER REGISTER
-        </div>
-
-        <div class="panel-desc">
-            Create and verify a new player account.
-        </div>
-
-    </a>
-
-    <!-- ADMIN LOGIN -->
-  <a href="login-admin.html">
-    Login Admin
-</a>
-        <div class="panel-icon">
-            🛡️
-        </div>
-
-        <div class="panel-title">
-            ADMIN LOGIN
-        </div>
-
-        <div class="panel-desc">
-            Administrative management access panel.
-        </div>
-
-    </a>
-
-    <!-- AUDIT ACCESS -->
-  <a href="login-auditor.html">
-    Login Auditor
-</a>
-        <div class="panel-icon">
-            📊
-        </div>
-
-        <div class="panel-title">
-            AUDIT ACCESS
-        </div>
-
-        <div class="panel-desc">
-            Compliance and transaction audit monitoring.
-        </div>
-
-    </a>
-
-</div>
-
-<!-- FOOTER -->
-<footer class="compliance-bar">
-
-    <a href="admin.html" class="comp-link">
-        CONTROL PANEL
-    </a>
-
-    <a href="audit.html" class="comp-link">
-        COMPLIANCE AUDIT
-    </a>
-
+<footer>
+© 2026 iGaming Ledger — Compliance System
 </footer>
-
-<script src="script.js"></script>
 
 </body>
 </html>
